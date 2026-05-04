@@ -1,104 +1,221 @@
 /* ============================================
-   SLOW FIRE SHOP — Scripts v1
+   SLOW FIRE SHOP — Scripts v2
    ============================================ */
 
-// ======================== PRODUCTS ========================
+// ======================== PRODUCTS DATA ========================
 const PRODUCTS = [
+  // ---- RUBS & SAUCE ----
   {
-    id: 'outback-classic',
-    name: 'OUTBACK CLASSIC',
-    nameja: 'アウトバック クラシック',
-    desc: 'オールマイティなスタンダードラブ。牛・豚・鶏に幅広く使える定番ブレンド。',
-    sizes: [{ label: '130g', price: 2800 }, { label: '250g', price: 4800 }],
-    theme: 'classic',
+    id: 'steak-shooter',
+    name: 'Steak Shooter',
+    nameja: 'ステーキシューター',
+    subtitle: 'Steak & Beef Rub',
+    desc: '牛肉のポテンシャルを最大限引き出すスタンダードラブ。バックヤードでも競技大会でも通用する、発色と旨みの黄金ブレンド。',
+    best: 'ステーキ / ロースト / 野菜',
+    price: 3800,
+    category: 'rub',
     badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg',
   },
   {
-    id: 'hickory-smoke',
-    name: 'HICKORY SMOKE',
-    nameja: 'ヒッコリー スモーク',
-    desc: 'ヒッコリーの煙香を閉じ込めた、深みのあるスモーキーラブ。',
-    sizes: [{ label: '130g', price: 3200 }, { label: '250g', price: 5500 }],
-    theme: 'hickory',
+    id: 'steak-shooter-spicy',
+    name: 'Steak Shooter SPICY',
+    nameja: 'ステーキシューター スパイシー',
+    subtitle: 'Spicy Steak & Beef Rub',
+    desc: 'ステーキシューターの辛口バージョン。辛さレベル2/5で、刺激を楽しみながらも旨みはそのまま。チキンウィングや豚チョップにも。',
+    best: 'ステーキ / チキンウィング / 豚チョップ',
+    price: 3800,
+    category: 'rub',
+    badge: 'SPICY',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg',
+  },
+  {
+    id: 'beef-bounce',
+    name: 'Beef Bounce',
+    nameja: 'ビーフバウンス',
+    subtitle: 'Beef & Brisket Rub',
+    desc: 'コーヒーノートとブラックペッパーの深みが特徴。ブリスケットや牛リブのバーク（外皮）を完璧に仕上げる上級者向けラブ。',
+    best: 'ブリスケット / 牛リブ / ステーキ',
+    price: 3800,
+    category: 'rub',
+    badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg',
+  },
+  {
+    id: 'honey-soy-slammer',
+    name: 'Honey Soy Slammer',
+    nameja: 'ハニーソイスラマー',
+    subtitle: 'Pork & Chicken Rub',
+    desc: '蜂蜜と醤油の絶妙なブレンド。ポークリブ、プルドポーク、チキンウィングに最高のグレーズと深みある風味を生む。',
+    best: '豚リブ / プルドポーク / チキンウィング',
+    price: 3800,
+    category: 'rub',
     badge: 'BEST SELLER',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg',
   },
   {
-    id: 'sweet-heat',
-    name: 'SWEET HEAT',
-    nameja: 'スウィート ヒート',
-    desc: '甘さと辛さの黄金比。プルドポークに最高のラブ。',
-    sizes: [{ label: '130g', price: 2800 }, { label: '250g', price: 4800 }],
-    theme: 'sweet',
+    id: 'lamb-layup',
+    name: 'Lamb Layup',
+    nameja: 'ラムレイアップ',
+    subtitle: 'Lamb & Game Rub',
+    desc: 'スマックとハーブのブレンドがラムとジビエを格上げ。カンガルー、アヒル、鴨から鹿まで、ワイルドな素材に最高の一本。',
+    best: 'ラムチョップ / カンガルー / ダックブレスト',
+    price: 3800,
+    category: 'rub',
     badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg',
   },
   {
-    id: 'pepper-herb',
-    name: 'PEPPER & HERB',
-    nameja: 'ペッパー ＆ ハーブ',
-    desc: '粗挽きブラックペッパーとフレッシュハーブの上品なブレンド。',
-    sizes: [{ label: '130g', price: 3500 }, { label: '250g', price: 6000 }],
-    theme: 'pepper',
+    id: 'garlic-goals',
+    name: 'Garlic Goals',
+    nameja: 'ガーリックゴールズ',
+    subtitle: 'All Purpose Rub',
+    desc: 'ガーリックとパルメザンチーズの万能ラブ。肉・野菜・ローストポテトまで何でも合う、最もフレキシブルなブレンド。',
+    best: 'チキン / ラム / ローストポテト',
+    price: 3800,
+    category: 'rub',
+    badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg',
+  },
+  {
+    id: 'chilli-citrus-charge',
+    name: 'Chilli Citrus Charge',
+    nameja: 'チリシトラスチャージ',
+    subtitle: 'Chicken & Pork Rub',
+    desc: 'チリの辛さとシトラスの爽やかさが絶妙なコンビ。チキンや豚肉に鮮やかな発色と、フレッシュで深みのある味わいを。',
+    best: 'チキン / 豚肉 / スペアリブ',
+    price: 3800,
+    category: 'rub',
     badge: 'NEW',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png',
   },
   {
-    id: 'starter-kit',
-    name: 'STARTER KIT',
-    nameja: 'スターター キット',
-    desc: '3種のラブがセットに。BBQ初心者に最適な入門セット。',
-    sizes: [{ label: '各130g × 3本', price: 7800 }],
-    theme: 'kit',
-    badge: 'GIFT',
+    id: 'hook-shot',
+    name: 'Hook Shot',
+    nameja: 'フックショット',
+    subtitle: 'Signature BBQ Sauce',
+    desc: 'Low n Slow Basicsのシグネチャーソース。ラブと組み合わせることでコンペティション級のフレーバーが完成。仕上げ・ディップ・グレーズに。',
+    best: '仕上げがけ / ディップ / グレーズ',
+    price: 4200,
+    category: 'rub',
+    badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png',
+  },
+  // ---- JERKY ----
+  {
+    id: 'steak-shooter-jerky',
+    name: 'Steak Shooter Beef Jerky',
+    nameja: 'ステーキシューター ビーフジャーキー',
+    subtitle: 'Grass Fed Australian Beef',
+    desc: '100%グラスフェッドのオーストラリア牛使用。高タンパク・低脂肪で、BBQの合間にも最高のスナック。',
+    best: 'そのままで / アウトドア / おつまみ',
+    price: 2500,
+    category: 'jerky',
+    badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/08/Steak-Shooter-Beef-Jerky.jpeg',
+  },
+  {
+    id: 'garlic-goals-jerky',
+    name: 'Garlic Goals Beef Jerky',
+    nameja: 'ガーリックゴールズ ビーフジャーキー',
+    subtitle: 'Grass Fed Australian Beef',
+    desc: 'ガーリックゴールズの風味をそのままジャーキーに。グラスフェッド牛の旨みとガーリックの芳香が癖になる逸品。',
+    best: 'そのままで / アウトドア / おつまみ',
+    price: 2500,
+    category: 'jerky',
+    badge: null,
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2025/03/beef-jerky-garlic-goals.jpg',
+  },
+  // ---- SETS ----
+  {
+    id: 'all-star-combo',
+    name: 'All-Star Combo',
+    nameja: 'オールスターコンボ',
+    subtitle: 'BBQ Rub Set — 7種類',
+    desc: '全7種のラブがすべて揃う最強セット。ステーキ・ポーク・チキン・ラム・オールパーパスであらゆるBBQシーンに対応。ギフトにも最適。',
+    best: '全シーン対応 / ギフト / コンプリート',
+    price: 24000,
+    originalPrice: 26600,
+    category: 'set',
+    badge: 'BEST VALUE',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png',
+  },
+  {
+    id: 'all-star-hook-shot',
+    name: 'All-Star Combo + Hook Shot',
+    nameja: 'オールスター ＋ フックショット',
+    subtitle: 'BBQ Rub Set + Sauce — 8種類',
+    desc: '全7種ラブ＋シグネチャーBBQソースのフルセット。ラブとソースを組み合わせたプロ仕様の完全装備。',
+    best: 'プロ仕様 / フルセット / ギフト',
+    price: 27000,
+    originalPrice: 30200,
+    category: 'set',
+    badge: 'POPULAR',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/all-star-combo-plus-hookshot-NEW-600x600.jpg',
+  },
+  {
+    id: 'all-star-full',
+    name: 'All-Star Full Set',
+    nameja: 'オールスター フルセット',
+    subtitle: 'Rubs + Sauce + Jerky — 10種類',
+    desc: '全7種ラブ＋BBQソース＋ジャーキー2種の究極セット。全ラインナップをまるごと体験できる、贈り物にも自分へのご褒美にも。',
+    best: '究極セット / プレミアムギフト',
+    price: 32000,
+    originalPrice: 35700,
+    category: 'set',
+    badge: 'PREMIUM',
+    image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/02/Rubs-Sauce-Bundle-Updated-600x600.png',
   },
 ];
+
+// badge → CSS class mapping
+const BADGE_CLASS = {
+  'BEST SELLER': 'badge-bestseller',
+  'NEW':         'badge-new',
+  'POPULAR':     'badge-popular',
+  'BEST VALUE':  'badge-value',
+  'PREMIUM':     'badge-premium',
+  'SPICY':       'badge-spicy',
+  'GIFT':        'badge-gift',
+};
+
+const CAT_LABEL = { rub: 'RUB / SAUCE', jerky: 'JERKY', set: 'SET' };
 
 // ======================== CART ========================
 class Cart {
   constructor() {
-    this.items = JSON.parse(localStorage.getItem('sfshop_cart') || '[]');
+    this.items = JSON.parse(localStorage.getItem('sfshop_v2_cart') || '[]');
   }
 
   save() {
-    localStorage.setItem('sfshop_cart', JSON.stringify(this.items));
+    localStorage.setItem('sfshop_v2_cart', JSON.stringify(this.items));
   }
 
-  add(productId, sizeLabel, price) {
-    const key = `${productId}__${sizeLabel}`;
-    const existing = this.items.find(i => i.key === key);
+  add(productId) {
+    const existing = this.items.find(i => i.id === productId);
     if (existing) {
       existing.qty += 1;
     } else {
-      const product = PRODUCTS.find(p => p.id === productId);
-      this.items.push({
-        key,
-        productId,
-        sizeLabel,
-        price,
-        qty: 1,
-        name: product.name,
-        nameja: product.nameja,
-        theme: product.theme,
-      });
+      const p = PRODUCTS.find(p => p.id === productId);
+      this.items.push({ id: productId, name: p.name, nameja: p.nameja, price: p.price, image: p.image, qty: 1 });
     }
     this.save();
     this.render();
     this.updateBadge();
   }
 
-  remove(key) {
-    this.items = this.items.filter(i => i.key !== key);
+  remove(id) {
+    this.items = this.items.filter(i => i.id !== id);
     this.save();
     this.render();
     this.updateBadge();
   }
 
-  updateQty(key, delta) {
-    const item = this.items.find(i => i.key === key);
+  updateQty(id, delta) {
+    const item = this.items.find(i => i.id === id);
     if (!item) return;
     item.qty += delta;
-    if (item.qty <= 0) {
-      this.remove(key);
-      return;
-    }
+    if (item.qty <= 0) { this.remove(id); return; }
     this.save();
     this.render();
     this.updateBadge();
@@ -121,7 +238,7 @@ class Cart {
   }
 
   render() {
-    const list = document.getElementById('cartList');
+    const list    = document.getElementById('cartList');
     const totalEl = document.getElementById('cartTotal');
     if (!list) return;
 
@@ -129,21 +246,22 @@ class Cart {
       list.innerHTML = '<p class="cart-empty">カートは空です</p>';
     } else {
       list.innerHTML = this.items.map(item => `
-        <div class="cart-item" data-key="${item.key}">
-          <div class="ci-visual pv-${item.theme}"></div>
+        <div class="cart-item">
+          <img class="ci-thumb" src="${item.image}" alt="${item.name}" loading="lazy"
+               onerror="this.style.background='var(--surface-2)';this.style.opacity='.4'">
           <div class="ci-info">
             <div class="ci-name">${item.name}</div>
-            <div class="ci-sub">${item.nameja} · ${item.sizeLabel}</div>
+            <div class="ci-sub">${item.nameja}</div>
             <div class="ci-price">¥${(item.price * item.qty).toLocaleString()}</div>
+            <div class="ci-qty">
+              <button class="ci-qty-btn" data-id="${item.id}" data-delta="-1">−</button>
+              <span class="ci-qty-num">${item.qty}</span>
+              <button class="ci-qty-btn" data-id="${item.id}" data-delta="1">＋</button>
+            </div>
           </div>
-          <div class="ci-controls">
-            <button class="qty-btn" data-key="${item.key}" data-delta="-1">−</button>
-            <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" data-key="${item.key}" data-delta="1">＋</button>
-          </div>
-          <button class="ci-remove" data-key="${item.key}" aria-label="削除">
+          <button class="ci-remove" data-id="${item.id}" aria-label="削除">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
             </svg>
           </button>
         </div>
@@ -152,18 +270,11 @@ class Cart {
 
     if (totalEl) totalEl.textContent = `¥${this.total().toLocaleString()}`;
 
-    list.querySelectorAll('.qty-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const key = btn.dataset.key;
-        const delta = parseInt(btn.dataset.delta, 10);
-        cart.updateQty(key, delta);
-      });
+    list.querySelectorAll('.ci-qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => cart.updateQty(btn.dataset.id, parseInt(btn.dataset.delta, 10)));
     });
-
     list.querySelectorAll('.ci-remove').forEach(btn => {
-      btn.addEventListener('click', () => {
-        cart.remove(btn.dataset.key);
-      });
+      btn.addEventListener('click', () => cart.remove(btn.dataset.id));
     });
   }
 }
@@ -173,83 +284,70 @@ cart.render();
 cart.updateBadge();
 
 // ======================== CART DRAWER ========================
-const cartDrawer  = document.getElementById('cartDrawer');
+const cartDrawer   = document.getElementById('cartDrawer');
 const cartBackdrop = document.getElementById('cartBackdrop');
-const cartCloseBtn = document.getElementById('cartClose');
-const cartBtn      = document.getElementById('cartBtn');
 
 function openCart() {
   cartDrawer?.classList.add('open');
   cartBackdrop?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeCart() {
   cartDrawer?.classList.remove('open');
   cartBackdrop?.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-cartBtn?.addEventListener('click', openCart);
-cartCloseBtn?.addEventListener('click', closeCart);
+document.getElementById('cartBtn')?.addEventListener('click', openCart);
+document.getElementById('cartClose')?.addEventListener('click', closeCart);
 cartBackdrop?.addEventListener('click', closeCart);
 
 // ======================== CHECKOUT MODAL ========================
-const checkoutModal     = document.getElementById('checkoutModal');
-const checkoutOverlay   = document.getElementById('checkoutOverlay');
-const checkoutCloseBtn  = document.getElementById('checkoutClose');
-const checkoutBtn       = document.getElementById('checkoutBtn');
-const orderSummaryEl    = document.getElementById('orderSummary');
-const orderTotalModalEl = document.getElementById('orderTotalModal');
-const checkoutForm      = document.getElementById('checkoutForm');
+const checkoutOverlay = document.getElementById('checkoutOverlay');
+const checkoutForm    = document.getElementById('checkoutForm');
 
 function openCheckout() {
   if (cart.count() === 0) return;
-
-  if (orderSummaryEl) {
-    orderSummaryEl.innerHTML = cart.items.map(item => `
+  const summaryEl = document.getElementById('orderSummary');
+  const totalEl   = document.getElementById('orderTotalModal');
+  if (summaryEl) {
+    summaryEl.innerHTML = cart.items.map(i => `
       <div class="order-row">
-        <span>${item.name} (${item.sizeLabel}) × ${item.qty}</span>
-        <span>¥${(item.price * item.qty).toLocaleString()}</span>
+        <span>${i.name} × ${i.qty}</span>
+        <span>¥${(i.price * i.qty).toLocaleString()}</span>
       </div>
     `).join('');
   }
-  if (orderTotalModalEl) orderTotalModalEl.textContent = `¥${cart.total().toLocaleString()}`;
-
-  checkoutModal?.classList.add('open');
+  if (totalEl) totalEl.textContent = `¥${cart.total().toLocaleString()}`;
+  checkoutOverlay?.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeCheckout() {
-  checkoutModal?.classList.remove('open');
+  checkoutOverlay?.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-checkoutBtn?.addEventListener('click', () => {
+document.getElementById('checkoutBtn')?.addEventListener('click', () => {
   closeCart();
   setTimeout(openCheckout, 200);
 });
+document.getElementById('checkoutClose')?.addEventListener('click', closeCheckout);
+checkoutOverlay?.addEventListener('click', e => { if (e.target === checkoutOverlay) closeCheckout(); });
 
-checkoutCloseBtn?.addEventListener('click', closeCheckout);
-checkoutOverlay?.addEventListener('click', (e) => {
-  if (e.target === checkoutOverlay) closeCheckout();
-});
-
-checkoutForm?.addEventListener('submit', (e) => {
+checkoutForm?.addEventListener('submit', e => {
   e.preventDefault();
-  const btn = checkoutForm.querySelector('button[type="submit"]');
+  const btn  = checkoutForm.querySelector('button[type="submit"]');
   const orig = btn.textContent;
   btn.textContent = '注文を受け付けました！ありがとうございます。';
-  btn.style.background = '#16a34a';
+  btn.style.background = '#16A34A';
   btn.disabled = true;
-
   setTimeout(() => {
     cart.items = [];
     cart.save();
     cart.render();
     cart.updateBadge();
     closeCheckout();
-    btn.textContent = orig;
+    btn.textContent    = orig;
     btn.style.background = '';
     btn.disabled = false;
     checkoutForm.reset();
@@ -257,53 +355,46 @@ checkoutForm?.addEventListener('submit', (e) => {
 });
 
 // ======================== PRODUCT GRID ========================
-function renderProducts() {
+let currentFilter = 'all';
+
+function renderProducts(filter = 'all') {
   const grid = document.getElementById('productsGrid');
   if (!grid) return;
+  currentFilter = filter;
 
-  grid.innerHTML = PRODUCTS.map(product => {
-    const badgeHtml = product.badge
-      ? `<span class="badge badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</span>`
-      : '';
+  const filtered = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
 
-    const sizesHtml = product.sizes.map((s, i) => `
-      <button class="size-opt ${i === 0 ? 'selected' : ''}"
-              data-product="${product.id}"
-              data-size="${s.label}"
-              data-price="${s.price}">
-        ${s.label}
-      </button>
-    `).join('');
-
-    const defaultSize  = product.sizes[0];
-    const defaultPrice = defaultSize.price;
+  grid.innerHTML = filtered.map(p => {
+    const badgeCls  = p.badge ? BADGE_CLASS[p.badge] || '' : '';
+    const badgeHtml = p.badge ? `<span class="pc-badge ${badgeCls}">${p.badge}</span>` : '';
+    const origHtml  = p.originalPrice
+      ? `<span class="pc-price-original">¥${p.originalPrice.toLocaleString()}</span>` : '';
 
     return `
-      <div class="product-card reveal">
-        ${badgeHtml}
-        <div class="pv-wrap">
-          <div class="product-visual pv-${product.theme}">
-            <div class="pv-label">
-              <div class="pv-brand">SLOW FIRE</div>
-              <div class="pv-title">${product.name}</div>
-              <div class="pv-sub">DRY RUB · AUSTRALIA</div>
-            </div>
-          </div>
+      <div class="product-card" role="listitem" data-id="${p.id}">
+        <div class="pc-img-wrap">
+          <img class="pc-img" src="${p.image}" alt="${p.name}" loading="lazy"
+               onerror="this.src='';this.closest('.pc-img-wrap').style.background='var(--surface-2)'">
+          <span class="pc-cat-badge">${CAT_LABEL[p.category]}</span>
+          ${badgeHtml}
         </div>
-        <div class="product-info">
-          <h3 class="product-name">${product.name}</h3>
-          <p class="product-nameja">${product.nameja}</p>
-          <p class="product-desc">${product.desc}</p>
-          <div class="size-selector" id="sizes-${product.id}">
-            ${sizesHtml}
-          </div>
-          <div class="product-footer">
-            <span class="product-price" id="price-${product.id}">¥${defaultPrice.toLocaleString()}</span>
-            <button class="atc-btn" id="atc-${product.id}"
-                    data-product="${product.id}"
-                    data-size="${defaultSize.label}"
-                    data-price="${defaultPrice}">
-              カートに追加
+        <div class="pc-body">
+          <div class="pc-name">${p.name}</div>
+          <div class="pc-nameja">${p.nameja}</div>
+          <p class="pc-desc">${p.desc}</p>
+          <p class="pc-best">おすすめ: ${p.best}</p>
+          <div class="pc-footer">
+            <div class="pc-price">
+              ${origHtml}
+              <span class="pc-price-main">¥${p.price.toLocaleString()}</span>
+            </div>
+            <button class="atc-btn" data-id="${p.id}">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1h1.7l2.3 7h5.8l1.2-4H4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="6.5" cy="11.5" r="1" fill="currentColor"/>
+                <circle cx="10.5" cy="11.5" r="1" fill="currentColor"/>
+              </svg>
+              カートへ
             </button>
           </div>
         </div>
@@ -311,221 +402,53 @@ function renderProducts() {
     `;
   }).join('');
 
-  // Size selector interaction
-  grid.querySelectorAll('.size-opt').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const productId = btn.dataset.product;
-      const sizeLabel = btn.dataset.size;
-      const price     = parseInt(btn.dataset.price, 10);
-
-      // Toggle selected state
-      document.querySelectorAll(`#sizes-${productId} .size-opt`).forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-
-      // Update price display
-      const priceEl = document.getElementById(`price-${productId}`);
-      if (priceEl) priceEl.textContent = `¥${price.toLocaleString()}`;
-
-      // Update ATC button data
-      const atcBtn = document.getElementById(`atc-${productId}`);
-      if (atcBtn) {
-        atcBtn.dataset.size  = sizeLabel;
-        atcBtn.dataset.price = price;
-      }
-    });
-  });
-
-  // Add to cart buttons
   grid.querySelectorAll('.atc-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const productId = btn.dataset.product;
-      const sizeLabel = btn.dataset.size;
-      const price     = parseInt(btn.dataset.price, 10);
-
-      // Loading state
-      btn.classList.add('loading');
-      btn.textContent = '...';
-
+      const id = btn.dataset.id;
+      cart.add(id);
+      btn.classList.add('done');
+      btn.innerHTML = '✓ 追加済み';
       setTimeout(() => {
-        cart.add(productId, sizeLabel, price);
-        btn.classList.remove('loading');
-        btn.classList.add('done');
-        btn.textContent = '✓ 追加しました';
-
-        setTimeout(() => {
-          btn.classList.remove('done');
-          btn.textContent = 'カートに追加';
-          openCart();
-        }, 1200);
-      }, 600);
+        btn.classList.remove('done');
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1h1.7l2.3 7h5.8l1.2-4H4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="6.5" cy="11.5" r="1" fill="currentColor"/>
+          <circle cx="10.5" cy="11.5" r="1" fill="currentColor"/>
+        </svg> カートへ`;
+        openCart();
+      }, 1000);
     });
   });
-
-  // Re-observe new reveal elements
-  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
-// ======================== SCROLL REVEAL ========================
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    renderProducts(btn.dataset.filter);
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+});
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// Render products after observer is set up
 renderProducts();
 
 // ======================== FAQ ACCORDION ========================
 document.querySelectorAll('.faq-item').forEach(item => {
-  const question = item.querySelector('.faq-question');
-  question?.addEventListener('click', () => {
+  item.querySelector('.faq-q')?.addEventListener('click', () => {
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
   });
 });
 
-// ======================== FIRE PARTICLE SYSTEM ========================
-const canvas = document.getElementById('fireCanvas');
-const ctx    = canvas?.getContext('2d');
-
-if (canvas && ctx) {
-  function resizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas, { passive: true });
-
-  const FIRE_PALETTE = [
-    [249, 115, 22],
-    [217, 119,  6],
-    [220,  38, 38],
-    [253, 186, 116],
-    [251, 191, 36],
-    [194,  65, 12],
-  ];
-
-  const SMOKE_PALETTE = [
-    [60, 45, 30],
-    [80, 62, 42],
-    [50, 38, 25],
-  ];
-
-  class FireParticle {
-    constructor(spread = false) { this.reset(spread); }
-
-    reset(spread = false) {
-      const w = canvas.width, h = canvas.height;
-      const zone = w * 0.55, offset = (w - zone) / 2;
-      this.x = offset + Math.random() * zone;
-      this.y = spread ? Math.random() * h : h + Math.random() * 60;
-      this.baseSize    = Math.random() * 4.5 + 0.8;
-      this.size        = this.baseSize;
-      this.speedX      = (Math.random() - 0.5) * 0.65;
-      this.speedY      = -(Math.random() * 2.4 + 0.5);
-      this.wobble      = Math.random() * Math.PI * 2;
-      this.wobbleSpeed = Math.random() * 0.035 + 0.008;
-      this.life        = 1;
-      this.decay       = Math.random() * 0.012 + 0.004;
-      this.col         = FIRE_PALETTE[Math.floor(Math.random() * FIRE_PALETTE.length)];
-    }
-
-    update() {
-      this.wobble += this.wobbleSpeed;
-      this.x += this.speedX + Math.sin(this.wobble) * 0.55;
-      this.y += this.speedY;
-      this.life -= this.decay;
-      this.size = this.baseSize * this.life;
-    }
-
-    draw() {
-      const [r, g, b] = this.col;
-      const alpha = Math.max(0, this.life * 0.72);
-      ctx.save();
-      ctx.globalAlpha  = alpha;
-      ctx.shadowBlur   = 20;
-      ctx.shadowColor  = `rgb(${r},${g},${b})`;
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2.4);
-      grad.addColorStop(0,    `rgba(${r},${g},${b},1)`);
-      grad.addColorStop(0.45, `rgba(${r},${g},${b},0.38)`);
-      grad.addColorStop(1,    `rgba(${r},${g},${b},0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size * 2.4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    isDead() { return this.life <= 0 || this.y < -40; }
-  }
-
-  class SmokeParticle {
-    constructor() { this.reset(); }
-
-    reset() {
-      const w = canvas.width, h = canvas.height;
-      const zone = w * 0.4, offset = (w - zone) / 2;
-      this.x = offset + Math.random() * zone;
-      this.y = h * 0.3 + Math.random() * h * 0.4;
-      this.size        = Math.random() * 60 + 30;
-      this.speedX      = (Math.random() - 0.5) * 0.3;
-      this.speedY      = -(Math.random() * 0.4 + 0.1);
-      this.wobble      = Math.random() * Math.PI * 2;
-      this.wobbleSpeed = Math.random() * 0.008 + 0.003;
-      this.life        = Math.random() * 0.3 + 0.05;
-      this.decay       = Math.random() * 0.0015 + 0.0005;
-      this.col         = SMOKE_PALETTE[Math.floor(Math.random() * SMOKE_PALETTE.length)];
-    }
-
-    update() {
-      this.wobble += this.wobbleSpeed;
-      this.x += this.speedX + Math.sin(this.wobble) * 0.4;
-      this.y += this.speedY;
-      this.life -= this.decay;
-      this.size += 0.25;
-    }
-
-    draw() {
-      const [r, g, b] = this.col;
-      const alpha = Math.max(0, this.life * 0.55);
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-      grad.addColorStop(0,   `rgba(${r},${g},${b},0.5)`);
-      grad.addColorStop(0.6, `rgba(${r},${g},${b},0.15)`);
-      grad.addColorStop(1,   `rgba(${r},${g},${b},0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    isDead() { return this.life <= 0 || this.y < -80; }
-  }
-
-  const fireParticles  = Array.from({ length: 150 }, () => new FireParticle(true));
-  const smokeParticles = Array.from({ length: 20  }, () => new SmokeParticle());
-
-  function renderParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (const p of smokeParticles) { p.update(); p.draw(); if (p.isDead()) p.reset(); }
-    for (const p of fireParticles)  { p.update(); p.draw(); if (p.isDead()) p.reset(); }
-    requestAnimationFrame(renderParticles);
-  }
-  renderParticles();
-}
-
 // ======================== NAV ========================
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav?.classList.toggle('scrolled', window.scrollY > 60);
+  nav?.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
 // ======================== HAMBURGER ========================
@@ -535,19 +458,20 @@ const navLinks  = document.querySelector('.nav-links');
 if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
     const open = navLinks.style.display === 'flex';
-    navLinks.style.display       = open ? 'none' : 'flex';
+    navLinks.style.display      = open ? 'none' : 'flex';
     navLinks.style.flexDirection = 'column';
-    navLinks.style.position      = 'absolute';
-    navLinks.style.top           = '100%';
-    navLinks.style.left          = '0';
-    navLinks.style.right         = '0';
-    navLinks.style.background    = 'rgba(8,6,4,0.97)';
-    navLinks.style.padding       = '1.5rem 2.5rem';
-    navLinks.style.gap           = '1.25rem';
-    navLinks.style.borderBottom  = '1px solid rgba(255,255,255,0.07)';
+    navLinks.style.position     = 'absolute';
+    navLinks.style.top          = '100%';
+    navLinks.style.left         = '0';
+    navLinks.style.right        = '0';
+    navLinks.style.background   = 'rgba(255,255,255,0.98)';
+    navLinks.style.padding      = '16px 24px';
+    navLinks.style.gap          = '16px';
+    navLinks.style.borderBottom = '1px solid var(--border)';
+    navLinks.style.boxShadow    = 'var(--shadow)';
+    hamburger.setAttribute('aria-expanded', String(!open));
     if (open) navLinks.style.display = 'none';
   });
-
   navLinks.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       if (window.innerWidth <= 768) navLinks.style.display = 'none';
@@ -556,9 +480,9 @@ if (hamburger && navLinks) {
 }
 
 // ======================== SMOOTH SCROLL ========================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const href = anchor.getAttribute('href');
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
     if (href === '#') return;
     e.preventDefault();
     const target = document.querySelector(href);
@@ -567,24 +491,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
-
-// ======================== CONTACT FORM ========================
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn  = contactForm.querySelector('button[type="submit"]');
-    const orig = btn.textContent;
-    btn.textContent = '送信完了！ありがとうございます。';
-    btn.style.background  = '#16a34a';
-    btn.style.boxShadow   = '0 8px 24px rgba(22,163,74,0.28)';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent     = orig;
-      btn.style.background = '';
-      btn.style.boxShadow  = '';
-      btn.disabled = false;
-      contactForm.reset();
-    }, 4000);
-  });
-}

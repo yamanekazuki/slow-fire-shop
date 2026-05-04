@@ -3,335 +3,348 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOW FIRE SHOP | 本場オーストラリアのBBQラブ</title>
-  <meta name="description" content="オーストラリア産の本格ドライラブが、ついに日本へ。アメリカンBBQを変えるスパイスの結晶。SLOW FIREが直輸入でお届けします。">
+  <title>SLOW FIRE SHOP — オーストラリア直輸入 BBQラブ</title>
+  <meta name="description" content="Low n Slow Basics 日本正規取扱。オーストラリア直輸入のプレミアムBBQドライラブ・ジャーキー。SLOW FIREが厳選。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Noto+Sans+JP:wght@300;400;500;700&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="grain-overlay" aria-hidden="true"></div>
 
   <!-- CART BACKDROP -->
-  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <div id="cartBackdrop" class="cart-backdrop"></div>
 
   <!-- CART DRAWER -->
-  <aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="カート">
-    <div class="cd-head">
-      <div class="cd-head-left">
-        <h3 class="cd-title">カート</h3>
-        <span class="cd-item-count" id="cdItemCount"></span>
-      </div>
-      <button class="cd-close" id="cartClose" aria-label="カートを閉じる">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="ショッピングカート">
+    <div class="cart-header">
+      <h2 class="cart-title">カート</h2>
+      <button id="cartClose" class="icon-btn" aria-label="閉じる">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
-    <div class="cd-body" id="cdBody"></div>
-    <div class="cd-foot" id="cdFoot"></div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>小計（税込）</span>
+        <span id="cartTotal">¥0</span>
+      </div>
+      <p class="cart-ship-note">¥15,000以上で送料無料 / 全国一律¥990</p>
+      <button id="checkoutBtn" class="btn-primary btn-block">注文手続きへ →</button>
+    </div>
   </aside>
 
-  <!-- CHECKOUT MODAL -->
-  <div class="modal-backdrop" id="modalBackdrop"></div>
-  <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true">
-    <div class="cm-head">
-      <h3>注文内容の確認</h3>
-      <button class="cm-close" id="modalClose" aria-label="閉じる">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+  <!-- CHECKOUT OVERLAY -->
+  <div id="checkoutOverlay" class="checkout-overlay" role="dialog" aria-modal="true">
+    <div id="checkoutModal" class="checkout-modal">
+      <div class="co-header">
+        <h2>ご注文の確認</h2>
+        <button id="checkoutClose" class="icon-btn" aria-label="閉じる">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="co-body">
+        <div class="co-section">
+          <h3 class="co-section-title">ご注文内容</h3>
+          <div id="orderSummary" class="order-list"></div>
+          <div class="order-total-row">
+            <span>合計（税込）</span>
+            <strong id="orderTotalModal">¥0</strong>
+          </div>
+        </div>
+        <form id="checkoutForm" class="co-section" novalidate>
+          <h3 class="co-section-title">お届け先情報</h3>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="fname">姓</label>
+              <input type="text" id="fname" name="fname" required placeholder="山根">
+            </div>
+            <div class="form-group">
+              <label for="lname">名</label>
+              <input type="text" id="lname" name="lname" required placeholder="一城">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">電話番号</label>
+            <input type="tel" id="phone" name="phone" placeholder="090-0000-0000">
+          </div>
+          <div class="form-group">
+            <label for="zip">郵便番号</label>
+            <input type="text" id="zip" name="zip" required placeholder="123-4567" maxlength="8">
+          </div>
+          <div class="form-group">
+            <label for="address">住所（都道府県から）</label>
+            <input type="text" id="address" name="address" required placeholder="東京都渋谷区〜">
+          </div>
+          <div class="form-group">
+            <label for="address2">マンション名・部屋番号</label>
+            <input type="text" id="address2" name="address2" placeholder="任意">
+          </div>
+          <div class="form-group">
+            <label for="note">備考</label>
+            <textarea id="note" name="note" rows="2" placeholder="ご要望があればご記入ください"></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-block btn-lg">注文を確定する</button>
+          <p class="co-note">ご注文確認後、メールにてお支払い方法をご案内します。</p>
+        </form>
+      </div>
     </div>
-    <div class="cm-body" id="cmBody"></div>
   </div>
 
   <!-- NAV -->
-  <nav id="nav">
+  <header id="nav" class="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">SLOW FIRE <span class="nav-shop-badge">SHOP</span></a>
-      <ul class="nav-links">
-        <li><a href="#products">商品一覧</a></li>
-        <li><a href="#how-to-use">使い方</a></li>
-        <li><a href="#story">ストーリー</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener" class="nav-service">サービスサイト ↗</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="cart-btn" id="cartBtn" aria-label="カートを開く">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="cart-svg">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      <a href="#" class="nav-logo" aria-label="SLOW FIRE SHOP ホーム">
+        <span class="logo-slow">SLOW</span><span class="logo-fire"> FIRE</span>
+        <span class="logo-shop"> SHOP</span>
+      </a>
+      <nav class="nav-links" aria-label="メインナビゲーション">
+        <a href="#products">商品一覧</a>
+        <a href="#story">ブランド</a>
+        <a href="#howto">使い方</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener" class="nav-link-ext">
+          サービスサイト
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:2px;vertical-align:middle;opacity:.5">
+            <path d="M1.5 8.5L8.5 1.5M8.5 1.5H4M8.5 1.5V6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+        </a>
+      </nav>
+      <div class="nav-actions">
+        <button id="cartBtn" class="cart-btn" aria-label="カートを開く">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span id="cartBadge" class="cart-badge" style="display:none">0</span>
         </button>
-        <button class="nav-hamburger" aria-label="メニュー">
+        <button class="nav-hamburger" aria-label="メニュー" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="hero">
-    <canvas id="fireCanvas"></canvas>
-    <div class="hero-glow"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">From Australia to Japan</p>
-      <h1 class="hero-title">本場の味を、<br><em>あなたの食卓へ。</em></h1>
-      <p class="hero-sub">オーストラリアで生まれた本格ドライラブが、ついに日本へ。<br>アメリカンBBQの哲学を変える、スパイスの結晶。</p>
-      <div class="hero-actions">
-        <a href="#products" class="btn btn-primary">ラブを選ぶ</a>
-        <a href="#story" class="btn btn-ghost">ストーリーを読む</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <span>SCROLL</span>
-      <div class="scroll-bar"></div>
-    </div>
   </header>
 
-  <!-- TRUST BAR -->
-  <div class="trust-bar">
-    <div class="trust-bar-inner">
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="tb-ico"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        <span>¥5,000以上 送料無料</span>
-      </div>
-      <div class="tb-sep"></div>
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="tb-ico"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>品質保証・返品対応</span>
-      </div>
-      <div class="tb-sep"></div>
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="tb-ico"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>最短翌日発送</span>
-      </div>
-      <div class="tb-sep"></div>
-      <div class="tb-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="tb-ico"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <span>Weber Grill Academy 認定</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- STORY -->
-  <section id="story">
-    <div class="section-container">
-      <div class="story-grid">
-        <div class="story-text reveal">
-          <p class="eyebrow">Why This Rub</p>
-          <h2>日本では手に入らない、<br>本物のラブがあった。</h2>
-          <p>アメリカンBBQを本格的に学ぶうち、私たちは一つの問題にぶつかった。<strong>本場のラブが、日本では手に入らない。</strong></p>
-          <p>市販の焼肉たれや国産スパイスミックスとは、根本的に違う。オーストラリアで磨かれたラブは、配合のバランス、スパイスの鮮度、炭火との相性——すべてが別格だった。</p>
-          <p>Weber Grill Academyでオーストラリア産ラブに出会い、その深みを知った私たちは、日本への販路を開拓することを決めた。<em>あの衝撃を、より多くの人に届けたい。</em></p>
-          <a href="#products" class="btn btn-primary" style="margin-top: 1.5rem;">商品を見る</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/07/lownslowbasics-logo-white-1.png"
+               alt="Low n Slow Basics" class="hero-brand-logo" loading="eager">
+          日本正規取扱
+        </p>
+        <h1 class="hero-heading">本場のBBQラブを、<br>あなたの食卓へ。</h1>
+        <p class="hero-sub">オーストラリアのBBQコンペティションで生まれたプレミアムドライラブ。<br>日本未流通のラインナップをSLOW FIREが直輸入でお届けします。</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn-primary btn-lg">商品一覧を見る</a>
+          <a href="#story" class="btn-ghost">ブランドについて</a>
         </div>
-        <div class="story-right reveal reveal-delay-2">
-          <div class="origin-card">
-            <div class="oc-flag">
-              <span class="oc-abbr">AU</span>
-              <span class="oc-name">オーストラリア</span>
-            </div>
-            <div class="oc-arrow">
-              <div class="oc-line"></div>
-              <div class="oc-label">直輸入・品質管理</div>
-              <div class="oc-arrowhead"></div>
-            </div>
-            <div class="oc-flag">
-              <span class="oc-abbr">JP</span>
-              <span class="oc-name">日本</span>
-            </div>
-          </div>
-          <div class="story-stats">
-            <div class="stat-pill">
-              <span class="sp-num">100%</span>
-              <span class="sp-label">天然スパイス</span>
-            </div>
-            <div class="stat-pill">
-              <span class="sp-num">0</span>
-              <span class="sp-label">人工添加物</span>
-            </div>
-          </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-wrap">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/all-star-combo-plus-hookshot-NEW-600x600.jpg"
+               alt="All-Star Combo BBQ Rub Set" class="hero-img" loading="eager">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div class="section-container">
-      <div class="section-header reveal">
-        <p class="eyebrow">Our Products</p>
-        <h2>5種のラブから、<br>あなたの一本を。</h2>
-        <p class="section-lead">Weber Grill Academy認定。肉の種類と好みの味わいで選んでください。</p>
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M9 1l2.12 4.3 4.74.69-3.43 3.34.81 4.72L9 11.77l-4.24 2.28.81-4.72L2.14 5.99l4.74-.69L9 1z" fill="currentColor"/>
+        </svg>
+        <span>オーストラリア直輸入</span>
       </div>
-      <div class="products-grid" id="productsGrid">
-        <!-- rendered by JS -->
+      <div class="trust-item">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="8" width="14" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M6 8V5.5a3 3 0 116 0V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span>安全・確実な決済</span>
+      </div>
+      <div class="trust-item">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2 4h14l-1.5 9H3.5L2 4zM6 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>¥15,000以上送料無料</span>
+      </div>
+      <div class="trust-item">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M9 5v4l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span>3〜7営業日でお届け</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="products-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title">商品一覧</h2>
+        <p class="section-sub">Low n Slow Basics フルラインナップ</p>
+      </div>
+      <div class="filter-bar" role="tablist">
+        <button class="filter-tab active" data-filter="all" role="tab">すべて</button>
+        <button class="filter-tab" data-filter="rub" role="tab">ラブ・ソース</button>
+        <button class="filter-tab" data-filter="jerky" role="tab">ジャーキー</button>
+        <button class="filter-tab" data-filter="set" role="tab">セット</button>
+      </div>
+      <div id="productsGrid" class="products-grid" role="list"></div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story" class="story-section">
+    <div class="story-inner">
+      <div class="story-img-col">
+        <div class="story-img-wrap">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png"
+               alt="Low n Slow Basics Rubs Collection" loading="lazy">
+        </div>
+      </div>
+      <div class="story-text-col">
+        <p class="eyebrow">BRAND STORY</p>
+        <h2 class="story-heading">なぜ、オーストラリアの<br>ラブなのか。</h2>
+        <p>Low n Slow Basicsは、オーストラリアのバックヤードBBQとコンペティションシーンの両方で磨かれたプレミアムラブブランドです。</p>
+        <p>プロのピットマスターが認める発色・旨み・汎用性を追求した結果、7種のラブ＋シグネチャーソースというラインナップが完成しました。日本ではまだほとんど流通しておらず、SLOW FIREが正規輸入ルートで日本初上陸させました。</p>
+        <p>グラスフェッド牛を使ったジャーキーも含め、すべてがオーストラリア品質。BBQをもっと本格的にするために。</p>
+        <div class="story-badge">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/07/lownslowbasics-logo-white-1.png"
+               alt="Low n Slow Basics" loading="lazy">
+          <span>日本正規取扱店</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- HOW TO USE -->
-  <section id="how-to-use">
-    <div class="section-container">
-      <div class="section-header reveal">
-        <p class="eyebrow">How to Use</p>
-        <h2>ラブの使い方、<br>3つのステップ。</h2>
-        <p class="section-lead">難しくない。この3ステップで、本場のBBQが完成する。</p>
+  <section id="howto" class="howto-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 class="section-title">ラブの使い方</h2>
+        <p class="section-sub">たった3ステップで本場のBBQフレーバー</p>
       </div>
-
       <div class="steps-grid">
-        <div class="step-card reveal reveal-delay-1">
+        <div class="step-card">
           <div class="step-num">01</div>
-          <h3>まぶす</h3>
-          <p>肉の全面にラブをたっぷりまぶす。表面全体が均一に覆われるよう、手でしっかり押さえながら馴染ませる。ケチらないことが重要——ラブはBBQの命だ。</p>
-          <div class="step-tip"><span class="tip-badge">TIP</span><span>前日仕込みで、より深く味が染み込む</span></div>
+          <h3>たっぷり振る</h3>
+          <p>肉の表面全体をラブで覆い隠すように振りかけます。少なすぎると効果が出ません。</p>
         </div>
-        <div class="step-card reveal reveal-delay-2">
+        <div class="step-card">
           <div class="step-num">02</div>
-          <h3>休ませる</h3>
-          <p>ラブをまぶした後、最低30分（理想は一晩）冷蔵庫で休ませる。スパイスが肉に馴染み、表面に美しいバークが形成される準備が整う。</p>
-          <div class="step-tip"><span class="tip-badge">TIP</span><span>ラップはせず、冷蔵庫で表面を乾かす</span></div>
+          <h3>なじませる</h3>
+          <p>塩分が肉に浸透するよう、最低30分〜理想は一晩。冷蔵でラップして置きます。</p>
         </div>
-        <div class="step-card reveal reveal-delay-3">
+        <div class="step-card">
           <div class="step-num">03</div>
-          <h3>インダイレクトで焼く</h3>
-          <p>ラブをつけた肉は<strong>間接熱</strong>で焼くのが基本。直火ではラブが焦げる。蓋を閉め、グリルをオーブンにして、じっくりと内側から変化させる。</p>
-          <div class="step-tip"><span class="tip-badge">TIP</span><span>内部温度計で中心温度を必ず確認</span></div>
+          <h3>じっくり焼く</h3>
+          <p>低温・間接熱でゆっくり火入れ。美しいバーク（外皮）とジューシーな仕上がりに。</p>
         </div>
       </div>
-
-      <!-- Pairing Guide -->
-      <div class="pairing-guide reveal">
-        <div class="pairing-head">
-          <p class="eyebrow">Pairing Guide</p>
-          <h3>肉×ラブ の相性ガイド</h3>
-        </div>
-        <div class="pairing-table">
-          <div class="pt-row pt-header">
-            <span>肉の種類</span>
-            <span>おすすめラブ</span>
-            <span>最適調理法</span>
-          </div>
-          <div class="pt-row"><span>豚肩（プルドポーク）</span><span class="pt-rub">SWEET HEAT</span><span>ロー＆スロー / 97℃</span></div>
-          <div class="pt-row"><span>スペアリブ</span><span class="pt-rub">HICKORY SMOKE</span><span>ロー＆スロー / 92℃</span></div>
-          <div class="pt-row"><span>ブリスケット</span><span class="pt-rub">OUTBACK CLASSIC</span><span>ロー＆スロー / 94℃</span></div>
-          <div class="pt-row"><span>ラム・牛赤身</span><span class="pt-rub">PEPPER &amp; HERB</span><span>ツーゾーン / 54℃</span></div>
-          <div class="pt-row"><span>丸鶏・手羽元</span><span class="pt-rub">OUTBACK CLASSIC</span><span>インダイレクト / 73℃</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUALITY -->
-  <section id="quality">
-    <div class="section-container">
-      <div class="quality-inner">
-        <div class="quality-text reveal">
-          <p class="eyebrow">Quality Promise</p>
-          <h2>妥協しない、<br>品質へのこだわり。</h2>
-          <p>オーストラリアの生産者と直接契約。スパイスの鮮度と品質を、仕入れから発送まで一貫して管理している。</p>
-          <p>人工添加物・保存料は一切不使用。天然スパイスだけのブレンドだからこそ、炭火との化学反応が生まれ、<em>本物のバーク</em>が形成される。</p>
-        </div>
-        <div class="quality-list reveal reveal-delay-2">
-          <div class="ql-item"><div class="ql-mark">—</div><div><h4>天然スパイス100%</h4><p>人工香料・着色料・保存料は一切不使用。スパイスそのものの力で、複雑な味わいをつくる。</p></div></div>
-          <div class="ql-item"><div class="ql-mark">—</div><div><h4>産地直輸入</h4><p>オーストラリアの生産者から直接仕入れ。中間マージンを削り、鮮度を最大化。</p></div></div>
-          <div class="ql-item"><div class="ql-mark">—</div><div><h4>Weber Grill Academy認定</h4><p>実際にWeber Grill Academyで使用・検証されたラブのみを厳選して取り扱う。</p></div></div>
-          <div class="ql-item"><div class="ql-mark">—</div><div><h4>密閉包装で鮮度保持</h4><p>開封後も鮮度が長持ちする密閉容器。スパイスの香りを最後の一振りまで届ける。</p></div></div>
+      <div class="pairing-wrap">
+        <h3 class="pairing-title">おすすめペアリングガイド</h3>
+        <div class="pairing-table-scroll">
+          <table class="pairing-table">
+            <thead>
+              <tr>
+                <th>ラブ</th>
+                <th>牛</th>
+                <th>豚</th>
+                <th>鶏</th>
+                <th>ラム</th>
+                <th>野菜</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Steak Shooter</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
+              <tr><td>Steak Shooter SPICY</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-no">—</td><td class="m-no">—</td></tr>
+              <tr><td>Beef Bounce</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td></tr>
+              <tr><td>Honey Soy Slammer</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
+              <tr><td>Lamb Layup</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-best">◎</td><td class="m-no">—</td></tr>
+              <tr><td>Garlic Goals</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-best">◎</td></tr>
+              <tr><td>Chilli Citrus Charge</td><td class="m-no">—</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
-    <div class="section-container">
-      <div class="section-header reveal">
-        <p class="eyebrow">FAQ</p>
-        <h2>よくある質問</h2>
+  <section id="faq" class="faq-section">
+    <div class="section-inner section-narrow">
+      <div class="section-header">
+        <h2 class="section-title">よくある質問</h2>
       </div>
-      <div class="faq-list reveal">
+      <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q"><span>ラブとタレ（ソース）の違いは何ですか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>ラブは乾燥スパイスの混合物で、焼く前に肉の表面にまぶして使います。水分がないため、グリルで焼いた時に「バーク（樹皮のような香ばしい層）」が形成されます。タレは液体ベースで後がけするもの。本格アメリカンBBQでは、ラブが下味の核心です。</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>どれくらいの量を使えばいいですか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>目安は肉100gに対してラブ大さじ1〜2杯。「ケチらない」がアメリカンBBQの鉄則です。肉の表面全体が均一に覆われた状態が理想。130gで豚肩ロース600〜700gに使用できます。</p></div>
+          <button class="faq-q">送料はいくらですか？</button>
+          <div class="faq-a"><p>全国一律990円（税込）です。¥15,000以上のご購入で送料無料になります。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>開封後の保存方法と賞味期限は？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>開封後は密閉容器で保存し、6ヶ月以内を目安にご使用ください。湿気を避け、直射日光の当たらない涼しい場所で保管することで、スパイスの香りと品質を長持ちさせられます。</p></div>
+          <button class="faq-q">賞味期限はどのくらいですか？</button>
+          <div class="faq-a"><p>各商品パッケージに記載の賞味期限をご確認ください。ラブは未開封で約2年、ジャーキーは約1年が目安です。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>送料はいくらかかりますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>¥5,000以上のご注文で全国送料無料。¥5,000未満の場合は送料¥660（全国一律）がかかります。発送は最短翌日、通常2〜4営業日でお届けします。</p></div>
+          <button class="faq-q">アレルゲンはありますか？</button>
+          <div class="faq-a"><p>製品によって異なります。小麦・大豆・乳製品・ゴマ・ピーナッツ・木の実の痕跡を含む可能性がある製品があります。アレルギーをお持ちの方は各商品説明をご確認の上ご購入ください。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>返品・交換はできますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>商品到着後7日以内、未開封の状態であれば返品・交換を承ります。商品の品質に問題がある場合は開封後でも対応いたします。お問い合わせフォームよりご連絡ください。</p></div>
+          <button class="faq-q">開封後の保存方法は？</button>
+          <div class="faq-a"><p>直射日光・高温多湿を避け、蓋をしっかり閉めて常温保存してください。ジャーキーは開封後冷蔵で1週間以内を目安にお召し上がりください。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span>ギフトラッピングはできますか？</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-chevron"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a"><p>はい、対応しています。STARTER KITは専用ギフトボックスに入れてお届けします。単品ギフトラッピング（+¥300）はカート内でご選択いただけます。のし・メッセージカードも対応可能です。</p></div>
+          <button class="faq-q">初めてでどれを選べばよいですか？</button>
+          <div class="faq-a"><p>迷ったらAll-Star Comboセット（7種入り）がおすすめです。全種類を試してお気に入りを見つけてから個別購入するのが一番です。牛肉好きはSteak Shooter、豚・鶏にはHoney Soy Slammerから試してみてください。</p></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-glow"></div>
-    <div class="section-container">
-      <div class="contact-wrap">
-        <div class="contact-text reveal">
-          <p class="eyebrow">Get in Touch</p>
-          <h2>お問い合わせ</h2>
-          <p class="contact-desc">ご注文・在庫・法人購入・その他のご相談は<br>こちらからお気軽にどうぞ。</p>
+        <div class="faq-item">
+          <button class="faq-q">返品・交換はできますか？</button>
+          <div class="faq-a"><p>食品のため、お客様都合による返品・交換はお受けできません。商品の破損・内容相違の場合は速やかに対応いたしますのでお問い合わせください。</p></div>
         </div>
-        <form class="contact-form reveal reveal-delay-1" id="contactForm">
-          <div class="form-row">
-            <label><span>お名前</span><input type="text" placeholder="山根 一城" required></label>
-            <label><span>メールアドレス</span><input type="email" placeholder="hello@slowfire.jp" required></label>
-          </div>
-          <label>
-            <span>お問い合わせの種類</span>
-            <select>
-              <option value="">選択してください</option>
-              <option>商品について</option>
-              <option>注文・在庫について</option>
-              <option>法人・まとめ買い</option>
-              <option>返品・交換</option>
-              <option>その他</option>
-            </select>
-          </label>
-          <label><span>メッセージ</span><textarea placeholder="ご質問やご相談の内容をお聞かせください。" rows="5"></textarea></label>
-          <button type="submit" class="btn btn-primary btn-large">送信する</button>
-        </form>
+        <div class="faq-item">
+          <button class="faq-q">ギフト包装はできますか？</button>
+          <div class="faq-a"><p>はい、ご注文時の備考欄に「ギフト包装希望」とご記入いただければ対応いたします。セット商品はギフトとして特に好評です。</p></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="footer">
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="footer-logo">SLOW FIRE <span class="footer-shop">SHOP</span></div>
-          <p class="footer-tagline">本場オーストラリアのラブを、あなたの食卓へ。</p>
-          <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener" class="footer-back-link">← サービスサイトへ</a>
+          <a href="#" class="footer-logo">
+            <span class="logo-slow">SLOW</span><span class="logo-fire"> FIRE</span>
+            <span class="logo-shop"> SHOP</span>
+          </a>
+          <p>Low n Slow Basics 日本正規取扱</p>
         </div>
         <nav class="footer-nav">
           <a href="#products">商品一覧</a>
-          <a href="#how-to-use">使い方</a>
-          <a href="#story">ストーリー</a>
-          <a href="#quality">品質</a>
+          <a href="#story">ブランドについて</a>
+          <a href="#howto">使い方</a>
           <a href="#faq">FAQ</a>
-          <a href="#contact">お問い合わせ</a>
+          <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">SLOW FIREサービスサイト</a>
         </nav>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 SLOW FIRE SHOP. All rights reserved.</p>
-        <p class="footer-copy">オーストラリア産BBQラブ 直輸入販売</p>
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+        <p>本商品はLow n Slow Basics（オーストラリア）の正規輸入品です。</p>
       </div>
     </div>
   </footer>
