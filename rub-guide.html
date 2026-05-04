@@ -222,17 +222,28 @@
       border-radius: 14px;
       padding: 28px 24px;
       border: 1.5px solid var(--gray-200);
-      text-align: center;
+      text-align: left;
     }
-    .thanks-icon { font-size: 36px; margin-bottom: 16px; }
+    .thanks-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--black);
+      opacity: .08;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
     .thanks-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-    .thanks-card p  { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
+    .thanks-card p  { font-size: 13px; color: var(--gray-600); line-height: 1.75; }
     .thanks-label {
       display: inline-block;
-      margin-top: 14px;
+      margin-top: 16px;
       font-size: 11px; font-weight: 700;
       color: var(--brand);
       letter-spacing: .06em;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 12px;
+      width: 100%;
     }
 
     /* pairing full */
@@ -478,9 +489,8 @@
           <div class="rub-card-body">
             <h3>Steak Shooter — ステーキシューター</h3>
             <p class="rub-subtitle">Steak & Beef Rub / スタンダードビーフラブ</p>
-            <p>塩・砂糖・脱水野菜パウダーのバランスが黄金比。牛肉の発色と旨みを最大化するスタンダードラブ。バックヤードでも競技大会でも「これ一本」で完結する汎用性の高さが人気の理由。</p>
-            <p><strong>おすすめ使い方：</strong>ステーキは焼く30分前にたっぷり振り、室温に戻してから焼く。ロースト系は前日塗って冷蔵庫で一晩置くと完璧。</p>
-            <p><strong>プロのTips：</strong>Beef Bounceと重ねがけすることで、よりリッチで複雑なバークが完成（レイヤリングテクニック）。</p>
+            <p>まずこれ一本から、というなら迷わずこれ。塩・砂糖・脱水野菜パウダーのバランスがとにかく安定していて、牛肉の発色と旨みを自然に引き上げてくれる。ステーキなら焼く30分前にたっぷり振って室温に戻してから焼くだけ。ローストなら前日仕込みで放置。シンプルなのに外皮の仕上がりが別物になる。</p>
+            <p>Beef Bounceと重ねてダブルラブにすると、さらに立体的な風味になる。コンペティション系の使い方だけど、家でやっても普通においしい。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">牛肉 ◎</span>
               <span class="rub-card-tag">鶏 ○</span>
@@ -495,8 +505,7 @@
           <div class="rub-card-body">
             <h3>Steak Shooter SPICY — スパイシー版</h3>
             <p class="rub-subtitle">Spicy Steak & Beef Rub / 辛さレベル2/5</p>
-            <p>オリジナルSteak Shooterに辛みスパイスを追加した上位版。辛さは控えめ（2/5）で、旨みはそのまま。刺激が欲しいシーンに。チキンウィングとの相性が特に抜群。</p>
-            <p><strong>おすすめ使い方：</strong>オリジナルと重ねてダブルラブも可。チキンウィングに使うと、外皮がカリッと赤く仕上がる。</p>
+            <p>オリジナルに辛みを足したバージョン。辛さは2/5で「じわっとくる」程度なので、辛いものが苦手でなければ全然いける。チキンウィングに使うと外皮がカリッと赤く仕上がって見た目も映える。オリジナルのSteak Shooterと重ねてダブルラブにするのもあり。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">牛肉 ◎</span>
               <span class="rub-card-tag">チキンウィング ◎</span>
@@ -509,10 +518,9 @@
           <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="Beef Bounce" loading="lazy">
           <div class="rub-card-body">
             <h3>Beef Bounce — ビーフバウンス</h3>
-            <p class="rub-subtitle">Beef & Brisket Rub / 上級者向け</p>
-            <p>コーヒー・ブラックペッパー・ガーリック・玉ねぎの複雑なブレンド。コーヒーノートが牛の赤身の旨みと絶妙に絡み、グレービーに近い深みを生む。ブリスケットや牛リブのバーク形成に最適。</p>
-            <p><strong>おすすめ使い方：</strong>前日の夜にたっぷり塗って一晩冷蔵。110℃の間接熱で8〜14時間スロークック。バークが黒褐色になったら完成のサイン。</p>
-            <p><strong>プロのTips：</strong>Steak Shooterを先に塗り、その上にBeef Bounceを重ねる「ダブルラブ」がコンペティション仕様。</p>
+            <p class="rub-subtitle">Beef & Brisket Rub / ブリスケット専用に近い</p>
+            <p>コーヒー・ブラックペッパー・ガーリック・玉ねぎ。このブレンドの何がすごいかというと、コーヒーのノートが牛の赤身の旨みと混ざったときに、グレービーのような深みが生まれること。ブリスケットを12時間かけて仕上げるとき、このラブで作れる黒褐色のバークは本当に別格。</p>
+            <p>前日夜にたっぷり塗って、110℃の間接熱でひたすら待つだけ。バークが黒くなっても焦げじゃないので安心してほしい。Steak Shooterを先に塗ってから重ねるのが定番の使い方。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">ブリスケット ◎</span>
               <span class="rub-card-tag best">牛リブ ◎</span>
@@ -527,8 +535,7 @@
             <h3>Honey Soy Slammer — ハニーソイスラマー</h3>
             <p class="rub-subtitle">Pork & Chicken Rub / No.1ベストセラー</p>
             <p>ハニーパウダー・醤油パウダー・パプリカ・フェンネル・生姜のブレンド。日本人の口に最も親しみやすく、なのに「こんなBBQラブが日本にあったのか？」と驚かせる一本。グレーズ感が出るため、見た目も抜群。</p>
-            <p><strong>おすすめ使い方：</strong>豚スペアリブは前日塗って一晩。プルドポークは2〜3日前に仕込むとさらに深みが増す。チキンウィングは1時間前で十分。</p>
-            <p><strong>プロのTips：</strong>仕上げにHook Shot（ソース）を薄く塗ってグリルすれば、キャラメライズが加わって完璧な艶に。</p>
+            <p>豚スペアリブは前日塗って一晩。プルドポークは2〜3日前に仕込むとさらに深みが増す。チキンウィングなら1時間前でも十分間に合う。仕上げにHook Shotを薄く塗ってグリルすれば、キャラメライズが加わってさらに艶が出る。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">豚リブ ◎</span>
               <span class="rub-card-tag best">チキン ◎</span>
@@ -544,7 +551,7 @@
             <h3>Lamb Layup — ラムレイアップ</h3>
             <p class="rub-subtitle">Lamb & Game Rub / ジビエ対応</p>
             <p>スマック（中東の酸味スパイス）・ブラックペッパー・ガーリック・玉ねぎ・サムバル・ハーブのブレンド。ラム特有の獣臭を消すのではなく、「香りを昇華させる」設計。カンガルーや鴨にも対応。</p>
-            <p><strong>おすすめ使い方：</strong>ラムチョップは30分〜1時間前。ラムレッグ（骨付き）は前日から仕込み、120℃でスロークック。Garlic Goalsとのレイヤリングで風味の複雑さが増す。</p>
+            <p>ラムチョップなら30分〜1時間前に塗ればいい。骨付きのラムレッグは前日から仕込んで120℃でじっくりスロークック。Garlic Goalsを下に塗ってからレイヤリングすると、風味の複雑さがさらに増す。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">ラム ◎</span>
               <span class="rub-card-tag">カンガルー ○</span>
@@ -559,7 +566,7 @@
             <h3>Garlic Goals — ガーリックゴールズ</h3>
             <p class="rub-subtitle">All Purpose Rub / 最も汎用性が高い</p>
             <p>ガーリック・パルメザンチーズパウダー・黒・白ペッパー・玉ねぎ・乳酸のブレンド。チーズの旨みとガーリックの芳香が絶妙で、肉・野菜・魚・ポテトまで何でも合う万能選手。Lamb LayupのベースラブとしてもNo.1。</p>
-            <p><strong>おすすめ使い方：</strong>ローストポテトに振りかけてオーブンへ。チキンの下味として他のラブの前に塗るベースラブとして使う。どんな料理も一段階引き上げる。</p>
+            <p>ローストポテトに振りかけてそのままオーブンへ。チキンの場合は他のラブを重ねる前のベースとして使うと、全体の風味が締まる。これ一本あるだけで、料理が一段階変わる。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">チキン ◎</span>
               <span class="rub-card-tag best">野菜 ◎</span>
@@ -575,11 +582,11 @@
             <h3>Chilli Citrus Charge — チリシトラスチャージ</h3>
             <p class="rub-subtitle">Chicken & Pork Rub / NEW ARRIVAL</p>
             <p>チリペッパーのじわっとした辛みと、シトラス系の爽やかな酸味が特徴の新作。チキンの皮に鮮やかなオレンジ色の発色をもたらし、食欲をそそる見た目に。夏のBBQに特に映える一本。</p>
-            <p><strong>おすすめ使い方：</strong>丸鶏の外と中に塗って一晩冷蔵。直火でローストすると皮がパリッと紅色に。豚ソーセージとの相性も抜群。</p>
+            <p>丸鶏の外と中にたっぷり塗って一晩冷蔵。直火でローストすると皮がパリッと紅色に仕上がる。豚ソーセージとの相性も抜群で、シトラスの酸味が脂をすっきりさせる。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">チキン ◎</span>
               <span class="rub-card-tag best">豚 ◎</span>
-              <span class="rub-card-tag">辛さ 🌶</span>
+              <span class="rub-card-tag">辛さ あり</span>
             </div>
           </div>
         </div>
@@ -590,7 +597,7 @@
             <h3>Hook Shot — フックショット</h3>
             <p class="rub-subtitle">Signature BBQ Sauce / ラブの仕上げに</p>
             <p>ラブと組み合わせることを前提に設計されたシグネチャーソース。スモーキーさと甘み・酸みのバランスが絶妙で、ラブで作ったバークに薄く塗ってグリルすることでキャラメライズが加わり、コンペティション級の仕上がりに。</p>
-            <p><strong>おすすめ使い方：</strong>スロークック後の仕上げに薄く塗り、高温グリルで1〜2分。ディップソースとしても、スライスした肉にかけても。単体でも使えるが、ラブ後が最高。</p>
+            <p>スロークック後の仕上げに薄く塗って、高温グリルで1〜2分。それだけで別物になる。ディップソースとして添えるのもいいし、スライスした肉にそのままかけても。単体でも使えるが、ラブと組み合わせたときが一番輝く。</p>
             <div class="rub-card-tags">
               <span class="rub-card-tag best">仕上げ ◎</span>
               <span class="rub-card-tag">ディップ ◎</span>
@@ -742,37 +749,37 @@
 
       <div class="thanks-grid">
         <div class="thanks-card">
-          <div class="thanks-icon">🎯</div>
+          <div class="thanks-num">01</div>
           <h3>こだわりが生まれる</h3>
           <p>「今日はビーフバウンスでブリスケットを12時間」——ラブを使い始めると、BBQに「目標」が生まれます。道具を磨く職人のように、BBQを「追求する」楽しみができる。</p>
           <span class="thanks-label">ラブのおかげで</span>
         </div>
         <div class="thanks-card">
-          <div class="thanks-icon">🗣️</div>
+          <div class="thanks-num">02</div>
           <h3>会話のネタになる</h3>
           <p>「これ何のラブ使ったの？」「このバーク、どうやって作るの？」——ラブは話題になります。食べた人が聞いてくる。BBQが「コミュニケーションのきっかけ」になる。</p>
           <span class="thanks-label">ラブのおかげで</span>
         </div>
         <div class="thanks-card">
-          <div class="thanks-icon">🔄</div>
+          <div class="thanks-num">03</div>
           <h3>また集まる理由ができる</h3>
           <p>「次はハニーソイのスペアリブ試してみて」——ラブの種類が増えるたびに、「また来たい」が増えます。BBQが「定期的に集まる理由」になる。</p>
           <span class="thanks-label">ラブのおかげで</span>
         </div>
         <div class="thanks-card">
-          <div class="thanks-icon">🌍</div>
+          <div class="thanks-num">04</div>
           <h3>世界が広がる</h3>
           <p>ラムレイアップを使えばオーストラリアのジビエ文化へ、Honey Soy Slammerを使えばアジア×BBQの融合へ。ラブは「食の世界地図」を広げる入口。</p>
           <span class="thanks-label">ラブのおかげで</span>
         </div>
         <div class="thanks-card">
-          <div class="thanks-icon">🍺</div>
+          <div class="thanks-num">05</div>
           <h3>「飲みに行こう」が変わる</h3>
           <p>「BBQしよう」が合言葉になる日。ラブが変えるのは料理の味だけじゃない。人と集まる「きっかけ」そのものが変わる。これがSLOW FIREの目指す世界。</p>
           <span class="thanks-label">ラブのおかげで</span>
         </div>
         <div class="thanks-card">
-          <div class="thanks-icon">⭐</div>
+          <div class="thanks-num">06</div>
           <h3>「すごい」と言われる</h3>
           <p>料理の腕が変わらなくても、ラブが変われば「これ、お店の味じゃない？」と言われるようになります。ラブは誰でもプロに近づける最短距離。</p>
           <span class="thanks-label">ラブのおかげで</span>
@@ -780,7 +787,7 @@
       </div>
 
       <div class="callout" style="margin-top:48px">
-        <p><strong>SLOW FIREが伝えたいこと：</strong>ラブの種類が広がると、BBQの世界は指数関数的に広がります。1種のラブで気づかなかった可能性が、2種・3種と増えるにつれて見えてくる。まず1本試してみてください。きっと、もっと欲しくなります。</p>
+        <p>ラブの種類が広がると、BBQの世界も広がります。1本だけではわからなかったことが、2本・3本と試すうちに見えてくる。まず1本、試してみてください。</p>
       </div>
     </div>
   </section>
