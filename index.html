@@ -3,348 +3,309 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOW FIRE SHOP — オーストラリア直輸入 BBQラブ</title>
-  <meta name="description" content="Low n Slow Basics 日本正規取扱。オーストラリア直輸入のプレミアムBBQドライラブ・ジャーキー。SLOW FIREが厳選。">
+  <title>SLOW FIRE SHOP — Australian BBQ Rubs</title>
+  <meta name="description" content="Low n Slow Basics 日本正規取扱。オーストラリア直輸入のプレミアムBBQドライラブ・ジャーキーをお届けします。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- CART BACKDROP -->
+  <!-- ===== CART BACKDROP ===== -->
   <div id="cartBackdrop" class="cart-backdrop"></div>
 
-  <!-- CART DRAWER -->
-  <aside id="cartDrawer" class="cart-drawer" aria-label="ショッピングカート">
+  <!-- ===== CART DRAWER ===== -->
+  <aside id="cartDrawer" class="cart-drawer">
     <div class="cart-header">
-      <h2 class="cart-title">カート</h2>
-      <button id="cartClose" class="icon-btn" aria-label="閉じる">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </button>
+      <span class="cart-title">カート <span id="cartCountLabel"></span></span>
+      <button id="cartClose" class="close-btn" aria-label="閉じる">✕</button>
     </div>
     <div id="cartList" class="cart-list"></div>
     <div class="cart-footer">
-      <div class="cart-subtotal">
+      <div class="cart-row">
         <span>小計（税込）</span>
-        <span id="cartTotal">¥0</span>
+        <strong id="cartTotal">¥0</strong>
       </div>
-      <p class="cart-ship-note">¥15,000以上で送料無料 / 全国一律¥990</p>
-      <button id="checkoutBtn" class="btn-primary btn-block">注文手続きへ →</button>
+      <p class="cart-ship">¥15,000以上で送料無料 / 全国一律¥990</p>
+      <button id="checkoutBtn" class="btn-dark btn-block">注文手続きへ</button>
     </div>
   </aside>
 
-  <!-- CHECKOUT OVERLAY -->
-  <div id="checkoutOverlay" class="checkout-overlay" role="dialog" aria-modal="true">
-    <div id="checkoutModal" class="checkout-modal">
-      <div class="co-header">
+  <!-- ===== CHECKOUT MODAL ===== -->
+  <div id="checkoutOverlay" class="co-overlay">
+    <div class="co-modal">
+      <div class="co-head">
         <h2>ご注文の確認</h2>
-        <button id="checkoutClose" class="icon-btn" aria-label="閉じる">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </button>
+        <button id="checkoutClose" class="close-btn" aria-label="閉じる">✕</button>
       </div>
       <div class="co-body">
-        <div class="co-section">
-          <h3 class="co-section-title">ご注文内容</h3>
-          <div id="orderSummary" class="order-list"></div>
-          <div class="order-total-row">
-            <span>合計（税込）</span>
-            <strong id="orderTotalModal">¥0</strong>
-          </div>
+        <h3 class="co-label">ご注文内容</h3>
+        <div id="orderSummary" class="order-rows"></div>
+        <div class="order-total">
+          <span>合計（税込）</span>
+          <strong id="orderTotalModal">¥0</strong>
         </div>
-        <form id="checkoutForm" class="co-section" novalidate>
-          <h3 class="co-section-title">お届け先情報</h3>
-          <div class="form-row-2">
-            <div class="form-group">
-              <label for="fname">姓</label>
-              <input type="text" id="fname" name="fname" required placeholder="山根">
-            </div>
-            <div class="form-group">
-              <label for="lname">名</label>
-              <input type="text" id="lname" name="lname" required placeholder="一城">
-            </div>
+
+        <form id="checkoutForm" novalidate>
+          <h3 class="co-label" style="margin-top:28px">お届け先</h3>
+          <div class="form-2col">
+            <div class="fg"><label>姓</label><input type="text" name="fname" required placeholder="山根"></div>
+            <div class="fg"><label>名</label><input type="text" name="lname" required placeholder="一城"></div>
           </div>
-          <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" required placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label for="phone">電話番号</label>
-            <input type="tel" id="phone" name="phone" placeholder="090-0000-0000">
-          </div>
-          <div class="form-group">
-            <label for="zip">郵便番号</label>
-            <input type="text" id="zip" name="zip" required placeholder="123-4567" maxlength="8">
-          </div>
-          <div class="form-group">
-            <label for="address">住所（都道府県から）</label>
-            <input type="text" id="address" name="address" required placeholder="東京都渋谷区〜">
-          </div>
-          <div class="form-group">
-            <label for="address2">マンション名・部屋番号</label>
-            <input type="text" id="address2" name="address2" placeholder="任意">
-          </div>
-          <div class="form-group">
-            <label for="note">備考</label>
-            <textarea id="note" name="note" rows="2" placeholder="ご要望があればご記入ください"></textarea>
-          </div>
-          <button type="submit" class="btn-primary btn-block btn-lg">注文を確定する</button>
-          <p class="co-note">ご注文確認後、メールにてお支払い方法をご案内します。</p>
+          <div class="fg"><label>メールアドレス</label><input type="email" name="email" required placeholder="your@email.com"></div>
+          <div class="fg"><label>電話番号</label><input type="tel" name="phone" placeholder="090-0000-0000"></div>
+          <div class="fg"><label>郵便番号</label><input type="text" name="zip" required placeholder="123-4567" maxlength="8"></div>
+          <div class="fg"><label>住所（都道府県から）</label><input type="text" name="address" required placeholder="東京都渋谷区〜"></div>
+          <div class="fg"><label>マンション・部屋番号（任意）</label><input type="text" name="address2" placeholder="任意"></div>
+          <div class="fg"><label>備考</label><textarea name="note" rows="2" placeholder="ご要望があれば"></textarea></div>
+          <button type="submit" class="btn-dark btn-block" style="margin-top:20px">注文を確定する</button>
+          <p class="co-note">確認後、メールにてお支払い方法をご案内します。</p>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- NAV -->
+  <!-- ===== NAV ===== -->
   <header id="nav" class="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo" aria-label="SLOW FIRE SHOP ホーム">
-        <span class="logo-slow">SLOW</span><span class="logo-fire"> FIRE</span>
-        <span class="logo-shop"> SHOP</span>
+    <div class="nav-wrap">
+      <a href="#" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
       </a>
-      <nav class="nav-links" aria-label="メインナビゲーション">
+      <nav class="nav-links">
         <a href="#products">商品一覧</a>
-        <a href="#story">ブランド</a>
+        <a href="#brand">ブランド</a>
         <a href="#howto">使い方</a>
         <a href="#faq">FAQ</a>
-        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener" class="nav-link-ext">
-          サービスサイト
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="margin-left:2px;vertical-align:middle;opacity:.5">
-            <path d="M1.5 8.5L8.5 1.5M8.5 1.5H4M8.5 1.5V6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">
+          サービスサイト ↗
         </a>
       </nav>
-      <div class="nav-actions">
-        <button id="cartBtn" class="cart-btn" aria-label="カートを開く">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3 6h18M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カートを開く">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
           </svg>
           <span id="cartBadge" class="cart-badge" style="display:none">0</span>
         </button>
-        <button class="nav-hamburger" aria-label="メニュー" aria-expanded="false">
+        <button class="hamburger" aria-label="メニュー">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <p class="hero-eyebrow">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/07/lownslowbasics-logo-white-1.png"
-               alt="Low n Slow Basics" class="hero-brand-logo" loading="eager">
-          日本正規取扱
-        </p>
-        <h1 class="hero-heading">本場のBBQラブを、<br>あなたの食卓へ。</h1>
-        <p class="hero-sub">オーストラリアのBBQコンペティションで生まれたプレミアムドライラブ。<br>日本未流通のラインナップをSLOW FIREが直輸入でお届けします。</p>
-        <div class="hero-actions">
-          <a href="#products" class="btn-primary btn-lg">商品一覧を見る</a>
-          <a href="#story" class="btn-ghost">ブランドについて</a>
+  <!-- ===== HERO CAROUSEL ===== -->
+  <section class="carousel" aria-label="商品ハイライト">
+    <div class="carousel-track" id="carouselTrack">
+
+      <div class="carousel-slide">
+        <div class="slide-text">
+          <p class="slide-tag">ALL-IN-ONE SET</p>
+          <h1 class="slide-h">全7種が揃う<br>最強ラブセット</h1>
+          <p class="slide-p">All-Star Combo — バックヤードから競技大会まで対応するLow n Slow Basics全ラインナップ。ギフトにも最適。</p>
+          <div class="slide-actions">
+            <a href="#products" class="btn-dark">セットを見る</a>
+            <span class="slide-price">¥24,000〜</span>
+          </div>
+        </div>
+        <div class="slide-img">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/all-star-combo-plus-hookshot-NEW-600x600.jpg" alt="All-Star Combo + Hook Shot" loading="eager">
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="hero-img-wrap">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/all-star-combo-plus-hookshot-NEW-600x600.jpg"
-               alt="All-Star Combo BBQ Rub Set" class="hero-img" loading="eager">
+
+      <div class="carousel-slide">
+        <div class="slide-text">
+          <p class="slide-tag">BEST SELLER</p>
+          <h1 class="slide-h">豚・鶏に<br>最高の一本</h1>
+          <p class="slide-p">Honey Soy Slammer — 蜂蜜と醤油の絶妙なブレンドで、ポークリブやチキンウィングが別次元の仕上がりに。</p>
+          <div class="slide-actions">
+            <a href="#products" class="btn-dark">購入する</a>
+            <span class="slide-price">¥3,800</span>
+          </div>
+        </div>
+        <div class="slide-img">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="Honey Soy Slammer" loading="lazy">
         </div>
       </div>
+
+      <div class="carousel-slide">
+        <div class="slide-text">
+          <p class="slide-tag">FOR BEEF</p>
+          <h1 class="slide-h">ブリスケットを<br>極める一本</h1>
+          <p class="slide-p">Beef Bounce — コーヒーノートとブラックペッパーの深みが、牛肉のバーク（外皮）を完璧に仕上げる本格派ラブ。</p>
+          <div class="slide-actions">
+            <a href="#products" class="btn-dark">購入する</a>
+            <span class="slide-price">¥3,800</span>
+          </div>
+        </div>
+        <div class="slide-img">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="Beef Bounce" loading="lazy">
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="slide-text">
+          <p class="slide-tag">NEW ARRIVAL</p>
+          <h1 class="slide-h">チリ×シトラスの<br>新定番</h1>
+          <p class="slide-p">Chilli Citrus Charge — チリの辛さと柑橘の爽やかさが絶妙。チキンや豚肉に鮮やかな発色と深みを与える新しいスタンダード。</p>
+          <div class="slide-actions">
+            <a href="#products" class="btn-dark">購入する</a>
+            <span class="slide-price">¥3,800</span>
+          </div>
+        </div>
+        <div class="slide-img">
+          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="Chilli Citrus Charge" loading="lazy">
+        </div>
+      </div>
+
     </div>
+
+    <!-- Controls -->
+    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="前へ">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="次へ">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="carousel-dots" id="carouselDots"></div>
   </section>
 
-  <!-- TRUST BAR -->
-  <div class="trust-bar">
-    <div class="trust-inner">
-      <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M9 1l2.12 4.3 4.74.69-3.43 3.34.81 4.72L9 11.77l-4.24 2.28.81-4.72L2.14 5.99l4.74-.69L9 1z" fill="currentColor"/>
-        </svg>
-        <span>オーストラリア直輸入</span>
-      </div>
-      <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <rect x="2" y="8" width="14" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M6 8V5.5a3 3 0 116 0V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-        <span>安全・確実な決済</span>
-      </div>
-      <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M2 4h14l-1.5 9H3.5L2 4zM6 4V3a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>¥15,000以上送料無料</span>
-      </div>
-      <div class="trust-item">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M9 5v4l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-        <span>3〜7営業日でお届け</span>
-      </div>
-    </div>
+  <!-- ===== TRUST STRIP ===== -->
+  <div class="trust-strip">
+    <span>🇦🇺 オーストラリア直輸入</span>
+    <span class="divider">|</span>
+    <span>📦 全国送料¥990 / ¥15,000以上無料</span>
+    <span class="divider">|</span>
+    <span>🕐 3〜7営業日でお届け</span>
+    <span class="divider">|</span>
+    <span>🔒 安全な決済</span>
   </div>
 
-  <!-- PRODUCTS -->
-  <section id="products" class="products-section">
-    <div class="section-inner">
-      <div class="section-header">
-        <h2 class="section-title">商品一覧</h2>
-        <p class="section-sub">Low n Slow Basics フルラインナップ</p>
+  <!-- ===== PRODUCTS ===== -->
+  <section id="products" class="products-sec">
+    <div class="sec-wrap">
+      <div class="sec-head">
+        <h2>商品一覧</h2>
+        <p>Low n Slow Basics — 全ラインナップ</p>
       </div>
-      <div class="filter-bar" role="tablist">
-        <button class="filter-tab active" data-filter="all" role="tab">すべて</button>
-        <button class="filter-tab" data-filter="rub" role="tab">ラブ・ソース</button>
-        <button class="filter-tab" data-filter="jerky" role="tab">ジャーキー</button>
-        <button class="filter-tab" data-filter="set" role="tab">セット</button>
+      <div class="filter-row" role="tablist">
+        <button class="filter-btn active" data-filter="all" role="tab">すべて</button>
+        <button class="filter-btn" data-filter="rub" role="tab">ラブ・ソース</button>
+        <button class="filter-btn" data-filter="jerky" role="tab">ジャーキー</button>
+        <button class="filter-btn" data-filter="set" role="tab">セット</button>
       </div>
-      <div id="productsGrid" class="products-grid" role="list"></div>
+      <div id="productsGrid" class="product-grid" role="list"></div>
     </div>
   </section>
 
-  <!-- STORY -->
-  <section id="story" class="story-section">
-    <div class="story-inner">
-      <div class="story-img-col">
-        <div class="story-img-wrap">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png"
-               alt="Low n Slow Basics Rubs Collection" loading="lazy">
-        </div>
+  <!-- ===== BRAND ===== -->
+  <section id="brand" class="brand-sec">
+    <div class="brand-wrap">
+      <div class="brand-img">
+        <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png"
+             alt="Low n Slow Basics Rubs" loading="lazy">
       </div>
-      <div class="story-text-col">
-        <p class="eyebrow">BRAND STORY</p>
-        <h2 class="story-heading">なぜ、オーストラリアの<br>ラブなのか。</h2>
-        <p>Low n Slow Basicsは、オーストラリアのバックヤードBBQとコンペティションシーンの両方で磨かれたプレミアムラブブランドです。</p>
-        <p>プロのピットマスターが認める発色・旨み・汎用性を追求した結果、7種のラブ＋シグネチャーソースというラインナップが完成しました。日本ではまだほとんど流通しておらず、SLOW FIREが正規輸入ルートで日本初上陸させました。</p>
-        <p>グラスフェッド牛を使ったジャーキーも含め、すべてがオーストラリア品質。BBQをもっと本格的にするために。</p>
-        <div class="story-badge">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/07/lownslowbasics-logo-white-1.png"
-               alt="Low n Slow Basics" loading="lazy">
-          <span>日本正規取扱店</span>
+      <div class="brand-text">
+        <p class="label-sm">BRAND STORY</p>
+        <h2>なぜ、オーストラリアの<br>ラブなのか。</h2>
+        <p>Low n Slow Basicsは、オーストラリアのバックヤードBBQとコンペティションシーンで磨かれたプレミアムブランドです。プロのピットマスターが認める発色・旨み・汎用性を、全7種のラブ＋シグネチャーソースで実現。</p>
+        <p>日本では流通していなかったこのブランドを、SLOW FIREが正規ルートで日本初上陸。グラスフェッド牛のジャーキーも含め、全品オーストラリア品質をそのままお届けします。</p>
+        <div class="brand-origin">
+          <span class="flag">🇦🇺</span>
+          <span>Australia → Japan</span>
+          <span class="badge-official">SLOW FIRE 正規取扱</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW TO USE -->
-  <section id="howto" class="howto-section">
-    <div class="section-inner">
-      <div class="section-header">
-        <h2 class="section-title">ラブの使い方</h2>
-        <p class="section-sub">たった3ステップで本場のBBQフレーバー</p>
+  <!-- ===== HOW TO USE ===== -->
+  <section id="howto" class="howto-sec">
+    <div class="sec-wrap">
+      <div class="sec-head">
+        <h2>ラブの使い方</h2>
+        <p>3ステップで本場のBBQフレーバー</p>
       </div>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-num">01</div>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-no">01</div>
           <h3>たっぷり振る</h3>
-          <p>肉の表面全体をラブで覆い隠すように振りかけます。少なすぎると効果が出ません。</p>
+          <p>肉の表面全体をラブで覆い隠すように振りかける。少なすぎると効果半減。</p>
         </div>
-        <div class="step-card">
-          <div class="step-num">02</div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-no">02</div>
           <h3>なじませる</h3>
-          <p>塩分が肉に浸透するよう、最低30分〜理想は一晩。冷蔵でラップして置きます。</p>
+          <p>塩分が肉に浸透するよう最低30分〜理想は一晩、冷蔵で休ませる。</p>
         </div>
-        <div class="step-card">
-          <div class="step-num">03</div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-no">03</div>
           <h3>じっくり焼く</h3>
-          <p>低温・間接熱でゆっくり火入れ。美しいバーク（外皮）とジューシーな仕上がりに。</p>
-        </div>
-      </div>
-      <div class="pairing-wrap">
-        <h3 class="pairing-title">おすすめペアリングガイド</h3>
-        <div class="pairing-table-scroll">
-          <table class="pairing-table">
-            <thead>
-              <tr>
-                <th>ラブ</th>
-                <th>牛</th>
-                <th>豚</th>
-                <th>鶏</th>
-                <th>ラム</th>
-                <th>野菜</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Steak Shooter</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
-              <tr><td>Steak Shooter SPICY</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-no">—</td><td class="m-no">—</td></tr>
-              <tr><td>Beef Bounce</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td></tr>
-              <tr><td>Honey Soy Slammer</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
-              <tr><td>Lamb Layup</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-no">—</td><td class="m-best">◎</td><td class="m-no">—</td></tr>
-              <tr><td>Garlic Goals</td><td class="m-ok">○</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-ok">○</td><td class="m-best">◎</td></tr>
-              <tr><td>Chilli Citrus Charge</td><td class="m-no">—</td><td class="m-ok">○</td><td class="m-best">◎</td><td class="m-no">—</td><td class="m-ok">○</td></tr>
-            </tbody>
-          </table>
+          <p>低温・間接熱でゆっくり火入れ。美しいバークとジューシーな仕上がりに。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="faq-section">
-    <div class="section-inner section-narrow">
-      <div class="section-header">
-        <h2 class="section-title">よくある質問</h2>
-      </div>
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="faq-sec">
+    <div class="sec-wrap sec-narrow">
+      <div class="sec-head"><h2>よくある質問</h2></div>
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-q">送料はいくらですか？</button>
-          <div class="faq-a"><p>全国一律990円（税込）です。¥15,000以上のご購入で送料無料になります。</p></div>
+          <div class="faq-a"><p>全国一律¥990（税込）。¥15,000以上のご購入で送料無料です。</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">賞味期限はどのくらいですか？</button>
-          <div class="faq-a"><p>各商品パッケージに記載の賞味期限をご確認ください。ラブは未開封で約2年、ジャーキーは約1年が目安です。</p></div>
+          <button class="faq-q">賞味期限は？</button>
+          <div class="faq-a"><p>ラブは未開封で約2年、ジャーキーは約1年が目安です。各パッケージの表示をご確認ください。</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">アレルゲンはありますか？</button>
-          <div class="faq-a"><p>製品によって異なります。小麦・大豆・乳製品・ゴマ・ピーナッツ・木の実の痕跡を含む可能性がある製品があります。アレルギーをお持ちの方は各商品説明をご確認の上ご購入ください。</p></div>
+          <div class="faq-a"><p>製品によって異なります。小麦・大豆・乳製品・ゴマ・ピーナッツ・木の実の痕跡を含む可能性がある製品があります。詳細は各商品説明をご確認ください。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">初めてどれを選べばいい？</button>
+          <div class="faq-a"><p>迷ったらAll-Star Combo（7種セット）がおすすめです。全種類試してからお気に入りを選べます。牛肉にはSteak Shooter、豚・鶏にはHoney Soy Slammerが特に人気です。</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">開封後の保存方法は？</button>
-          <div class="faq-a"><p>直射日光・高温多湿を避け、蓋をしっかり閉めて常温保存してください。ジャーキーは開封後冷蔵で1週間以内を目安にお召し上がりください。</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">初めてでどれを選べばよいですか？</button>
-          <div class="faq-a"><p>迷ったらAll-Star Comboセット（7種入り）がおすすめです。全種類を試してお気に入りを見つけてから個別購入するのが一番です。牛肉好きはSteak Shooter、豚・鶏にはHoney Soy Slammerから試してみてください。</p></div>
+          <div class="faq-a"><p>直射日光・高温多湿を避け、蓋をしっかり閉めて常温保存。ジャーキーは開封後冷蔵で1週間以内にお召し上がりください。</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">返品・交換はできますか？</button>
-          <div class="faq-a"><p>食品のため、お客様都合による返品・交換はお受けできません。商品の破損・内容相違の場合は速やかに対応いたしますのでお問い合わせください。</p></div>
+          <div class="faq-a"><p>食品のためお客様都合の返品はお受けできません。商品の破損・内容相違の場合はお問い合わせください。速やかに対応いたします。</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">ギフト包装はできますか？</button>
-          <div class="faq-a"><p>はい、ご注文時の備考欄に「ギフト包装希望」とご記入いただければ対応いたします。セット商品はギフトとして特に好評です。</p></div>
+          <div class="faq-a"><p>はい。注文時の備考欄に「ギフト包装希望」とご記入ください。セット商品はギフトとして特に喜ばれています。</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="footer-inner">
+    <div class="footer-wrap">
       <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#" class="footer-logo">
-            <span class="logo-slow">SLOW</span><span class="logo-fire"> FIRE</span>
-            <span class="logo-shop"> SHOP</span>
-          </a>
-          <p>Low n Slow Basics 日本正規取扱</p>
+        <div>
+          <a href="#" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics 日本正規取扱</p>
         </div>
         <nav class="footer-nav">
           <a href="#products">商品一覧</a>
-          <a href="#story">ブランドについて</a>
+          <a href="#brand">ブランドについて</a>
           <a href="#howto">使い方</a>
           <a href="#faq">FAQ</a>
-          <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">SLOW FIREサービスサイト</a>
+          <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">SLOW FIREサービスサイト ↗</a>
         </nav>
       </div>
       <div class="footer-bottom">
         <p>© 2025 SLOW FIRE. All rights reserved.</p>
-        <p>本商品はLow n Slow Basics（オーストラリア）の正規輸入品です。</p>
+        <p>本商品はLow n Slow Basics（Australia）の正規輸入品です。</p>
       </div>
     </div>
   </footer>
