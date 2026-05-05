@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ラブの見取り図｜全18種を4象限でマッピング - SLOW FIRE SHOP</title>
-  <meta name="description" content="Low n Slow Basics と Butcher's Axe BBQ、両ブランド全18種類のBBQラブを4象限グラフで一望。万能↔特化、マイルド↔濃厚スパイシーの2軸で「いま欲しい一本」が一目で見つかる。">
+  <title>ラブの見取り図｜全22種を4象限でマッピング - SLOW FIRE SHOP</title>
+  <meta name="description" content="Low n Slow Basics・Butcher's Axe BBQ・Stef the Maori、3ブランド全22種類のBBQラブを4象限グラフで一望。万能↔特化、マイルド↔濃厚スパイシーの2軸で「いま欲しい一本」が一目で見つかる。">
   <meta name="keywords" content="BBQラブ 比較,ラブ 選び方,Low n Slow Basics,Butcher's Axe,海外BBQラブ,スパイス比較">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/rub-map.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ラブの見取り図｜全18種を4象限でマッピング">
-  <meta property="og:description" content="両ブランド18種のBBQラブを2軸で一望。「いま欲しい一本」が一目で見つかる。">
+  <meta property="og:title" content="ラブの見取り図｜全22種を4象限でマッピング">
+  <meta property="og:description" content="3ブランド22種のBBQラブを2軸で一望。「いま欲しい一本」が一目で見つかる。">
   <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/rub-map.html">
   <meta property="og:locale" content="ja_JP">
   <meta name="theme-color" content="#B45309">
@@ -61,6 +61,7 @@
     }
     .rm-legend-dot.lns { background: var(--brand); }
     .rm-legend-dot.bax { background: var(--black); }
+    .rm-legend-dot.stm { background: #15803d; }
 
     /* filter chips */
     .rm-chips {
@@ -195,6 +196,7 @@
     }
     .rm-dot.lns { background: var(--brand); }
     .rm-dot.bax { background: var(--black); }
+    .rm-dot.stm { background: #15803d; }
     .rm-dot.dim { opacity: 0.18; }
 
     /* dot label (always visible on desktop) */
@@ -239,6 +241,7 @@
     }
     .rm-d-tag.lns { background: #FEF3C7; color: var(--brand); }
     .rm-d-tag.bax { background: #1f1f1f; color: var(--white); }
+    .rm-d-tag.stm { background: #052e1d; color: #DCFCE7; }
     .rm-d-tag.cat { background: var(--white); color: var(--gray-600); border: 1px solid var(--gray-200); }
     .rm-d-name {
       font-family: 'Playfair Display', serif;
@@ -321,8 +324,8 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "ラブの見取り図 — 全18種を4象限でマッピング",
-    "description": "Low n Slow Basics と Butcher's Axe BBQ の全18ラブを、万能↔特化／マイルド↔濃厚スパイシーの2軸で視覚化",
+    "name": "ラブの見取り図 — 全22種を4象限でマッピング",
+    "description": "Low n Slow Basics・Butcher's Axe BBQ・Stef the Maori、3ブランド全22ラブを、万能↔特化／マイルド↔濃厚スパイシーの2軸で視覚化",
     "url": "https://yamanekazuki.github.io/slow-fire-shop/rub-map.html"
   }
   </script>
@@ -350,20 +353,22 @@
   <!-- HERO -->
   <section class="rm-hero">
     <p class="rm-hero-eyebrow">Rub Atlas · ラブの見取り図</p>
-    <h1>18本のラブを、<em>1枚の地図に。</em></h1>
-    <p>Low n Slow Basics と Butcher's Axe BBQ、両ブランドの全ラブを <strong>万能↔特化</strong>・<strong>マイルド↔濃厚スパイシー</strong> の2軸で配置。<br>「いま欲しい一本」が、座標で見つかる。</p>
+    <h1>22本のラブを、<em>1枚の地図に。</em></h1>
+    <p>Low n Slow Basics・Butcher's Axe BBQ・Stef the Maori、3ブランドの全ラブを <strong>万能↔特化</strong>・<strong>マイルド↔濃厚スパイシー</strong> の2軸で配置。<br>「いま欲しい一本」が、座標で見つかる。</p>
   </section>
 
   <!-- LEGEND + FILTERS -->
   <div class="rm-legend">
     <div class="rm-legend-item"><span class="rm-legend-dot lns"></span>Low n Slow Basics</div>
     <div class="rm-legend-item"><span class="rm-legend-dot bax"></span>Butcher's Axe BBQ</div>
+    <div class="rm-legend-item"><span class="rm-legend-dot stm"></span>Stef the Maori</div>
   </div>
 
   <div class="rm-chips">
     <button class="rm-chip is-active" data-filter="all">すべて</button>
     <button class="rm-chip" data-filter="lns">Low n Slow のみ</button>
     <button class="rm-chip" data-filter="bax">Butcher's Axe のみ</button>
+    <button class="rm-chip" data-filter="stm">Stef the Maori のみ</button>
   </div>
 
   <!-- CHART -->
@@ -411,7 +416,7 @@
       <div class="footer-top">
         <div>
           <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
-          <p class="footer-sub">Low n Slow Basics・Butcher's Axe BBQ 日本正規取扱</p>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
         </div>
         <nav class="footer-nav">
           <a href="index.html#products">商品一覧</a>
@@ -458,7 +463,13 @@
     { id: 'butchers-gyro',      name: 'Gyro',      nameja: 'ジャイロ',       brand: 'bax', cat: 'ロティサリー', x: 72, y: 48, desc: 'ロティサリー専用に設計された地中海風。鶏丸焼き、ビア缶チキンが一段格上に。',                                    uses: 'ビア缶チキン・丸鶏', flavor: 'ハーブ・地中海', price: 2980 },
     { id: 'butchers-woodlands', name: 'Woodlands', nameja: 'ウッドランズ',   brand: 'bax', cat: '万能',       x: 42, y: 48, desc: 'ワイルドガーリックを主軸にした森のような深い香り。肉・野菜・ピザ・ポテトまで効く。',                              uses: '万能・特に野菜',     flavor: 'ガーリック・森', price: 2980 },
     { id: 'butchers-scout',     name: 'Scout',     nameja: 'スカウト',       brand: 'bax', cat: '魚・鶏',     x: 42, y: 32, desc: 'レモンペッパーの王道をButcher\'s Axe流に。鶏胸、白身魚、エビ、サラダに万能。',                                  uses: '魚・鶏胸・エビ',     flavor: 'マイルド・爽', price: 2980 },
-    { id: 'butchers-basecamp',  name: 'Basecamp',  nameja: 'ベースキャンプ', brand: 'bax', cat: '万能',       x: 18, y: 30, desc: '迷ったらこれ、というBBQの「拠点」。万能シーズニングとして肉・魚・野菜・卵まで。',                                  uses: 'なんでも',           flavor: 'マイルド・万能', price: 2980 }
+    { id: 'butchers-basecamp',  name: 'Basecamp',  nameja: 'ベースキャンプ', brand: 'bax', cat: '万能',       x: 18, y: 30, desc: '迷ったらこれ、というBBQの「拠点」。万能シーズニングとして肉・魚・野菜・卵まで。',                                  uses: 'なんでも',           flavor: 'マイルド・万能', price: 2980 },
+
+    // Stef the Maori (New Zealand × Stagg & Co)
+    { id: 'stef-rub-one-out',   name: 'Rub One Out',   nameja: 'ラブ・ワン・アウト',   brand: 'stm', cat: '万能',       x: 22, y: 42, desc: 'アオテアロア北部発祥の万能シーズニング。ヒマラヤピンクソルト、黒胡椒、ガーリック、マスタード、ハーブの絶妙な配合で「ほぼ何にでも」効く。', uses: 'なんでも',           flavor: 'バランス・万能', price: 3500 },
+    { id: 'stef-pork-hunt',     name: 'Pork Hunt',     nameja: 'ポーク・ハント',       brand: 'stm', cat: '豚・鶏',     x: 58, y: 60, desc: 'BBQポークリブとチキンウィングのための白身肉特化。ココナッツシュガー、パプリカ、スモークパウダーが織りなす骨太なフルフレーバー。',           uses: 'ポーク・チキン',     flavor: '骨太・スモーキー', price: 3500 },
+    { id: 'stef-deep-bush',     name: 'Deep Bush',     nameja: 'ディープ・ブッシュ',   brand: 'stm', cat: 'ハーブ系',   x: 50, y: 55, desc: 'ニュージーランド原産の薬用ハーブ「ホロピト」を主軸にした、世界に唯一無二のブレンド。微妙な辛味とハーブの深みが「マオリの森」の風を運ぶ。',     uses: '肉全般',             flavor: 'ハーブ・微辛味', price: 3500 },
+    { id: 'stef-aquadesiac',    name: 'Aquadesiac',    nameja: 'アクアデジアック',     brand: 'stm', cat: '海鮮・万能', x: 50, y: 48, desc: '海鮮（エビ、ホタテ、白身魚、イカ）のための東南アジア風シーズニング。ライムパウダーと海苔の組み合わせ。Throw this at anything の万能性も魅力。', uses: '海鮮〜万能',         flavor: 'シトラス・海苔', price: 3500 }
   ];
 
   /* ============================================

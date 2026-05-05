@@ -302,6 +302,56 @@ const FALLBACK_PRODUCTS = [
     badge: null,
     image: 'images/products/butchers-axe/injection.jpg',
   },
+
+  // ============ STEF THE MAORI (Stagg & Co, New Zealand × Australia) ============
+  {
+    id: 'stef-rub-one-out',
+    name: 'Rub One Out',
+    nameja: 'ラブ・ワン・アウト',
+    subtitle: "All-Purpose Seasoning · Stef the Maori",
+    desc: 'アオテアロア（ニュージーランド）北部発祥の万能シーズニング。ヒマラヤピンクソルト、黒胡椒、ガーリック、マスタード、ハーブの絶妙な配合で、肉・魚・野菜「ほぼ何にでも」効く一本。',
+    price: 3500,
+    category: 'rub',
+    brand: 'stef-the-maori',
+    badge: null,
+    image: 'images/products/stef-the-maori/rub-one-out.jpg',
+  },
+  {
+    id: 'stef-pork-hunt',
+    name: 'Pork Hunt',
+    nameja: 'ポーク・ハント',
+    subtitle: "Pork & White Meat Rub · Stef the Maori",
+    desc: 'BBQポークリブとチキンウィングのために設計された白身肉特化シーズニング。ココナッツシュガーとパプリカ、スモークパウダーが織りなす、骨太でフルフレーバーな一本。',
+    price: 3500,
+    category: 'rub',
+    brand: 'stef-the-maori',
+    badge: null,
+    image: 'images/products/stef-the-maori/pork-hunt.jpg',
+  },
+  {
+    id: 'stef-deep-bush',
+    name: 'Deep Bush',
+    nameja: 'ディープ・ブッシュ',
+    subtitle: "Horopito Herb Rub · Stef the Maori",
+    desc: 'ニュージーランド原産の薬用ハーブ「ホロピト」を主軸にした、世界に唯一無二のブレンド。微妙な辛味とハーブの深みが、肉料理に「マオリの森」の風を吹き込む。',
+    price: 3500,
+    category: 'rub',
+    brand: 'stef-the-maori',
+    badge: 'NEW',
+    image: 'images/products/stef-the-maori/deep-bush.jpg',
+  },
+  {
+    id: 'stef-aquadesiac',
+    name: 'Aquadesiac',
+    nameja: 'アクアデジアック',
+    subtitle: "Seafood & Universal Rub · Stef the Maori",
+    desc: '海鮮（エビ、ホタテ、白身魚、イカ）のために設計された東南アジア風シーズニング。ライムパウダーと海苔の組み合わせが秀逸。「Throw this at anything」を地で行く万能性も魅力。',
+    price: 3500,
+    category: 'rub',
+    brand: 'stef-the-maori',
+    badge: null,
+    image: 'images/products/stef-the-maori/aquadesiac.jpg',
+  },
 ];
 
 // Will be populated from Firestore (or falls back)
@@ -524,17 +574,22 @@ function renderProducts(filter = 'all') {
                     : p.category === 'jerky' ? 'グラスフェッドビーフジャーキー'
                     : p.category === 'accessory' ? 'BBQ道具'
                     : 'BBQラブセット';
-    const brandLabel = p.brand === 'butchers-axe' ? "Butcher's Axe BBQ" : 'Low n Slow Basics';
+    const brandLabel = p.brand === 'butchers-axe' ? "Butcher's Axe BBQ"
+                     : p.brand === 'stef-the-maori' ? 'Stef the Maori'
+                     : 'Low n Slow Basics';
+    const brandBadge = p.brand === 'butchers-axe' ? '<span class="pc-brand-badge bb-bax">Butcher\'s Axe</span>'
+                     : p.brand === 'stef-the-maori' ? '<span class="pc-brand-badge bb-stm">Stef the Maori</span>'
+                     : '';
     return `
       <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product" data-brand="${p.brand || 'lownslow'}">
         <div class="pc-photo-wrap">
           <img class="pc-photo" src="${p.image}" itemprop="image"
-               alt="${p.name}（${p.nameja || ''}）— ${brandLabel} オーストラリア産${catWords}"
+               alt="${p.name}（${p.nameja || ''}）— ${brandLabel} ${catWords}"
                width="600" height="600" loading="lazy"
                onerror="this.style.display='none';this.parentElement.classList.add('no-img');this.parentElement.dataset.fallback='${p.name}';">
           <span class="pc-cat" aria-label="カテゴリ">${CAT_LABEL[p.category]}</span>
           ${badgeHtml}
-          ${p.brand === 'butchers-axe' ? '<span class="pc-brand-badge">Butcher\'s Axe</span>' : ''}
+          ${brandBadge}
         </div>
         <div class="pc-body">
           <h3 class="pc-name" itemprop="name">${p.name}</h3>

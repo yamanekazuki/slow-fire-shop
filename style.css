@@ -816,6 +816,9 @@ body.menu-open { overflow: hidden; }
 .product-card[data-brand="butchers-axe"] .pc-photo-wrap.no-img {
   background: linear-gradient(135deg, #0a0a0a 0%, #1f1f1f 50%, #3a2818 100%);
 }
+.product-card[data-brand="stef-the-maori"] .pc-photo-wrap.no-img {
+  background: linear-gradient(135deg, #052e1d 0%, #0e4a2e 50%, #15803d 100%);
+}
 
 .pc-brand-badge {
   position: absolute;
@@ -825,13 +828,13 @@ body.menu-open { overflow: hidden; }
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 4px 10px;
-  background: rgba(0,0,0,0.85);
-  color: rgba(255,255,255,0.92);
   border-radius: 4px;
   border: 1px solid rgba(255,255,255,0.15);
   backdrop-filter: blur(4px);
   text-transform: uppercase;
 }
+.pc-brand-badge.bb-bax { background: rgba(0,0,0,0.85); color: rgba(255,255,255,0.92); }
+.pc-brand-badge.bb-stm { background: rgba(5,46,29,0.9); color: rgba(220,252,231,0.95); }
 
 .pc-cat {
   position: absolute;
