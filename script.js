@@ -156,6 +156,152 @@ const FALLBACK_PRODUCTS = [
     badge: 'PREMIUM',
     image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/02/Rubs-Sauce-Bundle-Updated-600x600.png',
   },
+
+  // ============ BUTCHER'S AXE BBQ (Stagg & Co, Australia) ============
+  {
+    id: 'butchers-bullseye',
+    name: 'Bullseye',
+    nameja: 'ブルズアイ',
+    subtitle: "Champion Beef Seasoning · Butcher's Axe",
+    desc: 'オーストラリアのコンペティションBBQで磨かれたビーフ専用シーズニング。「ど真ん中（Bullseye）」の名の通り、迷いのない牛肉特化ブレンド。Steak Shooterと並ぶ、ビーフラブの双璧。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/bullseye.jpg',
+  },
+  {
+    id: 'butchers-hunter',
+    name: 'Hunter',
+    nameja: 'ハンター',
+    subtitle: "Lamb & Game Seasoning · Butcher's Axe",
+    desc: 'ラム、鹿、カンガルーなどジビエ専用。ハーブと深いスパイスがゲーム肉のクセを抑えながら、野性味を残す。Lamb Layupとは異なる、より骨太な香り。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/hunter.jpg',
+  },
+  {
+    id: 'butchers-ranger',
+    name: 'Ranger',
+    nameja: 'レンジャー',
+    subtitle: "Big Red Seasoning · Butcher's Axe",
+    desc: '赤系スパイスを核にした「赤の探検家」。豚・鶏・牛のどれにも適応。グリルに大胆な発色とスモーキーな深みを与える、汎用性の高い濃厚ラブ。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/ranger.jpg',
+  },
+  {
+    id: 'butchers-big-bark',
+    name: 'Big Bark',
+    nameja: 'ビッグバーク',
+    subtitle: "Secret Black Seasoning · Butcher's Axe",
+    desc: 'ロー&スローで分厚い黒い「バーク（外皮）」を作るための競技会向け秘密ブレンド。ブリスケットやプルドポークの仕上がりが激変する、ピットマスター御用達。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: 'BEST VALUE',
+    image: 'images/products/butchers-axe/big-bark.jpg',
+  },
+  {
+    id: 'butchers-stampede',
+    name: 'Stampede',
+    nameja: 'スタンピード',
+    subtitle: "Champion Steak Seasoning · Butcher's Axe",
+    desc: 'ステーキ専用。「群れ（Stampede）」を駆け抜けるような濃厚な存在感。リブアイ、トマホーク、サーロインに直接振るだけで、競技会レベルの仕上がりへ。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/stampede.jpg',
+  },
+  {
+    id: 'butchers-el-hacha',
+    name: 'El Hacha',
+    nameja: 'エル・アチャ',
+    subtitle: "Tex-Mex Seasoning · Butcher's Axe",
+    desc: 'スペイン語で「斧」を意味するEl Hacha。クミン、コリアンダー、唐辛子、ライム — テックスメックスの香りが織りなす、メキシコ国境の風。カルネ・アサーダ、ファヒータに。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: 'NEW',
+    image: 'images/products/butchers-axe/el-hacha.jpg',
+  },
+  {
+    id: 'butchers-gyro',
+    name: 'Gyro',
+    nameja: 'ジャイロ',
+    subtitle: "Rotisserie Seasoning · Butcher's Axe",
+    desc: 'ロティサリー（回転焼き）専用に設計された地中海風シーズニング。鶏丸焼き、ラムシュワルマ、ビア缶チキンが一段格上に。ガーリック、オレガノ、レモンの三重奏。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/gyro.jpg',
+  },
+  {
+    id: 'butchers-woodlands',
+    name: 'Woodlands',
+    nameja: 'ウッドランズ',
+    subtitle: "Wild Garlic Seasoning · Butcher's Axe",
+    desc: 'ワイルドガーリック（野生ニンニク）を主軸にした、森のように深い香り。Garlic Goalsより骨太で、肉以外（野菜、魚、ピザ、ポテト）にも幅広く効く。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/woodlands.jpg',
+  },
+  {
+    id: 'butchers-scout',
+    name: 'Scout',
+    nameja: 'スカウト',
+    subtitle: "Lemon Pepper Seasoning · Butcher's Axe",
+    desc: 'レモンペッパーの王道を、Butcher\'s Axe流に再構築。鶏胸肉、白身魚、エビ、サラダの仕上げまで万能に。爽やかさと辛味のバランスが絶妙。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/scout.jpg',
+  },
+  {
+    id: 'butchers-basecamp',
+    name: 'Basecamp',
+    nameja: 'ベースキャンプ',
+    subtitle: "All-Purpose Seasoning · Butcher's Axe",
+    desc: '迷ったらこれ、というBBQの「拠点」。万能シーズニングとして、肉・魚・野菜・卵料理・ポテトまですべてに使える。最初の一本、または常備の一本に最適。',
+    price: 2980,
+    category: 'rub',
+    brand: 'butchers-axe',
+    badge: 'BEST SELLER',
+    image: 'images/products/butchers-axe/basecamp.jpg',
+  },
+  {
+    id: 'butchers-gloves',
+    name: 'Heat Resistant BBQ Gloves',
+    nameja: '耐熱BBQグローブ',
+    subtitle: "BBQ Tools · Butcher's Axe",
+    desc: 'BBQの安全装備。熱した網、リフトオフのリブ、燃え盛る炭の取り扱いに。Butcher\'s Axe認定の本格仕様で、両手の自由を確保。',
+    price: 6800,
+    category: 'accessory',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/gloves.jpg',
+  },
+  {
+    id: 'butchers-injection',
+    name: 'Beef Injection',
+    nameja: 'ビーフインジェクション',
+    subtitle: "Injection Marinade · Butcher's Axe",
+    desc: '塊肉の「内側」に味を入れる液状インジェクション。ブリスケットやプルドポークなど、表面のラブだけでは届かない部位の核心まで風味を運ぶ、競技会の必殺技。',
+    price: 4800,
+    category: 'accessory',
+    brand: 'butchers-axe',
+    badge: null,
+    image: 'images/products/butchers-axe/injection.jpg',
+  },
 ];
 
 // Will be populated from Firestore (or falls back)
@@ -169,7 +315,7 @@ const BADGE_CLASS = {
   'PREMIUM':     'bdg-premium',
   'SPICY':       'bdg-spicy',
 };
-const CAT_LABEL = { rub: 'RUB / SAUCE', jerky: 'JERKY', set: 'SET' };
+const CAT_LABEL = { rub: 'RUB / SAUCE', jerky: 'JERKY', set: 'SET', accessory: 'ACCESSORY' };
 
 // =============================================
 // HERO CAROUSEL
@@ -376,16 +522,19 @@ function renderProducts(filter = 'all') {
     const catWords = p.category === 'rub' ? '海外BBQドライラブ'
                     : p.category === 'sauce' ? 'BBQソース'
                     : p.category === 'jerky' ? 'グラスフェッドビーフジャーキー'
+                    : p.category === 'accessory' ? 'BBQ道具'
                     : 'BBQラブセット';
+    const brandLabel = p.brand === 'butchers-axe' ? "Butcher's Axe BBQ" : 'Low n Slow Basics';
     return `
-      <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product">
+      <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product" data-brand="${p.brand || 'lownslow'}">
         <div class="pc-photo-wrap">
           <img class="pc-photo" src="${p.image}" itemprop="image"
-               alt="${p.name}（${p.nameja || ''}）— Low n Slow Basics オーストラリア産${catWords}"
+               alt="${p.name}（${p.nameja || ''}）— ${brandLabel} オーストラリア産${catWords}"
                width="600" height="600" loading="lazy"
-               onerror="this.closest('.pc-photo-wrap').style.background='var(--gray-200)'">
+               onerror="this.style.display='none';this.parentElement.classList.add('no-img');this.parentElement.dataset.fallback='${p.name}';">
           <span class="pc-cat" aria-label="カテゴリ">${CAT_LABEL[p.category]}</span>
           ${badgeHtml}
+          ${p.brand === 'butchers-axe' ? '<span class="pc-brand-badge">Butcher\'s Axe</span>' : ''}
         </div>
         <div class="pc-body">
           <h3 class="pc-name" itemprop="name">${p.name}</h3>

@@ -794,6 +794,45 @@ body.menu-open { overflow: hidden; }
 }
 .product-card:hover .pc-photo { transform: scale(1.04); }
 
+/* fallback when product image is missing */
+.pc-photo-wrap.no-img {
+  background: linear-gradient(135deg, #1a0f0a 0%, #3d1f10 50%, #6b2d12 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.pc-photo-wrap.no-img::after {
+  content: attr(data-fallback);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  text-align: center;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.product-card[data-brand="butchers-axe"] .pc-photo-wrap.no-img {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1f1f1f 50%, #3a2818 100%);
+}
+
+.pc-brand-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.85);
+  color: rgba(255,255,255,0.92);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+}
+
 .pc-cat {
   position: absolute;
   top: 10px; left: 10px;

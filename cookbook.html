@@ -746,10 +746,10 @@
       <nav class="nav-links">
         <a href="index.html#products">商品一覧</a>
         <a href="rub-guide.html">ラブガイド</a>
+        <a href="rub-map.html">ラブの見取り図</a>
         <a href="pairing-guide.html">ペアリング</a>
         <a href="cookbook.html" style="color:var(--black);font-weight:700;">料理ガイド</a>
         <a href="team.html">私たちについて</a>
-        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">サービスサイト ↗</a>
       </nav>
       <div class="nav-right">
         <button id="cartBtn" class="cart-icon-btn" aria-label="カートを開く" onclick="location.href='index.html'">
@@ -932,14 +932,27 @@
      Recipe data
      ============================================ */
   const RUB_DB = {
-    'steak-shooter':       { icon: '🥩', name: 'Steak Shooter',          desc: '牛肉のスタンダードラブ' },
-    'steak-shooter-spicy': { icon: '🌶️', name: 'Steak Shooter SPICY',    desc: 'スパイシー版（辛さ2/5）' },
-    'beef-bounce':         { icon: '☕', name: 'Beef Bounce',             desc: 'コーヒー＋ペッパーの深み' },
-    'honey-soy-slammer':   { icon: '🍯', name: 'Honey Soy Slammer',       desc: '蜂蜜＋醤油のグレーズ' },
-    'lamb-layup':          { icon: '🌿', name: 'Lamb Layup',              desc: 'ハーブ＋スマック' },
-    'garlic-goals':        { icon: '🧄', name: 'Garlic Goals',            desc: 'ガーリック万能型' },
-    'chilli-citrus-charge':{ icon: '🍊', name: 'Chilli Citrus Charge',   desc: 'チリ×シトラスの新作' },
-    'hook-shot':           { icon: '🔥', name: 'Hook Shot',               desc: 'シグネチャーBBQソース' }
+    // Low n Slow Basics
+    'steak-shooter':       { icon: '🥩', name: 'Steak Shooter',          desc: '牛肉のスタンダード（LNS）' },
+    'steak-shooter-spicy': { icon: '🌶️', name: 'Steak Shooter SPICY',    desc: 'スパイシー版・辛さ2/5（LNS）' },
+    'beef-bounce':         { icon: '☕', name: 'Beef Bounce',             desc: 'コーヒー＋ペッパーの深み（LNS）' },
+    'honey-soy-slammer':   { icon: '🍯', name: 'Honey Soy Slammer',       desc: '蜂蜜＋醤油のグレーズ（LNS）' },
+    'lamb-layup':          { icon: '🌿', name: 'Lamb Layup',              desc: 'ハーブ＋スマック（LNS）' },
+    'garlic-goals':        { icon: '🧄', name: 'Garlic Goals',            desc: 'ガーリック万能型（LNS）' },
+    'chilli-citrus-charge':{ icon: '🍊', name: 'Chilli Citrus Charge',   desc: 'チリ×シトラス（LNS）' },
+    'hook-shot':           { icon: '🔥', name: 'Hook Shot',               desc: 'シグネチャーBBQソース（LNS）' },
+
+    // Butcher's Axe BBQ
+    'butchers-bullseye':   { icon: '🎯', name: 'Bullseye',               desc: "ビーフ特化（Butcher's Axe）" },
+    'butchers-hunter':     { icon: '🏹', name: 'Hunter',                 desc: "ラム・ジビエ用（Butcher's Axe）" },
+    'butchers-ranger':     { icon: '🌶️', name: 'Ranger',                 desc: "ビッグレッド・濃厚（Butcher's Axe）" },
+    'butchers-big-bark':   { icon: '⚫', name: 'Big Bark',               desc: "ロー&スロー黒バーク（Butcher's Axe）" },
+    'butchers-stampede':   { icon: '🐂', name: 'Stampede',               desc: "ステーキ専用（Butcher's Axe）" },
+    'butchers-el-hacha':   { icon: '🪓', name: 'El Hacha',               desc: "テックスメックス（Butcher's Axe）" },
+    'butchers-gyro':       { icon: '🥙', name: 'Gyro',                   desc: "ロティサリー・地中海（Butcher's Axe）" },
+    'butchers-woodlands':  { icon: '🌳', name: 'Woodlands',              desc: "ワイルドガーリック（Butcher's Axe）" },
+    'butchers-scout':      { icon: '🍋', name: 'Scout',                  desc: "レモンペッパー（Butcher's Axe）" },
+    'butchers-basecamp':   { icon: '⛺', name: 'Basecamp',               desc: "万能シーズニング（Butcher's Axe）" }
   };
 
   const RECIPES = [
