@@ -352,14 +352,14 @@
     }
 
     /* ============================================
-       Pairing v2 — image-first, data-driven (by-cut)
+       Pairing v3 — BIG package photo, max 2 rubs
        ============================================ */
     .pairing-wrap > p { margin-bottom: 28px; }
-    .pg-group { margin-bottom: 56px; }
+    .pg-group { margin-bottom: 64px; }
     .pg-group:last-child { margin-bottom: 0; }
     .pg-group-head {
       display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 24px; padding-bottom: 14px;
+      margin-bottom: 28px; padding-bottom: 14px;
       border-bottom: 2px solid var(--gray-200);
     }
     .pg-group-icon { font-size: 28px; line-height: 1; }
@@ -376,29 +376,31 @@
       letter-spacing: 0.04em;
     }
 
+    /* card grid: 1 col mobile, 2 cols desktop (was 2/3 — wider cards now to host bigger photos) */
     .pg-cuts {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 24px;
     }
-    @media (min-width: 760px) {
-      .pg-cuts { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 880px) {
+      .pg-cuts { grid-template-columns: repeat(2, 1fr); }
     }
 
     .pg-cut {
       background: var(--white);
       border: 1.5px solid var(--gray-200);
       border-radius: 18px;
-      padding: 22px 22px 18px;
+      padding: 24px 24px 20px;
       transition: border-color 0.18s, box-shadow 0.18s;
       display: flex;
       flex-direction: column;
     }
-    .pg-cut:hover { border-color: var(--gray-400); box-shadow: var(--shadow); }
-    .pg-cut-head { margin-bottom: 16px; }
+    .pg-cut:hover { border-color: var(--gray-400); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+
+    .pg-cut-head { margin-bottom: 20px; }
     .pg-cut-head h4 {
       font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700;
+      font-size: 22px; font-weight: 700;
       color: var(--black);
       margin-bottom: 4px;
     }
@@ -409,34 +411,42 @@
       line-height: 1.5;
     }
 
+    /* RUBS — always 2 columns (or 1 centered if single) */
     .pg-rubs {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-      gap: 10px;
-      margin-bottom: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
     }
+    .pg-rubs.single-rub {
+      grid-template-columns: 1fr;
+      max-width: 56%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .pg-rub {
       display: flex;
       flex-direction: column;
       text-decoration: none;
       color: inherit;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      background: var(--white);
-      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+      transition: transform 0.18s, box-shadow 0.18s;
       position: relative;
     }
     .pg-rub:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
-      border-color: var(--brand);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
     }
+
+    /* THE PHOTO — now BIG. aspect 3:4, no border, full bleed */
     .pg-rub-img-wrap {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 3 / 4;
       background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
       overflow: hidden;
       position: relative;
+      border-radius: 12px;
     }
     .pg-rub[data-brand="bax"] .pg-rub-img-wrap {
       background: linear-gradient(135deg, #1f1f1f 0%, #3a2818 100%);
@@ -450,73 +460,59 @@
       display: block;
       transition: transform 0.4s ease;
     }
-    .pg-rub:hover .pg-rub-img-wrap img { transform: scale(1.06); }
-    .pg-rub-brand-mark {
-      position: absolute;
-      top: 6px; left: 6px;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--brand);
-      border: 1.5px solid white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
-    .pg-rub[data-brand="bax"] .pg-rub-brand-mark { background: #111; }
-    .pg-rub[data-brand="stm"] .pg-rub-brand-mark { background: #15803d; }
+    .pg-rub:hover .pg-rub-img-wrap img { transform: scale(1.05); }
 
-    .pg-rub-meta {
-      padding: 10px 12px 12px;
-      background: var(--white);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    /* tag overlay top-right of photo (so the photo has nothing else competing) */
     .pg-rub-tag {
-      align-self: flex-start;
+      position: absolute;
+      top: 8px; right: 8px;
       font-size: 9.5px;
       font-weight: 700;
       letter-spacing: 0.06em;
-      color: var(--brand);
-      background: #FEF3C7;
-      padding: 3px 8px;
+      color: var(--white);
+      background: rgba(180,83,9,0.95);
+      padding: 4px 9px;
       border-radius: 100px;
-      margin-bottom: 6px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      z-index: 2;
     }
-    .pg-rub[data-brand="bax"] .pg-rub-tag { color: #1f1f1f; background: #f3f4f6; }
-    .pg-rub[data-brand="stm"] .pg-rub-tag { color: #15803d; background: #DCFCE7; }
+    .pg-rub[data-brand="bax"] .pg-rub-tag { background: rgba(0,0,0,0.85); }
+    .pg-rub[data-brand="stm"] .pg-rub-tag { background: rgba(21,128,61,0.92); }
+
+    /* meta: small, sits below photo. font sizes stay as user requested */
+    .pg-rub-meta {
+      padding: 10px 4px 0;
+    }
     .pg-rub-name {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--black);
       line-height: 1.3;
       margin-bottom: 2px;
     }
     .pg-rub-brand {
-      font-size: 10px;
+      font-size: 10.5px;
       color: var(--gray-400);
       letter-spacing: 0.03em;
-      margin-top: auto;
     }
 
     .pg-tip {
       font-size: 12.5px;
       color: var(--gray-600);
       background: var(--off-white);
-      padding: 10px 14px;
-      border-radius: 8px;
+      padding: 12px 16px;
+      border-radius: 10px;
       border-left: 3px solid var(--brand);
-      line-height: 1.6;
+      line-height: 1.65;
       margin-top: auto;
     }
 
     @media (max-width: 480px) {
-      .pg-rubs {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-      .pg-cut { padding: 18px 16px 14px; }
-      .pg-cut-head h4 { font-size: 18px; }
-      .pg-rub-meta { padding: 8px 10px 10px; }
-      .pg-rub-name { font-size: 12px; }
+      .pg-rubs.single-rub { max-width: 70%; }
+      .pg-cut { padding: 20px 18px 16px; }
+      .pg-cut-head h4 { font-size: 20px; }
+      .pg-rub-name { font-size: 13px; }
     }
   </style>
 </head>
@@ -1537,34 +1533,38 @@
             <span class="pg-group-sub">${group.sub}</span>
           </div>
           <div class="pg-cuts">
-            ${group.cuts.map(c => `
-              <article class="pg-cut">
-                <header class="pg-cut-head">
-                  <h4>${c.cut}</h4>
-                  <p>${c.cutEn}</p>
-                </header>
-                <div class="pg-rubs">
-                  ${c.rubs.map(r => {
-                    const info = RUB_INFO[r.id];
-                    if (!info) return '';
-                    return `
-                      <a class="pg-rub" href="index.html#product-${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
-                        <div class="pg-rub-img-wrap">
-                          <span class="pg-rub-brand-mark" aria-hidden="true"></span>
-                          <img src="${info.image}" alt="${info.name}" loading="lazy">
-                        </div>
-                        <div class="pg-rub-meta">
-                          <span class="pg-rub-tag">${r.tag}</span>
-                          <div class="pg-rub-name">${info.name}</div>
-                          <div class="pg-rub-brand">${BRAND_LABEL[info.brand]}</div>
-                        </div>
-                      </a>
-                    `;
-                  }).join('')}
-                </div>
-                <div class="pg-tip">💡 ${c.tip}</div>
-              </article>
-            `).join('')}
+            ${group.cuts.map(c => {
+              // Limit to 2 rubs max — focus on the package photo
+              const limited = c.rubs.slice(0, 2);
+              const isSingle = limited.length === 1 ? ' single-rub' : '';
+              return `
+                <article class="pg-cut">
+                  <header class="pg-cut-head">
+                    <h4>${c.cut}</h4>
+                    <p>${c.cutEn}</p>
+                  </header>
+                  <div class="pg-rubs${isSingle}">
+                    ${limited.map(r => {
+                      const info = RUB_INFO[r.id];
+                      if (!info) return '';
+                      return `
+                        <a class="pg-rub" href="index.html#product-${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
+                          <div class="pg-rub-img-wrap">
+                            <span class="pg-rub-tag">${r.tag}</span>
+                            <img src="${info.image}" alt="${info.name}" loading="lazy">
+                          </div>
+                          <div class="pg-rub-meta">
+                            <div class="pg-rub-name">${info.name}</div>
+                            <div class="pg-rub-brand">${BRAND_LABEL[info.brand]}</div>
+                          </div>
+                        </a>
+                      `;
+                    }).join('')}
+                  </div>
+                  <div class="pg-tip">💡 ${c.tip}</div>
+                </article>
+              `;
+            }).join('')}
           </div>
         </div>
       `).join('');
