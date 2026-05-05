@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BBQで何を作る？｜タグで選ぶ16品の料理ガイド - SLOW FIRE SHOP</title>
+  <meta name="description" content="BBQで作る16品をレベル・食材・時間で絞り込めるユーザードリブン料理ガイド。各料理に合うLow n Slow Basics BBQラブも紹介。シダープランクサーモン、スペアリブ、プルドポーク、ビア缶チキンまで火入れの温度と時間が一目で分かる。">
+  <meta name="keywords" content="BBQ レシピ,BBQ 料理,バーベキュー 何作る,BBQ メニュー,BBQラブ,シダープランクサーモン,スペアリブ,プルドポーク,ビア缶チキン">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/cookbook.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQで何を作る？｜タグで選ぶ16品の料理ガイド">
+  <meta property="og:description" content="レベル・食材・時間で絞り込む、16品のBBQ料理ガイド。各料理に合うBBQラブも提案。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/cookbook.html">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#B45309">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== cookbook page (white base, EC site palette) ===== */
+    :root {
+      --lvl-1-color: #047857;
+      --lvl-1-bg: #ECFDF5;
+      --lvl-1-border: #A7F3D0;
+      --lvl-2-color: var(--brand);
+      --lvl-2-bg: #FEF3C7;
+      --lvl-2-border: #FCD34D;
+      --lvl-3-color: #BE185D;
+      --lvl-3-bg: #FCE7F3;
+      --lvl-3-border: #F9A8D4;
+    }
+
+    /* hero */
+    .ck-hero {
+      padding: calc(var(--nav-h) + 50px) 1.5rem 50px;
+      text-align: center;
+      background: var(--off-white);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .ck-hero-inner { max-width: 720px; margin: 0 auto; }
+    .ck-hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 14px;
+    }
+    .ck-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+    .ck-hero h1 em { color: var(--brand); font-style: italic; }
+    .ck-hero p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+
+    /* filter bar */
+    .ck-filter-bar {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 14px 1rem 12px;
+    }
+    .ck-filter-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .ck-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 2px;
+    }
+    .ck-filter-row::-webkit-scrollbar { display: none; }
+    .ck-filter-label {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      flex-shrink: 0;
+      min-width: 50px;
+      font-weight: 700;
+    }
+    .ck-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      padding: 7px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--gray-600);
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+    }
+    .ck-chip:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+    .ck-chip.is-active {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* result meta */
+    .ck-result-meta {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .ck-result-meta .count { font-size: 13px; color: var(--gray-600); }
+    .ck-result-meta .count strong {
+      color: var(--brand);
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .ck-reset-btn {
+      background: none;
+      border: none;
+      font-size: 12px;
+      color: var(--gray-400);
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: color 0.2s;
+      font-family: inherit;
+    }
+    .ck-reset-btn:hover { color: var(--brand); }
+    .ck-reset-btn.hidden { display: none; }
+
+    /* grid */
+    .ck-grid-wrap {
+      background: var(--white);
+      padding: 1rem 1.5rem 80px;
+    }
+    .ck-grid {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* card */
+    .ck-card {
+      position: relative;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--r-lg);
+      background: var(--white);
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      padding: 0;
+    }
+    .ck-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--black);
+      transform: translateY(-2px);
+    }
+    .ck-card.hidden { display: none; }
+
+    .ck-card-img {
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .ck-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .ck-card:hover .ck-card-img img { transform: scale(1.05); }
+    .ck-card-img-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      opacity: 0.55;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    }
+    .ck-card-img-overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 5px;
+    }
+    .ck-card-level {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .ck-card-level.lvl-1 { background: rgba(236,253,245,0.9); color: var(--lvl-1-color); }
+    .ck-card-level.lvl-2 { background: rgba(254,243,199,0.9); color: var(--lvl-2-color); }
+    .ck-card-level.lvl-3 { background: rgba(252,231,243,0.9); color: var(--lvl-3-color); }
+
+    .ck-card-time {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      background: rgba(17,17,17,0.78);
+      color: var(--white);
+      border-radius: 100px;
+      backdrop-filter: blur(4px);
+    }
+
+    .ck-card-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .ck-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+    }
+    .ck-card-en {
+      font-size: 11px;
+      color: var(--gray-400);
+      letter-spacing: 0.04em;
+    }
+    .ck-card-essence {
+      font-size: 12.5px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      flex: 1;
+      margin-top: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .ck-card-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-200);
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+    .ck-card-meta span { display: inline-flex; align-items: center; gap: 3px; }
+
+    /* empty state */
+    .ck-empty {
+      max-width: 480px;
+      margin: 80px auto;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .ck-empty.hidden { display: none; }
+    .ck-empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+    .ck-empty p {
+      color: var(--gray-600);
+      font-size: 14px;
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+
+    /* modal */
+    .ck-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(17,17,17,0.55);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      z-index: 1200;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      overflow-y: auto;
+    }
+    .ck-modal-backdrop.open { opacity: 1; visibility: visible; }
+
+    .ck-modal {
+      width: 100%;
+      max-width: 760px;
+      max-height: 94vh;
+      background: var(--white);
+      border-radius: 16px 16px 0 0;
+      transform: translateY(40px);
+      transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-top: auto;
+    }
+    .ck-modal-backdrop.open .ck-modal { transform: translateY(0); }
+
+    .ck-modal-hero {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .ck-modal-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ck-modal-hero-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      opacity: 0.5;
+    }
+    .ck-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      font-size: 16px;
+      color: var(--black);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      backdrop-filter: blur(4px);
+    }
+    .ck-modal-close:hover { background: var(--white); }
+
+    .ck-modal-body {
+      padding: 24px 28px 28px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .ck-modal-tags { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .ck-tag-pill {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 4px 11px;
+      border-radius: 100px;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-600);
+    }
+    .ck-tag-pill.lvl-1 { color: var(--lvl-1-color); background: var(--lvl-1-bg); border-color: var(--lvl-1-border); font-weight: 600; }
+    .ck-tag-pill.lvl-2 { color: var(--lvl-2-color); background: var(--lvl-2-bg); border-color: var(--lvl-2-border); font-weight: 600; }
+    .ck-tag-pill.lvl-3 { color: var(--lvl-3-color); background: var(--lvl-3-bg); border-color: var(--lvl-3-border); font-weight: 600; }
+
+    .ck-modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .ck-modal-en {
+      font-size: 12px;
+      color: var(--gray-400);
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+    }
+    .ck-modal-essence {
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--black);
+      padding: 14px 18px;
+      background: var(--off-white);
+      border-left: 3px solid var(--brand);
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 22px;
+    }
+
+    .ck-modal-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .ck-modal-spec {
+      padding: 14px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      text-align: center;
+      background: var(--gray-50);
+    }
+    .ck-modal-spec-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .ck-modal-spec-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .ck-modal-section { margin-bottom: 22px; }
+    .ck-modal-section h3 {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .ck-modal-section ul { list-style: none; padding: 0; }
+    .ck-modal-section li {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.85;
+      padding: 6px 0 6px 18px;
+      position: relative;
+    }
+    .ck-modal-section li::before {
+      content: '─';
+      position: absolute;
+      left: 0;
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .ck-modal-section li strong { color: var(--brand); }
+
+    .ck-modal-philosophy {
+      padding: 16px 18px;
+      background: var(--off-white);
+      border-radius: 8px;
+      margin-bottom: 22px;
+    }
+    .ck-modal-philosophy p {
+      font-size: 13.5px;
+      color: var(--gray-600);
+      line-height: 1.95;
+      font-style: italic;
+    }
+    .ck-modal-philosophy p strong { color: var(--black); font-style: normal; font-weight: 700; }
+
+    /* paired rubs */
+    .ck-paired-rubs {
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FFEDD5 100%);
+      border-radius: 10px;
+      border: 1px solid var(--lvl-2-border);
+    }
+    .ck-paired-rubs-head {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ck-rub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ck-rub {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--white);
+      border-radius: 8px;
+      border: 1px solid var(--gray-200);
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .ck-rub:hover {
+      border-color: var(--brand);
+      transform: translateX(2px);
+    }
+    .ck-rub-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      background: var(--brand);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .ck-rub-text { flex: 1; }
+    .ck-rub-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .ck-rub-desc {
+      font-size: 11.5px;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+    .ck-rub-arrow {
+      color: var(--brand);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* fundamentals */
+    .ck-fund {
+      background: var(--off-white);
+      padding: 60px 1.5rem;
+      border-top: 1px solid var(--gray-200);
+    }
+    .ck-fund-inner { max-width: var(--max); margin: 0 auto; }
+    details.ck-fund-d {
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      background: var(--white);
+      margin-bottom: 12px;
+    }
+    details.ck-fund-d > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    details.ck-fund-d > summary::-webkit-details-marker { display: none; }
+    .ck-fund-summary strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .ck-fund-summary span { font-size: 12px; color: var(--gray-400); }
+    .ck-fund-toggle {
+      font-size: 20px;
+      color: var(--brand);
+      transition: transform 0.3s;
+    }
+    details[open] .ck-fund-toggle { transform: rotate(45deg); }
+    .ck-fund-content {
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .ck-fund-4t {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0 0;
+    }
+    .ck-fund-t {
+      padding: 16px 12px;
+      background: var(--off-white);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .ck-fund-t .letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .ck-fund-t .name {
+      font-size: 13px;
+      color: var(--black);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .ck-fund-t .desc { font-size: 10.5px; color: var(--gray-600); line-height: 1.5; }
+
+    .ck-temps {
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+    .ck-temp-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+      align-items: center;
+    }
+    .ck-temp-row:last-child { border-bottom: none; }
+    .ck-temp-row.head {
+      background: var(--gray-50);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      font-weight: 700;
+    }
+    .ck-temp-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    /* CTA */
+    .ck-cta {
+      background: var(--black);
+      color: var(--white);
+      padding: 80px 1.5rem;
+      text-align: center;
+    }
+    .ck-cta-inner { max-width: 580px; margin: 0 auto; }
+    .ck-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .ck-cta h2 em {
+      font-style: italic;
+      color: var(--brand);
+      background: linear-gradient(120deg, var(--brand), #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ck-cta p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .ck-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--brand);
+      color: var(--white);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .ck-cta-btn:hover { background: var(--brand-dk); transform: translateY(-1px); }
+
+    @media (max-width: 768px) {
+      .ck-hero { padding: 110px 1.25rem 35px; }
+      .ck-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .ck-modal-body { padding: 20px 18px; }
+      .ck-modal h2 { font-size: 22px; }
+      .ck-modal-specs { grid-template-columns: 1fr 1fr 1fr; }
+      .ck-fund-4t { grid-template-columns: 1fr 1fr; }
+      .ck-fund { padding: 50px 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .ck-modal-specs { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- Firebase compat (consistent with EC site) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "BBQで作る料理16選 — SLOW FIRE SHOPの料理ガイド",
+    "description": "レベル・食材・時間で絞り込めるBBQ料理ガイド。各料理に合うLow n Slow Basics BBQラブを提案。",
+    "numberOfItems": 16,
+    "url": "https://yamanekazuki.github.io/slow-fire-shop/cookbook.html"
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#products">商品一覧</a>
+        <a href="rub-guide.html">ラブガイド</a>
+        <a href="pairing-guide.html">ペアリング</a>
+        <a href="cookbook.html" style="color:var(--black);font-weight:700;">料理ガイド</a>
+        <a href="team.html">私たちについて</a>
+        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">サービスサイト ↗</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カートを開く" onclick="location.href='index.html'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="ck-hero">
+    <div class="ck-hero-inner">
+      <p class="ck-hero-eyebrow">Cookbook · 料理ガイド</p>
+      <h1>BBQで、<em>何を作る？</em></h1>
+      <p>レベル・食材・時間でサッと絞り込む、SLOW FIREが提案する16品。<br>各料理に合うBBQラブも一緒に。</p>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="ck-filter-bar" aria-label="絞り込みフィルター">
+    <div class="ck-filter-inner">
+      <div class="ck-filter-row">
+        <span class="ck-filter-label">レベル</span>
+        <button class="ck-chip is-active" data-filter="level" data-value="all">すべて</button>
+        <button class="ck-chip" data-filter="level" data-value="1">初級</button>
+        <button class="ck-chip" data-filter="level" data-value="2">中級</button>
+        <button class="ck-chip" data-filter="level" data-value="3">上級</button>
+      </div>
+      <div class="ck-filter-row">
+        <span class="ck-filter-label">食材</span>
+        <button class="ck-chip is-active" data-filter="category" data-value="all">すべて</button>
+        <button class="ck-chip" data-filter="category" data-value="meat">🥩 肉</button>
+        <button class="ck-chip" data-filter="category" data-value="fish">🐟 魚</button>
+        <button class="ck-chip" data-filter="category" data-value="veggie">🥬 野菜</button>
+        <button class="ck-chip" data-filter="category" data-value="side">🧀 サイド</button>
+        <button class="ck-chip" data-filter="category" data-value="dessert">🍰 デザート</button>
+      </div>
+      <div class="ck-filter-row">
+        <span class="ck-filter-label">時間</span>
+        <button class="ck-chip is-active" data-filter="time" data-value="all">すべて</button>
+        <button class="ck-chip" data-filter="time" data-value="short">⚡ 〜15分</button>
+        <button class="ck-chip" data-filter="time" data-value="mid">⏱ 15〜60分</button>
+        <button class="ck-chip" data-filter="time" data-value="long">🔥 60分〜</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ck-result-meta">
+    <div class="count"><strong id="resultCount">16</strong>品が見つかりました</div>
+    <button class="ck-reset-btn hidden" id="resetBtn">フィルターをリセット ✕</button>
+  </div>
+
+  <!-- GRID -->
+  <section class="ck-grid-wrap">
+    <div class="ck-grid" id="recipeGrid"></div>
+    <div class="ck-empty hidden" id="emptyState">
+      <div class="ck-empty-icon">🔍</div>
+      <p>条件に合う料理が見つかりませんでした。<br>フィルターを少しゆるめて探してみてください。</p>
+      <button class="btn-dark" id="resetBtn2">フィルターをリセット</button>
+    </div>
+  </section>
+
+  <!-- FUNDAMENTALS -->
+  <section class="ck-fund">
+    <div class="ck-fund-inner">
+      <details class="ck-fund-d">
+        <summary>
+          <div class="ck-fund-summary">
+            <strong>火入れの4つのT</strong>
+            <span>BBQの判断はすべてこの4つに帰着する</span>
+          </div>
+          <span class="ck-fund-toggle">＋</span>
+        </summary>
+        <div class="ck-fund-content">
+          <div class="ck-fund-4t">
+            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Time</div><div class="desc">仕込み・焼き・休ませ</div></div>
+            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Temperature</div><div class="desc">数字を信じる</div></div>
+            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Tool</div><div class="desc">杉板・ラック・温度計</div></div>
+            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Technique</div><div class="desc">直火か間接火か</div></div>
+          </div>
+        </div>
+      </details>
+      <details class="ck-fund-d">
+        <summary>
+          <div class="ck-fund-summary">
+            <strong>中心温度リファレンス</strong>
+            <span>「見た目」より「数字」を信じるための表</span>
+          </div>
+          <span class="ck-fund-toggle">＋</span>
+        </summary>
+        <div class="ck-fund-content">
+          <div class="ck-temps">
+            <div class="ck-temp-row head"><span>食材</span><span>中心温度</span><span>火入れ</span></div>
+            <div class="ck-temp-row"><span>牛（ステーキ）</span><span class="ck-temp-num">53℃</span><span>ダイレクト</span></div>
+            <div class="ck-temp-row"><span>豚（ステーキ）</span><span class="ck-temp-num">63℃</span><span>ダイレクト</span></div>
+            <div class="ck-temp-row"><span>鶏（焼き全般）</span><span class="ck-temp-num">73℃</span><span>ダイレクト/間接</span></div>
+            <div class="ck-temp-row"><span>サーモン（養殖）</span><span class="ck-temp-num">53℃</span><span>ダイレクト＋杉板</span></div>
+            <div class="ck-temp-row"><span>スペアリブ</span><span class="ck-temp-num">92℃</span><span>ロー&スロー</span></div>
+            <div class="ck-temp-row"><span>プルドポーク</span><span class="ck-temp-num">97℃</span><span>ロー&スロー</span></div>
+            <div class="ck-temp-row"><span>ブリスケット</span><span class="ck-temp-num">92〜96℃</span><span>ロー&スロー</span></div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ck-cta">
+    <div class="ck-cta-inner">
+      <h2>料理を、<em>ラブで決める。</em></h2>
+      <p>SLOW FIREのBBQラブは、Low n Slow Basics（オーストラリア）日本正規取扱。<br>料理ごとに合う1本を、まず試してみてください。</p>
+      <a href="index.html#products" class="ck-cta-btn">商品一覧を見る →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html#products">商品一覧</a>
+          <a href="rub-guide.html">ラブガイド</a>
+          <a href="pairing-guide.html">ペアリング</a>
+          <a href="cookbook.html">料理ガイド</a>
+          <a href="team.html">私たちについて</a>
+          <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">SLOW FIREサービスサイト ↗</a>
+          <a href="https://www.instagram.com/afro_anri/" target="_blank" rel="noopener">Instagram ↗</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+        <p>本商品はLow n Slow Basics（Australia）の正規輸入品です。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="ck-modal-backdrop" id="recipeModal" aria-hidden="true">
+    <div class="ck-modal" role="dialog" aria-modal="true">
+      <div class="ck-modal-hero">
+        <img id="modalImg" src="" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ck-modal-hero-fallback" id="modalFallback" style="display:none">🔥</div>
+        <button class="ck-modal-close" id="modalClose" aria-label="閉じる">✕</button>
+      </div>
+      <div class="ck-modal-body">
+        <div class="ck-modal-tags" id="modalTags"></div>
+        <h2 id="modalTitle"></h2>
+        <p class="ck-modal-en" id="modalEn"></p>
+        <div class="ck-modal-essence" id="modalEssence"></div>
+        <div class="ck-modal-specs" id="modalSpecs"></div>
+        <div class="ck-modal-section">
+          <h3>火入れのポイント</h3>
+          <ul id="modalPoints"></ul>
+        </div>
+        <div class="ck-modal-philosophy">
+          <p><strong style="display:block;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand);margin-bottom:6px;">SLOW FIRE視点</strong><span id="modalPhilosophy"></span></p>
+        </div>
+        <div class="ck-paired-rubs" id="modalPairedRubs">
+          <div class="ck-paired-rubs-head">🔥 この料理に合うBBQラブ</div>
+          <div class="ck-rub-list" id="modalRubList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script src="mobile-nav.js"></script>
+  <script>
+  /* ============================================
+     Recipe data
+     ============================================ */
+  const RUB_DB = {
+    'steak-shooter':       { icon: '🥩', name: 'Steak Shooter',          desc: '牛肉のスタンダードラブ' },
+    'steak-shooter-spicy': { icon: '🌶️', name: 'Steak Shooter SPICY',    desc: 'スパイシー版（辛さ2/5）' },
+    'beef-bounce':         { icon: '☕', name: 'Beef Bounce',             desc: 'コーヒー＋ペッパーの深み' },
+    'honey-soy-slammer':   { icon: '🍯', name: 'Honey Soy Slammer',       desc: '蜂蜜＋醤油のグレーズ' },
+    'lamb-layup':          { icon: '🌿', name: 'Lamb Layup',              desc: 'ハーブ＋スマック' },
+    'garlic-goals':        { icon: '🧄', name: 'Garlic Goals',            desc: 'ガーリック万能型' },
+    'chilli-citrus-charge':{ icon: '🍊', name: 'Chilli Citrus Charge',   desc: 'チリ×シトラスの新作' },
+    'hook-shot':           { icon: '🔥', name: 'Hook Shot',               desc: 'シグネチャーBBQソース' }
+  };
+
+  const RECIPES = [
+    {
+      id: 'cedar-salmon', name: 'シダープランクサーモン', nameEn: 'Cedar Plank Salmon', icon: '🐟',
+      level: 1, levelLabel: '初級', category: 'fish', categoryLabel: '🐟 魚',
+      timeMin: 12, timeBucket: 'short', timeLabel: '⚡ 約12分',
+      essence: '杉板から立ちのぼる微かな煙が、サーモンに「森の記憶」を与える。BBQで初めて「料理が場の空気を変える」瞬間を体験できる、入口にして頂点。',
+      specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '8〜12分' },{ label: '中心温度', value: '53℃' }],
+      points: ['杉板は最低30分、できれば1時間以上水に浸す','板のツルツル面を下にして、グリルに置く','<strong>「パチッ」と音が鳴ったら</strong>サーモンを乗せる合図','養殖サーモンが安全。天然はアニサキス対策に75℃以上推奨','キッチンペーパーで水分を完全に拭くと仕上がりが激変する'],
+      philosophy: '杉板料理は、テーブルで歓声が上がる料理。サーモンを焼くのではなく、杉板を介して<strong>「香りを贈る」</strong>料理として捉えるとよい。',
+      pairedRubs: ['lamb-layup', 'garlic-goals']
+    },
+    {
+      id: 'veg-grill', name: '季節の野菜グリル', nameEn: 'Seasonal Grilled Vegetables', icon: '🥬',
+      level: 1, levelLabel: '初級', category: 'veggie', categoryLabel: '🥬 野菜',
+      timeMin: 9, timeBucket: 'short', timeLabel: '⚡ 約9分',
+      essence: '水分を飛ばすほど甘くなる。野菜は「焼く」のではなく「水を抜く」料理だと気づいた瞬間、BBQの解像度が一段上がる。',
+      specs: [{ label: 'グリル温度', value: '230〜250℃' },{ label: '焼き時間', value: '3分×3回' },{ label: '合図', value: '焼き色' }],
+      points: ['野菜は<strong>大きく</strong>切る — 大きいほど柔らかく仕上がる','エリンギは輪切り、パプリカは4等分','オリーブオイルは網ではなく<strong>食材に塗る</strong>','後からオイルは追加しない','焼き色＝完成の合図。焼きすぎない'],
+      philosophy: 'オリーブオイルは食材の水分をコーティングする。ナスがパリパリにならないのも、エリンギがジューシーなのも、すべて<strong>オイルの仕事</strong>。',
+      pairedRubs: ['garlic-goals']
+    },
+    {
+      id: 'pork-steak', name: 'ポークステーキ', nameEn: 'Pork Steak (2cm)', icon: '🥩',
+      level: 1, levelLabel: '初級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 5, timeBucket: 'short', timeLabel: '⚡ 約5分',
+      essence: '「見た目」ではなく「中心温度63℃」を信じる。最初の高温＋短時間の組み合わせは、BBQで最も再現性の高い火入れだ。',
+      specs: [{ label: 'グリル温度', value: '230〜250℃' },{ label: '焼き時間', value: '2.5分×2' },{ label: '中心温度', value: '63℃' }],
+      points: ['網に対して<strong>45度</strong>に置く（焼き目が美しくなる）','軽く押すだけ。動かさない','焼いた時間の<strong>1/3</strong>はレストタイム','カットはフォークではなく<strong>スプーン</strong>','仕上げにコンパウンドバター（バター＋メープル＋ローズマリー＋マスタード）'],
+      philosophy: 'BBQの火力は「強くする」のではなく<strong>「配置する」</strong>もの。初心者がまず学ぶべきは火加減ではなく、火の置き方。',
+      pairedRubs: ['honey-soy-slammer', 'garlic-goals']
+    },
+    {
+      id: 'bratwurst', name: 'ブラートソーセージ', nameEn: 'Bratwurst Sausage', icon: '🌭',
+      level: 1, levelLabel: '初級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 8, timeBucket: 'short', timeLabel: '⚡ 約8分',
+      essence: '仕込み5分。場が温まる前の「つなぎ」として完璧。会話が始まる前にテーブルに到着する、最初の一品の役割を担う。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '2分×4面' },{ label: '中心温度', value: '63℃' }],
+      points: ['網目に沿って、網と網の間に乗せて安定させる','4面を均等に焼く（転がすイメージ）','仕上げのリッチハニーマスタード：蜂蜜＋粒マスタード＋マヨ＋カイエン','レストタイムは数分でOK'],
+      philosophy: 'BBQは「仕込みは一括、提供は順番」が鉄則。ソーセージは仕込み時間が短いので、<strong>メインの待ち時間に出す</strong>と、場のテンポが崩れない。',
+      pairedRubs: ['steak-shooter']
+    },
+    {
+      id: 'cheeseburger', name: 'クラシックチーズバーガー', nameEn: 'Classic Cheeseburger', icon: '🍔',
+      level: 1, levelLabel: '初級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 6, timeBucket: 'short', timeLabel: '⚡ 約6分',
+      essence: 'バーガーは、BBQのアイコンであり、BBQの宣言だ。「これがアメリカン」と一目で伝わる、最も雄弁な一品。',
+      specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '2.5分×2＋30秒' },{ label: '中心温度', value: '63℃' }],
+      points: ['パテは150g、塩胡椒＋オリーブオイルでシンプルに','裏返すのは<strong>1回だけ</strong>。動かさない','チーズは焼き上がる30秒前に乗せる','バンズの内側を直火で20秒、焼き目をつける','サウザンアイランドソース：マヨ＋ケチャップ＋レリッシュ'],
+      philosophy: 'バーガーは<strong>「個別配膳できる」</strong>料理。一人一個ずつ手渡す瞬間に、テーブルの表情が変わる。料理を「渡す」体験は、料理を「並べる」体験より深い。',
+      pairedRubs: ['steak-shooter', 'beef-bounce']
+    },
+    {
+      id: 'shiitake', name: '肉詰めしいたけ', nameEn: 'Meat Stuffed Shiitake', icon: '🍄',
+      level: 2, levelLabel: '中級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 10, timeBucket: 'short', timeLabel: '⚡ 約10分',
+      essence: '和の食材に、アメリカンBBQの火入れ思想を当てる。インダイレクトでじっくり火を通すと、しいたけは肉と一体になる。',
+      specs: [{ label: 'グリル温度', value: '200〜250℃' },{ label: '焼き時間', value: '約10分' },{ label: '中心温度', value: '63℃' }],
+      points: ['しいたけのヘタは<strong>手で取る</strong>（包丁では旨味が逃げる）','豚ミンチ＋大葉＋オリーブオイル＋塩胡椒','<strong>インダイレクト必須</strong> — ダイレクトだと、しいたけが先に焦げて中の肉が焼けない','ラック＆シールドを使うと安定する','仕上げに焼き鳥のタレを塗ると、和に寄る'],
+      philosophy: 'BBQはアメリカ的な肉文化の象徴に見えるが、しいたけ・大葉・焼き鳥のタレを介すると、日本人の身体に届く。普遍を語るには、まず<strong>翻訳</strong>が必要だ。',
+      pairedRubs: ['honey-soy-slammer']
+    },
+    {
+      id: 'veg-skewer', name: 'スキュアーベジタブル（串野菜）', nameEn: 'Skewered Vegetables', icon: '🥒',
+      level: 2, levelLabel: '中級', category: 'veggie', categoryLabel: '🥬 野菜',
+      timeMin: 6, timeBucket: 'short', timeLabel: '⚡ 約6分',
+      essence: '串に刺す行為そのものが、「これからBBQが始まる」という宣言になる。視覚的な多幸感が、テーブルの期待値を引き上げる。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '3分×2' },{ label: '合図', value: '焼き目' }],
+      points: ['竹串は30分以上水に浸す（焦げ防止）','パプリカ・ズッキーニ・茄子・エリンギ・季節野菜','バジルペースト＋オリーブオイル＋塩胡椒のタレを刷毛で塗る','一口大にカットしてから串に刺す','焼き目がしっかり付いたら完成'],
+      philosophy: 'BBQは料理であると同時に<strong>「振る舞い」</strong>だ。串野菜は手元に運ぶ動きが美しいので、提供時の所作まで含めて設計するとよい。',
+      pairedRubs: ['garlic-goals']
+    },
+    {
+      id: 'spare-ribs', name: 'スペアリブ', nameEn: 'Spare Ribs', icon: '🍖',
+      level: 2, levelLabel: '中級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 100, timeBucket: 'long', timeLabel: '🔥 約100分',
+      essence: '100分かけて、肉と話す。ラブで下味、180℃でじっくり、最後に蜂蜜とBBQソースで艶を出す。骨からホロリと外れたとき、テーブルの全員が言葉を失う。',
+      specs: [{ label: 'グリル温度', value: '180℃' },{ label: '焼き時間', value: '30→60→10分' },{ label: '中心温度', value: '92℃' }],
+      points: ['裏側の薄皮（メンブレン）は<strong>必ず剥がす</strong>','ラブは裏側からたっぷり振る','ラック＆シールドで遠火30分','アルミホイルでBBQソース＋蜂蜜を塗って包み、再度遠火で1時間','裸の状態で強火の遠火10分、外側に香ばしさを出して完成'],
+      philosophy: 'スペアリブから先は「焼く」料理ではなく<strong>「見守る」</strong>料理になる。90分以上の調理時間を「面倒」ではなく「場の土台」として捉えると、BBQの構造が変わる。',
+      pairedRubs: ['honey-soy-slammer', 'beef-bounce']
+    },
+    {
+      id: 'pizza', name: 'マルゲリータピッツァ', nameEn: 'Margherita Pizza', icon: '🍕',
+      level: 2, levelLabel: '中級', category: 'side', categoryLabel: '🧀 サイド',
+      timeMin: 10, timeBucket: 'short', timeLabel: '⚡ 約10分',
+      essence: '「BBQでピザが焼ける」という事実そのものが、最大の演出になる。グリルがオーブンに変わる瞬間を見せるだけで、場の常識が反転する。',
+      specs: [{ label: 'グリル温度', value: '250℃' },{ label: '焼き時間', value: '10分' },{ label: '必要', value: 'ピザストーン' }],
+      points: ['ピザストーンは事前に<strong>8分間予熱</strong>（最重要）','市販ピザ生地で十分。トマトソース＋モッツァレラ＋ミニトマト','仕上げにバジルソースをかけると本格度が一気に上がる','生地の下も焼けているか必ず確認する'],
+      philosophy: 'BBQの本質は「グリルを<strong>オーブンとして使う</strong>」こと。ピザはその思想を最も視覚的に伝える料理であり、BBQの定義を再生する力がある。',
+      pairedRubs: ['garlic-goals']
+    },
+    {
+      id: 'lemon-chicken', name: 'ガーリックレモンチキン', nameEn: 'Garlic Lemon Chicken', icon: '🍗',
+      level: 2, levelLabel: '中級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 10, timeBucket: 'short', timeLabel: '⚡ 約10分',
+      essence: 'マリネ液に1晩。仕込みのほとんどは「待つこと」。BBQ当日は焼くだけ。準備の長さが、提供の余裕を生む。',
+      specs: [{ label: 'グリル温度', value: '250℃' },{ label: '焼き時間', value: '5分×2' },{ label: '中心温度', value: '73℃' }],
+      points: ['マリネ：レモン汁1個分＋すりおろしニンニク＋ケイジャンスパイス＋オリーブオイル＋塩胡椒','30分以上漬ける、できれば<strong>一晩</strong>','皮面を下にして5分、ひっくり返してさらに5分','骨に当たる位置の中心温度が73℃で完成'],
+      philosophy: 'BBQは「当日の調理」よりも<strong>「前日の仕込み」</strong>が結果を決める。仕込みに時間をかけられる人ほど、当日テーブルで会話に集中できる。料理は時間配分の哲学だ。',
+      pairedRubs: ['chilli-citrus-charge', 'honey-soy-slammer']
+    },
+    {
+      id: 'apple-pie', name: 'アップルパイ', nameEn: 'Apple Pie', icon: '🥧',
+      level: 2, levelLabel: '中級', category: 'dessert', categoryLabel: '🍰 デザート',
+      timeMin: 20, timeBucket: 'mid', timeLabel: '⏱ 約20分',
+      essence: 'BBQで甘いものを出すと、テーブルの時間が一段ゆっくりになる。シナモンの香りは、解散の合図ではなく「もう少し居たい」のサイン。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '15分＋5分' },{ label: '材料', value: '市販パイシート' }],
+      points: ['リンゴは皮を剥いて4等分→スライス','パイシートにリンゴ・バター・砂糖・シナモンを乗せ、フォークで端を留める','クッキングシート上で<strong>遠火15分</strong>（200℃）','その後、直火に移してさらに5分。焼き目で完成'],
+      philosophy: 'デザートは「美味しさ」のためではなく、<strong>「時間を伸ばすため」</strong>にある。場が深いほど、参加者は帰りたくなくなる。アップルパイは、その引き留め役。',
+      pairedRubs: []
+    },
+    {
+      id: 'gratin', name: 'BBQポテトグラタン', nameEn: 'BBQ Potato Gratin', icon: '🥔',
+      level: 3, levelLabel: '上級', category: 'side', categoryLabel: '🧀 サイド',
+      timeMin: 30, timeBucket: 'mid', timeLabel: '⏱ 約30分',
+      essence: 'グリルでグラタンが焼けるという事実。それだけで、テーブルの常識が一段ゆるむ。生クリームとパルメザンの濃厚さが、BBQの香ばしさを引き立てる。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '約30分' },{ label: '火入れ', value: 'インダイレクト' }],
+      points: ['ジャガイモは皮をむき、20分水に浸す（変色防止）','生クリーム200cc＋パルメザン100g（チーズの塩分があるので塩は控えめ）','アルミ容器に入れて<strong>インダイレクトで30分</strong>','真ん中は火を入れすぎない','明太子・ベーコン・コーン・マッシュルーム — 何でも合う'],
+      philosophy: 'BBQでサイドメニューを侮ってはいけない。むしろ、サイドの選択こそホストの感性が問われる。グラタンは<strong>「肉に集中したくない参加者」</strong>のための逃げ場として機能する。',
+      pairedRubs: ['garlic-goals']
+    },
+    {
+      id: 'beer-can-chicken', name: 'ビア缶チキン', nameEn: 'Beer Can Chicken', icon: '🍺',
+      level: 3, levelLabel: '上級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 60, timeBucket: 'long', timeLabel: '🔥 約60分',
+      essence: '鶏が直立した姿で焼ける。見た目のインパクト、ビールの蒸気で内側からしっとり、繊維に味が染み込む構造。「セクシーチキン」と呼ばれる所以。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '約60分' },{ label: '中心温度', value: '73℃' }],
+      points: ['下味：醤油＋オイスターソース＋みりん＋料理酒＋ビール、<strong>1日漬ける</strong>','ビール＋炭酸水で繊維に味が入りやすくなる（細かい気泡が鍵）','胸肉は味が入りにくいので、胸側にガーリックパウダーをしっかり塗る','15分ごとにタレを塗る','切り方：足を斜めにカット → 背中〜胸 → 最後は手でほぐす'],
+      philosophy: 'BBQの極意のひとつは<strong>「炭酸とアルコールが肉質を変える」</strong>という発見。ビア缶チキンは、料理の科学を最も視覚的に体験できる教材。',
+      pairedRubs: ['honey-soy-slammer', 'chilli-citrus-charge']
+    },
+    {
+      id: 'back-ribs', name: 'バックリブ（ロー&スロー）', nameEn: 'Back Ribs · Low & Slow', icon: '💎',
+      level: 3, levelLabel: '上級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 240, timeBucket: 'long', timeLabel: '🔥 約4時間',
+      essence: 'スペアリブが「お腹側」、バックリブは「背中側」。赤身が多く淡白で、ロー&スローの本質が最もよく現れる部位。コラーゲン理解こそがBBQの本質だ。',
+      specs: [{ label: 'グリル温度', value: '約200℃' },{ label: '焼き時間', value: '4時間前後' },{ label: '完成温度', value: '92℃' }],
+      points: ['<strong>70〜80℃：硬い</strong>（コラーゲンがまだ収縮）','<strong>80℃以上：コラーゲンがゼラチン化</strong>','<strong>92℃：スペアリブ完成</strong>（骨が浮き出る）','<strong>97℃：プルドポーク</strong>（手でほぐれる）','63℃で一度取り出してアルミで包み、再加熱して温度を上げると失敗しない'],
+      philosophy: 'ロー&スローは「時間をかける料理」ではなく、<strong>「コラーゲンを理解する料理」</strong>だ。数字を信じれば、誰でも到達できる。',
+      pairedRubs: ['beef-bounce', 'honey-soy-slammer']
+    },
+    {
+      id: 'salmon-pro', name: '上級サーモン（はちみつ×マスタード）', nameEn: 'Honey Mustard Salmon', icon: '🍯',
+      level: 3, levelLabel: '上級', category: 'fish', categoryLabel: '🐟 魚',
+      timeMin: 10, timeBucket: 'short', timeLabel: '⚡ 約10分',
+      essence: '初級のシダープランクサーモンと同じ食材で、別次元の体験を作る。鍵は下処理 — ドリップを完全に拭くこと。それだけで、サーモンは別物になる。',
+      specs: [{ label: '火入れ', value: '高温→低温' },{ label: '焼き時間', value: '約10分' },{ label: '中心温度', value: '53℃' }],
+      points: ['下処理：キッチンペーパーで<strong>ドリップを完全に拭く</strong>（ここで仕上がりが決まる）','味付け：<strong>はちみつ × マスタード</strong>のグレーズ','最初は高温で表面を固める','煙が出始めたら温度を下げて、じっくり中まで火を入れる','「煙を出したい時は温度を下げる」が原則'],
+      philosophy: 'BBQの上級者と初心者の違いは、火の強さではなく<strong>「水分の見立て」</strong>にある。ドリップをどう扱うか。煙をいつ出すか。その判断こそが、料理を一段引き上げる。',
+      pairedRubs: ['honey-soy-slammer']
+    },
+    {
+      id: 'banana', name: 'バナナグリル', nameEn: 'Grilled Banana with Rum', icon: '🍌',
+      level: 3, levelLabel: '上級', category: 'dessert', categoryLabel: '🍰 デザート',
+      timeMin: 3, timeBucket: 'short', timeLabel: '⚡ 約3分',
+      essence: '3分で焼ける、最後の一品。ラム酒のアルコールを飛ばして香りだけ残す手順は、BBQ全体を「儀式」に昇華させる。',
+      specs: [{ label: 'グリル温度', value: '中火' },{ label: '焼き時間', value: '約3分' },{ label: '材料', value: 'ラム酒＋蜂蜜' }],
+      points: ['バナナは<strong>縦にカット</strong>。皮ごと身を下にして焼く','ラム酒＋はちみつをかける','<strong>アルコールを飛ばす</strong>（炎が上がるが慌てない）','仕上げにバニラアイスを乗せると、温度差で多幸感が増す'],
+      philosophy: '炎が立つ料理は、視覚的に<strong>「終わり」</strong>を告げる。バナナグリルは、BBQという長い時間に句読点を打つ料理。',
+      pairedRubs: []
+    }
+  ];
+
+  /* ============================================
+     Filter + render
+     ============================================ */
+  const state = { level: 'all', category: 'all', time: 'all' };
+  const grid = document.getElementById('recipeGrid');
+  const empty = document.getElementById('emptyState');
+  const resultCount = document.getElementById('resultCount');
+  const resetBtn = document.getElementById('resetBtn');
+  const resetBtn2 = document.getElementById('resetBtn2');
+
+  function buildCards() {
+    grid.innerHTML = RECIPES.map(r => `
+      <button class="ck-card" data-id="${r.id}" data-level="${r.level}" data-category="${r.category}" data-time="${r.timeBucket}">
+        <div class="ck-card-img">
+          <img src="images/recipes/${r.id}.jpg" alt="${r.name}（${r.nameEn}）"
+               loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="ck-card-img-fallback" style="display:none">${r.icon}</div>
+          <div class="ck-card-img-overlay">
+            <span class="ck-card-level lvl-${r.level}">${r.levelLabel}</span>
+          </div>
+          <div class="ck-card-time">${r.timeLabel}</div>
+        </div>
+        <div class="ck-card-body">
+          <div>
+            <h3 class="ck-card-name">${r.name}</h3>
+            <div class="ck-card-en">${r.nameEn}</div>
+          </div>
+          <p class="ck-card-essence">${r.essence}</p>
+          <div class="ck-card-meta">
+            <span>${r.categoryLabel}</span>
+            ${r.pairedRubs.length ? `<span>· 合うラブ ${r.pairedRubs.length}本</span>` : ''}
+          </div>
+        </div>
+      </button>
+    `).join('');
+    grid.querySelectorAll('.ck-card').forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.id));
+    });
+  }
+
+  function applyFilter() {
+    let visible = 0;
+    grid.querySelectorAll('.ck-card').forEach(card => {
+      const ml = state.level === 'all' || card.dataset.level === state.level;
+      const mc = state.category === 'all' || card.dataset.category === state.category;
+      const mt = state.time === 'all' || card.dataset.time === state.time;
+      const show = ml && mc && mt;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    resultCount.textContent = visible;
+    empty.classList.toggle('hidden', visible > 0);
+    const anyActive = state.level !== 'all' || state.category !== 'all' || state.time !== 'all';
+    resetBtn.classList.toggle('hidden', !anyActive);
+  }
+
+  function resetFilters() {
+    state.level = state.category = state.time = 'all';
+    document.querySelectorAll('.ck-chip').forEach(chip => {
+      chip.classList.toggle('is-active', chip.dataset.value === 'all');
+    });
+    applyFilter();
+  }
+
+  document.querySelectorAll('.ck-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      state[chip.dataset.filter] = chip.dataset.value;
+      document.querySelectorAll(`.ck-chip[data-filter="${chip.dataset.filter}"]`).forEach(c => {
+        c.classList.toggle('is-active', c.dataset.value === chip.dataset.value);
+      });
+      applyFilter();
+    });
+  });
+
+  resetBtn.addEventListener('click', resetFilters);
+  resetBtn2.addEventListener('click', resetFilters);
+
+  /* ============================================
+     Modal
+     ============================================ */
+  const modal = document.getElementById('recipeModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalFallback = document.getElementById('modalFallback');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalEn = document.getElementById('modalEn');
+  const modalTags = document.getElementById('modalTags');
+  const modalEssence = document.getElementById('modalEssence');
+  const modalSpecs = document.getElementById('modalSpecs');
+  const modalPoints = document.getElementById('modalPoints');
+  const modalPhilosophy = document.getElementById('modalPhilosophy');
+  const modalPairedWrap = document.getElementById('modalPairedRubs');
+  const modalRubList = document.getElementById('modalRubList');
+
+  function openModal(id) {
+    const r = RECIPES.find(x => x.id === id);
+    if (!r) return;
+    modalImg.src = `images/recipes/${r.id}.jpg`;
+    modalImg.alt = r.name;
+    modalImg.style.display = '';
+    modalFallback.textContent = r.icon;
+    modalFallback.style.display = 'none';
+    modalTitle.textContent = r.name;
+    modalEn.textContent = r.nameEn;
+    modalTags.innerHTML = `
+      <span class="ck-tag-pill lvl-${r.level}">${r.levelLabel}</span>
+      <span class="ck-tag-pill">${r.categoryLabel}</span>
+      <span class="ck-tag-pill">${r.timeLabel}</span>
+    `;
+    modalEssence.textContent = r.essence;
+    modalSpecs.innerHTML = r.specs.map(s => `
+      <div class="ck-modal-spec">
+        <div class="ck-modal-spec-label">${s.label}</div>
+        <div class="ck-modal-spec-value">${s.value}</div>
+      </div>
+    `).join('');
+    modalPoints.innerHTML = r.points.map(p => `<li>${p}</li>`).join('');
+    modalPhilosophy.innerHTML = r.philosophy;
+
+    if (r.pairedRubs && r.pairedRubs.length) {
+      modalPairedWrap.style.display = '';
+      modalRubList.innerHTML = r.pairedRubs.map(rid => {
+        const rub = RUB_DB[rid];
+        if (!rub) return '';
+        return `
+          <a href="index.html#products" class="ck-rub">
+            <div class="ck-rub-icon">${rub.icon}</div>
+            <div class="ck-rub-text">
+              <div class="ck-rub-name">${rub.name}</div>
+              <div class="ck-rub-desc">${rub.desc}</div>
+            </div>
+            <span class="ck-rub-arrow">→</span>
+          </a>
+        `;
+      }).join('');
+    } else {
+      modalPairedWrap.style.display = 'none';
+    }
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* nav scroll behavior */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+  /* init */
+  buildCards();
+  applyFilter();
+  </script>
+</body>
+</html>
