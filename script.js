@@ -168,7 +168,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/bullseye.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bullseye-front.png?v=1739404920&width=800',
   },
   {
     id: 'butchers-hunter',
@@ -180,7 +180,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/hunter.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-hunter-front.png?v=1739405308&width=800',
   },
   {
     id: 'butchers-ranger',
@@ -192,7 +192,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/ranger.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-ranger-front.png?v=1739402780&width=800',
   },
   {
     id: 'butchers-big-bark',
@@ -204,7 +204,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: 'BEST VALUE',
-    image: 'images/products/butchers-axe/big-bark.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bigbark-front.png?v=1739404322&width=800',
   },
   {
     id: 'butchers-stampede',
@@ -216,7 +216,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/stampede.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-stampede-front.png?v=1739406111&width=800',
   },
   {
     id: 'butchers-el-hacha',
@@ -228,7 +228,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: 'NEW',
-    image: 'images/products/butchers-axe/el-hacha.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-elhacha-front.png?v=1739403261&width=800',
   },
   {
     id: 'butchers-gyro',
@@ -240,7 +240,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/gyro.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-gyro-front.png?v=1739405696&width=800',
   },
   {
     id: 'butchers-woodlands',
@@ -252,7 +252,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/woodlands.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-woodlands-front.png?v=1745364106&width=800',
   },
   {
     id: 'butchers-scout',
@@ -264,7 +264,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/scout.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?v=1745364053&width=800',
   },
   {
     id: 'butchers-basecamp',
@@ -276,7 +276,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'butchers-axe',
     badge: 'BEST SELLER',
-    image: 'images/products/butchers-axe/basecamp.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?v=1747206655&width=800',
   },
   {
     id: 'butchers-gloves',
@@ -288,7 +288,7 @@ const FALLBACK_PRODUCTS = [
     category: 'accessory',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/gloves.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-gloves-both.png?v=1745363707&width=800',
   },
   {
     id: 'butchers-injection',
@@ -300,7 +300,7 @@ const FALLBACK_PRODUCTS = [
     category: 'accessory',
     brand: 'butchers-axe',
     badge: null,
-    image: 'images/products/butchers-axe/injection.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-beefinjection-front_c63dd2e4-ce56-4830-bdf4-fd6a177d38ce.png?width=800',
   },
 
   // ============ STEF THE MAORI (Stagg & Co, New Zealand × Australia) ============
@@ -314,7 +314,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'stef-the-maori',
     badge: null,
-    image: 'images/products/stef-the-maori/rub-one-out.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/Stefthemaoriruboneout-front.png?v=1739318375&width=800',
   },
   {
     id: 'stef-pork-hunt',
@@ -326,7 +326,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'stef-the-maori',
     badge: null,
-    image: 'images/products/stef-the-maori/pork-hunt.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriPorkhunt-front.png?v=1745364300&width=800',
   },
   {
     id: 'stef-deep-bush',
@@ -338,7 +338,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'stef-the-maori',
     badge: 'NEW',
-    image: 'images/products/stef-the-maori/deep-bush.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriDeepbush-front.png?v=1739317303&width=800',
   },
   {
     id: 'stef-aquadesiac',
@@ -350,7 +350,7 @@ const FALLBACK_PRODUCTS = [
     category: 'rub',
     brand: 'stef-the-maori',
     badge: null,
-    image: 'images/products/stef-the-maori/aquadesiac.jpg',
+    image: 'https://www.staggandco.com.au/cdn/shop/files/WEB_-Aquadesiac_-_new.png?v=1750822318&width=800',
   },
 ];
 
