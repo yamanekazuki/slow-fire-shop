@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // 商品マスタ — 全員読み取り可、管理者のみ書き込み
+    match /products/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 注文 — 本人のみ読込、認証済みユーザーは作成可能、本人/管理者のみ更新
+    match /orders/{id} {
+      allow create: if request.auth != null || request.resource.data.uid == null;
+      allow read:   if request.auth != null
+                    && (resource.data.uid == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+
+    // ユーザープロファイル — 本人のみ
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // 管理者リスト — 管理者のみ
+    match /admins/{uid} {
+      allow read:  if request.auth != null && request.auth.uid == uid;
+      allow write: if isAdmin();
+    }
+  }
+}

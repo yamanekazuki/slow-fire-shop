@@ -1,11 +1,12 @@
 /* =============================================
-   SLOW FIRE SHOP — Scripts v3
+   SLOW FIRE SHOP — Scripts v4
+   + Firebase Auth + Firestore products + Stripe Checkout
    ============================================= */
 
 // =============================================
-// PRODUCTS DATA
+// FALLBACK PRODUCTS (used if Firestore is empty / not configured)
 // =============================================
-const PRODUCTS = [
+const FALLBACK_PRODUCTS = [
   // ---- RUBS & SAUCE ----
   {
     id: 'steak-shooter',
@@ -156,6 +157,9 @@ const PRODUCTS = [
     image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/02/Rubs-Sauce-Bundle-Updated-600x600.png',
   },
 ];
+
+// Will be populated from Firestore (or falls back)
+let PRODUCTS = FALLBACK_PRODUCTS;
 
 const BADGE_CLASS = {
   'BEST SELLER': 'bdg-bestseller',
@@ -349,21 +353,9 @@ document.getElementById('checkoutBtn')?.addEventListener('click', () => {
 document.getElementById('checkoutClose')?.addEventListener('click', closeCheckout);
 coOverlay?.addEventListener('click', e => { if (e.target === coOverlay) closeCheckout(); });
 
-coForm?.addEventListener('submit', e => {
+coForm?.addEventListener('submit', async e => {
   e.preventDefault();
-  const btn = coForm.querySelector('button[type="submit"]');
-  const orig = btn.textContent;
-  btn.textContent = '注文を受け付けました！';
-  btn.style.background = '#16A34A';
-  btn.disabled = true;
-  setTimeout(() => {
-    cart.items = []; cart.save(); cart.render(); cart.badge();
-    closeCheckout();
-    btn.textContent    = orig;
-    btn.style.background = '';
-    btn.disabled = false;
-    coForm.reset();
-  }, 3000);
+  await submitCheckout();
 });
 
 // =============================================
@@ -450,24 +442,7 @@ window.addEventListener('scroll', () => {
   nav?.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// Hamburger
-const hamburger = document.querySelector('.hamburger');
-const navLinks  = document.querySelector('.nav-links');
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', () => {
-    const open = navLinks.style.display === 'flex';
-    navLinks.style.cssText = open ? '' : `
-      display:flex; flex-direction:column; position:absolute;
-      top:100%; left:0; right:0; background:var(--white);
-      padding:16px 24px; gap:14px;
-      border-bottom:1px solid var(--gray-200);
-      box-shadow:var(--shadow);
-    `;
-    if (open) navLinks.style.display = 'none';
-  });
-  navLinks.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => { if (window.innerWidth <= 768) navLinks.style.display = 'none'; }));
-}
+// Hamburger handled by mobile-nav.js (loaded separately)
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -480,3 +455,398 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
   });
 });
+
+// =============================================
+// FIRESTORE — load products dynamically
+// =============================================
+async function loadProductsFromFirestore() {
+  if (!window.FIREBASE_READY || !window.db) return;
+  try {
+    const snap = await db.collection('products')
+      .where('status', '==', 'active')
+      .get();
+    if (snap.empty) return;
+    const fromDb = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
+    if (fromDb.length) {
+      PRODUCTS = fromDb;
+      const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+      renderProducts(activeFilter);
+    }
+  } catch (err) {
+    console.warn('[SLOW FIRE] Firestore products load failed, using fallback:', err.message);
+  }
+}
+loadProductsFromFirestore();
+
+// =============================================
+// AUTH — login, signup, Google, password reset
+// =============================================
+let currentUser = null;
+const SIGNED_IN_PROFILES = new Map(); // uid -> {name, address, ...}
+
+const authOverlay = document.getElementById('authOverlay');
+const authClose   = document.getElementById('authClose');
+const authForm    = document.getElementById('authForm');
+const authError   = document.getElementById('authError');
+const authSubmit  = document.getElementById('authSubmit');
+const googleBtn   = document.getElementById('googleBtn');
+const forgotBtn   = document.getElementById('forgotBtn');
+const accountBtn  = document.getElementById('accountBtn');
+const accountLabel = document.getElementById('accountLabel');
+const accountMenu = document.getElementById('accountMenu');
+const amName      = document.getElementById('amName');
+const amEmail     = document.getElementById('amEmail');
+const amOrders    = document.getElementById('amOrders');
+const amLogout    = document.getElementById('amLogout');
+
+let authMode = 'login';
+
+function openAuth(mode = 'login') {
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.mode === mode));
+  authSubmit.textContent = mode === 'login' ? 'ログイン' : '会員登録する';
+  authError.textContent = '';
+  document.querySelector('.auth-name-fg').style.display = mode === 'signup' ? '' : 'none';
+  if (mode === 'signup') {
+    document.getElementById('authPassword').setAttribute('autocomplete', 'new-password');
+  } else {
+    document.getElementById('authPassword').setAttribute('autocomplete', 'current-password');
+  }
+  authOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAuth() {
+  authOverlay.classList.remove('open');
+  if (!cartDrawer.classList.contains('open') && !coOverlay.classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+document.querySelectorAll('.auth-tab').forEach(t =>
+  t.addEventListener('click', () => openAuth(t.dataset.mode)));
+authClose?.addEventListener('click', closeAuth);
+authOverlay?.addEventListener('click', e => { if (e.target === authOverlay) closeAuth(); });
+document.querySelectorAll('[data-open-auth]').forEach(btn =>
+  btn.addEventListener('click', () => { closeCheckout(); openAuth(btn.dataset.openAuth); }));
+
+function authErr(code, fallback) {
+  const map = {
+    'auth/invalid-email':         'メールアドレスの形式が正しくありません',
+    'auth/user-not-found':        'このメールアドレスのユーザーが見つかりません',
+    'auth/wrong-password':        'パスワードが正しくありません',
+    'auth/invalid-credential':    'メールアドレスまたはパスワードが正しくありません',
+    'auth/email-already-in-use':  'このメールアドレスは既に登録されています',
+    'auth/weak-password':         'パスワードは6文字以上で入力してください',
+    'auth/popup-closed-by-user':  'ログインがキャンセルされました',
+    'auth/too-many-requests':     'ログイン試行回数が多すぎます。しばらく待ってください',
+    'auth/network-request-failed':'ネットワークエラー。接続を確認してください',
+  };
+  return map[code] || fallback || 'エラーが発生しました';
+}
+
+authForm?.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!window.FIREBASE_READY) {
+    authError.textContent = 'Firebase未設定のためログインできません。サイト管理者にお問い合わせください。';
+    return;
+  }
+  const email = document.getElementById('authEmail').value.trim();
+  const pw    = document.getElementById('authPassword').value;
+  const name  = document.getElementById('authName').value.trim();
+  authError.textContent = '';
+  authSubmit.disabled = true;
+  const orig = authSubmit.textContent;
+  authSubmit.textContent = '処理中...';
+
+  try {
+    if (authMode === 'signup') {
+      const cred = await sfAuth.createUserWithEmailAndPassword(email, pw);
+      if (name) await cred.user.updateProfile({ displayName: name });
+      await db.collection('users').doc(cred.user.uid).set({
+        email, name: name || '',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      }, { merge: true });
+    } else {
+      await sfAuth.signInWithEmailAndPassword(email, pw);
+    }
+    closeAuth();
+  } catch(err) {
+    authError.textContent = authErr(err.code, err.message);
+  } finally {
+    authSubmit.disabled = false;
+    authSubmit.textContent = orig;
+  }
+});
+
+googleBtn?.addEventListener('click', async () => {
+  if (!window.FIREBASE_READY) {
+    authError.textContent = 'Firebase未設定のためログインできません';
+    return;
+  }
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const result = await sfAuth.signInWithPopup(provider);
+    const user = result.user;
+    await db.collection('users').doc(user.uid).set({
+      email: user.email,
+      name:  user.displayName || '',
+      photo: user.photoURL || '',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+    closeAuth();
+  } catch(err) {
+    authError.textContent = authErr(err.code, err.message);
+  }
+});
+
+forgotBtn?.addEventListener('click', async () => {
+  const email = document.getElementById('authEmail').value.trim();
+  if (!email) { authError.textContent = 'メールアドレスを入力してから「パスワードを忘れた方」を押してください'; return; }
+  if (!window.FIREBASE_READY) { authError.textContent = 'Firebase未設定です'; return; }
+  try {
+    await sfAuth.sendPasswordResetEmail(email);
+    authError.style.color = '#16A34A';
+    authError.textContent = '✓ パスワード再設定メールを送信しました';
+  } catch(err) {
+    authError.style.color = '';
+    authError.textContent = authErr(err.code, err.message);
+  }
+});
+
+// Account button — toggles menu (logged-in) or opens auth (guest)
+accountBtn?.addEventListener('click', e => {
+  e.stopPropagation();
+  if (currentUser) {
+    accountMenu.classList.toggle('open');
+  } else {
+    openAuth('login');
+  }
+});
+document.addEventListener('click', e => {
+  if (!accountMenu.contains(e.target) && !accountBtn.contains(e.target)) {
+    accountMenu.classList.remove('open');
+  }
+});
+
+amLogout?.addEventListener('click', async () => {
+  await sfAuth.signOut();
+  accountMenu.classList.remove('open');
+});
+
+// Auth state
+if (window.FIREBASE_READY && window.sfAuth) {
+  sfAuth.onAuthStateChanged(async user => {
+    currentUser = user;
+    if (user) {
+      const display = user.displayName || (user.email ? user.email.split('@')[0] : 'ユーザー');
+      accountLabel.textContent = display;
+      accountBtn.classList.add('is-logged-in');
+      amName.textContent  = user.displayName || display;
+      amEmail.textContent = user.email || '';
+
+      const promptEl = document.getElementById('coLoginPrompt');
+      if (promptEl) {
+        promptEl.classList.add('is-logged-in');
+        promptEl.innerHTML = `<span>✓ ${display} としてログイン中</span>`;
+      }
+
+      // Pre-fill checkout from user profile
+      try {
+        const doc = await db.collection('users').doc(user.uid).get();
+        if (doc.exists) {
+          const u = doc.data();
+          SIGNED_IN_PROFILES.set(user.uid, u);
+          if (u.email && coForm) coForm.email.value = u.email;
+          if (u.lastShipping) {
+            const s = u.lastShipping;
+            if (s.fname) coForm.fname.value = s.fname;
+            if (s.lname) coForm.lname.value = s.lname;
+            if (s.phone) coForm.phone.value = s.phone;
+            if (s.zip) coForm.zip.value = s.zip;
+            if (s.address) coForm.address.value = s.address;
+            if (s.address2) coForm.address2.value = s.address2;
+          }
+        } else if (coForm) {
+          coForm.email.value = user.email || '';
+        }
+      } catch(_) {}
+    } else {
+      accountLabel.textContent = 'ログイン';
+      accountBtn.classList.remove('is-logged-in');
+      amName.textContent = '—';
+      amEmail.textContent = '—';
+      const promptEl = document.getElementById('coLoginPrompt');
+      if (promptEl) {
+        promptEl.classList.remove('is-logged-in');
+        promptEl.innerHTML = `
+          <span>会員ですか？</span>
+          <button type="button" class="link-btn" data-open-auth="login">ログイン</button>
+          <span class="dim">/</span>
+          <button type="button" class="link-btn" data-open-auth="signup">新規登録</button>
+        `;
+        promptEl.querySelectorAll('[data-open-auth]').forEach(btn =>
+          btn.addEventListener('click', () => { closeCheckout(); openAuth(btn.dataset.openAuth); }));
+      }
+    }
+  });
+}
+
+// =============================================
+// CHECKOUT — Stripe Checkout (via Cloud Function) with form fallback
+// =============================================
+async function submitCheckout() {
+  const btn = document.getElementById('checkoutSubmit');
+  const lbl = document.getElementById('checkoutSubmitLabel');
+  const orig = lbl.textContent;
+  authError.textContent = '';
+
+  if (!cart.count()) return;
+  if (!coForm.checkValidity()) { coForm.reportValidity(); return; }
+
+  const fd = new FormData(coForm);
+  const shipping = {
+    fname: fd.get('fname'), lname: fd.get('lname'),
+    email: fd.get('email'), phone: fd.get('phone') || '',
+    zip: fd.get('zip'), address: fd.get('address'),
+    address2: fd.get('address2') || '', note: fd.get('note') || '',
+  };
+
+  btn.disabled = true;
+  lbl.textContent = '決済画面を準備中...';
+
+  // Persist shipping for next time
+  if (currentUser && window.FIREBASE_READY) {
+    try {
+      await db.collection('users').doc(currentUser.uid).set({
+        lastShipping: shipping,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      }, { merge: true });
+    } catch(_) {}
+  }
+
+  // Save pending order
+  let orderId = null;
+  if (window.FIREBASE_READY) {
+    try {
+      const ref = await db.collection('orders').add({
+        uid: currentUser?.uid || null,
+        email: shipping.email,
+        items: cart.items.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price })),
+        subtotal: cart.total(),
+        shipping,
+        status: 'pending_payment',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      orderId = ref.id;
+    } catch(e) {
+      console.warn('[SLOW FIRE] order pre-save failed:', e.message);
+    }
+  }
+
+  // Try Stripe Checkout via Cloud Function
+  if (window.FIREBASE_READY && window.sfFunctions) {
+    try {
+      const createSession = sfFunctions.httpsCallable('createCheckoutSession');
+      const res = await createSession({
+        orderId,
+        items: cart.items.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty, image: i.image })),
+        email: shipping.email,
+        shipping,
+      });
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+        return;
+      }
+    } catch(err) {
+      console.warn('[SLOW FIRE] Stripe Checkout unavailable, falling back to manual order:', err.message);
+    }
+  }
+
+  // Fallback: store order, show success message (no real payment)
+  if (window.FIREBASE_READY && orderId) {
+    try {
+      await db.collection('orders').doc(orderId).update({ status: 'pending_review' });
+    } catch(_) {}
+  }
+  lbl.textContent = '注文を受け付けました ✓';
+  btn.style.background = '#16A34A';
+  btn.disabled = true;
+  setTimeout(() => {
+    cart.items = []; cart.save(); cart.render(); cart.badge();
+    closeCheckout();
+    lbl.textContent = orig;
+    btn.style.background = '';
+    btn.disabled = false;
+    coForm.reset();
+  }, 2400);
+}
+
+// =============================================
+// ORDERS DRAWER (account → 注文履歴)
+// =============================================
+const ordersDrawer   = document.getElementById('ordersDrawer');
+const ordersBackdrop = document.getElementById('ordersBackdrop');
+
+amOrders?.addEventListener('click', async () => {
+  accountMenu.classList.remove('open');
+  if (!currentUser || !window.FIREBASE_READY) return;
+  ordersDrawer.classList.add('open');
+  ordersBackdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const list = document.getElementById('ordersList');
+  list.innerHTML = '<p class="cart-empty">読み込み中...</p>';
+  try {
+    const snap = await db.collection('orders')
+      .where('uid', '==', currentUser.uid)
+      .orderBy('createdAt', 'desc').limit(20).get();
+    if (snap.empty) {
+      list.innerHTML = '<p class="cart-empty">まだ注文履歴がありません</p>';
+      return;
+    }
+    list.innerHTML = snap.docs.map(d => {
+      const o = d.data();
+      const date = o.createdAt?.toDate?.()?.toLocaleDateString('ja-JP') || '—';
+      const items = (o.items || []).map(i => `${i.name} × ${i.qty}`).join(', ');
+      const statusLabel = {
+        pending_payment: '支払い待ち',
+        paid: '支払い完了',
+        shipped: '発送済み',
+        pending_review: '受付確認中',
+      }[o.status] || o.status || '—';
+      return `<div class="cart-item" style="grid-template-columns:1fr">
+        <div>
+          <div class="ci-name">${date} — ${statusLabel}</div>
+          <div class="ci-sub">${items}</div>
+          <div class="ci-price">¥${(o.subtotal || 0).toLocaleString()}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = `<p class="cart-empty">エラー: ${e.message}</p>`;
+  }
+});
+function closeOrders() {
+  ordersDrawer.classList.remove('open');
+  ordersBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('ordersClose')?.addEventListener('click', closeOrders);
+ordersBackdrop?.addEventListener('click', closeOrders);
+
+// =============================================
+// SUCCESS / CANCEL PAGE — handle redirect back from Stripe
+// =============================================
+(function () {
+  const p = new URLSearchParams(location.search);
+  if (p.get('payment') === 'success') {
+    cart.items = []; cart.save(); cart.render(); cart.badge();
+    setTimeout(() => alert('✓ ご注文ありがとうございました。確認メールをお送りしました。'), 200);
+    history.replaceState({}, '', location.pathname);
+  } else if (p.get('payment') === 'cancel') {
+    setTimeout(() => alert('決済がキャンセルされました。再度お試しください。'), 200);
+    history.replaceState({}, '', location.pathname);
+  }
+})();

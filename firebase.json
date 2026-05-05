@@ -1,0 +1,44 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**",
+      "*.md",
+      "package*.json"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|png|webp|svg|woff2)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      },
+      {
+        "source": "**/*.@(html|js|css)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }]
+      }
+    ],
+    "rewrites": [
+      { "source": "/api/checkout", "function": { "functionId": "createCheckoutSession", "region": "asia-northeast1" } },
+      { "source": "/api/stripe-webhook", "function": { "functionId": "stripeWebhook", "region": "asia-northeast1" } }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs20",
+      "ignore": ["node_modules", ".git", "*.log"]
+    }
+  ]
+}

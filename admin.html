@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理パネル — SLOW FIRE SHOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #B45309;
+      --brand-light: #FEF3C7;
+      --black: #111;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-400: #9CA3AF;
+      --gray-600: #4B5563;
+      --white: #FFFFFF;
+      --success: #059669;
+      --danger: #DC2626;
+      --warning: #D97706;
+      --sidebar-w: 220px;
+      --header-h: 56px;
+    }
+    body { font-family: 'Noto Sans JP', sans-serif; background: var(--gray-50); color: var(--black); font-size: 14px; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; font-size: 13px; }
+    input, select, textarea { font-family: inherit; font-size: 14px; }
+
+    /* ===== LOGIN ===== */
+    #loginOverlay {
+      display: flex; align-items: center; justify-content: center;
+      position: fixed; inset: 0; background: #080604; z-index: 9999;
+    }
+    .login-box {
+      width: 360px; padding: 40px 36px;
+      background: #111; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .login-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: #fff; margin-bottom: 8px;
+    }
+    .login-logo em { color: #f97316; font-style: italic; }
+    .login-sub { font-size: 12px; color: #6b7280; margin-bottom: 28px; }
+    .login-box label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #9ca3af; margin-bottom: 5px; }
+    .login-box input {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.05);
+      color: #fff; margin-bottom: 14px; outline: none;
+    }
+    .login-box input:focus { border-color: #f97316; }
+    .login-btn {
+      width: 100%; padding: 11px;
+      background: #B45309; color: #fff;
+      border: none; border-radius: 8px; font-weight: 700;
+      font-size: 14px; transition: opacity .18s; margin-top: 4px;
+    }
+    .login-btn:hover { opacity: .88; }
+    .login-error { font-size: 12px; color: #f87171; margin-top: 10px; min-height: 18px; }
+
+    /* ===== LAYOUT ===== */
+    #adminPanel { display: none; flex-direction: column; min-height: 100vh; }
+    .admin-header {
+      height: var(--header-h); background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex; align-items: center; padding: 0 20px;
+      position: sticky; top: 0; z-index: 100;
+      gap: 12px;
+    }
+    .admin-header .logo {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+      margin-right: auto;
+    }
+    .admin-header .logo em { color: var(--brand); font-style: italic; }
+    .header-user { font-size: 12px; color: var(--gray-400); }
+    .header-logout {
+      padding: 6px 14px; border: 1px solid var(--gray-200);
+      border-radius: 6px; background: none; color: var(--gray-600);
+      font-size: 12px; transition: all .15s;
+    }
+    .header-logout:hover { border-color: var(--danger); color: var(--danger); }
+
+    .admin-body { display: flex; flex: 1; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: var(--sidebar-w); background: var(--white);
+      border-right: 1px solid var(--gray-200);
+      padding: 20px 0; flex-shrink: 0;
+      position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+    }
+    .sidebar-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; font-size: 13px; font-weight: 500;
+      color: var(--gray-600); cursor: pointer; transition: all .15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav-item:hover { background: var(--gray-50); color: var(--black); }
+    .sidebar-nav-item.active { background: var(--brand-light); color: var(--brand); border-left-color: var(--brand); font-weight: 700; }
+    .sidebar-nav-item .icon { font-size: 16px; }
+    .sidebar-section { padding: 20px 20px 6px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); }
+
+    /* ===== MAIN ===== */
+    .main-content { flex: 1; padding: 28px 32px; overflow-y: auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ===== PAGE HEADER ===== */
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+    .page-sub { font-size: 13px; color: var(--gray-400); margin-bottom: 24px; }
+
+    /* ===== STAT CARDS ===== */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px; }
+    .stat-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+    .stat-num { font-size: 2rem; font-weight: 700; color: var(--black); line-height: 1; margin-bottom: 4px; }
+    .stat-hint { font-size: 11px; color: var(--gray-400); }
+
+    /* ===== BUTTONS ===== */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 7px; font-weight: 700; font-size: 13px; border: none; transition: all .15s; cursor: pointer; }
+    .btn-primary { background: var(--brand); color: var(--white); }
+    .btn-primary:hover { opacity: .88; }
+    .btn-outline { background: none; border: 1.5px solid var(--gray-200); color: var(--gray-600); }
+    .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
+    .btn-danger { background: none; border: 1.5px solid var(--gray-200); color: var(--danger); }
+    .btn-danger:hover { background: var(--danger); color: var(--white); border-color: var(--danger); }
+    .btn-sm { padding: 5px 10px; font-size: 11px; }
+    .btn-ai { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; }
+    .btn-ai:hover { opacity: .88; }
+
+    /* ===== TABLE ===== */
+    .table-wrap { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
+    .table-head { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--gray-200); gap: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: var(--gray-50); }
+    th { text-align: left; padding: 11px 16px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); border-bottom: 1px solid var(--gray-200); }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--gray-100); font-size: 13px; vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--gray-50); }
+
+    .product-img-cell { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: var(--gray-100); }
+    .cat-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; background: var(--gray-100); color: var(--gray-600); }
+    .cat-badge.rub { background: #FEF3C7; color: #92400E; }
+    .cat-badge.sauce { background: #FEE2E2; color: #991B1B; }
+    .cat-badge.jerky { background: #D1FAE5; color: #065F46; }
+    .cat-badge.set { background: #EDE9FE; color: #5B21B6; }
+    .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; }
+    .status-dot.active { background: var(--success); }
+    .status-dot.draft { background: var(--gray-400); }
+
+    /* ===== MODAL ===== */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200; display: none; align-items: flex-start; justify-content: center; padding-top: 40px; overflow-y: auto; }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: var(--white); border-radius: 16px; width: 100%; max-width: 680px; margin: 0 16px 40px; box-shadow: 0 24px 48px rgba(0,0,0,.2); }
+    .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; flex: 1; }
+    .modal-close { width: 28px; height: 28px; border: none; background: var(--gray-100); border-radius: 50%; font-size: 14px; color: var(--gray-600); }
+    .modal-body { padding: 24px; }
+    .modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-200); display: flex; gap: 10px; justify-content: flex-end; }
+
+    /* ===== FORM ===== */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-full { grid-column: 1 / -1; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg label { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-400); }
+    .fg input, .fg select, .fg textarea {
+      padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+      outline: none; transition: border-color .15s; background: var(--white);
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--brand); }
+    .fg textarea { resize: vertical; min-height: 80px; }
+    .fg .hint { font-size: 11px; color: var(--gray-400); }
+
+    /* ===== AI SECTION ===== */
+    .ai-box {
+      background: linear-gradient(135deg, #EDE9FE, #F5F3FF);
+      border: 1.5px solid #C4B5FD;
+      border-radius: 12px; padding: 16px;
+      margin-bottom: 20px;
+    }
+    .ai-box-title { font-size: 12px; font-weight: 700; color: #6D28D9; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .ai-url-row { display: flex; gap: 8px; }
+    .ai-url-input { flex: 1; padding: 9px 12px; border: 1.5px solid #C4B5FD; border-radius: 8px; outline: none; font-size: 13px; background: var(--white); }
+    .ai-url-input:focus { border-color: #7C3AED; }
+    .ai-status { font-size: 12px; color: #6D28D9; margin-top: 8px; min-height: 18px; }
+
+    /* ===== IMAGE UPLOAD ===== */
+    .img-upload-area {
+      border: 2px dashed var(--gray-200); border-radius: 10px;
+      padding: 20px; text-align: center; cursor: pointer;
+      transition: border-color .15s; position: relative;
+    }
+    .img-upload-area:hover { border-color: var(--brand); }
+    .img-upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin: 0 auto 10px; display: none; }
+    .img-upload-icon { font-size: 28px; margin-bottom: 8px; }
+    .img-upload-text { font-size: 12px; color: var(--gray-400); }
+
+    /* ===== SETTINGS ===== */
+    .settings-section { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .settings-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .settings-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 18px; }
+    .key-input { display: flex; gap: 8px; }
+    .key-input input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--gray-200); border-radius: 8px; font-family: monospace; font-size: 12px; outline: none; }
+    .key-input input:focus { border-color: var(--brand); }
+
+    /* ===== TOAST ===== */
+    #toast { position: fixed; bottom: 24px; right: 24px; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 700; z-index: 9999; opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.success { background: var(--success); color: #fff; }
+    #toast.error { background: var(--danger); color: #fff; }
+    #toast.info { background: var(--black); color: #fff; }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--gray-400); }
+    .empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { padding: 16px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">SLOW<em>FIRE</em> SHOP</div>
+    <div class="login-sub">管理パネルにログインしてください</div>
+    <form id="loginForm">
+      <label for="loginEmail">メールアドレス</label>
+      <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="email" required>
+      <label for="loginPw">パスワード</label>
+      <input type="password" id="loginPw" placeholder="••••••••" autocomplete="current-password" required>
+      <button type="submit" class="login-btn">ログイン</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== ADMIN PANEL ===== -->
+<div id="adminPanel">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="logo">SLOW<em>FIRE</em> SHOP 管理</div>
+    <span class="header-user" id="headerUser"></span>
+    <button class="header-logout" id="logoutBtn">ログアウト</button>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">メニュー</div>
+      <div class="sidebar-nav-item active" data-tab="dashboard"><span class="icon">📊</span> ダッシュボード</div>
+      <div class="sidebar-nav-item" data-tab="products"><span class="icon">📦</span> 商品管理</div>
+      <div class="sidebar-nav-item" data-tab="orders"><span class="icon">🧾</span> 注文管理</div>
+      <div class="sidebar-section">システム</div>
+      <div class="sidebar-nav-item" data-tab="settings"><span class="icon">⚙️</span> 設定</div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+      <!-- DASHBOARD TAB -->
+      <div id="tab-dashboard" class="tab-content active">
+        <div class="page-title">ダッシュボード</div>
+        <div class="page-sub">SLOW FIRE SHOPの管理画面へようこそ</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">商品数</div>
+            <div class="stat-num" id="statProducts">—</div>
+            <div class="stat-hint">Firestoreに登録済み</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">注文数</div>
+            <div class="stat-num" id="statOrders">—</div>
+            <div class="stat-hint">累計</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">カテゴリ</div>
+            <div class="stat-num">4</div>
+            <div class="stat-hint">Rub / Sauce / Jerky / Set</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">ステータス</div>
+            <div class="stat-num" style="font-size:1.2rem" id="statStatus">確認中...</div>
+            <div class="stat-hint" id="statStatusHint">Firebase接続を確認中</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <strong>クイックアクション</strong>
+          </div>
+          <div style="padding:20px;display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="openTab('products');openProductModal()">+ 新規商品を追加</button>
+            <a href="index.html" target="_blank" class="btn btn-outline">ECサイトを確認 ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS TAB -->
+      <div id="tab-products" class="tab-content">
+        <div class="page-title">商品管理</div>
+        <div class="page-sub">Firestoreに保存された商品データを管理します</div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <span style="font-size:13px;color:var(--gray-400)" id="productCount">読み込み中...</span>
+            <div style="margin-left:auto;display:flex;gap:8px;">
+              <button class="btn btn-primary" onclick="openProductModal()">+ 商品を追加</button>
+              <button class="btn btn-outline btn-sm" onclick="seedDefaultProducts()" title="デフォルト商品をFirestoreにインポート">デフォルト商品をインポート</button>
+            </div>
+          </div>
+          <div id="productsTableContainer">
+            <div class="empty-state">
+              <div class="icon">📦</div>
+              <p>商品データを読み込み中...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS TAB -->
+      <div id="tab-orders" class="tab-content">
+        <div class="page-title">注文管理</div>
+        <div class="page-sub">Firestoreに保存された注文データを確認します</div>
+        <div class="table-wrap">
+          <div class="table-head"><span style="font-size:13px;color:var(--gray-400)" id="orderCount">読み込み中...</span></div>
+          <div id="ordersTableContainer">
+            <div class="empty-state"><div class="icon">🧾</div><p>注文データなし</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div id="tab-settings" class="tab-content">
+        <div class="page-title">設定</div>
+        <div class="page-sub">APIキーとシステム設定を管理します</div>
+
+        <div class="settings-section">
+          <div class="settings-title">Claude API キー（AI商品説明生成）</div>
+          <div class="settings-sub">URLから商品情報を自動生成するために使用します。管理者のブラウザにのみ保存されます。</div>
+          <div class="key-input">
+            <input type="password" id="claudeKeyInput" placeholder="sk-ant-...">
+            <button class="btn btn-primary" onclick="saveClaudeKey()">保存</button>
+            <button class="btn btn-outline" onclick="clearClaudeKey()">削除</button>
+          </div>
+          <div style="font-size:11px;color:var(--gray-400);margin-top:8px;" id="claudeKeyStatus"></div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-title">Firebase 接続状態</div>
+          <div class="settings-sub">firebase-config.js の設定状態を確認します</div>
+          <div id="firebaseStatus" style="font-size:13px;padding:12px;background:var(--gray-50);border-radius:8px;"></div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-title">Stripe 設定</div>
+          <div class="settings-sub">firebase-config.js の stripeKey を本番キーに変更することで、本番環境の決済が有効になります。</div>
+          <div style="font-size:13px;padding:12px;background:var(--gray-50);border-radius:8px;" id="stripeStatus"></div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-title">Firestore セキュリティルール（推奨設定）</div>
+          <div class="settings-sub">Firebase コンソール → Firestore → ルールに以下を設定してください</div>
+          <pre style="font-size:11px;background:var(--gray-100);padding:14px;border-radius:8px;overflow-x:auto;line-height:1.6">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 商品: 全員読み取り可、管理者のみ書き込み可
+    match /products/{id} {
+      allow read: if true;
+      allow write: if request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    // 注文: 本人と管理者のみ
+    match /orders/{id} {
+      allow read, write: if request.auth != null;
+    }
+    // 管理者リスト: 管理者のみ
+    match /admins/{uid} {
+      allow read, write: if request.auth != null &&
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+  }
+}</pre>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-backdrop" id="productModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">商品を追加</div>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- AI URL 生成 -->
+      <div class="ai-box">
+        <div class="ai-box-title">✨ AIで商品情報を自動生成</div>
+        <div class="ai-url-row">
+          <input class="ai-url-input" id="aiUrlInput" type="url" placeholder="https://lownslowbasics.com.au/product/...">
+          <button class="btn btn-ai" onclick="generateFromUrl()">AIで取得</button>
+        </div>
+        <div class="ai-status" id="aiStatus"></div>
+      </div>
+
+      <!-- 画像アップロード -->
+      <div class="fg form-full" style="margin-bottom:16px;">
+        <label>商品画像</label>
+        <div class="img-upload-area" id="imgUploadArea">
+          <input type="file" id="imgFileInput" accept="image/*" onchange="handleImageSelect(event)">
+          <img class="img-preview" id="imgPreview">
+          <div class="img-upload-icon" id="imgUploadIcon">🖼</div>
+          <div class="img-upload-text" id="imgUploadText">クリックして画像を選択、またはURLを直接入力</div>
+        </div>
+        <input type="text" id="imgUrlInput" placeholder="または画像URL (https://...)" style="margin-top:8px;padding:9px 12px;border:1.5px solid var(--gray-200);border-radius:8px;width:100%;font-size:13px;" oninput="previewImageFromUrl(this.value)">
+      </div>
+
+      <!-- フォームフィールド -->
+      <div class="form-grid">
+        <div class="fg">
+          <label>商品名 (英語)</label>
+          <input type="text" id="fName" placeholder="Steak Shooter">
+        </div>
+        <div class="fg">
+          <label>商品名 (日本語)</label>
+          <input type="text" id="fNameJa" placeholder="ステーキシューター">
+        </div>
+        <div class="fg">
+          <label>サブタイトル</label>
+          <input type="text" id="fSubtitle" placeholder="Steak & Beef Rub">
+        </div>
+        <div class="fg">
+          <label>カテゴリ</label>
+          <select id="fCategory">
+            <option value="rub">Rub（ラブ）</option>
+            <option value="sauce">Sauce（ソース）</option>
+            <option value="jerky">Jerky（ジャーキー）</option>
+            <option value="set">Set（セット）</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>価格（円・税込）</label>
+          <input type="number" id="fPrice" placeholder="3800" min="0">
+        </div>
+        <div class="fg">
+          <label>元の価格（セット割引前・任意）</label>
+          <input type="number" id="fOriginalPrice" placeholder="4200" min="0">
+        </div>
+        <div class="fg form-full">
+          <label>説明文</label>
+          <textarea id="fDesc" rows="4" placeholder="商品の説明文を入力..."></textarea>
+        </div>
+        <div class="fg form-full">
+          <label>Stripe Payment Link（決済URL）</label>
+          <input type="url" id="fStripeLink" placeholder="https://buy.stripe.com/...">
+          <span class="hint">Stripeダッシュボード → 決済リンク で作成したURLを貼り付けてください</span>
+        </div>
+        <div class="fg">
+          <label>バッジ（任意）</label>
+          <input type="text" id="fBadge" placeholder="BEST SELLER / NEW / SPICY">
+        </div>
+        <div class="fg">
+          <label>並び順</label>
+          <input type="number" id="fOrder" placeholder="0" value="0">
+        </div>
+        <div class="fg form-full">
+          <label>公開設定</label>
+          <select id="fStatus">
+            <option value="active">公開中</option>
+            <option value="draft">下書き（非公開）</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeProductModal()">キャンセル</button>
+      <button class="btn btn-primary" onclick="saveProduct()" id="saveProductBtn">保存する</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+/* =============================================
+   SLOW FIRE SHOP — Admin Panel Script
+   ============================================= */
+
+let currentUser = null;
+let editingProductId = null;
+let products = [];
+let selectedImageFile = null;
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  initSettingsDisplay();
+  loadClaudeKeyStatus();
+
+  if (!FIREBASE_READY) {
+    showAdminPanel({ email: 'Firebase未設定（デモモード）' });
+    return;
+  }
+
+  sfAuth.onAuthStateChanged(user => {
+    if (user) {
+      checkAdminAccess(user);
+    } else {
+      showLoginOverlay();
+    }
+  });
+});
+
+async function checkAdminAccess(user) {
+  try {
+    const adminDoc = await db.collection('admins').doc(user.uid).get();
+    if (adminDoc.exists) {
+      currentUser = user;
+      showAdminPanel(user);
+    } else {
+      await sfAuth.signOut();
+      setLoginError('管理者権限がありません。Firestoreのadminsコレクションにこのユーザーを追加してください。');
+      showLoginOverlay();
+    }
+  } catch(e) {
+    // Firestoreルール未設定の場合はそのまま進む（開発用）
+    currentUser = user;
+    showAdminPanel(user);
+  }
+}
+
+function showLoginOverlay() {
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('adminPanel').style.display = 'none';
+}
+
+function showAdminPanel(user) {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'flex';
+  document.getElementById('headerUser').textContent = user.email || '';
+  loadDashboard();
+  loadProducts();
+  loadOrders();
+}
+
+// ===== LOGIN =====
+document.getElementById('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const pw    = document.getElementById('loginPw').value;
+  setLoginError('');
+  try {
+    await sfAuth.signInWithEmailAndPassword(email, pw);
+  } catch(err) {
+    const msgs = {
+      'auth/invalid-email': 'メールアドレスの形式が正しくありません',
+      'auth/user-not-found': 'このメールアドレスのユーザーが見つかりません',
+      'auth/wrong-password': 'パスワードが正しくありません',
+      'auth/too-many-requests': 'ログイン試行回数が多すぎます。しばらく待ってください',
+    };
+    setLoginError(msgs[err.code] || 'ログインに失敗しました: ' + err.message);
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sfAuth.signOut().then(() => location.reload());
+});
+
+function setLoginError(msg) {
+  document.getElementById('loginError').textContent = msg;
+}
+
+// ===== TABS =====
+function openTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sidebar-nav-item').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name)?.classList.add('active');
+  document.querySelector(`[data-tab="${name}"]`)?.classList.add('active');
+}
+
+document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+  item.addEventListener('click', () => openTab(item.dataset.tab));
+});
+
+// ===== DASHBOARD =====
+async function loadDashboard() {
+  if (!FIREBASE_READY) {
+    document.getElementById('statStatus').textContent = '⚠ 未設定';
+    document.getElementById('statStatusHint').textContent = 'firebase-config.jsを編集してください';
+    return;
+  }
+  try {
+    const [prods, orders] = await Promise.all([
+      db.collection('products').get(),
+      db.collection('orders').get()
+    ]);
+    document.getElementById('statProducts').textContent = prods.size;
+    document.getElementById('statOrders').textContent = orders.size;
+    document.getElementById('statStatus').textContent = '✓ 接続済み';
+    document.getElementById('statStatusHint').textContent = 'Firebase Firestore';
+  } catch(e) {
+    document.getElementById('statStatus').textContent = '❌ エラー';
+    document.getElementById('statStatusHint').textContent = e.message;
+  }
+}
+
+// ===== PRODUCTS =====
+async function loadProducts() {
+  const container = document.getElementById('productsTableContainer');
+  const countEl   = document.getElementById('productCount');
+
+  if (!FIREBASE_READY) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Firebase未設定。firebase-config.jsを編集後リロードしてください。<br><br><button class="btn btn-outline" onclick="seedDefaultProducts()">デフォルト商品でプレビュー</button></p></div>';
+    countEl.textContent = 'Firebase未接続';
+    return;
+  }
+
+  try {
+    const snap = await db.collection('products').orderBy('order', 'asc').get();
+    products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    countEl.textContent = `${products.length} 件の商品`;
+    renderProductsTable();
+  } catch(e) {
+    container.innerHTML = `<div class="empty-state"><div class="icon">❌</div><p>読み込みエラー: ${e.message}<br><br><button class="btn btn-outline btn-sm" onclick="seedDefaultProducts()">デフォルト商品をインポート</button></p></div>`;
+    countEl.textContent = 'エラー';
+  }
+}
+
+function renderProductsTable() {
+  const container = document.getElementById('productsTableContainer');
+  if (!products.length) {
+    container.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>商品がまだありません。<br><button class="btn btn-primary" style="margin-top:12px" onclick="openProductModal()">+ 最初の商品を追加</button><br><br><button class="btn btn-outline btn-sm" style="margin-top:8px" onclick="seedDefaultProducts()">デフォルト商品をインポート</button></p></div>`;
+    return;
+  }
+  container.innerHTML = `<table>
+    <thead><tr>
+      <th style="width:60px">画像</th>
+      <th>商品名</th>
+      <th>カテゴリ</th>
+      <th>価格</th>
+      <th>状態</th>
+      <th style="width:130px">操作</th>
+    </tr></thead>
+    <tbody id="productsTbody"></tbody>
+  </table>`;
+  const tbody = document.getElementById('productsTbody');
+  products.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><img class="product-img-cell" src="${p.image || ''}" alt="${p.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect width=%2248%22 height=%2248%22 fill=%22%23f3f4f6%22/></svg>'"></td>
+      <td>
+        <div style="font-weight:700;font-size:13px">${p.name || '—'}</div>
+        <div style="font-size:11px;color:var(--gray-400)">${p.nameja || ''}</div>
+      </td>
+      <td><span class="cat-badge ${p.category || ''}">${p.category || '—'}</span></td>
+      <td>¥${(p.price || 0).toLocaleString()}</td>
+      <td><span class="status-dot ${p.status || 'active'}"></span>${p.status === 'draft' ? '下書き' : '公開中'}</td>
+      <td style="display:flex;gap:5px">
+        <button class="btn btn-outline btn-sm" onclick="editProduct('${p.id}')">編集</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">削除</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function editProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  editingProductId = id;
+  document.getElementById('modalTitle').textContent = '商品を編集';
+  fillProductForm(p);
+  document.getElementById('productModal').classList.add('open');
+}
+
+function fillProductForm(p) {
+  document.getElementById('fName').value          = p.name || '';
+  document.getElementById('fNameJa').value        = p.nameja || '';
+  document.getElementById('fSubtitle').value      = p.subtitle || '';
+  document.getElementById('fCategory').value      = p.category || 'rub';
+  document.getElementById('fPrice').value         = p.price || '';
+  document.getElementById('fOriginalPrice').value = p.originalPrice || '';
+  document.getElementById('fDesc').value          = p.desc || '';
+  document.getElementById('fStripeLink').value    = p.stripeLink || '';
+  document.getElementById('fBadge').value         = p.badge || '';
+  document.getElementById('fOrder').value         = p.order || 0;
+  document.getElementById('fStatus').value        = p.status || 'active';
+  document.getElementById('imgUrlInput').value    = p.image || '';
+  if (p.image) previewImageFromUrl(p.image);
+}
+
+async function deleteProduct(id) {
+  if (!confirm('この商品を削除しますか？')) return;
+  try {
+    await db.collection('products').doc(id).delete();
+    showToast('商品を削除しました', 'success');
+    loadProducts();
+  } catch(e) {
+    showToast('削除エラー: ' + e.message, 'error');
+  }
+}
+
+// ===== PRODUCT MODAL =====
+function openProductModal(prefill = null) {
+  editingProductId = null;
+  document.getElementById('modalTitle').textContent = '商品を追加';
+  document.getElementById('fName').value = '';
+  document.getElementById('fNameJa').value = '';
+  document.getElementById('fSubtitle').value = '';
+  document.getElementById('fCategory').value = 'rub';
+  document.getElementById('fPrice').value = '';
+  document.getElementById('fOriginalPrice').value = '';
+  document.getElementById('fDesc').value = '';
+  document.getElementById('fStripeLink').value = '';
+  document.getElementById('fBadge').value = '';
+  document.getElementById('fOrder').value = products.length;
+  document.getElementById('fStatus').value = 'active';
+  document.getElementById('imgUrlInput').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('imgUploadIcon').style.display = '';
+  document.getElementById('imgUploadText').style.display = '';
+  document.getElementById('aiUrlInput').value = '';
+  document.getElementById('aiStatus').textContent = '';
+  selectedImageFile = null;
+  if (prefill) fillProductForm(prefill);
+  document.getElementById('productModal').classList.add('open');
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open');
+}
+
+async function saveProduct() {
+  const btn = document.getElementById('saveProductBtn');
+  btn.textContent = '保存中...'; btn.disabled = true;
+
+  let imageUrl = document.getElementById('imgUrlInput').value;
+
+  // 画像アップロード（Firebase Storage）
+  if (selectedImageFile && FIREBASE_READY) {
+    try {
+      const ref = sfStorage.ref(`products/${Date.now()}_${selectedImageFile.name}`);
+      await ref.put(selectedImageFile);
+      imageUrl = await ref.getDownloadURL();
+    } catch(e) {
+      showToast('画像アップロードエラー: ' + e.message, 'error');
+      btn.textContent = '保存する'; btn.disabled = false;
+      return;
+    }
+  }
+
+  const data = {
+    name:          document.getElementById('fName').value.trim(),
+    nameja:        document.getElementById('fNameJa').value.trim(),
+    subtitle:      document.getElementById('fSubtitle').value.trim(),
+    category:      document.getElementById('fCategory').value,
+    price:         parseInt(document.getElementById('fPrice').value) || 0,
+    originalPrice: parseInt(document.getElementById('fOriginalPrice').value) || null,
+    desc:          document.getElementById('fDesc').value.trim(),
+    stripeLink:    document.getElementById('fStripeLink').value.trim(),
+    badge:         document.getElementById('fBadge').value.trim() || null,
+    order:         parseInt(document.getElementById('fOrder').value) || 0,
+    status:        document.getElementById('fStatus').value,
+    image:         imageUrl,
+    updatedAt:     firebase.firestore.FieldValue.serverTimestamp(),
+  };
+
+  if (!data.name) { showToast('商品名を入力してください', 'error'); btn.textContent = '保存する'; btn.disabled = false; return; }
+
+  if (!FIREBASE_READY) { showToast('Firebase未設定のため保存できません', 'error'); btn.textContent = '保存する'; btn.disabled = false; return; }
+
+  try {
+    if (editingProductId) {
+      await db.collection('products').doc(editingProductId).update(data);
+    } else {
+      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await db.collection('products').add(data);
+    }
+    showToast('商品を保存しました ✓', 'success');
+    closeProductModal();
+    loadProducts();
+    loadDashboard();
+  } catch(e) {
+    showToast('保存エラー: ' + e.message, 'error');
+  }
+  btn.textContent = '保存する'; btn.disabled = false;
+}
+
+// ===== IMAGE =====
+function handleImageSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  selectedImageFile = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = document.getElementById('imgPreview');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('imgUploadIcon').style.display = 'none';
+    document.getElementById('imgUploadText').textContent = file.name;
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewImageFromUrl(url) {
+  if (!url) return;
+  const img = document.getElementById('imgPreview');
+  img.src = url;
+  img.style.display = 'block';
+  document.getElementById('imgUploadIcon').style.display = 'none';
+  document.getElementById('imgUploadText').textContent = '外部URL使用中';
+}
+
+// ===== URL → 商品情報自動取得 =====
+// 1. Cloud Functions経由でOGP（タイトル・画像・説明文）を取得 → 即フォーム反映
+// 2. Claude APIキーがあれば、AI で説明文を磨き上げて上書き
+async function generateFromUrl() {
+  const url    = document.getElementById('aiUrlInput').value.trim();
+  const apiKey = localStorage.getItem('sf_claude_key');
+  const status = document.getElementById('aiStatus');
+
+  if (!url) { status.textContent = 'URLを入力してください'; return; }
+
+  let ogp = null;
+
+  // ===== Step 1: OGP取得 =====
+  status.textContent = '🔄 ページを取得中...';
+
+  if (window.FIREBASE_READY && window.sfFunctions) {
+    try {
+      const fetchMeta = sfFunctions.httpsCallable('fetchProductMeta');
+      const res = await fetchMeta({ url });
+      ogp = res.data;
+    } catch (err) {
+      console.warn('[Admin] Cloud Functions取得失敗、CORSプロキシでフォールバック:', err.message);
+    }
+  }
+
+  // フォールバック: 公開CORSプロキシでHTML取得 → クライアント側でパース
+  if (!ogp) {
+    try {
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const res = await fetch(proxyUrl);
+      const data = await res.json();
+      const html = data.contents || '';
+      const meta = (name, attr = 'property') => {
+        const re1 = new RegExp(`<meta[^>]*${attr}=["']${name}["'][^>]*content=["']([^"']+)["']`, 'i');
+        const re2 = new RegExp(`<meta[^>]*content=["']([^"']+)["'][^>]*${attr}=["']${name}["']`, 'i');
+        const m = html.match(re1) || html.match(re2);
+        return m ? m[1] : '';
+      };
+      ogp = {
+        title:       meta('og:title') || (html.match(/<title[^>]*>([^<]+)<\/title>/i)||[])[1] || '',
+        description: meta('og:description') || meta('description', 'name') || '',
+        image:       meta('og:image'),
+        excerpt:     html.replace(/<script[\s\S]*?<\/script>/gi,' ')
+                          .replace(/<style[\s\S]*?<\/style>/gi,' ')
+                          .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0, 4000),
+      };
+    } catch (err) {
+      status.textContent = '❌ ページ取得失敗: ' + err.message;
+      return;
+    }
+  }
+
+  // ===== Step 2: フォームに反映（OGPベース） =====
+  if (ogp.title)       document.getElementById('fName').value = ogp.title;
+  if (ogp.description) document.getElementById('fDesc').value = ogp.description;
+  if (ogp.image) {
+    document.getElementById('imgUrlInput').value = ogp.image;
+    previewImageFromUrl(ogp.image);
+  }
+  status.textContent = '✓ ページから情報を取得しました' + (apiKey ? ' / AIで磨き上げ中...' : '');
+
+  // ===== Step 3: Claude APIキーがあれば、AI で日本語化＆構造化 =====
+  if (!apiKey) {
+    status.textContent = '✅ 取得完了。Claude APIキーを設定すると、日本語商品名・カテゴリ・価格まで自動入力されます。';
+    return;
+  }
+
+  try {
+    const text = (ogp.excerpt || ogp.description || '').slice(0, 4000);
+    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 600,
+        messages: [{
+          role: 'user',
+          content: `以下のBBQ関連商品ページのテキストから情報を抽出し、JSON形式のみで返答してください（説明文は不要）。
+
+{
+  "name": "英語商品名（OGPタイトルから不要なサイト名は除く）",
+  "nameja": "日本語商品名（なければカタカナ表記）",
+  "subtitle": "英語サブタイトル（例: Steak & Beef Rub）",
+  "category": "rub | sauce | jerky | set のいずれか",
+  "price": 数字のみ（円換算、不明なら0）,
+  "desc": "日本語で2〜3文の魅力的な商品説明",
+  "badge": null または BEST SELLER / NEW / SPICY / POPULAR / PREMIUM
+}
+
+OGPタイトル: ${ogp.title}
+OGP説明: ${ogp.description}
+
+本文抜粋:
+${text}`
+        }]
+      })
+    });
+    if (!aiRes.ok) {
+      const err = await aiRes.json();
+      throw new Error(err.error?.message || aiRes.status);
+    }
+    const aiData = await aiRes.json();
+    const content = aiData.content[0].text;
+    const match = content.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('AIからJSONが返りませんでした');
+    const parsed = JSON.parse(match[0]);
+
+    if (parsed.name)     document.getElementById('fName').value = parsed.name;
+    if (parsed.nameja)   document.getElementById('fNameJa').value = parsed.nameja;
+    if (parsed.subtitle) document.getElementById('fSubtitle').value = parsed.subtitle;
+    if (parsed.category) document.getElementById('fCategory').value = parsed.category;
+    if (parsed.price)    document.getElementById('fPrice').value = parsed.price;
+    if (parsed.desc)     document.getElementById('fDesc').value = parsed.desc;
+    if (parsed.badge)    document.getElementById('fBadge').value = parsed.badge;
+
+    status.textContent = '✅ AIで自動入力しました。内容を確認して保存してください。';
+  } catch(e) {
+    status.textContent = '⚠ OGPは取得できましたが、AI処理でエラー: ' + e.message;
+    console.error(e);
+  }
+}
+
+// ===== ORDERS =====
+async function loadOrders() {
+  if (!FIREBASE_READY) return;
+  try {
+    const snap = await db.collection('orders').orderBy('createdAt', 'desc').limit(50).get();
+    const orders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    document.getElementById('orderCount').textContent = `${orders.length} 件の注文`;
+    const container = document.getElementById('ordersTableContainer');
+    if (!orders.length) {
+      container.innerHTML = '<div class="empty-state"><div class="icon">🧾</div><p>まだ注文がありません</p></div>';
+      return;
+    }
+    container.innerHTML = `<table>
+      <thead><tr><th>注文日時</th><th>メール</th><th>合計</th><th>状態</th></tr></thead>
+      <tbody>${orders.map(o => `<tr>
+        <td>${o.createdAt?.toDate?.()?.toLocaleDateString('ja-JP') || '—'}</td>
+        <td>${o.email || '—'}</td>
+        <td>¥${(o.total || 0).toLocaleString()}</td>
+        <td>${o.status || '—'}</td>
+      </tr>`).join('')}</tbody>
+    </table>`;
+  } catch(e) {
+    document.getElementById('orderCount').textContent = 'エラー';
+  }
+}
+
+// ===== SETTINGS =====
+function initSettingsDisplay() {
+  const fs = document.getElementById('firebaseStatus');
+  const ss = document.getElementById('stripeStatus');
+  if (FIREBASE_READY) {
+    fs.innerHTML = '✅ Firebase 接続済み — プロジェクトID: ' + (SF_CONFIG.firebase.projectId || '—');
+  } else {
+    fs.innerHTML = '⚠️ Firebase 未設定 — firebase-config.js を編集して接続してください';
+    fs.style.color = '#D97706';
+  }
+  if (SF_CONFIG.stripeKey.startsWith('pk_test_YOUR')) {
+    ss.innerHTML = '⚠️ Stripe 未設定 — stripeKey を firebase-config.js に入力してください';
+    ss.style.color = '#D97706';
+  } else if (SF_CONFIG.stripeKey.startsWith('pk_test_')) {
+    ss.innerHTML = '🔶 Stripe テストモード — 本番環境では pk_live_ キーに変更してください';
+    ss.style.color = '#D97706';
+  } else {
+    ss.innerHTML = '✅ Stripe 本番モード';
+  }
+}
+
+function loadClaudeKeyStatus() {
+  const key = localStorage.getItem('sf_claude_key');
+  const el  = document.getElementById('claudeKeyStatus');
+  if (key) {
+    document.getElementById('claudeKeyInput').value = key.slice(0,12) + '••••••••••••';
+    el.textContent = '✅ APIキー登録済み';
+    el.style.color = '#059669';
+  } else {
+    el.textContent = '未登録。AIで商品情報を生成する際に必要です。';
+    el.style.color = '#9CA3AF';
+  }
+}
+
+function saveClaudeKey() {
+  const key = document.getElementById('claudeKeyInput').value.trim();
+  if (key && !key.includes('•')) {
+    localStorage.setItem('sf_claude_key', key);
+    showToast('APIキーを保存しました', 'success');
+    loadClaudeKeyStatus();
+  }
+}
+
+function clearClaudeKey() {
+  localStorage.removeItem('sf_claude_key');
+  document.getElementById('claudeKeyInput').value = '';
+  showToast('APIキーを削除しました', 'info');
+  loadClaudeKeyStatus();
+}
+
+// ===== SEED DEFAULT PRODUCTS =====
+async function seedDefaultProducts() {
+  if (!FIREBASE_READY) { showToast('Firebase未設定のため実行できません', 'error'); return; }
+  if (!confirm('デフォルト商品13点をFirestoreにインポートしますか？（既存の同名商品は上書きされます）')) return;
+
+  const defaults = [
+    { id:'steak-shooter',       name:'Steak Shooter',          nameja:'ステーキシューター',   subtitle:'Steak & Beef Rub',   category:'rub',   price:3800, desc:'牛肉のポテンシャルを最大限引き出すスタンダードラブ。発色と旨みの黄金ブレンド。', badge:null, order:0, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+    { id:'steak-shooter-spicy', name:'Steak Shooter SPICY',    nameja:'ステーキシューター スパイシー', subtitle:'Spicy Steak & Beef Rub', category:'rub', price:3800, desc:'辛さレベル2/5のスパイシー版。刺激を楽しみながら旨みはそのまま。', badge:'SPICY', order:1, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg' },
+    { id:'beef-bounce',         name:'Beef Bounce',            nameja:'ビーフバウンス',        subtitle:'Beef & Brisket Rub', category:'rub',   price:3800, desc:'コーヒーとブラックペッパーの深み。ブリスケットのバークを完璧に仕上げる本格派。', badge:null, order:2, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg' },
+    { id:'honey-soy-slammer',   name:'Honey Soy Slammer',      nameja:'ハニーソイスラマー',    subtitle:'Pork & Chicken Rub', category:'rub',   price:3800, desc:'蜂蜜と醤油の絶妙ブレンド。ポークリブとチキンに最高のグレーズ。', badge:'BEST SELLER', order:3, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg' },
+    { id:'lamb-layup',          name:'Lamb Layup',             nameja:'ラムレイアップ',        subtitle:'Lamb & Game Rub',    category:'rub',   price:3800, desc:'スマックとハーブでラムを格上げ。カンガルーやジビエにも対応。', badge:null, order:4, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg' },
+    { id:'garlic-goals',        name:'Garlic Goals',           nameja:'ガーリックゴールズ',    subtitle:'All Purpose Rub',    category:'rub',   price:3800, desc:'ガーリックとパルメザンチーズのブレンド。肉・野菜・魚に対応する万能ラブ。', badge:null, order:5, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg' },
+    { id:'chilli-citrus-charge',name:'Chilli Citrus Charge',   nameja:'チリシトラスチャージ',  subtitle:'Chicken & Pork Rub', category:'rub',   price:3800, desc:'チリとシトラスの爽やかな新作。チキンの皮をオレンジ色に仕上げる夏のラブ。', badge:'NEW', order:6, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png' },
+    { id:'hook-shot',           name:'Hook Shot',              nameja:'フックショット',        subtitle:'Signature BBQ Sauce',category:'sauce', price:4200, desc:'ラブとの組み合わせで真価を発揮するシグネチャーソース。仕上げのグレーズに。', badge:null, order:7, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png' },
+    { id:'steak-shooter-jerky', name:'Steak Shooter Jerky',   nameja:'ステーキシューター ジャーキー', subtitle:'Beef Jerky', category:'jerky', price:2500, desc:'ステーキシューターで味付けした本格ビーフジャーキー。', badge:null, order:8, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+    { id:'garlic-goals-jerky',  name:'Garlic Goals Jerky',    nameja:'ガーリックゴールズ ジャーキー', subtitle:'Beef Jerky', category:'jerky', price:2500, desc:'ガーリックゴールズで仕上げた風味豊かなビーフジャーキー。', badge:null, order:9, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg' },
+    { id:'all-star-combo',      name:'All-Star Combo Set',    nameja:'オールスターコンボセット', subtitle:'7種ラブセット', category:'set', price:24000, originalPrice:26600, desc:'全7種のラブが揃うお得なセット。BBQ初心者から上級者まで。', badge:'セット割', order:10, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+    { id:'all-star-hook-shot',  name:'All-Star + Hook Shot',  nameja:'オールスター＋フックショットセット', subtitle:'8点コンプリート', category:'set', price:27000, originalPrice:30200, desc:'7種ラブ＋シグネチャーソースの完全セット。', badge:'人気', order:11, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png' },
+    { id:'all-star-full',       name:'All-Star Full Set',     nameja:'フルコンプリートセット', subtitle:'全13点完全セット', category:'set', price:32000, originalPrice:35700, desc:'ラブ・ソース・ジャーキー全品入り。究極のBBQスターターパック。', badge:'完全版', order:12, image:'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+  ];
+
+  showToast('インポート中...', 'info');
+  try {
+    const batch = db.batch();
+    defaults.forEach(p => {
+      const { id, ...data } = p;
+      data.status = 'active';
+      data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+      batch.set(db.collection('products').doc(id), data, { merge: true });
+    });
+    await batch.commit();
+    showToast(`${defaults.length}件の商品をインポートしました ✓`, 'success');
+    loadProducts();
+    loadDashboard();
+  } catch(e) {
+    showToast('インポートエラー: ' + e.message, 'error');
+  }
+}
+
+// ===== TOAST =====
+function showToast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  setTimeout(() => { el.className = ''; }, 3000);
+}
+
+// ===== CLOSE MODAL ON BACKDROP =====
+document.getElementById('productModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('productModal')) closeProductModal();
+});
+</script>
+</body>
+</html>
