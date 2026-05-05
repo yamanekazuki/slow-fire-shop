@@ -200,7 +200,7 @@
     .ck-card.hidden { display: none; }
 
     .ck-card-img {
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 4 / 3;
       background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
       position: relative;
       overflow: hidden;
@@ -343,8 +343,8 @@
 
     .ck-modal-hero {
       position: relative;
-      aspect-ratio: 16 / 9;
-      max-height: 320px;          /* keep image from dominating viewport */
+      aspect-ratio: 4 / 3;
+      max-height: 460px;          /* taller hero so 3:4 photos breathe */
       background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
       overflow: hidden;
       border-radius: 16px 16px 0 0;
@@ -1214,10 +1214,11 @@
   const resetBtn2 = document.getElementById('resetBtn2');
 
   function buildCards() {
+    const IMG_VER = '20260506';
     grid.innerHTML = RECIPES.map(r => `
       <button class="ck-card" data-id="${r.id}" data-level="${r.level}" data-category="${r.category}" data-time="${r.timeBucket}">
         <div class="ck-card-img">
-          <img src="images/recipes/${r.id}.jpg" alt="${r.name}（${r.nameEn}）"
+          <img src="images/recipes/${r.id}.jpg?v=${IMG_VER}" alt="${r.name}（${r.nameEn}）"
                loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="ck-card-img-fallback" style="display:none">${r.icon}</div>
           <div class="ck-card-img-overlay">
@@ -1299,7 +1300,7 @@
   function openModal(id) {
     const r = RECIPES.find(x => x.id === id);
     if (!r) return;
-    modalImg.src = `images/recipes/${r.id}.jpg`;
+    modalImg.src = `images/recipes/${r.id}.jpg?v=20260506`;
     modalImg.alt = r.name;
     modalImg.style.display = '';
     modalFallback.textContent = r.icon;
