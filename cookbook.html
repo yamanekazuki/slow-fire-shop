@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>BBQで何を作る？｜タグで選ぶ16品の料理ガイド - SLOW FIRE SHOP</title>
-  <meta name="description" content="BBQで作る16品をレベル・食材・時間で絞り込めるユーザードリブン料理ガイド。各料理に合うLow n Slow Basics BBQラブも紹介。シダープランクサーモン、スペアリブ、プルドポーク、ビア缶チキンまで火入れの温度と時間が一目で分かる。">
+  <title>BBQで何を作る？｜タグで選ぶ24品の料理ガイド - SLOW FIRE SHOP</title>
+  <meta name="description" content="BBQで作る24品をレベル・食材・時間で絞り込めるユーザードリブン料理ガイド。各料理に合うLow n Slow Basics BBQラブも紹介。シダープランクサーモン、スペアリブ、プルドポーク、ビア缶チキンまで火入れの温度と時間が一目で分かる。">
   <meta name="keywords" content="BBQ レシピ,BBQ 料理,バーベキュー 何作る,BBQ メニュー,BBQラブ,シダープランクサーモン,スペアリブ,プルドポーク,ビア缶チキン">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/cookbook.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="BBQで何を作る？｜タグで選ぶ16品の料理ガイド">
-  <meta property="og:description" content="レベル・食材・時間で絞り込む、16品のBBQ料理ガイド。各料理に合うBBQラブも提案。">
+  <meta property="og:title" content="BBQで何を作る？｜タグで選ぶ24品の料理ガイド">
+  <meta property="og:description" content="レベル・食材・時間で絞り込む、24品のBBQ料理ガイド。各料理に合うBBQラブも提案。">
   <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/cookbook.html">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
@@ -313,44 +313,41 @@
       margin-bottom: 1.25rem;
     }
 
-    /* modal */
+    /* modal — single-scroll, image scrolls with content */
     .ck-modal-backdrop {
       position: fixed; inset: 0;
       background: rgba(17,17,17,0.55);
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
       z-index: 1200;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s, visibility 0.3s;
-      overflow-y: auto;
+      overflow-y: auto;           /* backdrop scrolls */
+      -webkit-overflow-scrolling: touch;
+      padding: 0;
     }
     .ck-modal-backdrop.open { opacity: 1; visibility: visible; }
 
     .ck-modal {
       width: 100%;
       max-width: 760px;
-      max-height: 94vh;
+      margin: 5vh auto 0;          /* small top breathing space, then scroll naturally */
       background: var(--white);
       border-radius: 16px 16px 0 0;
       transform: translateY(40px);
       transition: transform 0.4s cubic-bezier(.16,1,.3,1);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      margin-top: auto;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
     }
     .ck-modal-backdrop.open .ck-modal { transform: translateY(0); }
 
     .ck-modal-hero {
       position: relative;
       aspect-ratio: 16 / 9;
+      max-height: 320px;          /* keep image from dominating viewport */
       background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
       overflow: hidden;
-      flex-shrink: 0;
+      border-radius: 16px 16px 0 0;
     }
     .ck-modal-hero img {
       width: 100%;
@@ -363,30 +360,35 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 6rem;
-      opacity: 0.5;
+      font-size: 5rem;
+      opacity: 0.45;
     }
+    /* Close button stays fixed in viewport corner — never lost on scroll */
     .ck-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 36px; height: 36px;
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      width: 40px; height: 40px;
       display: flex; align-items: center; justify-content: center;
       border: none;
       border-radius: 50%;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.96);
       font-size: 16px;
       color: var(--black);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
       backdrop-filter: blur(4px);
+      z-index: 1300;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s, visibility .25s, background .15s;
     }
-    .ck-modal-close:hover { background: var(--white); }
+    .ck-modal-backdrop.open ~ .ck-modal-close,
+    .ck-modal-close.is-visible { opacity: 1; visibility: visible; }
+    .ck-modal-close:hover { background: var(--white); transform: scale(1.05); }
 
     .ck-modal-body {
-      padding: 24px 28px 28px;
-      overflow-y: auto;
-      flex: 1;
+      padding: 24px 28px 40px;
     }
     .ck-modal-tags { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
     .ck-tag-pill {
@@ -725,9 +727,9 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "BBQで作る料理16選 — SLOW FIRE SHOPの料理ガイド",
-    "description": "レベル・食材・時間で絞り込めるBBQ料理ガイド。各料理に合うLow n Slow Basics BBQラブを提案。",
-    "numberOfItems": 16,
+    "name": "BBQで作る料理24選 — SLOW FIRE SHOPの料理ガイド",
+    "description": "レベル・食材・時間で絞り込めるBBQ料理ガイド24品。各料理に合うLow n Slow Basics BBQラブを提案。",
+    "numberOfItems": 24,
     "url": "https://yamanekazuki.github.io/slow-fire-shop/cookbook.html"
   }
   </script>
@@ -768,7 +770,7 @@
     <div class="ck-hero-inner">
       <p class="ck-hero-eyebrow">Cookbook · 料理ガイド</p>
       <h1>BBQで、<em>何を作る？</em></h1>
-      <p>レベル・食材・時間でサッと絞り込む、SLOW FIREが提案する16品。<br>各料理に合うBBQラブも一緒に。</p>
+      <p>レベル・食材・時間でサッと絞り込む、SLOW FIREが提案する24品。<br>各料理に合うBBQラブも一緒に。</p>
     </div>
   </section>
 
@@ -802,7 +804,7 @@
   </section>
 
   <div class="ck-result-meta">
-    <div class="count"><strong id="resultCount">16</strong>品が見つかりました</div>
+    <div class="count"><strong id="resultCount">24</strong>品が見つかりました</div>
     <button class="ck-reset-btn hidden" id="resetBtn">フィルターをリセット ✕</button>
   </div>
 
@@ -895,12 +897,12 @@
   </footer>
 
   <!-- MODAL -->
+  <button class="ck-modal-close" id="modalClose" aria-label="閉じる">✕</button>
   <div class="ck-modal-backdrop" id="recipeModal" aria-hidden="true">
     <div class="ck-modal" role="dialog" aria-modal="true">
       <div class="ck-modal-hero">
         <img id="modalImg" src="" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="ck-modal-hero-fallback" id="modalFallback" style="display:none">🔥</div>
-        <button class="ck-modal-close" id="modalClose" aria-label="閉じる">✕</button>
       </div>
       <div class="ck-modal-body">
         <div class="ck-modal-tags" id="modalTags"></div>
@@ -1100,6 +1102,86 @@
       points: ['バナナは<strong>縦にカット</strong>。皮ごと身を下にして焼く','ラム酒＋はちみつをかける','<strong>アルコールを飛ばす</strong>（炎が上がるが慌てない）','仕上げにバニラアイスを乗せると、温度差で多幸感が増す'],
       philosophy: '炎が立つ料理は、視覚的に<strong>「終わり」</strong>を告げる。バナナグリルは、BBQという長い時間に句読点を打つ料理。',
       pairedRubs: []
+    },
+    {
+      id: 'pulled-pork', name: 'プルドポーク', nameEn: 'Pulled Pork', icon: '🐷',
+      level: 3, levelLabel: '上級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 600, timeBucket: 'long', timeLabel: '🔥 約8〜10時間',
+      essence: 'BBQの王様。豚肩ロースに塩・砂糖・スパイスを擦り込み、110℃で10時間。中心温度97℃で「手でほぐれる」状態が完成のサイン。バンズに挟むと、世界が変わる。',
+      specs: [{ label: 'グリル温度', value: '110〜120℃' },{ label: '焼き時間', value: '8〜10時間' },{ label: '完成温度', value: '97℃' }],
+      points: ['豚肩ロース（ボストンバット）1〜2kg、脂は適度に残す','ラブをたっぷり擦り込み、最低1時間（できれば一晩）寝かせる','<strong>110〜120℃</strong>のロー&スローで、ウッドチップで燻香をつける','中心温度70℃あたりで「スタリング」（停滞）が起きるが慌てない','92℃を超えると一気に進む。<strong>97℃</strong>でフォークがスッと入れば完成','取り出してから30分休ませ、フォーク2本で繊維に沿ってほぐす'],
+      philosophy: 'プルドポークは「<strong>10時間、その場にいる</strong>」料理だ。火を見守り、温度を眺め、何度も覗く。料理する人の存在そのものが、味を決める。',
+      pairedRubs: ['honey-soy-slammer', 'beef-bounce']
+    },
+    {
+      id: 'jerk-chicken', name: 'ジャマイカン ジャークチキン', nameEn: 'Jamaican Jerk Chicken', icon: '🌶️',
+      level: 2, levelLabel: '中級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 35, timeBucket: 'mid', timeLabel: '⏱ 約35分',
+      essence: 'カリブの風がBBQに吹き込む一品。オールスパイス、スコッチボネット、タイム — 強烈な香りの層が、皮目から鶏肉まで貫く。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '30〜40分' },{ label: '中心温度', value: '73℃' }],
+      points: ['ジャークシーズニング：オールスパイス＋タイム＋シナモン＋ナツメグ＋スコッチボネット（or ハバネロ）＋ガーリック＋ライム','マリネは<strong>最低6時間、できれば一晩</strong>','皮目を下にして10分、ひっくり返してインダイレクト20分','焦げやすいので皮側は注意深く','仕上げにライムを絞ると風味が立つ'],
+      philosophy: 'ジャークは「香りの料理」。鶏を焼くというより、<strong>香りを纏わせる</strong>感覚で。BBQで「いつもと違う場」を作りたいときに、これが一番効く。',
+      pairedRubs: ['chilli-citrus-charge']
+    },
+    {
+      id: 'saikyo-fish', name: 'さわらの西京焼き', nameEn: 'Saikyo Miso Glazed Fish', icon: '🍱',
+      level: 2, levelLabel: '中級', category: 'fish', categoryLabel: '🐟 魚',
+      timeMin: 12, timeBucket: 'short', timeLabel: '⚡ 約12分',
+      essence: 'BBQで西京焼きが焼ける、という発見。日本の最も洗練された魚料理を、薪火と煙で再構築する。和の食材は、アメリカンBBQの火入れで化ける。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '8〜12分' },{ label: '火入れ', value: 'インダイレクト' }],
+      points: ['味噌床：白味噌＋みりん＋酒＋砂糖を混ぜる','さわら（or 鯖）の切り身を<strong>1日漬ける</strong>','焼く前にキッチンペーパーで味噌を軽く拭く（焦げ防止）','インダイレクトで200℃、皮目から焼く','焼き色がついたら反対面、合計8〜12分','杉板を併用すると香りに奥行きが出る'],
+      philosophy: '日本の食文化は「<strong>素材を信じる</strong>」哲学。アメリカンBBQの「<strong>時間を信じる</strong>」哲学。両方を一皿に乗せると、新しい場が生まれる。',
+      pairedRubs: ['honey-soy-slammer']
+    },
+    {
+      id: 'carne-asada', name: 'カルネ・アサーダ', nameEn: 'Carne Asada', icon: '🌮',
+      level: 2, levelLabel: '中級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 12, timeBucket: 'short', timeLabel: '⚡ 約12分',
+      essence: 'メキシコのBBQ文化が、BBQの幅を広げる。フランクステーキを薄切りにしてトルティーヤに包む瞬間、テーブルが一段にぎやかになる。',
+      specs: [{ label: 'グリル温度', value: '280℃' },{ label: '焼き時間', value: '3〜4分×2' },{ label: '中心温度', value: '53℃' }],
+      points: ['フランク or スカートステーキ（厚さ1〜1.5cm）','マリネ：ライム＋オレンジ＋ガーリック＋クミン＋オレガノ＋唐辛子＋オリーブオイル','<strong>2時間以上漬ける</strong>（4時間が理想）','高温短時間で一気に焼く（焼きすぎ厳禁）','焼いた後5分休ませ、繊維に対して<strong>垂直に薄切り</strong>','トルティーヤ＋ライム＋パクチー＋玉ねぎで完成'],
+      philosophy: 'カルネ・アサーダは「<strong>分け合う</strong>」料理。一枚を切って配るのではなく、トルティーヤに包んで自分で完成させる。料理の最後の工程を客に任せると、参加感が生まれる。',
+      pairedRubs: ['steak-shooter-spicy', 'chilli-citrus-charge']
+    },
+    {
+      id: 'tomahawk', name: 'トマホークステーキ', nameEn: 'Tomahawk Steak', icon: '🪓',
+      level: 3, levelLabel: '上級', category: 'meat', categoryLabel: '🥩 肉',
+      timeMin: 75, timeBucket: 'long', timeLabel: '🔥 約75分',
+      essence: '骨付きリブアイの極み。長い骨は「斧（トマホーク）」の柄。テーブルに出した瞬間に拍手が起きる、BBQ最大のショーピース。',
+      specs: [{ label: 'グリル温度', value: '120℃→280℃' },{ label: '焼き時間', value: '60分＋8分' },{ label: '中心温度', value: '54℃' }],
+      points: ['厚さ4〜5cm、800g〜1.2kg の骨付きリブアイ','<strong>リバースシア法</strong>：低温で内部を温め、最後に高温で焼き目','インダイレクト120℃で内部48℃まで（約60分）','一度取り出し、ダイレクト280℃で各面1.5〜2分','中心温度54℃で休ませ、5〜10分後にカット','塩・胡椒・ローズマリー・ガーリックバターで仕上げ'],
+      philosophy: 'トマホークは「<strong>提供のための料理</strong>」だ。皿に乗ったときの威圧感そのものが、夜の主役を作る。料理は栄養ではなく、場を立てる装置になる。',
+      pairedRubs: ['beef-bounce', 'steak-shooter']
+    },
+    {
+      id: 'shrimp-grill', name: 'ガーリックシュリンプ', nameEn: 'Garlic Grilled Shrimp', icon: '🦐',
+      level: 1, levelLabel: '初級', category: 'fish', categoryLabel: '🐟 魚',
+      timeMin: 6, timeBucket: 'short', timeLabel: '⚡ 約6分',
+      essence: '殻付きで焼くと、エビの味が逃げない。ガーリックバターと白ワインを絡めれば、ホテルディナーの一品が、グリルの上で再現できる。',
+      specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '2〜3分×2' },{ label: '合図', value: 'ピンク色' }],
+      points: ['ジャンボシュリンプ（殻付き）背わたを取る','ガーリックバター＋オリーブオイル＋白ワイン＋イタリアンパセリでマリネ15分','直火で2〜3分、ひっくり返してさらに2〜3分','ピンク色になったら<strong>すぐ取り出す</strong>（焼きすぎると硬くなる）','殻を剥きながら食べる「手と口で楽しむ」料理','仕上げにレモンをひと絞り'],
+      philosophy: 'エビは<strong>「殻ごと焼く」</strong>のが基本。殻が肉汁を守る。料理の本質は「素材を裸にしないこと」だ。',
+      pairedRubs: ['garlic-goals', 'lamb-layup']
+    },
+    {
+      id: 'mushroom-grill', name: 'ポートベローマッシュルーム', nameEn: 'Portobello Mushroom Grill', icon: '🍄‍🟫',
+      level: 1, levelLabel: '初級', category: 'veggie', categoryLabel: '🥬 野菜',
+      timeMin: 10, timeBucket: 'short', timeLabel: '⚡ 約10分',
+      essence: 'ベジタリアンの主役級。肉のような食感、肉のような旨味、肉のような満足感。「肉以外の選択肢」がBBQの幅を広げる。',
+      specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '4〜5分×2' },{ label: '合図', value: '汁が滲む' }],
+      points: ['ポートベロー（or 大きなマッシュルーム）軸を取り、傘を上にして焼く','バルサミコ＋オリーブオイル＋ガーリック＋タイムでマリネ20分','傘を上にしてダイレクト4〜5分（汁が傘の中に溜まる）','ひっくり返してさらに4〜5分、汁を傘に戻すように','<strong>水分を逃さないこと</strong>が美味しさの鍵','仕上げにブルーチーズかパルメザンを乗せる'],
+      philosophy: 'マッシュルームは「<strong>動物性に近い食物</strong>」だ。BBQで肉以外の選択肢を持つことは、参加者の多様性を受け入れること。料理は誰のためにあるかを問う。',
+      pairedRubs: ['garlic-goals']
+    },
+    {
+      id: 'asparagus-grill', name: 'アスパラガスのグリル', nameEn: 'Grilled Asparagus', icon: '🌿',
+      level: 1, levelLabel: '初級', category: 'veggie', categoryLabel: '🥬 野菜',
+      timeMin: 5, timeBucket: 'short', timeLabel: '⚡ 約5分',
+      essence: 'BBQの「合間」を埋める一品。3〜4分で焼ける、軽い、香ばしい。重い肉料理の隙間に出すと、テーブルのリズムが整う。',
+      specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '3〜4分' },{ label: '合図', value: '焼き目' }],
+      points: ['太めのアスパラガスを選ぶ（細いと焦げる）','根元の硬い部分を1cmカット、皮を少しむく','オリーブオイル＋塩＋胡椒のみ。シンプルに','直火で3〜4分、転がしながら全面に焼き目','仕上げにレモン汁＋粉チーズ','<strong>焼きすぎないこと</strong>。シャキッと感を残す'],
+      philosophy: 'BBQで「軽い料理」を出せる人が、ホスト力の高い人だ。重い肉だけを並べるのは、<strong>料理ではなく見栄</strong>。緩急があるから、場が長く続く。',
+      pairedRubs: ['garlic-goals']
     }
   ];
 
@@ -1243,12 +1325,16 @@
 
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
+    document.getElementById('modalClose').classList.add('is-visible');
     document.body.style.overflow = 'hidden';
+    // Reset scroll to top each time modal opens
+    modal.scrollTop = 0;
   }
 
   function closeModal() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
+    document.getElementById('modalClose').classList.remove('is-visible');
     document.body.style.overflow = '';
   }
 
