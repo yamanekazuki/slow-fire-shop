@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
   {
@@ -56,7 +56,7 @@
     .page-hero > * { position: relative; }
     .page-hero .label-sm { color: var(--brand); margin-bottom: 16px; }
     .page-hero h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: clamp(30px, 5vw, 58px);
       font-weight: 700;
       line-height: 1.18;
@@ -109,7 +109,7 @@
     }
     .guide-wrap .label-sm { margin-bottom: 14px; }
     .guide-wrap h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: clamp(24px, 3vw, 36px);
       font-weight: 700;
       margin-bottom: 24px;
@@ -184,7 +184,7 @@
       margin-bottom: 36px;
     }
     .scenario-box h3 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 20px; font-weight: 700; color: var(--white);
       margin-bottom: 8px;
     }
@@ -206,7 +206,7 @@
     .flavor-card-img { width: 100%; height: 90px; object-fit: cover; }
     .flavor-card-body { padding: 16px; }
     .flavor-card-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 28px; font-weight: 700;
       color: var(--black); opacity: .08;
       line-height: 1; margin-bottom: 4px;
@@ -244,7 +244,7 @@
       background: var(--white);
     }
     .layer-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 36px; font-weight: 700;
       color: var(--black); opacity: .08;
       line-height: 1; margin-bottom: 10px;
@@ -307,7 +307,7 @@
     /* cta */
     .cta-section { background: var(--black); padding: 72px 24px; text-align: center; }
     .cta-section h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: clamp(24px, 3vw, 38px); font-weight: 700;
       color: var(--white); margin-bottom: 16px;
     }
@@ -364,7 +364,7 @@
     }
     .pg-group-icon { font-size: 28px; line-height: 1; }
     .pg-group-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: clamp(20px, 2.4vw, 26px);
       font-weight: 700;
       color: var(--black);
@@ -399,7 +399,7 @@
 
     .pg-cut-head { margin-bottom: 20px; }
     .pg-cut-head h4 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 22px; font-weight: 700;
       color: var(--black);
       margin-bottom: 4px;
@@ -550,18 +550,60 @@
     <p>部位別のおすすめ、同じ肉を違うラブで焼いたらどう変わるか、組み合わせのコツ——選ぶ楽しさをまるごと解説します。</p>
   </section>
 
-  <!-- TOC -->
-  <section class="toc-section">
-    <div class="toc-wrap">
-      <h2>このガイドの内容</h2>
-      <div class="toc-list">
-        <a href="#by-cut" class="toc-item">部位別おすすめラブ（牛・豚・鶏・ラム）</a>
-        <a href="#flavor-compare" class="toc-item">同じ肉を違うラブで焼くと？フレーバー比較</a>
-        <a href="#layering" class="toc-item">ラブの重ねがけ（レイヤリング）組み合わせ</a>
-        <a href="#quick-ref" class="toc-item">クイックリファレンス表</a>
-      </div>
+  <!-- STICKY TABS -->
+  <nav class="pg-tabs" aria-label="セクションナビ">
+    <div class="pg-tabs-inner">
+      <a href="#by-cut" class="pg-tab is-active" data-target="by-cut">部位別おすすめ</a>
+      <a href="#flavor-compare" class="pg-tab" data-target="flavor-compare">フレーバー比較</a>
+      <a href="#layering" class="pg-tab" data-target="layering">重ねがけ</a>
+      <a href="#quick-ref" class="pg-tab" data-target="quick-ref">クイックリファレンス</a>
+      <a href="#butchers-axe-pairing" class="pg-tab" data-target="butchers-axe-pairing">Butcher's Axe</a>
+      <a href="#stef-pairing" class="pg-tab" data-target="stef-pairing">Stef the Maori</a>
     </div>
-  </section>
+  </nav>
+
+  <style>
+    .pg-tabs {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 80;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .pg-tabs-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .pg-tabs-inner::-webkit-scrollbar { display: none; }
+    .pg-tab {
+      flex-shrink: 0;
+      padding: 16px 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .pg-tab:hover { color: var(--black); }
+    .pg-tab.is-active {
+      color: var(--black);
+      border-bottom-color: var(--black);
+      font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .pg-tabs-inner { padding: 0 1rem; }
+      .pg-tab { padding: 14px 14px; font-size: 13px; }
+    }
+  </style>
 
   <!-- 01. BY CUT -->
   <!-- 01. BY CUT (NEW: image-first card grid, data-driven) -->
@@ -1572,6 +1614,44 @@
       `).join('');
     }
     renderPairings();
+
+    /* ============================================
+       Sticky tab — active highlight on scroll
+       ============================================ */
+    (function() {
+      const tabs = document.querySelectorAll('.pg-tab');
+      const sections = ['by-cut', 'flavor-compare', 'layering', 'quick-ref', 'butchers-axe-pairing', 'stef-pairing']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+      if (!tabs.length || !sections.length) return;
+
+      const setActive = (id) => {
+        tabs.forEach(t => t.classList.toggle('is-active', t.dataset.target === id));
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.target.offsetTop - b.target.offsetTop);
+        if (visible.length) setActive(visible[0].target.id);
+      }, {
+        rootMargin: '-25% 0px -55% 0px',
+        threshold: 0
+      });
+      sections.forEach(s => observer.observe(s));
+
+      // smooth scroll with offset for tabs
+      tabs.forEach(t => {
+        t.addEventListener('click', e => {
+          const id = t.dataset.target;
+          const el = document.getElementById(id);
+          if (!el) return;
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 110;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
+    })();
   </script>
   <script src="mobile-nav.js"></script>
 </body>
