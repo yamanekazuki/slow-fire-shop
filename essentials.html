@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BBQ ESSENTIALS｜初めてのBBQ・神髄を1ページに - SLOW FIRE SHOP</title>
+  <meta name="description" content="グリルの選び方（炭・ガス・電気・スモーカー）、ツーゾーンファイヤー、ダイレクト/インダイレクト、ピュアオリーブオイルの理由、ロースティングラック&シールドの使い分け、杉板との早見表まで。BBQ初心者が最初に読むべき神髄。">
+  <meta name="keywords" content="BBQ 初心者,BBQ 神髄,炭グリル,ガスグリル,電気グリル,スモーカー,ツーゾーンファイヤー,インダイレクト,ロースティングラック,ロースティングシールド,杉板,ピュアオリーブオイル">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/essentials.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="BBQ ESSENTIALS｜初めてのBBQ・神髄を1ページに">
+  <meta property="og:description" content="グリル選び・火の配置・オリーブオイル・ロースティングラック&シールド・杉板の使い分けまで。BBQ初心者が最初に読むべき神髄。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/essentials.html">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="theme-color" content="#B45309">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== Essentials page ===== */
+    .es-hero {
+      padding: calc(var(--nav-h) + 60px) 1.5rem 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #1a0f0a 0%, #2d1810 50%, #3a2818 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .es-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(180,83,9,0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .es-hero-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .es-hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+      text-transform: uppercase; color: #FBA577; margin-bottom: 18px;
+    }
+    .es-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5.5vw, 56px);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 18px; color: var(--white);
+    }
+    .es-hero h1 em { font-style: italic; color: #FBA577; }
+    .es-hero p {
+      font-size: 15px; line-height: 1.85;
+      color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto;
+    }
+
+    /* TOC */
+    .es-toc {
+      background: var(--off-white);
+      padding: 36px 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .es-toc-inner { max-width: 880px; margin: 0 auto; }
+    .es-toc-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gray-400); margin-bottom: 18px;
+    }
+    .es-toc-list {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .es-toc-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.18s, transform 0.18s;
+      font-size: 13.5px; font-weight: 600;
+    }
+    .es-toc-item:hover { border-color: var(--brand); transform: translateX(2px); }
+    .es-toc-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; color: var(--brand); font-weight: 700;
+      min-width: 24px;
+    }
+
+    /* sections */
+    .es-section {
+      padding: 80px 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .es-section:nth-child(even) { background: var(--off-white); }
+    .es-section-inner { max-width: 880px; margin: 0 auto; }
+    .es-section-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.18em;
+      color: var(--brand); margin-bottom: 12px;
+    }
+    .es-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700; color: var(--black);
+      line-height: 1.25; margin-bottom: 18px;
+    }
+    .es-section h2 em { font-style: italic; color: var(--brand); }
+    .es-section .lead {
+      font-size: 15px; color: var(--gray-600);
+      line-height: 1.95; margin-bottom: 32px;
+    }
+    .es-section .lead strong { color: var(--black); }
+    .es-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; color: var(--black);
+      margin: 32px 0 12px;
+    }
+    .es-section p {
+      font-size: 14.5px; color: var(--gray-600);
+      line-height: 1.95; margin-bottom: 16px;
+    }
+    .es-section p strong { color: var(--black); }
+    .es-section ul { padding-left: 0; list-style: none; }
+    .es-section ul li {
+      font-size: 14.5px; color: var(--gray-600);
+      line-height: 1.85; padding: 6px 0 6px 20px;
+      position: relative;
+    }
+    .es-section ul li::before {
+      content: '─'; position: absolute; left: 0; color: var(--brand); font-weight: 700;
+    }
+
+    /* comparison cards */
+    .grill-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin: 28px 0;
+    }
+    @media (min-width: 760px) {
+      .grill-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .grill-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 26px 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .grill-card.recommended {
+      border-color: var(--brand);
+      background: linear-gradient(160deg, #FFFBEB 0%, var(--white) 60%);
+    }
+    .grill-card.recommended::before {
+      content: 'SLOW FIRE推し';
+      position: absolute;
+      top: -1px; left: 24px;
+      background: var(--brand); color: var(--white);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      padding: 4px 12px;
+      border-radius: 0 0 6px 6px;
+    }
+    .grill-card-icon { font-size: 36px; line-height: 1; margin-bottom: 12px; }
+    .grill-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 4px;
+      color: var(--black);
+    }
+    .grill-card-sub {
+      font-size: 11.5px; color: var(--gray-400);
+      letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+    .grill-card .pros, .grill-card .cons {
+      font-size: 13px; line-height: 1.75;
+      margin: 10px 0;
+    }
+    .grill-card .pros strong { color: var(--green); }
+    .grill-card .cons strong { color: var(--gray-600); }
+    .grill-card .conclusion {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 13px;
+      border-left: 3px solid var(--brand);
+      line-height: 1.7;
+    }
+    .grill-card.recommended .conclusion { background: rgba(180,83,9,0.06); }
+
+    /* zone diagram */
+    .zone-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media (min-width: 720px) {
+      .zone-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .zone-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .zone-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 700; margin-bottom: 8px;
+    }
+    .zone-card .zone-vis {
+      width: 100%; height: 50px;
+      border-radius: 6px;
+      display: flex;
+      overflow: hidden;
+      margin-bottom: 14px;
+      border: 1px solid var(--gray-200);
+    }
+    .zone-vis .zone-hot {
+      background: linear-gradient(to right, #DC2626, #F59E0B);
+    }
+    .zone-vis .zone-mid {
+      background: linear-gradient(to right, #F59E0B, #FBBF24);
+    }
+    .zone-vis .zone-cool {
+      background: var(--gray-100);
+    }
+    .zone-card p { font-size: 12.5px; color: var(--gray-600); line-height: 1.7; margin: 0; }
+
+    /* table-like comparison */
+    .compat-table {
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 28px 0;
+    }
+    .compat-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+      align-items: center;
+    }
+    .compat-row:last-child { border-bottom: none; }
+    .compat-row.head {
+      background: var(--black);
+      color: rgba(255,255,255,0.85);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .compat-row .scene { font-weight: 600; color: var(--black); }
+    .compat-mark {
+      display: inline-block;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .compat-mark.ok { background: var(--brand); color: var(--white); }
+    .compat-mark.maybe { background: #F3F4F6; color: var(--gray-600); }
+    .compat-mark.no { background: #FEE2E2; color: var(--red); }
+    .compat-mark.weak { background: #FEF3C7; color: var(--brand); font-size: 11px; }
+
+    @media (max-width: 600px) {
+      .compat-row { grid-template-columns: 1.2fr 0.6fr 0.6fr 0.6fr; padding: 10px 12px; gap: 6px; font-size: 12px; }
+      .compat-row.head { font-size: 9px; letter-spacing: 0.08em; }
+    }
+
+    /* technique callout boxes */
+    .tech-box {
+      margin: 24px 0;
+      padding: 22px 24px;
+      background: var(--white);
+      border-radius: 14px;
+      border: 1.5px solid var(--gray-200);
+    }
+    .tech-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--black); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .tech-box h4 .badge {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+      padding: 3px 9px; background: var(--brand); color: var(--white);
+      border-radius: 100px; text-transform: uppercase;
+    }
+    .tech-box p { margin-bottom: 10px; }
+    .tech-box .tip {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 13px;
+      border-left: 3px solid var(--brand);
+    }
+
+    /* tools - shield/rack */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media (min-width: 720px) { .tools-grid { grid-template-columns: 1fr 1fr; } }
+    .tool-card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .tool-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; font-weight: 700; color: var(--black);
+      margin-bottom: 4px;
+    }
+    .tool-card .tool-en {
+      font-size: 11.5px; color: var(--gray-400);
+      letter-spacing: 0.06em; margin-bottom: 12px;
+    }
+    .tool-card .role {
+      padding: 10px 14px;
+      background: var(--off-white);
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      border-left: 3px solid var(--brand);
+    }
+    .tool-card h5 {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gray-400);
+      margin-top: 16px; margin-bottom: 8px;
+    }
+
+    /* final rules */
+    .final-rules {
+      max-width: 640px;
+      margin: 32px auto 0;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 32px 30px;
+    }
+    .final-rules h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; color: var(--white);
+      margin-bottom: 6px; margin-top: 0;
+    }
+    .final-rules-sub {
+      font-size: 12px; color: rgba(255,255,255,0.5);
+      margin-bottom: 22px; letter-spacing: 0.06em;
+    }
+    .final-rules ul { padding: 0; }
+    .final-rules ul li {
+      font-size: 14.5px; color: rgba(255,255,255,0.85);
+      padding: 12px 0 12px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .final-rules ul li::before {
+      content: '→'; color: var(--brand); font-weight: 700;
+      position: absolute; left: 0; top: 12px;
+    }
+    .final-rules ul li:last-child { border-bottom: none; }
+    .final-rules ul li strong { color: var(--white); }
+
+    /* CTA */
+    .es-cta {
+      background: var(--off-white);
+      padding: 70px 1.5rem;
+      text-align: center;
+    }
+    .es-cta-inner { max-width: 580px; margin: 0 auto; }
+    .es-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      margin-bottom: 14px; color: var(--black);
+      line-height: 1.4;
+    }
+    .es-cta p { color: var(--gray-600); font-size: 14px; line-height: 1.85; margin-bottom: 24px; }
+    .es-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "BBQ ESSENTIALS｜初めてのBBQ・神髄を1ページに",
+    "description": "グリル選び・火の配置・オリーブオイル・ラック&シールド・杉板の使い分け・初心者ルール。BBQの神髄をまとめた完全ガイド。",
+    "url": "https://yamanekazuki.github.io/slow-fire-shop/essentials.html",
+    "inLanguage": "ja-JP",
+    "author": {"@type": "Organization", "name": "SLOW FIRE"},
+    "publisher": {"@type": "Organization", "name": "SLOW FIRE"},
+    "about": [
+      {"@type": "Thing", "name": "BBQ初心者ガイド"},
+      {"@type": "Thing", "name": "炭グリル"},
+      {"@type": "Thing", "name": "ガスグリル"},
+      {"@type": "Thing", "name": "電気グリル"},
+      {"@type": "Thing", "name": "ツーゾーンファイヤー"},
+      {"@type": "Thing", "name": "インダイレクトクッキング"}
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#products">商品一覧</a>
+        <a href="essentials.html" style="color:var(--black);font-weight:700;">BBQの神髄</a>
+        <a href="rub-guide.html">ラブガイド</a>
+        <a href="pairing-guide.html">ペアリング</a>
+        <a href="cookbook.html">料理ガイド</a>
+        <a href="team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='index.html'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="es-hero">
+    <div class="es-hero-inner">
+      <p class="es-hero-eyebrow">BBQ Essentials · 初めての一冊</p>
+      <h1>BBQの<em>神髄</em>を、<br>1ページに。</h1>
+      <p>グリルの選び方、火の配置、オリーブオイル、ロースティングラック＆シールド、杉板の使い分け——<br>BBQで迷わないための「最初の地図」。</p>
+    </div>
+  </section>
+
+  <!-- TOC -->
+  <section class="es-toc">
+    <div class="es-toc-inner">
+      <p class="es-toc-label">このページの内容</p>
+      <div class="es-toc-list">
+        <a href="#grill" class="es-toc-item"><span class="es-toc-num">01</span>グリルの選び方</a>
+        <a href="#fire-zones" class="es-toc-item"><span class="es-toc-num">02</span>火の配置（2ゾーン）</a>
+        <a href="#direct-indirect" class="es-toc-item"><span class="es-toc-num">03</span>ダイレクト／インダイレクト</a>
+        <a href="#oil" class="es-toc-item"><span class="es-toc-num">04</span>オリーブオイルの選び方</a>
+        <a href="#tools" class="es-toc-item"><span class="es-toc-num">05</span>ラック＆シールドの使い分け</a>
+        <a href="#cedar" class="es-toc-item"><span class="es-toc-num">06</span>杉板との早見表</a>
+        <a href="#rules" class="es-toc-item"><span class="es-toc-num">07</span>初心者の最終ルール</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 GRILL -->
+  <section id="grill" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">01 / GRILL</p>
+      <h2>グリルの選び方<br><em>炭・ガス・電気・スモーカー。</em></h2>
+      <p class="lead">BBQの「美味しさ」と「手軽さ」は<strong>反比例</strong>する。これを理解すれば、自分のライフスタイルに合うグリルが選べます。SLOW FIREは「美味しさ最優先」の立場から<strong>炭グリルを推奨</strong>しますが、各グリルにそれぞれの居場所があります。</p>
+
+      <div class="grill-grid">
+
+        <article class="grill-card recommended">
+          <div class="grill-card-icon">🔥</div>
+          <h4>炭グリル</h4>
+          <p class="grill-card-sub">Charcoal Grill — 王道の選択</p>
+          <p class="pros"><strong>強み</strong>：遠赤外線がガスの<strong style="color:var(--brand)">約4倍</strong>。肉の表面が均一に焼け、内部までふっくら。煙の香り（スモーキーフレーバー）も自然に乗る。</p>
+          <p class="cons"><strong>弱み</strong>：温度コントロールが難しい。火起こし・後処理が必要。屋外・換気必須。</p>
+          <div class="conclusion">「美味しさで選ぶなら炭」。これ以上の理由は要らない。週末の本番BBQはぜひ炭で。</div>
+        </article>
+
+        <article class="grill-card">
+          <div class="grill-card-icon">⛽</div>
+          <h4>ガスグリル</h4>
+          <p class="grill-card-sub">Gas Grill — 安定・再現性</p>
+          <p class="pros"><strong>強み</strong>：<strong>10分予熱で即スタート</strong>。温度が安定し、初心者でも失敗が少ない。蓋付きはオーブンとして機能。</p>
+          <p class="cons"><strong>弱み</strong>：遠赤外線量が炭の1/4。スモーキーフレーバーは出にくい（ウッドチップで補える）。</p>
+          <div class="conclusion">普段使いの庭BBQ・ベランダBBQに最適。「失敗したくない人」「子連れの場」はガスから入るのが◎。</div>
+        </article>
+
+        <article class="grill-card">
+          <div class="grill-card-icon">🔌</div>
+          <h4>電気グリル</h4>
+          <p class="grill-card-sub">Electric Grill — 屋内対応</p>
+          <p class="pros"><strong>強み</strong>：<strong>屋内・マンションのベランダで使える</strong>。煙が少なく、温度は最も正確（〜310℃）。後処理が圧倒的に楽。</p>
+          <p class="cons"><strong>弱み</strong>：遠赤外線・煙の風味は最弱。「BBQらしさ」は炭・ガスに劣る。</p>
+          <div class="conclusion">マンション在住で屋内派、または雨の日のサブ機として。インダイレクトもラック＋シールドで実現可能。</div>
+        </article>
+
+        <article class="grill-card">
+          <div class="grill-card-icon">💨</div>
+          <h4>スモーカー</h4>
+          <p class="grill-card-sub">Smoker — 上級者の領域</p>
+          <p class="pros"><strong>強み</strong>：低温（110〜120℃）を長時間維持。ブリスケットやプルドポークなど<strong>ロー＆スロー専門機</strong>。「スモーキーマウンテン」など縦型が定番。</p>
+          <p class="cons"><strong>弱み</strong>：高温調理（ステーキ等）はできない。1日仕事の覚悟必須。</p>
+          <div class="conclusion">「12時間ブリスケットを焼きたい」と思ったら、それはもう次のステージ。普通のグリルで上達してから検討するもの。</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 FIRE ZONES -->
+  <section id="fire-zones" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">02 / FIRE ZONES</p>
+      <h2>火の配置で、<br><em>BBQの全てが決まる。</em></h2>
+      <p class="lead">初心者の最大の誤解：「BBQは火力勝負」。<br>正解は <strong>「火の配置（レイアウト）勝負」</strong>です。炭を片側に寄せるだけで、調理の幅が一気に広がります。</p>
+
+      <div class="zone-grid">
+        <div class="zone-card">
+          <h4>ツーゾーンファイヤー</h4>
+          <div class="zone-vis"><div class="zone-hot" style="flex:1"></div><div class="zone-cool" style="flex:1"></div></div>
+          <p><strong>炭を片側に寄せる</strong>。強火（炭あり）と弱火（炭なし）の2エリア。<br><strong>これだけ覚えればOK。</strong></p>
+        </div>
+        <div class="zone-card">
+          <h4>スリーゾーンファイヤー</h4>
+          <div class="zone-vis"><div class="zone-hot" style="flex:1"></div><div class="zone-mid" style="flex:1"></div><div class="zone-cool" style="flex:1"></div></div>
+          <p><strong>炭で坂を作る</strong>。強火 / 中火 / 弱火 の3エリアで、<br>同時に複数の食材を焼き分け。</p>
+        </div>
+        <div class="zone-card">
+          <h4>スプリットツーゾーン</h4>
+          <div class="zone-vis"><div class="zone-cool" style="flex:1"></div><div class="zone-hot" style="flex:1"></div><div class="zone-cool" style="flex:1"></div></div>
+          <p>炭を<strong>左右両端</strong>に。中央が冷える「インダイレクト専用」レイアウト。塊肉に最適。</p>
+        </div>
+      </div>
+
+      <div class="tech-box">
+        <h4>初心者の最重要ルール <span class="badge">CORE</span></h4>
+        <p><strong>「火を強くしない」</strong>。焼けないと感じたら大抵は<strong>余熱不足</strong>です（9割）。蓋を10分閉じて、温度が上がるのを待つ。</p>
+        <p><strong>炭は動かさない</strong>。途中で動かすと温度が崩れる。調整は<strong>上下の通気口</strong>でする。</p>
+        <div class="tip">💡 蓋を開けすぎると温度が下がります。「焼けない」と感じる原因の大半は、ここ。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 DIRECT/INDIRECT -->
+  <section id="direct-indirect" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">03 / DIRECT &amp; INDIRECT</p>
+      <h2>ダイレクトと<br><em>インダイレクト。</em></h2>
+      <p class="lead">BBQで最初に身体に入れるべき<strong>2つの判断軸</strong>。「焼き色」が欲しいか、「火を通したい」かで使い分けます。</p>
+
+      <div class="grill-grid">
+        <article class="grill-card">
+          <div class="grill-card-icon">🔥</div>
+          <h4>ダイレクトクッキング</h4>
+          <p class="grill-card-sub">直火で焼く</p>
+          <ul>
+            <li>食材を<strong>炭の真上</strong>に置く</li>
+            <li>焼き色・香ばしさを生む</li>
+            <li>最初 or 最後に短時間使う</li>
+          </ul>
+          <div class="conclusion">薄切り肉、野菜、ソーセージ、エビなど「短時間で焼ける食材」専用。20分以下が目安。</div>
+        </article>
+
+        <article class="grill-card recommended">
+          <div class="grill-card-icon">♨️</div>
+          <h4>インダイレクトクッキング</h4>
+          <p class="grill-card-sub">間接火で火を通す</p>
+          <ul>
+            <li>食材を<strong>炭がない側</strong>に置く</li>
+            <li>蓋でオーブン化させる</li>
+            <li>中までゆっくり火を通す</li>
+            <li>焦がさない</li>
+          </ul>
+          <div class="conclusion">塊肉、鶏丸焼き、厚切り肉、リブ全般。<strong>20分以上かかる料理は最初からインダイレクト</strong>が原則。</div>
+        </article>
+      </div>
+
+      <h3>グリル別・インダイレクトの作り方</h3>
+
+      <div class="tech-box">
+        <h4>炭グリル <span class="badge">推奨</span></h4>
+        <p>炭を片側に寄せる（ツーゾーンファイヤー）→ 食材を炭がない側に置く → 蓋を閉める。これで完成。</p>
+        <div class="tip">💡 「ケトル型グリル（Weber等）」なら、炭の対角に水を入れたドリップパンを置くと温度がさらに安定。</div>
+      </div>
+
+      <div class="tech-box">
+        <h4>ガスグリル（3バーナー以上）</h4>
+        <p><strong>真ん中のバーナーだけ消す</strong>。両端は中火で点火、中央のスペースに食材を置く。これだけで完璧なインダイレクト環境になる。</p>
+        <div class="tip">💡 2バーナーしかない場合：片側だけ点火→反対側に食材。温度ムラに注意。</div>
+      </div>
+
+      <div class="tech-box">
+        <h4>電気グリル</h4>
+        <p>電気グリルは熱源が下にあるため、そのままだとダイレクトしかできない。<br><strong>ロースティングラック＋ロースティングシールド</strong>を組み合わせて、強制的にインダイレクト環境を作る（次セクションで詳説）。</p>
+        <div class="tip">💡 これが電気グリルでBBQを「再現」するキーテクニック。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 OIL -->
+  <section id="oil" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">04 / OIL</p>
+      <h2>オリーブオイルは、<br><em>「ピュア」を選ぶ。</em></h2>
+      <p class="lead">BBQでオリーブオイルを使う理由は2つ：<strong>食材の水分をコーティング</strong>することと、<strong>網に食材がくっつかないようにする</strong>こと。意外と知られていませんが、<strong>使うのは「ピュアオリーブオイル」</strong>です。エクストラバージンではありません。</p>
+
+      <div class="grill-grid">
+        <article class="grill-card recommended">
+          <div class="grill-card-icon">🫒</div>
+          <h4>ピュアオリーブオイル</h4>
+          <p class="grill-card-sub">Pure Olive Oil — BBQ用</p>
+          <p class="pros"><strong>強み</strong>：煙点が高い（約230℃）。BBQの高温調理に耐える。クセが少なく食材の風味を邪魔しない。コンビニでも入手可能で<strong>安い</strong>。</p>
+          <p class="cons"><strong>弱み</strong>：エクストラバージンほどの香り高さはない（が、BBQでは不要）。</p>
+          <div class="conclusion">「BBQ用は必ずピュア」。これだけ覚えれば失敗しません。</div>
+        </article>
+
+        <article class="grill-card">
+          <div class="grill-card-icon">🍶</div>
+          <h4>エクストラバージン</h4>
+          <p class="grill-card-sub">Extra Virgin Olive Oil</p>
+          <p class="pros"><strong>強み</strong>：香り高く、生食やドレッシングには最高。</p>
+          <p class="cons"><strong>弱み</strong>：煙点が低い（160〜190℃）。<strong>BBQの高温で焦げる・苦くなる</strong>。せっかくの香りも飛ぶ。</p>
+          <div class="conclusion">BBQの調理には<strong>使わない</strong>。仕上げにかける用途のみ。</div>
+        </article>
+      </div>
+
+      <div class="tech-box">
+        <h4>オイルの正しい使い方 <span class="badge">CORE</span></h4>
+        <ul>
+          <li><strong>網には塗らない、食材に塗る</strong> — 網に塗ると煙だけ立つ</li>
+          <li><strong>薄く・均一に</strong> — ドバドバ塗らない</li>
+          <li>焼く<strong>直前</strong>に塗る（早すぎると流れ落ちる）</li>
+          <li>野菜は最初にしっかり、後から追加しない</li>
+        </ul>
+        <div class="tip">💡 ナスがパリパリにならず、エリンギがジューシーに仕上がるのは、すべてオイルが水分をコーティングしてくれているから。<strong>見えない保護膜</strong>。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 TOOLS -->
+  <section id="tools" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">05 / TOOLS</p>
+      <h2>ラックとシールド、<br><em>2つの基本道具。</em></h2>
+      <p class="lead">Weber Grill Academyで最初に教わるのが、この2つ。<strong>「ロースティングシールド（火を遮る板）」と「ロースティングラック（食材を浮かせる台）」</strong>を組み合わせれば、BBQの幅は劇的に広がります。</p>
+
+      <div class="tools-grid">
+        <article class="tool-card">
+          <h4>ロースティングシールド</h4>
+          <p class="tool-en">Roasting Shield — 火を遮る板</p>
+          <div class="role"><strong>役割</strong>：直火を遮断し、強制的にインダイレクト環境を作る。脂落ちによる炎上も防止。</div>
+          <h5>使うべき食材</h5>
+          <ul>
+            <li>塊肉（ローストビーフ、ローストポーク）</li>
+            <li>鶏丸焼き</li>
+            <li>厚切り肉（20分以上焼くもの）</li>
+            <li>脂の多い肉</li>
+          </ul>
+          <h5>使う判断</h5>
+          <p style="margin-bottom:0;font-size:13px;">「焼く」より「<strong>火を通す</strong>」時間が長いとき</p>
+        </article>
+
+        <article class="tool-card">
+          <h4>ロースティングラック</h4>
+          <p class="tool-en">Roasting Rack — 食材を浮かせる台</p>
+          <div class="role"><strong>役割</strong>：食材を網から浮かせ、下からも熱を回す。皮・底面がベチャっとならない。</div>
+          <h5>使うべき食材</h5>
+          <ul>
+            <li>塊肉（特に丸い形）</li>
+            <li>鶏もも・鶏むね（皮をパリッと）</li>
+            <li>野菜（焼きすぎ防止）</li>
+            <li>杉板を使わない魚</li>
+          </ul>
+          <h5>使う判断</h5>
+          <p style="margin-bottom:0;font-size:13px;">「<strong>焦がしたくない</strong>」「均一に火を入れたい」とき</p>
+        </article>
+      </div>
+
+      <div class="tech-box">
+        <h4>正しい組み合わせ例（実践）</h4>
+        <p><strong>豚肩ロース（厚切り）の場合</strong></p>
+        <div class="tip">焼き網 ↑ ロースティングラック ↑ 豚肩ロース ↓ ロースティングシールド ↓ 直火<br>→ <strong>焦げずに63℃まで持っていける</strong></p>
+        <p><strong>サーモンの場合</strong></p>
+        <div class="tip">焼き網 ↑ <strong>杉板</strong> ↑ サーモン<br>→ 香り・水分・安全性重視</div>
+        <p><strong>鶏もも（皮をパリッ）の場合</strong></p>
+        <div class="tip">焼き網 ↑ ロースティングラック ↑ 鶏もも（皮目上）<br>→ 途中でダイレクトに戻して皮を焼く</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 06 CEDAR PLANK -->
+  <section id="cedar" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">06 / COMPATIBILITY</p>
+      <h2>杉板（シダープランク）<br><em>との使い分け。</em></h2>
+      <p class="lead">3つの道具——<strong>杉板・ラック・シールド</strong>。それぞれが活躍する場面は、食材によって違います。<strong>この表を覚えれば、BBQで迷うことはほぼ無くなります。</strong></p>
+
+      <div class="compat-table">
+        <div class="compat-row head">
+          <span>シーン</span>
+          <span>杉板</span>
+          <span>ラック</span>
+          <span>シールド</span>
+        </div>
+        <div class="compat-row"><span class="scene">サーモン</span><span><span class="compat-mark ok">◎</span> 主役</span><span><span class="compat-mark weak">△</span> 不要</span><span><span class="compat-mark no">✕</span></span></div>
+        <div class="compat-row"><span class="scene">白身魚</span><span><span class="compat-mark ok">◎</span></span><span><span class="compat-mark weak">△</span></span><span><span class="compat-mark no">✕</span></span></div>
+        <div class="compat-row"><span class="scene">鶏むね</span><span><span class="compat-mark maybe">○</span></span><span><span class="compat-mark ok">◎</span></span><span><span class="compat-mark weak">△</span></span></div>
+        <div class="compat-row"><span class="scene">豚肩ロース（厚切り）</span><span><span class="compat-mark no">✕</span></span><span><span class="compat-mark ok">◎</span></span><span><span class="compat-mark ok">◎</span></span></div>
+        <div class="compat-row"><span class="scene">ローストビーフ</span><span><span class="compat-mark no">✕</span></span><span><span class="compat-mark ok">◎</span></span><span><span class="compat-mark ok">◎</span></span></div>
+        <div class="compat-row"><span class="scene">野菜</span><span><span class="compat-mark maybe">○</span></span><span><span class="compat-mark ok">◎</span></span><span><span class="compat-mark no">✕</span></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 07 RULES -->
+  <section id="rules" class="es-section">
+    <div class="es-section-inner">
+      <p class="es-section-num">07 / FINAL RULES</p>
+      <h2>初心者の<br><em>最終ルール。</em></h2>
+      <p class="lead">細かいことは、これだけ覚えてください。BBQ当日に思い出すべき、5つだけのルール。</p>
+
+      <div class="final-rules">
+        <h3>これだけ覚えてOK</h3>
+        <p class="final-rules-sub">SLOW FIRE 初心者向け5原則</p>
+        <ul>
+          <li><strong>香りを足したい → 杉板</strong></li>
+          <li><strong>焦がしたくない → ラック</strong></li>
+          <li><strong>炎上させたくない → シールド</strong></li>
+          <li><strong>長時間 → ラック＋シールド</strong></li>
+          <li><strong>魚 → まず杉板</strong></li>
+        </ul>
+      </div>
+
+      <h3 style="margin-top:48px;">最後の3つの原則</h3>
+      <ul>
+        <li><strong>焼けない</strong> → 余熱不足。蓋を閉めて10分待つ</li>
+        <li><strong>焦げる</strong> → ダイレクトに寄りすぎ。インダイレクトに退避</li>
+        <li><strong>迷う</strong> → インダイレクトへ。間違いない</li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="es-cta">
+    <div class="es-cta-inner">
+      <h2>道具と知識が揃ったら、<br>あとは<em>火を点けるだけ</em>。</h2>
+      <p>SLOW FIRE SHOPでは、BBQの「最初の一本」になるラブを揃えています。<br>料理ガイドからメニュー選び、ペアリングからラブ選びへどうぞ。</p>
+      <div class="es-cta-btns">
+        <a href="cookbook.html" class="btn-dark">料理ガイドへ</a>
+        <a href="index.html#products" class="btn-dark" style="background:var(--off-white);color:var(--black);border:1.5px solid var(--gray-200);">商品一覧へ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html#products">商品一覧</a>
+          <a href="essentials.html">BBQの神髄</a>
+          <a href="rub-guide.html">ラブガイド</a>
+          <a href="pairing-guide.html">ペアリング</a>
+          <a href="cookbook.html">料理ガイド</a>
+          <a href="team.html">私たちについて</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    /* smooth scroll for TOC */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#' || id.length < 2) return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+  </script>
+  <script src="mobile-nav.js"></script>
+</body>
+</html>
