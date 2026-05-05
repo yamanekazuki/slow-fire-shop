@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# AI / LLM crawlers — explicitly allow
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Block admin
+User-agent: *
+Disallow: /admin.html
+Disallow: /functions/
+
+Sitemap: https://yamanekazuki.github.io/slow-fire-shop/sitemap.xml

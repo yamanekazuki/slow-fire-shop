@@ -373,27 +373,35 @@ function renderProducts(filter = 'all') {
     const origHtml  = p.originalPrice
       ? `<span class="pc-orig">¥${p.originalPrice.toLocaleString()}</span>` : '';
 
+    const catWords = p.category === 'rub' ? '海外BBQドライラブ'
+                    : p.category === 'sauce' ? 'BBQソース'
+                    : p.category === 'jerky' ? 'グラスフェッドビーフジャーキー'
+                    : 'BBQラブセット';
     return `
-      <div class="product-card" role="listitem">
+      <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product">
         <div class="pc-photo-wrap">
-          <img class="pc-photo" src="${p.image}" alt="${p.name}" loading="lazy"
+          <img class="pc-photo" src="${p.image}" itemprop="image"
+               alt="${p.name}（${p.nameja || ''}）— Low n Slow Basics オーストラリア産${catWords}"
+               width="600" height="600" loading="lazy"
                onerror="this.closest('.pc-photo-wrap').style.background='var(--gray-200)'">
-          <span class="pc-cat">${CAT_LABEL[p.category]}</span>
+          <span class="pc-cat" aria-label="カテゴリ">${CAT_LABEL[p.category]}</span>
           ${badgeHtml}
         </div>
         <div class="pc-body">
-          <div class="pc-name">${p.name}</div>
-          <div class="pc-nameja">${p.nameja}</div>
-          <p class="pc-desc">${p.desc}</p>
-          <div class="pc-footer">
+          <h3 class="pc-name" itemprop="name">${p.name}</h3>
+          <div class="pc-nameja" itemprop="alternateName">${p.nameja}</div>
+          <p class="pc-desc" itemprop="description">${p.desc}</p>
+          <div class="pc-footer" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="JPY">
+            <meta itemprop="availability" content="https://schema.org/InStock">
             <div class="pc-price-wrap">
               ${origHtml}
-              <span class="pc-price">¥${p.price.toLocaleString()}</span>
+              <span class="pc-price" itemprop="price" content="${p.price}">¥${p.price.toLocaleString()}</span>
             </div>
-            <button class="atc-btn" data-id="${p.id}">＋ カートへ</button>
+            <button class="atc-btn" data-id="${p.id}" aria-label="${p.name}をカートに追加">＋ カートへ</button>
           </div>
         </div>
-      </div>
+      </article>
     `;
   }).join('');
 
@@ -410,6 +418,47 @@ function renderProducts(filter = 'all') {
       }, 900);
     });
   });
+
+  // SEO: inject Product JSON-LD for currently displayed products
+  injectProductJsonLd(list);
+}
+
+// Inject schema.org Product structured data for crawler/AI engine consumption
+function injectProductJsonLd(list) {
+  const SITE = 'https://yamanekazuki.github.io/slow-fire-shop/';
+  const old = document.getElementById('productListJsonLd');
+  if (old) old.remove();
+
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": list.map((p, i) => ({
+      "@type": "Product",
+      "@id": `${SITE}#product-${p.id}`,
+      "position": i + 1,
+      "name": `${p.name}（${p.nameja || ''}）`.replace(/（）$/, ''),
+      "description": p.desc || p.subtitle || '',
+      "image": p.image,
+      "brand": { "@type": "Brand", "name": "Low n Slow Basics" },
+      "category": (p.category === 'rub' ? 'BBQドライラブ / Rub'
+                  : p.category === 'sauce' ? 'BBQソース / Sauce'
+                  : p.category === 'jerky' ? 'ビーフジャーキー / Jerky'
+                  : 'セット商品 / Gift Set'),
+      "countryOfOrigin": { "@type": "Country", "name": "Australia" },
+      "offers": {
+        "@type": "Offer",
+        "url": `${SITE}#products`,
+        "priceCurrency": "JPY",
+        "price": p.price,
+        "availability": "https://schema.org/InStock",
+        "seller": { "@type": "Organization", "name": "SLOW FIRE" }
+      }
+    }))
+  };
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.id = 'productListJsonLd';
+  el.textContent = JSON.stringify(data);
+  document.head.appendChild(el);
 }
 
 // Filter tabs
