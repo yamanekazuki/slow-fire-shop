@@ -581,7 +581,7 @@ function renderProducts(filter = 'all') {
                      : p.brand === 'stef-the-maori' ? '<span class="pc-brand-badge bb-stm">Stef the Maori</span>'
                      : '';
     return `
-      <article class="product-card" role="listitem" itemscope itemtype="https://schema.org/Product" data-brand="${p.brand || 'lownslow'}">
+      <article class="product-card" id="product-${p.id}" role="listitem" itemscope itemtype="https://schema.org/Product" data-brand="${p.brand || 'lownslow'}">
         <div class="pc-photo-wrap">
           <img class="pc-photo" src="${p.image}" itemprop="image"
                alt="${p.name}（${p.nameja || ''}）— ${brandLabel} ${catWords}"

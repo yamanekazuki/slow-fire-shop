@@ -350,6 +350,174 @@
       .cuts-grid         { grid-template-columns: repeat(2, 1fr); }
       .flavor-grid       { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ============================================
+       Pairing v2 — image-first, data-driven (by-cut)
+       ============================================ */
+    .pairing-wrap > p { margin-bottom: 28px; }
+    .pg-group { margin-bottom: 56px; }
+    .pg-group:last-child { margin-bottom: 0; }
+    .pg-group-head {
+      display: flex; align-items: baseline; gap: 14px;
+      margin-bottom: 24px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .pg-group-icon { font-size: 28px; line-height: 1; }
+    .pg-group-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.4vw, 26px);
+      font-weight: 700;
+      color: var(--black);
+    }
+    .pg-group-sub {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-left: auto;
+      letter-spacing: 0.04em;
+    }
+
+    .pg-cuts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+    @media (min-width: 760px) {
+      .pg-cuts { grid-template-columns: 1fr 1fr; }
+    }
+
+    .pg-cut {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
+    }
+    .pg-cut:hover { border-color: var(--gray-400); box-shadow: var(--shadow); }
+    .pg-cut-head { margin-bottom: 16px; }
+    .pg-cut-head h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+    .pg-cut-head p {
+      font-size: 12px;
+      color: var(--gray-400);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    .pg-rubs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .pg-rub {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--white);
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+      position: relative;
+    }
+    .pg-rub:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+      border-color: var(--brand);
+    }
+    .pg-rub-img-wrap {
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
+      overflow: hidden;
+      position: relative;
+    }
+    .pg-rub[data-brand="bax"] .pg-rub-img-wrap {
+      background: linear-gradient(135deg, #1f1f1f 0%, #3a2818 100%);
+    }
+    .pg-rub[data-brand="stm"] .pg-rub-img-wrap {
+      background: linear-gradient(135deg, #052e1d 0%, #15803d 100%);
+    }
+    .pg-rub-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .pg-rub:hover .pg-rub-img-wrap img { transform: scale(1.06); }
+    .pg-rub-brand-mark {
+      position: absolute;
+      top: 6px; left: 6px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: 1.5px solid white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .pg-rub[data-brand="bax"] .pg-rub-brand-mark { background: #111; }
+    .pg-rub[data-brand="stm"] .pg-rub-brand-mark { background: #15803d; }
+
+    .pg-rub-meta {
+      padding: 10px 12px 12px;
+      background: var(--white);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .pg-rub-tag {
+      align-self: flex-start;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--brand);
+      background: #FEF3C7;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-bottom: 6px;
+    }
+    .pg-rub[data-brand="bax"] .pg-rub-tag { color: #1f1f1f; background: #f3f4f6; }
+    .pg-rub[data-brand="stm"] .pg-rub-tag { color: #15803d; background: #DCFCE7; }
+    .pg-rub-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .pg-rub-brand {
+      font-size: 10px;
+      color: var(--gray-400);
+      letter-spacing: 0.03em;
+      margin-top: auto;
+    }
+
+    .pg-tip {
+      font-size: 12.5px;
+      color: var(--gray-600);
+      background: var(--off-white);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-left: 3px solid var(--brand);
+      line-height: 1.6;
+      margin-top: auto;
+    }
+
+    @media (max-width: 480px) {
+      .pg-rubs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .pg-cut { padding: 18px 16px 14px; }
+      .pg-cut-head h4 { font-size: 18px; }
+      .pg-rub-meta { padding: 8px 10px 10px; }
+      .pg-rub-name { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -363,7 +531,6 @@
       <nav class="nav-links">
         <a href="index.html#products">商品一覧</a>
         <a href="rub-guide.html">ラブガイド</a>
-        <a href="rub-map.html">ラブの見取り図</a>
         <a href="pairing-guide.html" style="color:var(--black);font-weight:700;">ペアリング</a>
         <a href="cookbook.html">料理ガイド</a>
         <a href="team.html">私たちについて</a>
@@ -400,311 +567,13 @@
   </section>
 
   <!-- 01. BY CUT -->
+  <!-- 01. BY CUT (NEW: image-first card grid, data-driven) -->
   <section id="by-cut" class="guide-section">
-    <div class="guide-wrap">
+    <div class="guide-wrap pairing-wrap">
       <p class="label-sm">01 / BY CUT</p>
       <h2>部位別<br>おすすめラブ。</h2>
-      <p>「どの肉にどのラブ？」——これが一番よく聞かれる質問です。部位ごとに、最も相性のいいラブと理由、仕込みのタイミングをまとめました。</p>
-
-      <div class="cut-categories">
-
-        <!-- 牛肉 -->
-        <div>
-          <div class="cut-category-label">牛肉</div>
-          <div class="cuts-grid">
-
-            <div class="cut-card">
-              <div class="cut-name">ステーキ</div>
-              <div class="cut-name-en">Steak — サーロイン・リブアイ</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Steak Shooter</div>
-                    <div class="cut-rub-why">発色と旨みを最大に引き出す</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Beef Bounce（重ねがけ）</div>
-                    <div class="cut-rub-why">コーヒーバークで深みを追加</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">焼く30分前〜1時間前に塗って室温に戻す</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">ブリスケット</div>
-              <div class="cut-name-en">Brisket — 胸部位・長時間スロークック</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Beef Bounce</div>
-                    <div class="cut-rub-why">ブリスケット最強ラブ。黒褐色バーク</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">○</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Steak Shooter（ベース）</div>
-                    <div class="cut-rub-why">先に薄く塗ってBounceを重ねる</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日夜に塗って冷蔵。110℃で12〜16時間</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">牛リブ</div>
-              <div class="cut-name-en">Beef Back Ribs / Short Ribs</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Beef Bounce</div>
-                    <div class="cut-rub-why">コーヒー×ペッパーが牛リブと完璧に合う</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日から仕込み。120℃で6〜8時間</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 豚肉 -->
-        <div>
-          <div class="cut-category-label">豚肉</div>
-          <div class="cuts-grid">
-
-            <div class="cut-card">
-              <div class="cut-name">スペアリブ</div>
-              <div class="cut-name-en">Spare Ribs — 骨付きバラ肉</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Honey Soy Slammer</div>
-                    <div class="cut-rub-why">グレーズ感と甘みが最高にマッチ</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">仕上げ</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="">
-                  <div>
-                    <div class="cut-rub-name">Hook Shot</div>
-                    <div class="cut-rub-why">最後に塗ってグリルでキャラメライズ</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日に塗って一晩冷蔵。120℃で4〜5時間</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">プルドポーク</div>
-              <div class="cut-name-en">Pulled Pork — 肩ロース・長時間</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Honey Soy Slammer</div>
-                    <div class="cut-rub-why">2〜3日前仕込みで深みが段違い</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">2〜3日前に仕込み。110℃で10〜12時間</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">豚ソーセージ</div>
-              <div class="cut-name-en">Pork Sausage — 直火グリル</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="">
-                  <div>
-                    <div class="cut-rub-name">Chilli Citrus Charge</div>
-                    <div class="cut-rub-why">シトラスの酸みが脂をすっきりさせる</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">焼く直前か30分前に振りかけるだけでOK</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 鶏肉 -->
-        <div>
-          <div class="cut-category-label">鶏肉</div>
-          <div class="cuts-grid">
-
-            <div class="cut-card">
-              <div class="cut-name">手羽先・ウィング</div>
-              <div class="cut-name-en">Chicken Wings — 高温直火</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Steak Shooter SPICY</div>
-                    <div class="cut-rub-why">外皮が赤く仕上がり見た目も最高</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Honey Soy Slammer</div>
-                    <div class="cut-rub-why">甘辛でやみつきになる</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">1時間前でも十分。塗って冷蔵→高温グリル</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">もも肉</div>
-              <div class="cut-name-en">Chicken Thigh — 骨付き・骨なし</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Honey Soy Slammer</div>
-                    <div class="cut-rub-why">脂と甘みのバランスが絶妙</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">○</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Garlic Goals</div>
-                    <div class="cut-rub-why">ベースに薄く塗って風味の土台に</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">30分〜2時間前。直火またはインダイレクト</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">むね肉</div>
-              <div class="cut-name-en">Chicken Breast — パサつきを防ぐ</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Garlic Goals</div>
-                    <div class="cut-rub-why">チーズ旨みが淡白さを補完する</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日から仕込むとより保湿感が出る</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">丸鶏</div>
-              <div class="cut-name-en">Whole Chicken — ビア缶チキンにも</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="">
-                  <div>
-                    <div class="cut-rub-name">Chilli Citrus Charge</div>
-                    <div class="cut-rub-why">皮が鮮やかなオレンジ色に。夏BBQ最高</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Garlic Goals</div>
-                    <div class="cut-rub-why">外と中にたっぷり。ビア缶チキンに最高</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日から外と中の両方に塗って冷蔵</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ラム・野菜 -->
-        <div>
-          <div class="cut-category-label">ラム・野菜</div>
-          <div class="cuts-grid">
-
-            <div class="cut-card">
-              <div class="cut-name">ラムチョップ</div>
-              <div class="cut-name-en">Lamb Chops — 骨付きカット</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Lamb Layup</div>
-                    <div class="cut-rub-why">獣臭を昇華。中東スパイスが香る</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">30分〜1時間前。高温で短時間グリル</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">ラムレッグ（骨付き）</div>
-              <div class="cut-name-en">Lamb Leg — スロークック推奨</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Lamb Layup</div>
-                    <div class="cut-rub-why">スロークックでスパイスが深く入る</div>
-                  </div>
-                </div>
-                <div class="cut-rub-row">
-                  <span class="badge-best">○</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Garlic Goals（ベース）</div>
-                    <div class="cut-rub-why">先に薄く。Layupを重ねると複雑な深み</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">前日から仕込み。120℃で4〜6時間</div>
-            </div>
-
-            <div class="cut-card">
-              <div class="cut-name">野菜・ポテト</div>
-              <div class="cut-name-en">Vegetables — 意外なほど合う</div>
-              <div class="cut-best-rub">
-                <div class="cut-rub-row">
-                  <span class="badge-best">◎</span>
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="cut-rub-name">Garlic Goals</div>
-                    <div class="cut-rub-why">ポテト・とうもろこし・きのこに最高</div>
-                  </div>
-                </div>
-              </div>
-              <div class="cut-timing">焼く直前に油を塗ってラブを振るだけ</div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
+      <p>「どの肉にどのラブ？」——これが一番よく聞かれる質問です。<br>3ブランド全23ラブを、部位別に最適な組み合わせで配置しました。<strong>ラブをタップすると商品ページの該当箇所に飛びます。</strong></p>
+      <div id="pairingGroups"></div>
     </div>
   </section>
 
@@ -1036,73 +905,73 @@
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥩 ステーキ全般</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-stampede" data-rub="butchers-stampede">Stampede</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-bullseye" data-rub="butchers-bullseye">Bullseye</a>
+          <a class="ba-rub" href="index.html#product-butchers-stampede" data-rub="butchers-stampede">Stampede</a>
+          <a class="ba-rub" href="index.html#product-butchers-bullseye" data-rub="butchers-bullseye">Bullseye</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥩 ブリスケット（ロー&スロー）</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-bullseye" data-rub="butchers-bullseye">Bullseye</a>
+          <a class="ba-rub" href="index.html#product-butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
+          <a class="ba-rub" href="index.html#product-butchers-bullseye" data-rub="butchers-bullseye">Bullseye</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥩 トマホーク・厚切り牛</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-stampede" data-rub="butchers-stampede">Stampede</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
+          <a class="ba-rub" href="index.html#product-butchers-stampede" data-rub="butchers-stampede">Stampede</a>
+          <a class="ba-rub" href="index.html#product-butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐷 プルドポーク（豚肩）</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-ranger" data-rub="butchers-ranger">Ranger</a>
+          <a class="ba-rub" href="index.html#product-butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
+          <a class="ba-rub" href="index.html#product-butchers-ranger" data-rub="butchers-ranger">Ranger</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍖 豚リブ・スペアリブ</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-ranger" data-rub="butchers-ranger">Ranger</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
+          <a class="ba-rub" href="index.html#product-butchers-ranger" data-rub="butchers-ranger">Ranger</a>
+          <a class="ba-rub" href="index.html#product-butchers-big-bark" data-rub="butchers-big-bark">Big Bark</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐑 ラム・カンガルー・ジビエ</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-hunter" data-rub="butchers-hunter">Hunter</a>
+          <a class="ba-rub" href="index.html#product-butchers-hunter" data-rub="butchers-hunter">Hunter</a>
           <span class="ba-rub-mute">— （唯一無二）</span>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍗 鶏丸焼き・ビア缶チキン</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-gyro" data-rub="butchers-gyro">Gyro</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-ranger" data-rub="butchers-ranger">Ranger</a>
+          <a class="ba-rub" href="index.html#product-butchers-gyro" data-rub="butchers-gyro">Gyro</a>
+          <a class="ba-rub" href="index.html#product-butchers-ranger" data-rub="butchers-ranger">Ranger</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍗 鶏胸・チキン全般</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-scout" data-rub="butchers-scout">Scout</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-gyro" data-rub="butchers-gyro">Gyro</a>
+          <a class="ba-rub" href="index.html#product-butchers-scout" data-rub="butchers-scout">Scout</a>
+          <a class="ba-rub" href="index.html#product-butchers-gyro" data-rub="butchers-gyro">Gyro</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐟 白身魚・サーモン</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-scout" data-rub="butchers-scout">Scout</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
+          <a class="ba-rub" href="index.html#product-butchers-scout" data-rub="butchers-scout">Scout</a>
+          <a class="ba-rub" href="index.html#product-butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🦐 エビ・シーフード</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-scout" data-rub="butchers-scout">Scout</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
+          <a class="ba-rub" href="index.html#product-butchers-scout" data-rub="butchers-scout">Scout</a>
+          <a class="ba-rub" href="index.html#product-butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🌮 メキシカン・カルネアサーダ</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-el-hacha" data-rub="butchers-el-hacha">El Hacha</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-ranger" data-rub="butchers-ranger">Ranger</a>
+          <a class="ba-rub" href="index.html#product-butchers-el-hacha" data-rub="butchers-el-hacha">El Hacha</a>
+          <a class="ba-rub" href="index.html#product-butchers-ranger" data-rub="butchers-ranger">Ranger</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥬 野菜グリル・野菜串</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
+          <a class="ba-rub" href="index.html#product-butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
+          <a class="ba-rub" href="index.html#product-butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍕 ピザ・パン系</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
+          <a class="ba-rub" href="index.html#product-butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
+          <a class="ba-rub" href="index.html#product-butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">⛺ 迷ったら（万能）</span>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
-          <a class="ba-rub" href="rub-map.html?rub=butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
+          <a class="ba-rub" href="index.html#product-butchers-basecamp" data-rub="butchers-basecamp">Basecamp</a>
+          <a class="ba-rub" href="index.html#product-butchers-woodlands" data-rub="butchers-woodlands">Woodlands</a>
         </div>
       </div>
 
@@ -1132,48 +1001,48 @@
         </div>
         <div class="ba-row">
           <span class="ba-cut">⛺ 迷ったら（万能）</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐷 ポークリブ・スペアリブ</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-pork-hunt" data-rub="stef-pork-hunt">Pork Hunt</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-pork-hunt" data-rub="stef-pork-hunt">Pork Hunt</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍗 チキンウィング・鶏全般</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-pork-hunt" data-rub="stef-pork-hunt">Pork Hunt</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-pork-hunt" data-rub="stef-pork-hunt">Pork Hunt</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥩 牛肉全般・ステーキ</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐑 ラム・ジビエ</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-deep-bush" data-rub="stef-deep-bush">Deep Bush</a>
           <span class="ba-rub-mute">— ホロピトの相性◎</span>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🦐 エビ・ホタテ・海鮮</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🐟 白身魚・サーモン</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🥬 野菜グリル・グリルコーン</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
         <div class="ba-row">
           <span class="ba-cut">🍳 卵料理・チャーハン</span>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
-          <a class="ba-rub stm-rub" href="rub-map.html?rub=stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-aquadesiac" data-rub="stef-aquadesiac">Aquadesiac</a>
+          <a class="ba-rub stm-rub" href="index.html#product-stef-rub-one-out" data-rub="stef-rub-one-out">Rub One Out</a>
         </div>
       </div>
 
@@ -1320,8 +1189,7 @@
     <p>どれを選べばいいか迷ったら、All-Star Comboセット（7種入り）か Basecamp（万能）が最短距離です。</p>
     <div class="cta-btns">
       <a href="index.html#products" class="btn-white">商品一覧へ</a>
-      <a href="rub-map.html" class="btn-outline">ラブの見取り図を見る</a>
-    </div>
+      </div>
   </section>
 
   <!-- FOOTER -->
@@ -1353,7 +1221,7 @@
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
     /* ============================================
-       Auto-linkify rub names → rub-map.html?rub=xxx
+       Auto-linkify rub names → index.html#product-xxx
        ============================================ */
     (function injectRubLinks() {
       const RUB_MAP = {
@@ -1412,12 +1280,296 @@
           const escapedName = matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           const html = el.innerHTML.replace(
             new RegExp(escapedName),
-            `<a class="rub-link-inject" href="rub-map.html?rub=${id}">${matched}</a>`
+            `<a class="rub-link-inject" href="index.html#product-${id}">${matched}</a>`
           );
           el.innerHTML = html;
         });
       });
     })();
+
+    /* ============================================
+       Pairing v2 — image-first card grid (data-driven)
+       ============================================ */
+    const RUB_INFO = {
+      // Low n Slow Basics
+      'steak-shooter':         { name: 'Steak Shooter',         brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+      'steak-shooter-spicy':   { name: 'Steak Shooter SPICY',   brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg' },
+      'beef-bounce':           { name: 'Beef Bounce',           brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg' },
+      'honey-soy-slammer':     { name: 'Honey Soy Slammer',     brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg' },
+      'lamb-layup':            { name: 'Lamb Layup',            brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg' },
+      'garlic-goals':          { name: 'Garlic Goals',          brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg' },
+      'chilli-citrus-charge':  { name: 'Chilli Citrus Charge',  brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png' },
+      'hook-shot':             { name: 'Hook Shot',             brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png' },
+      // Butcher's Axe
+      'butchers-bullseye':  { name: 'Bullseye',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bullseye-front.png?v=1739404920&width=400' },
+      'butchers-hunter':    { name: 'Hunter',    brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-hunter-front.png?v=1739405308&width=400' },
+      'butchers-ranger':    { name: 'Ranger',    brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-ranger-front.png?v=1739402780&width=400' },
+      'butchers-big-bark':  { name: 'Big Bark',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bigbark-front.png?v=1739404322&width=400' },
+      'butchers-stampede':  { name: 'Stampede',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-stampede-front.png?v=1739406111&width=400' },
+      'butchers-el-hacha':  { name: 'El Hacha',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-elhacha-front.png?v=1739403261&width=400' },
+      'butchers-gyro':      { name: 'Gyro',      brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-gyro-front.png?v=1739405696&width=400' },
+      'butchers-woodlands': { name: 'Woodlands', brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-woodlands-front.png?v=1745364106&width=400' },
+      'butchers-scout':     { name: 'Scout',     brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?v=1745364053&width=400' },
+      'butchers-basecamp':  { name: 'Basecamp',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?v=1747206655&width=400' },
+      // Stef the Maori
+      'stef-rub-one-out':   { name: 'Rub One Out',  brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/Stefthemaoriruboneout-front.png?v=1739318375&width=400' },
+      'stef-pork-hunt':     { name: 'Pork Hunt',    brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriPorkhunt-front.png?v=1745364300&width=400' },
+      'stef-deep-bush':     { name: 'Deep Bush',    brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriDeepbush-front.png?v=1739317303&width=400' },
+      'stef-aquadesiac':    { name: 'Aquadesiac',   brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/WEB_-Aquadesiac_-_new.png?v=1750822318&width=400' }
+    };
+
+    const BRAND_LABEL = { lns: 'Low n Slow', bax: "Butcher's Axe", stm: 'Stef the Maori' };
+
+    const PAIRING_GROUPS = [
+      {
+        title: '牛肉',
+        icon: '🥩',
+        sub: 'Beef',
+        cuts: [
+          { cut: 'ステーキ',           cutEn: 'Steak — サーロイン・リブアイ',                 tip: '焼く30分〜1時間前に塗って室温に戻す',                rubs: [
+            { id: 'steak-shooter',       tag: '王道' },
+            { id: 'butchers-bullseye',   tag: 'コンペ' },
+            { id: 'butchers-stampede',   tag: 'ステーキ専用' },
+            { id: 'beef-bounce',         tag: '重ねがけ' }
+          ] },
+          { cut: 'ブリスケット',       cutEn: 'Brisket — 胸部位・長時間ロー&スロー',          tip: '前日夜に塗って冷蔵。110℃で12〜16時間',             rubs: [
+            { id: 'beef-bounce',         tag: '王道' },
+            { id: 'butchers-big-bark',   tag: '黒バーク' },
+            { id: 'butchers-bullseye',   tag: 'コンペ' },
+            { id: 'steak-shooter',       tag: 'ベース' }
+          ] },
+          { cut: '牛リブ',             cutEn: 'Beef Back Ribs / Short Ribs',                  tip: '前日仕込み。120℃で6〜8時間',                       rubs: [
+            { id: 'beef-bounce',         tag: '濃厚' },
+            { id: 'butchers-big-bark',   tag: '深バーク' },
+            { id: 'butchers-stampede',   tag: 'ステーキ寄り' }
+          ] },
+          { cut: 'トマホーク',         cutEn: 'Tomahawk — 骨付き厚切りリブアイ',              tip: 'リバースシア法。120℃→280℃で焼き目',              rubs: [
+            { id: 'butchers-stampede',   tag: 'メイン' },
+            { id: 'beef-bounce',         tag: '深み' },
+            { id: 'steak-shooter',       tag: '基本' }
+          ] },
+          { cut: 'カルネ・アサーダ',   cutEn: 'Carne Asada — メキシカン薄切り',               tip: 'マリネ2時間以上、280℃で短時間',                    rubs: [
+            { id: 'butchers-el-hacha',   tag: '本場' },
+            { id: 'steak-shooter-spicy', tag: 'スパイス' },
+            { id: 'chilli-citrus-charge',tag: '柑橘' }
+          ] }
+        ]
+      },
+      {
+        title: '豚肉',
+        icon: '🐷',
+        sub: 'Pork',
+        cuts: [
+          { cut: 'ポークリブ',         cutEn: 'Pork Spare Ribs',                              tip: 'メンブレン剥がす。180℃で約100分',                  rubs: [
+            { id: 'honey-soy-slammer',   tag: '王道' },
+            { id: 'stef-pork-hunt',      tag: '骨太' },
+            { id: 'butchers-ranger',     tag: '濃厚' },
+            { id: 'hook-shot',           tag: '仕上げ' }
+          ] },
+          { cut: 'バックリブ',         cutEn: 'Pork Back Ribs — ロー&スロー',                 tip: '110℃で4時間、92℃で完成',                          rubs: [
+            { id: 'butchers-big-bark',   tag: '黒バーク' },
+            { id: 'beef-bounce',         tag: '深み' },
+            { id: 'honey-soy-slammer',   tag: '甘旨' }
+          ] },
+          { cut: 'プルドポーク',       cutEn: 'Pulled Pork — 豚肩ロース',                     tip: '110℃で10時間、97℃で手でほぐれる',                  rubs: [
+            { id: 'honey-soy-slammer',   tag: '王道' },
+            { id: 'butchers-big-bark',   tag: 'バーク作り' },
+            { id: 'butchers-ranger',     tag: '濃厚' }
+          ] },
+          { cut: 'ポークステーキ',     cutEn: 'Pork Steak / Loin Chop',                       tip: '直火250℃、中心63℃で完成',                         rubs: [
+            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'stef-pork-hunt',      tag: '専用設計' }
+          ] }
+        ]
+      },
+      {
+        title: '鶏肉',
+        icon: '🍗',
+        sub: 'Chicken',
+        cuts: [
+          { cut: 'ビア缶チキン',       cutEn: 'Beer Can Chicken — 丸鶏',                      tip: '1日漬け込み、200℃で約60分',                        rubs: [
+            { id: 'butchers-gyro',       tag: 'ロティサリー' },
+            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
+            { id: 'butchers-ranger',     tag: '濃厚' },
+            { id: 'stef-rub-one-out',    tag: 'マオリ' }
+          ] },
+          { cut: 'チキンモモ・骨付き', cutEn: 'Chicken Thigh — Bone-in',                     tip: 'マリネ一晩、皮目から5分→裏返し5分',                rubs: [
+            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
+            { id: 'chilli-citrus-charge',tag: '柑橘' },
+            { id: 'stef-pork-hunt',      tag: '白身肉' }
+          ] },
+          { cut: 'チキンウィング',     cutEn: 'Chicken Wings',                                tip: '皮目から焼く、73℃で完成',                          rubs: [
+            { id: 'chilli-citrus-charge',tag: '辛+爽' },
+            { id: 'steak-shooter-spicy', tag: 'スパイシー' },
+            { id: 'stef-pork-hunt',      tag: '骨太' },
+            { id: 'butchers-ranger',     tag: '赤系' }
+          ] },
+          { cut: 'チキン胸',           cutEn: 'Chicken Breast — マリネ系',                    tip: 'マリネで保湿、73℃で完成',                          rubs: [
+            { id: 'butchers-scout',      tag: 'レモン' },
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-basecamp',   tag: '万能' }
+          ] },
+          { cut: 'ジャークチキン',     cutEn: 'Jamaican Jerk Chicken',                        tip: 'マリネ一晩、皮目から焼く',                          rubs: [
+            { id: 'chilli-citrus-charge',tag: 'スパイス' },
+            { id: 'butchers-ranger',     tag: '赤系' },
+            { id: 'stef-deep-bush',      tag: 'ハーブ' }
+          ] }
+        ]
+      },
+      {
+        title: 'ラム・ジビエ',
+        icon: '🐑',
+        sub: 'Lamb & Game',
+        cuts: [
+          { cut: 'ラムチョップ',       cutEn: 'Lamb Chops',                                   tip: 'ハーブ系で短時間直火',                              rubs: [
+            { id: 'lamb-layup',          tag: '専用' },
+            { id: 'butchers-hunter',     tag: '骨太' },
+            { id: 'stef-deep-bush',      tag: 'ホロピト' }
+          ] },
+          { cut: 'ラムショルダー',     cutEn: 'Lamb Shoulder — ロー&スロー',                  tip: '120℃で6〜8時間',                                   rubs: [
+            { id: 'lamb-layup',          tag: 'メイン' },
+            { id: 'butchers-hunter',     tag: '専用' },
+            { id: 'garlic-goals',        tag: 'ベース' }
+          ] },
+          { cut: 'ジビエ（鹿・カンガルー）', cutEn: 'Venison / Kangaroo',                     tip: 'クセを抑えるハーブ系で',                            rubs: [
+            { id: 'butchers-hunter',     tag: '専用' },
+            { id: 'lamb-layup',          tag: 'ハーブ' },
+            { id: 'stef-deep-bush',      tag: 'ホロピト' }
+          ] }
+        ]
+      },
+      {
+        title: '魚介',
+        icon: '🐟',
+        sub: 'Seafood',
+        cuts: [
+          { cut: 'シダープランクサーモン', cutEn: 'Cedar Plank Salmon',                       tip: '杉板30分浸し、230℃で8〜12分',                      rubs: [
+            { id: 'lamb-layup',          tag: 'ハーブ' },
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'stef-aquadesiac',     tag: '海鮮' },
+            { id: 'butchers-scout',      tag: 'レモン' }
+          ] },
+          { cut: '上級サーモン',       cutEn: 'Honey Mustard Salmon',                         tip: 'ドリップ完全に拭き取る、高温→低温',                 rubs: [
+            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
+            { id: 'stef-aquadesiac',     tag: '海鮮' },
+            { id: 'butchers-scout',      tag: 'レモン' }
+          ] },
+          { cut: 'エビ・シーフード',   cutEn: 'Shrimp & Seafood',                             tip: '殻ごと焼く、ピンク色で取り出す',                    rubs: [
+            { id: 'stef-aquadesiac',     tag: '海鮮専用' },
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-scout',      tag: 'レモン' },
+            { id: 'lamb-layup',          tag: 'ハーブ' }
+          ] },
+          { cut: '白身魚',             cutEn: 'White Fish — タラ・スズキ',                    tip: '杉板または直火で繊細に',                            rubs: [
+            { id: 'butchers-scout',      tag: 'レモン' },
+            { id: 'stef-aquadesiac',     tag: '海鮮' },
+            { id: 'garlic-goals',        tag: '万能' }
+          ] },
+          { cut: 'さわらの西京焼き',   cutEn: 'Saikyo Miso Saba',                             tip: '味噌床1日漬け、200℃で12分',                        rubs: [
+            { id: 'honey-soy-slammer',   tag: '甘旨' },
+            { id: 'stef-aquadesiac',     tag: '和魚介' }
+          ] }
+        ]
+      },
+      {
+        title: '野菜・サイド',
+        icon: '🥬',
+        sub: 'Vegetables & Sides',
+        cuts: [
+          { cut: '季節の野菜グリル',   cutEn: 'Seasonal Grilled Vegetables',                  tip: '大きく切る、3分×3回',                              rubs: [
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-woodlands',  tag: 'ガーリック' },
+            { id: 'butchers-basecamp',   tag: '万能' },
+            { id: 'stef-rub-one-out',    tag: 'マオリ万能' }
+          ] },
+          { cut: 'スキュアーベジタブル', cutEn: 'Vegetable Skewers',                           tip: '竹串30分浸し、200℃で6分',                          rubs: [
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-basecamp',   tag: '万能' },
+            { id: 'butchers-woodlands',  tag: 'ガーリック' }
+          ] },
+          { cut: 'アスパラガス',       cutEn: 'Grilled Asparagus',                            tip: '太め選ぶ、3〜4分直火',                              rubs: [
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-scout',      tag: 'レモン' },
+            { id: 'butchers-basecamp',   tag: 'シンプル' }
+          ] },
+          { cut: 'ポートベローマッシュルーム', cutEn: 'Portobello Mushroom',                  tip: '軸を取り、傘を上にして焼く',                       rubs: [
+            { id: 'butchers-woodlands',  tag: 'ガーリック' },
+            { id: 'garlic-goals',        tag: '万能' }
+          ] },
+          { cut: 'BBQポテトグラタン',  cutEn: 'BBQ Potato Gratin',                            tip: 'インダイレクトで30分',                              rubs: [
+            { id: 'garlic-goals',        tag: '万能' },
+            { id: 'butchers-woodlands',  tag: 'ガーリック' }
+          ] },
+          { cut: 'ピザ・パン系',       cutEn: 'Pizza & Bread',                                tip: 'ピザストーン8分予熱',                                rubs: [
+            { id: 'butchers-woodlands',  tag: 'ガーリック' },
+            { id: 'garlic-goals',        tag: '万能' }
+          ] }
+        ]
+      },
+      {
+        title: '迷ったら（万能）',
+        icon: '⛺',
+        sub: 'When in doubt',
+        cuts: [
+          { cut: '初めての一本',       cutEn: 'Best for Beginners',                           tip: 'まず1本だけ買うならこれ',                           rubs: [
+            { id: 'butchers-basecamp',   tag: '万能' },
+            { id: 'stef-rub-one-out',    tag: 'マオリ万能' },
+            { id: 'garlic-goals',        tag: 'ガーリック万能' }
+          ] },
+          { cut: 'チャーハン・卵料理', cutEn: 'Fried Rice & Eggs',                            tip: '仕上げに振るだけ',                                  rubs: [
+            { id: 'butchers-basecamp',   tag: '万能' },
+            { id: 'stef-aquadesiac',     tag: 'アジアン' },
+            { id: 'stef-rub-one-out',    tag: 'シンプル' }
+          ] }
+        ]
+      }
+    ];
+
+    function renderPairings() {
+      const container = document.getElementById('pairingGroups');
+      if (!container) return;
+      container.innerHTML = PAIRING_GROUPS.map(group => `
+        <div class="pg-group">
+          <div class="pg-group-head">
+            <span class="pg-group-icon">${group.icon}</span>
+            <h3 class="pg-group-title">${group.title}</h3>
+            <span class="pg-group-sub">${group.sub}</span>
+          </div>
+          <div class="pg-cuts">
+            ${group.cuts.map(c => `
+              <article class="pg-cut">
+                <header class="pg-cut-head">
+                  <h4>${c.cut}</h4>
+                  <p>${c.cutEn}</p>
+                </header>
+                <div class="pg-rubs">
+                  ${c.rubs.map(r => {
+                    const info = RUB_INFO[r.id];
+                    if (!info) return '';
+                    return `
+                      <a class="pg-rub" href="index.html#product-${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
+                        <div class="pg-rub-img-wrap">
+                          <span class="pg-rub-brand-mark" aria-hidden="true"></span>
+                          <img src="${info.image}" alt="${info.name}" loading="lazy">
+                        </div>
+                        <div class="pg-rub-meta">
+                          <span class="pg-rub-tag">${r.tag}</span>
+                          <div class="pg-rub-name">${info.name}</div>
+                          <div class="pg-rub-brand">${BRAND_LABEL[info.brand]}</div>
+                        </div>
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+                <div class="pg-tip">💡 ${c.tip}</div>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+    renderPairings();
   </script>
   <script src="mobile-nav.js"></script>
 </body>
