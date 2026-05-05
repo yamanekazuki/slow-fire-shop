@@ -328,15 +328,28 @@
       </a>
       <nav class="nav-links">
         <a href="#products">商品一覧</a>
-        <a href="essentials.html">BBQの神髄</a>
-        <a href="rub-guide.html">ラブガイド</a>
-        <a href="pairing-guide.html">ペアリング</a>
-        <a href="cookbook.html">料理ガイド</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="essentials.html" role="menuitem">
+              <strong>BBQの神髄</strong>
+              <span>初めての方向け・グリルの選び方</span>
+            </a>
+            <a href="pairing-guide.html" role="menuitem">
+              <strong>食材から選ぶ</strong>
+              <span>部位別おすすめラブ・ペアリング</span>
+            </a>
+            <a href="cookbook.html" role="menuitem">
+              <strong>料理から選ぶ</strong>
+              <span>24品の料理ガイド</span>
+            </a>
+            <a href="rub-guide.html" role="menuitem">
+              <strong>ラブガイド</strong>
+              <span>ラブの種類と使い方</span>
+            </a>
+          </div>
+        </div>
         <a href="team.html">私たちについて</a>
-        <a href="#faq">FAQ</a>
-        <a href="https://yamanekazuki.github.io/slow-fire/" target="_blank" rel="noopener">
-          サービスサイト ↗
-        </a>
       </nav>
       <div class="nav-right">
         <button id="accountBtn" class="account-btn" aria-label="アカウント">
@@ -360,85 +373,27 @@
     </div>
   </header>
 
-  <!-- ===== HERO CAROUSEL ===== -->
-  <section class="carousel" aria-label="海外BBQラブ・人気商品ハイライト">
-    <div class="carousel-track" id="carouselTrack">
-
-      <div class="carousel-slide">
-        <div class="slide-text">
-          <p class="slide-tag">ALL-IN-ONE SET</p>
-          <h1 class="slide-h">全7種が揃う<br>最強ラブセット</h1>
-          <p class="slide-p">All-Star Combo — バックヤードから競技大会まで対応するLow n Slow Basics全ラインナップ。ギフトにも最適。</p>
-          <div class="slide-actions">
-            <a href="#products" class="btn-dark">セットを見る</a>
-            <span class="slide-price">¥24,000〜</span>
-          </div>
-        </div>
-        <div class="slide-img">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/all-star-combo-plus-hookshot-NEW-600x600.jpg" alt="All-Star Combo + Hook Shot" loading="eager">
-        </div>
+  <!-- ===== HOME HERO ===== -->
+  <section class="home-hero">
+    <div class="home-hero-inner">
+      <p class="home-hero-eyebrow">OVERSEAS BBQ RUBS · 3 BRANDS · 28 PRODUCTS</p>
+      <h1 class="home-hero-h">
+        ラブを変えると、<br>BBQが変わる。
+      </h1>
+      <p class="home-hero-sub">
+        オーストラリア・ニュージーランド直輸入の本格BBQラブ。<br>
+        コンペティション級の3ブランド、全28商品を日本正規取扱。
+      </p>
+      <div class="home-hero-cta">
+        <a href="#paths" class="btn-dark btn-hero">どう選ぶ？ →</a>
+        <a href="#products" class="btn-hero btn-ghost">商品一覧を見る</a>
       </div>
-
-      <div class="carousel-slide">
-        <div class="slide-text">
-          <p class="slide-tag">BEST SELLER</p>
-          <h1 class="slide-h">豚・鶏に<br>最高の一本</h1>
-          <p class="slide-p">Honey Soy Slammer — 蜂蜜と醤油の絶妙なブレンドで、ポークリブやチキンウィングが別次元の仕上がりに。</p>
-          <div class="slide-actions">
-            <a href="#products" class="btn-dark">購入する</a>
-            <span class="slide-price">¥3,800</span>
-          </div>
-        </div>
-        <div class="slide-img">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="Honey Soy Slammer" loading="lazy">
-        </div>
-      </div>
-
-      <div class="carousel-slide">
-        <div class="slide-text">
-          <p class="slide-tag">FOR BEEF</p>
-          <h1 class="slide-h">ブリスケットを<br>極める一本</h1>
-          <p class="slide-p">Beef Bounce — コーヒーノートとブラックペッパーの深みが、牛肉のバーク（外皮）を完璧に仕上げる本格派ラブ。</p>
-          <div class="slide-actions">
-            <a href="#products" class="btn-dark">購入する</a>
-            <span class="slide-price">¥3,800</span>
-          </div>
-        </div>
-        <div class="slide-img">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="Beef Bounce" loading="lazy">
-        </div>
-      </div>
-
-      <div class="carousel-slide">
-        <div class="slide-text">
-          <p class="slide-tag">NEW ARRIVAL</p>
-          <h1 class="slide-h">チリ×シトラスの<br>新定番</h1>
-          <p class="slide-p">Chilli Citrus Charge — チリの辛さと柑橘の爽やかさが絶妙。チキンや豚肉に鮮やかな発色と深みを与える新しいスタンダード。</p>
-          <div class="slide-actions">
-            <a href="#products" class="btn-dark">購入する</a>
-            <span class="slide-price">¥3,800</span>
-          </div>
-        </div>
-        <div class="slide-img">
-          <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="Chilli Citrus Charge" loading="lazy">
-        </div>
-      </div>
-
     </div>
-
-    <!-- Controls -->
-    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="前へ">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="次へ">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <div class="carousel-dots" id="carouselDots"></div>
   </section>
 
   <!-- ===== TRUST STRIP ===== -->
   <div class="trust-strip" role="region" aria-label="お買い物のメリット">
-    <span>🇦🇺 オーストラリア直輸入の本格BBQラブ</span>
+    <span>🇦🇺🇳🇿 海外3ブランド正規取扱</span>
     <span class="divider">|</span>
     <span>📦 全国送料¥990 / ¥15,000以上無料</span>
     <span class="divider">|</span>
@@ -447,12 +402,115 @@
     <span>🔒 Apple Pay / Google Pay 対応</span>
   </div>
 
+  <!-- ===== 3-WAY PATHS ===== -->
+  <section id="paths" class="home-paths">
+    <div class="home-paths-inner">
+      <div class="home-paths-head">
+        <p class="home-paths-eyebrow">FIND YOUR RUB</p>
+        <h2>あなたに合うラブを、<br>3つの入口から見つける。</h2>
+        <p>「BBQラブ」と一言で言っても、選び方は人それぞれ。<br>あなたの状況に合った入口から進んでください。</p>
+      </div>
+
+      <div class="paths-grid">
+
+        <a href="pairing-guide.html" class="path-card">
+          <div class="path-card-num">01</div>
+          <h3>食材から選ぶ</h3>
+          <p class="path-target">「ステーキ用に何が合う？」<br>「鶏肉に最適なラブは？」</p>
+          <p class="path-desc">部位別ペアリングで、肉や魚に最適なラブが一発で分かります。3ブランド全23ラブから最適解を提示。</p>
+          <span class="path-arrow">部位別ペアリングへ →</span>
+        </a>
+
+        <a href="essentials.html" class="path-card path-card--featured">
+          <span class="path-badge">初めての方</span>
+          <div class="path-card-num">02</div>
+          <h3>初めてのBBQ</h3>
+          <p class="path-target">「何から買えばいい？」<br>「グリルって何が違うの？」</p>
+          <p class="path-desc">グリルの選び方、火の配置、ラックとシールド——BBQの神髄を1ページに。最初の一本も、ここで決まります。</p>
+          <span class="path-arrow">BBQの神髄を読む →</span>
+        </a>
+
+        <a href="#sets" class="path-card">
+          <div class="path-card-num">03</div>
+          <h3>ギフト・セット</h3>
+          <p class="path-target">「BBQ好きへの贈り物」<br>「全種類試したい」</p>
+          <p class="path-desc">All-Star Comboなどの厳選セット。失敗しないギフト、自分への投資、両方に最適です。</p>
+          <span class="path-arrow">セット商品へ →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOP PICKS — 迷ったらこの3本 ===== -->
+  <section class="home-picks">
+    <div class="home-picks-inner">
+      <div class="home-picks-head">
+        <p class="home-picks-eyebrow">TOP PICKS</p>
+        <h2>迷ったら、この3本。</h2>
+        <p>SLOW FIREが選ぶ、最初に手に取るべき定番。</p>
+      </div>
+
+      <div class="picks-grid">
+
+        <article class="pick-card">
+          <span class="pick-tag pick-tag-1">初心者・万能</span>
+          <a href="#product-butchers-basecamp" class="pick-img">
+            <img src="https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?v=1747206655&width=800" alt="Basecamp">
+          </a>
+          <div class="pick-body">
+            <h3>Basecamp</h3>
+            <p class="pick-sub">Butcher's Axe · 万能シーズニング</p>
+            <p class="pick-reason">「BBQの拠点」と呼ばれる万能型。肉・魚・野菜・卵まで、これ1本で大半の料理が成立する。最初の一本に。</p>
+            <div class="pick-foot">
+              <span class="pick-price">¥2,980</span>
+              <a href="#product-butchers-basecamp" class="btn-dark btn-sm">詳しく見る →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pick-card">
+          <span class="pick-tag pick-tag-2">人気No.1</span>
+          <a href="#product-honey-soy-slammer" class="pick-img">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="Honey Soy Slammer">
+          </a>
+          <div class="pick-body">
+            <h3>Honey Soy Slammer</h3>
+            <p class="pick-sub">Low n Slow Basics · 豚・鶏特化</p>
+            <p class="pick-reason">蜂蜜と醤油のグレーズが、ポークリブとチキンウィングを別次元に。日本人の味覚に最も馴染むラブ。</p>
+            <div class="pick-foot">
+              <span class="pick-price">¥3,800</span>
+              <a href="#product-honey-soy-slammer" class="btn-dark btn-sm">詳しく見る →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pick-card">
+          <span class="pick-tag pick-tag-3">セット推し</span>
+          <a href="#product-all-star-combo" class="pick-img">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png" alt="All-Star Combo">
+          </a>
+          <div class="pick-body">
+            <h3>All-Star Combo</h3>
+            <p class="pick-sub">Low n Slow Basics · 7種セット</p>
+            <p class="pick-reason">全7種ラブが揃う最強セット。あらゆるBBQシーンに対応。ギフトにも、自分の本気の入口にも最適。</p>
+            <div class="pick-foot">
+              <span class="pick-price">¥24,000<span class="pick-price-strike">¥26,600</span></span>
+              <a href="#product-all-star-combo" class="btn-dark btn-sm">詳しく見る →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PRODUCTS ===== -->
   <section id="products" class="products-sec" aria-labelledby="productsHead">
     <div class="sec-wrap">
       <div class="sec-head">
-        <h2 id="productsHead">BBQラブ・BBQソース・ジャーキー 商品一覧</h2>
-        <p>Low n Slow Basics（オーストラリア）— 全13ラインナップ</p>
+        <h2 id="productsHead">全商品一覧</h2>
+        <p>3ブランド28商品 — フィルターで絞り込めます</p>
       </div>
       <div class="filter-row" role="tablist">
         <button class="filter-btn active" data-filter="all" role="tab">すべて</button>
@@ -465,54 +523,110 @@
     </div>
   </section>
 
-  <!-- ===== BRAND ===== -->
-  <section id="brand" class="brand-sec" aria-labelledby="brandHead">
-    <div class="brand-wrap">
-      <div class="brand-img">
-        <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/Rubs-Bundle-Updated-600x600.png"
-             alt="Low n Slow Basics オーストラリア産BBQラブ全種類セット — Steak Shooter / Beef Bounce / Honey Soy Slammer 等"
-             width="600" height="600" loading="lazy">
+  <!-- ===== COOKBOOK PEEK — 料理から選ぶ ===== -->
+  <section class="home-cookbook">
+    <div class="home-cookbook-inner">
+      <div class="home-cookbook-head">
+        <p class="home-cookbook-eyebrow">FROM THE COOKBOOK</p>
+        <h2>料理から、ラブを決める。</h2>
+        <p>「今日は何作る？」から逆算して、必要なラブが見つかります。<br>SLOW FIRE料理ガイド全24品から、人気の6品を抜粋。</p>
       </div>
-      <div class="brand-text">
-        <p class="label-sm">BRAND STORY</p>
-        <h2 id="brandHead">なぜ、海外（オーストラリア）の<br>BBQラブなのか。</h2>
-        <p>Low n Slow Basicsは、オーストラリアのバックヤードBBQとコンペティションシーン（BBQ競技会）で磨かれたプレミアムブランドです。プロのピットマスターが認める<strong>発色・旨み・汎用性</strong>を、全7種のドライラブ＋シグネチャーBBQソースで実現。塩・砂糖・パプリカ・ガーリックを独自配合し、低温長時間調理（ロー&スロー）で美しい「バーク（外皮）」を生み出します。</p>
-        <p>日本では正規流通していなかったこのブランドを、SLOW FIREが日本初上陸。アメリカンBBQ／オーストラリアンBBQに必要な本格スパイスブレンドを、グラスフェッド牛のジャーキーと合わせて、全品オーストラリア品質そのままお届けします。</p>
-        <div class="brand-origin">
-          <span class="flag" aria-hidden="true">🇦🇺</span>
-          <span>Australia → Japan</span>
-          <span class="badge-official">SLOW FIRE 日本正規取扱</span>
-        </div>
+
+      <div class="cookbook-peek-grid">
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/cedar-salmon.jpg?v=20260506" alt="シダープランクサーモン" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-1">初級</span>
+            <h4>シダープランクサーモン</h4>
+          </div>
+        </a>
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/shrimp-grill.jpg?v=20260506" alt="ガーリックシュリンプ" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-1">初級</span>
+            <h4>ガーリックシュリンプ</h4>
+          </div>
+        </a>
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/lemon-chicken.jpg?v=20260506" alt="ガーリックレモンチキン" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-2">中級</span>
+            <h4>ガーリックレモンチキン</h4>
+          </div>
+        </a>
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/pizza.jpg?v=20260506" alt="マルゲリータピッツァ" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-2">中級</span>
+            <h4>マルゲリータピッツァ</h4>
+          </div>
+        </a>
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/bratwurst.jpg?v=20260506" alt="ブラートソーセージ" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-1">初級</span>
+            <h4>ブラートソーセージ</h4>
+          </div>
+        </a>
+        <a href="cookbook.html" class="cookbook-peek">
+          <div class="cookbook-peek-img"><img src="images/recipes/veg-grill.jpg?v=20260506" alt="季節の野菜グリル" loading="lazy"></div>
+          <div class="cookbook-peek-meta">
+            <span class="cookbook-peek-level lvl-1">初級</span>
+            <h4>季節の野菜グリル</h4>
+          </div>
+        </a>
+      </div>
+
+      <div class="home-cookbook-cta">
+        <a href="cookbook.html" class="btn-dark">全24品の料理ガイドへ →</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== HOW TO USE ===== -->
-  <section id="howto" class="howto-sec">
-    <div class="sec-wrap">
-      <div class="sec-head">
-        <h2>ラブの使い方</h2>
-        <p>3ステップで本場のBBQフレーバー</p>
+  <!-- ===== 3 BRANDS ===== -->
+  <section class="home-brands">
+    <div class="home-brands-inner">
+      <div class="home-brands-head">
+        <p class="home-brands-eyebrow">3 BRANDS</p>
+        <h2>3つのブランド、<br>3つの世界観。</h2>
+        <p>SLOW FIREは、性格の違う3ブランドを揃えています。<br>「どの世界観で焼くか」で選んでも、楽しい。</p>
       </div>
-      <div class="steps-row">
-        <div class="step">
-          <div class="step-no">01</div>
-          <h3>たっぷり振る</h3>
-          <p>肉の表面全体をラブで覆い隠すように振りかける。少なすぎると効果半減。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-no">02</div>
-          <h3>なじませる</h3>
-          <p>塩分が肉に浸透するよう最低30分〜理想は一晩、冷蔵で休ませる。</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-no">03</div>
-          <h3>じっくり焼く</h3>
-          <p>低温・間接熱でゆっくり火入れ。美しいバークとジューシーな仕上がりに。</p>
-        </div>
+
+      <div class="brands-grid">
+        <article class="brand-card">
+          <p class="brand-card-origin">🇦🇺 Australia</p>
+          <h3>Low n Slow Basics</h3>
+          <p class="brand-card-tagline">洗練された深み。コンペBBQの王道。</p>
+          <p class="brand-card-desc">オーストラリアのバックヤード＆コンペティションBBQで磨かれた定番。プロのピットマスターが認める発色と旨み。SLOW FIRE日本初上陸。</p>
+          <p class="brand-card-count">8商品</p>
+        </article>
+
+        <article class="brand-card">
+          <p class="brand-card-origin">🇦🇺 Australia · Stagg & Co</p>
+          <h3>Butcher's Axe BBQ</h3>
+          <p class="brand-card-tagline">骨太な直球。コンペ向け本格派。</p>
+          <p class="brand-card-desc">「斧（Axe）」のように切れ味のある、競技BBQの即戦力。Big Barkや黒バーク用の本格ブレンドを中心に、初心者向け万能型まで揃えた幅広いライン。</p>
+          <p class="brand-card-count">12商品</p>
+        </article>
+
+        <article class="brand-card">
+          <p class="brand-card-origin">🇳🇿 New Zealand · Stagg & Co</p>
+          <h3>Stef the Maori</h3>
+          <p class="brand-card-tagline">遊び心と異国情緒。NZマオリの森から。</p>
+          <p class="brand-card-desc">アオテアロア（NZ）北部発祥。ニュージーランド原産のホロピトを使ったDeep Bushや、海鮮万能のAquadesiacなど、唯一無二の世界観。</p>
+          <p class="brand-card-count">4商品</p>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== ESSENTIALS CTA ===== -->
+  <section class="home-ess-cta">
+    <div class="home-ess-cta-inner">
+      <p class="home-ess-cta-eyebrow">DEEPER DIVE</p>
+      <h2>BBQをもっと、<br>知りたくなったら。</h2>
+      <p>炭・ガス・電気・スモーカーの選び方、火の配置、オリーブオイルの正解、ロースティングラック＆シールドの使い分け——<br>BBQの神髄を、1ページに凝縮しました。</p>
+      <a href="essentials.html" class="btn-dark btn-hero">BBQの神髄を読む →</a>
     </div>
   </section>
 
