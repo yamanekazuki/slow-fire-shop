@@ -511,45 +511,50 @@
       gap: 6px;
     }
     .ck-rub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
     }
     .ck-rub {
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
+      flex-direction: column;
       background: var(--white);
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid var(--gray-200);
-      transition: border-color 0.2s, transform 0.2s;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       color: inherit;
     }
     .ck-rub:hover {
       border-color: var(--brand);
-      transform: translateX(2px);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
-    .ck-rub-icon {
-      width: 36px; height: 36px;
-      flex-shrink: 0;
-      background: var(--brand);
-      color: var(--white);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+    .ck-rub-img-wrap {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
     }
-    .ck-rub-text { flex: 1; }
+    .ck-rub[data-brand="butchers-axe"] .ck-rub-img-wrap { background: linear-gradient(135deg, #1f1f1f, #3a2818); }
+    .ck-rub[data-brand="stef-the-maori"] .ck-rub-img-wrap { background: linear-gradient(135deg, #052e1d, #15803d); }
+    .ck-rub-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ck-rub-meta {
+      padding: 8px 10px 10px;
+    }
     .ck-rub-name {
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--black);
+      line-height: 1.35;
       margin-bottom: 2px;
     }
     .ck-rub-desc {
-      font-size: 11.5px;
-      color: var(--gray-600);
+      font-size: 10.5px;
+      color: var(--gray-400);
       line-height: 1.4;
     }
     .ck-rub-arrow {
@@ -946,32 +951,32 @@
      ============================================ */
   const RUB_DB = {
     // Low n Slow Basics
-    'steak-shooter':       { icon: '🥩', name: 'Steak Shooter',          desc: '牛肉のスタンダード（LNS）' },
-    'steak-shooter-spicy': { icon: '🌶️', name: 'Steak Shooter SPICY',    desc: 'スパイシー版・辛さ2/5（LNS）' },
-    'beef-bounce':         { icon: '☕', name: 'Beef Bounce',             desc: 'コーヒー＋ペッパーの深み（LNS）' },
-    'honey-soy-slammer':   { icon: '🍯', name: 'Honey Soy Slammer',       desc: '蜂蜜＋醤油のグレーズ（LNS）' },
-    'lamb-layup':          { icon: '🌿', name: 'Lamb Layup',              desc: 'ハーブ＋スマック（LNS）' },
-    'garlic-goals':        { icon: '🧄', name: 'Garlic Goals',            desc: 'ガーリック万能型（LNS）' },
-    'chilli-citrus-charge':{ icon: '🍊', name: 'Chilli Citrus Charge',   desc: 'チリ×シトラス（LNS）' },
-    'hook-shot':           { icon: '🔥', name: 'Hook Shot',               desc: 'シグネチャーBBQソース（LNS）' },
+    'steak-shooter':       { brand: 'lownslow', name: 'Steak Shooter',          desc: '牛肉のスタンダード',         image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
+    'steak-shooter-spicy': { brand: 'lownslow', name: 'Steak Shooter SPICY',    desc: 'スパイシー版・辛さ2/5',      image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg' },
+    'beef-bounce':         { brand: 'lownslow', name: 'Beef Bounce',            desc: 'コーヒー＋ペッパーの深み',   image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg' },
+    'honey-soy-slammer':   { brand: 'lownslow', name: 'Honey Soy Slammer',      desc: '蜂蜜＋醤油のグレーズ',       image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg' },
+    'lamb-layup':          { brand: 'lownslow', name: 'Lamb Layup',             desc: 'ハーブ＋スマック',           image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg' },
+    'garlic-goals':        { brand: 'lownslow', name: 'Garlic Goals',           desc: 'ガーリック万能型',           image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg' },
+    'chilli-citrus-charge':{ brand: 'lownslow', name: 'Chilli Citrus Charge',   desc: 'チリ×シトラス',              image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png' },
+    'hook-shot':           { brand: 'lownslow', name: 'Hook Shot',              desc: 'シグネチャーBBQソース',      image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png' },
 
     // Butcher's Axe BBQ
-    'butchers-bullseye':   { icon: '🎯', name: 'Bullseye',               desc: "ビーフ特化（Butcher's Axe）" },
-    'butchers-hunter':     { icon: '🏹', name: 'Hunter',                 desc: "ラム・ジビエ用（Butcher's Axe）" },
-    'butchers-ranger':     { icon: '🌶️', name: 'Ranger',                 desc: "ビッグレッド・濃厚（Butcher's Axe）" },
-    'butchers-big-bark':   { icon: '⚫', name: 'Big Bark',               desc: "ロー&スロー黒バーク（Butcher's Axe）" },
-    'butchers-stampede':   { icon: '🐂', name: 'Stampede',               desc: "ステーキ専用（Butcher's Axe）" },
-    'butchers-el-hacha':   { icon: '🪓', name: 'El Hacha',               desc: "テックスメックス（Butcher's Axe）" },
-    'butchers-gyro':       { icon: '🥙', name: 'Gyro',                   desc: "ロティサリー・地中海（Butcher's Axe）" },
-    'butchers-woodlands':  { icon: '🌳', name: 'Woodlands',              desc: "ワイルドガーリック（Butcher's Axe）" },
-    'butchers-scout':      { icon: '🍋', name: 'Scout',                  desc: "レモンペッパー（Butcher's Axe）" },
-    'butchers-basecamp':   { icon: '⛺', name: 'Basecamp',               desc: "万能シーズニング（Butcher's Axe）" },
+    'butchers-bullseye':   { brand: 'butchers-axe', name: 'Bullseye',           desc: "ビーフ特化",                  image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bullseye-front.png?width=400' },
+    'butchers-hunter':     { brand: 'butchers-axe', name: 'Hunter',             desc: "ラム・ジビエ用",              image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-hunter-front.png?width=400' },
+    'butchers-ranger':     { brand: 'butchers-axe', name: 'Ranger',             desc: "ビッグレッド・濃厚",          image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-ranger-front.png?width=400' },
+    'butchers-big-bark':   { brand: 'butchers-axe', name: 'Big Bark',           desc: "ロー&スロー黒バーク",         image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bigbark-front.png?width=400' },
+    'butchers-stampede':   { brand: 'butchers-axe', name: 'Stampede',           desc: "ステーキ専用",                image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-stampede-front.png?width=400' },
+    'butchers-el-hacha':   { brand: 'butchers-axe', name: 'El Hacha',           desc: "テックスメックス",            image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-elhacha-front.png?width=400' },
+    'butchers-gyro':       { brand: 'butchers-axe', name: 'Gyro',               desc: "ロティサリー・地中海",        image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-gyro-front.png?width=400' },
+    'butchers-woodlands':  { brand: 'butchers-axe', name: 'Woodlands',          desc: "ワイルドガーリック",          image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-woodlands-front.png?width=400' },
+    'butchers-scout':      { brand: 'butchers-axe', name: 'Scout',              desc: "レモンペッパー",              image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?width=400' },
+    'butchers-basecamp':   { brand: 'butchers-axe', name: 'Basecamp',           desc: "万能シーズニング",            image: 'https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?width=400' },
 
     // Stef the Maori
-    'stef-rub-one-out':    { icon: '🌿', name: 'Rub One Out',            desc: 'NZマオリ発・万能（Stef the Maori）' },
-    'stef-pork-hunt':      { icon: '🐗', name: 'Pork Hunt',              desc: '豚・チキン特化（Stef the Maori）' },
-    'stef-deep-bush':      { icon: '🌳', name: 'Deep Bush',              desc: 'ホロピト主軸・微辛味（Stef the Maori）' },
-    'stef-aquadesiac':     { icon: '🌊', name: 'Aquadesiac',             desc: '海鮮・アジアン万能（Stef the Maori）' }
+    'stef-rub-one-out':    { brand: 'stef-the-maori', name: 'Rub One Out',      desc: 'NZマオリ発・万能',            image: 'https://www.staggandco.com.au/cdn/shop/files/Stefthemaoriruboneout-front.png?width=400' },
+    'stef-pork-hunt':      { brand: 'stef-the-maori', name: 'Pork Hunt',        desc: '豚・チキン特化',              image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriPorkhunt-front.png?width=400' },
+    'stef-deep-bush':      { brand: 'stef-the-maori', name: 'Deep Bush',        desc: 'ホロピト主軸・微辛味',         image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriDeepbush-front.png?width=400' },
+    'stef-aquadesiac':     { brand: 'stef-the-maori', name: 'Aquadesiac',       desc: '海鮮・アジアン万能',          image: 'https://www.staggandco.com.au/cdn/shop/files/WEB_-Aquadesiac_-_new.png?width=400' }
   };
 
   const RECIPES = [
@@ -1342,13 +1347,14 @@
         const rub = RUB_DB[rid];
         if (!rub) return '';
         return `
-          <a href="index.html#products" class="ck-rub">
-            <div class="ck-rub-icon">${rub.icon}</div>
-            <div class="ck-rub-text">
+          <a href="index.html#product-${rid}" class="ck-rub" data-brand="${rub.brand}" aria-label="${rub.name}">
+            <div class="ck-rub-img-wrap">
+              <img src="${rub.image}" alt="${rub.name}" loading="lazy">
+            </div>
+            <div class="ck-rub-meta">
               <div class="ck-rub-name">${rub.name}</div>
               <div class="ck-rub-desc">${rub.desc}</div>
             </div>
-            <span class="ck-rub-arrow">→</span>
           </a>
         `;
       }).join('');
