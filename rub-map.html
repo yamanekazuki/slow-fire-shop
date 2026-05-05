@@ -548,6 +548,22 @@
   window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
   renderDots();
+
+  /* auto-select rub from URL: ?rub=steak-shooter or #steak-shooter */
+  (function autoSelectFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const fromQuery = params.get('rub');
+    const fromHash = window.location.hash.replace('#', '');
+    const id = fromQuery || fromHash;
+    if (id && RUBS.find(r => r.id === id)) {
+      // small delay so layout settles
+      setTimeout(() => {
+        selectRub(id);
+        // smooth scroll the chart into view
+        document.querySelector('.rm-chart-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  })();
   </script>
 </body>
 </html>
