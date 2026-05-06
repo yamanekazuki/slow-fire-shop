@@ -543,3 +543,6 @@ const RECIPE_INFO = {
   'mushroom-grill':    { name: 'ポートベローマッシュルーム',   icon: '🍄', level: '初級', image: '' },
   'asparagus-grill':   { name: 'アスパラガスのグリル',         icon: '🌿', level: '初級', image: '' }
 };
+
+window.PRODUCT_DETAILS = PRODUCT_DETAILS;
+window.RECIPE_INFO = RECIPE_INFO;

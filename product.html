@@ -101,17 +101,16 @@
       letter-spacing: 0.04em;
     }
     .pd-flavor {
-      padding: 16px 18px;
+      padding: 14px 16px;
       background: var(--off-white);
       border-radius: 10px;
-      border-left: 3px solid var(--brand);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
     .pd-flavor-label {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.14em;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--brand);
+      color: var(--gray-400);
       margin-bottom: 6px;
     }
     .pd-flavor-text {
@@ -121,23 +120,38 @@
       font-weight: 500;
     }
 
-    /* spice level */
+    /* spice level — clearer presentation */
     .pd-spice {
       display: flex; align-items: center;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 24px;
-      font-size: 13px;
-      color: var(--gray-600);
+      padding: 12px 16px;
+      background: var(--off-white);
+      border-radius: 10px;
     }
-    .pd-spice-bars {
-      display: flex; gap: 4px;
+    .pd-spice-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-400);
     }
-    .pd-spice-bar {
-      width: 16px; height: 8px;
-      border-radius: 2px;
+    .pd-spice-value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-left: auto;
+    }
+    .pd-spice-scale {
+      display: flex; gap: 3px;
+    }
+    .pd-spice-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
       background: var(--gray-200);
     }
-    .pd-spice-bar.on { background: var(--brand); }
+    .pd-spice-dot.on { background: #DC2626; }
+    .pd-spice-dot.lvl-0.on { background: var(--gray-400); }
 
     .pd-desc {
       font-size: 14px;
@@ -201,40 +215,67 @@
       letter-spacing: -0.005em;
     }
 
-    /* food affinity */
-    .pd-affinity {
-      max-width: 640px;
+    /* food affinity — radar (pentagon) chart */
+    .pd-affinity-wrap {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .pd-affinity-row {
-      display: grid;
-      grid-template-columns: 80px 1fr 60px;
+      gap: 28px;
       align-items: center;
-      gap: 14px;
     }
-    .pd-affinity-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--black);
+    @media (min-width: 720px) {
+      .pd-affinity-wrap { grid-template-columns: minmax(280px, 360px) 1fr; gap: 40px; }
     }
-    .pd-affinity-bar {
-      height: 10px;
-      background: var(--gray-100);
-      border-radius: 5px;
-      overflow: hidden;
+    .pd-radar {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
-    .pd-affinity-bar-fill {
-      height: 100%;
-      background: linear-gradient(to right, #d97706, #b45309);
-      border-radius: 5px;
-      transition: width 0.6s ease;
+    .pd-radar-grid { fill: none; stroke: var(--gray-200); stroke-width: 1; }
+    .pd-radar-axis { stroke: var(--gray-200); stroke-width: 1; }
+    .pd-radar-data {
+      fill: rgba(180, 83, 9, 0.18);
+      stroke: var(--brand);
+      stroke-width: 2;
+      stroke-linejoin: round;
     }
-    .pd-affinity-score {
+    .pd-radar-point {
+      fill: var(--brand);
+    }
+    .pd-radar-label {
       font-size: 12px;
-      color: var(--gray-400);
-      text-align: right;
+      font-weight: 700;
+      fill: var(--black);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .pd-radar-score-tag {
+      font-size: 10px;
+      fill: var(--gray-400);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .pd-affinity-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .pd-affinity-list-item {
+      padding: 10px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .pd-affinity-list-name {
+      color: var(--black);
+      font-weight: 600;
+    }
+    .pd-affinity-list-score {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand);
       font-variant-numeric: tabular-nums;
     }
 
@@ -330,13 +371,14 @@
       line-height: 1.85;
     }
 
-    /* related rubs */
+    /* related rubs — smaller, 4 columns */
     .pd-related-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 12px;
     }
-    @media (min-width: 720px) { .pd-related-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 600px) { .pd-related-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    @media (min-width: 880px) { .pd-related-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
 
     .pd-related-card {
       display: flex;
@@ -344,7 +386,7 @@
       text-decoration: none;
       color: inherit;
       border: 1px solid var(--gray-200);
-      border-radius: 14px;
+      border-radius: 10px;
       overflow: hidden;
       background: var(--white);
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
@@ -366,26 +408,27 @@
       object-fit: cover;
     }
     .pd-related-meta {
-      padding: 14px 16px 16px;
+      padding: 10px 12px 12px;
     }
     .pd-related-brand {
-      font-size: 10.5px;
+      font-size: 9.5px;
       font-weight: 700;
       color: var(--gray-400);
       letter-spacing: 0.06em;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       text-transform: uppercase;
     }
     .pd-related-name {
       font-family: 'Noto Sans JP', sans-serif;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 13.5px;
       color: var(--black);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
+      line-height: 1.35;
       letter-spacing: -0.005em;
     }
     .pd-related-price {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--black);
     }
@@ -470,10 +513,10 @@
           <p class="pd-flavor-text" id="pdFlavor"></p>
         </div>
 
-        <div class="pd-spice">
-          <span style="font-weight:600;">辛さ</span>
-          <div class="pd-spice-bars" id="pdSpiceBars"></div>
-          <span id="pdSpiceText" style="font-size:12px;color:var(--gray-400);"></span>
+        <div class="pd-spice" id="pdSpiceWrap">
+          <span class="pd-spice-label">辛さレベル</span>
+          <div class="pd-spice-scale" id="pdSpiceScale"></div>
+          <span class="pd-spice-value" id="pdSpiceText"></span>
         </div>
 
         <p class="pd-desc" id="pdDesc"></p>
@@ -489,7 +532,10 @@
     <section class="pd-section" id="affinitySection">
       <p class="pd-section-eyebrow">FOOD AFFINITY</p>
       <h2>どの食材に合う？</h2>
-      <div class="pd-affinity" id="pdAffinity"></div>
+      <div class="pd-affinity-wrap">
+        <svg id="pdRadar" class="pd-radar" viewBox="0 0 280 280" aria-hidden="true"></svg>
+        <div class="pd-affinity-list" id="pdAffinityList"></div>
+      </div>
     </section>
 
     <!-- RELATED RECIPES -->
@@ -500,13 +546,6 @@
       <div style="margin-top:28px;">
         <a href="cookbook.html" class="btn-dark" style="display:inline-block;padding:11px 24px;font-size:13px;">全24品の料理ガイドへ →</a>
       </div>
-    </section>
-
-    <!-- USAGE -->
-    <section class="pd-section">
-      <p class="pd-section-eyebrow">HOW TO USE</p>
-      <h2>使い方</h2>
-      <div class="pd-usage-grid" id="pdUsage"></div>
     </section>
 
     <!-- RELATED PRODUCTS -->
@@ -545,6 +584,7 @@
   </footer>
 
   <script src="product-data.js"></script>
+  <script src="recipe-data.js"></script>
   <script src="mobile-nav.js"></script>
   <script>
     /* nav scroll */
@@ -605,19 +645,18 @@
       document.getElementById('pdDesc').textContent = p.desc;
       document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
 
-      // Spice bars
-      const sb = document.getElementById('pdSpiceBars');
+      // Spice scale (5 dots) + clear label
+      const sb = document.getElementById('pdSpiceScale');
       sb.innerHTML = '';
       for (let i = 0; i < 5; i++) {
-        const bar = document.createElement('span');
-        bar.className = 'pd-spice-bar' + (i < p.spiceLevel ? ' on' : '');
-        sb.appendChild(bar);
+        const dot = document.createElement('span');
+        dot.className = 'pd-spice-dot' + (i < p.spiceLevel ? ' on' : '');
+        if (p.spiceLevel === 0) dot.classList.add('lvl-0');
+        sb.appendChild(dot);
       }
-      document.getElementById('pdSpiceText').textContent = p.spiceLevel === 0 ? 'なし' :
-        p.spiceLevel === 1 ? '弱' :
-        p.spiceLevel === 2 ? '中' :
-        p.spiceLevel === 3 ? '中辛' :
-        p.spiceLevel === 4 ? '辛' : '激辛';
+      const spiceLabels = ['辛さなし', 'マイルド', '中辛', 'スパイシー', '辛口', '激辛'];
+      document.getElementById('pdSpiceText').textContent =
+        `${p.spiceLevel} / 5・${spiceLabels[p.spiceLevel] || ''}`;
 
       // Buy button
       const buyBtn = document.getElementById('pdBuyBtn');
@@ -633,43 +672,42 @@
         }
       });
 
-      // Food affinity
-      const aff = document.getElementById('pdAffinity');
-      const labels = { beef: '🥩 牛', pork: '🐷 豚', chicken: '🍗 鶏', fish: '🐟 魚介', veggie: '🥬 野菜' };
-      aff.innerHTML = Object.entries(p.bestFor).map(([key, score]) => `
-        <div class="pd-affinity-row">
-          <span class="pd-affinity-label">${labels[key] || key}</span>
-          <div class="pd-affinity-bar"><div class="pd-affinity-bar-fill" style="width: ${score * 20}%"></div></div>
-          <span class="pd-affinity-score">${score} / 5</span>
+      // Food affinity — pentagon radar chart
+      renderRadar(p.bestFor);
+      const affList = document.getElementById('pdAffinityList');
+      const affMeta = [
+        { key: 'beef',    label: '🥩 牛' },
+        { key: 'pork',    label: '🐷 豚' },
+        { key: 'chicken', label: '🍗 鶏' },
+        { key: 'fish',    label: '🐟 魚介' },
+        { key: 'veggie',  label: '🥬 野菜' }
+      ];
+      affList.innerHTML = affMeta.map(({ key, label }) => `
+        <div class="pd-affinity-list-item">
+          <span class="pd-affinity-list-name">${label}</span>
+          <span class="pd-affinity-list-score">${p.bestFor[key] || 0} / 5</span>
         </div>
       `).join('');
 
-      // Related recipes
+      // Related recipes — link to individual recipe page
       const rec = document.getElementById('pdRecipes');
+      const RECIPES_BY_ID = {};
+      (window.RECIPES || []).forEach(r => RECIPES_BY_ID[r.id] = r);
       rec.innerHTML = (p.bestRecipes || []).map(rid => {
-        const r = RECIPE_INFO[rid];
+        const r = RECIPES_BY_ID[rid];
         if (!r) return '';
-        const imgHtml = r.image ? `<img src="${r.image}" alt="${r.name}" loading="lazy">` : `<span>${r.icon}</span>`;
+        const imgHtml = `<img src="images/recipes/${r.id}.jpg?v=20260506" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;">${r.icon}</span>`;
+        const lv = r.levelLabel || (r.level === 1 ? '初級' : r.level === 2 ? '中級' : '上級');
         return `
-          <a href="cookbook.html" class="pd-recipe-card">
+          <a href="recipe.html?id=${r.id}" class="pd-recipe-card">
             <div class="pd-recipe-img">${imgHtml}</div>
             <div class="pd-recipe-meta">
-              <span class="pd-recipe-level lv-${r.level}">${r.level}</span>
+              <span class="pd-recipe-level lv-${lv}">${lv}</span>
               <div class="pd-recipe-name">${r.name}</div>
             </div>
           </a>
         `;
       }).join('');
-
-      // Usage
-      const usage = document.getElementById('pdUsage');
-      usage.innerHTML = (p.usage || []).map((u, i) => `
-        <div class="pd-usage-card">
-          <p class="pd-usage-num">${String(i + 1).padStart(2, '0')}</p>
-          <h4>${u.title}</h4>
-          <p>${u.desc}</p>
-        </div>
-      `).join('');
 
       // Related products
       const rel = document.getElementById('pdRelated');
@@ -687,6 +725,58 @@
           </a>
         `;
       }).join('');
+    }
+
+    /* Pentagon (5-axis) radar chart for food affinity */
+    function renderRadar(bestFor) {
+      const svg = document.getElementById('pdRadar');
+      if (!svg) return;
+      const cx = 140, cy = 140, R = 90;
+      const axes = [
+        { key: 'beef',    label: '牛',   labelOffset: 22 },
+        { key: 'pork',    label: '豚',   labelOffset: 22 },
+        { key: 'chicken', label: '鶏',   labelOffset: 22 },
+        { key: 'fish',    label: '魚介', labelOffset: 26 },
+        { key: 'veggie',  label: '野菜', labelOffset: 26 }
+      ];
+      const N = axes.length;
+      const angle = i => (-Math.PI / 2) + (i * 2 * Math.PI / N);
+      const point = (i, r) => [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r];
+
+      let svgContent = '';
+      // grid pentagons (5 levels)
+      for (let lvl = 1; lvl <= 5; lvl++) {
+        const r = (lvl / 5) * R;
+        const pts = axes.map((_, i) => point(i, r).map(n => n.toFixed(1)).join(',')).join(' ');
+        svgContent += `<polygon class="pd-radar-grid" points="${pts}"/>`;
+      }
+      // axes lines
+      axes.forEach((_, i) => {
+        const [x, y] = point(i, R);
+        svgContent += `<line class="pd-radar-axis" x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`;
+      });
+      // data polygon
+      const dataPts = axes.map(({ key }, i) => {
+        const score = Math.max(0, Math.min(5, bestFor[key] || 0));
+        const r = (score / 5) * R;
+        return point(i, r).map(n => n.toFixed(1)).join(',');
+      }).join(' ');
+      svgContent += `<polygon class="pd-radar-data" points="${dataPts}"/>`;
+      // data points
+      axes.forEach(({ key }, i) => {
+        const score = Math.max(0, Math.min(5, bestFor[key] || 0));
+        const r = (score / 5) * R;
+        const [x, y] = point(i, r);
+        svgContent += `<circle class="pd-radar-point" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5"/>`;
+      });
+      // labels
+      axes.forEach(({ label, labelOffset }, i) => {
+        const [x, y] = point(i, R + labelOffset);
+        const anchor = Math.abs(Math.cos(angle(i))) < 0.2 ? 'middle' : (Math.cos(angle(i)) > 0 ? 'start' : 'end');
+        svgContent += `<text class="pd-radar-label" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle">${label}</text>`;
+      });
+
+      svg.innerHTML = svgContent;
     }
 
     /* Schema.org Product JSON-LD (dynamic) */
