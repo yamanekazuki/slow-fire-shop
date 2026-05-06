@@ -1294,7 +1294,7 @@
           const escapedName = matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
           const html = el.innerHTML.replace(
             new RegExp(escapedName),
-            `<a class="rub-link-inject" href="index.html#product-${id}">${matched}</a>`
+            `<a class="rub-link-inject" href="product.html?id=${id}">${matched}</a>`
           );
           el.innerHTML = html;
         });
@@ -1566,7 +1566,7 @@
                       const info = RUB_INFO[r.id];
                       if (!info) return '';
                       return `
-                        <a class="pg-rub" href="index.html#product-${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
+                        <a class="pg-rub" href="product.html?id=${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
                           <div class="pg-rub-img-wrap">
                             <span class="pg-rub-tag">${r.tag}</span>
                             <img src="${info.image}" alt="${info.name}" loading="lazy">
@@ -1633,13 +1633,13 @@
           <article class="bp-cut">
             <h4 class="bp-cut-title">${p.cut}</h4>
             <div class="bp-rubs${isSingle ? ' single' : ''}">
-              <a class="bp-rub" href="index.html#product-${p.primary}" data-brand="${r1.brand}" aria-label="${r1.name}">
+              <a class="bp-rub" href="product.html?id=${p.primary}" data-brand="${r1.brand}" aria-label="${r1.name}">
                 <span class="bp-rank first">第一候補</span>
                 <div class="bp-img"><img src="${r1.image}" alt="${r1.name}" loading="lazy"></div>
                 <div class="bp-name">${r1.name}</div>
               </a>
               ${r2 ? `
-                <a class="bp-rub" href="index.html#product-${p.secondary}" data-brand="${r2.brand}" aria-label="${r2.name}">
+                <a class="bp-rub" href="product.html?id=${p.secondary}" data-brand="${r2.brand}" aria-label="${r2.name}">
                   <span class="bp-rank second">第二候補</span>
                   <div class="bp-img"><img src="${r2.image}" alt="${r2.name}" loading="lazy"></div>
                   <div class="bp-name">${r2.name}</div>

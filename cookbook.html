@@ -1347,7 +1347,7 @@
         const rub = RUB_DB[rid];
         if (!rub) return '';
         return `
-          <a href="index.html#product-${rid}" class="ck-rub" data-brand="${rub.brand}" aria-label="${rub.name}">
+          <a href="product.html?id=${rid}" class="ck-rub" data-brand="${rub.brand}" aria-label="${rub.name}">
             <div class="ck-rub-img-wrap">
               <img src="${rub.image}" alt="${rub.name}" loading="lazy">
             </div>

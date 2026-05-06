@@ -609,8 +609,20 @@ function renderProducts(filter = 'all') {
     `;
   }).join('');
 
+  /* Card itself → product detail page (except when the cart button is clicked) */
+  grid.querySelectorAll('.product-card').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', e => {
+      // ignore if the click landed on the add-to-cart button
+      if (e.target.closest('.atc-btn')) return;
+      const id = card.id.replace('product-', '');
+      location.href = `product.html?id=${id}`;
+    });
+  });
+
   grid.querySelectorAll('.atc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
       cart.add(btn.dataset.id);
       const orig = btn.textContent;
       btn.classList.add('done');
@@ -637,7 +649,7 @@ function injectProductJsonLd(list) {
     "@context": "https://schema.org",
     "@graph": list.map((p, i) => ({
       "@type": "Product",
-      "@id": `${SITE}#product-${p.id}`,
+      "@id": `${SITE}product.html?id=${p.id}`,
       "position": i + 1,
       "name": `${p.name}（${p.nameja || ''}）`.replace(/（）$/, ''),
       "description": p.desc || p.subtitle || '',
