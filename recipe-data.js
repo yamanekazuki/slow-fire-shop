@@ -6,9 +6,7 @@
    Used when a local image does not exist; provides Unsplash CDN images
    so every recipe has a visual presence. */
 window.RECIPE_IMAGE_OVERRIDES = {
-  'gratin':           'https://images.unsplash.com/photo-1626624155295-d0152ab4200c?w=800&q=80&auto=format&fit=crop',
-  'beer-can-chicken': 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
-  'banana':           'https://images.unsplash.com/photo-1572383672419-ab35444a6934?w=800&q=80&auto=format&fit=crop'
+  'gratin':           'https://images.unsplash.com/photo-1626624155295-d0152ab4200c?w=800&q=80&auto=format&fit=crop'
 };
 
 /* Local images (in /images/recipes/) — these take precedence over overrides */
@@ -17,7 +15,8 @@ window.RECIPE_LOCAL_IMAGES = new Set([
   'apple-pie', 'pulled-pork', 'bread-pudding',
   'pork-steak', 'cheeseburger', 'shiitake', 'veg-skewer', 'asparagus-grill',
   'mushroom-grill', 'tomahawk', 'spare-ribs', 'jerk-chicken', 'saikyo-fish',
-  'carne-asada', 'salmon-pro', 'back-ribs'
+  'carne-asada', 'salmon-pro', 'back-ribs',
+  'beer-can-chicken', 'banana'
 ]);
 
 /* Helper: resolve image URL for a given recipe id */
