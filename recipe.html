@@ -168,35 +168,99 @@
       padding: 0; margin: 0;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 14px;
+      counter-reset: rd-pt;
     }
     .rd-points li {
       position: relative;
-      padding: 14px 16px 14px 44px;
+      padding: 16px 18px 18px 50px;
       background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.75;
       color: var(--black);
     }
     .rd-points li::before {
       content: counter(rd-pt);
       counter-increment: rd-pt;
       position: absolute;
-      left: 14px; top: 14px;
-      width: 22px; height: 22px;
+      left: 14px; top: 16px;
+      width: 26px; height: 26px;
       border-radius: 50%;
       background: var(--brand);
       color: var(--white);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .rd-points { counter-reset: rd-pt; }
+    .rd-point-step {
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.6;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .rd-point-note {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--gray-600);
+      margin: 0;
+    }
     .rd-points li strong { color: var(--brand); font-weight: 700; }
+
+    /* ingredients */
+    .rd-ingredients-section {
+      max-width: var(--max);
+      margin: 32px auto 0;
+      padding: 0 24px;
+    }
+    .rd-ingredients-section .rd-ingredients-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      color: var(--brand); margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .rd-ingredients-section h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: clamp(20px, 2.6vw, 26px);
+      color: var(--black);
+      line-height: 1.4;
+      margin-bottom: 8px;
+      letter-spacing: -0.005em;
+    }
+    .rd-ingredients-sub {
+      font-size: 12.5px;
+      color: var(--gray-400);
+      margin-bottom: 20px;
+    }
+    .rd-ingredients {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    @media (min-width: 600px) {
+      .rd-ingredients { grid-template-columns: repeat(2, 1fr); gap: 10px 14px; }
+    }
+    .rd-ingredient {
+      padding: 12px 16px;
+      background: var(--off-white);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      gap: 10px;
+    }
+    .rd-ingredient-name {
+      font-weight: 700;
+      color: var(--black);
+    }
+    .rd-ingredient-amount {
+      color: var(--gray-600);
+      font-size: 12.5px;
+      text-align: right;
+    }
 
     .rd-philosophy {
       padding: 24px 26px;
@@ -338,6 +402,13 @@
       </div>
     </section>
 
+    <section class="rd-ingredients-section" id="rdIngredientsSection">
+      <p class="rd-ingredients-eyebrow">INGREDIENTS</p>
+      <h2>用意するもの</h2>
+      <p class="rd-ingredients-sub">分量は目安です。お好みで増減してOK。BBQラブは下の「合うラブ」を参考にしてください。</p>
+      <div class="rd-ingredients" id="rdIngredients"></div>
+    </section>
+
     <section class="rd-section">
       <p class="rd-section-eyebrow">KEY POINTS</p>
       <h2>調理のポイント</h2>
@@ -440,7 +511,32 @@
         </div>
       `).join('');
 
-      document.getElementById('rdPoints').innerHTML = (r.points || []).map(p => `<li>${p}</li>`).join('');
+      // Render ingredients (new structure) — fallback gracefully if missing
+      const ingredientsEl = document.getElementById('rdIngredients');
+      const ingredientsSection = document.getElementById('rdIngredientsSection');
+      if (r.ingredients && r.ingredients.length) {
+        ingredientsEl.innerHTML = r.ingredients.map(ing => `
+          <div class="rd-ingredient">
+            <span class="rd-ingredient-name">${ing.name}</span>
+            <span class="rd-ingredient-amount">${ing.amount}</span>
+          </div>
+        `).join('');
+      } else {
+        ingredientsSection.style.display = 'none';
+      }
+
+      // Render points — supports both new {step, note} format and old plain string
+      document.getElementById('rdPoints').innerHTML = (r.points || []).map(p => {
+        if (typeof p === 'string') {
+          return `<li><div class="rd-point-step">${p}</div></li>`;
+        }
+        return `
+          <li>
+            <div class="rd-point-step">${p.step}</div>
+            ${p.note ? `<p class="rd-point-note">${p.note}</p>` : ''}
+          </li>
+        `;
+      }).join('');
       document.getElementById('rdPhilosophy').innerHTML = r.philosophy;
 
       const rubsSection = document.getElementById('rdRubsSection');
