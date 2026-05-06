@@ -11,13 +11,11 @@ window.RECIPE_IMAGE_OVERRIDES = {
   'shiitake':         'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
   'veg-skewer':       'https://images.unsplash.com/photo-1593708659671-595be1c95128?w=800&q=80&auto=format&fit=crop',
   'spare-ribs':       'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80&auto=format&fit=crop',
-  'apple-pie':        'https://images.unsplash.com/photo-1572383672419-ab35444a6934?w=800&q=80&auto=format&fit=crop',
   'gratin':           'https://images.unsplash.com/photo-1768204039572-9e62db7b39fd?w=800&q=80&auto=format&fit=crop',
   'beer-can-chicken': 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
   'back-ribs':        'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80&auto=format&fit=crop',
   'salmon-pro':       'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&auto=format&fit=crop',
   'banana':           'https://images.unsplash.com/photo-1572383672419-ab35444a6934?w=800&q=80&auto=format&fit=crop',
-  'pulled-pork':      'https://images.unsplash.com/photo-1761712826051-b873907fb5d3?w=800&q=80&auto=format&fit=crop',
   'jerk-chicken':     'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
   'saikyo-fish':      'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&auto=format&fit=crop',
   'carne-asada':      'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
@@ -28,7 +26,8 @@ window.RECIPE_IMAGE_OVERRIDES = {
 
 /* Local images (in /images/recipes/) — these take precedence over overrides */
 window.RECIPE_LOCAL_IMAGES = new Set([
-  'cedar-salmon', 'veg-grill', 'bratwurst', 'lemon-chicken', 'pizza', 'shrimp-grill'
+  'cedar-salmon', 'veg-grill', 'bratwurst', 'lemon-chicken', 'pizza', 'shrimp-grill',
+  'apple-pie', 'pulled-pork', 'bread-pudding'
 ]);
 
 /* Helper: resolve image URL for a given recipe id */
@@ -41,14 +40,14 @@ window.getRecipeImage = function(id) {
 
 window.RECIPES = [
   {
-    id: 'cedar-salmon', name: 'シダープランクサーモン', nameEn: 'Cedar Plank Salmon', icon: '🐟',
+    id: 'cedar-salmon', name: 'シダープランク・シーフード', nameEn: 'Cedar Plank Seafood (Salmon・Shrimp・Scallop)', icon: '🐟',
     level: 1, levelLabel: '初級', category: 'fish', categoryLabel: '🐟 魚',
     timeMin: 12, timeBucket: 'short', timeLabel: '⚡ 約12分',
-    essence: '杉板から立ちのぼる微かな煙が、サーモンに「森の記憶」を与える。BBQで初めて「料理が場の空気を変える」瞬間を体験できる、入口にして頂点。',
-    specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '8〜12分' },{ label: '中心温度', value: '53℃' }],
-    points: ['杉板は最低30分、できれば1時間以上水に浸す','板のツルツル面を下にして、グリルに置く','<strong>「パチッ」と音が鳴ったら</strong>サーモンを乗せる合図','養殖サーモンが安全。天然はアニサキス対策に75℃以上推奨','キッチンペーパーで水分を完全に拭くと仕上がりが激変する'],
-    philosophy: '杉板料理は、テーブルで歓声が上がる料理。サーモンを焼くのではなく、杉板を介して<strong>「香りを贈る」</strong>料理として捉えるとよい。',
-    pairedRubs: ['lamb-layup', 'garlic-goals']
+    essence: '杉板から立ちのぼる微かな煙が、魚介に「森の記憶」を与える。BBQで初めて「料理が場の空気を変える」瞬間を体験できる、入口にして頂点。<strong>サーモン・エビ・ホタテを一枚の板で同時に焼ける</strong>万能料理。',
+    specs: [{ label: 'グリル温度', value: '230℃' },{ label: '焼き時間', value: '8〜12分' },{ label: '中心温度', value: '53℃（サーモン）' }],
+    points: ['杉板は最低30分、できれば1時間以上水に浸す','板のツルツル面を下にして、グリルに置く','<strong>「パチッ」と音が鳴ったら</strong>魚介を乗せる合図','<strong>サーモンを中央、エビ・ホタテを両脇</strong>に配置すると同時に焼ける','ローズマリーを枝ごと乗せると、杉と相まって香りに奥行きが出る','養殖サーモンが安全。天然はアニサキス対策に75℃以上推奨','エビは殻ごと焼く。ホタテは塩・胡椒のみで素材の甘みを引き出す'],
+    philosophy: '杉板料理は、テーブルで歓声が上がる料理。魚介を焼くのではなく、杉板を介して<strong>「香りを贈る」</strong>料理として捉えるとよい。一枚の板に複数の魚介を乗せると、それぞれの香りが混ざり合い、海の盛り合わせになる。',
+    pairedRubs: ['lamb-layup', 'garlic-goals', 'stef-aquadesiac']
   },
   {
     id: 'veg-grill', name: '季節の野菜グリル', nameEn: 'Seasonal Grilled Vegetables', icon: '🥬',
@@ -144,10 +143,20 @@ window.RECIPES = [
     id: 'apple-pie', name: 'アップルパイ', nameEn: 'Apple Pie', icon: '🥧',
     level: 2, levelLabel: '中級', category: 'dessert', categoryLabel: '🍰 デザート',
     timeMin: 20, timeBucket: 'mid', timeLabel: '⏱ 約20分',
-    essence: 'BBQで甘いものを出すと、テーブルの時間が一段ゆっくりになる。シナモンの香りは、解散の合図ではなく「もう少し居たい」のサイン。',
+    essence: 'BBQで甘いものを出すと、テーブルの時間が一段ゆっくりになる。シナモンの香りは、解散の合図ではなく「もう少し居たい」のサイン。バニラアイスを添えると、温度差で多幸感が増す。',
     specs: [{ label: 'グリル温度', value: '200℃' },{ label: '焼き時間', value: '15分＋5分' },{ label: '材料', value: '市販パイシート' }],
-    points: ['リンゴは皮を剥いて4等分→スライス','パイシートにリンゴ・バター・砂糖・シナモンを乗せ、フォークで端を留める','クッキングシート上で<strong>遠火15分</strong>（200℃）','その後、直火に移してさらに5分。焼き目で完成'],
+    points: ['リンゴは皮を剥いて4等分→スライス','パイシートにリンゴ・バター・砂糖・シナモンを乗せ、フォークで端を留める','クッキングシート上で<strong>遠火15分</strong>（200℃）','その後、直火に移してさらに5分。焼き目で完成','仕上げに<strong>バニラアイスを横に添える</strong>のが王道'],
     philosophy: 'デザートは「美味しさ」のためではなく、<strong>「時間を伸ばすため」</strong>にある。場が深いほど、参加者は帰りたくなくなる。アップルパイは、その引き留め役。',
+    pairedRubs: []
+  },
+  {
+    id: 'bread-pudding', name: 'BBQブレッドプディング', nameEn: 'BBQ Bread Pudding (with Marshmallow)', icon: '🍮',
+    level: 2, levelLabel: '中級', category: 'dessert', categoryLabel: '🍰 デザート',
+    timeMin: 25, timeBucket: 'mid', timeLabel: '⏱ 約25分',
+    essence: '余ったパンとマシュマロで作る、グリル発のデザート。表面のマシュマロが香ばしく焦げた瞬間、テーブルが拍手で迎える。BBQの「最後の余白」を埋める一品。',
+    specs: [{ label: 'グリル温度', value: '180℃' },{ label: '焼き時間', value: '20〜25分' },{ label: '火入れ', value: 'インダイレクト' }],
+    points: ['食パン or ブリオッシュを<strong>一口大にちぎる</strong>','卵2個＋牛乳200ml＋砂糖大さじ2＋バニラエッセンス少々を混ぜる','パンを浸して、アルミ容器に詰める','<strong>マシュマロを上にぎっしり乗せる</strong>','インダイレクト180℃で15分、マシュマロが膨らんで焼き目がつくまで','焼きすぎ注意。マシュマロが完全に黒くなる前に取り出す','ラック&シールドを下に敷くと底が焦げない'],
+    philosophy: 'BBQの最後にデザートを出すと、場が「もう少し続けたい」モードに切り替わる。<strong>マシュマロの焼き目は、終わりではなく余韻の合図</strong>。アップルパイより視覚的にエンタメ性が高く、SNS映えも抜群。',
     pairedRubs: []
   },
   {
