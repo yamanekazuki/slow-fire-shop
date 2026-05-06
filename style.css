@@ -496,6 +496,41 @@ input, textarea { font: inherit; }
   font-weight: 700;
 }
 .mobile-menu .mm-cta:hover { background: var(--brand); color: var(--white); }
+
+/* Section title (e.g., ガイド) inside mobile menu */
+.mobile-menu .mm-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--brand);
+  text-transform: uppercase;
+  padding: 18px 0 8px;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* Sub-link items under a section (essentials / pairing / cookbook etc.) */
+.mobile-menu .mm-sublink {
+  padding: 14px 0 14px 16px;
+  border-left: 2px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+.mobile-menu .mm-sublink:hover { border-left-color: var(--brand); }
+.mobile-menu .mm-sublink-title {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--black);
+}
+.mobile-menu .mm-sublink-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 2px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
 body.menu-open { overflow: hidden; }
 
 /* ---- CART BACKDROP ---- */
