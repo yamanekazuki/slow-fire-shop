@@ -1148,7 +1148,7 @@ body.menu-open { overflow: hidden; }
   color: var(--white);
   text-align: center;
 }
-.home-ess-cta-inner { max-width: 640px; margin: 0 auto; }
+.home-ess-cta-inner { max-width: 1100px; margin: 0 auto; }
 .home-ess-cta-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
   color: rgba(255,255,255,0.5); margin-bottom: 16px;
@@ -1174,6 +1174,76 @@ body.menu-open { overflow: hidden; }
   color: var(--white);
 }
 .home-ess-cta .btn-dark:hover { background: var(--brand-dk); }
+
+/* DEEPER DIVE — 3-card grid (Essentials / Journal / Team) */
+.deeper-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 32px;
+  text-align: left;
+}
+@media (min-width: 720px) {
+  .deeper-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+.deeper-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 28px 26px 26px;
+  text-decoration: none;
+  color: var(--white);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  min-height: 220px;
+}
+.deeper-card:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+.deeper-card--brand {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.deeper-card--brand:hover {
+  background: var(--brand-dk);
+  border-color: var(--brand-dk);
+}
+.deeper-eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 12px;
+}
+.deeper-card--brand .deeper-eyebrow { color: rgba(255,255,255,0.85); }
+.deeper-h {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--white);
+  margin: 0 0 12px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+}
+.deeper-desc {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 18px;
+  flex-grow: 1;
+}
+.deeper-go {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.95);
+  margin-top: auto;
+}
+.deeper-card--brand .deeper-desc { color: rgba(255,255,255,0.92); }
 
 /* mobile nav dropdown — make it tappable */
 @media (max-width: 768px) {
