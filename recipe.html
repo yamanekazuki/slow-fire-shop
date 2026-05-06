@@ -46,13 +46,24 @@
     }
 
     .rd-img-wrap {
-      aspect-ratio: 4/3;
       border-radius: 16px;
       overflow: hidden;
       background: linear-gradient(135deg, #FEF3C7, #FED7AA);
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 640px;
+      min-height: 320px;
     }
-    .rd-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rd-img-wrap img {
+      max-width: 100%;
+      max-height: 640px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
     .rd-img-fallback {
       position: absolute; inset: 0;
       display: none;
