@@ -83,4 +83,17 @@
   <url><loc>https://yamanekazuki.github.io/slow-fire-shop/recipe.html?id=shrimp-grill</loc><lastmod>2026-05-06</lastmod><priority>0.8</priority></url>
   <url><loc>https://yamanekazuki.github.io/slow-fire-shop/recipe.html?id=mushroom-grill</loc><lastmod>2026-05-06</lastmod><priority>0.8</priority></url>
   <url><loc>https://yamanekazuki.github.io/slow-fire-shop/recipe.html?id=asparagus-grill</loc><lastmod>2026-05-06</lastmod><priority>0.8</priority></url>
+
+  <!-- SLOW FIRE JOURNAL -->
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/</loc><lastmod>2026-05-06</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/low-and-slow.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/back-ribs.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/brisket.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/texas-bbq.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/reverse-sear.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/pulled-pork.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/beer-can-chicken.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/prime-rib.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/bbq-rub-osusume.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
+  <url><loc>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/australian-bbq.html</loc><lastmod>2026-05-06</lastmod><priority>0.9</priority></url>
   </urlset>
