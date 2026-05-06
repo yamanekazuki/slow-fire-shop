@@ -541,7 +541,18 @@ const RECIPE_INFO = {
   'tomahawk':          { name: 'トマホークステーキ',           icon: '🪓', level: '上級', image: '' },
   'shrimp-grill':      { name: 'ガーリックシュリンプ',         icon: '🦐', level: '初級', image: 'images/recipes/shrimp-grill.jpg?v=20260506' },
   'mushroom-grill':    { name: 'ポートベローマッシュルーム',   icon: '🍄', level: '初級', image: '' },
-  'asparagus-grill':   { name: 'アスパラガスのグリル',         icon: '🌿', level: '初級', image: '' }
+  'asparagus-grill':   { name: 'アスパラガスのグリル',         icon: '🌿', level: '初級', image: '' },
+  'pepper-sesame-beef':{ name: 'ペッパー&セサミ・ビーフ',      icon: '🥩', level: '上級', image: 'images/recipes/pepper-sesame-beef.jpg?v=20260506f' },
+  'skillet-apple':     { name: 'スキレットアップル',           icon: '🍎', level: '中級', image: 'images/recipes/skillet-apple.jpg?v=20260506f' },
+  'chicken-thigh':     { name: 'グリルチキンソテー',           icon: '🍗', level: '初級', image: 'images/recipes/chicken-thigh.jpg?v=20260506f' },
+  'sanma':             { name: '炭火さんまの塩焼き',           icon: '🐟', level: '中級', image: 'images/recipes/sanma.jpg?v=20260506f' },
+  'cedar-shrimp-herb': { name: '杉板ハーブシュリンプ',         icon: '🦐', level: '中級', image: 'images/recipes/cedar-shrimp-herb.jpg?v=20260506f' },
+  'jerk-ribs-pineapple':{ name: 'ジャークリブ&パイナップル',   icon: '🍍', level: '上級', image: 'images/recipes/jerk-ribs-pineapple.jpg?v=20260506f' },
+  'cedar-camembert':   { name: '杉板カマンベール&ホタテ',      icon: '🧀', level: '中級', image: 'images/recipes/cedar-camembert.jpg?v=20260506f' },
+  'tomato-cheese-skillet':{ name: 'スキレットトマト&チーズ',   icon: '🍅', level: '初級', image: 'images/recipes/tomato-cheese-skillet.jpg?v=20260506f' },
+  'pumpkin-camembert': { name: '丸ごとかぼちゃのカマンベール', icon: '🎃', level: '上級', image: 'images/recipes/pumpkin-camembert.jpg?v=20260506f' },
+  'cedar-whitefish':   { name: '杉板の白身魚',                 icon: '🐠', level: '中級', image: 'images/recipes/cedar-whitefish.jpg?v=20260506f' },
+  'grilled-corn':      { name: 'グリルコーン',                 icon: '🌽', level: '初級', image: 'images/recipes/grilled-corn.jpg?v=20260506f' }
 };
 
 window.PRODUCT_DETAILS = PRODUCT_DETAILS;
