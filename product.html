@@ -698,7 +698,8 @@
       rec.innerHTML = (p.bestRecipes || []).map(rid => {
         const r = RECIPES_BY_ID[rid];
         if (!r) return '';
-        const imgHtml = `<img src="images/recipes/${r.id}.jpg?v=20260506" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;">${r.icon}</span>`;
+        const imgUrl = window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260506`;
+        const imgHtml = `<img src="${imgUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;">${r.icon}</span>`;
         const lv = r.levelLabel || (r.level === 1 ? '初級' : r.level === 2 ? '中級' : '上級');
         return `
           <a href="recipe.html?id=${r.id}" class="pd-recipe-card">

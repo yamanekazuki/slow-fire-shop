@@ -409,7 +409,7 @@
       document.getElementById('crumbName').textContent = r.name;
 
       const img = document.getElementById('rdImg');
-      img.src = `images/recipes/${r.id}.jpg?v=20260506`;
+      img.src = window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260506`;
       img.alt = r.name;
       document.getElementById('rdImgFallback').textContent = r.icon;
 

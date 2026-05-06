@@ -2,6 +2,43 @@
    RECIPE DATA — used by cookbook.html, recipe.html, product.html
    =================================================================== */
 
+/* Image override map — overrides local images/recipes/{id}.jpg.
+   Used when a local image does not exist; provides Unsplash CDN images
+   so every recipe has a visual presence. */
+window.RECIPE_IMAGE_OVERRIDES = {
+  'pork-steak':       'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'cheeseburger':     'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'shiitake':         'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'veg-skewer':       'https://images.unsplash.com/photo-1593708659671-595be1c95128?w=800&q=80&auto=format&fit=crop',
+  'spare-ribs':       'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80&auto=format&fit=crop',
+  'apple-pie':        'https://images.unsplash.com/photo-1572383672419-ab35444a6934?w=800&q=80&auto=format&fit=crop',
+  'gratin':           'https://images.unsplash.com/photo-1768204039572-9e62db7b39fd?w=800&q=80&auto=format&fit=crop',
+  'beer-can-chicken': 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'back-ribs':        'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80&auto=format&fit=crop',
+  'salmon-pro':       'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&auto=format&fit=crop',
+  'banana':           'https://images.unsplash.com/photo-1572383672419-ab35444a6934?w=800&q=80&auto=format&fit=crop',
+  'pulled-pork':      'https://images.unsplash.com/photo-1761712826051-b873907fb5d3?w=800&q=80&auto=format&fit=crop',
+  'jerk-chicken':     'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'saikyo-fish':      'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80&auto=format&fit=crop',
+  'carne-asada':      'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'tomahawk':         'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=80&auto=format&fit=crop',
+  'mushroom-grill':   'https://images.unsplash.com/photo-1593708659671-595be1c95128?w=800&q=80&auto=format&fit=crop',
+  'asparagus-grill':  'https://images.unsplash.com/photo-1593708659671-595be1c95128?w=800&q=80&auto=format&fit=crop'
+};
+
+/* Local images (in /images/recipes/) — these take precedence over overrides */
+window.RECIPE_LOCAL_IMAGES = new Set([
+  'cedar-salmon', 'veg-grill', 'bratwurst', 'lemon-chicken', 'pizza', 'shrimp-grill'
+]);
+
+/* Helper: resolve image URL for a given recipe id */
+window.getRecipeImage = function(id) {
+  if (window.RECIPE_LOCAL_IMAGES.has(id)) {
+    return `images/recipes/${id}.jpg?v=20260506`;
+  }
+  return window.RECIPE_IMAGE_OVERRIDES[id] || `images/recipes/${id}.jpg?v=20260506`;
+};
+
 window.RECIPES = [
   {
     id: 'cedar-salmon', name: 'シダープランクサーモン', nameEn: 'Cedar Plank Salmon', icon: '🐟',

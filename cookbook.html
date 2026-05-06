@@ -842,23 +842,6 @@
       <details class="ck-fund-d">
         <summary>
           <div class="ck-fund-summary">
-            <strong>火入れの4つのT</strong>
-            <span>BBQの判断はすべてこの4つに帰着する</span>
-          </div>
-          <span class="ck-fund-toggle">＋</span>
-        </summary>
-        <div class="ck-fund-content">
-          <div class="ck-fund-4t">
-            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Time</div><div class="desc">仕込み・焼き・休ませ</div></div>
-            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Temperature</div><div class="desc">数字を信じる</div></div>
-            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Tool</div><div class="desc">杉板・ラック・温度計</div></div>
-            <div class="ck-fund-t"><div class="letter">T</div><div class="name">Technique</div><div class="desc">直火か間接火か</div></div>
-          </div>
-        </div>
-      </details>
-      <details class="ck-fund-d">
-        <summary>
-          <div class="ck-fund-summary">
             <strong>中心温度リファレンス</strong>
             <span>「見た目」より「数字」を信じるための表</span>
           </div>
@@ -995,11 +978,10 @@
   const resetBtn2 = document.getElementById('resetBtn2');
 
   function buildCards() {
-    const IMG_VER = '20260506';
     grid.innerHTML = RECIPES.map(r => `
       <button class="ck-card" data-id="${r.id}" data-level="${r.level}" data-category="${r.category}" data-time="${r.timeBucket}">
         <div class="ck-card-img">
-          <img src="images/recipes/${r.id}.jpg?v=${IMG_VER}" alt="${r.name}（${r.nameEn}）"
+          <img src="${window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260506`}" alt="${r.name}（${r.nameEn}）"
                loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="ck-card-img-fallback" style="display:none">${r.icon}</div>
           <div class="ck-card-img-overlay">
