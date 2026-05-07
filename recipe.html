@@ -579,16 +579,43 @@
 
     /* Schema.org Recipe JSON-LD */
     if (recipe) {
+      const imgUrl = `https://yamanekazuki.github.io/slow-fire-shop/images/recipes/${recipe.id}.jpg`;
+      const ingredients = (recipe.ingredients || []).map(i =>
+        typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
+      );
+      const instructions = (recipe.points || []).map((p, idx) => {
+        const step = typeof p === 'string' ? p : (p.step || '');
+        const note = typeof p === 'object' ? (p.note || '') : '';
+        return {
+          "@type": "HowToStep",
+          "position": idx + 1,
+          "name": step,
+          "text": note ? `${step}。${note}` : step
+        };
+      });
+      const keywords = [
+        recipe.name, recipe.nameEn, recipe.categoryLabel, recipe.levelLabel,
+        'BBQ', 'バーベキュー', 'グリル', 'レシピ'
+      ].filter(Boolean).join(',');
+
       const ld = {
         "@context": "https://schema.org",
         "@type": "Recipe",
         "name": recipe.name,
         "alternateName": recipe.nameEn,
         "description": recipe.essence,
-        "image": `https://yamanekazuki.github.io/slow-fire-shop/images/recipes/${recipe.id}.jpg`,
-        "totalTime": `PT${recipe.timeMin}M`,
+        "image": [imgUrl],
+        "author": { "@type": "Organization", "name": "SLOW FIRE SHOP" },
+        "datePublished": "2026-05-06",
+        "prepTime": "PT10M",
+        "cookTime": `PT${recipe.timeMin}M`,
+        "totalTime": `PT${recipe.timeMin + 10}M`,
         "recipeCategory": recipe.categoryLabel,
-        "recipeCuisine": "BBQ"
+        "recipeCuisine": "BBQ",
+        "recipeYield": "2〜4人分",
+        "keywords": keywords,
+        "recipeIngredient": ingredients,
+        "recipeInstructions": instructions
       };
       const script = document.createElement('script');
       script.type = 'application/ld+json';
