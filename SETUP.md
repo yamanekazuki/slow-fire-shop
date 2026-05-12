@@ -137,6 +137,56 @@ firebase deploy --only functions
 
 ---
 
+## ステップ 3.6：購入通知メール（Firebase拡張）の設定（5分）
+
+注文が入ったとき `yamane@potentialight.com` にメール通知が届くようにします。
+公式の Firebase拡張「**Trigger Email from Firestore**」を使うので、コードは既に対応済みです。
+
+### 3.6-1. Gmailアプリパスワードを取得（Google Workspaceでも可）
+
+1. https://myaccount.google.com/security にアクセス
+2. **「2段階認証プロセス」** を有効化（未設定の場合）
+3. https://myaccount.google.com/apppasswords を開く
+4. アプリ名「Slow Fire Shop」で生成 → 16桁のパスワードをコピー
+
+> Workspace管理者でSMTPリレーを許可している場合は、リレーホスト経由でも可。
+
+### 3.6-2. 拡張機能をインストール
+
+```bash
+cd /Users/yamanekazuki/Documents/bbq-shop
+firebase ext:install firebase/firestore-send-email
+```
+
+プロンプトで以下を入力：
+
+| 設定項目 | 値 |
+|---|---|
+| Cloud Functions location | `asia-northeast1` |
+| SMTP connection URI | `smtps://yamane%40potentialight.com:【アプリパスワード】@smtp.gmail.com:465` |
+| SMTP password (secret) | （アプリパスワードを再入力、または上記URIに含めればスキップ可） |
+| Default FROM address | `SLOW FIRE SHOP <yamane@potentialight.com>` |
+| Default REPLY-TO address | `yamane@potentialight.com` |
+| Email documents collection | `mail` |
+| Users collection | （空欄でOK） |
+| Templates collection | （空欄でOK） |
+
+> ⚠️ メールアドレスの `@` はURI内では `%40` にエンコード必須。
+> 例: `yamane%40potentialight.com`
+
+### 3.6-3. 動作確認
+
+1. Stripeテスト決済（`4242 4242 4242 4242`）を実行
+2. `yamane@potentialight.com` に「【SLOW FIRE SHOP】新規注文 …」が届けばOK
+3. Firebase Console → **Extensions → Trigger Email → ログ** で配信状況を確認できる
+4. Firestore `mail/{自動ID}` ドキュメントに `delivery.state = SUCCESS` が記録される
+
+### 3.6-4. 通知先を変更したいとき
+
+`functions/index.js` 冒頭の `ADMIN_NOTIFY_EMAILS` 配列にメールアドレスを追加し、`firebase deploy --only functions:stripeWebhook` で反映。
+
+---
+
 ## ステップ 4：Hosting にデプロイ（3分）
 
 ```bash
@@ -189,6 +239,7 @@ URLからより自然な日本語の紹介文をAIに書かせたい場合：
 | ☐ | `/admin.html` で管理者ログインでき、商品の追加・編集ができる |
 | ☐ | 管理画面でURLを貼ると商品情報が自動入力される |
 | ☐ | スマホでハンバーガーメニューが正しく開閉する |
+| ☐ | テスト決済後 `yamane@potentialight.com` に購入通知メールが届く |
 
 ---
 
@@ -205,6 +256,9 @@ URLからより自然な日本語の紹介文をAIに書かせたい場合：
 
 **Apple Pay ボタンが出ない**
 → Stripeダッシュボードでドメイン認証が完了していない、または HTTPS でアクセスしていない可能性があります。
+
+**購入通知メールが届かない**
+→ Firebase Console → Extensions → Trigger Email → ログ を確認。SMTP URIのアプリパスワードまたは `@` のURLエンコード（`%40`）漏れが典型的な原因。Firestoreの `mail/{ID}/delivery` フィールドにエラー詳細が記録される。
 
 ---
 

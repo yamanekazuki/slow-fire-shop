@@ -1,9 +1,12 @@
 /* =============================================
    SLOW FIRE SHOP — Cloud Functions
    - createCheckoutSession : Stripe Checkout Session（Apple/Google Pay対応）
-   - stripeWebhook         : 決済完了時に注文ステータス更新
+   - stripeWebhook         : 決済完了時に注文ステータス更新 + 管理者通知メール
    - fetchProductMeta      : URL→OGPメタデータ取得（管理画面のAI入力支援）
    ============================================= */
+
+// 管理者への購入通知メール送信先（Firebase拡張 "Trigger Email" が拾う）
+const ADMIN_NOTIFY_EMAILS = ['yamane@potentialight.com'];
 const { onCall, HttpsError } = require('firebase-functions/v2/https');
 const { onRequest } = require('firebase-functions/v2/https');
 const { setGlobalOptions } = require('firebase-functions/v2');
@@ -113,10 +116,92 @@ exports.stripeWebhook = onRequest(
           paidAt: admin.firestore.FieldValue.serverTimestamp(),
         }, { merge: true });
       }
+
+      // 管理者へ購入通知メール（Firebase拡張 "Trigger Email from Firestore" が mail コレクションを監視して送信）
+      try {
+        await sendAdminOrderNotification(stripe, session, orderId);
+      } catch (mailErr) {
+        // 通知失敗は決済処理自体を巻き戻さない（Stripe側のリトライを避ける）
+        console.error('Order notification email error:', mailErr);
+      }
     }
     res.json({ received: true });
   }
 );
+
+// =============================================
+// sendAdminOrderNotification — 管理者宛に購入通知メールを作成
+// Firebase拡張「Trigger Email from Firestore」が `mail` コレクションを監視し
+// 自動送信する仕組みのため、ここでは Firestore に書き込むだけ
+// =============================================
+async function sendAdminOrderNotification(stripe, session, orderId) {
+  // Stripe Sessionから明細・配送先を取得（line_itemsはretrieveで展開が必要）
+  const full = await stripe.checkout.sessions.retrieve(session.id, {
+    expand: ['line_items.data.price.product'],
+  });
+
+  const items = (full.line_items?.data || []).map((li) => ({
+    name: li.description || li.price?.product?.name || '商品',
+    qty: li.quantity || 1,
+    amount: li.amount_total || 0,
+  }));
+
+  const customer = full.customer_details || {};
+  const shipping =
+    full.collected_information?.shipping_details ||
+    full.shipping_details ||
+    full.shipping ||
+    {};
+  const addr = shipping.address || {};
+
+  const itemRows = items.length
+    ? items.map((i) => `・${i.name} × ${i.qty}　¥${(i.amount || 0).toLocaleString()}`).join('\n')
+    : '（明細取得失敗）';
+
+  const addressBlock = [
+    shipping.name || customer.name || '',
+    addr.postal_code ? `〒${addr.postal_code}` : '',
+    [addr.state, addr.city, addr.line1, addr.line2].filter(Boolean).join(' '),
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  const total = full.amount_total || 0;
+  const subject = `【SLOW FIRE SHOP】新規注文 ${orderId || session.id}（¥${total.toLocaleString()}）`;
+
+  const text = [
+    '新しい注文が入りました。',
+    '',
+    `■ 注文ID: ${orderId || '（なし）'}`,
+    `■ Stripe Session: ${session.id}`,
+    '',
+    '■ 購入者',
+    `${customer.name || '（名前なし）'} <${customer.email || ''}>`,
+    customer.phone ? `電話: ${customer.phone}` : '',
+    '',
+    '■ 商品',
+    itemRows,
+    '',
+    `■ 合計金額: ¥${total.toLocaleString()}`,
+    '',
+    '■ 配送先',
+    addressBlock || '（未入力）',
+    '',
+    '管理画面: https://yamanekazuki.github.io/slow-fire-shop/admin.html',
+  ]
+    .filter((line) => line !== null && line !== undefined)
+    .join('\n');
+
+  await admin.firestore().collection('mail').add({
+    to: ADMIN_NOTIFY_EMAILS,
+    message: {
+      subject,
+      text,
+      html: text.replace(/\n/g, '<br>'),
+    },
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+}
 
 // =============================================
 // fetchProductMeta — URLからOGPメタデータを取得
