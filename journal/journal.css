@@ -524,6 +524,17 @@
   justify-content: center;
   font-size: 3rem;
   opacity: 0.6;
+  position: relative;
+  overflow: hidden;
+}
+.jr-related-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
 }
 .jr-related-meta { padding: 14px 16px 16px; }
 .jr-related-cat {
@@ -641,6 +652,17 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 5rem;
   opacity: 0.5;
+  position: relative;
+  overflow: hidden;
+}
+.jr-feat-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
 }
 @media (min-width: 880px) { .jr-feat-img { aspect-ratio: auto; min-height: 420px; } }
 .jr-feat-meta {
@@ -728,7 +750,19 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 3rem; opacity: 0.55;
   position: relative;
+  overflow: hidden;
 }
+.jr-list-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  transition: transform 0.4s ease;
+}
+.jr-list-card:hover .jr-list-img img { transform: scale(1.04); }
 .jr-list-card[data-tone="dark"] .jr-list-img { background: linear-gradient(135deg, #1f1f1f, #3a2818); color: #FEF3C7; }
 .jr-list-card[data-tone="green"] .jr-list-img { background: linear-gradient(135deg, #052e1d, #15803d); color: #FEF3C7; }
 .jr-list-meta { padding: 18px 18px 20px; flex-grow: 1; display:flex; flex-direction: column; }
