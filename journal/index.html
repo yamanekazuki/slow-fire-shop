@@ -416,11 +416,12 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
-    /* category filter */
+    /* category filter — data-catがあるpill(="すべて")のみJS処理、他はカテゴリページへ遷移 */
     const pills = document.querySelectorAll('.jr-cat-pill');
     const cards = document.querySelectorAll('.jr-list-card');
     pills.forEach(pill => {
       pill.addEventListener('click', e => {
+        if (!pill.dataset.cat) return; // data-catなしのpillは通常リンクとして遷移
         e.preventDefault();
         pills.forEach(p => p.classList.remove('is-active'));
         pill.classList.add('is-active');
