@@ -72,7 +72,7 @@
     /* Hero */
     .tool-hero {
       padding: 80px 22px 40px;
-      background: linear-gradient(180deg, #FFF7ED 0%, #FFFFFF 100%);
+      background: linear-gradient(180deg, var(--brand-50) 0%, #FFFFFF 100%);
       text-align: center;
     }
     .tool-hero .tool-eyebrow {
@@ -256,7 +256,7 @@
       line-height: 1.2;
     }
     .summary-card .sc-value small { font-size: 12px; color: var(--gray-400); font-weight: 600; margin-left: 3px; }
-    .summary-card.accent { background: linear-gradient(135deg, #B45309, #92400E); color: #fff; border-color: transparent; }
+    .summary-card.accent { background: linear-gradient(135deg, var(--brand-500), var(--brand-700)); color: #fff; border-color: transparent; }
     .summary-card.accent .sc-label { color: rgba(255,255,255,.85); }
     .summary-card.accent .sc-value { color: #fff; }
 
@@ -1039,8 +1039,8 @@
 
     // category color (for budget bar)
     const CAT_COLORS = {
-      meat:'#B45309', vegetables:'#16A34A', staple:'#D97706',
-      seasoning:'#7C2D12', side:'#0891B2', drink:'#6B21A8'
+      meat:'var(--brand-500)', vegetables:'var(--success)', staple:'#D97706',
+      seasoning:'var(--brand-900)', side:'#0891B2', drink:'#6B21A8'
     };
 
     // ===== State =====
@@ -1135,7 +1135,7 @@
         legend.appendChild(lg);
       });
       const useRate = state.budget > 0 ? (totalAll / state.budget * 100) : 0;
-      let useColor = useRate > 110 ? '#DC2626' : (useRate > 95 ? '#D97706' : '#16A34A');
+      let useColor = useRate > 110 ? 'var(--danger)' : (useRate > 95 ? '#D97706' : 'var(--success)');
       $('#budgetUseTxt').innerHTML = `予算使用率 <strong style="color:${useColor}">${useRate.toFixed(0)}%</strong>`;
 
       // categories

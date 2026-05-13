@@ -129,8 +129,8 @@
     }
     @media (min-width: 720px) { .tt-summary { grid-template-columns: repeat(3, 1fr); } }
     .tt-card {
-      background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-      border: 1px solid #FED7AA;
+      background: linear-gradient(135deg, var(--brand-50) 0%, var(--brand-100) 100%);
+      border: 1px solid var(--brand-200);
       border-radius: 14px;
       padding: 18px 18px;
       text-align: left;
@@ -209,7 +209,7 @@
     table.tt-table td.tt-step { font-weight: 700; color: var(--black); width: 30%; }
     table.tt-table td.tt-desc { color: var(--gray-600); line-height: 1.7; }
     table.tt-table tr:last-child td { border-bottom: none; }
-    table.tt-table tr.tt-row-finish td { background: #FFF7ED; }
+    table.tt-table tr.tt-row-finish td { background: var(--brand-50); }
     table.tt-table tr.tt-row-prep td { background: #FAFAF9; }
 
     .tt-error {

@@ -77,7 +77,7 @@
       display: inline-block;
       font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
       color: var(--brand);
-      background: #FEF3C7;
+      background: var(--cream);
       padding: 5px 14px; border-radius: 100px;
       margin-bottom: 18px;
     }
@@ -182,7 +182,7 @@
     .meat-card:hover { border-color: #FCD34D; background: #FFFBEB; }
     .meat-card.active {
       border-color: var(--brand);
-      background: #FEF3C7;
+      background: var(--cream);
       box-shadow: 0 4px 12px rgba(180, 83, 9, 0.15);
     }
     .meat-card-emoji { font-size: 26px; margin-bottom: 6px; line-height: 1; }
@@ -197,7 +197,7 @@
     }
     @media (max-width: 760px) { .result-grid { grid-template-columns: 1fr; } }
     .result-cell {
-      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      background: linear-gradient(135deg, #FFFBEB, var(--cream));
       border: 1px solid #FDE68A;
       border-radius: 14px;
       padding: 18px 18px 16px;
@@ -238,7 +238,7 @@
       text-align: left;
     }
     table.curve-table th {
-      background: #fafaf7;
+      background: var(--paper);
       font-weight: 700;
       color: var(--gray-600);
       font-size: 12px;
@@ -250,7 +250,7 @@
     .curve-viz {
       margin: 18px 0 8px;
       padding: 18px 16px;
-      background: #fafaf7;
+      background: var(--paper);
       border-radius: 12px;
     }
     .curve-bar-row { display: grid; grid-template-columns: 100px 1fr 56px; gap: 12px; align-items: center; margin-bottom: 8px; }
@@ -258,7 +258,7 @@
     .curve-bar-row .bar-track { background: #ebebeb; height: 10px; border-radius: 6px; overflow: hidden; }
     .curve-bar-row .bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #FCD34D, #B45309);
+      background: linear-gradient(90deg, #FCD34D, var(--brand-500));
       border-radius: 6px;
       transition: width 0.4s ease;
     }
@@ -346,7 +346,7 @@
       letter-spacing: 0.04em;
       transition: all 0.18s ease;
     }
-    .shop-cta a:hover { background: #92400E; transform: translateY(-1px); }
+    .shop-cta a:hover { background: var(--brand-700); transform: translateY(-1px); }
     .shop-cta a.outline { background: transparent; border: 1.5px solid rgba(245,241,232,0.4); color: #f5f1e8; }
     .shop-cta a.outline:hover { background: rgba(245,241,232,0.08); border-color: var(--brand); }
 
