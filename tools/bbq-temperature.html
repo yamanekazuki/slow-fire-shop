@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQ中心温度ガイドツール — 部位別の目標温度と焼き時間 | SLOW FIRE</title>
+  <meta name="description" content="肉の部位・重量・焼き加減を入力するだけで、目標中心温度・グリル温度・調理時間・タイムテーブルが自動算出されるBBQ専用ツール。ブリスケット・プルドポーク・リブも対応。">
+  <meta name="keywords" content="BBQ 中心温度,BBQ 温度計算,ブリスケット 温度,プルドポーク 温度,焼き時間 計算">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-temperature.html">
+  <meta name="theme-color" content="#B45309">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQ中心温度ガイドツール — 部位別の目標温度と焼き時間">
+  <meta property="og:description" content="肉の部位・重量・焼き加減から、目標中心温度・グリル温度・調理時間・タイムテーブルを自動算出するBBQ専用ツール。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-temperature.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1200&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BBQ中心温度ガイドツール | SLOW FIRE">
+  <meta name="twitter:description" content="肉の部位・重量・焼き加減から、目標中心温度・グリル温度・調理時間・タイムテーブルを自動算出。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260513">
+  <link rel="stylesheet" href="../journal/journal.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BBQ中心温度ガイドツール",
+    "description": "肉の部位・重量・焼き加減を入力するだけで、目標中心温度・グリル温度・調理時間・タイムテーブルが自動算出されるBBQ専用ツール。",
+    "url": "https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-temperature.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "publisher": { "@type": "Organization", "name": "SLOW FIRE SHOP", "url": "https://yamanekazuki.github.io/slow-fire-shop/" },
+    "inLanguage": "ja-JP"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yamanekazuki.github.io/slow-fire-shop/" },
+      { "@type": "ListItem", "position": 2, "name": "ツール", "item": "https://yamanekazuki.github.io/slow-fire-shop/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "BBQ中心温度ガイド", "item": "https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-temperature.html" }
+    ]
+  }
+  </script>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B6PRVFPKF');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wmtxoerxqx");
+  </script>
+
+  <style>
+    /* =========== Tool layout =========== */
+    .tool-hero {
+      max-width: var(--jr-page-max);
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 56px) 24px 36px;
+      text-align: center;
+    }
+    .tool-hero .eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      color: var(--brand);
+      background: #FEF3C7;
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .tool-hero h1 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4.4vw, 44px);
+      line-height: 1.32;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .tool-hero p.lead {
+      max-width: 680px; margin: 0 auto;
+      font-size: 15.5px; line-height: 1.9;
+      color: var(--gray-600);
+    }
+
+    /* =========== Tool body =========== */
+    .tool-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 24px 80px;
+    }
+    .tool-card {
+      background: var(--white);
+      border: 1px solid var(--jr-line);
+      border-radius: 18px;
+      padding: 28px 28px 32px;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    .tool-card h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--black);
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+    }
+    .tool-card .sub {
+      font-size: 13px; color: var(--gray-400); margin-bottom: 22px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 760px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-grid label {
+      display: block;
+      font-size: 12px; font-weight: 700;
+      color: var(--gray-600);
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .form-grid select,
+    .form-grid input[type="number"] {
+      width: 100%;
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--jr-line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--jr-text);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-grid select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3e%3cpath d='M1 1L6 6L11 1' stroke='%23999' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .form-grid select:focus,
+    .form-grid input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
+    }
+
+    /* meat cards */
+    .meat-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .meat-card {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 14px 8px;
+      border: 1.5px solid var(--jr-line);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      background: #fff;
+      text-align: center;
+    }
+    .meat-card:hover { border-color: #FCD34D; background: #FFFBEB; }
+    .meat-card.active {
+      border-color: var(--brand);
+      background: #FEF3C7;
+      box-shadow: 0 4px 12px rgba(180, 83, 9, 0.15);
+    }
+    .meat-card-emoji { font-size: 26px; margin-bottom: 6px; line-height: 1; }
+    .meat-card-name { font-size: 12.5px; font-weight: 600; color: var(--jr-text); line-height: 1.4; }
+
+    /* result */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 760px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-cell {
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      border: 1px solid #FDE68A;
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      text-align: center;
+    }
+    .result-cell .label {
+      font-size: 11px; font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .result-cell .value {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.1;
+    }
+    .result-cell .value small {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-left: 4px;
+    }
+    .result-cell .hint { font-size: 11.5px; color: var(--gray-400); margin-top: 6px; }
+
+    /* curve / timeline */
+    table.curve-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    table.curve-table th, table.curve-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--jr-line);
+      text-align: left;
+    }
+    table.curve-table th {
+      background: #fafaf7;
+      font-weight: 700;
+      color: var(--gray-600);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    table.curve-table td.temp-cell { font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; }
+    table.curve-table td.time-cell { font-variant-numeric: tabular-nums; color: var(--jr-text-soft); }
+
+    .curve-viz {
+      margin: 18px 0 8px;
+      padding: 18px 16px;
+      background: #fafaf7;
+      border-radius: 12px;
+    }
+    .curve-bar-row { display: grid; grid-template-columns: 100px 1fr 56px; gap: 12px; align-items: center; margin-bottom: 8px; }
+    .curve-bar-row .step { font-size: 12px; font-weight: 600; color: var(--jr-text); }
+    .curve-bar-row .bar-track { background: #ebebeb; height: 10px; border-radius: 6px; overflow: hidden; }
+    .curve-bar-row .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #FCD34D, #B45309);
+      border-radius: 6px;
+      transition: width 0.4s ease;
+    }
+    .curve-bar-row .deg { font-size: 12.5px; font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; text-align: right; }
+
+    .done-criteria {
+      background: #052e1d;
+      color: #f5f1e8;
+      border-radius: 14px;
+      padding: 22px 22px 20px;
+    }
+    .done-criteria h3 { font-size: 15px; font-weight: 800; margin: 0 0 10px; color: #FCD34D; letter-spacing: 0.04em; }
+    .done-criteria ul { margin: 0; padding-left: 18px; }
+    .done-criteria li { font-size: 13.5px; line-height: 1.85; margin-bottom: 4px; }
+
+    /* explainer */
+    .explainer { max-width: var(--jr-content-max); margin: 60px auto 40px; padding: 0 24px; }
+    .explainer h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--black);
+      margin: 40px 0 14px;
+      letter-spacing: -0.005em;
+      border-left: 4px solid var(--brand);
+      padding-left: 12px;
+    }
+    .explainer h3 { font-weight: 700; font-size: 17px; margin: 22px 0 8px; color: var(--black); }
+    .explainer p { font-size: 15px; line-height: 1.95; color: var(--jr-text-soft); margin-bottom: 14px; }
+    .explainer ul { font-size: 15px; line-height: 1.9; color: var(--jr-text-soft); padding-left: 22px; }
+    .explainer li { margin-bottom: 6px; }
+    .explainer strong { color: var(--black); }
+
+    /* related & cta */
+    .tool-related { max-width: var(--jr-page-max); margin: 40px auto 30px; padding: 0 24px; }
+    .tool-related .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      color: var(--brand);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .tool-related h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 800; font-size: 22px;
+      margin: 0 0 22px; color: var(--black);
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .related-card {
+      display: block;
+      padding: 18px 20px;
+      border: 1px solid var(--jr-line);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.18s ease;
+      background: #fff;
+    }
+    .related-card:hover { border-color: var(--brand); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(180, 83, 9, 0.08); }
+    .related-card .cat { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--brand); text-transform: uppercase; margin-bottom: 6px; }
+    .related-card .ttl { font-size: 14.5px; font-weight: 700; color: var(--black); line-height: 1.55; }
+
+    .shop-cta {
+      max-width: var(--jr-page-max);
+      margin: 40px auto 80px;
+      padding: 38px 24px;
+      background: linear-gradient(135deg, #1a1a1a, #2d1b0a);
+      color: #f5f1e8;
+      border-radius: 18px;
+      text-align: center;
+    }
+    .shop-cta h2 { font-family: 'Noto Sans JP', sans-serif; font-weight: 800; font-size: 24px; color: #fff; margin: 0 0 8px; }
+    .shop-cta p { font-size: 14px; color: rgba(245,241,232,0.78); margin-bottom: 22px; }
+    .shop-cta .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .shop-cta a {
+      display: inline-block;
+      padding: 13px 26px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      transition: all 0.18s ease;
+    }
+    .shop-cta a:hover { background: #92400E; transform: translateY(-1px); }
+    .shop-cta a.outline { background: transparent; border: 1.5px solid rgba(245,241,232,0.4); color: #f5f1e8; }
+    .shop-cta a.outline:hover { background: rgba(245,241,232,0.08); border-color: var(--brand); }
+
+    .disclaimer {
+      max-width: var(--jr-content-max);
+      margin: 0 auto 40px; padding: 0 24px;
+      font-size: 12px; color: var(--gray-400); line-height: 1.8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="journal-page">
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="../cookbook.html"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="../journal/index.html">JOURNAL</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="jr-crumb">
+    <a href="../index.html">ホーム</a><span class="jr-crumb-sep">/</span>
+    <a href="./">ツール</a><span class="jr-crumb-sep">/</span>
+    <span>BBQ中心温度ガイド</span>
+  </nav>
+
+  <section class="tool-hero">
+    <span class="eyebrow">TOOL · 中心温度ガイド</span>
+    <h1>BBQ中心温度ガイドツール<br>部位別の目標温度と焼き時間</h1>
+    <p class="lead">
+      肉の部位・重量・焼き加減を選ぶだけで、<strong>目標中心温度・推奨グリル温度・調理時間・タイムテーブル</strong>を自動で算出します。
+      ブリスケット、プルドポーク、リブアイ、ビアキャンチキンまで主要10部位に対応。
+    </p>
+  </section>
+
+  <main class="tool-wrap">
+
+    <!-- INPUT CARD -->
+    <div class="tool-card">
+      <h2>1. 肉の部位を選ぶ</h2>
+      <p class="sub">タップ／クリックで選択（10種類）</p>
+      <div class="meat-cards" id="meatCards"></div>
+
+      <h2 style="margin-top:24px">2. 重量と焼き加減</h2>
+      <p class="sub">入力すると下のカードがリアルタイムで更新されます</p>
+      <div class="form-grid">
+        <div>
+          <label for="weight">重量 (kg)</label>
+          <input type="number" id="weight" min="0.3" max="10" step="0.1" value="2.0">
+        </div>
+        <div>
+          <label for="doneness">焼き加減</label>
+          <select id="doneness"></select>
+        </div>
+        <div>
+          <label for="startTime">火入れ時刻</label>
+          <input type="time" id="startTime" value="08:00">
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="tool-card">
+      <h2>3. 計算結果</h2>
+      <p class="sub" id="resultSub">— 部位と条件に応じて自動更新 —</p>
+
+      <div class="result-grid">
+        <div class="result-cell">
+          <div class="label">目標中心温度</div>
+          <div class="value" id="rTarget">—<small>℃</small></div>
+          <div class="hint" id="rTargetHint">中心まで火入れする最終温度</div>
+        </div>
+        <div class="result-cell">
+          <div class="label">推奨グリル温度</div>
+          <div class="value" id="rGrill">—<small>℃</small></div>
+          <div class="hint">インダイレクト・ロー&スロー帯</div>
+        </div>
+        <div class="result-cell">
+          <div class="label">調理時間（目安）</div>
+          <div class="value" id="rTime">—</div>
+          <div class="hint" id="rTimeHint">レスト時間込み</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:8px;font-size:14px;font-weight:800;color:var(--black);letter-spacing:0.04em;">温度カーブ（中心温度の推移）</h3>
+      <div class="curve-viz" id="curveViz"></div>
+
+      <h3 style="margin-top:18px;font-size:14px;font-weight:800;color:var(--black);letter-spacing:0.04em;">タイムテーブル</h3>
+      <div style="overflow-x:auto;">
+        <table class="curve-table" id="timetable">
+          <thead><tr><th>時刻</th><th>経過</th><th>工程</th><th>中心温度</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DONE CRITERIA -->
+    <div class="tool-card" style="background:transparent;border:none;padding:0;box-shadow:none;">
+      <div class="done-criteria">
+        <h3 id="doneTitle">完成の判定基準</h3>
+        <ul id="doneList"></ul>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- EXPLAINER (SEO) -->
+  <section class="explainer">
+    <h2>なぜBBQで中心温度が大切か</h2>
+    <p>BBQは「時間で決める料理」ではなく、<strong>温度で決める料理</strong>です。火力・外気温・肉の個体差・水分量によって、同じ重量でも仕上がりの時間は1〜2時間平気でずれます。「重量1kgあたり1時間」というレシピが目安にしかならないのはこのためです。</p>
+    <p>逆に、中心温度は嘘をつきません。ブリスケットなら95℃、プルドポークなら95℃、リブアイのミディアムレアなら54℃。<strong>この数字に到達した瞬間が完成</strong>であり、何時間かかったかは結果論にすぎません。中心温度を計測する習慣が身につくと、BBQの失敗は劇的に減ります。</p>
+
+    <h2>温度計の選び方</h2>
+    <p>BBQで使う温度計は、用途によって2種類を使い分けるのが定石です。</p>
+    <h3>1. 刺すタイプ（プローブ温度計）</h3>
+    <p>肉の中心に刺して中心温度を計測するもの。Inkbird、ThermoPro、Thermoworks（Smoke / Signals）などが定番。<strong>ワイヤレス対応・2チャンネル以上</strong>のモデルを選べば、肉の中心とグリル庫内温度を同時に計測できます。長時間調理のブリスケットやプルドポークでは必須の装備。</p>
+    <h3>2. 瞬間計測タイプ（インスタント温度計）</h3>
+    <p>差し込んで2〜3秒で表示されるもの。ThermoworksのThermapen ONEが世界標準。ステーキやリブのように「最後の決め」が必要な料理で、刺してすぐ抜けるスピードが武器になります。</p>
+    <p>家庭で1本だけ買うなら、まずはプローブ温度計を。レスト中の温度推移まで見られるため、火入れの精度が一段上がります。</p>
+
+    <h2>BBQで起こりやすい失敗パターン</h2>
+    <h3>1. ストール（温度停滞）でパニックになる</h3>
+    <p>ブリスケットやプルドポークでは、中心温度が65〜75℃あたりで数時間止まる現象が起きます。これは肉の水分が蒸発して気化熱で冷えるためで、<strong>異常ではなく必須の通過点</strong>です。耐えるか、テキサスクラッチ（アルミホイル巻き）で突破するかを選びます。</p>
+    <h3>2. 中心温度だけ見て、肉の質感を確認しない</h3>
+    <p>ブリスケットは95℃に到達しても、コラーゲンの分解が不十分だと固いままです。<strong>「ベンドテスト」</strong>（トングで持ち上げて震えるか）や<strong>「プローブテスト」</strong>（温度計をバターに差し込むようにスッと入るか）を併用するのが正解。温度は必要条件であって、十分条件ではありません。</p>
+    <h3>3. レストを省略する</h3>
+    <p>大型肉ほど、レスト（休ませる時間）が決定的に重要です。ブリスケットなら最低1時間、プルドポークなら30分以上。レスト中も中心温度は2〜5℃上がり続け（キャリーオーバー）、肉汁が筋繊維に再吸収されます。<strong>「焼き終わり＝完成」ではなく、「レスト終わり＝完成」</strong>と覚えてください。</p>
+    <h3>4. グリル温度を測っていない</h3>
+    <p>グリルの蓋についている温度計はあてになりません。実際の調理面（グレート上）の温度は、表示より20〜30℃低いことも普通です。プローブ温度計のグリルチャンネルを、肉の真横にクリップで設置するのが鉄則です。</p>
+
+    <h2>このツールの使い方</h2>
+    <p>上のフォームで肉・重量・焼き加減・火入れ時刻を入力すると、結果カードが自動で更新されます。<strong>調理時間はあくまで「目安」</strong>で、実際の完成判定は中心温度と質感で行ってください。タイムテーブルは「いつクラッチを巻くか」「いつレストに入るか」というスケジュール感覚を掴むためのものです。</p>
+    <p>長時間調理（ブリスケット・プルドポーク）では、必ず<strong>2〜3時間早く火入れを始める余裕</strong>を取ってください。早く終わったらクーラーボックスで保温（FTC法）すれば、4時間以上美味しく保てます。逆に遅れると食卓を待たせます。</p>
+  </section>
+
+  <!-- RELATED -->
+  <section class="tool-related">
+    <p class="eyebrow">RELATED ARTICLES</p>
+    <h2>このツールと一緒に読みたい記事</h2>
+    <div class="related-grid">
+      <a href="../journal/articles/brisket-temperature.html" class="related-card">
+        <div class="cat">SCIENCE</div>
+        <div class="ttl">ブリスケットの中心温度を読み解く。95℃の正体</div>
+      </a>
+      <a href="../journal/articles/pulled-pork-temperature.html" class="related-card">
+        <div class="cat">SCIENCE</div>
+        <div class="ttl">プルドポークの中心温度。なぜ95℃なのか</div>
+      </a>
+      <a href="../journal/articles/reverse-sear.html" class="related-card">
+        <div class="cat">SCIENCE</div>
+        <div class="ttl">リバースシア法とは。逆算思考でステーキを焼く</div>
+      </a>
+      <a href="../journal/articles/bbq-yougo.html" class="related-card">
+        <div class="cat">GLOSSARY</div>
+        <div class="ttl">BBQ用語辞典。クラッチからベンドテストまで</div>
+      </a>
+      <a href="../journal/articles/texas-crutch.html" class="related-card">
+        <div class="cat">TECHNIQUE</div>
+        <div class="ttl">テキサスクラッチとは。ストール突破の必殺技</div>
+      </a>
+      <a href="../journal/articles/low-and-slow.html" class="related-card">
+        <div class="cat">PHILOSOPHY</div>
+        <div class="ttl">ロー&スローとは何か。コラーゲンの料理</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SHOP CTA -->
+  <section class="shop-cta">
+    <h2>正しい火入れには、正しいラブを。</h2>
+    <p>温度計と同じくらい、ラブの選択は仕上がりを左右します。SLOW FIRE が厳選した正規輸入のラブを。</p>
+    <div class="btn-row">
+      <a href="../index.html#products">商品一覧を見る</a>
+      <a href="../rub-guide.html" class="outline">ラブガイドを読む</a>
+    </div>
+  </section>
+
+  <p class="disclaimer">
+    ※ 本ツールの数値は一般的な目安です。実際の調理時間は、外気温・グリルの密閉性・肉の個体差・脂肪量によって大きく変動します。<br>
+    必ずプローブ温度計で中心温度を計測しながら調理してください。
+  </p>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a><p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../essentials.html">BBQの神髄</a><a href="../pairing-guide.html">食材から選ぶ</a><a href="../cookbook.html">料理から選ぶ</a><a href="../rub-guide.html">ラブガイド</a><a href="../journal/index.html">JOURNAL</a><a href="../team.html">私たちについて</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260513"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
+  </script>
+
+  <!-- ======== TOOL LOGIC ======== -->
+  <script>
+    /**
+     * SLOW FIRE — BBQ Temperature Calculator
+     * 肉ごとの調理パラメータと、ユーザー入力から
+     *  - 目標中心温度
+     *  - 推奨グリル温度
+     *  - 推定調理時間（レスト込）
+     *  - タイムテーブル（火入れ→クラッチ→完成→レスト→提供）
+     *  - 温度カーブの簡易ビジュアル
+     *  - 完成判定基準
+     * を計算する。
+     */
+
+    /* ---------- データ ---------- */
+    const DONENESS_LABELS = {
+      'rare':         { label: 'レア',        temp: 48 },
+      'medium-rare':  { label: 'ミディアムレア', temp: 54 },
+      'medium':       { label: 'ミディアム',   temp: 57 },
+      'medium-well':  { label: 'ミディアムウェル', temp: 60 },
+      'well-done':    { label: 'ウェルダン（崩れる柔らかさ）', temp: 63 },
+    };
+
+    /**
+     * doneness は「適用可能な焼き加減」。
+     * 長時間調理（プルドポーク・ブリスケット・リブ）は well-done 固定（崩れる柔らかさが目標）。
+     */
+    const meatData = {
+      brisket: {
+        name: '牛ブリスケット',
+        emoji: '🥩',
+        targetTemp: 95, grillTemp: 120, timePerKg: 90,
+        crutchTemp: 73, restTime: 60,
+        doneness: ['well-done'],
+        tips: [
+          '中心温度95℃を目標に。最後はプローブが「バターに刺すように」入る感触で判断。',
+          'ベンドテスト：トングで持ち上げて、肉が震えるU字に曲がれば完成。',
+          'レストは最低1時間。クーラーボックス保温（FTC）なら4時間まで美味しい。'
+        ],
+      },
+      ribeye: {
+        name: '牛リブアイ（厚切りステーキ）',
+        emoji: '🥩',
+        targetTemp: 54, grillTemp: 120, timePerKg: 40,
+        crutchTemp: null, restTime: 8,
+        doneness: ['rare', 'medium-rare', 'medium', 'medium-well', 'well-done'],
+        reverseSear: true,
+        tips: [
+          'リバースシア法を採用。低温で目標-3℃まで運び、最後に280℃で焼き目をつける。',
+          '最後の高温焼きで2〜3℃上昇する想定で、低温段階から取り出すこと。',
+          'レストは5〜8分。長すぎると冷えるので注意。'
+        ],
+      },
+      sirloin: {
+        name: '牛サーロイン',
+        emoji: '🥩',
+        targetTemp: 57, grillTemp: 120, timePerKg: 35,
+        crutchTemp: null, restTime: 8,
+        doneness: ['medium-rare', 'medium', 'medium-well'],
+        reverseSear: true,
+        tips: [
+          'リブアイより脂が少ないので、ミディアム以上は乾きやすい。ミディアムレア推奨。',
+          '焼き目をつける前に表面の水分をペーパーで完全に拭く。',
+          'スライスは繊維に対して直角に。1cm厚で。'
+        ],
+      },
+      'short-rib': {
+        name: '牛ショートリブ',
+        emoji: '🍖',
+        targetTemp: 96, grillTemp: 120, timePerKg: 100,
+        crutchTemp: 75, restTime: 45,
+        doneness: ['well-done'],
+        tips: [
+          'ビーフリブの定番。脂と肉のバランスが完璧な部位。',
+          '中心温度96℃と高めに設定。コラーゲン分解を優先する。',
+          'プローブが骨と肉の間にスッと入れば完成。',
+        ],
+      },
+      'pulled-pork': {
+        name: '豚肩ロース（プルドポーク）',
+        emoji: '🐖',
+        targetTemp: 95, grillTemp: 110, timePerKg: 90,
+        crutchTemp: 71, restTime: 45,
+        doneness: ['well-done'],
+        tips: [
+          '中心温度95℃でコラーゲンが完全にゼラチン化し、フォークで簡単にほぐれる。',
+          'ボーンプル：骨を持って軽く引いて、抵抗なく抜ければ完成。',
+          'レスト後にラブとアップルジュースをかけながら手でほぐす。'
+        ],
+      },
+      'spare-rib': {
+        name: '豚スペアリブ',
+        emoji: '🍖',
+        targetTemp: 93, grillTemp: 120, timePerKg: 75,
+        crutchTemp: 70, restTime: 15,
+        doneness: ['well-done'],
+        tips: [
+          '3-2-1メソッドが定番（3時間そのまま→2時間クラッチ→1時間ソース）。',
+          'ベンドテスト：トングで持ち上げて、表面が割れ始めれば完成。',
+          '骨が肉から1cm露出してきたら、完成のサイン。'
+        ],
+      },
+      'back-rib': {
+        name: '豚バックリブ',
+        emoji: '🍖',
+        targetTemp: 93, grillTemp: 120, timePerKg: 65,
+        crutchTemp: 70, restTime: 12,
+        doneness: ['well-done'],
+        tips: [
+          'スペアリブより小さく、火入れが速い。2-2-1メソッドで。',
+          '骨と肉の間にプローブを差して、温度を確認。',
+          'ソースを塗るのは最後の1時間だけ（焦げ防止）。'
+        ],
+      },
+      'whole-chicken': {
+        name: '鶏丸鶏（ビアキャンチキン）',
+        emoji: '🍗',
+        targetTemp: 75, grillTemp: 160, timePerKg: 60,
+        crutchTemp: null, restTime: 10,
+        doneness: ['well-done'],
+        tips: [
+          '中心温度は最も厚い部分（もも内側）で計測。皮ではなく肉の中心。',
+          '75℃で食中毒リスクがゼロ、かつジューシーさを保てる温度。',
+          'ビアキャン缶のビールが沸騰して、肉を内側から蒸す方式。'
+        ],
+      },
+      'chicken-thigh': {
+        name: '鶏もも肉',
+        emoji: '🍗',
+        targetTemp: 74, grillTemp: 180, timePerKg: 28,
+        crutchTemp: null, restTime: 5,
+        doneness: ['well-done'],
+        tips: [
+          '骨付きならインダイレクト180℃、皮目を最後にダイレクトでパリッと。',
+          '74℃で安全＆ジューシー。胸肉と違って多少高くても乾きにくい。',
+          '骨に沿ってプローブを差し、骨に触れないように温度を計測。'
+        ],
+      },
+      'lamb-shoulder': {
+        name: 'ラム肩肉',
+        emoji: '🐑',
+        targetTemp: 93, grillTemp: 130, timePerKg: 80,
+        crutchTemp: 72, restTime: 30,
+        doneness: ['well-done'],
+        tips: [
+          'プルドラム。中心温度93℃でフォークで簡単にほぐれる柔らかさ。',
+          'ローズマリーとガーリックを差し込んで香りを移す。',
+          'ミントソースとピタブレッドで提供（ギリシャ風）。'
+        ],
+      },
+    };
+
+    /* ---------- 状態 ---------- */
+    const state = {
+      meat: 'brisket',
+      weight: 2.0,
+      doneness: 'well-done',
+      startTime: '08:00',
+    };
+
+    /* ---------- 描画：肉カード ---------- */
+    function renderMeatCards() {
+      const wrap = document.getElementById('meatCards');
+      wrap.innerHTML = Object.entries(meatData).map(([key, m]) => `
+        <div class="meat-card ${key === state.meat ? 'active' : ''}" data-key="${key}" role="button" tabindex="0">
+          <div class="meat-card-emoji">${m.emoji}</div>
+          <div class="meat-card-name">${m.name}</div>
+        </div>
+      `).join('');
+      wrap.querySelectorAll('.meat-card').forEach(card => {
+        card.addEventListener('click', () => {
+          state.meat = card.dataset.key;
+          renderMeatCards();
+          syncDoneness();
+          recalc();
+        });
+      });
+    }
+
+    /* ---------- 焼き加減セレクトを肉に応じて切り替え ---------- */
+    function syncDoneness() {
+      const sel = document.getElementById('doneness');
+      const m = meatData[state.meat];
+      sel.innerHTML = m.doneness.map(d =>
+        `<option value="${d}">${DONENESS_LABELS[d].label}</option>`
+      ).join('');
+      // 既存選択を維持できるなら維持
+      if (m.doneness.includes(state.doneness)) {
+        sel.value = state.doneness;
+      } else {
+        state.doneness = m.doneness[m.doneness.includes('medium-rare') ? m.doneness.indexOf('medium-rare') : 0];
+        sel.value = state.doneness;
+      }
+    }
+
+    /* ---------- 時刻ユーティリティ ---------- */
+    function toMinutes(timeStr) {
+      const [h, m] = timeStr.split(':').map(Number);
+      return h * 60 + m;
+    }
+    function fmtTime(totalMin) {
+      const t = ((totalMin % (24 * 60)) + 24 * 60) % (24 * 60);
+      const h = Math.floor(t / 60);
+      const m = Math.round(t % 60);
+      return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    }
+    function fmtDuration(min) {
+      min = Math.max(0, Math.round(min));
+      const h = Math.floor(min / 60);
+      const m = min % 60;
+      if (h === 0) return `${m}分`;
+      if (m === 0) return `${h}時間`;
+      return `${h}時間${m}分`;
+    }
+
+    /* ---------- 計算 ---------- */
+    function calculate() {
+      const m = meatData[state.meat];
+      const w = Math.max(0.3, Math.min(10, Number(state.weight) || 1));
+
+      // 焼き加減が選択されている場合は中心温度を上書き（ステーキ系）
+      let centerTemp = m.targetTemp;
+      if (m.doneness.length > 1) {
+        centerTemp = DONENESS_LABELS[state.doneness].temp;
+      }
+
+      // 調理時間（分）。リバースシア対象は低温で目標-3℃まで運ぶ前提で時間短縮係数。
+      let cookMin;
+      if (m.reverseSear) {
+        // ステーキは重量より厚みで決まるが、簡易的に重量比例
+        cookMin = m.timePerKg * w * (centerTemp / 54); // ミディアムレア基準
+        cookMin += 5; // 高温焼き
+      } else {
+        cookMin = m.timePerKg * w;
+      }
+      const restMin = m.restTime;
+      const totalMin = cookMin + restMin;
+
+      // スケジュール
+      const start = toMinutes(state.startTime);
+      const stages = [];
+
+      stages.push({
+        time: start,
+        elapsed: 0,
+        step: '火入れ開始（グリル' + m.grillTemp + '℃）',
+        temp: 'ー'
+      });
+
+      if (m.crutchTemp != null) {
+        // クラッチタイミング：中心温度がクラッチ温度に達したと推定される時刻 = 全体の 約55%地点
+        const crutchAt = start + Math.round(cookMin * 0.55);
+        stages.push({
+          time: crutchAt,
+          elapsed: crutchAt - start,
+          step: 'テキサスクラッチ（アルミ箔で包む）',
+          temp: m.crutchTemp + '℃'
+        });
+      }
+
+      // 完成（中心温度到達）
+      const doneAt = start + Math.round(cookMin);
+      stages.push({
+        time: doneAt,
+        elapsed: doneAt - start,
+        step: m.reverseSear ? '低温段階終了 → 高温で焼き目' : '中心温度到達 → グリルから上げる',
+        temp: centerTemp + '℃'
+      });
+
+      // レスト
+      const eatAt = doneAt + restMin;
+      stages.push({
+        time: eatAt,
+        elapsed: eatAt - start,
+        step: 'レスト終了 → スライス・提供',
+        temp: (centerTemp + (m.reverseSear ? 0 : 2)) + '℃ (キャリーオーバー)'
+      });
+
+      return {
+        meat: m,
+        centerTemp,
+        cookMin,
+        restMin,
+        totalMin,
+        stages,
+      };
+    }
+
+    /* ---------- 描画：結果 ---------- */
+    function renderResult(r) {
+      const m = r.meat;
+
+      document.getElementById('resultSub').textContent =
+        `${m.name} ${state.weight}kg / ${DONENESS_LABELS[state.doneness].label}`;
+
+      document.getElementById('rTarget').innerHTML = `${r.centerTemp}<small>℃</small>`;
+      document.getElementById('rGrill').innerHTML = `${m.grillTemp}<small>℃</small>`;
+      document.getElementById('rTime').innerHTML = `${fmtDuration(r.totalMin)}`;
+      document.getElementById('rTimeHint').textContent = `調理 ${fmtDuration(r.cookMin)} + レスト ${r.restMin}分`;
+
+      // 温度カーブ簡易ビジュアル
+      const max = r.centerTemp + 5;
+      const points = [
+        { step: '火入れ直後', deg: 10 },
+        { step: '1/3経過', deg: Math.round(r.centerTemp * 0.55) },
+        ...(m.crutchTemp != null ? [{ step: 'ストール突入', deg: m.crutchTemp - 5 }] : []),
+        ...(m.crutchTemp != null ? [{ step: 'クラッチ後', deg: m.crutchTemp + 6 }] : [{ step: '2/3経過', deg: Math.round(r.centerTemp * 0.85) }]),
+        { step: '完成', deg: r.centerTemp },
+        { step: 'レスト後', deg: r.centerTemp + (m.reverseSear ? 0 : 2) },
+      ];
+      document.getElementById('curveViz').innerHTML = points.map(p => `
+        <div class="curve-bar-row">
+          <div class="step">${p.step}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.min(100, (p.deg / max) * 100)}%"></div></div>
+          <div class="deg">${p.deg}℃</div>
+        </div>
+      `).join('');
+
+      // タイムテーブル
+      const tbody = document.querySelector('#timetable tbody');
+      tbody.innerHTML = r.stages.map(s => `
+        <tr>
+          <td class="time-cell">${fmtTime(s.time)}</td>
+          <td class="time-cell">+${fmtDuration(s.elapsed)}</td>
+          <td>${s.step}</td>
+          <td class="temp-cell">${s.temp}</td>
+        </tr>
+      `).join('');
+
+      // 完成基準
+      document.getElementById('doneTitle').textContent = `完成の判定基準 — ${m.name}`;
+      document.getElementById('doneList').innerHTML =
+        [`<strong>中心温度 ${r.centerTemp}℃</strong> に到達（プローブ温度計で実測）`]
+        .concat(m.tips)
+        .map(t => `<li>${t}</li>`).join('');
+    }
+
+    /* ---------- 再計算 ---------- */
+    function recalc() {
+      state.weight = Number(document.getElementById('weight').value) || 1;
+      state.doneness = document.getElementById('doneness').value || state.doneness;
+      state.startTime = document.getElementById('startTime').value || '08:00';
+      const r = calculate();
+      renderResult(r);
+    }
+
+    /* ---------- 初期化 ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMeatCards();
+      syncDoneness();
+      document.getElementById('weight').addEventListener('input', recalc);
+      document.getElementById('doneness').addEventListener('change', recalc);
+      document.getElementById('startTime').addEventListener('input', recalc);
+      recalc();
+    });
+  </script>
+</body>
+</html>

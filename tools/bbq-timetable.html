@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQタイムテーブル計算機 — 夕食時刻から逆算する火入れスケジュール | SLOW FIRE</title>
+  <meta name="description" content="ブリスケット、プルドポーク、バックリブなど料理別に、夕食時刻から逆算したBBQの全タイムテーブルを自動生成。前日下処理から完成・レストまで完全ガイド。">
+  <meta name="keywords" content="BBQ タイムテーブル,BBQ 時間,ブリスケット 時間,プルドポーク 何時間,BBQ スケジュール">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-timetable.html">
+  <meta name="theme-color" content="#B45309">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQタイムテーブル計算機 — 夕食時刻から逆算する火入れスケジュール">
+  <meta property="og:description" content="料理と夕食時刻を入れるだけで、前日下処理から完成までの全タイムテーブルを自動生成。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-timetable.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1200&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BBQタイムテーブル計算機 | SLOW FIRE">
+  <meta name="twitter:description" content="夕食時刻から逆算する、BBQの全タイムテーブルを自動生成。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260513">
+  <link rel="stylesheet" href="../journal/journal.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BBQタイムテーブル計算機",
+    "description": "ブリスケット、プルドポーク、バックリブ、ビア缶チキン、プライムリブ、リバースシア・ステーキの夕食時刻から、火入れ開始時刻と全タイムテーブルを逆算する無料ツール。",
+    "url": "https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-timetable.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "ja-JP",
+    "publisher": { "@type": "Organization", "name": "SLOW FIRE SHOP", "url": "https://yamanekazuki.github.io/slow-fire-shop/" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yamanekazuki.github.io/slow-fire-shop/" },
+      { "@type": "ListItem", "position": 2, "name": "ツール", "item": "https://yamanekazuki.github.io/slow-fire-shop/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "タイムテーブル計算機", "item": "https://yamanekazuki.github.io/slow-fire-shop/tools/bbq-timetable.html" }
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B6PRVFPKF');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wmtxoerxqx");
+  </script>
+
+  <style>
+    /* === BBQ Timetable Tool — page-local styles === */
+    .tt-hero { padding: 56px 20px 32px; max-width: 980px; margin: 0 auto; text-align: center; }
+    .tt-hero .tt-eyebrow { display: inline-block; font-size: 12px; letter-spacing: .22em; font-weight: 700; color: var(--brand); margin-bottom: 14px; }
+    .tt-hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.3; letter-spacing: -.01em; margin: 0 0 18px; color: var(--black); }
+    .tt-hero p { font-size: 16px; line-height: 1.85; color: var(--gray-700); max-width: 720px; margin: 0 auto; }
+
+    .tt-tool { max-width: 980px; margin: 0 auto; padding: 0 20px 24px; }
+
+    .tt-form-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.04);
+    }
+    .tt-form-title {
+      font-size: 13px; letter-spacing: .2em; font-weight: 700; color: var(--brand);
+      margin: 0 0 18px; text-transform: uppercase;
+    }
+    .tt-form-grid {
+      display: grid; gap: 16px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) { .tt-form-grid { grid-template-columns: 2fr 1fr 1fr; } }
+
+    .tt-field { display: flex; flex-direction: column; gap: 6px; }
+    .tt-field label {
+      font-size: 13px; font-weight: 600; color: var(--gray-700);
+      letter-spacing: .02em;
+    }
+    .tt-field select,
+    .tt-field input {
+      appearance: none;
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--black);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .tt-field select:focus,
+    .tt-field input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(180,83,9,.12);
+    }
+    .tt-field select {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%23666' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+    .tt-field .tt-help { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+    .tt-summary {
+      display: grid; gap: 12px;
+      grid-template-columns: 1fr;
+      margin-top: 24px;
+    }
+    @media (min-width: 720px) { .tt-summary { grid-template-columns: repeat(3, 1fr); } }
+    .tt-card {
+      background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+      border: 1px solid #FED7AA;
+      border-radius: 14px;
+      padding: 18px 18px;
+      text-align: left;
+    }
+    .tt-card.tt-card-strong {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dk) 100%);
+      border-color: var(--brand-dk);
+      color: #fff;
+    }
+    .tt-card .tt-card-label {
+      font-size: 11px; letter-spacing: .18em; font-weight: 700;
+      text-transform: uppercase; opacity: .78;
+      margin: 0 0 6px;
+    }
+    .tt-card .tt-card-value {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 800; line-height: 1.15; margin: 0;
+      font-feature-settings: "tnum";
+    }
+    .tt-card .tt-card-sub { font-size: 12px; opacity: .82; margin: 6px 0 0; }
+
+    .tt-table-wrap {
+      margin-top: 28px;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .tt-table-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+      flex-wrap: wrap; gap: 10px;
+    }
+    .tt-table-head h3 { margin: 0; font-size: 16px; font-weight: 700; color: var(--black); letter-spacing: .02em; }
+    .tt-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tt-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px;
+      font-size: 13px; font-weight: 600;
+      border-radius: 8px;
+      border: 1.5px solid var(--gray-200);
+      background: #fff;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .tt-btn:hover { border-color: var(--brand); color: var(--brand); }
+    .tt-btn.tt-btn-primary {
+      background: var(--brand); border-color: var(--brand); color: #fff;
+    }
+    .tt-btn.tt-btn-primary:hover { background: var(--brand-dk); border-color: var(--brand-dk); color: #fff; }
+
+    table.tt-table {
+      width: 100%; border-collapse: collapse;
+    }
+    table.tt-table th, table.tt-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+      vertical-align: top;
+    }
+    table.tt-table th {
+      background: #FAFAF9;
+      font-weight: 700;
+      color: var(--gray-700);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    table.tt-table td.tt-time {
+      font-weight: 800; color: var(--brand);
+      font-feature-settings: "tnum"; white-space: nowrap;
+      width: 130px;
+    }
+    table.tt-table td.tt-step { font-weight: 700; color: var(--black); width: 30%; }
+    table.tt-table td.tt-desc { color: var(--gray-600); line-height: 1.7; }
+    table.tt-table tr:last-child td { border-bottom: none; }
+    table.tt-table tr.tt-row-finish td { background: #FFF7ED; }
+    table.tt-table tr.tt-row-prep td { background: #FAFAF9; }
+
+    .tt-error {
+      margin-top: 14px; padding: 12px 16px;
+      background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B;
+      border-radius: 10px; font-size: 14px;
+    }
+    .tt-error[hidden] { display: none; }
+
+    /* SEO 解説 */
+    .tt-seo {
+      max-width: 820px; margin: 60px auto 0; padding: 0 20px;
+    }
+    .tt-seo h2 { font-size: 24px; font-weight: 800; margin: 36px 0 14px; color: var(--black); letter-spacing: .01em; }
+    .tt-seo h2:first-child { margin-top: 0; }
+    .tt-seo p { font-size: 15px; line-height: 1.95; color: var(--gray-700); margin: 0 0 14px; }
+    .tt-seo ul { padding-left: 22px; margin: 0 0 18px; }
+    .tt-seo ul li { font-size: 15px; line-height: 1.9; color: var(--gray-700); margin-bottom: 4px; }
+
+    /* CTA ブロック */
+    .tt-cta {
+      max-width: 980px; margin: 56px auto 0; padding: 36px 24px;
+      background: linear-gradient(135deg, #1A1A1A 0%, #2D2418 100%);
+      color: #fff; border-radius: 18px; text-align: center;
+    }
+    .tt-cta .tt-cta-eyebrow { font-size: 11px; letter-spacing: .25em; font-weight: 700; color: var(--brand); margin: 0 0 10px; }
+    .tt-cta h2 { font-size: clamp(22px, 3.5vw, 30px); font-weight: 800; line-height: 1.4; margin: 0 0 12px; color: #fff; }
+    .tt-cta p { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.78); max-width: 620px; margin: 0 auto 20px; }
+    .tt-cta-buttons { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .tt-cta-btn {
+      display: inline-block; padding: 13px 28px;
+      font-size: 14px; font-weight: 700; letter-spacing: .03em;
+      border-radius: 999px; text-decoration: none;
+      transition: transform .14s, background .15s;
+    }
+    .tt-cta-btn.tt-cta-primary { background: var(--brand); color: #fff; }
+    .tt-cta-btn.tt-cta-primary:hover { background: var(--brand-dk); transform: translateY(-1px); }
+    .tt-cta-btn.tt-cta-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.32); }
+    .tt-cta-btn.tt-cta-ghost:hover { border-color: #fff; }
+
+    .tt-footer-space { height: 72px; }
+
+    /* 印刷 */
+    @media print {
+      header.nav, footer.footer, .tt-cta, .tt-seo, .jr-related, .tt-form-card .tt-form-grid,
+      .tt-actions, .tt-hero p, .tt-footer-space { display: none !important; }
+      body { background: #fff !important; }
+      .tt-hero { padding: 12px 0 8px; }
+      .tt-hero h1 { font-size: 22px; margin: 0; }
+      .tt-tool { padding: 0; max-width: none; }
+      .tt-form-card { border: none; box-shadow: none; padding: 0; }
+      .tt-summary { margin-top: 8px; }
+      .tt-card { background: #fff !important; color: #000 !important; border: 1px solid #ccc !important; }
+      .tt-card.tt-card-strong { background: #fff !important; color: #000 !important; }
+      .tt-card .tt-card-value { color: #000 !important; }
+      .tt-table-wrap { margin-top: 14px; border: 1px solid #999; }
+      .tt-table-head { padding: 8px 12px; border-bottom: 1px solid #999; }
+      table.tt-table th, table.tt-table td { border-bottom: 1px solid #ddd; padding: 8px 12px; }
+      table.tt-table td.tt-time { color: #000 !important; }
+      @page { size: A4 portrait; margin: 14mm; }
+    }
+  </style>
+</head>
+<body class="journal-page">
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="../cookbook.html"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="../journal/index.html">JOURNAL</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="jr-crumb" style="max-width:980px;margin:0 auto;padding:24px 20px 0;">
+      <a href="../index.html">ホーム</a><span class="jr-crumb-sep">/</span>
+      <a href="../tools/">ツール</a><span class="jr-crumb-sep">/</span>
+      <span>タイムテーブル計算機</span>
+    </nav>
+
+    <section class="tt-hero">
+      <span class="tt-eyebrow">BBQ TIMETABLE CALCULATOR</span>
+      <h1>BBQタイムテーブル計算機</h1>
+      <p>料理・重量・夕食時刻を入れるだけ。前日の下処理から火入れ開始、テキサスクラッチ、レストまで、すべての時刻を逆算します。「何時に火を入れればいいか分からない」を、もう終わらせる。</p>
+    </section>
+
+    <section class="tt-tool">
+      <div class="tt-form-card">
+        <p class="tt-form-title">入力 / Inputs</p>
+        <div class="tt-form-grid">
+          <div class="tt-field">
+            <label for="ttRecipe">料理</label>
+            <select id="ttRecipe">
+              <option value="brisket">ブリスケット（約11時間）</option>
+              <option value="pulled-pork">プルドポーク（約10時間）</option>
+              <option value="back-ribs">バックリブ（約4時間）</option>
+              <option value="beer-can-chicken">ビア缶チキン（約2.5時間）</option>
+              <option value="prime-rib">プライムリブ（約2時間）</option>
+              <option value="reverse-sear">リバースシア・ステーキ（約1.5時間）</option>
+            </select>
+            <span class="tt-help">調理時間はあくまで目安。肉の厚みで前後します。</span>
+          </div>
+
+          <div class="tt-field">
+            <label for="ttWeight">重量（kg）</label>
+            <input id="ttWeight" type="number" min="0.3" max="10" step="0.1" value="2.0">
+            <span class="tt-help">重さによって火入れ時間が補正されます。</span>
+          </div>
+
+          <div class="tt-field">
+            <label for="ttDinner">夕食時刻</label>
+            <input id="ttDinner" type="time" value="19:00">
+            <span class="tt-help">提供したい時刻（カット直前）。</span>
+          </div>
+        </div>
+
+        <div id="ttError" class="tt-error" hidden></div>
+
+        <div class="tt-summary" id="ttSummary">
+          <div class="tt-card tt-card-strong">
+            <p class="tt-card-label">火入れ開始</p>
+            <p class="tt-card-value" id="ttStartTime">—</p>
+            <p class="tt-card-sub" id="ttStartSub">グリル/スモーカーをONにする時刻</p>
+          </div>
+          <div class="tt-card">
+            <p class="tt-card-label">前日下処理</p>
+            <p class="tt-card-value" id="ttPrepTime">—</p>
+            <p class="tt-card-sub" id="ttPrepSub">ラブ振り・室温戻し開始</p>
+          </div>
+          <div class="tt-card">
+            <p class="tt-card-label">総所要時間</p>
+            <p class="tt-card-value" id="ttTotal">—</p>
+            <p class="tt-card-sub">下処理から提供まで</p>
+          </div>
+        </div>
+
+        <div class="tt-table-wrap">
+          <div class="tt-table-head">
+            <h3 id="ttTableTitle">タイムテーブル</h3>
+            <div class="tt-actions">
+              <button class="tt-btn" id="ttCopyBtn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                <span id="ttCopyLabel">テキストコピー</span>
+              </button>
+              <button class="tt-btn tt-btn-primary" id="ttPrintBtn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                A4印刷
+              </button>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="tt-table">
+              <thead>
+                <tr>
+                  <th>時刻</th>
+                  <th>ステップ</th>
+                  <th>やること</th>
+                </tr>
+              </thead>
+              <tbody id="ttRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tt-seo">
+      <h2>なぜタイムテーブルが大切か</h2>
+      <p>BBQはレシピで失敗するより、<strong>時間で失敗する料理</strong>です。ブリスケットなら11時間、プルドポークなら10時間。長丁場の料理ほど、「いつ火を入れ始めればいいか」という1点を間違えると、夕食の時間に肉がまだ70℃ということが起きます。逆に、早く仕上がりすぎてレストが2時間になり、肉汁が落ちきってしまうこともある。BBQの上手い人と下手な人の差は、ラブの種類でも炭の銘柄でもなく、<strong>「時間を支配する力」</strong>に尽きます。</p>
+      <p>タイムテーブルを書き出す行為は、料理の構造を頭の中で一度シミュレーションすることに等しい。前日にラブを振る時刻、火入れ開始、ステール（停滞期）に入る時間帯、テキサスクラッチでラップする中心温度、完成からレスト、そしてカットして皿に乗せるまで——すべてを夕食時刻から逆算できれば、当日の自分は「ただ流れに乗るだけ」になります。これがBBQの真髄です。</p>
+
+      <h2>初心者がやりがちな失敗例</h2>
+      <ul>
+        <li><strong>「3時間あれば焼ける」と思って当日朝に始める</strong>。ブリスケットは11時間。前日に下処理しないと、夕食には絶対間に合いません。</li>
+        <li><strong>ステール（中心温度が70℃前後で止まる停滞期）を知らずに、火力を上げてしまう</strong>。タンパク質変性と水分蒸発のバランスが崩れ、肉が硬くなります。</li>
+        <li><strong>レスト（休ませる時間）を省略する</strong>。塊肉は最低30分、ブリスケットなら1時間以上のレストが必要。これを切り詰めると、カットした瞬間に肉汁が皿に流れ出てしまう。</li>
+        <li><strong>「ちょっと早く仕上がったから保温」が長すぎる</strong>。保温は2時間が限度。それ以上はホールド調理として温度管理が別ロジックになります。</li>
+      </ul>
+
+      <h2>クラッチタイミング（テキサスクラッチ）の見極め</h2>
+      <p>ブリスケット・プルドポークなど大型の塊肉では、中心温度が65〜75℃あたりで温度上昇が止まる「ステール」が必ず起きます。これは肉の表面から蒸発する水分の気化熱で、火の熱が打ち消されている状態。ここで止まったまま2〜3時間粘ると、外側はオーバークックになり食感が悪化します。</p>
+      <p>解決策が<strong>テキサスクラッチ</strong>——肉をブッチャーペーパーかアルミホイルで包み、蒸発を抑えて温度を再上昇させる手法です。タイミングは<strong>中心温度70〜73℃</strong>。タイムテーブル上では「火入れから5〜6時間後」が目安ですが、最終的には温度計で判断します。本ツールはこのクラッチタイミングも自動で時刻を表示するので、当日忘れることがありません。</p>
+
+      <p>料理は逆算で組み立てるもの。<a href="../journal/articles/reverse-sear.html">リバースシア法</a>がステーキの逆算なら、タイムテーブルはBBQ全体の逆算です。一度書き出してしまえば、当日の不安はゼロになります。</p>
+    </section>
+
+    <section class="jr-related" style="max-width: 980px; margin: 56px auto 0; padding: 0 20px;">
+      <p class="jr-related-eyebrow">RELATED ARTICLES</p>
+      <h2>関連記事</h2>
+      <div class="jr-related-grid">
+        <a href="../journal/articles/brisket-recipe.html" class="jr-related-card">
+          <div class="jr-related-img"><img src="https://images.unsplash.com/photo-1774923097632-c98e17b7e842?auto=format&fit=crop&w=1200&q=80" alt="スモークブリスケットのスライス" loading="lazy"></div>
+          <div class="jr-related-meta"><p class="jr-related-cat">RECIPE</p><h3 class="jr-related-title">ブリスケットの作り方。12時間、肉と話す料理</h3></div>
+        </a>
+        <a href="../journal/articles/pulled-pork.html" class="jr-related-card">
+          <div class="jr-related-img"><img src="https://images.unsplash.com/photo-1623238913973-21e45cced554?auto=format&fit=crop&w=1200&q=80" alt="プルドポークサンドイッチ" loading="lazy"></div>
+          <div class="jr-related-meta"><p class="jr-related-cat">RECIPE</p><h3 class="jr-related-title">プルドポークの作り方。豚肩肉を10時間で仕上げる</h3></div>
+        </a>
+        <a href="../journal/articles/texas-crutch.html" class="jr-related-card">
+          <div class="jr-related-img"><img src="https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1200&q=80" alt="ペーパーで包まれたBBQ肉" loading="lazy"></div>
+          <div class="jr-related-meta"><p class="jr-related-cat">TECHNIQUE</p><h3 class="jr-related-title">テキサスクラッチとは。ステールを突破する技術</h3></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="tt-cta">
+      <p class="tt-cta-eyebrow">START YOUR BBQ</p>
+      <h2>タイムテーブルが組めたら、あとはラブを選ぶだけ</h2>
+      <p>SLOW FIRE SHOPでは、Low n Slow Basics・Butcher's Axe・Stef the Maori の本場オーストラリアBBQラブを日本正規取扱で販売中。料理ごとの相性は「ラブガイド」で。</p>
+      <div class="tt-cta-buttons">
+        <a href="../index.html#products" class="tt-cta-btn tt-cta-primary">商品一覧を見る →</a>
+        <a href="../rub-guide.html" class="tt-cta-btn tt-cta-ghost">ラブガイドへ</a>
+      </div>
+    </section>
+
+    <div class="tt-footer-space"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="../index.html#products">商品一覧</a>
+          <a href="../essentials.html">BBQの神髄</a>
+          <a href="../pairing-guide.html">食材から選ぶ</a>
+          <a href="../cookbook.html">料理から選ぶ</a>
+          <a href="../rub-guide.html">ラブガイド</a>
+          <a href="../journal/index.html">JOURNAL</a>
+          <a href="../team.html">私たちについて</a>
+        </nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../mobile-nav.js?v=20260513"></script>
+  <script>const nav = document.getElementById('nav'); window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });</script>
+
+  <script>
+  /* === BBQ Timetable Calculator === */
+  (function () {
+    // offset は「夕食提供時刻」を 0 分とした、相対オフセット（分）。負の値ほど早い時刻。
+    const RECIPES = {
+      'brisket': {
+        name: 'ブリスケット',
+        baseHours: 11,           // 2kg を基準にした目安
+        baseWeight: 2.0,
+        kgFactor: 0.6,           // +1kg ごとに +0.6 時間
+        steps: [
+          { offset: (h)=> -h*60 - 180, name: '前日 — ラブ振り・室温戻し', desc: '塩 → ラブの順で全面に擦り込む。ラップして冷蔵庫で6〜12時間寝かせる。当日朝、火入れ前に30分以上室温戻し。' },
+          { offset: (h)=> -h*60,        name: '火入れ開始（120℃ON）',    desc: 'スモーカー/グリルをインダイレクト120℃で安定させる。チップを投入し、煙が落ち着いてから肉を投入。' },
+          { offset: (h)=> -h*60 + 60,   name: '初期スモーク（最重要）',  desc: '最初の2〜3時間がスモークの吸着窓。蓋を開けない。温度計だけで判断する。' },
+          { offset: (h)=> -h*60*0.45,   name: 'ステール突入（中心70℃）',desc: '温度上昇が止まる。慌てない。クラッチ準備（ブッチャーペーパー or アルミホイル）。' },
+          { offset: (h)=> -h*60*0.35,   name: 'テキサスクラッチ（中心73℃）', desc: 'ペーパー/ホイルで包む。蒸発を止めて温度を再上昇させる。ここから残り4〜5時間。' },
+          { offset: -60,                name: '完成（中心95℃／プローブがバターに刺さるように）', desc: '温度より「ヌルッと刺さるか」が真の指標。クーラーボックスに入れてレスト開始。' },
+          { offset: -30,                name: 'レスト終盤・カット準備',  desc: '繊維と垂直にスライス。鉛筆の太さ（約8mm）が黄金幅。' },
+          { offset: 0,                  name: '夕食提供',                desc: '皿に乗せたら3分以内に提供。冷めるのが一番もったいない。' }
+        ]
+      },
+      'pulled-pork': {
+        name: 'プルドポーク',
+        baseHours: 10,
+        baseWeight: 2.0,
+        kgFactor: 0.7,
+        steps: [
+          { offset: (h)=> -h*60 - 180, name: '前日 — ラブ振り',          desc: 'マスタードを薄く塗ってからラブを全面に。一晩冷蔵庫で寝かせる。' },
+          { offset: (h)=> -h*60,        name: '火入れ開始（115℃ON）',    desc: 'プルドポークはブリスケットより少し低温の115℃が定石。脂が溶ける時間を長く取る。' },
+          { offset: (h)=> -h*60*0.50,   name: 'ステール突入（中心70℃）',desc: '肩肉は特に長いステールになる。3時間止まることも普通。クラッチ準備。' },
+          { offset: (h)=> -h*60*0.35,   name: 'テキサスクラッチ（中心73℃）', desc: 'アップルジュースを少量振ってからホイルで包む。蒸し焼き効果でジューシーに。' },
+          { offset: -75,                name: '完成（中心92〜95℃）',      desc: '骨を持って軽く引いたらスッと抜けるのが完成サイン。クーラーで30〜60分レスト。' },
+          { offset: -20,                name: 'ほぐし（プル）',          desc: 'ベアクロー or フォーク2本で繊維に沿ってほぐす。漏れ出た肉汁を絡める。' },
+          { offset: 0,                  name: '夕食提供',                desc: 'バンズに挟むならコールスローを忘れずに。脂と酸のコントラスト。' }
+        ]
+      },
+      'back-ribs': {
+        name: 'バックリブ',
+        baseHours: 4,
+        baseWeight: 1.2,
+        kgFactor: 0.4,
+        steps: [
+          { offset: (h)=> -h*60 - 60,  name: '下処理 — メンブレン剥がし',desc: '骨側の薄皮をペーパータオルで掴んで一気に剥がす。ラブを両面に。30分置く。' },
+          { offset: (h)=> -h*60,        name: '火入れ開始（120℃ON）',    desc: '骨側を下にして配置。煙の通り道を意識する。' },
+          { offset: (h)=> -h*60*0.55,   name: 'ラップ（3-2-1法の2時間目）',desc: 'バター・ブラウンシュガー・ハニーをかけてホイルで包む。' },
+          { offset: -45,                name: 'ソース塗り（最後の30〜45分）', desc: 'ホイルを外し、BBQソースを薄く塗る。表面をキャラメリゼ。' },
+          { offset: -10,                name: '完成（曲げて表面に亀裂）',desc: 'トングで持ち上げてバウンドテスト。肉が裂けかける瞬間が完成。' },
+          { offset: 0,                  name: '夕食提供',                desc: '骨の間でカット。1本ずつ独立させる。' }
+        ]
+      },
+      'beer-can-chicken': {
+        name: 'ビア缶チキン',
+        baseHours: 2.5,
+        baseWeight: 1.5,
+        kgFactor: 0.3,
+        steps: [
+          { offset: (h)=> -h*60 - 45,  name: '下処理 — ラブ振り',        desc: '皮の下にも指を入れてラブを擦り込む。皮の表面はパリッと仕上げるため乾燥させる。' },
+          { offset: (h)=> -h*60,        name: '火入れ開始（160℃ON）',    desc: 'ビア缶を半分飲み、ハーブとガーリックを投入。鶏を被せて立てる。' },
+          { offset: (h)=> -h*60*0.5,    name: '半分経過チェック',         desc: '皮の色をチェック。焦げそうなら位置を回転。' },
+          { offset: -30,                name: '完成チェック（モモ75℃）', desc: 'モモの最深部に温度計。75℃で食中毒リスクゼロ。胸肉は73℃が理想。' },
+          { offset: -15,                name: 'レスト',                  desc: 'ホイルで軽く覆って15分。肉汁が落ち着く。' },
+          { offset: 0,                  name: '夕食提供',                desc: '関節を外しながら解体。胸肉はスライス、モモは骨ごと。' }
+        ]
+      },
+      'prime-rib': {
+        name: 'プライムリブ',
+        baseHours: 2,
+        baseWeight: 2.0,
+        kgFactor: 0.5,
+        steps: [
+          { offset: (h)=> -h*60 - 60,  name: '下処理 — 塩・ラブ振り',    desc: '塩を全面に。1時間室温に出して中心温度を上げてから火入れ（重要）。' },
+          { offset: (h)=> -h*60,        name: '火入れ開始（120℃インダイレクト）', desc: 'リバースシア法。低温でゆっくり中まで温める。' },
+          { offset: (h)=> -h*60*0.5,    name: '中心温度チェック',         desc: '40℃まで上がっていればペース順調。50℃を超えたら最終フェーズへ。' },
+          { offset: -25,                name: '低温段階完了（中心52℃）',desc: '肉を取り出し、グリルを280℃まで上げる。表面の水分を完全に拭く。' },
+          { offset: -10,                name: '高温シア（各面30〜60秒）', desc: '全面に均一な焼き目。中心温度は最終54℃を狙う。' },
+          { offset: -5,                 name: 'レスト',                  desc: '5〜10分。リバースシアはレスト短めでOK（既に内部が安定しているため）。' },
+          { offset: 0,                  name: '夕食提供',                desc: '骨に沿って外し、繊維と垂直にスライス。厚さ1.5〜2cm。' }
+        ]
+      },
+      'reverse-sear': {
+        name: 'リバースシア・ステーキ',
+        baseHours: 1.5,
+        baseWeight: 0.5,
+        kgFactor: 0.4,
+        steps: [
+          { offset: (h)=> -h*60 - 30,  name: '室温戻し・塩振り',         desc: '塩を全面に振って30分置く。ドリップを浮かせる→拭く→ラブ。' },
+          { offset: (h)=> -h*60,        name: '低温フェーズ開始（120℃）',desc: 'インダイレクト120℃。火から離れた位置に。表面温度を上げすぎない。' },
+          { offset: -20,                name: '中心温度48〜50℃で取り出し',desc: '最終目標54℃の3〜5℃手前。表面の水分を完全にペーパーで拭く。' },
+          { offset: -10,                name: 'グリルを280℃に再加熱',     desc: '5分待つ。フライパンの場合は強火で煙が出るまで。' },
+          { offset: -5,                 name: '高温シア（各面30〜60秒）', desc: '焼き目をつけるためだけの工程。長くしない。' },
+          { offset: -3,                 name: '短いレスト',               desc: '3〜5分でOK。長すぎると焼き目が湿る。' },
+          { offset: 0,                  name: '夕食提供',                desc: 'カットして即提供。エッジまで均一なロゼ色が完成サイン。' }
+        ]
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const recipeSel = $('ttRecipe');
+    const weightInp = $('ttWeight');
+    const dinnerInp = $('ttDinner');
+    const rowsEl    = $('ttRows');
+    const errEl     = $('ttError');
+    const tableTitle = $('ttTableTitle');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    /** Returns a Date built from a given dinner Date and offset in minutes (negative = before dinner). */
+    function offsetTime(dinnerDate, offsetMin) {
+      const d = new Date(dinnerDate.getTime());
+      d.setMinutes(d.getMinutes() + offsetMin);
+      return d;
+    }
+
+    function fmtTime(date, dinnerDate) {
+      const dayDiff = Math.floor((date.setHours(0,0,0,0) - new Date(dinnerDate).setHours(0,0,0,0)) / 86400000);
+      // Reset hours (the above set destroyed the originals); we need to use the real date.
+      return null; // placeholder; we'll use a non-destructive formatter below
+    }
+
+    function formatTimeLabel(date, dinnerDate) {
+      const sameDay = date.toDateString() === dinnerDate.toDateString();
+      const oneDayBefore = new Date(dinnerDate.getTime() - 24*60*60*1000).toDateString() === date.toDateString();
+      const twoDayBefore = new Date(dinnerDate.getTime() - 48*60*60*1000).toDateString() === date.toDateString();
+      const hhmm = `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      if (sameDay) return `当日 ${hhmm}`;
+      if (oneDayBefore) return `前日 ${hhmm}`;
+      if (twoDayBefore) return `2日前 ${hhmm}`;
+      return `${date.getMonth()+1}/${date.getDate()} ${hhmm}`;
+    }
+
+    function calcAdjustedHours(recipe, weightKg) {
+      const delta = (weightKg - recipe.baseWeight) * recipe.kgFactor;
+      const h = Math.max(0.5, recipe.baseHours + delta);
+      return Math.round(h * 10) / 10;
+    }
+
+    function resolveOffset(step, hours) {
+      return typeof step.offset === 'function' ? step.offset(hours) : step.offset;
+    }
+
+    function render() {
+      errEl.hidden = true;
+
+      const recipe = RECIPES[recipeSel.value];
+      const weight = parseFloat(weightInp.value);
+      const dinnerStr = dinnerInp.value;
+
+      if (!recipe) return;
+      if (!weight || weight <= 0 || weight > 15) {
+        errEl.textContent = '重量は 0.3〜10 kg の範囲で入力してください。';
+        errEl.hidden = false;
+        return;
+      }
+      if (!dinnerStr) {
+        errEl.textContent = '夕食時刻を入力してください。';
+        errEl.hidden = false;
+        return;
+      }
+
+      const [hh, mm] = dinnerStr.split(':').map(Number);
+      const today = new Date();
+      const dinnerDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hh, mm, 0, 0);
+
+      const adjHours = calcAdjustedHours(recipe, weight);
+
+      // Generate steps
+      const items = recipe.steps.map((s) => {
+        const offsetMin = Math.round(resolveOffset(s, adjHours));
+        const t = offsetTime(dinnerDate, offsetMin);
+        return { time: t, label: formatTimeLabel(t, dinnerDate), name: s.name, desc: s.desc, offsetMin };
+      }).sort((a,b) => a.offsetMin - b.offsetMin);
+
+      // Header / cards
+      tableTitle.textContent = `${recipe.name}（${weight}kg）— ${adjHours}時間プラン`;
+
+      // Find "火入れ開始" step or earliest non-prep step as the "ignite" time
+      const fireStep = items.find(i => i.name.includes('火入れ') || i.name.includes('低温フェーズ'));
+      const prepStep = items[0];
+      const lastStep = items[items.length - 1];
+
+      $('ttStartTime').textContent = fireStep ? formatTimeLabel(fireStep.time, dinnerDate) : '—';
+      $('ttPrepTime').textContent  = prepStep ? formatTimeLabel(prepStep.time, dinnerDate) : '—';
+
+      const totalMinutes = Math.round((lastStep.time - prepStep.time) / 60000);
+      const totalH = Math.floor(totalMinutes / 60);
+      const totalM = totalMinutes % 60;
+      $('ttTotal').textContent = totalM === 0 ? `${totalH}時間` : `${totalH}時間${totalM}分`;
+
+      // Rows
+      rowsEl.innerHTML = '';
+      items.forEach((it, idx) => {
+        const tr = document.createElement('tr');
+        if (idx === items.length - 1) tr.className = 'tt-row-finish';
+        else if (it.name.includes('下処理') || it.name.includes('前日') || it.name.includes('室温戻し')) tr.className = 'tt-row-prep';
+        tr.innerHTML = `
+          <td class="tt-time">${it.label}</td>
+          <td class="tt-step">${it.name}</td>
+          <td class="tt-desc">${it.desc}</td>
+        `;
+        rowsEl.appendChild(tr);
+      });
+    }
+
+    function buildPlainText() {
+      const recipe = RECIPES[recipeSel.value];
+      const weight = parseFloat(weightInp.value);
+      const dinnerStr = dinnerInp.value;
+      const [hh, mm] = dinnerStr.split(':').map(Number);
+      const today = new Date();
+      const dinnerDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hh, mm, 0, 0);
+      const adjHours = calcAdjustedHours(recipe, weight);
+
+      const items = recipe.steps.map((s) => {
+        const offsetMin = Math.round(resolveOffset(s, adjHours));
+        const t = offsetTime(dinnerDate, offsetMin);
+        return { label: formatTimeLabel(t, dinnerDate), name: s.name, desc: s.desc, offsetMin };
+      }).sort((a,b) => a.offsetMin - b.offsetMin);
+
+      let out = `# BBQタイムテーブル — ${recipe.name}（${weight}kg / ${adjHours}時間プラン）\n`;
+      out += `夕食時刻: ${dinnerStr}\n\n`;
+      items.forEach(i => {
+        out += `${i.label}  ${i.name}\n  └ ${i.desc}\n\n`;
+      });
+      out += `— SLOW FIRE タイムテーブル計算機\n`;
+      return out;
+    }
+
+    // Wire up
+    [recipeSel, weightInp, dinnerInp].forEach(el => el.addEventListener('input', render));
+    recipeSel.addEventListener('change', render);
+
+    $('ttPrintBtn').addEventListener('click', () => window.print());
+
+    $('ttCopyBtn').addEventListener('click', async () => {
+      const txt = buildPlainText();
+      try {
+        await navigator.clipboard.writeText(txt);
+        const lbl = $('ttCopyLabel');
+        const orig = lbl.textContent;
+        lbl.textContent = 'コピー済み ✓';
+        setTimeout(() => { lbl.textContent = orig; }, 1800);
+      } catch (e) {
+        // Fallback: textarea
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(_) {}
+        document.body.removeChild(ta);
+        const lbl = $('ttCopyLabel');
+        const orig = lbl.textContent;
+        lbl.textContent = 'コピー済み ✓';
+        setTimeout(() => { lbl.textContent = orig; }, 1800);
+      }
+    });
+
+    // Initial render
+    render();
+  })();
+  </script>
+</body>
+</html>
