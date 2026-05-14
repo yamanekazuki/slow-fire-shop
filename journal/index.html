@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SLOW FIRE JOURNAL — BBQの科学と哲学を語るメディア</title>
-  <meta name="description" content="ロー&スロー、ブリスケット、プルドポーク、テキサスBBQ、リバースシア — 海外BBQの「火入れの科学」と「ホストの哲学」を、SLOW FIRE SHOPがメディアとして発信します。">
+  <title>FIRESIDE — BBQの教科書 | SLOW FIRE SHOP</title>
+  <meta name="description" content="ロー&スロー、ブリスケット、プルドポーク、テキサスBBQ、リバースシア — 海外BBQの「火入れの科学」と「ホストの哲学」を、検索しながら学ぶBBQの教科書。">
   <meta name="keywords" content="BBQ,バーベキュー,ロー&スロー,ブリスケット,プルドポーク,テキサスBBQ,リバースシア,BBQラブ">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/journal/">
   <meta name="theme-color" content="#B45309">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="SLOW FIRE JOURNAL — BBQの科学と哲学を語るメディア">
-  <meta property="og:description" content="ロー&スロー、ブリスケット、テキサスBBQ。SLOW FIRE SHOPが発信するBBQメディア。">
+  <meta property="og:title" content="FIRESIDE — BBQの教科書 | SLOW FIRE SHOP">
+  <meta property="og:description" content="ロー&スロー、ブリスケット、テキサスBBQ。火入れの科学と場をつくる哲学を、検索しながら学べるBBQの教科書。">
   <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/journal/">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -27,15 +27,29 @@
   {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "SLOW FIRE JOURNAL",
+    "name": "FIRESIDE — BBQの教科書",
+    "alternateName": "SLOW FIRE JOURNAL",
     "url": "https://yamanekazuki.github.io/slow-fire-shop/journal/",
-    "description": "海外BBQの火入れの科学とホストの哲学を発信するメディア",
+    "description": "海外BBQの火入れの科学とホストの哲学を、検索しながら学べる場所。",
     "publisher": {
       "@type": "Organization",
       "name": "SLOW FIRE SHOP",
       "url": "https://yamanekazuki.github.io/slow-fire-shop/"
     },
     "inLanguage": "ja-JP"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://yamanekazuki.github.io/slow-fire-shop/journal/",
+    "name": "FIRESIDE — BBQの教科書",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://yamanekazuki.github.io/slow-fire-shop/journal/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
   <!-- Google Analytics (GA4) -->
@@ -74,7 +88,7 @@
             <a href="../rub-guide.html" role="menuitem"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
           </div>
         </div>
-        <a href="index.html" style="color: var(--brand);">JOURNAL</a>
+        <a href="index.html" style="color: var(--brand);">FIRESIDE</a>
         <a href="../team.html">私たちについて</a>
       </nav>
       <div class="nav-right">
@@ -92,13 +106,28 @@
   </header>
 
   <section class="jr-top-hero">
-    <p class="jr-top-mark">SLOW FIRE JOURNAL</p>
-    <h1>The science of <em>SLOW FIRE</em>.<br>The philosophy of the host.</h1>
+    <p class="jr-top-mark">FIRESIDE</p>
+    <h1>BBQの<em>教科書</em>。</h1>
     <p class="jr-top-tagline">
       ロー&スロー、ブリスケット、テキサスBBQ。<br>
-      海外BBQの「火入れの科学」と、料理で「場」をつくるホストの哲学を、SLOW FIRE SHOP が発信するメディア。
+      火入れの科学と、場をつくる哲学を、いつでも引き出せる場所に。
     </p>
     <p class="jr-top-mission">読み物として深く、実践として正確に、思想として誠実に。</p>
+  </section>
+
+  <section class="jr-search">
+    <div class="jr-search-wrap">
+      <svg class="jr-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="jr-search-input" id="searchInput" placeholder="何を知りたいですか？  例：ブリスケット 中心温度 / 8人で1万円" autocomplete="off">
+    </div>
+    <p class="jr-search-hint">
+      <kbd>ロー&スロー</kbd> <kbd>テキサスクラッチ</kbd> <kbd>プルドポーク</kbd> <kbd>4人 BBQ</kbd> など、思いついた言葉でどうぞ
+    </p>
+  </section>
+
+  <section class="jr-search-results" id="searchResults">
+    <p class="jr-search-meta"><strong id="searchCount">0</strong> 件見つかりました</p>
+    <ul class="jr-search-list" id="searchList"></ul>
   </section>
 
   <nav class="jr-cat-nav" aria-label="カテゴリー">
@@ -400,7 +429,7 @@
           <a href="../pairing-guide.html">食材から選ぶ</a>
           <a href="../cookbook.html">料理から選ぶ</a>
           <a href="../rub-guide.html">ラブガイド</a>
-          <a href="index.html">JOURNAL</a>
+          <a href="index.html">FIRESIDE</a>
           <a href="../team.html">私たちについて</a>
         </nav>
       </div>
@@ -411,6 +440,7 @@
   </footer>
 
   <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
   <script>
     /* nav scroll */
     const nav = document.getElementById('nav');
@@ -421,7 +451,7 @@
     const cards = document.querySelectorAll('.jr-list-card');
     pills.forEach(pill => {
       pill.addEventListener('click', e => {
-        if (!pill.dataset.cat) return; // data-catなしのpillは通常リンクとして遷移
+        if (!pill.dataset.cat) return;
         e.preventDefault();
         pills.forEach(p => p.classList.remove('is-active'));
         pill.classList.add('is-active');
@@ -436,6 +466,70 @@
         });
       });
     });
+
+    /* ========== FIRESIDE search ========== */
+    (async () => {
+      const input = document.getElementById('searchInput');
+      const resultsEl = document.getElementById('searchResults');
+      const listEl = document.getElementById('searchList');
+      const countEl = document.getElementById('searchCount');
+      if (!input) return;
+
+      // 検索インデックス読み込み
+      let data = [];
+      try {
+        const r = await fetch('search-index.json');
+        data = await r.json();
+      } catch (e) {
+        console.warn('search-index.json 読み込み失敗', e);
+        return;
+      }
+
+      const fuse = new Fuse(data, {
+        keys: [
+          { name: 'h1', weight: 3 },
+          { name: 'title', weight: 2 },
+          { name: 'desc', weight: 1.5 },
+          { name: 'keywords', weight: 2 },
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+      });
+
+      function render(query) {
+        if (!query.trim()) {
+          resultsEl.classList.remove('active');
+          return;
+        }
+        const hits = fuse.search(query).slice(0, 20);
+        countEl.textContent = hits.length;
+        listEl.innerHTML = hits.length
+          ? hits.map(({ item }) => `
+              <li>
+                <a class="jr-search-item" href="${item.url}">
+                  <span class="jr-search-cat">${item.category}</span>
+                  <span class="jr-search-body">
+                    <div class="jr-search-title">${escapeHtml(item.h1)}</div>
+                    <div class="jr-search-desc">${escapeHtml(item.desc)}</div>
+                  </span>
+                </a>
+              </li>
+            `).join('')
+          : `<li class="jr-search-empty">該当する記事は見つかりませんでした。別のキーワードで試してみてください。</li>`;
+        resultsEl.classList.add('active');
+      }
+
+      function escapeHtml(s) {
+        return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+      }
+
+      let timer;
+      input.addEventListener('input', e => {
+        clearTimeout(timer);
+        timer = setTimeout(() => render(e.target.value), 150);
+      });
+    })();
   </script>
 </body>
 </html>
