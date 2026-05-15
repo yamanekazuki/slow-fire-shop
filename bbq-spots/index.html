@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQ場検索 — 日本最詳のバーベキュー場データベース | SLOW FIRE SHOP</title>
+  <meta name="description" content="蓋付きグリル持ち込み可否・電源対応・アメリカンBBQ可能か・人数別など、9種類のフィルターで絞り込める日本最詳のBBQ場検索。武蔵野公園・城南島・若洲・HERO FIELD新木場ほか全15スポット収録。">
+  <meta name="keywords" content="BBQ場,バーベキュー場,検索,持ち込み可,電源,アメリカンBBQ,蓋付きグリル,Weber,Pulse,東京 BBQ,東京 バーベキュー">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/bbq-spots/">
+  <meta name="theme-color" content="#B45309">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQ場検索 — 日本最詳のバーベキュー場データベース">
+  <meta property="og:description" content="蓋付きグリル持ち込み・電源・アメリカンBBQ可否で絞り込める、日本最詳のBBQ場検索。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/bbq-spots/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260516">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "東京都内のBBQ場 検索データベース",
+    "description": "アメリカンBBQ可否・持ち込み可否・電源対応で絞り込める、SLOW FIRE運営の日本最詳BBQ場検索",
+    "numberOfItems": 15,
+    "itemListOrder": "https://schema.org/ItemListOrderAscending"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://yamanekazuki.github.io/slow-fire-shop/"},
+      {"@type": "ListItem", "position": 2, "name": "BBQ場検索", "item": "https://yamanekazuki.github.io/slow-fire-shop/bbq-spots/"}
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wmtxoerxqx");</script>
+
+  <style>
+    /* ===== BBQ Spots search page ===== */
+    .bs-wrap { max-width: 1240px; margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 64px; }
+    .bs-hero { text-align: center; margin-bottom: 36px; }
+    .bs-mark { font-size: var(--text-xs); letter-spacing: 0.34em; color: var(--brand-500); font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 14px; }
+    .bs-hero h1 { font-size: clamp(28px, 4.5vw, 44px); font-weight: var(--weight-bold); color: var(--gray-900); line-height: var(--leading-tight); margin-bottom: 14px; }
+    .bs-hero h1 em { font-style: normal; color: var(--brand-500); }
+    .bs-tagline { font-size: var(--text-base); color: var(--gray-600); max-width: 720px; margin: 0 auto; line-height: var(--leading-relaxed); }
+
+    /* SLOW FIRE classification banner */
+    .bs-types {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
+      margin: 32px 0;
+    }
+    .bs-type-card {
+      padding: 16px 18px; background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--r-lg); border-top: 4px solid var(--brand-500);
+    }
+    .bs-type-card[data-type="A"] { border-top-color: var(--gray-400); }
+    .bs-type-card[data-type="B"] { border-top-color: var(--warning); }
+    .bs-type-card[data-type="C"] { border-top-color: var(--success); }
+    .bs-type-card[data-type="D"] { border-top-color: var(--brand-500); }
+    .bs-type-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--gray-500); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .bs-type-title { font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; }
+    .bs-type-desc { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-snug); }
+
+    /* search & filters */
+    .bs-search { margin: 32px 0 24px; }
+    .bs-search-input-wrap {
+      position: relative; background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 14px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .bs-search-input-wrap:focus-within { border-color: var(--brand-500); box-shadow: 0 0 0 4px rgba(180,83,9,.08); }
+    .bs-search-input { width: 100%; padding: 16px 20px 16px 50px; font-size: var(--text-base); border: none; outline: none; background: transparent; border-radius: 14px; }
+    .bs-search-input::placeholder { color: var(--gray-400); }
+    .bs-search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+
+    .bs-filters {
+      margin: 24px 0; padding: 22px; background: var(--gray-50);
+      border-radius: var(--r-lg); border: 1px solid var(--gray-200);
+    }
+    .bs-filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+    .bs-filter-row:last-child { margin-bottom: 0; }
+    .bs-filter-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--gray-700); letter-spacing: 0.06em; text-transform: uppercase; min-width: 100px; }
+    .bs-chip {
+      display: inline-flex; align-items: center; gap: 4px; padding: 8px 14px;
+      background: var(--white); border: 1px solid var(--gray-300); border-radius: 100px;
+      font-size: var(--text-sm); color: var(--gray-700); cursor: pointer;
+      transition: all 0.15s;
+    }
+    .bs-chip:hover { border-color: var(--brand-500); color: var(--brand-500); }
+    .bs-chip.active { background: var(--brand-500); border-color: var(--brand-500); color: var(--white); }
+    .bs-reset {
+      margin-left: auto; font-size: var(--text-xs); color: var(--gray-500); cursor: pointer;
+      padding: 6px 12px; background: none; border: none;
+    }
+    .bs-reset:hover { color: var(--brand-500); text-decoration: underline; }
+
+    /* result info */
+    .bs-result-info {
+      display: flex; justify-content: space-between; align-items: center;
+      margin: 20px 0 16px; font-size: var(--text-sm); color: var(--gray-600);
+    }
+    .bs-result-info strong { color: var(--brand-500); font-weight: var(--weight-bold); }
+    .bs-sort { padding: 6px 10px; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--white); font-size: var(--text-sm); }
+
+    /* spot cards grid */
+    .bs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+
+    .bs-card {
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg);
+      overflow: hidden; transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+      display: flex; flex-direction: column;
+      color: inherit; text-decoration: none;
+    }
+    .bs-card:hover {
+      border-color: var(--brand-500); transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .bs-card-img {
+      aspect-ratio: 16/10; background: var(--gray-100); position: relative; overflow: hidden;
+    }
+    .bs-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bs-card-type-badge {
+      position: absolute; top: 12px; left: 12px;
+      padding: 4px 10px; background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
+      border-radius: 100px; font-size: 10px; font-weight: var(--weight-bold);
+      color: var(--gray-700); letter-spacing: 0.06em;
+    }
+    .bs-card-type-badge[data-type="A"] { color: var(--gray-700); }
+    .bs-card-type-badge[data-type="B"] { color: var(--warning); }
+    .bs-card-type-badge[data-type="C"] { color: var(--success); }
+    .bs-card-type-badge[data-type="D"] { color: var(--brand-500); }
+
+    .bs-card-rating-badge {
+      position: absolute; top: 12px; right: 12px;
+      padding: 4px 10px; background: var(--brand-500); color: var(--white);
+      border-radius: 100px; font-size: 11px; font-weight: var(--weight-bold);
+    }
+    .bs-card-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; }
+    .bs-card-name { font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; line-height: var(--leading-snug); }
+    .bs-card-area { font-size: var(--text-xs); color: var(--gray-500); margin-bottom: 12px; letter-spacing: 0.04em; }
+    .bs-card-summary { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-snug); margin-bottom: 14px; flex: 1; }
+    .bs-card-features { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .bs-card-feature {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 3px 8px; font-size: 10px; font-weight: var(--weight-semi);
+      background: var(--gray-50); color: var(--gray-700); border-radius: 4px;
+    }
+    .bs-card-feature.ok { color: var(--success); background: rgba(22,163,74,0.08); }
+    .bs-card-feature.ng { color: var(--danger); background: rgba(220,38,38,0.08); }
+
+    .bs-empty {
+      grid-column: 1 / -1; text-align: center; padding: 60px 24px;
+      color: var(--gray-500); font-size: var(--text-sm);
+    }
+
+    .bs-faq {
+      margin-top: 64px; padding: 32px; background: var(--gray-50);
+      border-radius: var(--r-lg);
+    }
+    .bs-faq h2 { font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: 20px; color: var(--gray-900); }
+    .bs-faq details { margin-bottom: 10px; padding: 14px 18px; background: var(--white); border-radius: 10px; border: 1px solid var(--gray-200); }
+    .bs-faq summary { font-size: var(--text-base); font-weight: var(--weight-semi); color: var(--gray-900); cursor: pointer; }
+    .bs-faq details[open] summary { margin-bottom: 8px; }
+    .bs-faq p { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-relaxed); }
+
+    /* mobile */
+    @media (max-width: 640px) {
+      .bs-filter-label { min-width: 80px; font-size: 10px; }
+      .bs-chip { font-size: var(--text-xs); padding: 6px 10px; }
+      .bs-filters { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="../cookbook.html"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="index.html" style="color: var(--brand-500);">BBQ場検索</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bs-wrap">
+
+    <section class="bs-hero">
+      <p class="bs-mark">BBQ場検索 · 15 SPOTS</p>
+      <h1>あなたのBBQに合う場所を、<em>機能で探す</em>。</h1>
+      <p class="bs-tagline">
+        蓋付きグリル持込・電源・アメリカンBBQ可否で絞り込める、SLOW FIRE運営の日本最詳のBBQ場検索。<br>
+        「Pulseを持って行ける？」「プルドポーク焼けるところはどこ？」が、ここでわかります。
+      </p>
+    </section>
+
+    <!-- SLOW FIRE classification -->
+    <section class="bs-types">
+      <div class="bs-type-card" data-type="A">
+        <div class="bs-type-label">TYPE A</div>
+        <div class="bs-type-title">常設・焼肉スタイル</div>
+        <div class="bs-type-desc">常設グリルあり・蓋なし。アメリカンBBQ不可。短時間の焼肉向け。</div>
+      </div>
+      <div class="bs-type-card" data-type="B">
+        <div class="bs-type-label">TYPE B</div>
+        <div class="bs-type-title">常設・手ぶら型</div>
+        <div class="bs-type-desc">蓋付きグリルあるが持込制限あり。手ぶら派には◎、ロー&スローは×</div>
+      </div>
+      <div class="bs-type-card" data-type="C">
+        <div class="bs-type-label">TYPE C</div>
+        <div class="bs-type-title">常設+持込OK（理想型）</div>
+        <div class="bs-type-desc">蓋付き常設グリルあり、自分のグリル・食材持込もOK。最強。</div>
+      </div>
+      <div class="bs-type-card" data-type="D">
+        <div class="bs-type-label">TYPE D</div>
+        <div class="bs-type-title">場所のみ（公園型）</div>
+        <div class="bs-type-desc">グリル常設なし、持込前提。Weberなど自前で運べる人向け。</div>
+      </div>
+    </section>
+
+    <!-- search box -->
+    <section class="bs-search">
+      <div class="bs-search-input-wrap">
+        <svg class="bs-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="bs-search-input" id="searchInput" placeholder="施設名・最寄駅・地名で検索  例：武蔵野公園 / 新木場 / 多摩" autocomplete="off">
+      </div>
+    </section>
+
+    <!-- filters -->
+    <section class="bs-filters">
+      <div class="bs-filter-row">
+        <span class="bs-filter-label">タイプ</span>
+        <button class="bs-chip" data-filter="type" data-value="A">A 焼肉スタイル</button>
+        <button class="bs-chip" data-filter="type" data-value="B">B 手ぶら型</button>
+        <button class="bs-chip" data-filter="type" data-value="C">C 持込OK</button>
+        <button class="bs-chip" data-filter="type" data-value="D">D 場所のみ</button>
+      </div>
+      <div class="bs-filter-row">
+        <span class="bs-filter-label">エリア</span>
+        <button class="bs-chip" data-filter="area" data-value="23ku">23区</button>
+        <button class="bs-chip" data-filter="area" data-value="tama">多摩</button>
+      </div>
+      <div class="bs-filter-row">
+        <span class="bs-filter-label">持込</span>
+        <button class="bs-chip" data-filter="bringGrill" data-value="ok">グリル持込◎</button>
+        <button class="bs-chip" data-filter="bringFood" data-value="ok">食材持込◎</button>
+        <button class="bs-chip" data-filter="bringElectric" data-value="ok">電気グリル可（Pulse対応）</button>
+      </div>
+      <div class="bs-filter-row">
+        <span class="bs-filter-label">設備</span>
+        <button class="bs-chip" data-filter="parking" data-value="true">駐車場あり</button>
+        <button class="bs-chip" data-filter="powerOutlet" data-value="ok">電源あり</button>
+        <button class="bs-chip" data-filter="roof" data-value="ok">屋根あり（雨天可）</button>
+        <button class="bs-chip" data-filter="shower" data-value="ok">シャワーあり</button>
+      </div>
+      <div class="bs-filter-row">
+        <span class="bs-filter-label">SLOW FIRE</span>
+        <button class="bs-chip" data-filter="lowAndSlow" data-value="4">ロー&スロー可（★4以上）</button>
+        <button class="bs-chip" data-filter="americanBbq" data-value="4">アメリカンBBQ可（★4以上）</button>
+        <button class="bs-reset" id="resetBtn">条件をすべてリセット</button>
+      </div>
+    </section>
+
+    <!-- result info -->
+    <div class="bs-result-info">
+      <div><strong id="resultCount">15</strong> 件のBBQ場が見つかりました</div>
+      <select class="bs-sort" id="sortSelect">
+        <option value="american">アメリカンBBQ度順</option>
+        <option value="lowAndSlow">ロー&スロー度順</option>
+        <option value="ease">手軽さ順</option>
+        <option value="scenery">景観順</option>
+        <option value="name">名前順</option>
+      </select>
+    </div>
+
+    <!-- spots grid -->
+    <div class="bs-grid" id="spotsGrid">
+      <!-- JS で生成 -->
+    </div>
+
+    <!-- FAQ -->
+    <section class="bs-faq">
+      <h2>BBQ場の選び方 Q&A</h2>
+      <details>
+        <summary>Q. アメリカンBBQ（ロー&スロー）ができる場所はどこ？</summary>
+        <p>「タイプC（常設+持込OK）」または「タイプD（場所のみ）」のスポットで、<strong>蓋付きグリル（Weber Kettle等）の持込が可能</strong>な場所が必要です。リストではタイプCのスポットが最も理想的です。</p>
+      </details>
+      <details>
+        <summary>Q. Weber Pulseのような電気グリルが使えるBBQ場は？</summary>
+        <p>電源がある施設が必要です。公園型（タイプD）の多くは発電機が禁止されており、ポータブル電源も推奨されていません。HERO FIELD 新木場や城南島海浜公園のように電源レンタル可の施設を選ぶか、Weber Kettle等の炭グリルに切り替える必要があります。</p>
+      </details>
+      <details>
+        <summary>Q. 焼肉スタイルのBBQができれば十分です。違いは？</summary>
+        <p>焼肉スタイルは「蓋なし炭グリル」でOKなので、ほぼ全タイプで楽しめます。常設グリルがあるタイプAやレンタル可のタイプBが手軽です。</p>
+      </details>
+      <details>
+        <summary>Q. 駒場野公園のように「グリル持込不可」のBBQ場ってあるの？</summary>
+        <p>はい、特に区立の小さい公園BBQ場ではコンクリート製の常設炉のみ使用可、というケースがあります。リストではタイプAに分類されます。アメリカンBBQ目的の方は避けたほうがいいです。</p>
+      </details>
+      <details>
+        <summary>Q. ブリスケットを12時間焼きたいんですが、どこが向いていますか？</summary>
+        <p>夜通し焼く場合は<strong>若洲海浜公園キャンプ場</strong>のように宿泊できるスポットが現実的です。日帰りでも長時間焼くなら、開園時間が長く広い「タイプC」（HERO FIELD 新木場・城南島）か、団体利用で時間を確保できる「タイプD」（武蔵野公園・野川公園）が向いています。</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="../index.html#products">商品一覧</a>
+          <a href="../essentials.html">BBQの神髄</a>
+          <a href="../pairing-guide.html">食材から選ぶ</a>
+          <a href="../cookbook.html">料理から選ぶ</a>
+          <a href="../rub-guide.html">ラブガイド</a>
+          <a href="../journal/index.html">FIRESIDE</a>
+          <a href="index.html">BBQ場検索</a>
+          <a href="../team.html">私たちについて</a>
+        </nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+  <script>
+    /* nav scroll */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    /* ========== BBQ Spots Search ========== */
+    (async () => {
+      const grid = document.getElementById('spotsGrid');
+      const input = document.getElementById('searchInput');
+      const countEl = document.getElementById('resultCount');
+      const sortSelect = document.getElementById('sortSelect');
+      const resetBtn = document.getElementById('resetBtn');
+      const chips = document.querySelectorAll('.bs-chip[data-filter]');
+
+      let data = [];
+      try {
+        data = await (await fetch('data.json')).json();
+      } catch(e) { console.error('data.json load fail', e); return; }
+
+      const fuse = new Fuse(data, {
+        keys: [
+          { name: 'name', weight: 3 },
+          { name: 'nameKana', weight: 2 },
+          { name: 'city', weight: 2 },
+          { name: 'address', weight: 1.5 },
+          { name: 'nearestStations.name', weight: 2 },
+          { name: 'tags', weight: 2 },
+          { name: 'uniqueness', weight: 1 },
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+      });
+
+      const state = {
+        query: '',
+        filters: {}, // { filterName: value }
+        sort: 'american',
+      };
+
+      function escapeHtml(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
+
+      function typeColor(type) {
+        return { A: 'gray-700', B: 'warning', C: 'success', D: 'brand-500' }[type] || 'gray-700';
+      }
+
+      function renderCard(spot) {
+        const features = [];
+        if (spot.bringIn.grill === 'ok') features.push({label: 'グリル持込', cls: 'ok'});
+        if (spot.bringIn.electric === 'ok') features.push({label: '電気グリル可', cls: 'ok'});
+        if (spot.facilities.powerOutlet === 'ok') features.push({label: '電源あり', cls: 'ok'});
+        if (spot.parking.available) features.push({label: '駐車場', cls: 'ok'});
+        if (spot.facilities.roof === 'ok') features.push({label: '屋根', cls: 'ok'});
+        if (spot.bringIn.grill === 'ng') features.push({label: '持込不可', cls: 'ng'});
+
+        return `
+          <a href="${spot.slug}.html" class="bs-card">
+            <div class="bs-card-img">
+              <img src="${spot.image}" alt="${escapeHtml(spot.name)}" loading="lazy">
+              <span class="bs-card-type-badge" data-type="${spot.slowFireType}">TYPE ${spot.slowFireType}</span>
+              <span class="bs-card-rating-badge">★${spot.americanBbqRating}/5</span>
+            </div>
+            <div class="bs-card-body">
+              <h3 class="bs-card-name">${escapeHtml(spot.name)}</h3>
+              <p class="bs-card-area">${escapeHtml(spot.areaLabel)} · ${escapeHtml(spot.city)} · ${escapeHtml(spot.nearestStations[0]?.name || '')}</p>
+              <p class="bs-card-summary">${escapeHtml(spot.uniqueness)}</p>
+              <div class="bs-card-features">
+                ${features.slice(0, 4).map(f => `<span class="bs-card-feature ${f.cls}">${f.label}</span>`).join('')}
+              </div>
+            </div>
+          </a>
+        `;
+      }
+
+      function applyFilters(items) {
+        return items.filter(spot => {
+          for (const [k, v] of Object.entries(state.filters)) {
+            if (k === 'type') { if (spot.slowFireType !== v) return false; }
+            else if (k === 'area') { if (spot.areaType !== v) return false; }
+            else if (k === 'bringGrill') { if (spot.bringIn.grill !== v) return false; }
+            else if (k === 'bringFood') { if (spot.bringIn.food !== v) return false; }
+            else if (k === 'bringElectric') { if (spot.bringIn.electric !== v) return false; }
+            else if (k === 'parking') { if (String(spot.parking.available) !== v) return false; }
+            else if (k === 'powerOutlet') { if (spot.facilities.powerOutlet !== v) return false; }
+            else if (k === 'roof') { if (spot.facilities.roof !== v) return false; }
+            else if (k === 'shower') { if (spot.facilities.shower !== v) return false; }
+            else if (k === 'lowAndSlow') { if (spot.ratings.lowAndSlow < parseInt(v)) return false; }
+            else if (k === 'americanBbq') { if (spot.ratings.americanBbq < parseInt(v)) return false; }
+          }
+          return true;
+        });
+      }
+
+      function sortItems(items) {
+        const cmp = {
+          american: (a, b) => b.ratings.americanBbq - a.ratings.americanBbq,
+          lowAndSlow: (a, b) => b.ratings.lowAndSlow - a.ratings.lowAndSlow,
+          ease: (a, b) => b.ratings.ease - a.ratings.ease,
+          scenery: (a, b) => b.ratings.scenery - a.ratings.scenery,
+          name: (a, b) => a.nameKana.localeCompare(b.nameKana, 'ja'),
+        }[state.sort];
+        return items.slice().sort(cmp);
+      }
+
+      function render() {
+        let items = state.query ? fuse.search(state.query).map(r => r.item) : data;
+        items = applyFilters(items);
+        if (state.sort !== 'relevance') items = sortItems(items);
+        countEl.textContent = items.length;
+        grid.innerHTML = items.length ? items.map(renderCard).join('') : '<div class="bs-empty">条件に合うBBQ場が見つかりませんでした。フィルターを緩めてお試しください。</div>';
+      }
+
+      // 検索
+      let timer;
+      input.addEventListener('input', e => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { state.query = e.target.value.trim(); render(); }, 150);
+      });
+
+      // フィルター
+      chips.forEach(c => {
+        c.addEventListener('click', () => {
+          const f = c.dataset.filter, v = c.dataset.value;
+          if (state.filters[f] === v) { delete state.filters[f]; c.classList.remove('active'); }
+          else {
+            state.filters[f] = v;
+            // 同じフィルター内の他チップをoff
+            document.querySelectorAll(`.bs-chip[data-filter="${f}"]`).forEach(x => x.classList.remove('active'));
+            c.classList.add('active');
+          }
+          render();
+        });
+      });
+
+      // ソート
+      sortSelect.addEventListener('change', e => { state.sort = e.target.value; render(); });
+
+      // リセット
+      resetBtn.addEventListener('click', () => {
+        state.filters = {}; state.query = ''; input.value = '';
+        document.querySelectorAll('.bs-chip.active').forEach(c => c.classList.remove('active'));
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
