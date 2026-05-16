@@ -1370,5 +1370,806 @@
       "駅近",
       "持込可"
     ]
+  },
+  {
+    "slug": "yokohama-zou-no-hana",
+    "name": "象の鼻パーク (横浜)",
+    "nameKana": "ぞうのはなぱーく",
+    "officialUrl": "https://zounohana.com/",
+    "image": "https://images.unsplash.com/photo-1768329234391-247bc8315d8b?auto=format&fit=crop&w=1600&q=85",
+    "address": "神奈川県横浜市中区海岸通1丁目",
+    "prefecture": "神奈川県",
+    "city": "横浜市",
+    "areaType": "kanagawa",
+    "areaLabel": "神奈川",
+    "nearestStations": [
+      {
+        "name": "みなとみらい線 日本大通り駅",
+        "minutes": 3,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": false,
+      "spots": 0,
+      "fee": "なし（近隣有料あり）"
+    },
+    "hours": "10:00〜17:00",
+    "openSeason": "通年",
+    "closedDays": "なし",
+    "slowFireType": "D",
+    "slowFireTypeLabel": "場所のみ（持込前提）",
+    "americanBbqRating": 3,
+    "americanBbqReason": "横浜港の眺望は最高だが、火気使用ルールは要確認",
+    "grillInstalled": {
+      "available": false,
+      "type": null,
+      "withLid": false
+    },
+    "bringIn": {
+      "grill": "warning",
+      "grillNote": "イベント時のみ、要確認",
+      "charcoal": "warning",
+      "gas": "warning",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "ng",
+      "shower": "ng",
+      "roof": "warning",
+      "tarp": "ng",
+      "tables": "warning",
+      "chairs": "warning",
+      "trash": "warning",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "ok"
+    },
+    "reservation": {
+      "required": true,
+      "method": "イベント時のみ"
+    },
+    "price": {
+      "base": "イベント参加費"
+    },
+    "capacity": "イベント次第",
+    "rainHandling": "屋根付きエリア限定的",
+    "scenery": "横浜港・ベイブリッジ・大さん橋",
+    "uniqueness": "横浜港の絶景と歴史的港湾の眺望。デート・特別な日に",
+    "slowFireNote": "通常はBBQ不可。期間限定イベント時に限定的に開催される。最新情報は公式サイトで。",
+    "ratings": {
+      "americanBbq": 3,
+      "lowAndSlow": 2,
+      "ease": 3,
+      "scenery": 5,
+      "accessibility": 5
+    },
+    "tags": [
+      "神奈川",
+      "横浜",
+      "海",
+      "夜景",
+      "イベント"
+    ]
+  },
+  {
+    "slug": "umizuri-koen-yokohama",
+    "name": "本牧海づり施設 BBQエリア (横浜)",
+    "nameKana": "ほんもくうみづりしせつ",
+    "officialUrl": "http://www.umiduri.com/yokohama/",
+    "image": "https://images.unsplash.com/photo-1763068778446-c6f8c17107e1?auto=format&fit=crop&w=1600&q=85",
+    "address": "神奈川県横浜市中区本牧ふ頭1",
+    "prefecture": "神奈川県",
+    "city": "横浜市",
+    "areaType": "kanagawa",
+    "areaLabel": "神奈川",
+    "nearestStations": [
+      {
+        "name": "JR根岸駅",
+        "minutes": 20,
+        "method": "バス"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 100,
+      "fee": "有料"
+    },
+    "hours": "9:00〜18:00",
+    "openSeason": "通年",
+    "closedDays": "なし",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "海釣り併設、釣った魚をBBQで焼ける独自体験",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": false,
+      "note": "蓋付きは持込推奨"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "warning",
+      "roof": "ok",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画3,500円〜"
+    },
+    "capacity": "予約制",
+    "rainHandling": "屋根あり",
+    "scenery": "東京湾・本牧ふ頭",
+    "uniqueness": "釣りとBBQが両方楽しめる。釣った魚をその場で焼く体験は唯一無二",
+    "slowFireNote": "釣りメインの施設だがBBQも本格的にできる。蓋付きグリル持込でロー&スロー対応可能。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 3,
+      "ease": 4,
+      "scenery": 4,
+      "accessibility": 3
+    },
+    "tags": [
+      "神奈川",
+      "横浜",
+      "釣り",
+      "海",
+      "持込OK"
+    ]
+  },
+  {
+    "slug": "shounan-enoshima-bbq",
+    "name": "湘南海岸・江ノ島 BBQエリア",
+    "nameKana": "しょうなんかいがん",
+    "officialUrl": "https://www.kanagawaparks.com/shounan/",
+    "image": "https://images.unsplash.com/photo-1763068778446-c6f8c17107e1?auto=format&fit=crop&w=1600&q=85",
+    "address": "神奈川県藤沢市片瀬海岸",
+    "prefecture": "神奈川県",
+    "city": "藤沢市",
+    "areaType": "kanagawa",
+    "areaLabel": "神奈川",
+    "nearestStations": [
+      {
+        "name": "小田急線 片瀬江ノ島駅",
+        "minutes": 5,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 200,
+      "fee": "有料"
+    },
+    "hours": "10:00〜18:00",
+    "openSeason": "夏季限定（7-8月）",
+    "closedDays": "オフシーズン",
+    "slowFireType": "D",
+    "slowFireTypeLabel": "場所のみ（持込前提）",
+    "americanBbqRating": 4,
+    "americanBbqReason": "湘南の海辺で本格BBQ。夕日が美しい",
+    "grillInstalled": {
+      "available": false,
+      "type": null,
+      "withLid": false
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "warning",
+      "electric": "ng",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "ng",
+      "shower": "ok",
+      "roof": "ng",
+      "tarp": "warning",
+      "tables": "warning",
+      "chairs": "warning",
+      "trash": "warning",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web (シーズン中)"
+    },
+    "price": {
+      "base": "場所利用無料（駐車場別）"
+    },
+    "capacity": "団体可",
+    "rainHandling": "屋根なし",
+    "scenery": "湘南海岸・江ノ島・富士山",
+    "uniqueness": "湘南の海辺で江ノ島と富士山を望むBBQ。夏限定の特別体験",
+    "slowFireNote": "夏限定のため長時間調理は時間制約あり。海風が強いので火加減注意。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 3,
+      "ease": 4,
+      "scenery": 5,
+      "accessibility": 4
+    },
+    "tags": [
+      "神奈川",
+      "湘南",
+      "海",
+      "夏限定",
+      "富士山"
+    ]
+  },
+  {
+    "slug": "inagekaihin-koen-chiba",
+    "name": "稲毛海浜公園バーベキュー場 (千葉)",
+    "nameKana": "いなげかいひんこうえん",
+    "officialUrl": "https://www.parks.chiba.lg.jp/parks/inagekaihin/",
+    "image": "https://images.unsplash.com/photo-1763068778446-c6f8c17107e1?auto=format&fit=crop&w=1600&q=85",
+    "address": "千葉県千葉市美浜区高浜7",
+    "prefecture": "千葉県",
+    "city": "千葉市",
+    "areaType": "chiba",
+    "areaLabel": "千葉",
+    "nearestStations": [
+      {
+        "name": "JR稲毛海岸駅",
+        "minutes": 15,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 1100,
+      "fee": "有料"
+    },
+    "hours": "10:00〜16:00",
+    "openSeason": "3〜11月",
+    "closedDays": "公園規定",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "千葉県内最大級のBBQ場。レンタル・持込両対応",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": true,
+      "note": "蓋付きグリルもレンタル可"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "ok",
+      "roof": "warning",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok",
+      "vending": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画2,500〜5,000円"
+    },
+    "capacity": "団体可",
+    "rainHandling": "一部屋根あり",
+    "scenery": "東京湾・人工ビーチ",
+    "uniqueness": "千葉県内最大級のBBQ施設。人工ビーチと併設、駐車場も豊富",
+    "slowFireNote": "持込グリル可で本格BBQ可能。広いエリアで長時間調理にも対応。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 5,
+      "scenery": 4,
+      "accessibility": 4
+    },
+    "tags": [
+      "千葉",
+      "海",
+      "ビーチ",
+      "持込OK",
+      "ファミリー"
+    ]
+  },
+  {
+    "slug": "shinrin-koen-funabashi",
+    "name": "県民の森・ふなばし三番瀬海浜公園 BBQ場",
+    "nameKana": "ふなばしさんばんぜ",
+    "officialUrl": "https://www.sambanze.jp/",
+    "image": "https://images.unsplash.com/photo-1771030669981-c995ebcde895?auto=format&fit=crop&w=1600&q=85",
+    "address": "千葉県船橋市潮見町40",
+    "prefecture": "千葉県",
+    "city": "船橋市",
+    "areaType": "chiba",
+    "areaLabel": "千葉",
+    "nearestStations": [
+      {
+        "name": "JR船橋駅",
+        "minutes": 25,
+        "method": "バス"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 500,
+      "fee": "有料"
+    },
+    "hours": "9:00〜17:00",
+    "openSeason": "通年",
+    "closedDays": "公園規定",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "三番瀬の自然と海岸線で本格BBQ",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": false,
+      "note": "レンタル可、蓋付きは持込推奨"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "ok",
+      "roof": "ok",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画3,000円〜"
+    },
+    "capacity": "団体可",
+    "rainHandling": "屋根エリアあり",
+    "scenery": "三番瀬海岸・東京湾",
+    "uniqueness": "潮干狩りも併設の海岸公園。子連れに最適",
+    "slowFireNote": "持込グリル可、設備充実。船橋エリアで本格BBQをしたい人向け。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 5,
+      "scenery": 4,
+      "accessibility": 4
+    },
+    "tags": [
+      "千葉",
+      "海",
+      "潮干狩り",
+      "持込OK",
+      "ファミリー"
+    ]
+  },
+  {
+    "slug": "showanomori-noda",
+    "name": "清水公園BBQ場 (千葉・野田)",
+    "nameKana": "しみずこうえん",
+    "officialUrl": "https://www.shimizu-kouen.com/",
+    "image": "https://images.unsplash.com/photo-1684767926505-72c8cdb2571f?auto=format&fit=crop&w=1600&q=85",
+    "address": "千葉県野田市清水906",
+    "prefecture": "千葉県",
+    "city": "野田市",
+    "areaType": "chiba",
+    "areaLabel": "千葉",
+    "nearestStations": [
+      {
+        "name": "東武アーバンパークライン 清水公園駅",
+        "minutes": 10,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 400,
+      "fee": "有料"
+    },
+    "hours": "9:00〜17:00",
+    "openSeason": "通年",
+    "closedDays": "公園規定",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "アスレチック併設の総合公園、施設充実",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": true,
+      "note": "レンタル豊富"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "ok",
+      "roof": "ok",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok",
+      "vending": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画3,500円〜"
+    },
+    "capacity": "団体可",
+    "rainHandling": "屋根あり",
+    "scenery": "桜の名所・自然豊かな総合公園",
+    "uniqueness": "アスレチック・桜・BBQが同時に楽しめる総合公園。1日遊べる",
+    "slowFireNote": "施設充実で持込グリル可。子連れファミリーに最適。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 5,
+      "scenery": 5,
+      "accessibility": 3
+    },
+    "tags": [
+      "千葉",
+      "桜",
+      "アスレチック",
+      "持込OK",
+      "ファミリー"
+    ]
+  },
+  {
+    "slug": "akigase-saitama",
+    "name": "秋ヶ瀬公園BBQ場 (埼玉)",
+    "nameKana": "あきがせこうえん",
+    "officialUrl": "https://www.pref.saitama.lg.jp/akigase/",
+    "image": "https://images.unsplash.com/photo-1771030669981-c995ebcde895?auto=format&fit=crop&w=1600&q=85",
+    "address": "埼玉県さいたま市桜区下大久保",
+    "prefecture": "埼玉県",
+    "city": "さいたま市",
+    "areaType": "saitama",
+    "areaLabel": "埼玉",
+    "nearestStations": [
+      {
+        "name": "JR西浦和駅",
+        "minutes": 20,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 700,
+      "fee": "有料"
+    },
+    "hours": "10:00〜16:00",
+    "openSeason": "3〜11月",
+    "closedDays": "公園規定",
+    "slowFireType": "D",
+    "slowFireTypeLabel": "場所のみ（持込前提）",
+    "americanBbqRating": 4,
+    "americanBbqReason": "広大な敷地で持込BBQ可能。荒川沿いの自然",
+    "grillInstalled": {
+      "available": false,
+      "type": null,
+      "withLid": false
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "warning",
+      "electric": "ng",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "ng",
+      "shower": "ng",
+      "roof": "ng",
+      "tarp": "warning",
+      "tables": "warning",
+      "chairs": "warning",
+      "trash": "warning",
+      "water": "ok",
+      "shop": "warning"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "ok"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "場所利用無料"
+    },
+    "capacity": "団体可",
+    "rainHandling": "屋根なし",
+    "scenery": "荒川河川敷の自然・桜",
+    "uniqueness": "埼玉県最大級の都市公園。荒川沿いで広々BBQ",
+    "slowFireNote": "広大な敷地で長時間調理も可能。風が強い日があるので火加減注意。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 3,
+      "scenery": 4,
+      "accessibility": 3
+    },
+    "tags": [
+      "埼玉",
+      "公園",
+      "荒川",
+      "桜",
+      "持込OK"
+    ]
+  },
+  {
+    "slug": "saiko-toda-saitama",
+    "name": "彩湖・道満グリーンパーク BBQ場",
+    "nameKana": "さいこ・どうまん",
+    "officialUrl": "https://parks.prfj.or.jp/saiko-doman/",
+    "image": "https://images.unsplash.com/photo-1705695373213-115c102714fd?auto=format&fit=crop&w=1600&q=85",
+    "address": "埼玉県戸田市重瀬745",
+    "prefecture": "埼玉県",
+    "city": "戸田市",
+    "areaType": "saitama",
+    "areaLabel": "埼玉",
+    "nearestStations": [
+      {
+        "name": "JR北戸田駅",
+        "minutes": 30,
+        "method": "バス"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 800,
+      "fee": "有料"
+    },
+    "hours": "9:00〜17:00",
+    "openSeason": "通年",
+    "closedDays": "公園規定",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "彩湖の湖畔で本格BBQ。広い敷地",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": false,
+      "note": "蓋付きは持込推奨"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "warning",
+      "roof": "warning",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画3,000円〜"
+    },
+    "capacity": "団体可",
+    "rainHandling": "屋根エリア限定",
+    "scenery": "彩湖の湖畔・荒川",
+    "uniqueness": "湖を望む稀有なBBQ場。レンタルから持込まで対応",
+    "slowFireNote": "湖風が時に強いので火加減注意。広い敷地で長時間調理可能。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 4,
+      "scenery": 5,
+      "accessibility": 2
+    },
+    "tags": [
+      "埼玉",
+      "湖",
+      "彩湖",
+      "持込OK",
+      "ファミリー"
+    ]
+  },
+  {
+    "slug": "kawagoe-saitama-bbq",
+    "name": "川越水上公園BBQ場 (埼玉)",
+    "nameKana": "かわごえすいじょうこうえん",
+    "officialUrl": "https://parks.prfj.or.jp/kawagoe/",
+    "image": "https://images.unsplash.com/photo-1771030669981-c995ebcde895?auto=format&fit=crop&w=1600&q=85",
+    "address": "埼玉県川越市大字池辺880",
+    "prefecture": "埼玉県",
+    "city": "川越市",
+    "areaType": "saitama",
+    "areaLabel": "埼玉",
+    "nearestStations": [
+      {
+        "name": "JR西川越駅",
+        "minutes": 15,
+        "method": "徒歩"
+      }
+    ],
+    "parking": {
+      "available": true,
+      "spots": 600,
+      "fee": "有料"
+    },
+    "hours": "10:00〜17:00",
+    "openSeason": "通年",
+    "closedDays": "公園規定",
+    "slowFireType": "C",
+    "slowFireTypeLabel": "常設・持込OK",
+    "americanBbqRating": 4,
+    "americanBbqReason": "プール併設の総合公園、施設充実",
+    "grillInstalled": {
+      "available": true,
+      "type": "炭グリル",
+      "withLid": false,
+      "note": "蓋付きは持込推奨"
+    },
+    "bringIn": {
+      "grill": "ok",
+      "charcoal": "ok",
+      "gas": "ok",
+      "electric": "warning",
+      "food": "ok",
+      "drinks": "ok"
+    },
+    "facilities": {
+      "toilet": "ok",
+      "powerOutlet": "warning",
+      "shower": "ok",
+      "roof": "warning",
+      "tarp": "ok",
+      "tables": "ok",
+      "chairs": "ok",
+      "trash": "ok",
+      "water": "ok",
+      "shop": "ok"
+    },
+    "rules": {
+      "directFire": "ng",
+      "music": "warning",
+      "kids": "ok",
+      "pets": "warning"
+    },
+    "reservation": {
+      "required": true,
+      "method": "Web"
+    },
+    "price": {
+      "base": "区画2,500円〜"
+    },
+    "capacity": "団体可",
+    "rainHandling": "一部屋根あり",
+    "scenery": "川越の自然・夏はプール併設",
+    "uniqueness": "夏はプール、春秋は桜・紅葉が楽しめる総合公園",
+    "slowFireNote": "施設充実で持込もレンタルも可。川越観光と組み合わせやすい。",
+    "ratings": {
+      "americanBbq": 4,
+      "lowAndSlow": 4,
+      "ease": 5,
+      "scenery": 4,
+      "accessibility": 3
+    },
+    "tags": [
+      "埼玉",
+      "川越",
+      "プール",
+      "持込OK",
+      "ファミリー"
+    ]
   }
 ]
