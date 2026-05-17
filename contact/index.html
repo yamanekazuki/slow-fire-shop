@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ — 取材・パートナーシップ・出店相談 | SLOW FIRE</title>
+  <meta name="description" content="SLOW FIRE SHOPへのお問い合わせ。取材依頼・パートナーシップ・出店相談・商品お問い合わせなど、お気軽にご連絡ください。">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/contact/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+
+  <style>
+    .ct-wrap { max-width: 640px; margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 64px; }
+    .ct-mark { font-size: 11px; letter-spacing: 0.34em; font-weight: 700; color: var(--brand-500); text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+    .ct-title { font-size: clamp(28px, 4vw, 38px); font-weight: 700; color: var(--gray-900); text-align: center; margin-bottom: 12px; }
+    .ct-tagline { text-align: center; font-size: 14.5px; color: var(--gray-600); margin-bottom: 36px; line-height: 1.8; }
+    .ct-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 32px; }
+    .ct-row { margin-bottom: 18px; }
+    .ct-label { display: block; font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 6px; letter-spacing: 0.04em; }
+    .ct-input, .ct-select, .ct-textarea { width: 100%; padding: 12px 14px; font-family: inherit; font-size: 15px; border: 1.5px solid var(--gray-300); border-radius: 10px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+    .ct-input:focus, .ct-select:focus, .ct-textarea:focus { border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(180,83,9,.08); }
+    .ct-textarea { min-height: 140px; resize: vertical; }
+    .ct-btn { display: block; width: 100%; padding: 14px; background: var(--brand-500); color: var(--white); border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.15s; font-family: inherit; }
+    .ct-btn:hover { background: var(--brand-700); }
+    .ct-success { display: none; padding: 14px 18px; background: var(--success); color: var(--white); border-radius: 10px; font-weight: 600; text-align: center; margin-top: 12px; }
+    .ct-success.show { display: block; }
+
+    .ct-direct { margin-top: 28px; padding: 20px; background: var(--gray-50); border-radius: 12px; text-align: center; font-size: 13.5px; color: var(--gray-700); line-height: 1.7; }
+    .ct-direct a { color: var(--brand-500); font-weight: 600; text-decoration: none; }
+    .ct-direct a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../planner/index.html">プランナー</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="ct-wrap">
+    <p class="ct-mark">CONTACT</p>
+    <h1 class="ct-title">お問い合わせ</h1>
+    <p class="ct-tagline">取材・パートナーシップ・出店相談・商品お問い合わせなど、<br>お気軽にご連絡ください。3営業日以内にお返事します。</p>
+
+    <div class="ct-card">
+      <form id="ctForm" action="https://formspree.io/f/your_form_id" method="POST">
+        <div class="ct-row">
+          <label class="ct-label" for="ctType">お問い合わせ種別 *</label>
+          <select id="ctType" name="type" class="ct-select" required>
+            <option value="">選択してください</option>
+            <option>一般のお問い合わせ</option>
+            <option>取材・メディア掲載依頼</option>
+            <option>パートナーシップ・コラボ</option>
+            <option>BBQイベント出店・運営相談</option>
+            <option>BBQ場の情報追加・修正リクエスト</option>
+            <option>商品・購入について</option>
+            <option>その他</option>
+          </select>
+        </div>
+
+        <div class="ct-row">
+          <label class="ct-label" for="ctName">お名前 *</label>
+          <input id="ctName" name="name" class="ct-input" required>
+        </div>
+
+        <div class="ct-row">
+          <label class="ct-label" for="ctEmail">メールアドレス *</label>
+          <input id="ctEmail" name="email" type="email" class="ct-input" required>
+        </div>
+
+        <div class="ct-row">
+          <label class="ct-label" for="ctOrg">会社・組織名（任意）</label>
+          <input id="ctOrg" name="organization" class="ct-input">
+        </div>
+
+        <div class="ct-row">
+          <label class="ct-label" for="ctMsg">メッセージ *</label>
+          <textarea id="ctMsg" name="message" class="ct-textarea" required placeholder="ご用件を詳しくお書きください。"></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="SLOW FIRE お問い合わせ">
+        <button type="submit" class="ct-btn">送信する</button>
+        <div class="ct-success" id="ctSuccess">✓ 送信しました。3営業日以内にお返事します。</div>
+      </form>
+    </div>
+
+    <div class="ct-direct">
+      <strong>メールで直接ご連絡</strong><br>
+      <a href="mailto:yamane@potentialight.com">yamane@potentialight.com</a><br>
+      <span style="font-size:11.5px;color:var(--gray-500);">フォームの代わりにメールでも構いません</span>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../journal/index.html">FIRESIDE</a><a href="../bbq-spots/index.html">BBQ場検索</a><a href="../planner/index.html">プランナー</a><a href="index.html">お問い合わせ</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+  <script src="../assets/sf-features.js?v=20260517" defer></script>
+  <script>
+    document.getElementById('ctForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(r => { if (r.ok) { document.getElementById('ctSuccess').classList.add('show'); form.reset(); } else alert('送信に失敗しました'); })
+        .catch(() => alert('送信に失敗しました'));
+    });
+  </script>
+</body>
+</html>

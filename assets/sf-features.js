@@ -315,6 +315,122 @@
     });
   }
 
+  // ===== Reading progress bar =====
+  function injectReadingProgress() {
+    if (!isArticlePage()) return;
+    const bar = document.createElement('div');
+    bar.className = 'sf-progress';
+    bar.innerHTML = '<div class="sf-progress-fill"></div>';
+    document.body.appendChild(bar);
+    const fill = bar.querySelector('.sf-progress-fill');
+    function update() {
+      const top = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (top / max) * 100 : 0;
+      fill.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  // ===== Back to top button =====
+  function injectBackToTop() {
+    const btn = document.createElement('button');
+    btn.className = 'sf-totop';
+    btn.setAttribute('aria-label', 'トップへ戻る');
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
+    document.body.appendChild(btn);
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('show', window.scrollY > 600);
+    }, { passive: true });
+  }
+
+  // ===== Keyboard shortcuts =====
+  function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)) return;
+      const meta = e.metaKey || e.ctrlKey;
+      // f: favorite current page
+      if (e.key === 'f' && !meta && isArticlePage()) {
+        e.preventDefault();
+        toggleFavorite(currentUrl, currentTitle);
+        const btn = document.querySelector('.sf-fav-btn');
+        if (btn) updateFavBtn(btn);
+      }
+      // j: next article via related
+      else if (e.key === 'j' && !meta && isArticlePage()) {
+        const next = document.querySelector('.jr-related a, .bs-card');
+        if (next) next.click();
+      }
+      // ?: show shortcuts help
+      else if (e.key === '?' && !meta) {
+        e.preventDefault();
+        showShortcutsHelp();
+      }
+      // g h: go home
+      else if (e.key === 'h' && !meta && window._sfPrevKey === 'g') {
+        location.href = BASE;
+      }
+      window._sfPrevKey = e.key;
+    });
+  }
+
+  function showShortcutsHelp() {
+    if (document.querySelector('.sf-help')) {
+      document.querySelector('.sf-help').remove();
+      return;
+    }
+    const m = document.createElement('div');
+    m.className = 'sf-help';
+    m.innerHTML = `
+      <div class="sf-help-card">
+        <button class="sf-help-close">✕</button>
+        <h3>キーボードショートカット</h3>
+        <table class="sf-help-table">
+          <tr><td><kbd>⌘K</kbd> / <kbd>/</kbd></td><td>検索を開く</td></tr>
+          <tr><td><kbd>F</kbd></td><td>この記事をお気に入り</td></tr>
+          <tr><td><kbd>J</kbd></td><td>次の記事へ</td></tr>
+          <tr><td><kbd>G</kbd> → <kbd>H</kbd></td><td>トップへ戻る</td></tr>
+          <tr><td><kbd>?</kbd></td><td>このヘルプを開く / 閉じる</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>モーダルを閉じる</td></tr>
+        </table>
+      </div>
+    `;
+    document.body.appendChild(m);
+    m.querySelector('.sf-help-close').addEventListener('click', () => m.remove());
+    m.addEventListener('click', (e) => { if (e.target === m) m.remove(); });
+  }
+
+  // ===== TOC scrollspy (right-side sticky) =====
+  function setupTocScrollspy() {
+    const toc = document.querySelector('.jr-toc');
+    if (!toc) return;
+    const links = toc.querySelectorAll('a[href^="#"]');
+    const headings = Array.from(links).map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    if (!headings.length) return;
+    function update() {
+      const top = window.scrollY + 100;
+      let active = null;
+      for (const h of headings) {
+        if (h.offsetTop <= top) active = h;
+      }
+      links.forEach(a => {
+        const id = a.getAttribute('href').slice(1);
+        a.classList.toggle('sf-toc-active', active && active.id === id);
+      });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  // ===== Service worker registration =====
+  function registerSw() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(BASE + 'sw.js').catch(() => {});
+    }
+  }
+
   // ===== Init =====
   function init() {
     injectThemeToggle();
@@ -322,6 +438,11 @@
     markReadIfApplicable();
     injectBbqCounter();
     injectShareButtons();
+    injectReadingProgress();
+    injectBackToTop();
+    setupKeyboardShortcuts();
+    setupTocScrollspy();
+    registerSw();
     if (visits === 1) {
       setTimeout(showWelcome, 1200);
     }

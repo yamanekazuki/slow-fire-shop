@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQ場 地図一覧 — 関東24スポットを1枚の地図で | SLOW FIRE</title>
+  <meta name="description" content="東京・神奈川・千葉・埼玉の24のBBQ場を1枚の地図でひと目で。タイプ別マーカー、現在地から近い順、ピンクリックで詳細表示。">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/bbq-spots/map.html">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+
+  <style>
+    .mp-hero { max-width: 1080px; margin: 0 auto; padding: calc(var(--nav-h) + 24px) 24px 16px; text-align: center; }
+    .mp-mark { font-size: 11px; letter-spacing: 0.34em; font-weight: 700; color: var(--brand-500); text-transform: uppercase; margin-bottom: 12px; }
+    .mp-hero h1 { font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+    .mp-hero p { font-size: 14px; color: var(--gray-600); max-width: 580px; margin: 0 auto; }
+    .mp-map { max-width: 1240px; height: 70vh; min-height: 520px; margin: 24px auto; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+    .mp-popup-name { font-size: 14.5px; font-weight: 700; margin-bottom: 4px; color: var(--gray-900); }
+    .mp-popup-meta { font-size: 11px; color: var(--gray-500); margin-bottom: 8px; }
+    .mp-popup-tag { display: inline-block; font-size: 9px; padding: 2px 7px; background: var(--brand-50); color: var(--brand-700); border-radius: 100px; font-weight: 700; margin-right: 3px; }
+    .mp-popup-link { display: inline-block; margin-top: 8px; padding: 6px 12px; background: var(--brand-500); color: var(--white) !important; text-decoration: none; border-radius: 100px; font-size: 11px; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="index.html" style="color: var(--brand-500);">BBQ場検索</a>
+        <a href="../planner/index.html">プランナー</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="mp-hero">
+    <p class="mp-mark">BBQ MAP · 24 SPOTS</p>
+    <h1>関東24のBBQ場を、1枚の地図で。</h1>
+    <p>東京・神奈川・千葉・埼玉。タイプ別カラーマーカー、ピンクリックで詳細表示。<br><a href="index.html" style="color:var(--brand-500);font-weight:600;">← 検索ページに戻る</a></p>
+  </section>
+
+  <div id="map" class="mp-map"></div>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../journal/index.html">FIRESIDE</a><a href="index.html">BBQ場検索</a><a href="../planner/index.html">プランナー</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+  <script src="../assets/sf-features.js?v=20260517" defer></script>
+
+  <script>
+    // Pre-computed lat/lng for each spot
+    const COORDS = {
+      'musashino-koen-bbq': [35.6914, 139.5070],
+      'nogawa-koen-bbq': [35.6960, 139.5400],
+      'komaba-no-koen-bbq': [35.6601, 139.6810],
+      'jonanjima-kaihin-koen-bbq': [35.5876, 139.7765],
+      'wakasu-kaihin-koen-camp': [35.6280, 139.8377],
+      'hikarigaoka-koen-bbq': [35.7625, 139.6280],
+      'showa-kinen-koen-bbq': [35.7065, 139.4060],
+      'local-bbq-harumi': [35.6555, 139.7820],
+      'hero-field-shinkiba': [35.6452, 139.8275],
+      'kasai-rinkai-koen-bbq': [35.6398, 139.8597],
+      'kinuta-koen-bbq': [35.6200, 139.6280],
+      'akiruno-akiru-koen': [35.7280, 139.2920],
+      'wild-magic-toyosu': [35.6470, 139.7950],
+      'ogawamachi-bbq': [35.7110, 139.5070],
+      'ojima-komatsugawa-koen-bbq': [35.6815, 139.8350],
+      'yokohama-zou-no-hana': [35.4520, 139.6440],
+      'umizuri-koen-yokohama': [35.4170, 139.6680],
+      'shounan-enoshima-bbq': [35.3010, 139.4830],
+      'inagekaihin-koen-chiba': [35.6450, 140.0440],
+      'shinrin-koen-funabashi': [35.6720, 139.9810],
+      'showanomori-noda': [35.9530, 139.8910],
+      'akigase-saitama': [35.8470, 139.6160],
+      'saiko-toda-saitama': [35.8120, 139.6810],
+      'kawagoe-saitama-bbq': [35.9120, 139.4860],
+    };
+
+    const TYPE_COLOR = { A: '#9CA3AF', B: '#CA8A04', C: '#16A34A', D: '#B45309' };
+
+    async function init() {
+      const res = await fetch('data.json');
+      const spots = await res.json();
+
+      const map = L.map('map').setView([35.65, 139.7], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
+        maxZoom: 18,
+      }).addTo(map);
+
+      const group = L.featureGroup();
+      spots.forEach(spot => {
+        const c = COORDS[spot.slug];
+        if (!c) return;
+        const color = TYPE_COLOR[spot.slowFireType] || '#666';
+        const icon = L.divIcon({
+          className: 'mp-marker',
+          html: `<div style="background:${color};width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;box-shadow:0 3px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);color:white;font-size:11px;font-weight:900;">${spot.slowFireType}</span></div>`,
+          iconSize: [28, 28],
+          iconAnchor: [14, 28],
+        });
+        const m = L.marker(c, { icon }).addTo(map);
+        m.bindPopup(`
+          <div class="mp-popup-name">${spot.name}</div>
+          <div class="mp-popup-meta">${spot.areaLabel} · ${spot.city}</div>
+          <span class="mp-popup-tag">TYPE ${spot.slowFireType}</span>
+          <span class="mp-popup-tag">★${spot.americanBbqRating}/5</span>
+          <br>
+          <a href="${spot.slug}.html" class="mp-popup-link">詳細を見る →</a>
+        `);
+        group.addLayer(m);
+      });
+      map.fitBounds(group.getBounds(), { padding: [30, 30] });
+    }
+    init();
+  </script>
+</body>
+</html>

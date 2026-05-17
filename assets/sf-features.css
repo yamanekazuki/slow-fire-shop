@@ -177,6 +177,76 @@
 .sf-share-copy { background: var(--white); color: var(--gray-700); border: 1px solid var(--gray-300); }
 .sf-share-copy:hover { border-color: var(--brand-500); color: var(--brand-500); }
 
+/* ===== Reading progress bar ===== */
+.sf-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 3px; background: transparent;
+  z-index: 9998;
+  pointer-events: none;
+}
+.sf-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--brand-500), var(--brand-700));
+  transition: width 0.1s linear;
+}
+
+/* ===== Back to top button ===== */
+.sf-totop {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 44px; height: 44px;
+  background: var(--gray-900); color: var(--white);
+  border-radius: 50%; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.25s, transform 0.25s, background 0.15s;
+  z-index: 990;
+  pointer-events: none;
+}
+.sf-totop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.sf-totop:hover { background: var(--brand-500); }
+
+/* ===== Keyboard help modal ===== */
+.sf-help {
+  position: fixed; inset: 0; z-index: 10001;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
+  padding: 24px;
+}
+.sf-help-card {
+  position: relative; background: var(--white); border-radius: 14px;
+  padding: 32px 28px; max-width: 420px; width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+}
+.sf-help-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: var(--gray-900); }
+.sf-help-table { width: 100%; font-size: 13.5px; }
+.sf-help-table td { padding: 8px 0; border-bottom: 1px solid var(--gray-100); }
+.sf-help-table td:first-child { color: var(--gray-700); font-weight: 600; }
+.sf-help-table td:last-child { color: var(--gray-600); text-align: right; }
+.sf-help-table kbd {
+  display: inline-block; padding: 2px 8px;
+  background: var(--gray-100); border: 1px solid var(--gray-300);
+  border-radius: 6px; font-family: monospace; font-size: 11px;
+  color: var(--gray-900); font-weight: 600;
+}
+.sf-help-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 28px; height: 28px; background: var(--gray-100);
+  border: none; border-radius: 50%; cursor: pointer; font-size: 14px;
+}
+
+/* ===== TOC scrollspy ===== */
+.jr-toc a.sf-toc-active {
+  color: var(--brand-500) !important;
+  font-weight: 700;
+}
+@media (min-width: 1280px) {
+  .jr-toc {
+    position: sticky;
+    top: calc(var(--nav-h) + 20px);
+  }
+}
+
 /* ===== Print mode ===== */
 @media print {
   .nav, .footer, .sf-share, .sf-bbq-counter, .sf-fav-btn, .sf-theme-toggle, .gs-trigger,
