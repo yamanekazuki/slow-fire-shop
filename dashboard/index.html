@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あなたのBBQダッシュボード — お気に入り＆読了管理 | SLOW FIRE</title>
+  <meta name="description" content="お気に入り保存した記事・BBQ場、読了済みコンテンツ、BBQ偏差値、最後のBBQ日まで、あなたのSLOW FIRE活動が一覧できるパーソナルダッシュボード。">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/dashboard/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+
+  <style>
+    .db-wrap { max-width: 960px; margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 64px; }
+    .db-hero { text-align: center; margin-bottom: 36px; }
+    .db-mark { font-size: 11px; letter-spacing: 0.34em; color: var(--brand-500); font-weight: 700; text-transform: uppercase; margin-bottom: 14px; }
+    .db-hero h1 { font-size: clamp(28px, 4.5vw, 40px); font-weight: 700; color: var(--gray-900); }
+    .db-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 32px 0; }
+    .db-stat { padding: 24px; background: var(--gray-50); border-radius: 14px; text-align: center; border: 1px solid var(--gray-200); }
+    .db-stat-num { font-size: 36px; font-weight: 900; color: var(--brand-500); line-height: 1; font-variant-numeric: tabular-nums; }
+    .db-stat-label { font-size: 11px; color: var(--gray-500); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 8px; }
+    .db-section { margin-bottom: 40px; }
+    .db-section h2 { font-size: 20px; font-weight: 700; color: var(--gray-900); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-500); }
+    .db-list { display: grid; gap: 10px; }
+    .db-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 10px; text-decoration: none; color: inherit;
+      transition: all 0.15s;
+    }
+    .db-item:hover { border-color: var(--brand-500); transform: translateX(4px); }
+    .db-item-title { flex: 1; font-size: 14.5px; font-weight: 600; color: var(--gray-900); }
+    .db-item-date { font-size: 11px; color: var(--gray-500); font-variant-numeric: tabular-nums; }
+    .db-item-remove { background: none; border: none; color: var(--gray-400); cursor: pointer; font-size: 14px; padding: 4px 8px; }
+    .db-item-remove:hover { color: var(--danger); }
+    .db-empty {
+      text-align: center; padding: 36px; color: var(--gray-500);
+      background: var(--gray-50); border-radius: 12px; font-size: 13.5px;
+    }
+    .db-empty a { color: var(--brand-500); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../planner/index.html">プランナー</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="db-wrap">
+    <section class="db-hero">
+      <p class="db-mark">YOUR DASHBOARD</p>
+      <h1>あなたのSLOW FIRE活動</h1>
+    </section>
+
+    <div class="db-stats" id="dbStats"></div>
+
+    <section class="db-section">
+      <h2>⭐ お気に入り</h2>
+      <div class="db-list" id="favList"></div>
+    </section>
+
+    <section class="db-section">
+      <h2>✓ 読了済み</h2>
+      <div class="db-list" id="readList"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../journal/index.html">FIRESIDE</a><a href="../bbq-spots/index.html">BBQ場検索</a><a href="../planner/index.html">プランナー</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+  <script src="../assets/sf-features.js?v=20260517" defer></script>
+  <script>
+    function get(k, d) { try { return JSON.parse(localStorage.getItem(k) || JSON.stringify(d)); } catch { return d; } }
+    function set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+    function fmtDate(ts) { return new Date(ts).toLocaleDateString('ja-JP', { year:'numeric', month:'short', day:'numeric'}); }
+
+    const favs = get('sf_favorites', []);
+    const reads = get('sf_read_articles', []);
+    const lastBbq = get('sf_last_bbq_date', null);
+    const visits = get('sf_visit_count', 0);
+    const deviation = parseInt(localStorage.getItem('sf_level_deviation') || '0', 10);
+    const daysSinceBbq = lastBbq ? Math.floor((Date.now() - lastBbq) / 86400000) : null;
+
+    // Stats
+    document.getElementById('dbStats').innerHTML = `
+      <div class="db-stat">
+        <div class="db-stat-num">${favs.length}</div>
+        <div class="db-stat-label">お気に入り</div>
+      </div>
+      <div class="db-stat">
+        <div class="db-stat-num">${reads.length}</div>
+        <div class="db-stat-label">読了記事</div>
+      </div>
+      <div class="db-stat">
+        <div class="db-stat-num">${deviation || '?'}</div>
+        <div class="db-stat-label">BBQ偏差値</div>
+      </div>
+      <div class="db-stat">
+        <div class="db-stat-num">${daysSinceBbq != null ? daysSinceBbq : '?'}</div>
+        <div class="db-stat-label">最後のBBQから</div>
+      </div>
+    `;
+
+    function renderList(elId, items, lsKey) {
+      const el = document.getElementById(elId);
+      if (!items.length) {
+        el.innerHTML = `<div class="db-empty">まだありません。<a href="../journal/">FIRESIDEで記事を読む</a></div>`;
+        return;
+      }
+      el.innerHTML = items.map((it, i) => `
+        <div class="db-item" data-i="${i}">
+          <a href="${it.url}" style="flex:1;text-decoration:none;color:inherit;">
+            <span class="db-item-title">${(it.title || '無題').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}</span>
+          </a>
+          <span class="db-item-date">${fmtDate(it.date)}</span>
+          <button class="db-item-remove" data-key="${lsKey}" data-i="${i}" aria-label="削除">✕</button>
+        </div>
+      `).join('');
+    }
+
+    renderList('favList', favs, 'sf_favorites');
+    renderList('readList', reads, 'sf_read_articles');
+
+    document.querySelectorAll('.db-item-remove').forEach(b => {
+      b.addEventListener('click', e => {
+        const key = e.target.dataset.key;
+        const idx = parseInt(e.target.dataset.i);
+        const arr = get(key, []);
+        arr.splice(idx, 1);
+        set(key, arr);
+        location.reload();
+      });
+    });
+  </script>
+</body>
+</html>

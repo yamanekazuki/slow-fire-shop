@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQレベル診断 — あなたのBBQ偏差値は？10問でわかる本格度 | SLOW FIRE</title>
+  <meta name="description" content="10問のYes/Noで、あなたのBBQ偏差値が30〜70で診断されます。レベルに応じた最適な記事・道具をパーソナライズして提案。シェアして友達のレベルもチェック。">
+  <meta name="keywords" content="BBQ 診断,BBQ レベル,BBQ クイズ,BBQ 偏差値,SLOW FIRE">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/quiz/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQレベル診断 — 10問でわかるあなたのBBQ偏差値">
+  <meta property="og:description" content="10問のYes/Noで診断。レベルに応じた記事と道具をパーソナライズ提案。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/quiz/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Quiz","name":"BBQレベル診断","about":"BBQ・バーベキューの知識と経験レベル","url":"https://yamanekazuki.github.io/slow-fire-shop/quiz/"}
+  </script>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+  <!-- Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wmtxoerxqx");</script>
+
+  <style>
+    .qz-wrap { max-width: 640px; margin: 0 auto; padding: calc(var(--nav-h) + 48px) 24px 64px; }
+    .qz-mark { font-size: 11px; letter-spacing: 0.34em; font-weight: 700; color: var(--brand-500); text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+    .qz-title { font-size: clamp(28px, 4.5vw, 42px); font-weight: 700; color: var(--gray-900); line-height: 1.2; text-align: center; margin-bottom: 14px; }
+    .qz-title em { font-style: normal; color: var(--brand-500); }
+    .qz-tagline { text-align: center; font-size: 14px; color: var(--gray-600); margin-bottom: 40px; }
+
+    .qz-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px 28px; box-shadow: var(--shadow); }
+
+    .qz-progress { display: flex; gap: 4px; margin-bottom: 20px; }
+    .qz-progress-bar { flex: 1; height: 6px; background: var(--gray-200); border-radius: 100px; transition: background 0.3s; }
+    .qz-progress-bar.done { background: var(--brand-500); }
+    .qz-progress-bar.active { background: var(--brand-300); }
+
+    .qz-step-num { font-size: 11px; color: var(--gray-400); font-weight: 700; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .qz-question { font-size: 22px; font-weight: 700; color: var(--gray-900); line-height: 1.4; margin-bottom: 24px; }
+    .qz-options { display: grid; gap: 10px; }
+    .qz-option {
+      padding: 16px 20px; background: var(--white); border: 2px solid var(--gray-200);
+      border-radius: 12px; cursor: pointer; transition: all 0.18s;
+      text-align: left; font-size: 15px; font-weight: 600; color: var(--gray-900);
+      font-family: inherit;
+    }
+    .qz-option:hover { border-color: var(--brand-500); background: var(--brand-50); transform: translateX(4px); }
+
+    /* Result */
+    .qz-result { text-align: center; display: none; }
+    .qz-result.active { display: block; animation: pl-fade 0.4s; }
+    .qz-result-score {
+      font-size: 14px; font-weight: 700; color: var(--gray-500);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .qz-result-num {
+      font-size: 96px; font-weight: 900; color: var(--brand-500);
+      line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+    }
+    .qz-result-label {
+      font-size: 24px; font-weight: 700; color: var(--gray-900); margin: 16px 0 12px;
+    }
+    .qz-result-desc {
+      font-size: 14.5px; color: var(--gray-600); line-height: 1.8;
+      max-width: 480px; margin: 0 auto 28px;
+    }
+    .qz-rec { margin-top: 32px; text-align: left; }
+    .qz-rec h3 {
+      font-size: 14px; font-weight: 700; color: var(--gray-700);
+      margin-bottom: 12px; letter-spacing: 0.04em; text-align: center;
+    }
+    .qz-rec-list { display: grid; gap: 10px; }
+    .qz-rec-card {
+      display: block; padding: 14px 18px; background: var(--gray-50);
+      border: 1px solid var(--gray-200); border-radius: 10px;
+      text-decoration: none; color: inherit; transition: all 0.15s;
+    }
+    .qz-rec-card:hover { border-color: var(--brand-500); background: var(--brand-50); transform: translateY(-2px); }
+    .qz-rec-cat { font-size: 10px; color: var(--brand-500); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    .qz-rec-title { font-size: 14.5px; font-weight: 600; color: var(--gray-900); }
+
+    .qz-share-row { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .qz-share-btn { padding: 10px 18px; border-radius: 100px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.15s; border: none; cursor: pointer; font-family: inherit; }
+    .qz-share-btn.x { background: #000; color: #fff; }
+    .qz-share-btn.line { background: #06C755; color: #fff; }
+    .qz-share-btn.restart { background: var(--white); color: var(--gray-700); border: 1px solid var(--gray-300); }
+    .qz-share-btn.restart:hover { border-color: var(--brand-500); color: var(--brand-500); }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../planner/index.html">プランナー</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="qz-wrap">
+    <p class="qz-mark">BBQ LEVEL QUIZ · 10 Q</p>
+    <h1 class="qz-title">あなたのBBQ<em>偏差値</em>は？</h1>
+    <p class="qz-tagline">10問のYes/Noで診断。所要時間1分。</p>
+
+    <div class="qz-card">
+      <div class="qz-progress" id="qzProgress"></div>
+      <div id="qzQuestion"></div>
+      <div class="qz-result" id="qzResult"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../journal/index.html">FIRESIDE</a><a href="../bbq-spots/index.html">BBQ場検索</a><a href="../planner/index.html">プランナー</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+  <script src="../assets/sf-features.js?v=20260517" defer></script>
+
+  <script>
+    const QUESTIONS = [
+      {q: 'BBQで「焼肉スタイル」と「アメリカンBBQ」の違いを説明できる？', yes: 8, no: 0},
+      {q: '蓋付きグリル（Weber Kettle等）を持っている、または使ったことがある？', yes: 10, no: 0},
+      {q: '肉の中心温度を測る温度計を持っている？', yes: 8, no: 0},
+      {q: 'ブリスケットやプルドポークを焼いたことがある？', yes: 12, no: 0},
+      {q: 'リバースシア法を知っている、または実践したことがある？', yes: 10, no: 0},
+      {q: 'BBQラブ（ドライスパイス）を使ったことがある？', yes: 6, no: 0},
+      {q: 'テキサスクラッチ（肉をホイル/ペーパーで包む技法）を知っている？', yes: 10, no: 0},
+      {q: 'BBQを10時間以上連続でしたことがある？', yes: 12, no: 0},
+      {q: 'インダイレクト（間接火）で焼く意味を理解している？', yes: 8, no: 0},
+      {q: '炭の種類（黒炭/白炭/オガ炭等）の違いを知っている？', yes: 6, no: 0},
+    ];
+
+    const LEVELS = [
+      {min: 0, max: 19, label: 'BBQビギナー', deviation: 35, desc: 'まだまだ未開拓のフィールド！世界には「アメリカンBBQ」という別の体系があって、味も体験もまったく違います。まずは「焼肉スタイルから次の一歩」がおすすめ。', recommends: [
+        ['焼肉スタイルのBBQに飽きたら', 'PHILOSOPHY', '../journal/articles/from-yakiniku.html'],
+        ['BBQ用語12選 — 海外動画が3倍楽しくなる', 'PHILOSOPHY', '../journal/articles/bbq-yougo.html'],
+        ['BBQプランナーで5分計画', 'TOOL', '../planner/'],
+      ]},
+      {min: 20, max: 39, label: 'BBQライダー', deviation: 50, desc: 'BBQの基礎は押さえています。次は「ロー&スロー」の世界に足を踏み入れる時。一度プルドポークを焼いてみると、世界が変わります。', recommends: [
+        ['ロー&スロー BBQとは何か', 'PHILOSOPHY', '../journal/articles/low-and-slow.html'],
+        ['プルドポークの作り方', 'RECIPE', '../journal/articles/pulled-pork.html'],
+        ['リバースシア法とは', 'SCIENCE', '../journal/articles/reverse-sear.html'],
+      ]},
+      {min: 40, max: 59, label: 'BBQマスター候補', deviation: 60, desc: '中級者として安定。次のステップはブリスケットの12時間ロー&スロー。中心温度ガイドとテキサスクラッチを学べば、本格派の仲間入りです。', recommends: [
+        ['ブリスケットとは何か。12時間ロー&スロー', 'RECIPE', '../journal/articles/brisket.html'],
+        ['テキサスクラッチとは', 'SCIENCE', '../journal/articles/texas-crutch.html'],
+        ['BBQラブの選び方', 'GEAR', '../journal/articles/bbq-rub-osusume.html'],
+      ]},
+      {min: 60, max: 79, label: 'BBQ準ピットマスター', deviation: 67, desc: '相当の腕前。あとはバーンエンドやメイラード反応の科学を深掘りすれば、ピットマスター級。SLOW FIREのコンテンツも刺激になるはず。', recommends: [
+        ['バーンエンドとは。テキサスBBQの肉キャンディ', 'PHILOSOPHY', '../journal/articles/burnt-ends.html'],
+        ['メイラード反応とは', 'SCIENCE', '../journal/articles/maillard-reaction.html'],
+        ['プライムリブの中心温度', 'SCIENCE', '../journal/articles/prime-rib-temperature.html'],
+      ]},
+      {min: 80, max: 100, label: 'BBQピットマスター', deviation: 75, desc: 'もはやプロ級。あなたの知識を誰かに伝える側に回るタイミングです。SLOW FIREのコミュニティで一緒に「BBQを日常にする」運動をやりませんか？', recommends: [
+        ['BBQ場検索 — 24スポット完全比較', 'TOOL', '../bbq-spots/'],
+        ['BBQ無料ツール3選', 'TOOL', '../tools/'],
+        ['SLOW FIRE 私たちについて', 'ABOUT', '../team.html'],
+      ]},
+    ];
+
+    let step = 0;
+    let score = 0;
+
+    function renderProgress() {
+      const el = document.getElementById('qzProgress');
+      el.innerHTML = QUESTIONS.map((_, i) => `<div class="qz-progress-bar ${i < step ? 'done' : i === step ? 'active' : ''}"></div>`).join('');
+    }
+
+    function renderQuestion() {
+      if (step >= QUESTIONS.length) {
+        renderResult();
+        return;
+      }
+      renderProgress();
+      const q = QUESTIONS[step];
+      document.getElementById('qzQuestion').innerHTML = `
+        <div class="qz-step-num">Q${step + 1} / ${QUESTIONS.length}</div>
+        <h2 class="qz-question">${q.q}</h2>
+        <div class="qz-options">
+          <button class="qz-option" data-val="yes">✓ はい</button>
+          <button class="qz-option" data-val="no">✕ いいえ</button>
+        </div>
+      `;
+      document.querySelectorAll('.qz-option').forEach(b => {
+        b.addEventListener('click', () => {
+          score += q[b.dataset.val];
+          step++;
+          renderQuestion();
+        });
+      });
+    }
+
+    function renderResult() {
+      document.getElementById('qzProgress').style.display = 'none';
+      document.getElementById('qzQuestion').style.display = 'none';
+      const lvl = LEVELS.find(l => score >= l.min && score <= l.max) || LEVELS[0];
+      const result = document.getElementById('qzResult');
+      result.classList.add('active');
+
+      const text = `BBQ偏差値${lvl.deviation} — ${lvl.label}`;
+      const shareText = `BBQ偏差値診断やってみた！\n→ ${text}\n\nあなたも診断してみる？\n${location.href}`;
+
+      result.innerHTML = `
+        <p class="qz-result-score">あなたのBBQ偏差値</p>
+        <div class="qz-result-num">${lvl.deviation}</div>
+        <h2 class="qz-result-label">${lvl.label}</h2>
+        <p class="qz-result-desc">${lvl.desc}</p>
+
+        <div class="qz-rec">
+          <h3>あなたへのおすすめ</h3>
+          <div class="qz-rec-list">
+            ${lvl.recommends.map(([t, c, u]) => `
+              <a href="${u}" class="qz-rec-card">
+                <div class="qz-rec-cat">${c}</div>
+                <div class="qz-rec-title">${t}</div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="qz-share-row">
+          <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}" target="_blank" rel="noopener" class="qz-share-btn x">𝕏 で結果を共有</a>
+          <a href="https://line.me/R/msg/text/?${encodeURIComponent(shareText)}" target="_blank" rel="noopener" class="qz-share-btn line">LINEで共有</a>
+          <button class="qz-share-btn restart" onclick="location.reload()">もう一度やる</button>
+        </div>
+      `;
+
+      // Save level
+      try { localStorage.setItem('sf_level_deviation', lvl.deviation); } catch {}
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
