@@ -431,8 +431,40 @@
     }
   }
 
+  // ===== Skip to content (アクセシビリティ) =====
+  function injectSkipLink() {
+    if (document.querySelector('.sf-skip')) return;
+    const a = document.createElement('a');
+    a.className = 'sf-skip';
+    a.href = '#main';
+    a.textContent = 'メインコンテンツへスキップ';
+    document.body.insertBefore(a, document.body.firstChild);
+    // main要素がなければmain追加用のid付与
+    const main = document.querySelector('main, article');
+    if (main && !main.id) main.id = 'main';
+  }
+
+  // ===== ナビバーの現在ページ自動ハイライト =====
+  function highlightCurrentNav() {
+    const links = document.querySelectorAll('.nav-links a');
+    const path = location.pathname;
+    links.forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('#')) return;
+      // 相対URLを絶対パスに正規化
+      try {
+        const abs = new URL(href, location.href).pathname;
+        if (abs === path || (abs !== '/' && path.startsWith(abs.replace(/index\.html$/, '')))) {
+          a.classList.add('sf-nav-active');
+        }
+      } catch {}
+    });
+  }
+
   // ===== Init =====
   function init() {
+    injectSkipLink();
+    highlightCurrentNav();
     injectThemeToggle();
     injectFavoriteButton();
     markReadIfApplicable();
