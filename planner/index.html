@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBQプランナー — 日付・人数・予算で5分でBBQを設計 | SLOW FIRE</title>
+  <meta name="description" content="日付・人数・予算・エリアを入力するだけで、食材リスト・おすすめBBQ場・推奨メニュー・招待状URLが5分で揃うインタラクティブなBBQ計画ウィザード。SLOW FIREが運営する日本初のBBQ設計ツール。">
+  <meta name="keywords" content="BBQ 計画,BBQ 計画 ツール,BBQ 設計,BBQ プランナー,BBQ 食材 計算,BBQ 招待状">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/planner/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BBQプランナー — 5分でBBQを設計するツール">
+  <meta property="og:description" content="日付・人数・予算で食材・場所・メニュー・招待状まで一気通貫で生成。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/planner/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"BBQプランナー","applicationCategory":"LifestyleApplication","description":"日付・人数・予算からBBQを5分で計画するインタラクティブツール","url":"https://yamanekazuki.github.io/slow-fire-shop/planner/","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://yamanekazuki.github.io/slow-fire-shop/"},{"@type":"ListItem","position":2,"name":"BBQプランナー","item":"https://yamanekazuki.github.io/slow-fire-shop/planner/"}]}
+  </script>
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+  <!-- Clarity -->
+  <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wmtxoerxqx");</script>
+
+  <style>
+    .pl-wrap { max-width: 980px; margin: 0 auto; padding: calc(var(--nav-h) + 32px) 24px 64px; }
+    .pl-hero { text-align: center; margin-bottom: 36px; }
+    .pl-mark { font-size: var(--text-xs); letter-spacing: 0.34em; font-weight: var(--weight-bold); color: var(--brand-500); text-transform: uppercase; margin-bottom: 14px; }
+    .pl-hero h1 { font-size: clamp(28px, 4.5vw, 42px); font-weight: var(--weight-bold); color: var(--gray-900); line-height: var(--leading-tight); margin-bottom: 14px; }
+    .pl-hero h1 em { font-style: normal; color: var(--brand-500); }
+    .pl-tagline { font-size: var(--text-base); color: var(--gray-600); max-width: 640px; margin: 0 auto; line-height: var(--leading-relaxed); }
+
+    /* Stepper */
+    .pl-stepper { display: flex; justify-content: center; gap: 4px; margin: 36px 0 28px; flex-wrap: wrap; }
+    .pl-step-dot {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; background: var(--gray-100); border-radius: 100px;
+      font-size: var(--text-xs); color: var(--gray-500); font-weight: var(--weight-semi);
+      transition: all 0.2s;
+    }
+    .pl-step-dot.active { background: var(--brand-500); color: var(--white); }
+    .pl-step-dot.done { background: var(--success); color: var(--white); }
+    .pl-step-num { font-weight: var(--weight-bold); font-size: 10px; opacity: 0.7; }
+
+    /* Steps panel */
+    .pl-panel {
+      background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px;
+      padding: 32px; box-shadow: var(--shadow);
+    }
+    .pl-step { display: none; }
+    .pl-step.active { display: block; animation: pl-fade 0.3s; }
+    @keyframes pl-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .pl-step-title { font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 8px; }
+    .pl-step-desc { font-size: var(--text-sm); color: var(--gray-600); margin-bottom: 24px; line-height: var(--leading-relaxed); }
+
+    /* Inputs */
+    .pl-input, .pl-date, .pl-range {
+      width: 100%; padding: 14px 16px; font-size: var(--text-base);
+      background: var(--white); border: 1.5px solid var(--gray-300); border-radius: 12px;
+      color: var(--gray-900); outline: none; font-family: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .pl-input:focus, .pl-date:focus { border-color: var(--brand-500); box-shadow: 0 0 0 4px rgba(180,83,9,.08); }
+    .pl-range { padding: 0; appearance: none; height: 8px; background: var(--gray-200); border: none; }
+    .pl-range::-webkit-slider-thumb { appearance: none; width: 24px; height: 24px; background: var(--brand-500); border-radius: 50%; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+    .pl-range::-moz-range-thumb { width: 24px; height: 24px; background: var(--brand-500); border-radius: 50%; cursor: pointer; border: none; }
+    .pl-range-label { display: flex; justify-content: space-between; margin-top: 8px; font-size: var(--text-sm); color: var(--gray-600); }
+    .pl-range-value { font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--brand-500); text-align: center; margin-bottom: 8px; }
+
+    /* Option cards */
+    .pl-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .pl-option {
+      padding: 18px; background: var(--white); border: 2px solid var(--gray-200); border-radius: 12px;
+      cursor: pointer; transition: all 0.18s; text-align: center;
+      font-family: inherit;
+    }
+    .pl-option:hover { border-color: var(--brand-300); transform: translateY(-2px); }
+    .pl-option.selected { border-color: var(--brand-500); background: var(--brand-50); }
+    .pl-option-icon { font-size: 28px; margin-bottom: 8px; }
+    .pl-option-title { font-size: var(--text-base); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; }
+    .pl-option-desc { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
+
+    /* Navigation */
+    .pl-nav { display: flex; justify-content: space-between; margin-top: 32px; gap: 12px; }
+    .pl-btn {
+      padding: 14px 28px; border-radius: 12px; font-size: var(--text-base); font-weight: var(--weight-bold);
+      font-family: inherit; cursor: pointer; transition: all 0.15s; border: none;
+    }
+    .pl-btn-primary { background: var(--brand-500); color: var(--white); }
+    .pl-btn-primary:hover { background: var(--brand-700); }
+    .pl-btn-primary:disabled { background: var(--gray-300); cursor: not-allowed; }
+    .pl-btn-ghost { background: transparent; color: var(--gray-600); border: 1px solid var(--gray-300); }
+    .pl-btn-ghost:hover { background: var(--gray-50); }
+
+    /* Result */
+    .pl-result { display: none; }
+    .pl-result.active { display: block; animation: pl-fade 0.4s; }
+    .pl-result h2 { font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 12px; }
+    .pl-result h3 { font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--gray-900); margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-500); }
+    .pl-summary {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;
+      padding: 20px; background: var(--brand-50); border-radius: 12px; margin: 16px 0;
+    }
+    .pl-sum-item { text-align: center; }
+    .pl-sum-label { font-size: 10px; color: var(--gray-500); letter-spacing: 0.04em; text-transform: uppercase; font-weight: var(--weight-bold); }
+    .pl-sum-value { font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--brand-700); margin-top: 4px; }
+    .pl-list { list-style: none; padding: 0; margin: 0; }
+    .pl-list li { padding: 10px 0; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; font-size: var(--text-sm); }
+    .pl-list li:last-child { border-bottom: none; }
+    .pl-list .pl-li-name { color: var(--gray-900); }
+    .pl-list .pl-li-qty { color: var(--gray-500); font-variant-numeric: tabular-nums; }
+
+    /* Spot cards in result */
+    .pl-spots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 12px; }
+    .pl-spot-card {
+      padding: 14px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px;
+      text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s;
+    }
+    .pl-spot-card:hover { border-color: var(--brand-500); transform: translateY(-2px); }
+    .pl-spot-name { font-size: var(--text-base); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; }
+    .pl-spot-meta { font-size: 11px; color: var(--gray-500); margin-bottom: 8px; }
+    .pl-spot-tag { display: inline-block; font-size: 10px; padding: 2px 8px; background: var(--brand-50); color: var(--brand-700); border-radius: 100px; font-weight: var(--weight-semi); margin-right: 4px; }
+
+    /* Share */
+    .pl-share {
+      margin-top: 36px; padding: 24px; background: linear-gradient(135deg, var(--brand-50), var(--cream));
+      border-radius: 14px; border: 1px solid var(--brand-200);
+    }
+    .pl-share-title { font-size: var(--text-md); font-weight: var(--weight-bold); margin-bottom: 12px; color: var(--gray-900); }
+    .pl-share-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pl-share-btn {
+      padding: 10px 18px; border-radius: 10px; font-size: var(--text-sm); font-weight: var(--weight-semi);
+      cursor: pointer; transition: all 0.15s; border: 1px solid; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pl-share-btn.gcal { background: var(--white); border-color: var(--gray-300); color: var(--gray-900); }
+    .pl-share-btn.gcal:hover { border-color: var(--info); color: var(--info); }
+    .pl-share-btn.line { background: #06C755; border-color: #06C755; color: var(--white); }
+    .pl-share-btn.line:hover { background: #04a346; }
+    .pl-share-btn.copy { background: var(--white); border-color: var(--gray-300); color: var(--gray-900); }
+    .pl-share-btn.copy:hover { border-color: var(--brand-500); color: var(--brand-500); }
+    .pl-share-btn.invite { background: var(--brand-500); border-color: var(--brand-500); color: var(--white); }
+    .pl-share-btn.invite:hover { background: var(--brand-700); border-color: var(--brand-700); }
+
+    .pl-restart { text-align: center; margin-top: 32px; }
+    .pl-restart a { color: var(--gray-500); font-size: var(--text-sm); text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="../cookbook.html"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="index.html" style="color: var(--brand-500);">プランナー</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pl-wrap">
+    <section class="pl-hero">
+      <p class="pl-mark">BBQ PLANNER · 5 MIN</p>
+      <h1>思いついた瞬間、<em>計画</em>になる。</h1>
+      <p class="pl-tagline">日付・人数・予算を入れるだけで、食材リスト・おすすめBBQ場・メニュー・招待状URLまで5分で揃う。</p>
+    </section>
+
+    <div class="pl-stepper" id="stepper">
+      <div class="pl-step-dot active" data-i="0"><span class="pl-step-num">01</span> 日付</div>
+      <div class="pl-step-dot" data-i="1"><span class="pl-step-num">02</span> 人数</div>
+      <div class="pl-step-dot" data-i="2"><span class="pl-step-num">03</span> 予算</div>
+      <div class="pl-step-dot" data-i="3"><span class="pl-step-num">04</span> スタイル</div>
+      <div class="pl-step-dot" data-i="4"><span class="pl-step-num">05</span> エリア</div>
+      <div class="pl-step-dot" data-i="5"><span class="pl-step-num">06</span> 結果</div>
+    </div>
+
+    <section class="pl-panel">
+      <!-- Step 0: Date -->
+      <div class="pl-step active" data-step="0">
+        <h2 class="pl-step-title">いつBBQしますか？</h2>
+        <p class="pl-step-desc">日付を選んでください。当日の天気予報や前日の買い物計画にも反映されます。</p>
+        <input type="date" id="plDate" class="pl-date">
+      </div>
+
+      <!-- Step 1: People -->
+      <div class="pl-step" data-step="1">
+        <h2 class="pl-step-title">何人で集まりますか？</h2>
+        <p class="pl-step-desc">参加者の人数を選んでください（ホスト含む）。食材の量はここから自動算出されます。</p>
+        <div class="pl-range-value"><span id="peopleVal">4</span> 人</div>
+        <input type="range" id="plPeople" class="pl-range" min="2" max="30" value="4">
+        <div class="pl-range-label"><span>2人</span><span>30人</span></div>
+      </div>
+
+      <!-- Step 2: Budget -->
+      <div class="pl-step" data-step="2">
+        <h2 class="pl-step-title">予算はいくらですか？</h2>
+        <p class="pl-step-desc">合計予算を選んでください（食材＋飲料）。施設利用料・駐車場代は別途。</p>
+        <div class="pl-range-value">¥<span id="budgetVal">12,000</span></div>
+        <input type="range" id="plBudget" class="pl-range" min="5000" max="80000" step="1000" value="12000">
+        <div class="pl-range-label"><span>¥5,000</span><span>¥80,000</span></div>
+      </div>
+
+      <!-- Step 3: Style -->
+      <div class="pl-step" data-step="3">
+        <h2 class="pl-step-title">どんなBBQにしますか？</h2>
+        <p class="pl-step-desc">スタイルによってメニューも食材リストも大きく変わります。</p>
+        <div class="pl-options">
+          <button class="pl-option" data-style="yakiniku">
+            <div class="pl-option-icon">🥩</div>
+            <div class="pl-option-title">焼肉スタイル</div>
+            <div class="pl-option-desc">薄切り肉中心、賑やかに</div>
+          </button>
+          <button class="pl-option" data-style="authentic">
+            <div class="pl-option-icon">🔥</div>
+            <div class="pl-option-title">アメリカンBBQ</div>
+            <div class="pl-option-desc">塊肉・ロー&スロー</div>
+          </button>
+          <button class="pl-option" data-style="mix">
+            <div class="pl-option-icon">🌈</div>
+            <div class="pl-option-title">ミックス</div>
+            <div class="pl-option-desc">両方の良いとこ取り</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 4: Area -->
+      <div class="pl-step" data-step="4">
+        <h2 class="pl-step-title">どのエリアでやりますか？</h2>
+        <p class="pl-step-desc">エリアを選ぶと、おすすめのBBQ場が表示されます。</p>
+        <div class="pl-options">
+          <button class="pl-option" data-area="23ku">
+            <div class="pl-option-icon">🏙</div>
+            <div class="pl-option-title">23区</div>
+            <div class="pl-option-desc">都心アクセス</div>
+          </button>
+          <button class="pl-option" data-area="tama">
+            <div class="pl-option-icon">🌳</div>
+            <div class="pl-option-title">多摩</div>
+            <div class="pl-option-desc">自然・広い公園</div>
+          </button>
+          <button class="pl-option" data-area="kanagawa">
+            <div class="pl-option-icon">🌊</div>
+            <div class="pl-option-title">神奈川</div>
+            <div class="pl-option-desc">湘南・横浜</div>
+          </button>
+          <button class="pl-option" data-area="chiba">
+            <div class="pl-option-icon">🌅</div>
+            <div class="pl-option-title">千葉</div>
+            <div class="pl-option-desc">海・キャンプ</div>
+          </button>
+          <button class="pl-option" data-area="saitama">
+            <div class="pl-option-icon">🏞</div>
+            <div class="pl-option-title">埼玉</div>
+            <div class="pl-option-desc">荒川・大型公園</div>
+          </button>
+          <button class="pl-option" data-area="any">
+            <div class="pl-option-icon">📍</div>
+            <div class="pl-option-title">どこでも</div>
+            <div class="pl-option-desc">最適提案</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 5: Result -->
+      <div class="pl-step pl-result" data-step="5" id="plResult"></div>
+
+      <div class="pl-nav">
+        <button class="pl-btn pl-btn-ghost" id="prevBtn">← 戻る</button>
+        <button class="pl-btn pl-btn-primary" id="nextBtn">次へ →</button>
+      </div>
+    </section>
+
+    <div class="pl-restart" style="display:none;" id="restartBox">
+      <a href="#" id="restartLink">もう一度作り直す</a>
+    </div>
+  </main>
+
+  
+  <!-- Newsletter signup -->
+  <link rel="stylesheet" href="../assets/newsletter.css?v=20260517">
+  <section class="nl-box" id="newsletter">
+    <p class="nl-mark">SLOW FIRE NEWSLETTER</p>
+    <h2 class="nl-title">月1回、BBQの「次の一歩」が届きます</h2>
+    <p class="nl-desc">季節のBBQ計画、新しいレシピ、BBQ場のオープン情報、ラブの入荷案内。<br>BBQを日常にする小さなヒントを、月1回だけお届けします。</p>
+    <form class="nl-form" id="nlForm" action="https://formspree.io/f/your_form_id" method="POST">
+      <input type="email" name="email" class="nl-input" placeholder="メールアドレスを入力" required>
+      <input type="hidden" name="_subject" value="SLOW FIRE Newsletter 登録">
+      <button type="submit" class="nl-btn">登録する</button>
+    </form>
+    <div class="nl-success" id="nlSuccess">✓ 登録ありがとうございます！</div>
+    <p class="nl-note">いつでも解除可能。配信は月1回まで。スパムは送りません。</p>
+  </section>
+  <script>
+    document.getElementById("nlForm")?.addEventListener("submit", function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+      fetch(form.action, { method: "POST", body: data, headers: { "Accept": "application/json" } })
+        .then(r => { if (r.ok) { document.getElementById("nlSuccess").classList.add("show"); form.reset(); } })
+        .catch(() => alert("送信に失敗しました。後ほどお試しください。"));
+    });
+  </script>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a><p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p></div>
+        <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../essentials.html">BBQの神髄</a><a href="../pairing-guide.html">食材から選ぶ</a><a href="../cookbook.html">料理から選ぶ</a><a href="../rub-guide.html">ラブガイド</a><a href="../journal/index.html">FIRESIDE</a><a href="../bbq-spots/index.html">BBQ場検索</a><a href="index.html">プランナー</a><a href="../team.html">私たちについて</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+
+  <script>
+    // ===== BBQ Planner ロジック =====
+    const state = {
+      step: 0,
+      date: '',
+      people: 4,
+      budget: 12000,
+      style: '',
+      area: '',
+    };
+    const totalSteps = 6;
+
+    const steps = document.querySelectorAll('.pl-step');
+    const dots = document.querySelectorAll('.pl-step-dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultEl = document.getElementById('plResult');
+
+    // Default date: next Saturday
+    function nextSaturday() {
+      const d = new Date();
+      d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7 || 7));
+      return d.toISOString().split('T')[0];
+    }
+    document.getElementById('plDate').value = nextSaturday();
+    state.date = nextSaturday();
+    document.getElementById('plDate').addEventListener('change', e => { state.date = e.target.value; });
+
+    // People
+    const peopleEl = document.getElementById('plPeople');
+    const peopleVal = document.getElementById('peopleVal');
+    peopleEl.addEventListener('input', e => {
+      state.people = parseInt(e.target.value);
+      peopleVal.textContent = state.people;
+    });
+
+    // Budget
+    const budgetEl = document.getElementById('plBudget');
+    const budgetVal = document.getElementById('budgetVal');
+    budgetEl.addEventListener('input', e => {
+      state.budget = parseInt(e.target.value);
+      budgetVal.textContent = state.budget.toLocaleString();
+    });
+
+    // Style
+    document.querySelectorAll('[data-style]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-style]').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.style = btn.dataset.style;
+        nextBtn.disabled = false;
+      });
+    });
+
+    // Area
+    document.querySelectorAll('[data-area]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-area]').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.area = btn.dataset.area;
+        nextBtn.disabled = false;
+      });
+    });
+
+    function updateUI() {
+      steps.forEach((s, i) => s.classList.toggle('active', i === state.step));
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === state.step);
+        d.classList.toggle('done', i < state.step);
+      });
+      prevBtn.style.visibility = state.step === 0 ? 'hidden' : 'visible';
+      if (state.step === totalSteps - 1) {
+        nextBtn.style.display = 'none';
+        document.getElementById('restartBox').style.display = 'block';
+        renderResult();
+      } else if (state.step === totalSteps - 2) {
+        nextBtn.textContent = '計画を生成 ✨';
+        nextBtn.disabled = !state.area;
+      } else if (state.step === 3) {
+        nextBtn.disabled = !state.style;
+      } else {
+        nextBtn.textContent = '次へ →';
+        nextBtn.disabled = false;
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (state.step < totalSteps - 1) {
+        state.step++;
+        updateUI();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+    prevBtn.addEventListener('click', () => {
+      if (state.step > 0) {
+        state.step--;
+        if (nextBtn.style.display === 'none') nextBtn.style.display = '';
+        document.getElementById('restartBox').style.display = 'none';
+        updateUI();
+      }
+    });
+    document.getElementById('restartLink').addEventListener('click', e => {
+      e.preventDefault();
+      state.step = 0;
+      state.style = ''; state.area = '';
+      document.querySelectorAll('.pl-option').forEach(b => b.classList.remove('selected'));
+      nextBtn.style.display = '';
+      document.getElementById('restartBox').style.display = 'none';
+      updateUI();
+    });
+
+    // ===== Result rendering =====
+    const PORTIONS = {
+      yakiniku: [
+        ['牛カルビ', 80, 350], ['牛バラ薄切り', 60, 280], ['豚バラ薄切り', 80, 180],
+        ['鶏もも肉', 60, 120], ['ソーセージ', 40, 200],
+        ['玉ねぎ', 50, 30], ['ピーマン', 40, 50], ['キャベツ', 80, 25], ['とうもろこし', 30, 200],
+        ['焼肉のたれ', 0, 350], ['塩・胡椒', 0, 200],
+        ['ご飯orパン', 100, 40], ['ビール', 350, 100], ['ソフトドリンク', 350, 40],
+      ],
+      authentic: [
+        ['牛ブリスケットor肩ロース', 200, 400], ['豚肩ロース', 200, 200], ['骨付き鶏もも肉', 150, 130],
+        ['ソーセージ', 50, 200],
+        ['玉ねぎ', 50, 30], ['ナス', 40, 35], ['パプリカ', 50, 80],
+        ['バンズ', 80, 100], ['コールスローキット', 60, 150],
+        ['BBQラブ', 0, 1800], ['BBQソース', 0, 500], ['ピクルス', 20, 60],
+        ['クラフトビール', 350, 130], ['ノンアル', 250, 60],
+      ],
+      mix: [
+        ['牛カルビ薄切り', 60, 350], ['牛ブリスケットor塊肉', 120, 350],
+        ['豚肩ロース塊', 100, 200], ['豚バラ薄切り', 50, 180],
+        ['鶏もも肉', 80, 120], ['ソーセージ', 50, 200],
+        ['玉ねぎ', 50, 30], ['なす', 40, 35], ['とうもろこし', 30, 200], ['パプリカ', 40, 80],
+        ['BBQラブ', 0, 1800], ['焼肉のたれ', 0, 350], ['塩・胡椒', 0, 200],
+        ['バンズorご飯', 80, 60], ['ビール', 350, 100], ['ソフトドリンク', 350, 40],
+      ],
+    };
+
+    function calcItems(people, budget, style) {
+      const list = PORTIONS[style] || PORTIONS.mix;
+      const items = [];
+      let total = 0;
+      list.forEach(([name, perPerson, pricePer100g]) => {
+        if (perPerson === 0) {
+          items.push({ name, qty: '1〜2本', price: pricePer100g });
+          total += pricePer100g;
+        } else if (name.includes('ビール') || name.includes('ドリンク') || name.includes('ノンアル')) {
+          const ml = people * perPerson;
+          const cans = Math.ceil(ml / 350);
+          const price = cans * pricePer100g;
+          items.push({ name, qty: `${cans}本程度`, price });
+          total += price;
+        } else if (name.includes('バンズ')) {
+          const qty = Math.max(1, Math.ceil(people * perPerson / 80));
+          const price = qty * pricePer100g;
+          items.push({ name, qty: `${qty}個`, price });
+          total += price;
+        } else if (name.includes('コールスロー') || name.includes('ピクルス')) {
+          items.push({ name, qty: '1袋', price: pricePer100g });
+          total += pricePer100g;
+        } else {
+          const g = people * perPerson;
+          const price = Math.round((g / 100) * pricePer100g);
+          items.push({ name, qty: g >= 1000 ? `${(g/1000).toFixed(1)}kg` : `${g}g`, price });
+          total += price;
+        }
+      });
+      return { items, total };
+    }
+
+    async function loadSpots() {
+      try {
+        const r = await fetch('../bbq-spots/data.json');
+        return await r.json();
+      } catch { return []; }
+    }
+
+    function pickSpots(spots, area, style) {
+      let filtered = spots;
+      if (area !== 'any') filtered = spots.filter(s => s.areaType === area);
+      // Style → preferred slowFireType
+      if (style === 'authentic') {
+        filtered = filtered.filter(s => ['C','D'].includes(s.slowFireType));
+        filtered.sort((a,b) => b.ratings.lowAndSlow - a.ratings.lowAndSlow);
+      } else if (style === 'yakiniku') {
+        filtered.sort((a,b) => b.ratings.ease - a.ratings.ease);
+      } else {
+        filtered.sort((a,b) => b.ratings.americanBbq - a.ratings.americanBbq);
+      }
+      return filtered.slice(0, 3);
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+    }
+
+    async function renderResult() {
+      const { items, total } = calcItems(state.people, state.budget, state.style);
+      const spots = await loadSpots();
+      const recommended = pickSpots(spots, state.area, state.style);
+
+      const styleLabel = {yakiniku:'焼肉スタイル', authentic:'アメリカンBBQ', mix:'ミックス'}[state.style];
+      const areaLabel = {'23ku':'23区','tama':'多摩','kanagawa':'神奈川','chiba':'千葉','saitama':'埼玉','any':'おまかせ'}[state.area];
+
+      const inviteParams = new URLSearchParams({
+        date: state.date,
+        people: state.people,
+        style: state.style,
+        area: state.area,
+        spot: recommended[0]?.name || '',
+      });
+      const inviteUrl = `${location.origin}${location.pathname.replace('/planner/', '/invite/')}?${inviteParams}`;
+
+      const dateStr = new Date(state.date).toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric', weekday:'short' });
+
+      // Google Calendar URL
+      const eventStart = new Date(state.date + 'T10:30:00');
+      const eventEnd = new Date(state.date + 'T15:30:00');
+      const fmt = d => d.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+      const gcalUrl = 'https://www.google.com/calendar/render?action=TEMPLATE&' + new URLSearchParams({
+        text: `BBQ — ${state.people}人 / ${styleLabel}`,
+        dates: `${fmt(eventStart)}/${fmt(eventEnd)}`,
+        details: `SLOW FIRE BBQ プランナーで作成\n参加: ${state.people}人\nスタイル: ${styleLabel}\n候補地: ${recommended[0]?.name || areaLabel}\n\n招待状URL: ${inviteUrl}`,
+        location: recommended[0]?.address || areaLabel,
+      });
+
+      // LINE Share
+      const lineText = `BBQやりませんか？\n📅 ${dateStr}\n👥 ${state.people}人\n📍 ${recommended[0]?.name || areaLabel}\n\n招待状: ${inviteUrl}`;
+      const lineUrl = 'https://line.me/R/msg/text/?' + encodeURIComponent(lineText);
+
+      resultEl.innerHTML = `
+        <h2>あなたのBBQプラン</h2>
+
+        <div class="pl-summary">
+          <div class="pl-sum-item"><div class="pl-sum-label">日時</div><div class="pl-sum-value" style="font-size:14px;">${escapeHtml(dateStr)}</div></div>
+          <div class="pl-sum-item"><div class="pl-sum-label">人数</div><div class="pl-sum-value">${state.people}人</div></div>
+          <div class="pl-sum-item"><div class="pl-sum-label">予算</div><div class="pl-sum-value">¥${state.budget.toLocaleString()}</div></div>
+          <div class="pl-sum-item"><div class="pl-sum-label">スタイル</div><div class="pl-sum-value" style="font-size:14px;">${escapeHtml(styleLabel)}</div></div>
+        </div>
+
+        <h3>🛒 食材リスト（${state.people}人前）</h3>
+        <p style="font-size:var(--text-sm);color:var(--gray-600);margin-bottom:10px;">推定合計：<strong style="color:var(--brand-700);">¥${total.toLocaleString()}</strong>　${total > state.budget ? '（予算オーバー、調整余地あり）' : '（予算内）'}</p>
+        <ul class="pl-list">
+          ${items.map(i => `<li><span class="pl-li-name">${escapeHtml(i.name)}</span><span class="pl-li-qty">${escapeHtml(i.qty)} · ¥${i.price.toLocaleString()}</span></li>`).join('')}
+        </ul>
+
+        <h3>📍 おすすめBBQ場（${escapeHtml(areaLabel)}）</h3>
+        ${recommended.length ? `<div class="pl-spots">
+          ${recommended.map(s => `
+            <a href="../bbq-spots/${s.slug}.html" class="pl-spot-card">
+              <div class="pl-spot-name">${escapeHtml(s.name)}</div>
+              <div class="pl-spot-meta">${escapeHtml(s.areaLabel)} · ${escapeHtml(s.city)}</div>
+              <span class="pl-spot-tag">TYPE ${s.slowFireType}</span>
+              <span class="pl-spot-tag">★${s.americanBbqRating}/5</span>
+            </a>
+          `).join('')}
+        </div>` : '<p style="color:var(--gray-500);">該当エリアのBBQ場データを追加予定です。</p>'}
+
+        <h3>📋 持ち物リスト（最低限）</h3>
+        <ul class="pl-list">
+          <li><span class="pl-li-name">トング・菜箸</span><span class="pl-li-qty">必須</span></li>
+          <li><span class="pl-li-name">アルミホイル</span><span class="pl-li-qty">必須</span></li>
+          <li><span class="pl-li-name">キッチンペーパー</span><span class="pl-li-qty">必須</span></li>
+          <li><span class="pl-li-name">ゴミ袋（複数枚）</span><span class="pl-li-qty">必須</span></li>
+          <li><span class="pl-li-name">クーラーボックス・氷</span><span class="pl-li-qty">必須</span></li>
+          ${state.style === 'authentic' ? `<li><span class="pl-li-name">温度計（中心温度用）</span><span class="pl-li-qty">必須</span></li><li><span class="pl-li-name">蓋付きグリル</span><span class="pl-li-qty">必須</span></li>` : ''}
+          <li><span class="pl-li-name">ウェットティッシュ</span><span class="pl-li-qty">推奨</span></li>
+          <li><span class="pl-li-name">虫除けスプレー</span><span class="pl-li-qty">推奨</span></li>
+          <li><span class="pl-li-name">日焼け止め</span><span class="pl-li-qty">推奨</span></li>
+        </ul>
+
+        <div class="pl-share">
+          <p class="pl-share-title">🎉 仲間に共有する</p>
+          <div class="pl-share-btns">
+            <a href="${inviteUrl}" class="pl-share-btn invite" target="_blank">📨 招待状を見る</a>
+            <a href="${lineUrl}" class="pl-share-btn line" target="_blank" rel="noopener">💬 LINEで送る</a>
+            <a href="${gcalUrl}" class="pl-share-btn gcal" target="_blank" rel="noopener">📅 カレンダーに追加</a>
+            <button class="pl-share-btn copy" onclick="navigator.clipboard.writeText('${inviteUrl}').then(()=>this.textContent='✓ コピーしました').catch(()=>{})">🔗 URLをコピー</button>
+          </div>
+        </div>
+      `;
+    }
+
+    updateUI();
+  </script>
+</body>
+</html>

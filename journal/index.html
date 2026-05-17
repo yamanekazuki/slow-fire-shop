@@ -93,6 +93,7 @@
         </div>
         <a href="index.html" style="color: var(--brand);">FIRESIDE</a>
         <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../planner/index.html">プランナー</a>
         <a href="../team.html">私たちについて</a>
       </nav>
       <div class="nav-right">
@@ -419,6 +420,32 @@
       <a href="../index.html#products">商品一覧を見る →</a>
     </div>
   </section>
+
+  
+  <!-- Newsletter signup -->
+  <link rel="stylesheet" href="../assets/newsletter.css?v=20260517">
+  <section class="nl-box" id="newsletter">
+    <p class="nl-mark">SLOW FIRE NEWSLETTER</p>
+    <h2 class="nl-title">月1回、BBQの「次の一歩」が届きます</h2>
+    <p class="nl-desc">季節のBBQ計画、新しいレシピ、BBQ場のオープン情報、ラブの入荷案内。<br>BBQを日常にする小さなヒントを、月1回だけお届けします。</p>
+    <form class="nl-form" id="nlForm" action="https://formspree.io/f/your_form_id" method="POST">
+      <input type="email" name="email" class="nl-input" placeholder="メールアドレスを入力" required>
+      <input type="hidden" name="_subject" value="SLOW FIRE Newsletter 登録">
+      <button type="submit" class="nl-btn">登録する</button>
+    </form>
+    <div class="nl-success" id="nlSuccess">✓ 登録ありがとうございます！</div>
+    <p class="nl-note">いつでも解除可能。配信は月1回まで。スパムは送りません。</p>
+  </section>
+  <script>
+    document.getElementById("nlForm")?.addEventListener("submit", function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+      fetch(form.action, { method: "POST", body: data, headers: { "Accept": "application/json" } })
+        .then(r => { if (r.ok) { document.getElementById("nlSuccess").classList.add("show"); form.reset(); } })
+        .catch(() => alert("送信に失敗しました。後ほどお試しください。"));
+    });
+  </script>
 
   <footer class="footer">
     <div class="footer-wrap">
