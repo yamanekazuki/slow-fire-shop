@@ -589,12 +589,15 @@
       const ingredients = (recipe.ingredients || []).map(i =>
         typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
       );
+      const pageUrl = `https://yamanekazuki.github.io/slow-fire-shop/recipe.html?id=${recipe.id}`;
       const instructions = (recipe.points || []).map((p, idx) => {
         const step = typeof p === 'string' ? p : (p.step || '');
         const note = typeof p === 'object' ? (p.note || '') : '';
         return {
           "@type": "HowToStep",
           "position": idx + 1,
+          "url": `${pageUrl}#step-${idx + 1}`,
+          "image": imgUrl,
           "name": step,
           "text": note ? `${step}。${note}` : step
         };
