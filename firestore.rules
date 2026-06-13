@@ -26,6 +26,24 @@ service cloud.firestore {
       allow read, write: if request.auth != null && request.auth.uid == uid;
     }
 
+    // みんなのBBQ記録（COOK投稿）— 全員閲覧、認証済みは投稿可、本人/管理者のみ削除
+    match /cooks/{id} {
+      allow read: if true;
+      // 投稿: 認証必須（匿名認証含む）。uid は本人、最低限のフィールドを検証
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.dishName is string
+                    && request.resource.data.dishName.size() > 0
+                    && request.resource.data.dishName.size() <= 80
+                    && request.resource.data.photos.size() <= 8;
+      // 更新は reactionCount（🔥リアクション）の変更のみ許可
+      allow update: if request.auth != null
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reactionCount']);
+      // 削除は本人または管理者
+      allow delete: if request.auth != null
+                    && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
     // 管理者リスト — 管理者のみ
     match /admins/{uid} {
       allow read:  if request.auth != null && request.auth.uid == uid;

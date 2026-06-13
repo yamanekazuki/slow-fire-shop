@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>みんなのBBQ記録 — 焼いた料理を投稿・見返す | SLOW FIRE</title>
+  <meta name="description" content="BBQで焼いた料理の写真を投稿し、どう作ったかをメモして残せるコミュニティ。みんなの投稿を眺めたり、自分がいつ何を焼いたかを時系列で振り返れます。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/cook/">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#B45309">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="みんなのBBQ記録 | SLOW FIRE">
+  <meta property="og:description" content="焼いた料理を投稿して、どう作ったかをメモ。みんなの記録を眺めて、自分の歴史を振り返る。">
+  <meta property="og:url" content="https://yamanekazuki.github.io/slow-fire-shop/cook/">
+
+  <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260517">
+  <link rel="stylesheet" href="cook.css?v=20260614">
+
+  <!-- Firebase SDK (compat) — used when configured, otherwise graceful localStorage fallback -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-2B6PRVFPKF');</script>
+</head>
+<body>
+
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../index.html#products">商品一覧</a>
+        <a href="../journal/index.html">FIRESIDE</a>
+        <a href="../cook/index.html" style="color:var(--brand-500);font-weight:700;">みんなのBBQ</a>
+        <a href="../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="cook-wrap">
+
+    <!-- HERO -->
+    <section class="cook-hero">
+      <p class="cook-mark">COMMUNITY · みんなのBBQ記録</p>
+      <h1>焼いた一皿を、残そう。</h1>
+      <p class="cook-lede">写真をあげて、どう作ったかをメモするだけ。<br>みんなの記録を眺めて、自分がいつ何を焼いたかを振り返る。</p>
+      <div class="cook-hero-actions">
+        <button class="btn-fire" id="heroPostBtn">＋ 投稿する</button>
+        <span class="cook-identity" id="identityChip"></span>
+      </div>
+    </section>
+
+    <!-- MODE / STATUS BANNER -->
+    <div class="cook-banner" id="modeBanner" hidden></div>
+
+    <!-- TABS -->
+    <div class="cook-tabs" role="tablist">
+      <button class="cook-tab is-active" data-tab="all" role="tab">みんなの投稿</button>
+      <button class="cook-tab" data-tab="mine" role="tab">マイ記録</button>
+    </div>
+
+    <!-- TAG FILTER -->
+    <div class="cook-filters" id="tagFilters"></div>
+
+    <!-- MINE: stats + timeline header -->
+    <section class="cook-mine-head" id="mineHead" hidden>
+      <div class="cook-mstats" id="mineStats"></div>
+    </section>
+
+    <!-- FEED -->
+    <section class="cook-feed" id="feed" aria-live="polite"></section>
+    <div class="cook-empty" id="emptyState" hidden></div>
+    <div class="cook-loading" id="loadingState">読み込み中…</div>
+
+  </main>
+
+  <!-- FLOATING ACTION BUTTON -->
+  <button class="cook-fab" id="fab" aria-label="投稿する">＋</button>
+
+  <!-- ===== COMPOSER MODAL ===== -->
+  <div class="cook-modal" id="composer" hidden>
+    <div class="cook-modal-card" role="dialog" aria-modal="true" aria-label="BBQ記録を投稿">
+      <button class="cook-modal-x" id="composerClose" aria-label="閉じる">✕</button>
+      <h2 class="cook-modal-title">BBQ記録を投稿</h2>
+
+      <form id="postForm">
+        <!-- Photos -->
+        <label class="cook-field-label">写真（複数OK・最大8枚）</label>
+        <div class="cook-dropzone" id="dropzone">
+          <input type="file" id="photoInput" accept="image/*" multiple hidden>
+          <div class="cook-dropzone-inner" id="dropzonePrompt">
+            <span class="cook-dz-icon">📷</span>
+            <span>タップして写真を選ぶ / ここにドラッグ</span>
+          </div>
+          <div class="cook-thumbs" id="thumbs"></div>
+        </div>
+
+        <!-- Dish name -->
+        <label class="cook-field-label" for="dishName">料理名 <em>*</em></label>
+        <input type="text" id="dishName" class="cook-input" placeholder="例：スペアリブのスモーク" maxlength="60" required>
+
+        <!-- Cooked date -->
+        <label class="cook-field-label" for="cookedAt">焼いた日</label>
+        <input type="date" id="cookedAt" class="cook-input">
+
+        <!-- Method memo -->
+        <label class="cook-field-label" for="method">どう作った？（メモ）</label>
+        <textarea id="method" class="cook-input cook-textarea" rows="5" placeholder="使ったラブ、温度、時間、火加減、ポイント、失敗したこと…自由にどうぞ。" maxlength="2000"></textarea>
+
+        <!-- Optional meta row -->
+        <div class="cook-meta-row">
+          <div>
+            <label class="cook-field-label" for="gear">グリル / 道具</label>
+            <input type="text" id="gear" class="cook-input" placeholder="例：Weber 57cm" maxlength="40">
+          </div>
+          <div>
+            <label class="cook-field-label" for="tempLabel">温度帯</label>
+            <input type="text" id="tempLabel" class="cook-input" placeholder="例：110℃ / 弱火" maxlength="30">
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <label class="cook-field-label">タグ</label>
+        <div class="cook-tagpick" id="tagPick"></div>
+
+        <p class="cook-form-msg" id="formMsg"></p>
+
+        <div class="cook-modal-actions">
+          <button type="button" class="btn-ghost" id="composerCancel">キャンセル</button>
+          <button type="submit" class="btn-fire" id="submitBtn">投稿する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== DETAIL MODAL ===== -->
+  <div class="cook-modal" id="detail" hidden>
+    <div class="cook-modal-card cook-detail-card" role="dialog" aria-modal="true" aria-label="投稿の詳細">
+      <button class="cook-modal-x" id="detailClose" aria-label="閉じる">✕</button>
+      <div id="detailBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== IDENTITY (nickname) MODAL ===== -->
+  <div class="cook-modal" id="nickModal" hidden>
+    <div class="cook-modal-card cook-nick-card" role="dialog" aria-modal="true" aria-label="ニックネーム設定">
+      <h2 class="cook-modal-title">参加するには</h2>
+      <p class="cook-nick-lede">表示名を決めてください。あとから変更できます。</p>
+      <input type="text" id="nickInput" class="cook-input" placeholder="例：たき火マスター" maxlength="24">
+      <div class="cook-modal-actions">
+        <button type="button" class="btn-fire" id="nickSave" style="width:100%;">この名前ではじめる</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">焼いた一皿を残す、BBQコミュニティ記録。</p>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <a href="../cook/index.html">みんなのBBQ記録</a>
+          <a href="../index.html#products">BBQラブ商品一覧</a>
+          <a href="../cookbook.html">料理ガイド（24品）</a>
+          <a href="../journal/index.html">SLOW FIRE JOURNAL</a>
+          <a href="../bbq-spots/index.html">BBQ場検索</a>
+          <a href="../team.html">SLOW FIREについて</a>
+          <a href="https://www.instagram.com/afro_anri/" target="_blank" rel="noopener">Instagram ↗</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../firebase-config.js"></script>
+  <script src="../mobile-nav.js?v=20260506e"></script>
+  <script src="cook.js?v=20260614"></script>
+</body>
+</html>
