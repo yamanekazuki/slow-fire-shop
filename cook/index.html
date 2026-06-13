@@ -22,13 +22,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=20260517">
-  <link rel="stylesheet" href="cook.css?v=20260614">
+  <link rel="stylesheet" href="cook.css?v=20260614b">
 
   <!-- Firebase SDK (compat) — used when configured, otherwise graceful localStorage fallback -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
@@ -75,6 +76,13 @@
       <button class="cook-tab" data-tab="mine" role="tab">マイ記録</button>
     </div>
 
+    <!-- SEARCH -->
+    <div class="cook-search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" id="searchInput" placeholder="料理名・タグ・投稿者・メモで検索…" autocomplete="off">
+      <button id="searchClear" class="cook-search-clear" aria-label="クリア" hidden>✕</button>
+    </div>
+
     <!-- TAG FILTER -->
     <div class="cook-filters" id="tagFilters"></div>
 
@@ -93,59 +101,33 @@
   <!-- FLOATING ACTION BUTTON -->
   <button class="cook-fab" id="fab" aria-label="投稿する">＋</button>
 
-  <!-- ===== COMPOSER MODAL ===== -->
+  <!-- ===== COMPOSER MODAL (bulk / multi-post) ===== -->
   <div class="cook-modal" id="composer" hidden>
-    <div class="cook-modal-card" role="dialog" aria-modal="true" aria-label="BBQ記録を投稿">
+    <div class="cook-modal-card cook-composer-card" role="dialog" aria-modal="true" aria-label="BBQ記録を投稿">
       <button class="cook-modal-x" id="composerClose" aria-label="閉じる">✕</button>
       <h2 class="cook-modal-title">BBQ記録を投稿</h2>
+      <p class="cook-composer-lede">写真を一気に選ぶと、<strong>1枚ずつ別の記録カード</strong>になります。AIが料理名・タグ・メモを自動で下書きするので、直して<strong>まとめて投稿</strong>できます。</p>
 
-      <form id="postForm">
-        <!-- Photos -->
-        <label class="cook-field-label">写真（複数OK・最大8枚）</label>
-        <div class="cook-dropzone" id="dropzone">
-          <input type="file" id="photoInput" accept="image/*" multiple hidden>
-          <div class="cook-dropzone-inner" id="dropzonePrompt">
-            <span class="cook-dz-icon">📷</span>
-            <span>タップして写真を選ぶ / ここにドラッグ</span>
-          </div>
-          <div class="cook-thumbs" id="thumbs"></div>
+      <!-- Add photos -->
+      <div class="cook-dropzone" id="dropzone">
+        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+        <div class="cook-dropzone-inner" id="dropzonePrompt">
+          <span class="cook-dz-icon">📷</span>
+          <span>タップして写真を選ぶ（何枚でもOK）/ ここにドラッグ</span>
         </div>
+      </div>
 
-        <!-- Dish name -->
-        <label class="cook-field-label" for="dishName">料理名 <em>*</em></label>
-        <input type="text" id="dishName" class="cook-input" placeholder="例：スペアリブのスモーク" maxlength="60" required>
+      <p class="cook-ai-note" id="aiNote" hidden></p>
 
-        <!-- Cooked date -->
-        <label class="cook-field-label" for="cookedAt">焼いた日</label>
-        <input type="date" id="cookedAt" class="cook-input">
+      <!-- Draft cards (one per photo) -->
+      <div class="cook-drafts" id="drafts"></div>
 
-        <!-- Method memo -->
-        <label class="cook-field-label" for="method">どう作った？（メモ）</label>
-        <textarea id="method" class="cook-input cook-textarea" rows="5" placeholder="使ったラブ、温度、時間、火加減、ポイント、失敗したこと…自由にどうぞ。" maxlength="2000"></textarea>
+      <p class="cook-form-msg" id="formMsg"></p>
 
-        <!-- Optional meta row -->
-        <div class="cook-meta-row">
-          <div>
-            <label class="cook-field-label" for="gear">グリル / 道具</label>
-            <input type="text" id="gear" class="cook-input" placeholder="例：Weber 57cm" maxlength="40">
-          </div>
-          <div>
-            <label class="cook-field-label" for="tempLabel">温度帯</label>
-            <input type="text" id="tempLabel" class="cook-input" placeholder="例：110℃ / 弱火" maxlength="30">
-          </div>
-        </div>
-
-        <!-- Tags -->
-        <label class="cook-field-label">タグ</label>
-        <div class="cook-tagpick" id="tagPick"></div>
-
-        <p class="cook-form-msg" id="formMsg"></p>
-
-        <div class="cook-modal-actions">
-          <button type="button" class="btn-ghost" id="composerCancel">キャンセル</button>
-          <button type="submit" class="btn-fire" id="submitBtn">投稿する</button>
-        </div>
-      </form>
+      <div class="cook-modal-actions cook-composer-actions" id="composerActions" hidden>
+        <button type="button" class="btn-ghost" id="composerCancel">キャンセル</button>
+        <button type="button" class="btn-fire" id="submitBtn">投稿する</button>
+      </div>
     </div>
   </div>
 
@@ -157,14 +139,25 @@
     </div>
   </div>
 
-  <!-- ===== IDENTITY (nickname) MODAL ===== -->
-  <div class="cook-modal" id="nickModal" hidden>
-    <div class="cook-modal-card cook-nick-card" role="dialog" aria-modal="true" aria-label="ニックネーム設定">
-      <h2 class="cook-modal-title">参加するには</h2>
-      <p class="cook-nick-lede">表示名を決めてください。あとから変更できます。</p>
-      <input type="text" id="nickInput" class="cook-input" placeholder="例：たき火マスター" maxlength="24">
+  <!-- ===== REGISTRATION MODAL ===== -->
+  <div class="cook-modal" id="regModal" hidden>
+    <div class="cook-modal-card cook-reg-card" role="dialog" aria-modal="true" aria-label="ユーザー登録">
+      <h2 class="cook-modal-title">ユーザー登録</h2>
+      <p class="cook-reg-lede">あなたのBBQ記録を残すために、まずプロフィールを登録しましょう。<br>30秒で完了します。あとから変更できます。</p>
+
+      <label class="cook-field-label">アイコン</label>
+      <div class="cook-avatars" id="avatarPick"></div>
+
+      <label class="cook-field-label" for="regName">表示名 <em>*</em></label>
+      <input type="text" id="regName" class="cook-input" placeholder="例：たき火マスター" maxlength="24">
+
+      <label class="cook-field-label" for="regBio">ひとこと（任意）</label>
+      <input type="text" id="regBio" class="cook-input" placeholder="例：週末はだいたい庭で炭火" maxlength="60">
+
+      <p class="cook-form-msg" id="regMsg"></p>
+
       <div class="cook-modal-actions">
-        <button type="button" class="btn-fire" id="nickSave" style="width:100%;">この名前ではじめる</button>
+        <button type="button" class="btn-fire" id="regSave" style="width:100%;">登録してはじめる</button>
       </div>
     </div>
   </div>
@@ -194,6 +187,6 @@
 
   <script src="../firebase-config.js"></script>
   <script src="../mobile-nav.js?v=20260506e"></script>
-  <script src="cook.js?v=20260614"></script>
+  <script src="cook.js?v=20260614b"></script>
 </body>
 </html>

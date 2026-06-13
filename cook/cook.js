@@ -1,32 +1,37 @@
 /* =====================================================
    SLOW FIRE — みんなのBBQ記録 (COOK community feed)
+   Features:
+     • ユーザー登録（プロフィール）ゲート
+     • 複数写真を一気に → 1枚=1記録カード → AI自動入力 → まとめて投稿
+     • Claude Vision による料理名/タグ/メモ自動生成（Cloud Function `analyzeCookPhoto`）
+     • 検索（料理名・タグ・投稿者・メモ）
    Dual-mode storage:
-     • FIREBASE_READY  → Firestore (`cooks`) + Storage (real multi-user SNS)
-     • fallback        → localStorage (personal log + demo, single device)
-   The same render/compose code drives both via the Store abstraction.
+     • FIREBASE_READY  → Firestore(`cooks`) + Storage + Functions
+     • fallback        → localStorage（個人記録＆デモ）
    ===================================================== */
 (function () {
   'use strict';
 
   // ---------- constants ----------
   const TAGS = ['牛', '豚', '鶏', 'ラム', '魚介', '野菜', 'スモーク', 'ロースト', '直火', '低温長時間', '燻製', 'デザート', '初挑戦', '自信作'];
-  const MAX_PHOTOS = 8;
-  const MAX_EDGE = 1600;       // px — longest edge after compression
+  const AVATARS = ['🔥', '🍖', '🥩', '🍗', '🌶️', '🍔', '🥓', '🧑‍🍳', '🪵', '🏕️', '🍻', '🐷'];
+  const MAX_PHOTOS = 12;
+  const MAX_EDGE = 1600;
   const JPEG_Q = 0.82;
   const LS_POSTS = 'sf_cook_posts';
-  const LS_NICK = 'sf_cook_nick';
+  const LS_PROFILE = 'sf_cook_profile';
   const LS_UID = 'sf_cook_uid';
   const LS_REACTED = 'sf_cook_reacted';
 
-  // ---------- tiny helpers ----------
+  // ---------- helpers ----------
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } };
   const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { console.warn('localStorage full', e); } };
-  const uid = () => 'u' + Math.abs(hash(navigator.userAgent + screen.width + (lsGet(LS_NICK, '') || ''))).toString(36) + (lsGet(LS_UID, '') || '');
   function hash(str) { let h = 0; for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; } return h; }
-  function newId() { return Date.now().toString(36) + Math.abs(hash(navigator.userAgent + performance.now())).toString(36).slice(0, 5); }
+  let __idc = 0;
+  function newId() { return Date.now().toString(36) + (__idc++).toString(36) + Math.abs(hash(navigator.userAgent + performance.now())).toString(36).slice(0, 4); }
   function fmtDate(d) {
     if (!d) return '';
     const dt = (typeof d === 'number') ? new Date(d) : new Date(d);
@@ -38,93 +43,106 @@
 
   const FB = !!window.FIREBASE_READY;
 
-  // ---------- Identity ----------
-  const Identity = {
-    uid: null, name: null,
+  // =====================================================
+  // PROFILE / 登録
+  // =====================================================
+  const Profile = {
+    uid: null, name: null, avatar: '🔥', bio: '',
     async ensureLocalId() {
       let id = lsGet(LS_UID, null);
       if (!id) { id = newId(); lsSet(LS_UID, id); }
       return id;
     },
-    get name_() { return lsGet(LS_NICK, null); },
+    load() {
+      const p = lsGet(LS_PROFILE, null);
+      if (p) { this.name = p.name; this.avatar = p.avatar || '🔥'; this.bio = p.bio || ''; }
+    },
     async init() {
-      this.name = lsGet(LS_NICK, null);
+      this.load();
       if (FB && window.sfAuth) {
         await new Promise((res) => {
           let done = false;
-          window.sfAuth.onAuthStateChanged(async (user) => {
-            if (user) { this.uid = user.uid; }
-            if (!done) { done = true; res(); }
-          });
+          window.sfAuth.onAuthStateChanged((user) => { if (user) this.uid = user.uid; if (!done) { done = true; res(); } });
           setTimeout(res, 1500);
         });
       }
       if (!this.uid) this.uid = await this.ensureLocalId();
     },
-    isReady() { return !!this.name; },
+    isRegistered() { return !!this.name; },
     async signInIfNeeded() {
-      // Firebase: anonymous auth so posts are attributable & rules pass.
       if (FB && window.sfAuth && !window.sfAuth.currentUser) {
         try { const cred = await window.sfAuth.signInAnonymously(); this.uid = cred.user.uid; }
-        catch (e) { console.warn('anon sign-in failed, using local id', e); }
+        catch (e) { console.warn('anon sign-in failed', e); }
       }
     },
-    setName(n) { this.name = n; lsSet(LS_NICK, n); }
+    async save(name, avatar, bio) {
+      this.name = name; this.avatar = avatar || '🔥'; this.bio = bio || '';
+      lsSet(LS_PROFILE, { name: this.name, avatar: this.avatar, bio: this.bio });
+      if (FB) {
+        await this.signInIfNeeded();
+        if (window.db && this.uid) {
+          try { await window.db.collection('users').doc(this.uid).set({ name: this.name, avatar: this.avatar, bio: this.bio, updatedAt: Date.now() }, { merge: true }); }
+          catch (e) { console.warn('profile save failed', e); }
+        }
+      }
+    }
   };
 
-  // ---------- Store abstraction ----------
+  // =====================================================
+  // STORE
+  // =====================================================
   const Store = {
     async list() {
       if (FB && window.db) {
-        const snap = await window.db.collection('cooks').orderBy('createdAt', 'desc').limit(200).get();
+        const snap = await window.db.collection('cooks').orderBy('createdAt', 'desc').limit(300).get();
         return snap.docs.map(d => ({ id: d.id, ...d.data() }));
       }
       return lsGet(LS_POSTS, []).sort((a, b) => b.createdAt - a.createdAt);
     },
     async add(post) {
-      if (FB && window.db) {
-        const ref = window.db.collection('cooks').doc(post.id);
-        await ref.set(post);
-        return post;
-      }
-      const all = lsGet(LS_POSTS, []);
-      all.push(post);
-      lsSet(LS_POSTS, all);
-      return post;
+      if (FB && window.db) { await window.db.collection('cooks').doc(post.id).set(post); return post; }
+      const all = lsGet(LS_POSTS, []); all.push(post); lsSet(LS_POSTS, all); return post;
     },
     async remove(id) {
       if (FB && window.db) { await window.db.collection('cooks').doc(id).delete(); return; }
       lsSet(LS_POSTS, lsGet(LS_POSTS, []).filter(p => p.id !== id));
     },
     async react(id, delta) {
-      if (FB && window.db) {
-        await window.db.collection('cooks').doc(id).update({
-          reactionCount: firebase.firestore.FieldValue.increment(delta)
-        });
-        return;
-      }
-      const all = lsGet(LS_POSTS, []);
-      const p = all.find(x => x.id === id);
+      if (FB && window.db) { await window.db.collection('cooks').doc(id).update({ reactionCount: firebase.firestore.FieldValue.increment(delta) }); return; }
+      const all = lsGet(LS_POSTS, []); const p = all.find(x => x.id === id);
       if (p) { p.reactionCount = Math.max(0, (p.reactionCount || 0) + delta); lsSet(LS_POSTS, all); }
     },
-    // Upload an array of {blob, dataUrl} → returns array of url strings.
-    async uploadPhotos(postId, photos, onProgress) {
+    async uploadOne(postId, photo) {
       if (FB && window.sfStorage) {
-        const urls = [];
-        for (let i = 0; i < photos.length; i++) {
-          const ref = window.sfStorage.ref(`cooks/${Identity.uid}/${postId}/${i}.jpg`);
-          await ref.put(photos[i].blob, { contentType: 'image/jpeg' });
-          urls.push(await ref.getDownloadURL());
-          onProgress && onProgress(i + 1, photos.length);
-        }
-        return urls;
+        const ref = window.sfStorage.ref(`cooks/${Profile.uid}/${postId}/0.jpg`);
+        await ref.put(photo.blob, { contentType: 'image/jpeg' });
+        return await ref.getDownloadURL();
       }
-      // local mode: store the (already compressed) dataURLs directly
-      return photos.map(p => p.dataUrl);
+      return photo.dataUrl;
     }
   };
 
-  // ---------- Image compression ----------
+  // =====================================================
+  // AI (Claude Vision via Cloud Function)
+  // =====================================================
+  const AI = {
+    available: FB && !!window.sfFunctions,
+    callable: null,
+    failed: false,
+    get fn() {
+      if (!this.callable && FB && window.sfFunctions) this.callable = window.sfFunctions.httpsCallable('analyzeCookPhoto');
+      return this.callable;
+    },
+    async analyze(b64, mime) {
+      if (!this.available || this.failed || !this.fn) throw new Error('AI unavailable');
+      const res = await this.fn({ image: b64, mime });
+      return res.data;
+    }
+  };
+
+  // =====================================================
+  // IMAGE
+  // =====================================================
   function compressImage(file) {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -138,7 +156,8 @@
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
         const dataUrl = canvas.toDataURL('image/jpeg', JPEG_Q);
-        canvas.toBlob(blob => resolve({ blob: blob || dataURLtoBlob(dataUrl), dataUrl }), 'image/jpeg', JPEG_Q);
+        const b64 = dataUrl.split(',')[1];
+        canvas.toBlob(blob => resolve({ blob: blob || dataURLtoBlob(dataUrl), dataUrl, b64, mime: 'image/jpeg' }), 'image/jpeg', JPEG_Q);
       };
       img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('画像を読み込めませんでした')); };
       img.src = url;
@@ -157,17 +176,24 @@
   let posts = [];
   let activeTab = 'all';
   let activeTag = null;
-  let draftPhotos = [];   // [{blob, dataUrl}]
-  let draftTags = [];
+  let searchQuery = '';
+  let drafts = [];   // [{id, blob, dataUrl, b64, mime, dishName, cookedAt, method, gear, tempLabel, tags[], aiStatus}]
   let reacted = new Set(lsGet(LS_REACTED, []));
 
   // =====================================================
-  // RENDER
+  // FEED RENDER
   // =====================================================
+  function matchesSearch(p) {
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return [p.dishName, p.method, p.authorName, p.gear, p.tempLabel, (p.tags || []).join(' ')]
+      .some(v => (v || '').toLowerCase().includes(q));
+  }
   function visiblePosts() {
     let list = posts.slice();
-    if (activeTab === 'mine') list = list.filter(p => p.uid === Identity.uid);
+    if (activeTab === 'mine') list = list.filter(p => p.uid === Profile.uid);
     if (activeTag) list = list.filter(p => (p.tags || []).includes(activeTag));
+    list = list.filter(matchesSearch);
     return list;
   }
 
@@ -176,21 +202,17 @@
     const empty = $('#emptyState');
     const list = visiblePosts();
 
-    // mine: stats + month grouping
     const mineHead = $('#mineHead');
-    if (activeTab === 'mine') {
-      mineHead.hidden = false;
-      renderMineStats();
-    } else {
-      mineHead.hidden = true;
-    }
+    if (activeTab === 'mine') { mineHead.hidden = false; renderMineStats(); }
+    else { mineHead.hidden = true; }
 
     if (!list.length) {
       feed.innerHTML = '';
       empty.hidden = false;
-      empty.innerHTML = activeTab === 'mine'
-        ? `<strong>まだ記録がありません</strong>焼いた料理を投稿して、自分のBBQ歴を残しましょう。<br><br><button class="btn-fire" onclick="window.__cookOpenComposer()">＋ 最初の一皿を投稿</button>`
-        : `<strong>まだ投稿がありません</strong>いちばん最初の投稿者になりましょう。<br><br><button class="btn-fire" onclick="window.__cookOpenComposer()">＋ 投稿する</button>`;
+      const reason = searchQuery ? `「${esc(searchQuery)}」に一致する投稿は見つかりませんでした。`
+        : (activeTab === 'mine' ? 'まだ記録がありません。焼いた料理を投稿して、自分のBBQ歴を残しましょう。'
+          : 'まだ投稿がありません。いちばん最初の投稿者になりましょう。');
+      empty.innerHTML = `<strong>${searchQuery ? '該当なし' : 'まだありません'}</strong>${reason}<br><br><button class="btn-fire" onclick="window.__cookOpenComposer()">＋ 投稿する</button>`;
       return;
     }
     empty.hidden = true;
@@ -206,15 +228,11 @@
     });
     feed.innerHTML = html;
 
-    $$('.cook-card', feed).forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.cook-react')) return;
-        openDetail(card.dataset.id);
-      });
-    });
-    $$('.cook-react', feed).forEach(btn => {
-      btn.addEventListener('click', (e) => { e.stopPropagation(); toggleReact(btn.dataset.id); });
-    });
+    $$('.cook-card', feed).forEach(card => card.addEventListener('click', (e) => {
+      if (e.target.closest('.cook-react')) return;
+      openDetail(card.dataset.id);
+    }));
+    $$('.cook-react', feed).forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); toggleReact(btn.dataset.id); }));
   }
 
   function cardHTML(p) {
@@ -231,22 +249,20 @@
         <div class="cook-card-body">
           <h3 class="cook-card-dish">${esc(p.dishName)}</h3>
           <div class="cook-card-meta">
-            <span class="cook-card-author">${esc(p.authorName || '名無し')}</span>
+            <span class="cook-card-author">${esc(p.authorAvatar || '🔥')} ${esc(p.authorName || '名無し')}</span>
             <span>·</span>
             <span>${esc(fmtDate(p.cookedAt || p.createdAt))}</span>
           </div>
           ${tags ? `<div class="cook-card-tags">${tags}</div>` : ''}
           <div class="cook-card-foot">
-            <button class="cook-react ${on ? 'is-on' : ''}" data-id="${esc(p.id)}" aria-label="焼けた!">
-              🔥 <span>${p.reactionCount || 0}</span>
-            </button>
+            <button class="cook-react ${on ? 'is-on' : ''}" data-id="${esc(p.id)}" aria-label="焼けた!">🔥 <span>${p.reactionCount || 0}</span></button>
           </div>
         </div>
       </article>`;
   }
 
   function renderMineStats() {
-    const mine = posts.filter(p => p.uid === Identity.uid);
+    const mine = posts.filter(p => p.uid === Profile.uid);
     const total = mine.length;
     const dishes = new Set(mine.map(p => p.dishName)).size;
     let lastDays = '—';
@@ -260,7 +276,6 @@
       <div class="cook-mstat"><div class="cook-mstat-num">${lastDays}</div><div class="cook-mstat-label">最後のBBQから(日)</div></div>`;
   }
 
-  // ---------- tag filters ----------
   function renderFilters() {
     const used = new Set();
     posts.forEach(p => (p.tags || []).forEach(t => used.add(t)));
@@ -271,10 +286,7 @@
       const on = activeTag === val || (val === null && activeTag === null);
       return `<button class="cook-chip ${on ? 'is-active' : ''}" data-tag="${val == null ? '' : esc(val)}">${esc(t)}</button>`;
     }).join('');
-    $$('.cook-chip', el).forEach(c => c.addEventListener('click', () => {
-      activeTag = c.dataset.tag || null;
-      renderFilters(); renderFeed();
-    }));
+    $$('.cook-chip', el).forEach(c => c.addEventListener('click', () => { activeTag = c.dataset.tag || null; renderFilters(); renderFeed(); }));
   }
 
   // =====================================================
@@ -283,8 +295,7 @@
   async function toggleReact(id) {
     const p = posts.find(x => x.id === id);
     if (!p) return;
-    const on = reacted.has(id);
-    if (on) { reacted.delete(id); p.reactionCount = Math.max(0, (p.reactionCount || 0) - 1); await Store.react(id, -1); }
+    if (reacted.has(id)) { reacted.delete(id); p.reactionCount = Math.max(0, (p.reactionCount || 0) - 1); await Store.react(id, -1); }
     else { reacted.add(id); p.reactionCount = (p.reactionCount || 0) + 1; await Store.react(id, +1); }
     lsSet(LS_REACTED, Array.from(reacted));
     renderFeed();
@@ -299,21 +310,19 @@
     if (!p) return;
     const photos = p.photos || [];
     const gClass = photos.length <= 1 ? 'g-1' : photos.length === 2 ? 'g-2' : 'g-many';
-    const gallery = photos.length
-      ? `<div class="cook-d-gallery ${gClass}">${photos.map(u => `<img src="${esc(u)}" alt="${esc(p.dishName)}" loading="lazy">`).join('')}</div>`
-      : '';
+    const gallery = photos.length ? `<div class="cook-d-gallery ${gClass}">${photos.map(u => `<img src="${esc(u)}" alt="${esc(p.dishName)}" loading="lazy">`).join('')}</div>` : '';
     const specs = [];
     if (p.gear) specs.push(`<div class="cook-d-spec"><b>グリル/道具</b>${esc(p.gear)}</div>`);
     if (p.tempLabel) specs.push(`<div class="cook-d-spec"><b>温度帯</b>${esc(p.tempLabel)}</div>`);
     const tags = (p.tags || []).map(t => `<span class="cook-tag-mini">${esc(t)}</span>`).join(' ');
     const on = reacted.has(p.id);
-    const isMine = p.uid === Identity.uid;
+    const isMine = p.uid === Profile.uid;
 
     $('#detailBody').innerHTML = `
       ${gallery}
       <h2 class="cook-d-dish">${esc(p.dishName)}</h2>
       <div class="cook-d-meta">
-        <span><b>${esc(p.authorName || '名無し')}</b></span>
+        <span><b>${esc(p.authorAvatar || '🔥')} ${esc(p.authorName || '名無し')}</b></span>
         <span>焼いた日：${esc(fmtDate(p.cookedAt || p.createdAt)) || '—'}</span>
       </div>
       ${tags ? `<div class="cook-card-tags" style="margin-bottom:6px;">${tags}</div>` : ''}
@@ -338,138 +347,225 @@
   }
 
   // =====================================================
-  // COMPOSER
+  // COMPOSER (bulk / multi-post)
   // =====================================================
   function buildComposer() {
-    // tag picker
-    $('#tagPick').innerHTML = TAGS.map(t => `<button type="button" class="cook-tagopt" data-tag="${esc(t)}">${esc(t)}</button>`).join('');
-    $$('.cook-tagopt').forEach(b => b.addEventListener('click', () => {
-      const t = b.dataset.tag;
-      if (draftTags.includes(t)) { draftTags = draftTags.filter(x => x !== t); b.classList.remove('is-on'); }
-      else { draftTags.push(t); b.classList.add('is-on'); }
-    }));
-    $('#cookedAt').value = todayISO();
-
-    // dropzone
     const dz = $('#dropzone');
     const input = $('#photoInput');
-    dz.addEventListener('click', (e) => { if (!e.target.closest('.cook-thumb-x')) input.click(); });
+    dz.addEventListener('click', () => input.click());
     input.addEventListener('change', () => handleFiles(input.files));
     ['dragenter', 'dragover'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('is-drag'); }));
     ['dragleave', 'drop'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove('is-drag'); }));
     dz.addEventListener('drop', e => { if (e.dataTransfer.files) handleFiles(e.dataTransfer.files); });
-
-    $('#postForm').addEventListener('submit', submitPost);
+    $('#submitBtn').addEventListener('click', submitAll);
   }
 
   async function handleFiles(fileList) {
     const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
-    const room = MAX_PHOTOS - draftPhotos.length;
+    const room = MAX_PHOTOS - drafts.length;
     if (room <= 0) { setMsg(`写真は最大${MAX_PHOTOS}枚までです`, 'err'); return; }
     const take = files.slice(0, room);
-    setMsg('画像を処理中…', '');
+    setMsg(`画像を処理中… (${take.length}枚)`, '');
+    const added = [];
     for (const f of take) {
-      try { draftPhotos.push(await compressImage(f)); } catch (e) { console.warn(e); }
+      try {
+        const img = await compressImage(f);
+        const d = { id: newId(), ...img, dishName: '', cookedAt: todayISO(), method: '', gear: '', tempLabel: '', tags: [], aiStatus: AI.available && !AI.failed ? 'pending' : 'na' };
+        drafts.push(d); added.push(d);
+      } catch (e) { console.warn(e); }
     }
     setMsg('', '');
-    renderThumbs();
+    renderDrafts();
     $('#photoInput').value = '';
+    // AI auto-fill each new draft
+    showAiNote();
+    added.forEach(d => { if (d.aiStatus === 'pending') runAI(d); });
   }
 
-  function renderThumbs() {
-    const wrap = $('#thumbs');
-    wrap.innerHTML = draftPhotos.map((p, i) => `
-      <div class="cook-thumb"><img src="${p.dataUrl}" alt=""><button type="button" class="cook-thumb-x" data-i="${i}">✕</button></div>
-    `).join('');
-    $('#dropzonePrompt').style.display = draftPhotos.length ? 'none' : '';
-    $$('.cook-thumb-x', wrap).forEach(b => b.addEventListener('click', (e) => {
-      e.stopPropagation();
-      draftPhotos.splice(parseInt(b.dataset.i), 1);
-      renderThumbs();
-    }));
+  function showAiNote() {
+    const note = $('#aiNote');
+    if (!FB) {
+      note.hidden = false;
+      note.innerHTML = '💡 写真のAI自動入力（料理名・タグ・メモ）は、FirebaseとAnthropic APIキーの設定後に有効になります。今は手動でどうぞ。';
+    } else if (AI.failed) {
+      note.hidden = false;
+      note.innerHTML = '⚠️ AI自動入力が利用できませんでした（Functions未デプロイの可能性）。手動で入力してください。';
+    } else if (AI.available) {
+      note.hidden = false;
+      note.innerHTML = '✨ AIが写真を見て、料理名・タグ・作り方メモを自動で下書きします。自由に直してください。';
+    } else { note.hidden = true; }
+  }
+
+  async function runAI(draft) {
+    setDraftStatus(draft.id, 'running');
+    try {
+      const d = await AI.analyze(draft.b64, draft.mime);
+      if (d && d.isFood !== false) {
+        const card = $(`#draft-${draft.id}`);
+        if (!draft.dishName && d.dishName) { draft.dishName = d.dishName; if (card) $('[data-f="dishName"]', card).value = d.dishName; }
+        if (!draft.method && d.method) { draft.method = d.method; if (card) $('[data-f="method"]', card).value = d.method; }
+        if (!draft.gear && d.gear) { draft.gear = d.gear; if (card) $('[data-f="gear"]', card).value = d.gear; }
+        if (!draft.tempLabel && d.tempLabel) { draft.tempLabel = d.tempLabel; if (card) $('[data-f="tempLabel"]', card).value = d.tempLabel; }
+        if (Array.isArray(d.tags) && !draft.tags.length) {
+          draft.tags = d.tags.filter(t => TAGS.includes(t)).slice(0, 4);
+          if (card) $$('.cook-tagopt', card).forEach(b => b.classList.toggle('is-on', draft.tags.includes(b.dataset.tag)));
+        }
+      }
+      setDraftStatus(draft.id, 'done');
+    } catch (e) {
+      console.warn('AI analyze failed', e);
+      AI.failed = true;
+      setDraftStatus(draft.id, 'na');
+      showAiNote();
+      drafts.forEach(d => { if (d.aiStatus === 'pending' || d.aiStatus === 'running') setDraftStatus(d.id, 'na'); });
+    }
+  }
+
+  function setDraftStatus(id, status) {
+    const d = drafts.find(x => x.id === id); if (d) d.aiStatus = status;
+    const badge = $(`#draft-${id} .cook-draft-ai`);
+    if (!badge) return;
+    const map = { pending: '✨ AI待機', running: '✨ AI解析中…', done: '✓ AI入力済', na: '手動入力', error: 'AI不可' };
+    badge.textContent = map[status] || '';
+    badge.className = 'cook-draft-ai is-' + status;
+  }
+
+  function renderDrafts() {
+    const wrap = $('#drafts');
+    wrap.innerHTML = drafts.map(d => draftCardHTML(d)).join('');
+    $('#composerActions').hidden = drafts.length === 0;
+    $('#dropzonePrompt').querySelector('span:last-child').textContent = drafts.length
+      ? `さらに写真を追加（現在 ${drafts.length} 枚 / 最大${MAX_PHOTOS}）`
+      : 'タップして写真を選ぶ（何枚でもOK）/ ここにドラッグ';
+    $('#submitBtn').textContent = drafts.length > 1 ? `${drafts.length}件まとめて投稿` : '投稿する';
+
+    drafts.forEach(d => {
+      const card = $(`#draft-${d.id}`);
+      if (!card) return;
+      $('.cook-draft-x', card).addEventListener('click', () => { drafts = drafts.filter(x => x.id !== d.id); renderDrafts(); });
+      ['dishName', 'cookedAt', 'method', 'gear', 'tempLabel'].forEach(f => {
+        const el = $(`[data-f="${f}"]`, card);
+        if (el) el.addEventListener('input', () => { d[f] = el.value; });
+      });
+      $$('.cook-tagopt', card).forEach(b => b.addEventListener('click', () => {
+        const t = b.dataset.tag;
+        if (d.tags.includes(t)) { d.tags = d.tags.filter(x => x !== t); b.classList.remove('is-on'); }
+        else { d.tags.push(t); b.classList.add('is-on'); }
+      }));
+      setDraftStatus(d.id, d.aiStatus);
+    });
+  }
+
+  function draftCardHTML(d) {
+    return `
+      <div class="cook-draft" id="draft-${esc(d.id)}">
+        <div class="cook-draft-photo"><img src="${d.dataUrl}" alt=""><button type="button" class="cook-draft-x" aria-label="削除">✕</button></div>
+        <div class="cook-draft-fields">
+          <div class="cook-draft-top">
+            <span class="cook-draft-ai is-${esc(d.aiStatus)}"></span>
+          </div>
+          <input type="text" class="cook-input" data-f="dishName" placeholder="料理名（例：スペアリブのスモーク）" maxlength="60" value="${esc(d.dishName)}">
+          <div class="cook-meta-row">
+            <input type="date" class="cook-input" data-f="cookedAt" value="${esc(d.cookedAt)}">
+            <input type="text" class="cook-input" data-f="gear" placeholder="グリル/道具" maxlength="40" value="${esc(d.gear)}">
+          </div>
+          <input type="text" class="cook-input" data-f="tempLabel" placeholder="温度帯（例：110℃ / 弱火）" maxlength="30" value="${esc(d.tempLabel)}">
+          <textarea class="cook-input cook-textarea" data-f="method" rows="3" placeholder="どう作った？（メモ）" maxlength="2000">${esc(d.method)}</textarea>
+          <div class="cook-tagpick">${TAGS.map(t => `<button type="button" class="cook-tagopt ${d.tags.includes(t) ? 'is-on' : ''}" data-tag="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+        </div>
+      </div>`;
   }
 
   function setMsg(msg, cls) { const el = $('#formMsg'); el.textContent = msg; el.className = 'cook-form-msg ' + (cls || ''); }
 
-  async function submitPost(e) {
-    e.preventDefault();
-    const dishName = $('#dishName').value.trim();
-    if (!dishName) { setMsg('料理名を入力してください', 'err'); return; }
-    if (!Identity.name) { setMsg('表示名が未設定です', 'err'); requireNickname(); return; }
+  async function submitAll() {
+    if (!drafts.length) { setMsg('写真を追加してください', 'err'); return; }
+    if (!Profile.isRegistered()) { requireRegister(() => submitAll()); return; }
+    const missing = drafts.filter(d => !(d.dishName || '').trim());
+    if (missing.length) { setMsg(`料理名が空のカードが${missing.length}件あります`, 'err'); return; }
 
-    const submitBtn = $('#submitBtn');
-    submitBtn.disabled = true;
-
+    const btn = $('#submitBtn'); btn.disabled = true;
     try {
-      await Identity.signInIfNeeded();
-      const id = newId();
-      setMsg(draftPhotos.length ? `写真をアップロード中… (0/${draftPhotos.length})` : '保存中…', '');
-      const photoUrls = await Store.uploadPhotos(id, draftPhotos, (done, total) => setMsg(`写真をアップロード中… (${done}/${total})`, ''));
-
-      const post = {
-        id,
-        uid: Identity.uid,
-        authorName: Identity.name,
-        dishName,
-        method: $('#method').value.trim(),
-        gear: $('#gear').value.trim(),
-        tempLabel: $('#tempLabel').value.trim(),
-        tags: draftTags.slice(),
-        photos: photoUrls,
-        cookedAt: $('#cookedAt').value || todayISO(),
-        createdAt: Date.now(),
-        reactionCount: 0
-      };
-      await Store.add(post);
-
-      posts.unshift(post);
-      resetComposer();
+      await Profile.signInIfNeeded();
+      let done = 0;
+      for (const d of drafts) {
+        setMsg(`投稿中… (${done + 1}/${drafts.length})`, '');
+        const id = newId();
+        const url = await Store.uploadOne(id, { blob: d.blob, dataUrl: d.dataUrl });
+        const post = {
+          id, uid: Profile.uid, authorName: Profile.name, authorAvatar: Profile.avatar,
+          dishName: d.dishName.trim(), method: (d.method || '').trim(),
+          gear: (d.gear || '').trim(), tempLabel: (d.tempLabel || '').trim(),
+          tags: (d.tags || []).slice(), photos: [url],
+          cookedAt: d.cookedAt || todayISO(), createdAt: Date.now() - (drafts.length - done), reactionCount: 0
+        };
+        await Store.add(post);
+        posts.unshift(post);
+        done++;
+      }
+      drafts = [];
+      renderDrafts();
       closeModal('#composer');
       renderFilters(); renderFeed();
-      if (typeof gtag === 'function') gtag('event', 'cook_post', { mode: FB ? 'firebase' : 'local' });
+      if (typeof gtag === 'function') gtag('event', 'cook_post', { count: done, mode: FB ? 'firebase' : 'local' });
     } catch (err) {
       console.error(err);
       setMsg('投稿に失敗しました：' + (err.message || err), 'err');
-    } finally {
-      submitBtn.disabled = false;
-    }
-  }
-
-  function resetComposer() {
-    $('#postForm').reset();
-    draftPhotos = []; draftTags = [];
-    renderThumbs();
-    $$('.cook-tagopt').forEach(b => b.classList.remove('is-on'));
-    $('#cookedAt').value = todayISO();
-    setMsg('', '');
+    } finally { btn.disabled = false; }
   }
 
   function openComposer() {
-    if (!Identity.isReady()) { requireNickname(() => openComposer()); return; }
-    $('#dropzonePrompt').style.display = draftPhotos.length ? 'none' : '';
+    if (!Profile.isRegistered()) { requireRegister(() => openComposer()); return; }
+    showAiNote();
+    renderDrafts();
     openModal('#composer');
   }
   window.__cookOpenComposer = openComposer;
 
   // =====================================================
-  // NICKNAME
+  // REGISTRATION
   // =====================================================
-  let nickThen = null;
-  function requireNickname(then) {
-    nickThen = then || null;
-    $('#nickInput').value = Identity.name || '';
-    openModal('#nickModal');
-    setTimeout(() => $('#nickInput').focus(), 50);
+  let regThen = null;
+  let regAvatar = '🔥';
+  function buildRegister() {
+    $('#avatarPick').innerHTML = AVATARS.map(a => `<button type="button" class="cook-avatar" data-a="${a}">${a}</button>`).join('');
+    $$('.cook-avatar').forEach(b => b.addEventListener('click', () => {
+      regAvatar = b.dataset.a;
+      $$('.cook-avatar').forEach(x => x.classList.toggle('is-on', x === b));
+    }));
+    $('#regSave').addEventListener('click', saveRegister);
+    $('#regName').addEventListener('keydown', e => { if (e.key === 'Enter') saveRegister(); });
+  }
+  function requireRegister(then) {
+    regThen = then || null;
+    regAvatar = Profile.avatar || '🔥';
+    $('#regName').value = Profile.name || '';
+    $('#regBio').value = Profile.bio || '';
+    $$('.cook-avatar').forEach(x => x.classList.toggle('is-on', x.dataset.a === regAvatar));
+    $('#regMsg').textContent = '';
+    openModal('#regModal');
+    setTimeout(() => $('#regName').focus(), 50);
+  }
+  async function saveRegister() {
+    const name = $('#regName').value.trim();
+    if (!name) { $('#regMsg').textContent = '表示名を入力してください'; $('#regMsg').className = 'cook-form-msg err'; $('#regName').focus(); return; }
+    $('#regSave').disabled = true;
+    await Profile.save(name, regAvatar, $('#regBio').value.trim());
+    $('#regSave').disabled = false;
+    renderProfileChip();
+    closeModal('#regModal');
+    if (regThen) { const fn = regThen; regThen = null; fn(); }
+    renderFeed();
   }
 
-  function renderIdentityChip() {
+  function renderProfileChip() {
     const el = $('#identityChip');
-    if (Identity.name) {
-      el.innerHTML = `投稿者：<strong>${esc(Identity.name)}</strong><a id="changeNick">名前を変更</a>`;
-      $('#changeNick').addEventListener('click', () => requireNickname());
+    if (Profile.isRegistered()) {
+      el.innerHTML = `${esc(Profile.avatar)} <strong>${esc(Profile.name)}</strong> <a id="editProfile">プロフィール編集</a>`;
+      $('#editProfile').addEventListener('click', () => requireRegister());
     } else {
-      el.innerHTML = `<a id="setNick">表示名を設定して参加</a>`;
-      $('#setNick').addEventListener('click', () => requireNickname());
+      el.innerHTML = `<a id="doRegister">＋ ユーザー登録して参加</a>`;
+      $('#doRegister').addEventListener('click', () => requireRegister());
     }
   }
 
@@ -483,25 +579,34 @@
   // INIT
   // =====================================================
   async function init() {
-    // mode banner
     const banner = $('#modeBanner');
     if (!FB) {
       banner.hidden = false;
-      banner.innerHTML = 'この端末に保存される<strong>お試し / 個人記録モード</strong>で動作中です（Firebase未設定）。設定するとみんなで共有できるSNSになります。';
+      banner.innerHTML = 'この端末に保存される<strong>お試し / 個人記録モード</strong>で動作中です（Firebase未設定）。設定するとみんなで共有でき、写真のAI自動入力も使えます。';
     }
 
-    await Identity.init();
-    renderIdentityChip();
+    await Profile.init();
+    renderProfileChip();
     buildComposer();
+    buildRegister();
 
     // tabs
     $$('.cook-tab').forEach(t => t.addEventListener('click', () => {
       $$('.cook-tab').forEach(x => x.classList.remove('is-active'));
       t.classList.add('is-active');
       activeTab = t.dataset.tab;
-      if (activeTab === 'mine' && !Identity.isReady()) { requireNickname(); }
+      if (activeTab === 'mine' && !Profile.isRegistered()) requireRegister();
       renderFeed();
     }));
+
+    // search
+    const searchInput = $('#searchInput');
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value.trim();
+      $('#searchClear').hidden = !searchQuery;
+      renderFeed();
+    });
+    $('#searchClear').addEventListener('click', () => { searchInput.value = ''; searchQuery = ''; $('#searchClear').hidden = true; renderFeed(); searchInput.focus(); });
 
     // buttons
     $('#fab').addEventListener('click', openComposer);
@@ -509,31 +614,13 @@
     $('#composerClose').addEventListener('click', () => closeModal('#composer'));
     $('#composerCancel').addEventListener('click', () => closeModal('#composer'));
     $('#detailClose').addEventListener('click', () => closeModal('#detail'));
-    $('#nickSave').addEventListener('click', saveNick);
-    $('#nickInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveNick(); });
-    // click backdrop to close
     $$('.cook-modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal('#' + m.id); }));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.cook-modal').forEach(m => { if (!m.hidden) closeModal('#' + m.id); }); });
 
-    // load feed
-    try {
-      posts = await Store.list();
-    } catch (e) {
-      console.error('load failed', e);
-      posts = lsGet(LS_POSTS, []);
-    }
+    try { posts = await Store.list(); }
+    catch (e) { console.error('load failed', e); posts = lsGet(LS_POSTS, []); }
     $('#loadingState').hidden = true;
     renderFilters();
-    renderFeed();
-  }
-
-  function saveNick() {
-    const v = $('#nickInput').value.trim();
-    if (!v) { $('#nickInput').focus(); return; }
-    Identity.setName(v);
-    renderIdentityChip();
-    closeModal('#nickModal');
-    if (nickThen) { const fn = nickThen; nickThen = null; fn(); }
     renderFeed();
   }
 

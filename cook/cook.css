@@ -248,6 +248,70 @@
 .cook-d-del { background: none; border: none; color: var(--gray-400); font-size: 12.5px; cursor: pointer; }
 .cook-d-del:hover { color: var(--danger); }
 
+/* ---------- SEARCH ---------- */
+.cook-search {
+  display: flex; align-items: center; gap: 10px; max-width: 520px; margin: 0 auto 18px;
+  background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 999px;
+  padding: 0 16px; color: var(--gray-400); transition: all .15s;
+}
+.cook-search:focus-within { border-color: var(--brand-500); background: var(--white); color: var(--brand-500); box-shadow: 0 0 0 3px rgba(180,83,9,.10); }
+.cook-search input {
+  flex: 1; border: none; background: none; outline: none; font-family: inherit;
+  font-size: 14.5px; color: var(--gray-900); padding: 11px 0;
+}
+.cook-search-clear { background: none; border: none; color: var(--gray-400); cursor: pointer; font-size: 14px; padding: 4px; }
+.cook-search-clear:hover { color: var(--gray-700); }
+
+/* ---------- AI NOTE ---------- */
+.cook-ai-note {
+  font-size: 12.5px; line-height: 1.6; color: var(--gray-600);
+  background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px;
+  padding: 10px 14px; margin: 14px 0 4px;
+}
+
+/* ---------- COMPOSER (bulk) ---------- */
+.cook-composer-card { max-width: 640px; }
+.cook-composer-lede { font-size: 13.5px; line-height: 1.7; color: var(--gray-600); margin-bottom: 18px; }
+.cook-composer-lede strong { color: var(--gray-900); }
+.cook-composer-actions { position: sticky; bottom: -32px; background: linear-gradient(transparent, var(--white) 30%); padding-top: 16px; }
+
+.cook-drafts { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.cook-draft {
+  display: flex; gap: 14px; padding: 14px; border: 1px solid var(--gray-200);
+  border-radius: 14px; background: var(--gray-50);
+}
+.cook-draft-photo { position: relative; flex-shrink: 0; width: 96px; }
+.cook-draft-photo img { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; border: 1px solid var(--gray-200); }
+.cook-draft-x {
+  position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--gray-900); color: #fff; border: 2px solid #fff; cursor: pointer; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cook-draft-fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.cook-draft-fields .cook-input { padding: 9px 11px; font-size: 14px; border-radius: 9px; }
+.cook-draft-fields .cook-meta-row { gap: 8px; }
+.cook-draft-top { display: flex; justify-content: flex-end; }
+.cook-draft-ai { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.cook-draft-ai.is-pending { background: var(--gray-100); color: var(--gray-500); }
+.cook-draft-ai.is-running { background: #FEF3C7; color: #92400E; animation: cookPulse 1.1s ease-in-out infinite; }
+.cook-draft-ai.is-done { background: #DCFCE7; color: #166534; }
+.cook-draft-ai.is-na, .cook-draft-ai.is-error { background: var(--gray-100); color: var(--gray-400); }
+@keyframes cookPulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+.cook-draft .cook-tagpick { gap: 5px; }
+.cook-draft .cook-tagopt { padding: 4px 10px; font-size: 11.5px; }
+
+/* ---------- REGISTRATION ---------- */
+.cook-reg-card { max-width: 460px; }
+.cook-reg-lede { color: var(--gray-600); font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+.cook-avatars { display: flex; flex-wrap: wrap; gap: 8px; }
+.cook-avatar {
+  width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--gray-200);
+  background: var(--gray-50); font-size: 22px; cursor: pointer; transition: all .12s;
+  display: flex; align-items: center; justify-content: center;
+}
+.cook-avatar:hover { border-color: var(--brand-300); }
+.cook-avatar.is-on { border-color: var(--brand-500); background: #FFF7ED; box-shadow: 0 0 0 2px rgba(180,83,9,.18); }
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 600px) {
   .cook-feed { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
@@ -255,4 +319,7 @@
   .cook-modal-card { padding: 26px 18px; }
   .cook-meta-row { grid-template-columns: 1fr; }
   .cook-fab { bottom: 18px; right: 18px; }
+  .cook-draft { flex-direction: column; }
+  .cook-draft-photo, .cook-draft-photo img { width: 100%; }
+  .cook-draft-photo img { height: 180px; }
 }
