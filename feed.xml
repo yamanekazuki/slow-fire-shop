@@ -6,7 +6,14 @@
   <atom:link href="https://yamanekazuki.github.io/slow-fire-shop/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 15 May 2026 10:50:22 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 24 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>牛タンをBBQで焼く完全ガイド — 厚切りと薄切りで火入れはこう変える</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/beef-tongue-bbq-guide.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/beef-tongue-bbq-guide.html</guid>
+    <pubDate>Wed, 24 Jun 2026 07:00:00 +0900</pubDate>
+    <description>牛タンをBBQで焼くなら厚切りと薄切りで火入れが全く違う。薄切りは直火高温で30秒×2、厚切りはリバースシアで中心58℃。温度・時間・道具を具体的に解説する実用ガイド。</description>
+  </item>
     <item>
       <title>ブリスケットの作り方 — 初めての人でも失敗しない、家で挑む10時間レシピ</title>
       <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/brisket-recipe.html</link>
