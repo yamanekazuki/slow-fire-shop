@@ -1,0 +1,94 @@
+name: SLOW FIRE JOURNAL 自動記事
+
+# 週3回（月・水・金 朝7:00 JST = 前日22:00 UTC）に journal記事を1本生成・公開する。
+on:
+  schedule:
+    - cron: "0 22 * * 0,2,4"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "同名スラッグでも強制生成（テスト用）"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: journal-blog
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 記事生成
+        id: gen
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BLOG_MODEL: claude-opus-4-8
+          FORCE: ${{ github.event.inputs.force }}
+        run: node scripts/generate-journal.mjs
+
+      - name: 変更をコミット & プッシュ
+        run: |
+          git config user.name  "slow-fire-bot"
+          git config user.email "bot@users.noreply.github.com"
+          if git diff --quiet && git diff --cached --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "変更なし。スキップします。"
+            exit 0
+          fi
+          git add journal/ search-index.json feed.xml sitemap-main.xml
+          git commit -m "journal: 自動生成記事を追加 ($(TZ=Asia/Tokyo date +%Y-%m-%d))"
+          git push
+
+      # 記事URLが公開反映されるまで待つ（メールが404にならないように）
+      - name: Pages公開を待機
+        if: steps.gen.outputs.generated == 'true'
+        run: |
+          url="${{ steps.gen.outputs.url }}"
+          echo "公開待ち: $url"
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo 000)
+            echo "  試行 $i: HTTP $code"
+            if [ "$code" = "200" ]; then echo "公開を確認"; exit 0; fi
+            sleep 10
+          done
+          echo "::warning::Pages反映の確認がタイムアウト（まもなく反映見込み）。メールは送信します。"
+
+      - name: 記事公開メール通知
+        if: steps.gen.outputs.generated == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: yamane@potentialight.com,afroanri0126@gmail.com,woodyuetaku@gmail.com
+          subject: "【SLOW FIRE JOURNAL】新着記事を公開しました：${{ steps.gen.outputs.title }}"
+          html_body: |
+            <div style="font-family:sans-serif;line-height:1.8;color:#222;max-width:600px">
+              <p>SLOW FIRE JOURNAL（EC）に新しい記事を公開しました。</p>
+              <p style="color:#B45309;font-size:13px;letter-spacing:.05em">${{ steps.gen.outputs.category }}</p>
+              <h2 style="margin:.2em 0 .6em">${{ steps.gen.outputs.title }}</h2>
+              <p style="color:#555">${{ steps.gen.outputs.summary }}</p>
+              <p style="margin-top:24px">
+                <a href="${{ steps.gen.outputs.url }}"
+                   style="display:inline-block;background:#B45309;color:#fff;text-decoration:none;padding:12px 22px;border-radius:4px">
+                  記事を読む
+                </a>
+              </p>
+              <p style="font-size:13px;color:#888;margin-top:12px">${{ steps.gen.outputs.url }}</p>
+              <hr style="border:none;border-top:1px solid #eee;margin:28px 0">
+              <p style="font-size:12px;color:#aaa">SLOW FIRE JOURNAL — 火入れの科学と、場をつくる哲学。<br>このメールは記事の自動公開時に送信されています。</p>
+            </div>
