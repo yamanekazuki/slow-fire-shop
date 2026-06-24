@@ -383,6 +383,26 @@ function faqBlock(faq) {
   const items = faq.map((f) => `<h3>${esc(f.q)}</h3>\n        <p>${esc(f.a)}</p>`).join("\n        ");
   return `\n      <h2>よくある質問</h2>\n        ${items}`;
 }
+// 本文先頭に「番号付き目次（アンカーリンク）」を付ける。各H2にidを振り、見出しが2つ以上のときだけ目次を出す。
+function addTOC(html) {
+  const heads = [];
+  let n = 0;
+  const withIds = html.replace(/<h2(\s[^>]*)?>([\s\S]*?)<\/h2>/g, (m, attr, inner) => {
+    n++;
+    const id = `sec-${n}`;
+    heads.push({ id, text: inner.replace(/<[^>]+>/g, "").trim() });
+    return `<h2 id="${id}" style="scroll-margin-top:84px">${inner}</h2>`;
+  });
+  if (heads.length < 2) return html;
+  const items = heads
+    .map((h) => `<li style="margin:.15em 0"><a href="#${h.id}" style="color:#B45309;text-decoration:none">${h.text}</a></li>`)
+    .join("");
+  const toc = `<nav class="jr-toc" aria-label="目次" style="margin:0 0 1.8em;padding:18px 22px;background:#faf7f2;border:1px solid #ece6db;border-radius:8px">
+        <p style="margin:0 0 10px;font-weight:700;font-size:15px;color:#1b1b1b">目次</p>
+        <ol style="margin:0;padding-left:1.5em;line-height:1.95;color:#333">${items}</ol>
+      </nav>`;
+  return toc + withIds;
+}
 function renderArticle(p) {
   const cat = CAT[p.category];
   const url = `${SITE}/journal/articles/${p.file}`;
@@ -462,7 +482,7 @@ ${NAV}
     </div>
 
     <div class="jr-body">
-      ${p.body_html}${faqBlock(p.faq)}
+      ${addTOC(p.body_html + faqBlock(p.faq))}
     </div>
 
     <div class="jr-back"><a href="../index.html">← SLOW FIRE JOURNAL TOPに戻る</a></div>
@@ -579,7 +599,7 @@ async function main() {
     faq: Array.isArray(a.faq) ? a.faq : [],
     iso, dotDate, hero,
   };
-  const reviewBody = `<h2 style="margin:.2em 0">${esc(p.title)}</h2><p style="color:#555"><em>${esc(p.lead)}</em></p>${p.body_html}${faqBlock(p.faq)}`;
+  const reviewBody = `<h2 style="margin:.2em 0">${esc(p.title)}</h2><p style="color:#555"><em>${esc(p.lead)}</em></p>${addTOC(p.body_html + faqBlock(p.faq))}`;
 
   // ドラフトモード: 公開もファイル更新もせず、山根さんにドラフト＋採点ログを送る
   if (DRAFT) {
