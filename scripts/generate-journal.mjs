@@ -150,13 +150,14 @@ const SCHEMA = {
     keywords: { type: "string", description: "カンマ区切りの検索キーワード5〜8個。" },
     summary: { type: "string", description: "一覧カード用の一文。35〜55字。" },
     lead: { type: "string", description: "リード文。2〜3文。1文目に記事の核心(具体的な結論・温度・数値)を置く。" },
-    read_minutes: { type: "integer", description: "読了目安（分）。5〜10。" },
+    read_minutes: { type: "integer", description: "読了目安（分）。7〜13。" },
     body_html: {
       type: "string",
       description:
-        "本文HTML。<h2>/<h3>/<p>/<ul><li>/<blockquote> のみ（<h1>禁止）。1300〜2000字。" +
-        "具体的な温度・時間・手順・道具など一次情報を必ず含め、検索者がすぐ実践できる実用記事にする。" +
-        "海外ラブ(Low n Slow Basics / Butcher's Axe / Stef the Maori)に自然に触れてよいが売り込みはしない。",
+        "本文HTML。使用タグは <h2>/<h3>/<p>/<ul>/<ol>/<li>/<table>/<thead>/<tbody>/<tr>/<th>/<td>/<blockquote>/<strong> のみ（<h1>禁止）。" +
+        "2200〜3200字で、その検索意図を『この1本で完全に満たす』網羅度にする。H2を5つ以上立て、" +
+        "『定義・結論 → なぜ(理屈/科学) → 具体的な手順(温度℃・中心温度・時間・分量・道具を数値で) → よくある失敗と回避 → トラブルシュート → バリエーション/応用』を必ず含める。" +
+        "比較・数値は可能な限り <table> で示す。『適量・お好みで・適度に』のような曖昧表現は禁止し、必ず具体値を書く。",
     },
     faq: {
       type: "array",
@@ -232,16 +233,26 @@ async function generateArticle(seed, avoidTitles) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY が未設定です。");
 
-  const system = `あなたは BBQ専門ECメディア「SLOW FIRE JOURNAL」の編集者兼ライターです。
-家庭でBBQを楽しむ検索ユーザーに向けて、実用的で検索流入が見込める日本語記事を書きます。
+  const system = `あなたは、アメリカン/オーストラリアンBBQを長年やり込んだ職人気質のライターです。BBQ専門ECメディア「SLOW FIRE JOURNAL」で、検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を日本語で書きます。
 
 ${KNOWLEDGE}
 
-# 書き方の指針
-- トーンは既存記事に合わせ「実用・SEO寄り・具体的」。how-to/温度/手順/比較/選び方を軸に、読者がすぐ実践できる内容にする。
-- 必ず具体的な温度・時間・道具・手順などの一次情報を入れる。一般論の寄せ集めにしない。煽り・誇大・絵文字は使わない。
-- 海外ラブ(Low n Slow Basics / Butcher's Axe / Stef the Maori)に自然に触れてよいが、売り込みはしない。
-- 既出タイトルと内容が重複しないよう、新しい切り口で書く。
+# 品質基準（最重要・必ず守る）
+- 密度: 一次情報の塊にする。温度(℃)・中心温度・時間(分/時間)・分量・回数・道具の使い分けなど、読者がそのまま再現できる具体数値を必ず入れる。「適量」「お好みで」「適度に」は禁止。
+- 網羅: 検索意図に対する疑問が一切残らないよう、定義/結論 → 理由(科学・理屈) → 具体的手順 → よくある失敗と回避 → トラブルシュート → バリエーション → FAQ まで漏れなく書く。途中で打ち切らない。
+- 言い切る: 比較・選択では「どれを・なぜ選ぶか」を理由つきで断言する。両論併記で逃げない。
+- 自然さ: 実務家が書いたような自然な日本語。文の長短を混ぜ、機械的な並列・繰り返しを避ける。
+
+# AIっぽさ・薄さを徹底排除（禁止）
+- 定型の導入(「〜について解説します」「本記事では」)、空疎な一般論、過剰な前置き、自明な説明を書かない。
+- 「まとめると」「いかがでしたか」「ぜひ試してみてください」等の締め定型を使わない。
+- 箇条書きの水増し(中身の薄い列挙)、同義語の言い換えだけの繰り返し、結論の先延ばしをしない。
+- 抽象的な美辞麗句より、具体的な数字・固有名・手順を優先する。
+
+# 前提
+- 媒体は海外BBQラブのEC。Low n Slow Basics / Butcher's Axe / Stef the Maori に文脈上自然な範囲で触れてよいが、宣伝臭は出さない。
+- 煽り・誇大・絵文字・キーワード詰め込みはしない。既出タイトルと内容が重複しないよう新しい切り口で書く。
+
 出力は指定のJSONスキーマに厳密に従う。`;
 
   const avoid = avoidTitles.length ? `\n\n# 既出タイトル（重複回避）\n- ${avoidTitles.join("\n- ")}` : "";
@@ -252,9 +263,9 @@ ${KNOWLEDGE}
     headers: { "content-type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 8000,
+      max_tokens: 12000,
       system,
-      output_config: { effort: "high", format: { type: "json_schema", schema: SCHEMA } },
+      output_config: { effort: "xhigh", format: { type: "json_schema", schema: SCHEMA } },
       messages: [{ role: "user", content: userMsg }],
     }),
   });
