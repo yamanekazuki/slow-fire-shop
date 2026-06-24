@@ -230,9 +230,6 @@ async function generateArticle(seed, avoidTitles) {
       faq: [{ q: "テスト質問?", a: "テスト回答です。" }],
     };
   }
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error("ANTHROPIC_API_KEY が未設定です。");
-
   const system = `あなたは、アメリカン/オーストラリアンBBQを長年やり込んだ職人気質のライターです。BBQ専門ECメディア「SLOW FIRE JOURNAL」で、検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を日本語で書きます。
 
 ${KNOWLEDGE}
@@ -258,14 +255,21 @@ ${KNOWLEDGE}
   const avoid = avoidTitles.length ? `\n\n# 既出タイトル（重複回避）\n- ${avoidTitles.join("\n- ")}` : "";
   const userMsg = `今回のテーマの種:「${seed}」\nこのテーマを起点に、実用的なBBQ記事を1本書いてください。種は出発点で、より具体的で新鮮な切り口に発展させて構いません。${avoid}`;
 
+  return callClaude(system, userMsg, SCHEMA, { maxTokens: 12000, effort: "xhigh" });
+}
+
+// 汎用 Claude 呼び出し（structured output / 依存ゼロ）
+async function callClaude(system, userMsg, schema, { maxTokens = 8000, effort = "high" } = {}) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error("ANTHROPIC_API_KEY が未設定です。");
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "content-type": "application/json", "x-api-key": apiKey, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 12000,
+      max_tokens: maxTokens,
       system,
-      output_config: { effort: "xhigh", format: { type: "json_schema", schema: SCHEMA } },
+      output_config: { effort, format: { type: "json_schema", schema } },
       messages: [{ role: "user", content: userMsg }],
     }),
   });
@@ -275,6 +279,97 @@ ${KNOWLEDGE}
   const t = (data.content || []).find((b) => b.type === "text");
   if (!t) throw new Error("テキストブロックなし");
   return JSON.parse(t.text);
+}
+
+// ===== 自己検証ループ（採点 → 修正 → 再採点）=====
+const PASS = 80;          // 合格点
+const MAX_REVISE = 3;     // 最大修正回数
+const RUBRIC = [
+  { name: "独自性・一次情報の密度", max: 25, desc: "具体的な温度/時間/分量/手順/数値が豊富で、ありきたりでなく独自の視点がある" },
+  { name: "技術的正確性", max: 25, desc: "下記の知識ベース(Weber Grill Academy由来)に照らして、温度・時間・手順などに誤った情報がない" },
+  { name: "言い切り・トーン", max: 20, desc: "実用的に根拠をもって言い切れている。ただし誇張・煽り・断定の押し付けがなく、落ち着いた語り口" },
+  { name: "次の行動の明確さ", max: 15, desc: "読者が次に取るべき行動が1つ、明確に書かれている" },
+  { name: "独自の切り口・重複回避", max: 15, desc: "既存記事と内容のかぶりが2割未満で、独自の切り口がある" },
+];
+const GRADE_SCHEMA = {
+  type: "object", additionalProperties: false,
+  properties: {
+    items: {
+      type: "array", description: "5項目の採点",
+      items: {
+        type: "object", additionalProperties: false,
+        properties: {
+          name: { type: "string", enum: RUBRIC.map((r) => r.name) },
+          score: { type: "integer", description: "獲得点(0〜配点)" },
+          max: { type: "integer", description: "配点" },
+          issue: { type: "string", description: "減点理由(満点なら『なし』)" },
+          fix: { type: "string", description: "具体的な直し方(満点なら『なし』)" },
+        },
+        required: ["name", "score", "max", "issue", "fix"],
+      },
+    },
+    verdict: { type: "string", description: "総評(1〜2文)" },
+  },
+  required: ["items", "verdict"],
+};
+function articleText(a) {
+  const faq = (a.faq || []).map((f) => `Q.${f.q}\nA.${f.a}`).join("\n");
+  return `タイトル: ${a.title}\nカテゴリ: ${a.category}\nリード: ${a.lead}\n\n本文HTML:\n${a.body_html}\n\nFAQ:\n${faq}`;
+}
+async function grade(a, avoidTitles) {
+  if (process.env.STUB === "1") {
+    return { total: 88, items: RUBRIC.map((r) => ({ name: r.name, score: r.max, max: r.max, issue: "なし", fix: "なし" })), verdict: "STUB合格" };
+  }
+  const system = `あなたは SLOW FIRE JOURNAL の厳格な編集長です。公開前の記事を以下のルーブリックで100点満点・項目別に採点します。甘くつけず、具体的に指摘します。
+
+# 採点ルーブリック（合格 ${PASS}点）
+${RUBRIC.map((r) => `- ${r.name}（${r.max}点）: ${r.desc}`).join("\n")}
+
+# 「技術的正確性」判定に使う“正”の知識（これに反する温度・手順・数値は誤りとして必ず減点）
+${KNOWLEDGE}
+
+各項目に 0〜配点 の整数で点をつけ、減点した項目には issue(理由) と fix(具体的な直し方) を必ず書く。出力はスキーマに厳密に従う。`;
+  const user = `# 採点対象の記事\n${articleText(a)}\n\n# 既存記事タイトル（重複判定用）\n- ${(avoidTitles || []).slice(0, 60).join("\n- ")}`;
+  const g = await callClaude(system, user, GRADE_SCHEMA, { maxTokens: 3500, effort: "high" });
+  const byName = Object.fromEntries(RUBRIC.map((r) => [r.name, r.max]));
+  const items = (g.items || []).map((i) => ({ ...i, max: byName[i.name] ?? i.max }));
+  const total = items.reduce((s, i) => s + (Number(i.score) || 0), 0);
+  return { total, items, verdict: g.verdict || "" };
+}
+async function revise(a, failing) {
+  const system = `あなたは BBQ専門メディア「SLOW FIRE JOURNAL」の編集者です。以下の記事を、指摘された項目を重点的に直して全文書き直します。良い部分は保ち、指摘以外を不必要に変えないこと。具体的な温度・時間・数値・手順を増やし、AIっぽい定型・水増し・薄さは排除する。
+
+${KNOWLEDGE}
+
+出力は記事生成と同じJSONスキーマに厳密に従う。`;
+  const fixList = failing.map((i) => `- ${i.name}（${i.score}/${i.max}）: ${i.issue} → ${i.fix}`).join("\n");
+  const cur = { title: a.title, slug: a.slug, category: a.category, description: a.description, og_description: a.og_description, keywords: a.keywords, summary: a.summary, lead: a.lead, read_minutes: a.read_minutes, body_html: a.body_html, faq: a.faq };
+  const user = `# 現在の記事(JSON)\n${JSON.stringify(cur)}\n\n# 直すべき項目（ここだけ重点的に改善）\n${fixList}`;
+  return callClaude(system, user, SCHEMA, { maxTokens: 12000, effort: "xhigh" });
+}
+function failSummary(g) {
+  const low = g.items.filter((i) => i.score < i.max);
+  return low.length ? `（弱点: ${low.map((i) => `${i.name} ${i.score}/${i.max}`).join(", ")}）` : "（全項目満点）";
+}
+async function reviewLoop(art, avoidTitles) {
+  const log = [];
+  let best = art;
+  let bestG = await grade(best, avoidTitles);
+  log.push(`採点1回目: ${bestG.total}点 ${failSummary(bestG)}`);
+  console.log(log[log.length - 1]);
+  let attempts = 0;
+  while (bestG.total < PASS && attempts < MAX_REVISE) {
+    attempts++;
+    const failing = bestG.items.filter((i) => i.score < i.max);
+    let candidate;
+    try { candidate = await revise(best, failing); }
+    catch (e) { console.warn(`修正${attempts}回目で失敗: ${e.message}`); break; }
+    const g = await grade(candidate, avoidTitles);
+    log.push(`修正${attempts}回目→採点: ${g.total}点 ${failSummary(g)}`);
+    console.log(log[log.length - 1]);
+    if (g.total > bestG.total) { best = candidate; bestG = g; }
+  }
+  return { best, grade: bestG, log: log.join("\n"), attempts };
 }
 
 // ---- 記事HTML ----------------------------------------------------------------
@@ -459,22 +554,48 @@ async function main() {
   console.log(`テーマの種: ${seed}`);
   const art = await generateArticle(seed, avoidTitles);
 
-  let slug = sanitizeSlug(art.slug, iso);
-  if (existingSlugs.has(slug) && !force) { console.log(`既存スラッグ ${slug}。スキップ。`); setOutput({ generated: "false" }); return; }
+  // --- 自己検証ループ（採点→修正→再採点）。STUBは採点をスキップ ---
+  const DRAFT = ["1", "true"].includes(process.env.DRAFT);
+  const review = process.env.STUB === "1"
+    ? { best: art, grade: { total: 100, items: RUBRIC.map((r) => ({ name: r.name, score: r.max, max: r.max, issue: "なし", fix: "なし" })), verdict: "STUB" }, log: "（STUB: 採点スキップ）", attempts: 0 }
+    : await reviewLoop(art, avoidTitles);
+  const a = review.best;
+  const g = review.grade;
+  const breakdown = g.items.map((i) => `${i.name} ${i.score}/${i.max}`).join(" ／ ");
+  console.log(`採点ログ:\n${review.log}\n最終スコア: ${g.total}点`);
+
+  // スラッグ・分類・画像
+  let slug = sanitizeSlug(a.slug, iso);
   if (existingSlugs.has(slug)) slug = `${slug}-${iso}`;
-  const category = CATEGORIES.includes(art.category) ? art.category : "recipe";
+  const category = CATEGORIES.includes(a.category) ? a.category : "recipe";
   const file = `${slug}.html`;
   const hero = HERO_POOL[files.length % HERO_POOL.length];
 
   const p = {
-    title: art.title, file, slug, category,
-    description: art.description, og_description: art.og_description || art.description,
-    keywords: art.keywords, summary: art.summary || art.description,
-    lead: art.lead, read_minutes: art.read_minutes || 7, body_html: art.body_html,
-    faq: Array.isArray(art.faq) ? art.faq : [],
+    title: a.title, file, slug, category,
+    description: a.description, og_description: a.og_description || a.description,
+    keywords: a.keywords, summary: a.summary || a.description,
+    lead: a.lead, read_minutes: a.read_minutes || 7, body_html: a.body_html,
+    faq: Array.isArray(a.faq) ? a.faq : [],
     iso, dotDate, hero,
   };
+  const reviewBody = `<h2 style="margin:.2em 0">${esc(p.title)}</h2><p style="color:#555"><em>${esc(p.lead)}</em></p>${p.body_html}${faqBlock(p.faq)}`;
 
+  // ドラフトモード: 公開もファイル更新もせず、山根さんにドラフト＋採点ログを送る
+  if (DRAFT) {
+    setOutput({ status: "draft", title: p.title, score: String(g.total), breakdown, log: review.log, body: reviewBody });
+    console.log(`DRAFT: 公開せず（${g.total}点）。`);
+    return;
+  }
+  // 安全弁: 合格点未満は公開しない。山根さんに最高得点版＋落ちた項目を送る
+  if (g.total < PASS) {
+    const reasons = g.items.filter((i) => i.score < i.max).map((i) => `${i.name} ${i.score}/${i.max}：${i.issue}`).join("\n");
+    setOutput({ status: "failed", title: p.title, score: String(g.total), breakdown, reasons: reasons || "—", log: review.log, body: reviewBody });
+    console.log(`不合格（${g.total}点）。公開せず、山根さんに通知。`);
+    return;
+  }
+
+  // --- 合格 → 公開（7ファイル更新）---
   // 1) 記事ページ
   await mkdir(ART_DIR, { recursive: true });
   await writeFile(join(ART_DIR, file), renderArticle(p), "utf8");
@@ -519,13 +640,16 @@ async function main() {
   });
 
   setOutput({
+    status: "published",
     generated: "true",
     title: p.title,
     summary: p.summary,
     category: CAT[category].ja,
     url: `${SITE}/journal/articles/${file}`,
+    score: String(g.total),
+    breakdown,
   });
-  console.log(`完了: ${p.title}`);
+  console.log(`公開完了: ${p.title}（${g.total}点）`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

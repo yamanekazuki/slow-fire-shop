@@ -1,13 +1,21 @@
 name: SLOW FIRE JOURNAL 自動記事
 
-# 週3回（月・水・金 朝7:00 JST = 前日22:00 UTC）に journal記事を1本生成・公開する。
+# 週3回（月・水・金 朝7:00 JST = 前日22:00 UTC）に journal記事を1本生成。
+# 生成→自己採点→（80点未満なら）修正→再採点を最大3回繰り返し、合格した記事だけ公開する。
+# 不合格 or ドラフト実行のときは公開せず、山根さんに内容＋採点ログをメールする。
 on:
-  schedule:
-    - cron: "0 22 * * 0,2,4"
+  # ▼ 自己検証ループのレビュー中は自動公開を一時停止。
+  #   ドラフトで内容を確認→OK後に、このscheduleのコメントを外して週3自動公開を再開する。
+  # schedule:
+  #   - cron: "0 22 * * 0,2,4"
   workflow_dispatch:
     inputs:
       force:
         description: "同名スラッグでも強制生成（テスト用）"
+        type: boolean
+        default: false
+      draft:
+        description: "ドラフト（公開せず・山根さんに採点ログ付きサンプルを送るだけ）"
         type: boolean
         default: false
 
@@ -30,29 +38,28 @@ jobs:
         with:
           node-version: "20"
 
-      - name: 記事生成
+      - name: 記事生成＋自己検証ループ
         id: gen
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           BLOG_MODEL: claude-opus-4-8
           FORCE: ${{ github.event.inputs.force }}
+          DRAFT: ${{ github.event.inputs.draft }}
         run: node scripts/generate-journal.mjs
 
+      # ===== 合格して公開する場合だけ commit / 公開待ち / 3名へメール =====
       - name: 変更をコミット & プッシュ
+        if: steps.gen.outputs.status == 'published'
         run: |
           git config user.name  "slow-fire-bot"
           git config user.email "bot@users.noreply.github.com"
-          if git diff --quiet && git diff --cached --quiet && [ -z "$(git status --porcelain)" ]; then
-            echo "変更なし。スキップします。"
-            exit 0
-          fi
+          if [ -z "$(git status --porcelain)" ]; then echo "変更なし"; exit 0; fi
           git add journal/ search-index.json feed.xml sitemap-main.xml
           git commit -m "journal: 自動生成記事を追加 ($(TZ=Asia/Tokyo date +%Y-%m-%d))"
           git push
 
-      # 記事URLが公開反映されるまで待つ（メールが404にならないように）
       - name: Pages公開を待機
-        if: steps.gen.outputs.generated == 'true'
+        if: steps.gen.outputs.status == 'published'
         run: |
           url="${{ steps.gen.outputs.url }}"
           echo "公開待ち: $url"
@@ -62,10 +69,10 @@ jobs:
             if [ "$code" = "200" ]; then echo "公開を確認"; exit 0; fi
             sleep 10
           done
-          echo "::warning::Pages反映の確認がタイムアウト（まもなく反映見込み）。メールは送信します。"
+          echo "::warning::Pages反映の確認がタイムアウト。メールは送信します。"
 
-      - name: 記事公開メール通知
-        if: steps.gen.outputs.generated == 'true'
+      - name: 記事公開メール通知（3名）
+        if: steps.gen.outputs.status == 'published'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -82,13 +89,70 @@ jobs:
               <p style="color:#B45309;font-size:13px;letter-spacing:.05em">${{ steps.gen.outputs.category }}</p>
               <h2 style="margin:.2em 0 .6em">${{ steps.gen.outputs.title }}</h2>
               <p style="color:#555">${{ steps.gen.outputs.summary }}</p>
-              <p style="margin-top:24px">
+              <p style="font-size:12px;color:#888;background:#f6f3ee;border-radius:4px;padding:8px 12px">
+                自己採点 最終スコア <strong>${{ steps.gen.outputs.score }}点</strong>（${{ steps.gen.outputs.breakdown }}）
+              </p>
+              <p style="margin-top:18px">
                 <a href="${{ steps.gen.outputs.url }}"
-                   style="display:inline-block;background:#B45309;color:#fff;text-decoration:none;padding:12px 22px;border-radius:4px">
-                  記事を読む
-                </a>
+                   style="display:inline-block;background:#B45309;color:#fff;text-decoration:none;padding:12px 22px;border-radius:4px">記事を読む</a>
               </p>
               <p style="font-size:13px;color:#888;margin-top:12px">${{ steps.gen.outputs.url }}</p>
-              <hr style="border:none;border-top:1px solid #eee;margin:28px 0">
-              <p style="font-size:12px;color:#aaa">SLOW FIRE JOURNAL — 火入れの科学と、場をつくる哲学。<br>このメールは記事の自動公開時に送信されています。</p>
+              <hr style="border:none;border-top:1px solid #eee;margin:24px 0">
+              <p style="font-size:12px;color:#aaa">SLOW FIRE JOURNAL — 記事の自動公開時に送信。</p>
+            </div>
+
+      # ===== ドラフト（公開せず・山根さんだけにサンプル＋採点ログ） =====
+      - name: ドラフト送付（山根さんのみ）
+        if: steps.gen.outputs.status == 'draft'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: yamane@potentialight.com
+          subject: "【ドラフト・未公開】SLOW FIRE JOURNAL 採点サンプル：${{ steps.gen.outputs.title }}（${{ steps.gen.outputs.score }}点）"
+          html_body: |
+            <div style="font-family:sans-serif;line-height:1.8;color:#222;max-width:680px">
+              <p style="background:#fff3e0;border:1px solid #ffd8a8;border-radius:6px;padding:10px 14px">
+                これは<strong>未公開のドラフト</strong>です。内容と採点ログを確認し、合格点・採点基準を一緒に調整してください。
+              </p>
+              <p style="font-size:13px;color:#555"><strong>最終スコア ${{ steps.gen.outputs.score }}点</strong>（${{ steps.gen.outputs.breakdown }}）</p>
+              <p style="font-size:13px;color:#555;white-space:pre-line;background:#f6f3ee;border-radius:4px;padding:10px 12px"><strong>採点ログ</strong>
+            ${{ steps.gen.outputs.log }}</p>
+              <hr style="border:none;border-top:1px solid #eee;margin:20px 0">
+              <div style="border:1px solid #eee;border-radius:6px;padding:18px 20px">
+                ${{ steps.gen.outputs.body }}
+              </div>
+            </div>
+
+      # ===== 不合格（3回でも80点未満・公開せず・安全弁） =====
+      - name: 不合格通知（山根さんのみ）
+        if: steps.gen.outputs.status == 'failed'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: yamane@potentialight.com
+          subject: "【非公開・要確認】SLOW FIRE JOURNAL 合格点に届かず：${{ steps.gen.outputs.title }}（${{ steps.gen.outputs.score }}点）"
+          html_body: |
+            <div style="font-family:sans-serif;line-height:1.8;color:#222;max-width:680px">
+              <p style="background:#ffeaea;border:1px solid #ffc9c9;border-radius:6px;padding:10px 14px">
+                3回直しても合格点（80点）に届かなかったため、<strong>公開していません</strong>（誤情報・低品質を世に出さないための安全弁）。最高得点版と落ちた項目を共有します。
+              </p>
+              <p style="font-size:13px;color:#555"><strong>最高スコア ${{ steps.gen.outputs.score }}点</strong>（${{ steps.gen.outputs.breakdown }}）</p>
+              <p style="font-size:13px;color:#555;white-space:pre-line;background:#f6f3ee;border-radius:4px;padding:10px 12px"><strong>落ちた項目</strong>
+            ${{ steps.gen.outputs.reasons }}</p>
+              <p style="font-size:12px;color:#888;white-space:pre-line">採点ログ:
+            ${{ steps.gen.outputs.log }}</p>
+              <hr style="border:none;border-top:1px solid #eee;margin:20px 0">
+              <div style="border:1px solid #eee;border-radius:6px;padding:18px 20px">
+                ${{ steps.gen.outputs.body }}
+              </div>
             </div>
