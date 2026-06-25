@@ -6,7 +6,14 @@
   <atom:link href="https://yamanekazuki.github.io/slow-fire-shop/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 24 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 26 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQ後のグリル掃除とメンテナンス完全ガイド — 焼き網・炭受け・本体を長持ちさせる手順</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/grill-cleaning-maintenance-guide.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/grill-cleaning-maintenance-guide.html</guid>
+    <pubDate>Fri, 26 Jun 2026 07:00:00 +0900</pubDate>
+    <description>BBQ後のグリル掃除を焼き網・炭受け・本体の3パートに分けて完全網羅。余熱を使うタイミング、油膜の作り方、サビの落とし方まで具体的な温度・手順・頻度で解説する。</description>
+  </item>
   <item>
     <title>ラムチョップの臭み対策と火入れ — 表面カリッ・中ロゼに仕上げる手順</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/lamb-chop-smell-and-fire.html</link>
