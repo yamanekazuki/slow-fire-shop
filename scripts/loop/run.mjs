@@ -151,7 +151,7 @@ const EDIT_SCHEMA = {
   required: ["edits", "note"],
 };
 
-async function aiImplement(html, proposal) {
+async function aiImplement(html, proposal, feedback = "") {
   const system = `あなたはSLOW FIRE JOURNAL（アメリカンBBQメディア）の編集者です。
 与えられた記事HTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。
 
@@ -167,7 +167,7 @@ async function aiImplement(html, proposal) {
 対象: ${proposal.target}
 変更内容: ${proposal.change}
 期待効果: ${proposal.impact}
-
+${feedback ? `\n# 前回の実装が審査で落ちた理由（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}
 # 記事HTML
 ${html}`;
   return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 12000, effort: "xhigh" });
@@ -242,30 +242,47 @@ async function doImplement() {
   }
 
   const before = fs.readFileSync(file, "utf8");
-  let impl;
-  try {
-    impl = await aiImplement(before, proposal);
-  } catch (e) {
-    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) });
-    return;
-  }
-  const { html: after, applied, skipped } = applyEdits(before, impl.edits);
-  if (!applied.length) {
-    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") });
-    return;
+
+  // 実装→自己採点を、合格点(80)に届くまで最大3回くり返す。
+  // 落ちた回は採点役の指摘（総評）を次の実装役へフィードバックして直させる。
+  // 80点の安全バーは下げない：3回努力しても届かなければ最高得点版を載せて見送る。
+  const MAX_ATTEMPTS = 3;
+  let best = null;     // { total, grade, after, applied, skipped }
+  let feedback = "";
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    let impl;
+    try {
+      impl = await aiImplement(before, proposal, feedback);
+    } catch (e) {
+      if (attempt === 1) { setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
+      feedback = `実装AIエラー: ${e.message}`; continue;
+    }
+    const { html: after, applied, skipped } = applyEdits(before, impl.edits);
+    if (!applied.length) {
+      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
+      feedback = "find が記事内に一致しなかった。記事HTMLに一字一句そのまま存在する十分長い文字列を find にすること。"; continue;
+    }
+
+    // 自己採点（実装役とは別呼び出し）
+    let grade;
+    try {
+      grade = await aiGrade(proposal, applied);
+    } catch (e) {
+      grade = { total: 0, items: [], verdict: `採点AIエラー: ${e.message}` };
+    }
+    const total = Number(grade.total) || 0;
+    if (!best || total > best.total) best = { total, grade, after, applied, skipped };
+    if (total >= PASS) { console.log(`attempt ${attempt}: ${total}点 合格`); break; }
+    feedback = `自己採点${total}/100点で不合格。総評：${grade.verdict || ""}${(grade.items || []).filter((it) => it.score < it.max).map((it) => `／${it.name}:${it.comment}`).join("")}`;
+    console.log(`attempt ${attempt}: ${total}点 — 指摘を直して再挑戦`);
   }
 
-  // 自己採点（実装役とは別呼び出し）
-  let grade;
-  try {
-    grade = await aiGrade(proposal, applied);
-  } catch (e) {
-    grade = { total: 0, items: [], verdict: `採点AIエラー: ${e.message}` };
-  }
-  if (Number(grade.total) < PASS) {
-    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL・非公開】採点${grade.total}点で見送り：${proposal.title || ""}`, html: rejectedHtml(proposal, grade, applied, file) });
+  // 3回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
+  if (!best || best.total < PASS) {
+    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
     return;
   }
+  const { grade, after, applied, skipped } = best;
 
   // 合格 → ブランチにコミット（公開はしない）
   gitSetup();
