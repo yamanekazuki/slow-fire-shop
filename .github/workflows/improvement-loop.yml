@@ -1,0 +1,57 @@
+name: SLOW FIRE JOURNAL 改善ループ（実装）
+
+# 改善提案メールの［承認］［公開］［取消］［元に戻す］ボタン →
+# cook-logのFirebase関数が repository_dispatch を送り、ここで実体を処理する。
+#   implement-article : 記事を編集→自己採点→（合格なら）ブランチにコミットしプレビューをメール
+#   publish-article   : ブランチをmainへ取り込み公開（Pages反映）→完了メール
+#   discard-article   : プレビュー破棄（ブランチ削除）
+#   revert-article    : 公開済みの変更を元に戻す
+on:
+  repository_dispatch:
+    types: [implement-article, publish-article, discard-article, revert-article]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: improvement-loop
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト（全履歴）
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node セットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 実装/公開/取消/復元を実行
+        id: loop
+        env:
+          ACTION: ${{ github.event.action }}
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          APPROVAL_SECRET: ${{ secrets.APPROVAL_SECRET }}
+          APPROVAL_FN_BASE: ${{ secrets.APPROVAL_FN_BASE }}
+          BLOG_MODEL: claude-opus-4-8
+        run: node scripts/loop/run.mjs
+
+      - name: 結果をメール（山根さん）
+        if: steps.loop.outputs.ready == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ steps.loop.outputs.to }}
+          subject: ${{ steps.loop.outputs.subject }}
+          html_body: ${{ steps.loop.outputs.html }}
