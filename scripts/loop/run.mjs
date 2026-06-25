@@ -35,6 +35,8 @@ const MODEL = process.env.BLOG_MODEL || "claude-opus-4-8";
 const REPO = "yamanekazuki/slow-fire-shop";
 const LIVE_BASE = "https://yamanekazuki.github.io/slow-fire-shop/";
 const PASS = 80;
+// 改善ループの結果メールの宛先（山根さん＋メンバー2名）。env MAIL_TO で上書き可。
+const TO = process.env.MAIL_TO || "yamane@potentialight.com,afroanri0126@gmail.com,woodyuetaku@gmail.com";
 
 // ---- 出力ヘルパ --------------------------------------------------------------
 function setOutput(pairs) {
@@ -234,7 +236,7 @@ async function doImplement() {
   if (!file) {
     setOutput({
       ready: "true",
-      to: "yamane@potentialight.com",
+      to: TO,
       subject: `【SLOW FIRE JOURNAL】自動実装の対象外でした：${proposal.title || ""}`,
       html: notImplementableHtml(proposal),
     });
@@ -254,12 +256,12 @@ async function doImplement() {
     try {
       impl = await aiImplement(before, proposal, feedback);
     } catch (e) {
-      if (attempt === 1) { setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
+      if (attempt === 1) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
       feedback = `実装AIエラー: ${e.message}`; continue;
     }
     const { html: after, applied, skipped } = applyEdits(before, impl.edits);
     if (!applied.length) {
-      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
       feedback = "find が記事内に一致しなかった。記事HTMLに一字一句そのまま存在する十分長い文字列を find にすること。"; continue;
     }
 
@@ -279,7 +281,7 @@ async function doImplement() {
 
   // 3回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
   if (!best || best.total < PASS) {
-    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: `【SLOW FIRE JOURNAL・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
+    setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
     return;
   }
   const { grade, after, applied, skipped } = best;
@@ -297,7 +299,7 @@ async function doImplement() {
 
   setOutput({
     ready: "true",
-    to: "yamane@potentialight.com",
+    to: TO,
     subject: `【SLOW FIRE JOURNAL】実装できました（採点${grade.total}点）公開しますか？：${proposal.title || ""}`,
     html: previewHtml({ proposal, grade, applied, skipped, file, branch, commit }),
   });
@@ -329,7 +331,7 @@ async function doPublish() {
 
   setOutput({
     ready: "true",
-    to: "yamane@potentialight.com",
+    to: TO,
     subject: `【SLOW FIRE JOURNAL】本番に公開しました${changed ? `：${changed}` : ""}`,
     html: publishedHtml({ branch, mainCommit, changed }),
   });
@@ -357,7 +359,7 @@ async function doRevert() {
   sh("git push origin main");
   setOutput({
     ready: "true",
-    to: "yamane@potentialight.com",
+    to: TO,
     subject: `【SLOW FIRE JOURNAL】変更を元に戻しました`,
     html: revertedHtml(commit),
   });
@@ -476,7 +478,7 @@ async function main() {
 if (ACTION) {
   main().catch((e) => {
     console.error("致命的エラー:", e);
-    setOutput({ ready: "true", to: "yamane@potentialight.com", subject: "【SLOW FIRE JOURNAL】改善ループでエラー", html: failHtml(PAYLOAD.proposal || {}, String(e && e.message || e)) });
+    setOutput({ ready: "true", to: TO, subject: "【SLOW FIRE JOURNAL】改善ループでエラー", html: failHtml(PAYLOAD.proposal || {}, String(e && e.message || e)) });
     process.exit(0);
   });
 }
