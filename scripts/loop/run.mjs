@@ -153,9 +153,9 @@ const EDIT_SCHEMA = {
   required: ["edits", "note"],
 };
 
-async function aiImplement(html, proposal, feedback = "") {
+async function aiImplement(html, proposal, feedback = "", downscope = "") {
   const system = `あなたはSLOW FIRE JOURNAL（アメリカンBBQメディア）の編集者です。
-与えられた記事HTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。
+与えられた記事HTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。完璧を狙って何も出せないより、確実で安全な一歩を必ず出します。
 
 # 鉄則
 - find は記事HTML内に「一字一句そのまま」存在する文字列にする（一意に特定できるよう十分長く）。
@@ -169,10 +169,28 @@ async function aiImplement(html, proposal, feedback = "") {
 対象: ${proposal.target}
 変更内容: ${proposal.change}
 期待効果: ${proposal.impact}
-${feedback ? `\n# 前回の実装が審査で落ちた理由（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}
+${feedback ? `\n# 前回の実装が審査で落ちた理由と、通すための直し方（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}${downscope}
 # 記事HTML
 ${html}`;
   return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 12000, effort: "xhigh" });
+}
+
+// 提案が安全に実装しづらく採点で落ち続けるとき、効果の核を残したまま「確実・安全に実装できる」狭い提案へ作り直す。
+const REFORM_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    title: { type: "string" },
+    target: { type: "string", description: "対象記事URL/パス（元提案と同じものを保つ）" },
+    change: { type: "string", description: "何をどう変えるか（最小・安全に、find/replaceで実装できる範囲）" },
+    impact: { type: "string" },
+  },
+  required: ["title", "target", "change", "impact"],
+};
+async function aiReformulate(proposal, feedback) {
+  const system = `あなたはSLOW FIRE JOURNALの編集長。安全に実装できず採点で落ち続けている改善提案を、狙う指標は保ったまま「確実に・安全に・最小のfind/replaceで実装できる」狭い提案に作り直します。targetは元提案と同じ記事を保つこと。`;
+  const userMsg = `# 元の提案\n${JSON.stringify(proposal, null, 2)}\n\n# 採点で繰り返し落ちている理由\n${feedback}\n\n狙い（どの指標を動かすか）は保ちつつ、リスクの高い要素を削り、確実に通る狭い一手に書き直す。`;
+  return callClaude(system, userMsg, REFORM_SCHEMA, { maxTokens: 2000, effort: "high" });
 }
 
 // ---- 採点役：変更が安全か（実装役とは別呼び出し）-----------------------------
@@ -196,12 +214,13 @@ const GRADE_SCHEMA = {
     },
     total: { type: "number", description: "100点満点の合計" },
     verdict: { type: "string", description: "総評（1〜2文）" },
+    fix_hint: { type: "string", description: "合格点(80)に届いていないなら、どう直せば通るかの具体的で実装可能な直し方を1〜2文。合格なら空文字" },
   },
-  required: ["items", "total", "verdict"],
+  required: ["items", "total", "verdict", "fix_hint"],
 };
 
 async function aiGrade(proposal, edits) {
-  const system = `あなたはSLOW FIRE JOURNALの編集長で、AIが作った記事修正を世に出す前の最終審査をします。辛口に。
+  const system = `あなたはSLOW FIRE JOURNALの編集長で、AIが作った記事修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
 以下5項目で100点満点採点し、合計を出してください。
 1. 提案との一致（25）：提案の意図どおりの修正になっているか
 2. 事実・技術的正確性（25）：温度/時間/手順などに誤りや劣化がないか
@@ -245,18 +264,25 @@ async function doImplement() {
 
   const before = fs.readFileSync(file, "utf8");
 
-  // 実装→自己採点を、合格点(80)に届くまで最大3回くり返す。
-  // 落ちた回は採点役の指摘（総評）を次の実装役へフィードバックして直させる。
-  // 80点の安全バーは下げない：3回努力しても届かなければ最高得点版を載せて見送る。
-  const MAX_ATTEMPTS = 3;
+  // 実装→自己採点を、合格点(80)に届くまで最大5回くり返す（人間の編集者と編集長が往復するように）。
+  //   - 落ちた回は採点役の「どう直せば通るか(fix_hint)」を次の実装役へ渡して直させる。
+  //   - 後半は「完璧な大きい変更より、確実に効く最小・安全な一部を必ず出荷」させる（ダウンスコープ）。
+  //   - 構造的に落ち続けるなら提案自体を安全で狭い版に作り直して続行する（reformulate）。
+  // 80点の安全バーは下げない：バーまで“登り切る”往復を増やすだけ。届かなければ最高得点版を見送る。
+  const MAX_ATTEMPTS = 5;
   let best = null;     // { total, grade, after, applied, skipped }
   let feedback = "";
+  let workingProposal = proposal;   // 行き詰まったら安全側に作り直すことがある（targetは保つ）
+  let reformulated = false;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const downscope = attempt >= 3
+      ? `\n# 重要（${attempt}回目・ここまで合格に届いていない）\n完璧で大きな変更にこだわらないこと。提案の中で「最も確実に効き・最も安全」な最小の一部だけを、自然な形で確実に編集する。小さくても本物の改善を出す方が、何も出さないより良い。リスクのある欲張った変更は削ること。\n`
+      : "";
     let impl;
     try {
-      impl = await aiImplement(before, proposal, feedback);
+      impl = await aiImplement(before, workingProposal, feedback, downscope);
     } catch (e) {
-      if (attempt === 1) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
       feedback = `実装AIエラー: ${e.message}`; continue;
     }
     const { html: after, applied, skipped } = applyEdits(before, impl.edits);
@@ -268,18 +294,31 @@ async function doImplement() {
     // 自己採点（実装役とは別呼び出し）
     let grade;
     try {
-      grade = await aiGrade(proposal, applied);
+      grade = await aiGrade(workingProposal, applied);
     } catch (e) {
       grade = { total: 0, items: [], verdict: `採点AIエラー: ${e.message}` };
     }
     const total = Number(grade.total) || 0;
     if (!best || total > best.total) best = { total, grade, after, applied, skipped };
     if (total >= PASS) { console.log(`attempt ${attempt}: ${total}点 合格`); break; }
-    feedback = `自己採点${total}/100点で不合格。総評：${grade.verdict || ""}${(grade.items || []).filter((it) => it.score < it.max).map((it) => `／${it.name}:${it.comment}`).join("")}`;
+    feedback = `自己採点${total}/100点で不合格。総評：${grade.verdict || ""}${(grade.items || []).filter((it) => it.score < it.max).map((it) => `／${it.name}:${it.comment}`).join("")}${grade.fix_hint ? `｜こう直せば通る：${grade.fix_hint}` : ""}`;
     console.log(`attempt ${attempt}: ${total}点 — 指摘を直して再挑戦`);
+
+    // 2回試しても構造的に届かない（提案自体が安全に実装しづらい）なら、提案を安全で狭い版に作り直して続行
+    if (!reformulated && attempt >= 2 && total < 70) {
+      try {
+        const ref = await aiReformulate(workingProposal, feedback);
+        if (ref && ref.title) {
+          workingProposal = { ...proposal, ...ref, target: proposal.target };
+          reformulated = true;
+          feedback += `\n（注：元提案は安全に実装しづらいため、確実に実装できる範囲へ調整した版で進める）`;
+          console.log(`提案を安全側に再定式化: ${ref.title}`);
+        }
+      } catch (e) { console.log(`再定式化スキップ: ${e.message}`); }
+    }
   }
 
-  // 3回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
+  // 5回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
   if (!best || best.total < PASS) {
     setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
     return;
