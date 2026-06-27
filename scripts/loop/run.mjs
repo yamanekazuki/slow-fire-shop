@@ -218,6 +218,9 @@ export function applyEdits(html, edits) {
       skipped.push({ ...e, reason: "find/replace不正" });
       continue;
     }
+    // 途中で切れた未完成HTML（最後のタグが閉じていない）を弾く＝壊れたページを本番に出さない安全弁
+    const lastOpen = e.replace.lastIndexOf("<"), lastClose = e.replace.lastIndexOf(">");
+    if (lastOpen > lastClose) { skipped.push({ ...e, reason: "置換HTMLが途中で切れている（未閉じタグ）ためスキップ" }); continue; }
     const idx = out.indexOf(e.find);
     if (idx === -1) { skipped.push({ ...e, reason: "対象テキストが見つからない" }); continue; }
     if (out.indexOf(e.find, idx + 1) !== -1) { skipped.push({ ...e, reason: "複数該当のため安全のためスキップ" }); continue; }
@@ -262,7 +265,9 @@ async function aiImplement(html, proposal, feedback = "", downscope = "") {
 - 事実を歪めない。価格・送料・在庫・商品仕様・配送/返品条件などを勝手に変えたり創作したりしない。
 - SLOW FIREのトーンは落ち着いた実用志向。煽り・誇大・虚偽の限定表現・キーワード詰め込みは禁止。
 - CTA文言・見出し・ファーストビューの価値提案・商品説明・内部リンク・FAQ・不安解消の一言などを、自然な日本語で改善する。
-- 編集は最大5件まで。確実に効くものだけ。`
+- 編集は最大5件まで。確実に効くものだけ。
+- 【最重要・HTML健全性】replace は必ず「完結した正しいHTML」にする。タグを開いたら必ず閉じる。途中で切れた未完成のHTMLは絶対に出さない。
+- 1件の replace を巨大にしない。大きなブロックを丸ごと差し込むより、既存要素の文言・属性を狙った小さく確実な編集に分割する（途中で切れて崩れる事故を防ぐ）。`
     : `あなたはSLOW FIRE JOURNAL（アメリカンBBQメディア）の編集者です。
 与えられた記事HTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。完璧を狙って何も出せないより、確実で安全な一歩を必ず出します。
 
@@ -281,7 +286,7 @@ async function aiImplement(html, proposal, feedback = "", downscope = "") {
 ${feedback ? `\n# 前回の実装が審査で落ちた理由と、通すための直し方（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}${downscope}
 # ${UNIT}HTML
 ${html}`;
-  return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 12000, effort: "xhigh" });
+  return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 20000, effort: "xhigh" });
 }
 
 // 提案が安全に実装しづらく採点で落ち続けるとき、効果の核を残したまま「確実・安全に実装できる」狭い提案へ作り直す。
