@@ -38,6 +38,13 @@ const PASS = 80;
 // 改善ループの結果メールの宛先（山根さん＋メンバー2名）。env MAIL_TO で上書き可。
 const TO = process.env.MAIL_TO || "yamane@potentialight.com,afroanri0126@gmail.com,woodyuetaku@gmail.com";
 
+// domain で「ショップ本体(EC)」と「ブログ記事(journal)」を切り替える。
+//   implement系: proposal.domain ／ 公開・取消・復元系: PAYLOAD.domain ／ 未指定は従来どおり article。
+const DOMAIN = (PAYLOAD.proposal && PAYLOAD.proposal.domain) || PAYLOAD.domain || (ACTION.endsWith("-shop") ? "shop" : "article");
+const IS_SHOP = DOMAIN === "shop";
+const BRAND = IS_SHOP ? "SLOW FIRE SHOP" : "SLOW FIRE JOURNAL";
+const UNIT = IS_SHOP ? "ページ" : "記事"; // メール文言用
+
 // ---- 出力ヘルパ --------------------------------------------------------------
 function setOutput(pairs) {
   const f = process.env.GITHUB_OUTPUT;
@@ -65,7 +72,7 @@ function signToken(d) {
 }
 function changeLink(kind, payload) {
   if (!FN_BASE || !SECRET) return "";
-  const d = b64urlJson({ kind, ...payload });
+  const d = b64urlJson({ kind, domain: DOMAIN, ...payload }); // domainを通して公開/復元メールのブランドを保つ
   return `${FN_BASE}/bbqChangeAction?d=${d}&t=${signToken(d)}`;
 }
 
@@ -93,20 +100,37 @@ async function callClaude(system, userMsg, schema, { maxTokens = 8000, effort = 
 
 // ---- 対象ファイル解決 --------------------------------------------------------
 // proposal.target（URL or パス）→ リポジトリ相対パス。解決できなければ null。
-export function resolveTargetFile(target) {
+//   domain="article" … journal/配下の記事HTMLのみ（ブログ改善）
+//   domain="shop"    … journal/を除くサイトのHTML（トップ/商品/LP等。EC本体改善）
+export function resolveTargetFile(target, domain = "article") {
   if (!target) return null;
   let t = String(target).trim();
-  if (/新規|new article/i.test(t)) return null;
+  if (/新規|new (article|page)|サイト全体|site[-\s]?wide|全ページ/i.test(t)) return null; // 単一ファイルに落ちないものは自動実装の対象外
   t = t.replace(/^https?:\/\/[^/]+\//, ""); // ドメイン除去
   t = t.replace(/^slow-fire-shop\//, ""); // Pagesのリポジトリ接頭辞
   t = t.replace(/^\/+/, "").replace(/[?#].*$/, ""); // 先頭スラッシュ/クエリ除去
+  if (t.includes("..")) return null; // パストラバーサル防止
+
+  if (domain === "shop") {
+    // ルートやディレクトリ指定を index.html / <page>.html に寄せる
+    if (t === "") t = "index.html";
+    if (t.endsWith("/")) t = t + "index.html";
+    if (!t.endsWith(".html")) {
+      if (fs.existsSync(t + ".html")) t = t + ".html";
+      else if (fs.existsSync(t + "/index.html")) t = t + "/index.html";
+      else return null;
+    }
+    if (t.startsWith("journal/")) return null; // ブログは別ループ(article)の担当
+    return fs.existsSync(t) ? t : null;
+  }
+
+  // article（従来）：journal/配下の記事のみ
   if (!t.startsWith("journal/")) {
     const m = t.match(/journal\/[^\s)]+\.html/);
     if (m) t = m[0];
     else return null;
   }
   if (!t.endsWith(".html")) return null;
-  if (t.includes("..")) return null; // パストラバーサル防止
   return fs.existsSync(t) ? t : null;
 }
 
@@ -154,7 +178,18 @@ const EDIT_SCHEMA = {
 };
 
 async function aiImplement(html, proposal, feedback = "", downscope = "") {
-  const system = `あなたはSLOW FIRE JOURNAL（アメリカンBBQメディア）の編集者です。
+  const system = IS_SHOP
+    ? `あなたはSLOW FIRE SHOP（アメリカンBBQのEC）のWeb編集者／CRO（コンバージョン改善）担当です。
+与えられたページHTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。完璧を狙って何も出せないより、確実で安全な一歩を必ず出します。
+
+# 鉄則
+- find はページHTML内に「一字一句そのまま」存在する文字列にする（一意に特定できるよう十分長く）。
+- 変更は提案の範囲に限定。ページ全体の作り直しや、無関係な改変はしない。
+- 事実を歪めない。価格・送料・在庫・商品仕様・配送/返品条件などを勝手に変えたり創作したりしない。
+- SLOW FIREのトーンは落ち着いた実用志向。煽り・誇大・虚偽の限定表現・キーワード詰め込みは禁止。
+- CTA文言・見出し・ファーストビューの価値提案・商品説明・内部リンク・FAQ・不安解消の一言などを、自然な日本語で改善する。
+- 編集は最大5件まで。確実に効くものだけ。`
+    : `あなたはSLOW FIRE JOURNAL（アメリカンBBQメディア）の編集者です。
 与えられた記事HTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。完璧を狙って何も出せないより、確実で安全な一歩を必ず出します。
 
 # 鉄則
@@ -170,7 +205,7 @@ async function aiImplement(html, proposal, feedback = "", downscope = "") {
 変更内容: ${proposal.change}
 期待効果: ${proposal.impact}
 ${feedback ? `\n# 前回の実装が審査で落ちた理由と、通すための直し方（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}${downscope}
-# 記事HTML
+# ${UNIT}HTML
 ${html}`;
   return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 12000, effort: "xhigh" });
 }
@@ -220,7 +255,15 @@ const GRADE_SCHEMA = {
 };
 
 async function aiGrade(proposal, edits) {
-  const system = `あなたはSLOW FIRE JOURNALの編集長で、AIが作った記事修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
+  const system = IS_SHOP
+    ? `あなたはSLOW FIRE SHOP（アメリカンBBQのEC）の責任者で、AIが作ったページ修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
+以下5項目で100点満点採点し、合計を出してください。
+1. 提案との一致（25）：提案の意図どおりの修正になっているか（CV/導線に効く形か）
+2. 事実・表記の正確性（25）：価格/送料/在庫/商品仕様/配送・返品条件を歪めたり創作していないか
+3. ブランドトーン（20）：落ち着いた実用志向。煽り/誇大/虚偽の限定表現/不自然な日本語がない
+4. SEO/表記安全性（15）：キーワード詰め込み・不自然な最適化・誤解を招く表現でない
+5. HTML健全性（15）：タグ崩れ・リンク切れ・レイアウト破壊・意味の壊れがない`
+    : `あなたはSLOW FIRE JOURNALの編集長で、AIが作った記事修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
 以下5項目で100点満点採点し、合計を出してください。
 1. 提案との一致（25）：提案の意図どおりの修正になっているか
 2. 事実・技術的正確性（25）：温度/時間/手順などに誤りや劣化がないか
@@ -249,14 +292,14 @@ function liveUrlFor(file) {
 // =============================================================================
 async function doImplement() {
   const proposal = PAYLOAD.proposal || {};
-  const file = resolveTargetFile(proposal.target);
+  const file = resolveTargetFile(proposal.target, DOMAIN);
 
   // 新規記事や対象不明 → 自動実装の対象外として通知（安全弁）
   if (!file) {
     setOutput({
       ready: "true",
       to: TO,
-      subject: `【SLOW FIRE JOURNAL】自動実装の対象外でした：${proposal.title || ""}`,
+      subject: `【${BRAND}】自動実装の対象外でした：${proposal.title || ""}`,
       html: notImplementableHtml(proposal),
     });
     return;
@@ -282,12 +325,12 @@ async function doImplement() {
     try {
       impl = await aiImplement(before, workingProposal, feedback, downscope);
     } catch (e) {
-      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【${BRAND}】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
       feedback = `実装AIエラー: ${e.message}`; continue;
     }
     const { html: after, applied, skipped } = applyEdits(before, impl.edits);
     if (!applied.length) {
-      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【${BRAND}】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
       feedback = "find が記事内に一致しなかった。記事HTMLに一字一句そのまま存在する十分長い文字列を find にすること。"; continue;
     }
 
@@ -320,7 +363,7 @@ async function doImplement() {
 
   // 5回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
   if (!best || best.total < PASS) {
-    setOutput({ ready: "true", to: TO, subject: `【SLOW FIRE JOURNAL・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
     return;
   }
   const { grade, after, applied, skipped } = best;
@@ -332,14 +375,14 @@ async function doImplement() {
   fs.writeFileSync(file, after);
   sh(`git checkout -b ${branch}`);
   sh(`git add ${JSON.stringify(file)}`);
-  sh(`git commit -m ${JSON.stringify(`journal改善: ${proposal.title || file} (採点${grade.total})`)}`);
+  sh(`git commit -m ${JSON.stringify(`${IS_SHOP ? "shop" : "journal"}改善: ${proposal.title || file} (採点${grade.total})`)}`);
   sh(`git push origin ${branch}`);
   const commit = sh("git rev-parse HEAD");
 
   setOutput({
     ready: "true",
     to: TO,
-    subject: `【SLOW FIRE JOURNAL】実装できました（採点${grade.total}点）公開しますか？：${proposal.title || ""}`,
+    subject: `【${BRAND}】実装できました（採点${grade.total}点）公開しますか？：${proposal.title || ""}`,
     html: previewHtml({ proposal, grade, applied, skipped, file, branch, commit }),
   });
 }
@@ -355,7 +398,7 @@ async function doPublish() {
   sh("git checkout main");
   sh("git pull --ff-only origin main");
   try {
-    sh(`git merge --no-ff origin/${branch} -m ${JSON.stringify(`journal改善を公開: ${branch}`)}`);
+    sh(`git merge --no-ff origin/${branch} -m ${JSON.stringify(`${IS_SHOP ? "shop" : "journal"}改善を公開: ${branch}`)}`);
   } catch (e) {
     // 既にmainが進んでいる等で衝突 → ブランチのコミットをcherry-pick
     sh(`git merge --abort || true`);
@@ -371,7 +414,7 @@ async function doPublish() {
   setOutput({
     ready: "true",
     to: TO,
-    subject: `【SLOW FIRE JOURNAL】本番に公開しました${changed ? `：${changed}` : ""}`,
+    subject: `【${BRAND}】本番に公開しました${changed ? `：${changed}` : ""}`,
     html: publishedHtml({ branch, mainCommit, changed }),
   });
 }
@@ -399,7 +442,7 @@ async function doRevert() {
   setOutput({
     ready: "true",
     to: TO,
-    subject: `【SLOW FIRE JOURNAL】変更を元に戻しました`,
+    subject: `【${BRAND}】変更を元に戻しました`,
     html: revertedHtml(commit),
   });
 }
@@ -407,7 +450,7 @@ async function doRevert() {
 // ---- メールHTML群 ------------------------------------------------------------
 const SHELL = (inner) => `<div style="font-family:-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif;max-width:640px;margin:0 auto;background:#fff;color:#1b1b1b">
   <div style="background:#080604;border-radius:10px 10px 0 0;padding:20px 24px">
-    <div style="color:#c2410c;font-size:12px;letter-spacing:.12em;font-weight:700">SLOW FIRE JOURNAL — 改善ループ</div>
+    <div style="color:#c2410c;font-size:12px;letter-spacing:.12em;font-weight:700">${BRAND} — 改善ループ</div>
   </div>
   <div style="border:1px solid #ececec;border-top:none;border-radius:0 0 10px 10px;padding:22px 24px">${inner}</div>
 </div>`;
@@ -480,7 +523,9 @@ function notImplementableHtml(proposal) {
   return SHELL(`
     <div style="font-size:12px;color:#b45309;font-weight:800;margin-bottom:6px">🗂 自動実装の対象外でした</div>
     <h2 style="font-size:17px;margin:0 0 8px">${esc(proposal.title || "")}</h2>
-    <p style="font-size:13px;color:#1b1b1b;line-height:1.9">この提案は「新規記事の作成」または対象記事が特定できないため、自動実装の対象外としました（既存記事へのテコ入れのみ自動化しています）。新規記事は週3回の自動ブログ、または手動でご対応ください。</p>
+    <p style="font-size:13px;color:#1b1b1b;line-height:1.9">${IS_SHOP
+      ? "この提案は「サイト全体にまたがる変更」または対象ページが特定できないため、自動実装の対象外としました（単一ページへのテコ入れのみ自動化しています）。横断的な変更は手動でご対応ください。"
+      : "この提案は「新規記事の作成」または対象記事が特定できないため、自動実装の対象外としました（既存記事へのテコ入れのみ自動化しています）。新規記事は週3回の自動ブログ、または手動でご対応ください。"}</p>
     <div style="font-size:12px;color:#666;background:#faf7f2;border-radius:8px;padding:11px 13px;margin-top:12px;line-height:1.8">対象指定：${esc(proposal.target || "(なし)")}<br>変更内容：${esc(proposal.change || "")}</div>`);
 }
 
@@ -502,6 +547,7 @@ function revertedHtml(commit) {
 // ---- ディスパッチ ------------------------------------------------------------
 const handlers = {
   "implement-article": doImplement,
+  "implement-shop": doImplement, // ショップ本体(EC)も同じ実装エンジン。domainで対象解決/文言/プロンプトを切替
   "publish-article": doPublish,
   "discard-article": doDiscard,
   "revert-article": doRevert,
@@ -517,7 +563,7 @@ async function main() {
 if (ACTION) {
   main().catch((e) => {
     console.error("致命的エラー:", e);
-    setOutput({ ready: "true", to: TO, subject: "【SLOW FIRE JOURNAL】改善ループでエラー", html: failHtml(PAYLOAD.proposal || {}, String(e && e.message || e)) });
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}】改善ループでエラー`, html: failHtml(PAYLOAD.proposal || {}, String(e && e.message || e)) });
     process.exit(0);
   });
 }

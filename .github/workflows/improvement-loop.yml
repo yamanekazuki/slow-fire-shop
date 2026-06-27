@@ -3,12 +3,13 @@ name: SLOW FIRE JOURNAL 改善ループ（実装）
 # 改善提案メールの［承認］［公開］［取消］［元に戻す］ボタン →
 # cook-logのFirebase関数が repository_dispatch を送り、ここで実体を処理する。
 #   implement-article : 記事を編集→自己採点→（合格なら）ブランチにコミットしプレビューをメール
+#   implement-shop    : ショップ本体(EC)のページを同じエンジンで編集（domain=shop）
 #   publish-article   : ブランチをmainへ取り込み公開（Pages反映）→完了メール
 #   discard-article   : プレビュー破棄（ブランチ削除）
 #   revert-article    : 公開済みの変更を元に戻す
 on:
   repository_dispatch:
-    types: [implement-article, publish-article, discard-article, revert-article]
+    types: [implement-article, implement-shop, publish-article, discard-article, revert-article]
 
 permissions:
   contents: write
