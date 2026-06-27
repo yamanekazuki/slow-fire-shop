@@ -102,29 +102,39 @@ async function callClaude(system, userMsg, schema, { maxTokens = 8000, effort = 
 // proposal.target（URL or パス）→ リポジトリ相対パス。解決できなければ null。
 //   domain="article" … journal/配下の記事HTMLのみ（ブログ改善）
 //   domain="shop"    … journal/を除くサイトのHTML（トップ/商品/LP等。EC本体改善）
+// targetは生成AIや承認リンク経由で「/slow-fire-shop/product.html（全商品共通テンプレート）」のような
+// 接頭辞・先頭スラッシュ・全角括弧の注釈付きで来ることが多い。表記揺れを徹底的に吸収して実ファイルに寄せる。
+// それでも単一ファイルに落ちない（『サイト全体』等）場合は null を返し、呼び出し側の aiResolveTarget が
+// 実在ページ一覧から最適な1ページを選ぶ（＝「対象外」で止めず、必ず実装に進める）。
 export function resolveTargetFile(target, domain = "article") {
   if (!target) return null;
-  let t = String(target).trim();
-  if (/新規|new (article|page)|サイト全体|site[-\s]?wide|全ページ/i.test(t)) return null; // 単一ファイルに落ちないものは自動実装の対象外
-  t = t.replace(/^https?:\/\/[^/]+\//, ""); // ドメイン除去
-  t = t.replace(/^slow-fire-shop\//, ""); // Pagesのリポジトリ接頭辞
-  t = t.replace(/^\/+/, "").replace(/[?#].*$/, ""); // 先頭スラッシュ/クエリ除去
+  const raw = String(target).trim();
+  let t = raw;
+  // 1) 全角/半角括弧の注釈を除去：例 "product.html（全商品共通テンプレート）" → "product.html"
+  t = t.replace(/[（(][^（）()]*[）)]/g, "").trim();
+  // 2) URLドメイン → 先頭スラッシュ → リポジトリ接頭辞 を順不同で吸収（順序に依存しない）
+  t = t.replace(/^https?:\/\/[^/]+\//i, "");
+  t = t.replace(/^\/+/, "");
+  t = t.replace(/^slow-fire-shop\//, "");
+  t = t.replace(/[?#].*$/, "").trim(); // クエリ/フラグメント除去
   if (t.includes("..")) return null; // パストラバーサル防止
 
   if (domain === "shop") {
-    // ルートやディレクトリ指定を index.html / <page>.html に寄せる
-    if (t === "") t = "index.html";
+    // 『サイト全体』『全ページ』等の横断ワードは単一ファイルに落ちない → AI解決に委ねる
+    if (/サイト全体|site[-\s]?wide|全ページ|全ての?ページ|複数ページ|全商品ページ|各ページ|新規/i.test(raw)) return null;
+    // ルート/トップ/ディレクトリ指定は index.html に寄せる
+    if (t === "" || t === "/" ) t = "index.html";
     if (t.endsWith("/")) t = t + "index.html";
-    if (!t.endsWith(".html")) {
-      if (fs.existsSync(t + ".html")) t = t + ".html";
-      else if (fs.existsSync(t + "/index.html")) t = t + "/index.html";
-      else return null;
-    }
     if (t.startsWith("journal/")) return null; // ブログは別ループ(article)の担当
-    return fs.existsSync(t) ? t : null;
+    if (t.endsWith(".html")) return fs.existsSync(t) ? t : null;
+    // 拡張子なし → <t>.html / <t>/index.html を試す
+    if (fs.existsSync(t + ".html")) return t + ".html";
+    if (fs.existsSync(t + "/index.html")) return t + "/index.html";
+    return null;
   }
 
   // article（従来）：journal/配下の記事のみ
+  if (/新規|new (article|page)/i.test(raw)) return null;
   if (!t.startsWith("journal/")) {
     const m = t.match(/journal\/[^\s)]+\.html/);
     if (m) t = m[0];
@@ -132,6 +142,70 @@ export function resolveTargetFile(target, domain = "article") {
   }
   if (!t.endsWith(".html")) return null;
   return fs.existsSync(t) ? t : null;
+}
+
+// ---- 実在ページ一覧 ----------------------------------------------------------
+// リポジトリ内の編集候補HTMLを列挙する。システム/管理/検証用ページは除外。
+//   shop    … journal/ を除くEC本体ページ（トップ・商品・ガイド・スポット等）
+//   article … journal/ 配下の記事
+const EXCLUDE_FILES = new Set(["404.html", "admin.html", "style-guide.html"]);
+function listCandidateFiles(domain = "article") {
+  const out = [];
+  const walk = (dir) => {
+    for (const name of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (name.name.startsWith(".") || name.name === "node_modules" || name.name === "scripts") continue;
+      const p = dir === "." ? name.name : `${dir}/${name.name}`;
+      if (name.isDirectory()) walk(p);
+      else if (name.name.endsWith(".html")) out.push(p);
+    }
+  };
+  try { walk("."); } catch { return []; }
+  return out.filter((p) => {
+    if (EXCLUDE_FILES.has(p.split("/").pop())) return false;
+    if (/^google[0-9a-f]+\.html$/i.test(p.split("/").pop())) return false; // 検証ファイル
+    const inJournal = p.startsWith("journal/");
+    return domain === "shop" ? !inJournal : inJournal;
+  });
+}
+
+// ---- 対象不明時のAI解決 ------------------------------------------------------
+// resolveTargetFile が単一ファイルに落とせなかった提案を「対象外」で捨てず、
+// 実在ページ一覧の中から最も効果的に実装できる1ページをClaudeに選ばせる。
+// 返り値は実在するリポジトリ相対パス、または null（候補ゼロ等の例外時のみ）。
+const PICK_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    file: { type: "string", description: "候補一覧から選んだ、実装対象として最適な実在ファイルパス（一覧の文字列と完全一致）" },
+    reason: { type: "string", description: "なぜこのページを選んだか（1文）" },
+  },
+  required: ["file", "reason"],
+};
+async function aiResolveTarget(proposal) {
+  const files = listCandidateFiles(DOMAIN);
+  if (!files.length) return null;
+  if (files.length === 1) return files[0];
+  const system = IS_SHOP
+    ? `あなたはSLOW FIRE SHOP（アメリカンBBQのEC）のCRO担当。改善提案を、与えられた実在ページ一覧の中から「最も効果的に・安全に実装できる1ページ」に割り当てます。横断的な提案でも、まず主担当となる1ページ（多くはトップ index.html か商品ページ product.html）を選ぶこと。必ず一覧にあるファイルパスを完全一致で返す。`
+    : `あなたはSLOW FIRE JOURNALの編集者。改善提案を、与えられた実在記事一覧の中から最も効果的に実装できる1記事に割り当てます。必ず一覧にあるファイルパスを完全一致で返す。`;
+  const userMsg = `# 改善提案
+タイトル: ${proposal.title}
+当初の対象指定: ${proposal.target}
+変更内容: ${proposal.change}
+期待効果: ${proposal.impact || ""}
+
+# 実在ページ一覧（この中から1つだけ選ぶ）
+${files.map((f) => `- ${f}`).join("\n")}`;
+  try {
+    const r = await callClaude(system, userMsg, PICK_SCHEMA, { maxTokens: 1000, effort: "high" });
+    if (r && r.file) {
+      const picked = resolveTargetFile(r.file, DOMAIN) || (files.includes(r.file) ? r.file : null);
+      if (picked && fs.existsSync(picked)) { console.log(`AI対象解決: ${picked}（${r.reason || ""}）`); return picked; }
+    }
+  } catch (e) { console.log(`AI対象解決スキップ: ${e.message}`); }
+  // 最後の保険：shopはトップ、articleは一覧の先頭
+  if (IS_SHOP && files.includes("index.html")) return "index.html";
+  return files[0] || null;
 }
 
 // ---- 編集適用 ----------------------------------------------------------------
@@ -292,9 +366,15 @@ function liveUrlFor(file) {
 // =============================================================================
 async function doImplement() {
   const proposal = PAYLOAD.proposal || {};
-  const file = resolveTargetFile(proposal.target, DOMAIN);
+  // まず表記揺れを吸収して実ファイルに寄せる。落とせなければ実在ページ一覧からAIが最適な1ページを選ぶ。
+  // ＝『サイト全体』『対象不明』でも止めず必ず実装に進める（山根さん要望：毎日確実に改善を回す）。
+  let file = resolveTargetFile(proposal.target, DOMAIN);
+  if (!file) {
+    console.log(`resolveTargetFile が解決できず（target="${proposal.target}"）→ AIで対象ページを選定`);
+    file = await aiResolveTarget(proposal);
+  }
 
-  // 新規記事や対象不明 → 自動実装の対象外として通知（安全弁）
+  // 候補ゼロ等、本当に対象が無いときだけ対象外として通知（安全弁・通常は到達しない）
   if (!file) {
     setOutput({
       ready: "true",
