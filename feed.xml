@@ -6,7 +6,14 @@
   <atom:link href="https://yamanekazuki.github.io/slow-fire-shop/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 26 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 29 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>ベランダBBQの煙と近隣トラブルを防ぐ完全対策 — 無煙化と火種管理の実務</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/balcony-bbq-smoke-control.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/balcony-bbq-smoke-control.html</guid>
+    <pubDate>Mon, 29 Jun 2026 07:00:00 +0900</pubDate>
+    <description>ベランダや自宅BBQで煙とニオイの苦情をゼロにするための実務ガイド。煙が出る温度の科学、無煙に近づける火種・道具選び、時間帯と立地の判断基準まで数値で解説する。</description>
+  </item>
   <item>
     <title>BBQ後のグリル掃除とメンテナンス完全ガイド — 焼き網・炭受け・本体を長持ちさせる手順</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/grill-cleaning-maintenance-guide.html</link>
