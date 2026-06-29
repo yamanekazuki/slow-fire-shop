@@ -789,7 +789,6 @@
   object-fit: cover;
   display: block;
   opacity: 1;
-  filter: saturate(1.12) contrast(1.05);
 }
 @media (min-width: 880px) { .jr-feat-img { aspect-ratio: auto; min-height: 420px; } }
 .jr-feat-meta {
@@ -888,7 +887,6 @@
   object-fit: cover;
   display: block;
   opacity: 1;
-  filter: saturate(1.12) contrast(1.05);
   transition: transform 0.4s ease;
 }
 .jr-list-card:hover .jr-list-img img { transform: scale(1.04); }
