@@ -453,7 +453,7 @@ async function doImplement() {
   }
   const { grade, after, applied, skipped } = best;
 
-  // 合格 → ブランチにコミット（公開はしない）
+  // 合格 → ブランチにコミット
   gitSetup();
   const stamp = sh("date -u +%Y%m%d-%H%M%S").replace(/\s/g, "");
   const branch = `loop/${stamp}`;
@@ -464,20 +464,22 @@ async function doImplement() {
   sh(`git push origin ${branch}`);
   const commit = sh("git rev-parse HEAD");
 
+  // 自己採点が合格点(80)を超えた＝戻せる/低リスク変更なので、人の承認を待たず自動で本番公開する。
+  // 山根さんはゲートキーパーでなく監査役（[[feedback_loop_human_not_bottleneck]] 原則②）。
+  // 公開後の「事後報告」メールに［元に戻す］を付け、違和感があればワンクリックで戻せる安全弁を残す。
+  const { mainCommit, changed } = mergeBranchToMain({ branch, commit });
   setOutput({
     ready: "true",
     to: TO,
-    subject: `【${BRAND}】実装できました（採点${grade.total}点）公開しますか？：${proposal.title || ""}`,
-    html: previewHtml({ proposal, grade, applied, skipped, file, branch, commit }),
+    subject: `【${BRAND}】自動公開しました（採点${grade.total}点）：${proposal.title || ""}`,
+    html: autoPublishedHtml({ proposal, grade, applied, skipped, file, mainCommit, changed }),
   });
 }
 
-// =============================================================================
-// アクション: publish-article（ブランチ → main 公開）
-// =============================================================================
-async function doPublish() {
-  const { branch, commit } = PAYLOAD;
-  if (!branch) { setOutput({ ready: "false" }); return; }
+// ---- ブランチ → main 公開（マージ）の共通処理 --------------------------------
+// 自動公開（doImplement）と手動公開ボタン（doPublish）の両方から使う。
+// 返り値 { mainCommit, changed }。mainCommit は［元に戻す］リンクの対象。
+function mergeBranchToMain({ branch, commit }) {
   gitSetup();
   sh("git fetch origin");
   sh("git checkout main");
@@ -495,7 +497,18 @@ async function doPublish() {
   let changed = "";
   try { changed = sh(`git show --stat --format= ${mainCommit}`).split("\n")[0] || ""; } catch {}
   sh(`git push origin --delete ${branch} || true`);
+  return { mainCommit, changed };
+}
 
+// =============================================================================
+// アクション: publish-article（ブランチ → main 公開）
+// ※ 通常は doImplement が合格時に自動公開するため使われないが、手動の
+//   「本番に公開する」ボタン経路を後方互換として残す。
+// =============================================================================
+async function doPublish() {
+  const { branch, commit } = PAYLOAD;
+  if (!branch) { setOutput({ ready: "false" }); return; }
+  const { mainCommit, changed } = mergeBranchToMain({ branch, commit });
   setOutput({
     ready: "true",
     to: TO,
@@ -576,6 +589,29 @@ function previewHtml({ proposal, grade, applied, skipped, file, branch, commit }
         <td style="padding:0 8px 0 0">${btn(publish, "🚀 本番に公開する", "#16a34a")}</td>
         <td>${btn(discard, "取り消す", "#fff", true)}</td>
       </tr></table>
+    </div>`);
+}
+
+// 自動公開の事後報告メール：合格点で承認を待たず公開した結果を報告する。
+// 採点・変更内容を見せ、違和感があればワンクリックで戻せる［元に戻す］を付ける。
+function autoPublishedHtml({ proposal, grade, applied, skipped, file, mainCommit, changed }) {
+  const revert = changeLink("revert", { commit: mainCommit, title: proposal.title || changed });
+  const diff = `https://github.com/${REPO}/commit/${mainCommit}`;
+  const live = liveUrlFor(file);
+  return SHELL(`
+    <div style="font-size:12px;color:#16a34a;font-weight:800;margin-bottom:6px">🚀 自動で本番に公開しました（自己採点 ${grade.total}点 / 合格${PASS}点）</div>
+    <h2 style="font-size:18px;margin:0 0 4px">${esc(proposal.title || "")}</h2>
+    <div style="font-size:12px;color:#888;margin-bottom:12px">対象：<a href="${live}" style="color:#c2410c">${esc(file)}</a>（反映まで1〜2分）</div>
+    <div style="font-size:12px;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 13px;line-height:1.8;margin-bottom:14px">合格点を超えたため、承認を待たずに公開しました。内容に違和感があれば、下のボタンでワンクリックで元に戻せます。</div>
+    <div style="font-size:13px;color:#1b1b1b;background:#faf7f2;border:1px solid #ececec;border-radius:8px;padding:11px 13px;line-height:1.8;margin-bottom:14px">${esc(grade.verdict || "")}</div>
+    ${gradeTable(grade)}
+    <h3 style="font-size:13px;margin:18px 0 8px">変更内容（${applied.length}件）</h3>
+    ${editsTable(applied)}
+    ${skipped && skipped.length ? `<div style="font-size:11px;color:#b45309">※ ${skipped.length}件は安全のためスキップ（対象テキスト不一致など）</div>` : ""}
+    <div style="margin:18px 0 6px">${btn(diff, "変更の詳細（GitHub）", "#475569")}</div>
+    <div style="margin-top:14px;padding:13px 15px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px">
+      <div style="font-size:12px;color:#b45309;line-height:1.8;margin-bottom:10px">もし違和感があれば、ワンクリックで元に戻せます。</div>
+      ${btn(revert, "↩️ この変更を元に戻す", "#fff", true)}
     </div>`);
 }
 
