@@ -547,7 +547,7 @@
 
         <div class="pd-buy">
           <span class="pd-price" id="pdPrice"></span>
-          <button id="pdBuyBtn" class="pd-buy-btn">＋ カートに追加</button>
+          <button id="pdBuyBtn" class="pd-buy-btn">カートに入れる</button>
         </div>
       </div>
     </section>
@@ -688,7 +688,7 @@
         // Try to use existing cart if available; otherwise redirect
         if (typeof window.cart !== 'undefined' && window.cart.add) {
           window.cart.add(p.id);
-          buyBtn.textContent = '✓ カートに追加しました';
+          buyBtn.textContent = '✓ カートに入れました';
           buyBtn.classList.add('added');
           setTimeout(() => location.href = 'index.html#products', 1200);
         } else {
