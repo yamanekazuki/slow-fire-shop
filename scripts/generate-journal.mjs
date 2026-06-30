@@ -106,13 +106,21 @@ const CAT = {
   science: { upper: "SCIENCE", ja: "科学" },
   gear: { upper: "GEAR", ja: "道具" },
 };
-// ヒーロー画像（サイトで実際に使われている Unsplash 画像から選択）
-const HERO_POOL = [
-  "https://images.unsplash.com/photo-1679711246825-1f2bd51b16d0?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1774923097632-c98e17b7e842?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1445979323117-80453f573b71?auto=format&fit=crop&w=1200&q=80",
-];
+// ヒーロー画像（images/journal/ にある SLOW FIRE の実写真を使う。ストック画像は使わない）
+// カテゴリごとに文脈の合う写真プールを用意し、その中から記事ごとに選ぶ。
+const IMG_BASE = `${SITE}/images/journal`;
+const HERO_BY_CAT = {
+  recipe:     ["bbq-platter.jpg", "pork-plate.jpg", "ribs.jpg", "roast-chicken.jpg", "seafood-board.jpg", "shrimp-skewers.jpg", "brisket-sliced.jpg", "roast-pork-loin.jpg", "vegetables.jpg"],
+  science:    ["meat-on-grill.jpg", "chicken-charcoal.jpg", "charcoal-chimney.jpg", "smoked-pork-shoulder.jpg", "brisket-sliced.jpg", "smoker.jpg"],
+  gear:       ["charcoal-chimney.jpg", "rub-ribs.jpg", "smoker.jpg", "meat-on-grill.jpg", "chicken-charcoal.jpg"],
+  philosophy: ["smoker.jpg", "charcoal-chimney.jpg", "smoked-pork-shoulder.jpg", "ribs.jpg", "meat-on-grill.jpg"],
+};
+const HERO_FALLBACK = ["meat-on-grill.jpg", "charcoal-chimney.jpg", "bbq-platter.jpg", "ribs.jpg"];
+// カテゴリ内のプールから、記事インデックスで1枚選んで絶対URLを返す
+function pickHero(category, idx) {
+  const pool = HERO_BY_CAT[category] || HERO_FALLBACK;
+  return `${IMG_BASE}/${pool[idx % pool.length]}`;
+}
 
 // ---- テーマの種（実用・SEO寄り。既存42本と重複しない新しい切り口）-------------
 const TOPIC_SEEDS = [
@@ -149,7 +157,7 @@ const SCHEMA = {
     og_description: { type: "string", description: "OG用の短い要約。40〜70字。" },
     keywords: { type: "string", description: "カンマ区切りの検索キーワード5〜8個。" },
     summary: { type: "string", description: "一覧カード用の一文。35〜55字。" },
-    lead: { type: "string", description: "リード文。2〜3文。1文目に記事の核心(具体的な結論・温度・数値)を置く。" },
+    lead: { type: "string", description: "リード文。3〜4文。やわらかい『です・ます』の語り口で、読者への共感や問いかけから入り、1〜2文目で記事の核心(具体的な結論・温度・数値)に触れる。常体（〜だ）は使わない。" },
     read_minutes: { type: "integer", description: "読了目安（分）。7〜13。" },
     body_html: {
       type: "string",
@@ -230,21 +238,30 @@ async function generateArticle(seed, avoidTitles) {
       faq: [{ q: "テスト質問?", a: "テスト回答です。" }],
     };
   }
-  const system = `あなたは、アメリカン/オーストラリアンBBQを長年やり込んだ職人気質のライターです。BBQ専門ECメディア「SLOW FIRE JOURNAL」で、検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を日本語で書きます。
+  const system = `あなたは、BBQ専門ECメディア「SLOW FIRE JOURNAL」のライターです。BBQが大好きで、自分でも何度も失敗しながらやり込んできた人。検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を、やわらかく親しみやすい語り口の日本語で書きます。
 
 ${KNOWLEDGE}
 
-# 品質基準（最重要・必ず守る）
-- 密度: 一次情報の塊にする。温度(℃)・中心温度・時間(分/時間)・分量・回数・道具の使い分けなど、読者がそのまま再現できる具体数値を必ず入れる。「適量」「お好みで」「適度に」は禁止。
+# 文体・声（最重要・SLOW FIREの世界観そのもの）
+SLOW FIREは「BBQを日常にする」「火と向き合う時間そのものを楽しむ」がコンセプト。だから記事も、上から教える硬い説明ではなく、隣で一緒に火を囲みながら話してくれる先輩のような、あたたかい語り口にします。具体的には:
+- 基調は「です・ます」。常体（〜だ／〜である）は使わない。読者に語りかけるように書く。
+- 強い主張ほど語尾でやわらげる:「〜なんですよね」「〜かなと思います」「個人的には〜」「〜といいですよ」。断定の押し付けをしない。
+- ただし要所はやさしく言い切る。やわらげと言い切りのコントラストが大事:「これだけは覚えておいてください。」「結論から言うと、原因は◯◯です。」
+- 冒頭は、読者の「あるある」への問いかけや共感から入る:「〜で困ったこと、ありませんか？」「実はこれ、◯◯が原因なんです」。いきなり定義から入らない。
+- 自分の体験・失敗を素直に混ぜる:「僕も最初これで何度も失敗しました」「正直に言うと」。
+- 専門用語は出したらすぐ、やさしい言葉で言い換える。読者を置いていかない。
+
+# 品質基準（必ず守る）
+- 密度: 一次情報の塊にする。温度(℃)・中心温度・時間(分/時間)・分量・回数・道具の使い分けなど、読者がそのまま再現できる具体数値を必ず入れる。「適量」「お好みで」「適度に」は禁止。やわらかい文体でも、数字の正確さは一切妥協しない。
 - 網羅: 検索意図に対する疑問が一切残らないよう、定義/結論 → 理由(科学・理屈) → 具体的手順 → よくある失敗と回避 → トラブルシュート → バリエーション → FAQ まで漏れなく書く。途中で打ち切らない。
-- 言い切る: 比較・選択では「どれを・なぜ選ぶか」を理由つきで断言する。両論併記で逃げない。
-- 自然さ: 実務家が書いたような自然な日本語。文の長短を混ぜ、機械的な並列・繰り返しを避ける。
+- 根拠をもって導く: 比較・選択では「どれを・なぜ選ぶか」を理由つきで示す。ただし「こうしろ」と突き放すのではなく「個人的にはこっちがおすすめです、なぜなら〜」と理由を添えて寄り添う。
+- 自然さ: 実際にBBQをやっている人が、友人に話すような自然な日本語。文の長短を混ぜ、機械的な並列・繰り返しを避ける。
 
 # AIっぽさ・薄さを徹底排除（禁止）
 - 定型の導入(「〜について解説します」「本記事では」)、空疎な一般論、過剰な前置き、自明な説明を書かない。
-- 「まとめると」「いかがでしたか」「ぜひ試してみてください」等の締め定型を使わない。
+- 「まとめると」「いかがでしたか」のような中身のない締め定型を使わない（自然な呼びかけで終えるのはOK）。
 - 箇条書きの水増し(中身の薄い列挙)、同義語の言い換えだけの繰り返し、結論の先延ばしをしない。
-- 抽象的な美辞麗句より、具体的な数字・固有名・手順を優先する。
+- 抽象的な美辞麗句より、具体的な数字・固有名・手順を優先する。やわらかさは「ふわっとした内容」とは違う。中身は濃く、語り口だけやわらかく。
 
 # 前提
 - 媒体は海外BBQラブのEC。Low n Slow Basics / Butcher's Axe / Stef the Maori に文脈上自然な範囲で触れてよいが、宣伝臭は出さない。
@@ -287,7 +304,7 @@ const MAX_REVISE = 3;     // 最大修正回数
 const RUBRIC = [
   { name: "独自性・一次情報の密度", max: 25, desc: "具体的な温度/時間/分量/手順/数値が豊富で、ありきたりでなく独自の視点がある" },
   { name: "技術的正確性", max: 25, desc: "下記の知識ベース(Weber Grill Academy由来)に照らして、温度・時間・手順などに誤った情報がない" },
-  { name: "言い切り・トーン", max: 20, desc: "実用的に根拠をもって言い切れている。ただし誇張・煽り・断定の押し付けがなく、落ち着いた語り口" },
+  { name: "語り口・トーン", max: 20, desc: "SLOW FIREらしい、やわらかく親しみやすい『です・ます』の語り口になっている（常体〜だ/〜である、上から教える硬い説明、断定の押し付けは減点）。語尾のやわらげ（〜なんですよね/個人的には等）と、要所のやさしい言い切りのコントラストがあり、読者に寄り添っている。一方で内容の濃さ・数値の正確さは保てている" },
   { name: "次の行動の明確さ", max: 15, desc: "読者が次に取るべき行動が1つ、明確に書かれている" },
   { name: "独自の切り口・重複回避", max: 15, desc: "既存記事と内容のかぶりが2割未満で、独自の切り口がある" },
 ];
@@ -395,11 +412,11 @@ function addTOC(html) {
   });
   if (heads.length < 2) return html;
   const items = heads
-    .map((h) => `<li style="margin:.15em 0"><a href="#${h.id}" style="color:#B45309;text-decoration:none">${h.text}</a></li>`)
+    .map((h) => `<li style="margin:.1em 0"><a href="#${h.id}" style="color:#B45309;text-decoration:none">${h.text}</a></li>`)
     .join("");
-  const toc = `<nav class="jr-toc" aria-label="目次" style="margin:0 0 1.8em;padding:18px 22px;background:#faf7f2;border:1px solid #ece6db;border-radius:8px">
-        <p style="margin:0 0 10px;font-weight:700;font-size:15px;color:#1b1b1b">目次</p>
-        <ol style="margin:0;padding-left:1.5em;line-height:1.95;color:#333">${items}</ol>
+  const toc = `<nav class="jr-toc" aria-label="目次" style="margin:0 0 2em;padding:20px 24px;background:#fbf8f3;border-left:3px solid #B45309;border-radius:4px">
+        <p style="margin:0 0 12px;font-weight:700;font-size:15px;color:#1b1b1b">この記事でお話しすること</p>
+        <ol style="margin:0;padding-left:1.4em;line-height:2.05;color:#333">${items}</ol>
       </nav>`;
   return toc + withIds;
 }
@@ -447,7 +464,9 @@ function renderArticle(p) {
   <meta property="og:title" content="${esc(p.title)}">
   <meta property="og:description" content="${esc(p.og_description)}">
   <meta property="og:url" content="${url}">
+  <meta property="og:image" content="${p.hero}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${p.hero}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
@@ -589,7 +608,7 @@ async function main() {
   if (existingSlugs.has(slug)) slug = `${slug}-${iso}`;
   const category = CATEGORIES.includes(a.category) ? a.category : "recipe";
   const file = `${slug}.html`;
-  const hero = HERO_POOL[files.length % HERO_POOL.length];
+  const hero = pickHero(category, files.length);
 
   const p = {
     title: a.title, file, slug, category,
