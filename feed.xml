@@ -6,7 +6,14 @@
   <atom:link href="https://yamanekazuki.github.io/slow-fire-shop/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 29 Jun 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 01 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>ツーゾーンファイアの作り方 — 炭の配置で火力を自在に操る実務</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/two-zone-fire-setup.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/two-zone-fire-setup.html</guid>
+    <pubDate>Wed, 01 Jul 2026 07:00:00 +0900</pubDate>
+    <description>炭を片側に寄せるツーゾーンファイアの作り方を、炭量・配置・温度の数値で解説。直火と間接を1台で使い分け、焦がさず中まで火を通す実務手順とトラブル対処まで網羅。</description>
+  </item>
   <item>
     <title>ベランダBBQの煙と近隣トラブルを防ぐ完全対策 — 無煙化と火種管理の実務</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/balcony-bbq-smoke-control.html</link>
