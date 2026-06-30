@@ -230,6 +230,46 @@ export function applyEdits(html, edits) {
   return { html: out, applied, skipped };
 }
 
+// ---- 決定的HTML健全性チェック（採点役の主観・断片誤読に頼らない）-------------
+// 編集適用後の「ページ全文」を機械的に検査し、タグ崩れ／途中切れを判定する。
+// before と比較して『編集で新たに壊れた』ものだけ減点する（<li>/<p>/<td>など任意
+// 閉じタグで元から不均衡な分は誤検知しない）。返り値 { score(0..15), ok, issues[] }。
+const VOID_TAGS = new Set(["area","base","br","col","embed","hr","img","input","link","meta","param","source","track","wbr"]);
+// 崩れると見た目・導線が確実に壊れる主要ブロック要素（これが新たに不均衡なら hardBreak）
+const BLOCK_TAGS = new Set(["html","head","body","div","section","article","main","header","footer","nav","aside","ul","ol","table","thead","tbody","tr","td","form","a","button","figure","picture","p","h1","h2","h3"]);
+function tagBalance(html) {
+  const bal = {};
+  const re = /<\/?([a-zA-Z][a-zA-Z0-9-]*)\b[^>]*?(\/?)>/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const name = m[1].toLowerCase();
+    if (VOID_TAGS.has(name)) continue;
+    if (m[2] === "/") continue; // 自己終了タグ
+    bal[name] = (bal[name] || 0) + (m[0][1] === "/" ? -1 : 1);
+  }
+  return bal;
+}
+export function htmlHealth(before, after) {
+  const issues = [];
+  let hardBreak = false;
+  // 1) 末尾にタグが開いたまま閉じていない＝途中で切れたHTML（決定的破損）
+  if (after.lastIndexOf("<") > after.lastIndexOf(">")) { issues.push("ページ末尾にタグが閉じられていない（途中で切れたHTML）"); hardBreak = true; }
+  // 2) HTMLコメント <!-- --> の未閉鎖
+  const oc = (after.match(/<!--/g) || []).length, cc = (after.match(/-->/g) || []).length;
+  if (oc !== cc) { issues.push("HTMLコメント <!-- --> が閉じていない"); hardBreak = true; }
+  // 3) 編集で新たに生じたタグ不均衡のみ検出（before比較で任意閉じタグの誤検知を回避）
+  const b = tagBalance(before), a = tagBalance(after);
+  for (const n of new Set([...Object.keys(a), ...Object.keys(b)])) {
+    const nb = b[n] || 0, na = a[n] || 0;
+    if (na !== 0 && Math.abs(na) > Math.abs(nb)) {
+      issues.push(`<${n}> の開始タグと終了タグの数が一致しない（${na > 0 ? "閉じ忘れ" : "開始タグ不足"}）`);
+      if (BLOCK_TAGS.has(n)) hardBreak = true;
+    }
+  }
+  const score = issues.length === 0 ? 15 : hardBreak ? 3 : 11;
+  return { score, ok: !hardBreak, issues };
+}
+
 // ---- 実装役：提案 → find/replace 編集 ----------------------------------------
 const EDIT_SCHEMA = {
   type: "object",
@@ -333,7 +373,7 @@ const GRADE_SCHEMA = {
   required: ["items", "total", "verdict", "fix_hint"],
 };
 
-async function aiGrade(proposal, edits) {
+async function aiGrade(proposal, edits, health, afterDoc) {
   const system = IS_SHOP
     ? `あなたはSLOW FIRE SHOP（アメリカンBBQのEC）の責任者で、AIが作ったページ修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
 以下5項目で100点満点採点し、合計を出してください。
@@ -341,20 +381,41 @@ async function aiGrade(proposal, edits) {
 2. 事実・表記の正確性（25）：価格/送料/在庫/商品仕様/配送・返品条件を歪めたり創作していないか
 3. ブランドトーン（20）：落ち着いた実用志向。煽り/誇大/虚偽の限定表現/不自然な日本語がない
 4. SEO/表記安全性（15）：キーワード詰め込み・不自然な最適化・誤解を招く表現でない
-5. HTML健全性（15）：タグ崩れ・リンク切れ・レイアウト破壊・意味の壊れがない`
+5. HTML健全性（15）：※この項目は別途の機械チェック結果を必ず採用する。あなたは編集断片から「タグが途中で切れている／未閉鎖」を推測しないこと（断片は採点用に切り出しただけで実体ではない）。機械チェックが「問題なし」なら15点、指摘があればその内容に従うこと。`
     : `あなたはSLOW FIRE JOURNALの編集長で、AIが作った記事修正を世に出す前の最終審査をします。辛口に。ただし落とすときは「どう直せば合格に届くか」を必ず具体的に示し、書き手を合格まで導きます。
 以下5項目で100点満点採点し、合計を出してください。
 1. 提案との一致（25）：提案の意図どおりの修正になっているか
 2. 事実・技術的正確性（25）：温度/時間/手順などに誤りや劣化がないか
 3. ブランドトーン（20）：落ち着いた実用志向。煽り/誇大/不自然な日本語がない
 4. SEO安全性（15）：キーワード詰め込み・不自然な最適化・重複でない
-5. HTML健全性（15）：タグ崩れ・リンク切れ・意味の壊れがない`;
+5. HTML健全性（15）：※この項目は別途の機械チェック結果を必ず採用する。あなたは編集断片から「タグが途中で切れている／未閉鎖」を推測しないこと（断片は採点用に切り出しただけで実体ではない）。機械チェックが「問題なし」なら15点、指摘があればその内容に従うこと。`;
+  const fullDoc = String(afterDoc || "");
   const userMsg = `# 提案
 ${JSON.stringify(proposal, null, 2)}
 
-# 適用された編集（find→replace）
-${JSON.stringify(edits.map((e) => ({ before: e.find.slice(0, 300), after: e.replace.slice(0, 300), why: e.why })), null, 2)}`;
-  return callClaude(system, userMsg, GRADE_SCHEMA, { maxTokens: 4000, effort: "high" });
+# 適用された編集（find→replace・全文。途中で省略していない実体）
+${JSON.stringify(edits.map((e) => ({ before: e.find, after: e.replace, why: e.why })), null, 2)}
+
+# 機械チェック済みのHTML健全性（HTML健全性の項目はこれを唯一の根拠とすること）
+${health && health.ok ? "問題なし：タグの開閉・構造は機械チェックで健全。" : "問題あり：" + ((health && health.issues) || []).join(" / ")}
+
+# 編集適用後のページ全文（提案との一致・トーン・読みやすさは、この“実物”で文脈ごと判断すること）
+${fullDoc.length > 70000 ? fullDoc.slice(0, 70000) + "\n…(以下省略)" : fullDoc}`;
+  const g = await callClaude(system, userMsg, GRADE_SCHEMA, { maxTokens: 4000, effort: "high" });
+
+  // HTML健全性は機械判定で必ず上書きし、合計を再計算する。
+  // ＝採点役が編集断片の見かけから「タグ未閉鎖」と誤読して落とす事故を恒久的に封じる。
+  const items = Array.isArray(g.items) ? g.items : [];
+  const hp = health || { score: 15, ok: true, issues: [] };
+  const htmlItem = items.find((it) => /HTML/i.test(it.name || ""));
+  const comment = hp.ok ? "機械チェックでタグの開閉・構造は健全。" : "機械チェックで問題検出：" + hp.issues.join(" / ");
+  if (htmlItem) { htmlItem.score = hp.score; htmlItem.max = 15; htmlItem.comment = comment; }
+  else items.push({ name: "HTML健全性", score: hp.score, max: 15, comment });
+  g.items = items;
+  g.total = items.reduce((s, it) => s + (Number(it.score) || 0), 0);
+  // 機械チェックで本当に壊れているのに fix_hint が空なら、具体的な直し方を補う
+  if (!hp.ok && !g.fix_hint) g.fix_hint = "HTMLが壊れている：" + hp.issues.join(" / ") + "。大きなブロックは2〜3個の小さく確実な編集に分割し、各タグを必ず閉じること。";
+  return g;
 }
 
 // ---- git ヘルパ --------------------------------------------------------------
@@ -419,10 +480,15 @@ async function doImplement() {
       feedback = "find が記事内に一致しなかった。記事HTMLに一字一句そのまま存在する十分長い文字列を find にすること。"; continue;
     }
 
-    // 自己採点（実装役とは別呼び出し）
+    // 適用後ページ全文を機械チェック（タグ崩れ/途中切れは採点役の主観でなくここで確定）
+    const health = htmlHealth(before, after);
+    // 大きなブロックが途中で切れてスキップされた場合は、次回への的確な指示を用意する
+    const truncatedSkips = (skipped || []).filter((s) => /切れ/.test(s.reason || ""));
+
+    // 自己採点（実装役とは別呼び出し）。実物（全文）＋機械チェック結果を渡して公正に採点させる。
     let grade;
     try {
-      grade = await aiGrade(workingProposal, applied);
+      grade = await aiGrade(workingProposal, applied, health, after);
     } catch (e) {
       grade = { total: 0, items: [], verdict: `採点AIエラー: ${e.message}` };
     }
@@ -430,6 +496,7 @@ async function doImplement() {
     if (!best || total > best.total) best = { total, grade, after, applied, skipped };
     if (total >= PASS) { console.log(`attempt ${attempt}: ${total}点 合格`); break; }
     feedback = `自己採点${total}/100点で不合格。総評：${grade.verdict || ""}${(grade.items || []).filter((it) => it.score < it.max).map((it) => `／${it.name}:${it.comment}`).join("")}${grade.fix_hint ? `｜こう直せば通る：${grade.fix_hint}` : ""}`;
+    if (truncatedSkips.length) feedback += `／【最重要】前回はCTA等の大きなブロックが途中で切れてスキップされた（${truncatedSkips.length}件・未反映）。1件のreplaceを巨大にせず、必ず2〜3個の小さく確実な編集に分割し、各タグを閉じきること。`;
     console.log(`attempt ${attempt}: ${total}点 — 指摘を直して再挑戦`);
 
     // 2回試しても構造的に届かない（提案自体が安全に実装しづらい）なら、提案を安全で狭い版に作り直して続行
