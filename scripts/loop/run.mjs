@@ -428,10 +428,38 @@ function liveUrlFor(file) {
 }
 
 // =============================================================================
-// アクション: implement-article
+// アクション: implement-article / implement-shop
+// -----------------------------------------------------------------------------
+// 単一提案でも、複数提案の「バッチ」でも動く。
+//   - 単一（従来）：提案ごとの結果メールを1通送る（手動の［承認］ボタン経路もこれ）。
+//   - バッチ（proposal.batch=[...]）：全提案を順番に実装・自己採点・（合格なら）本番公開し、
+//     最後に結果を1通のサマリーメールにまとめて送る。山根さん要望「承認クリックを無くし、
+//     どう実装したかの結論だけ受け取りたい」に対応。1回のワークフロー実行で直列処理するので、
+//     concurrency の pending キャンセルや main への並列 push 衝突が起きない（＝提案の取りこぼしなし）。
 // =============================================================================
+// 実装→自己採点を、合格点(80)に届くまで最大この回数くり返す（人間の編集者と編集長が往復するように）。
+const MAX_ATTEMPTS = 5;
+
 async function doImplement() {
-  const proposal = PAYLOAD.proposal || {};
+  const envelope = PAYLOAD.proposal || {};
+  const isBatch = Array.isArray(envelope.batch) && envelope.batch.length > 0;
+  const items = isBatch ? envelope.batch : [envelope];
+  const results = [];
+  for (const item of items) {
+    try {
+      results.push(await implementOne(item));
+    } catch (e) {
+      console.error("implementOne 致命的:", e && e.message);
+      results.push({ status: "failed", proposal: item, reason: String((e && e.message) || e) });
+    }
+  }
+  if (isBatch) emitBatchSummary(results);
+  else emitSingle(results[0]);
+}
+
+// 1提案を実装→自己採点→（合格なら）本番公開する。メールは送らず結果オブジェクトを返す。
+// 返り値 status: "published" | "rejected" | "notimpl" | "failed"
+async function implementOne(proposal) {
   // まず表記揺れを吸収して実ファイルに寄せる。落とせなければ実在ページ一覧からAIが最適な1ページを選ぶ。
   // ＝『サイト全体』『対象不明』でも止めず必ず実装に進める（山根さん要望：毎日確実に改善を回す）。
   let file = resolveTargetFile(proposal.target, DOMAIN);
@@ -440,25 +468,15 @@ async function doImplement() {
     file = await aiResolveTarget(proposal);
   }
 
-  // 候補ゼロ等、本当に対象が無いときだけ対象外として通知（安全弁・通常は到達しない）
-  if (!file) {
-    setOutput({
-      ready: "true",
-      to: TO,
-      subject: `【${BRAND}】自動実装の対象外でした：${proposal.title || ""}`,
-      html: notImplementableHtml(proposal),
-    });
-    return;
-  }
+  // 候補ゼロ等、本当に対象が無いときだけ対象外（安全弁・通常は到達しない）
+  if (!file) return { status: "notimpl", proposal };
 
   const before = fs.readFileSync(file, "utf8");
 
-  // 実装→自己採点を、合格点(80)に届くまで最大5回くり返す（人間の編集者と編集長が往復するように）。
   //   - 落ちた回は採点役の「どう直せば通るか(fix_hint)」を次の実装役へ渡して直させる。
   //   - 後半は「完璧な大きい変更より、確実に効く最小・安全な一部を必ず出荷」させる（ダウンスコープ）。
   //   - 構造的に落ち続けるなら提案自体を安全で狭い版に作り直して続行する（reformulate）。
   // 80点の安全バーは下げない：バーまで“登り切る”往復を増やすだけ。届かなければ最高得点版を見送る。
-  const MAX_ATTEMPTS = 5;
   let best = null;     // { total, grade, after, applied, skipped }
   let feedback = "";
   let workingProposal = proposal;   // 行き詰まったら安全側に作り直すことがある（targetは保つ）
@@ -471,12 +489,12 @@ async function doImplement() {
     try {
       impl = await aiImplement(before, workingProposal, feedback, downscope);
     } catch (e) {
-      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【${BRAND}】実装に失敗：${proposal.title || ""}`, html: failHtml(proposal, `実装AIエラー: ${e.message}`) }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) return { status: "failed", proposal, file, reason: `実装AIエラー: ${e.message}` };
       feedback = `実装AIエラー: ${e.message}`; continue;
     }
     const { html: after, applied, skipped } = applyEdits(before, impl.edits);
     if (!applied.length) {
-      if (attempt === MAX_ATTEMPTS && !best) { setOutput({ ready: "true", to: TO, subject: `【${BRAND}】変更を適用できませんでした：${proposal.title || ""}`, html: failHtml(proposal, "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。") }); return; }
+      if (attempt === MAX_ATTEMPTS && !best) return { status: "failed", proposal, file, reason: "編集対象テキストが記事内で特定できませんでした（記事が更新済みの可能性）。" };
       feedback = "find が記事内に一致しなかった。記事HTMLに一字一句そのまま存在する十分長い文字列を find にすること。"; continue;
     }
 
@@ -513,10 +531,9 @@ async function doImplement() {
     }
   }
 
-  // 5回努力しても合格点に届かなければ、最高得点版を載せて見送る（安全弁は維持）
+  // 5回努力しても合格点に届かなければ、最高得点版の内容を持って見送る（安全弁は維持）
   if (!best || best.total < PASS) {
-    setOutput({ ready: "true", to: TO, subject: `【${BRAND}・非公開】採点${best ? best.total : 0}点で見送り（${MAX_ATTEMPTS}回試行）：${proposal.title || ""}`, html: rejectedHtml(proposal, best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, best ? best.applied : [], file) });
-    return;
+    return { status: "rejected", proposal, file, grade: best ? best.grade : { total: 0, items: [], verdict: "実装できませんでした" }, applied: best ? best.applied : [] };
   }
   const { grade, after, applied, skipped } = best;
 
@@ -535,11 +552,35 @@ async function doImplement() {
   // 山根さんはゲートキーパーでなく監査役（[[feedback_loop_human_not_bottleneck]] 原則②）。
   // 公開後の「事後報告」メールに［元に戻す］を付け、違和感があればワンクリックで戻せる安全弁を残す。
   const { mainCommit, changed } = mergeBranchToMain({ branch, commit });
+  return { status: "published", proposal, file, grade, applied, skipped, mainCommit, changed };
+}
+
+// ---- 結果 → メール ----------------------------------------------------------
+// 単一提案の結果を、従来どおり1通のメールにする（手動の［承認］ボタン経路もこれ）。
+function emitSingle(r) {
+  if (!r) { setOutput({ ready: "false" }); return; }
+  const p = r.proposal || {};
+  if (r.status === "notimpl") {
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}】自動実装の対象外でした：${p.title || ""}`, html: notImplementableHtml(p) });
+  } else if (r.status === "failed") {
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}】実装できませんでした：${p.title || ""}`, html: failHtml(p, r.reason || "") });
+  } else if (r.status === "rejected") {
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}・非公開】採点${r.grade.total}点で見送り（${MAX_ATTEMPTS}回試行）：${p.title || ""}`, html: rejectedHtml(p, r.grade, r.applied, r.file) });
+  } else {
+    setOutput({ ready: "true", to: TO, subject: `【${BRAND}】自動公開しました（採点${r.grade.total}点）：${p.title || ""}`, html: autoPublishedHtml(r) });
+  }
+}
+
+// バッチの結果を、公開/見送り/対象外/失敗を一覧にした1通のサマリーメールにまとめる。
+function emitBatchSummary(results) {
+  const pub = results.filter((r) => r && r.status === "published");
+  const rej = results.filter((r) => r && r.status === "rejected");
+  const oth = results.filter((r) => r && r.status !== "published" && r.status !== "rejected");
   setOutput({
     ready: "true",
     to: TO,
-    subject: `【${BRAND}】自動公開しました（採点${grade.total}点）：${proposal.title || ""}`,
-    html: autoPublishedHtml({ proposal, grade, applied, skipped, file, mainCommit, changed }),
+    subject: `【${BRAND}】改善を自動実装：${pub.length}件を本番公開（全${results.length}件処理）`,
+    html: batchSummaryHtml(results, pub, rej, oth),
   });
 }
 
@@ -680,6 +721,46 @@ function autoPublishedHtml({ proposal, grade, applied, skipped, file, mainCommit
       <div style="font-size:12px;color:#b45309;line-height:1.8;margin-bottom:10px">もし違和感があれば、ワンクリックで元に戻せます。</div>
       ${btn(revert, "↩️ この変更を元に戻す", "#fff", true)}
     </div>`);
+}
+
+// バッチ処理の結果サマリー：公開/見送り/対象外/失敗を1通に並べ、公開分には［元に戻す］を付ける。
+function batchSummaryHtml(results, pub, rej, oth) {
+  const chip = (bg, bd, fg, txt) =>
+    `<span style="display:inline-block;background:${bg};border:1px solid ${bd};color:${fg};font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px">${txt}</span>`;
+  const card = (r) => {
+    const p = (r && r.proposal) || {};
+    let head = "", body = "";
+    if (r.status === "published") {
+      const revert = changeLink("revert", { commit: r.mainCommit, title: p.title || r.changed });
+      const diff = `https://github.com/${REPO}/commit/${r.mainCommit}`;
+      head = chip("#f0fdf4", "#bbf7d0", "#15803d", `🚀 自動公開（採点${r.grade.total}点）`);
+      body = `<div style="font-size:12px;color:#888;margin:8px 0 6px">対象：<a href="${liveUrlFor(r.file)}" style="color:#c2410c">${esc(r.file)}</a>／変更${(r.applied || []).length}件</div>
+        <div style="font-size:13px;color:#1b1b1b;line-height:1.8">${esc(r.grade.verdict || "")}</div>
+        <div style="margin-top:10px">${btn(diff, "変更の詳細", "#475569")}　${btn(revert, "↩️ 元に戻す", "#fff", true)}</div>`;
+    } else if (r.status === "rejected") {
+      head = chip("#fef2f2", "#fecaca", "#b91c1c", `⏸ 見送り（採点${r.grade.total}点／合格${PASS}点）`);
+      body = `<div style="font-size:12px;color:#888;margin:8px 0 6px">対象：${esc(r.file || "")}</div>
+        <div style="font-size:13px;color:#1b1b1b;line-height:1.8">${esc(r.grade.verdict || "")}</div>
+        <div style="font-size:11px;color:#b45309;margin-top:6px">誤情報・低品質を世に出さないための安全弁により未公開です。</div>`;
+    } else if (r.status === "notimpl") {
+      head = chip("#fff7ed", "#fed7aa", "#b45309", "🗂 対象外");
+      body = `<div style="font-size:12px;color:#666;margin-top:8px;line-height:1.8">対象ページを特定できず、自動実装をスキップしました（指定：${esc(p.target || "なし")}）。</div>`;
+    } else {
+      head = chip("#f1f5f9", "#cbd5e1", "#475569", "⚠️ 実装できず");
+      body = `<div style="font-size:12px;color:#666;margin-top:8px;line-height:1.8">${esc(r.reason || "")}</div>`;
+    }
+    return `<div style="border:1px solid #ececec;border-radius:12px;padding:15px 17px;margin-bottom:12px">
+      <div style="margin-bottom:8px">${head}</div>
+      <div style="font-size:15px;font-weight:900;color:#0f172a;line-height:1.5">${esc(p.title || "")}</div>
+      ${body}
+    </div>`;
+  };
+  return SHELL(`
+    <div style="font-size:12px;color:#16a34a;font-weight:800;margin-bottom:6px">🤖 今日の改善を自動で実装しました</div>
+    <h2 style="font-size:18px;margin:0 0 10px">${results.length}件を処理：本番公開 ${pub.length}件${rej.length ? ` ／ 見送り ${rej.length}件` : ""}${oth.length ? ` ／ 対象外・失敗 ${oth.length}件` : ""}</h2>
+    <div style="font-size:12px;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 13px;line-height:1.8;margin-bottom:16px">承認クリックは不要です。合格点（${PASS}点）を超えた提案は、承認を待たず自動で本番公開しました。各公開に［元に戻す］が付いているので、違和感があればワンクリックで戻せます。</div>
+    ${results.map(card).join("")}
+    <p style="font-size:11px;color:#aaa;margin-top:8px">${BRAND} 改善ループ／自己採点${PASS}点以上のみ公開・未閉じタグ等の壊れた変更は自動で除外</p>`);
 }
 
 function publishedHtml({ branch, mainCommit, changed }) {
