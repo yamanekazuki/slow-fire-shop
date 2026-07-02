@@ -532,6 +532,12 @@
         <p class="pd-nameja" id="pdNameja"></p>
         <p class="pd-subtitle" id="pdSubtitle"></p>
 
+        <div class="pd-buy" id="pdBuyTop" style="margin-bottom:20px;">
+          <span class="pd-price" id="pdPriceTop"></span>
+          <button id="pdBuyBtnTop" class="pd-buy-btn">＋ カートに追加</button>
+        </div>
+        <p id="pdShipTop" style="font-size:12px;color:var(--gray-600);margin-bottom:20px;line-height:1.6;">全国一律送料 ¥550・¥7,000以上のご購入で送料無料／在庫あり</p>
+
         <p class="pd-flavor-links" style="font-size:12.5px;margin-bottom:20px;"><a href="index.html#products" style="color:var(--brand);font-weight:700;text-decoration:none;">他の味・ラインナップを見る →</a></p>
 
         <div class="pd-flavor">
@@ -679,6 +685,8 @@
       document.getElementById('pdFlavor').textContent = p.flavorNotes;
       document.getElementById('pdDesc').textContent = p.desc;
       document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
+      const priceTopEl = document.getElementById('pdPriceTop');
+      if (priceTopEl) priceTopEl.textContent = '¥' + p.price.toLocaleString() + '（税込）';
       const factPriceEl = document.getElementById('pdFactPrice');
       if (factPriceEl) factPriceEl.textContent = '¥' + p.price.toLocaleString();
       const affTagsEl = document.getElementById('pdAffinityTags');
@@ -708,6 +716,20 @@
         `${p.spiceLevel} / 5・${spiceLabels[p.spiceLevel] || ''}`;
 
       // Buy button
+      const buyBtnTop = document.getElementById('pdBuyBtnTop');
+      if (buyBtnTop) {
+        buyBtnTop.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
+        buyBtnTop.addEventListener('click', () => {
+          if (typeof window.cart !== 'undefined' && window.cart.add) {
+            window.cart.add(p.id);
+            buyBtnTop.textContent = '✓ カートに追加しました';
+            buyBtnTop.classList.add('added');
+            setTimeout(() => location.href = 'index.html#products', 1200);
+          } else {
+            location.href = 'index.html#product-' + p.id;
+          }
+        });
+      }
       const buyBtn = document.getElementById('pdBuyBtn');
       buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）｜全国一律送料¥550・¥7,000以上で送料無料';
       buyBtn.addEventListener('click', () => {
