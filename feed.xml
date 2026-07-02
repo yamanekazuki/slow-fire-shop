@@ -6,7 +6,14 @@
   <atom:link href="https://yamanekazuki.github.io/slow-fire-shop/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 01 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 03 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>ソーセージが破裂する・生焼けになる原因と、失敗しない焼き方</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/grilling-sausages-hotdog.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/grilling-sausages-hotdog.html</guid>
+    <pubDate>Fri, 03 Jul 2026 07:00:00 +0900</pubDate>
+    <description>BBQでソーセージが破裂したり生焼けになる原因を解説。中心68℃を目指すツーゾーン焼きの手順、下茹での有無、皮パリの作り方、ホットドッグの温め方まで数値で完全網羅します。</description>
+  </item>
   <item>
     <title>ツーゾーンファイアの作り方 — 炭の配置で火力を自在に操る実務</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/two-zone-fire-setup.html</link>
