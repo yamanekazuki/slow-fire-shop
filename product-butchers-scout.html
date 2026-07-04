@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title id="pageTitle">Scout (スカウト) — Butcher's Axe BBQ | SLOW FIRE SHOP</title>
+  <meta id="pageDesc" name="description" content="レモンペッパーの王道をButcher's Axe流に再構築。鶏胸肉、白身魚、エビ、サラダの仕上げまで万能に。爽やかさと辛味のバランスが絶妙。 レモン・ブラックペッパー / 爽やかで万能">
+  <meta name="robots" content="index,follow">
+  <link id="canonicalLink" rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/product-butchers-scout.html">
+  <meta property="og:type" content="product">
+  <meta name="theme-color" content="#B45309">
+  <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260506e">
+  <link rel="stylesheet" href="assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="assets/sf-features.css?v=20260517">
+
+  <style>
+    /* ===== product detail page ===== */
+    .pd-page { background: var(--white); }
+
+    /* breadcrumb */
+    .pd-crumb {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 24px) 24px 0;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+    .pd-crumb a { color: var(--gray-600); text-decoration: none; }
+    .pd-crumb a:hover { color: var(--black); text-decoration: underline; }
+    .pd-crumb-sep { margin: 0 6px; color: var(--gray-200); }
+
+    /* hero (image + info) */
+    .pd-hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 24px 60px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 880px) {
+      .pd-hero { grid-template-columns: 1fr 1fr; gap: 56px; padding-top: 36px; }
+    }
+
+    .pd-img-wrap {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
+      position: relative;
+    }
+    .pd-img-wrap[data-brand="butchers-axe"]   { background: linear-gradient(135deg, #1f1f1f, #3a2818); }
+    .pd-img-wrap[data-brand="stef-the-maori"] { background: linear-gradient(135deg, #052e1d, #15803d); }
+    .pd-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .pd-badge {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 11px; font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+    }
+    .bdg-bestseller { background: var(--brand); color: var(--white); }
+    .bdg-new        { background: #2563EB; color: var(--white); }
+    .bdg-spicy      { background: #DC2626; color: var(--white); }
+    .bdg-value      { background: #16A34A; color: var(--white); }
+
+    .pd-info {}
+    .pd-brand {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gray-400);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .pd-name {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 6px;
+      letter-spacing: -0.005em;
+    }
+    .pd-nameja {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-bottom: 8px;
+    }
+    .pd-subtitle {
+      font-size: 12.5px;
+      color: var(--gray-400);
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+    }
+    .pd-flavor {
+      padding: 14px 16px;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 22px;
+    }
+    .pd-flavor-label {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+    .pd-flavor-text {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* spice level — clearer presentation */
+    .pd-spice {
+      display: flex; align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: var(--off-white);
+      border-radius: 10px;
+    }
+    .pd-spice-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+    .pd-spice-value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-left: auto;
+    }
+    .pd-spice-scale {
+      display: flex; gap: 3px;
+    }
+    .pd-spice-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gray-200);
+    }
+    .pd-spice-dot.on { background: #DC2626; }
+    .pd-spice-dot.lvl-0.on { background: var(--gray-400); }
+
+    .pd-desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.95;
+      margin-bottom: 28px;
+    }
+
+    .pd-buy {
+      display: flex; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .pd-price {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--black);
+    }
+    .pd-buy-btn {
+      flex: 1;
+      min-width: 200px;
+      padding: 16px 28px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .pd-buy-btn:hover { background: #333; }
+    .pd-buy-btn:active { transform: scale(.98); }
+    .pd-buy-btn.added { background: #16A34A; }
+
+    /* sections */
+    .pd-section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 24px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .pd-section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      color: var(--gray-400); margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .pd-section h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--black);
+      line-height: 1.4;
+      margin-bottom: 24px;
+      letter-spacing: -0.005em;
+    }
+
+    /* food affinity — radar (pentagon) chart */
+    .pd-affinity-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      .pd-affinity-wrap { grid-template-columns: minmax(280px, 360px) 1fr; gap: 40px; }
+    }
+    .pd-radar {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .pd-radar-grid { fill: none; stroke: var(--gray-200); stroke-width: 1; }
+    .pd-radar-axis { stroke: var(--gray-200); stroke-width: 1; }
+    .pd-radar-data {
+      fill: rgba(180, 83, 9, 0.18);
+      stroke: var(--brand);
+      stroke-width: 2;
+      stroke-linejoin: round;
+    }
+    .pd-radar-point {
+      fill: var(--brand);
+    }
+    .pd-radar-label {
+      font-size: 12px;
+      font-weight: 700;
+      fill: var(--black);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .pd-radar-score-tag {
+      font-size: 10px;
+      fill: var(--gray-400);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .pd-affinity-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .pd-affinity-list-item {
+      padding: 10px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .pd-affinity-list-name {
+      color: var(--black);
+      font-weight: 600;
+    }
+    .pd-affinity-list-score {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--brand);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* recipes */
+    .pd-recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    @media (min-width: 720px) { .pd-recipes-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .pd-recipe-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--white);
+      transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+    }
+    .pd-recipe-card:hover {
+      border-color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .pd-recipe-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      opacity: 0.65;
+    }
+    .pd-recipe-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .pd-recipe-meta {
+      padding: 12px 14px;
+    }
+    .pd-recipe-level {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 6px;
+    }
+    .pd-recipe-level.lv-初級 { background: #ECFDF5; color: #047857; }
+    .pd-recipe-level.lv-中級 { background: #FEF3C7; color: var(--brand); }
+    .pd-recipe-level.lv-上級 { background: #FCE7F3; color: #BE185D; }
+    .pd-recipe-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    /* usage */
+    .pd-usage-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 720px) { .pd-usage-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pd-usage-card {
+      padding: 22px 22px;
+      background: var(--off-white);
+      border-radius: 12px;
+    }
+    .pd-usage-num {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--brand);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+    .pd-usage-card h4 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .pd-usage-card p {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.85;
+    }
+
+    /* related rubs — smaller, 4 columns */
+    .pd-related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 600px) { .pd-related-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    @media (min-width: 880px) { .pd-related-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; } }
+
+    .pd-related-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--white);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .pd-related-card:hover {
+      border-color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .pd-related-img {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
+    }
+    .pd-related-card[data-brand="butchers-axe"]   .pd-related-img { background: linear-gradient(135deg, #1f1f1f, #3a2818); }
+    .pd-related-card[data-brand="stef-the-maori"] .pd-related-img { background: linear-gradient(135deg, #052e1d, #15803d); }
+    .pd-related-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .pd-related-meta {
+      padding: 10px 12px 12px;
+    }
+    .pd-related-brand {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--gray-400);
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .pd-related-name {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--black);
+      margin-bottom: 3px;
+      line-height: 1.35;
+      letter-spacing: -0.005em;
+    }
+    .pd-related-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    /* loading state */
+    .pd-loading {
+      max-width: 640px;
+      margin: calc(var(--nav-h) + 80px) auto;
+      padding: 60px 24px;
+      text-align: center;
+      color: var(--gray-400);
+    }
+  </style>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B6PRVFPKF');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wmtxoerxqx");
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Scout","alternateName":"スカウト","image":"https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?v=1745364053&width=800","description":"レモンペッパーの王道をButcher's Axe流に再構築。鶏胸肉、白身魚、エビ、サラダの仕上げまで万能に。爽やかさと辛味のバランスが絶妙。","brand":{"@type":"Brand","name":"Butcher's Axe BBQ"},"offers":{"@type":"Offer","url":"https://yamanekazuki.github.io/slow-fire-shop/product-butchers-scout.html","priceCurrency":"JPY","price":2980,"availability":"https://schema.org/InStock"}}</script>
+</head>
+
+<body class="pd-page">
+
+  <!-- NAV -->
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="essentials.html" role="menuitem"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="pairing-guide.html" role="menuitem"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="cookbook.html" role="menuitem"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="rub-guide.html" role="menuitem"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="bbq-spots/index.html">BBQ場検索</a>
+        <a href="planner/index.html">プランナー</a>
+        <a href="team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='index.html#products'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LOADING / NOT FOUND -->
+  <div id="pdLoading" class="pd-loading" style="display:none">
+    <p>読み込み中...</p>
+  </div>
+
+  <!-- MAIN CONTENT (rendered dynamically) -->
+  <main id="pdMain" style="display:block">
+
+    <!-- Breadcrumb -->
+    <nav class="pd-crumb" aria-label="パンくずリスト">
+      <a href="index.html">ホーム</a>
+      <span class="pd-crumb-sep">/</span>
+      <a href="index.html#products">商品一覧</a>
+      <span class="pd-crumb-sep">/</span>
+      <span id="crumbName">Scout</span>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pd-hero">
+      <div class="pd-img-wrap" id="pdImgWrap">
+        <img id="pdImg" src="https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?v=1745364053&amp;width=800" alt="Scout — Butcher's Axe BBQ">
+        <span id="pdBadge" class="pd-badge" style="display:none"></span>
+      </div>
+      <div class="pd-info">
+        <p class="pd-brand" id="pdBrand">🇦🇺 Stagg &amp; Co Australia · Butcher's Axe BBQ</p>
+        <h1 class="pd-name" id="pdName">Scout</h1>
+        <p class="pd-nameja" id="pdNameja">スカウト</p>
+        <p class="pd-subtitle" id="pdSubtitle">Lemon Pepper Seasoning</p>
+
+        <div class="pd-flavor">
+          <p class="pd-flavor-label">フレーバー</p>
+          <p class="pd-flavor-text" id="pdFlavor">レモン・ブラックペッパー / 爽やかで万能</p>
+        </div>
+
+        <div class="pd-spice" id="pdSpiceWrap">
+          <span class="pd-spice-label">辛さレベル</span>
+          <div class="pd-spice-scale" id="pdSpiceScale"></div>
+          <span class="pd-spice-value" id="pdSpiceText"></span>
+        </div>
+
+        <p class="pd-desc" id="pdDesc">レモンペッパーの王道をButcher's Axe流に再構築。鶏胸肉、白身魚、エビ、サラダの仕上げまで万能に。爽やかさと辛味のバランスが絶妙。</p>
+
+        <div class="pd-buy">
+          <span class="pd-price" id="pdPrice">¥2,980</span>
+          <button id="pdBuyBtn" class="pd-buy-btn">＋ カートに追加</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOD AFFINITY -->
+    <section class="pd-section" id="affinitySection">
+      <p class="pd-section-eyebrow">FOOD AFFINITY</p>
+      <h2>どの食材に合う？</h2>
+      <div class="pd-affinity-wrap">
+        <svg id="pdRadar" class="pd-radar" viewBox="0 0 280 280" aria-hidden="true"></svg>
+        <div class="pd-affinity-list" id="pdAffinityList"></div>
+      </div>
+    </section>
+
+    <!-- RELATED RECIPES -->
+    <section class="pd-section">
+      <p class="pd-section-eyebrow">PERFECT WITH</p>
+      <h2>こんな料理に合います</h2>
+      <div class="pd-recipes-grid" id="pdRecipes"></div>
+      <div style="margin-top:28px;">
+        <a href="cookbook.html" class="btn-dark" style="display:inline-block;padding:11px 24px;font-size:13px;">全24品の料理ガイドへ →</a>
+      </div>
+    </section>
+
+    <!-- RELATED PRODUCTS -->
+    <section class="pd-section" style="background:var(--off-white);">
+      <p class="pd-section-eyebrow">YOU MAY ALSO LIKE</p>
+      <h2>関連商品</h2>
+      <div class="pd-related-grid" id="pdRelated"></div>
+      <div style="margin-top:28px;">
+        <a href="index.html#products" class="btn-dark" style="display:inline-block;padding:11px 24px;font-size:13px;background:var(--white);color:var(--black);border:1.5px solid var(--gray-200);">全商品一覧へ →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html#products">商品一覧</a>
+          <a href="essentials.html">BBQの神髄</a>
+          <a href="pairing-guide.html">食材から選ぶ</a>
+          <a href="cookbook.html">料理から選ぶ</a>
+          <a href="rub-guide.html">ラブガイド</a>
+          <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="team.html">私たちについて</a><a href="legal/tokushoho.html">特定商取引法</a><a href="legal/privacy.html">プライバシー</a><a href="legal/terms.html">利用規約</a><a href="about/">About</a><a href="contact/">お問い合わせ</a></nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="product-data.js?v=20260506f"></script>
+  <script src="recipe-data.js?v=20260506f"></script>
+  <script src="mobile-nav.js?v=20260506e"></script>
+  <script>
+    /* nav scroll */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    /* read product id from URL */
+    const params = new URLSearchParams(window.location.search);
+    const productId = "butchers-scout";
+    const product = productId ? PRODUCT_DETAILS[productId] : null;
+
+    const loadingEl = document.getElementById('pdLoading');
+    const mainEl = document.getElementById('pdMain');
+
+    if (!product) {
+      loadingEl.innerHTML = `
+        <h2 style="font-size:24px;color:var(--black);margin-bottom:14px;">商品が見つかりませんでした</h2>
+        <p style="margin-bottom:28px;">商品IDが正しいかご確認ください。</p>
+        <a href="index.html#products" class="btn-dark" style="display:inline-block;padding:12px 26px;">商品一覧に戻る →</a>
+      `;
+    } else {
+      renderProduct(product);
+      loadingEl.style.display = 'none';
+      mainEl.style.display = 'block';
+    }
+
+    function renderProduct(p) {
+      // SEO
+      document.getElementById('pageTitle').textContent = `${p.name} (${p.nameja}) — ${p.brandLabel} | SLOW FIRE SHOP`;
+      document.getElementById('pageDesc').setAttribute('content', `${p.desc} ${p.flavorNotes}`);
+      document.getElementById('canonicalLink').setAttribute('href', `https://yamanekazuki.github.io/slow-fire-shop/product-${p.id}.html`);
+
+      // Hero
+      document.getElementById('crumbName').textContent = p.name;
+      const imgWrap = document.getElementById('pdImgWrap');
+      imgWrap.dataset.brand = p.brand;
+      const img = document.getElementById('pdImg');
+      img.src = p.image;
+      img.alt = `${p.name} — ${p.brandLabel}`;
+
+      const badge = document.getElementById('pdBadge');
+      if (p.badge) {
+        badge.textContent = p.badge;
+        badge.className = 'pd-badge bdg-' + (
+          p.badge === 'BEST SELLER' ? 'bestseller' :
+          p.badge === 'NEW' ? 'new' :
+          p.badge === 'SPICY' ? 'spicy' :
+          p.badge === 'BEST VALUE' ? 'value' : 'bestseller'
+        );
+        badge.style.display = '';
+      }
+
+      document.getElementById('pdBrand').textContent = `${p.brandOrigin} · ${p.brandLabel}`;
+      document.getElementById('pdName').textContent = p.name;
+      document.getElementById('pdNameja').textContent = p.nameja;
+      document.getElementById('pdSubtitle').textContent = p.subtitle;
+      document.getElementById('pdFlavor').textContent = p.flavorNotes;
+      document.getElementById('pdDesc').textContent = p.desc;
+      document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
+
+      // Spice scale (5 dots) + clear label
+      const sb = document.getElementById('pdSpiceScale');
+      sb.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'pd-spice-dot' + (i < p.spiceLevel ? ' on' : '');
+        if (p.spiceLevel === 0) dot.classList.add('lvl-0');
+        sb.appendChild(dot);
+      }
+      const spiceLabels = ['辛さなし', 'マイルド', '中辛', 'スパイシー', '辛口', '激辛'];
+      document.getElementById('pdSpiceText').textContent =
+        `${p.spiceLevel} / 5・${spiceLabels[p.spiceLevel] || ''}`;
+
+      // Buy button
+      const buyBtn = document.getElementById('pdBuyBtn');
+      buyBtn.addEventListener('click', () => {
+        // Try to use existing cart if available; otherwise redirect
+        if (typeof window.cart !== 'undefined' && window.cart.add) {
+          window.cart.add(p.id);
+          buyBtn.textContent = '✓ カートに追加しました';
+          buyBtn.classList.add('added');
+          setTimeout(() => location.href = 'index.html#products', 1200);
+        } else {
+          location.href = 'index.html#product-' + p.id;
+        }
+      });
+
+      // Food affinity — pentagon radar chart
+      renderRadar(p.bestFor);
+      const affList = document.getElementById('pdAffinityList');
+      const affMeta = [
+        { key: 'beef',    label: '🥩 牛' },
+        { key: 'pork',    label: '🐷 豚' },
+        { key: 'chicken', label: '🍗 鶏' },
+        { key: 'fish',    label: '🐟 魚介' },
+        { key: 'veggie',  label: '🥬 野菜' }
+      ];
+      affList.innerHTML = affMeta.map(({ key, label }) => `
+        <div class="pd-affinity-list-item">
+          <span class="pd-affinity-list-name">${label}</span>
+          <span class="pd-affinity-list-score">${p.bestFor[key] || 0} / 5</span>
+        </div>
+      `).join('');
+
+      // Related recipes — link to individual recipe page
+      const rec = document.getElementById('pdRecipes');
+      const RECIPES_BY_ID = {};
+      (window.RECIPES || []).forEach(r => RECIPES_BY_ID[r.id] = r);
+      rec.innerHTML = (p.bestRecipes || []).map(rid => {
+        const r = RECIPES_BY_ID[rid];
+        if (!r) return '';
+        const imgUrl = window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260506`;
+        const imgHtml = `<img src="${imgUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;">${r.icon}</span>`;
+        const lv = r.levelLabel || (r.level === 1 ? '初級' : r.level === 2 ? '中級' : '上級');
+        return `
+          <a href="recipe-${r.id}.html" class="pd-recipe-card">
+            <div class="pd-recipe-img">${imgHtml}</div>
+            <div class="pd-recipe-meta">
+              <span class="pd-recipe-level lv-${lv}">${lv}</span>
+              <div class="pd-recipe-name">${r.name}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      // Related products
+      const rel = document.getElementById('pdRelated');
+      rel.innerHTML = (p.relatedRubs || []).map(rid => {
+        const r = PRODUCT_DETAILS[rid];
+        if (!r) return '';
+        return `
+          <a href="product-${r.id}.html" class="pd-related-card" data-brand="${r.brand}">
+            <div class="pd-related-img"><img src="${r.image}" alt="${r.name}" loading="lazy"></div>
+            <div class="pd-related-meta">
+              <p class="pd-related-brand">${r.brandLabel}</p>
+              <h4 class="pd-related-name">${r.name}</h4>
+              <p class="pd-related-price">¥${r.price.toLocaleString()}</p>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    /* Pentagon (5-axis) radar chart for food affinity */
+    function renderRadar(bestFor) {
+      const svg = document.getElementById('pdRadar');
+      if (!svg) return;
+      const cx = 140, cy = 140, R = 90;
+      const axes = [
+        { key: 'beef',    label: '牛',   labelOffset: 22 },
+        { key: 'pork',    label: '豚',   labelOffset: 22 },
+        { key: 'chicken', label: '鶏',   labelOffset: 22 },
+        { key: 'fish',    label: '魚介', labelOffset: 26 },
+        { key: 'veggie',  label: '野菜', labelOffset: 26 }
+      ];
+      const N = axes.length;
+      const angle = i => (-Math.PI / 2) + (i * 2 * Math.PI / N);
+      const point = (i, r) => [cx + Math.cos(angle(i)) * r, cy + Math.sin(angle(i)) * r];
+
+      let svgContent = '';
+      // grid pentagons (5 levels)
+      for (let lvl = 1; lvl <= 5; lvl++) {
+        const r = (lvl / 5) * R;
+        const pts = axes.map((_, i) => point(i, r).map(n => n.toFixed(1)).join(',')).join(' ');
+        svgContent += `<polygon class="pd-radar-grid" points="${pts}"/>`;
+      }
+      // axes lines
+      axes.forEach((_, i) => {
+        const [x, y] = point(i, R);
+        svgContent += `<line class="pd-radar-axis" x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`;
+      });
+      // data polygon
+      const dataPts = axes.map(({ key }, i) => {
+        const score = Math.max(0, Math.min(5, bestFor[key] || 0));
+        const r = (score / 5) * R;
+        return point(i, r).map(n => n.toFixed(1)).join(',');
+      }).join(' ');
+      svgContent += `<polygon class="pd-radar-data" points="${dataPts}"/>`;
+      // data points
+      axes.forEach(({ key }, i) => {
+        const score = Math.max(0, Math.min(5, bestFor[key] || 0));
+        const r = (score / 5) * R;
+        const [x, y] = point(i, r);
+        svgContent += `<circle class="pd-radar-point" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5"/>`;
+      });
+      // labels
+      axes.forEach(({ label, labelOffset }, i) => {
+        const [x, y] = point(i, R + labelOffset);
+        const anchor = Math.abs(Math.cos(angle(i))) < 0.2 ? 'middle' : (Math.cos(angle(i)) > 0 ? 'start' : 'end');
+        svgContent += `<text class="pd-radar-label" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle">${label}</text>`;
+      });
+
+      svg.innerHTML = svgContent;
+    }
+
+    /* Schema.org Product JSON-LD (dynamic) */
+    if (product) {
+      const ld = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product.name,
+        "alternateName": product.nameja,
+        "image": product.image,
+        "description": product.desc,
+        "brand": { "@type": "Brand", "name": product.brandLabel },
+        "offers": {
+          "@type": "Offer",
+          "url": `https://yamanekazuki.github.io/slow-fire-shop/product-${product.id}.html`,
+          "priceCurrency": "JPY",
+          "price": product.price,
+          "availability": "https://schema.org/InStock"
+        }
+      };
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(ld);
+      document.head.appendChild(script);
+    }
+  </script>
+<script src="assets/global-search.js?v=20260516" defer></script>
+<script src="assets/sf-features.js?v=20260517" defer></script>
+</body>
+</html>
