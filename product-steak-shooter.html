@@ -533,6 +533,19 @@
         <p class="pd-nameja" id="pdNameja">ステーキシューター</p>
         <p class="pd-subtitle" id="pdSubtitle">Steak &amp; Beef Rub</p>
 
+        <div class="pd-buy" id="pdBuyTop" style="margin-bottom:20px;">
+          <span class="pd-price" id="pdPriceTop"></span>
+          <button id="pdBuyBtnTop" class="pd-buy-btn">カートに入れる</button>
+        </div>
+        <div class="pd-facts-top" id="pdFactsTop" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;padding:14px 16px;background:var(--off-white);border-radius:10px;margin-bottom:16px;font-size:13px;line-height:1.6;">
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">内容量</span><span style="font-weight:700;color:var(--black);">商品ページ参照</span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">在庫</span><span style="font-weight:700;color:#16A34A;">在庫あり</span></div>
+          <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">何にかける？</span><span style="color:var(--gray-600);">ステーキ・牛塊肉に。焼く前に全面へすり込むだけ</span></div>
+          <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">送料・発送目安</span><span style="color:var(--gray-600);">全国一律 ¥550・¥7,000以上で送料無料／ご注文から1〜3営業日で発送</span></div>
+        </div>
+
+        <p class="pd-flavor-links" style="font-size:12.5px;margin-bottom:20px;"><a href="index.html#products" style="color:var(--brand);font-weight:700;text-decoration:none;">他の味・ラインナップを見る →</a></p>
+
         <div class="pd-flavor">
           <p class="pd-flavor-label">フレーバー</p>
           <p class="pd-flavor-text" id="pdFlavor">塩・ガーリック・パプリカの王道3軸 / 甘みは控えめ</p>
@@ -546,6 +559,15 @@
 
         <p class="pd-desc" id="pdDesc">牛肉のポテンシャルを最大限引き出すスタンダードラブ。バックヤードでも競技大会でも通用する発色と旨みの黄金ブレンド。</p>
 
+        <div class="pd-facts" id="pdFacts" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:14px 16px;background:var(--off-white);border-radius:10px;margin-bottom:20px;font-size:13px;line-height:1.6;">
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">価格（税込）</span><span id="pdFactPrice" style="font-weight:700;color:var(--black);"></span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">内容量</span><span id="pdFactWeight" style="font-weight:700;color:var(--black);">商品ページ参照</span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">使用目安</span><span style="color:var(--gray-600);">肉500gに小さじ2〜3が目安</span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">在庫</span><span style="font-weight:700;color:#16A34A;">在庫あり</span></div>
+          <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">送料</span><span style="color:var(--gray-600);">全国一律 ¥550・¥7,000以上のご購入で送料無料</span></div>
+          <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">1回で使える目安</span><span style="color:var(--gray-600);">肉2〜3kg分・約4〜6人分のBBQに</span></div>
+        </div>
+        <p class="pd-affinity-tags" id="pdAffinityTags" style="font-size:12.5px;color:var(--gray-600);margin-bottom:20px;"></p>
         <div class="pd-buy">
           <span class="pd-price" id="pdPrice">¥3,800</span>
           <button id="pdBuyBtn" class="pd-buy-btn">＋ カートに追加</button>
@@ -669,6 +691,22 @@
       document.getElementById('pdFlavor').textContent = p.flavorNotes;
       document.getElementById('pdDesc').textContent = p.desc;
       document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
+      const priceTopEl = document.getElementById('pdPriceTop');
+      if (priceTopEl) priceTopEl.textContent = '¥' + p.price.toLocaleString() + '（税込）';
+      const factPriceEl = document.getElementById('pdFactPrice');
+      if (factPriceEl) factPriceEl.textContent = '¥' + p.price.toLocaleString();
+      const affTagsEl = document.getElementById('pdAffinityTags');
+      if (affTagsEl && p.bestFor) {
+        const tagMeta = [
+          { key: 'beef',    label: 'ビーフ' },
+          { key: 'pork',    label: 'ポーク' },
+          { key: 'chicken', label: 'チキン' },
+          { key: 'fish',    label: '魚介' },
+          { key: 'veggie',  label: '野菜' }
+        ];
+        const tags = tagMeta.filter(t => (p.bestFor[t.key] || 0) >= 4).map(t => t.label);
+        affTagsEl.textContent = tags.length ? ('特に合う食材： ' + tags.join(' / ')) : '';
+      }
 
       // Spice scale (5 dots) + clear label
       const sb = document.getElementById('pdSpiceScale');
@@ -684,12 +722,28 @@
         `${p.spiceLevel} / 5・${spiceLabels[p.spiceLevel] || ''}`;
 
       // Buy button
+      const buyBtnTop = document.getElementById('pdBuyBtnTop');
+      if (buyBtnTop) {
+        buyBtnTop.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
+        buyBtnTop.addEventListener('click', () => {
+          if (typeof window.cart !== 'undefined' && window.cart.add) {
+            window.cart.add(p.id);
+            buyBtnTop.textContent = '✓ カートに追加しました';
+            buyBtnTop.classList.add('added');
+            setTimeout(() => location.href = 'index.html#products', 1200);
+          } else {
+            location.href = 'index.html#product-' + p.id;
+          }
+        });
+      }
       const buyBtn = document.getElementById('pdBuyBtn');
+      buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）｜全国一律送料¥550・¥7,000以上で送料無料';
       buyBtn.addEventListener('click', () => {
         // Try to use existing cart if available; otherwise redirect
         if (typeof window.cart !== 'undefined' && window.cart.add) {
           window.cart.add(p.id);
           buyBtn.textContent = '✓ カートに追加しました';
+          void 0;
           buyBtn.classList.add('added');
           setTimeout(() => location.href = 'index.html#products', 1200);
         } else {
