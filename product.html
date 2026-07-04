@@ -531,6 +531,7 @@
         <h1 class="pd-name" id="pdName"></h1>
         <p class="pd-nameja" id="pdNameja"></p>
         <p class="pd-subtitle" id="pdSubtitle"></p>
+        <p class="pd-oneliner" id="pdOneLiner" style="font-size:14px;font-weight:600;color:var(--black);line-height:1.7;padding:12px 14px;background:var(--off-white);border-radius:10px;margin-bottom:20px;"></p>
 
         <div class="pd-buy" id="pdBuyTop" style="margin-bottom:20px;">
           <span class="pd-price" id="pdPriceTop"></span>
@@ -687,6 +688,16 @@
       document.getElementById('pdName').textContent = p.name;
       document.getElementById('pdNameja').textContent = p.nameja;
       document.getElementById('pdSubtitle').textContent = p.subtitle;
+      const oneLinerEl = document.getElementById('pdOneLiner');
+      if (oneLinerEl) {
+        const useMap = { beef: '牛', pork: '豚', chicken: '鶏', fish: '魚介', veggie: '野菜' };
+        let useTxt = '';
+        if (p.bestFor) {
+          const tops = Object.keys(useMap).filter(k => (p.bestFor[k] || 0) >= 4).map(k => useMap[k]);
+          if (tops.length) useTxt = tops.join('・') + '向け／';
+        }
+        oneLinerEl.textContent = useTxt + (p.subtitle || p.flavorNotes || '') + '｜税込¥' + p.price.toLocaleString() + '・全国一律送料¥550（¥7,000以上で無料）';
+      }
       document.getElementById('pdFlavor').textContent = p.flavorNotes;
       document.getElementById('pdDesc').textContent = p.desc;
       document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
@@ -724,6 +735,14 @@
       const buyBtnTop = document.getElementById('pdBuyBtnTop');
       if (buyBtnTop) {
         buyBtnTop.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
+        var buyTopNote = document.getElementById('pdBuyTopNote');
+        if (!buyTopNote) {
+          buyTopNote = document.createElement('p');
+          buyTopNote.id = 'pdBuyTopNote';
+          buyTopNote.style.cssText = 'width:100%;font-size:12px;color:var(--gray-600);margin:8px 0 0;';
+          buyTopNote.textContent = 'まずは1本から試せます。全国一律送料¥550・¥7,000以上で送料無料';
+          buyBtnTop.parentNode.appendChild(buyTopNote);
+        }
         buyBtnTop.addEventListener('click', () => {
           if (typeof window.cart !== 'undefined' && window.cart.add) {
             window.cart.add(p.id);
