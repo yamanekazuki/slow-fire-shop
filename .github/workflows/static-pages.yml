@@ -1,0 +1,44 @@
+name: 静的ページ自動生成（SEO）
+
+# 商品・レシピのデータ/テンプレが変わったら、
+# product-<id>.html / recipe-<id>.html と sitemap.xml を自動再生成する。
+# → 商品を追加・編集しても手作業なしでインデックス対象ページが増える。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "product-data.js"
+      - "recipe-data.js"
+      - "product.html"
+      - "recipe.html"
+      - "scripts/build-static-pages.mjs"
+  workflow_dispatch: {} # 手動実行も可
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 静的ページ + sitemap を生成
+        run: node scripts/build-static-pages.mjs
+
+      - name: 変更があればコミット（[skip ci]でループ防止）
+        run: |
+          git config user.name  "slow-fire-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add product-*.html recipe-*.html sitemap.xml product.html recipe.html
+          if git diff --cached --quiet; then
+            echo "変更なし。コミットをスキップ。"
+          else
+            git commit -m "静的ページ自動再生成 ($(TZ=Asia/Tokyo date +%Y-%m-%d)) [skip ci]"
+            git push
+          fi

@@ -217,38 +217,22 @@ for (const r of RECIPES) {
 }
 
 /* ============================================================
-   sitemap.xml を再生成（トップページ+ガイド+新クリーンURL）
+   sitemap.xml を「非破壊」で更新。
+   既存 sitemap をそのまま土台にし、product/recipe のクエリURL
+   (product.html?id=x / recipe.html?id=x) だけをクリーンURLへ変換する。
+   → journal記事など他のURLは一切消さずに保持する。
    ============================================================ */
-const staticPages = [
-  { loc: `${BASE}/`, priority: '1.0', changefreq: 'weekly' },
-  { loc: `${BASE}/essentials.html`, priority: '0.95', changefreq: 'monthly' },
-  { loc: `${BASE}/cookbook.html`, priority: '0.9', changefreq: 'monthly' },
-  { loc: `${BASE}/pairing-guide.html`, priority: '0.8', changefreq: 'monthly' },
-  { loc: `${BASE}/rub-guide.html`, priority: '0.8', changefreq: 'monthly' },
-  { loc: `${BASE}/team.html`, priority: '0.6', changefreq: 'monthly' },
-  { loc: `${BASE}/journal/index.html`, priority: '0.7', changefreq: 'weekly' },
-];
-
-const today = fs.existsSync(path.join(ROOT, 'sitemap.xml'))
-  ? (fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').match(/<lastmod>(\d{4}-\d{2}-\d{2})/)?.[1] || '2026-05-06')
-  : '2026-05-06';
-
-const urls = [
-  ...staticPages.map(
-    (s) =>
-      `  <url><loc>${s.loc}</loc><changefreq>${s.changefreq}</changefreq><priority>${s.priority}</priority></url>`
-  ),
-  ...generated.map(
-    (g) => `  <url><loc>${g.url}</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>`
-  ),
-];
-
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join('\n')}
-</urlset>
-`;
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemap);
+const sitemapPath = path.join(ROOT, 'sitemap.xml');
+if (fs.existsSync(sitemapPath)) {
+  const before = fs.readFileSync(sitemapPath, 'utf8');
+  const after = cleanLinks(before); // ?id= を持つ product/recipe URL のみクリーン化
+  fs.writeFileSync(sitemapPath, after);
+  const nClean = (after.match(/\/(product|recipe)-[a-z0-9-]+\.html<\/loc>/g) || []).length;
+  const nStale = (after.match(/\.html\?id=/g) || []).length;
+  console.log(`✅ sitemap.xml: クリーンURL ${nClean}件 / 残存クエリURL ${nStale}件(0が正) / journal等は保持`);
+} else {
+  console.warn('⚠️ sitemap.xml が見つかりません。スキップしました。');
+}
 
 /* ============================================================
    旧 product.html / recipe.html の内部リンク・canonical(JS)を
@@ -262,5 +246,4 @@ fs.writeFileSync(path.join(ROOT, 'recipe.html'), cleanLinks(recipeTpl));
 const nProd = generated.filter((g) => g.type === 'product').length;
 const nRec = generated.filter((g) => g.type === 'recipe').length;
 console.log(`✅ 生成完了: product ${nProd}件 / recipe ${nRec}件`);
-console.log(`✅ sitemap.xml 再生成: 合計 ${urls.length} URL`);
 console.log(`✅ 旧 product.html / recipe.html の内部リンクをクリーンURLへ変換`);
