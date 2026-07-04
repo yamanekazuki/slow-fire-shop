@@ -661,7 +661,7 @@
       // SEO
       document.getElementById('pageTitle').textContent = `${p.name} (${p.nameja}) — ${p.brandLabel} | SLOW FIRE SHOP`;
       document.getElementById('pageDesc').setAttribute('content', `${p.desc} ${p.flavorNotes}`);
-      document.getElementById('canonicalLink').setAttribute('href', `https://yamanekazuki.github.io/slow-fire-shop/product.html?id=${p.id}`);
+      document.getElementById('canonicalLink').setAttribute('href', `https://yamanekazuki.github.io/slow-fire-shop/product-${p.id}.html`);
 
       // Hero
       document.getElementById('crumbName').textContent = p.name;
@@ -778,7 +778,7 @@
         const imgHtml = `<img src="${imgUrl}" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:2rem;">${r.icon}</span>`;
         const lv = r.levelLabel || (r.level === 1 ? '初級' : r.level === 2 ? '中級' : '上級');
         return `
-          <a href="recipe.html?id=${r.id}" class="pd-recipe-card">
+          <a href="recipe-${r.id}.html" class="pd-recipe-card">
             <div class="pd-recipe-img">${imgHtml}</div>
             <div class="pd-recipe-meta">
               <span class="pd-recipe-level lv-${lv}">${lv}</span>
@@ -794,7 +794,7 @@
         const r = PRODUCT_DETAILS[rid];
         if (!r) return '';
         return `
-          <a href="product.html?id=${r.id}" class="pd-related-card" data-brand="${r.brand}">
+          <a href="product-${r.id}.html" class="pd-related-card" data-brand="${r.brand}">
             <div class="pd-related-img"><img src="${r.image}" alt="${r.name}" loading="lazy"></div>
             <div class="pd-related-meta">
               <p class="pd-related-brand">${r.brandLabel}</p>
@@ -870,7 +870,7 @@
         "brand": { "@type": "Brand", "name": product.brandLabel },
         "offers": {
           "@type": "Offer",
-          "url": `https://yamanekazuki.github.io/slow-fire-shop/product.html?id=${product.id}`,
+          "url": `https://yamanekazuki.github.io/slow-fire-shop/product-${product.id}.html`,
           "priceCurrency": "JPY",
           "price": product.price,
           "availability": "https://schema.org/InStock"
