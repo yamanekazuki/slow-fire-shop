@@ -98,7 +98,7 @@ firebase login
 ### 3-2. Stripeシークレットキーを Firebase Secrets に登録
 
 ```bash
-cd /Users/yamanekazuki/Documents/bbq-shop
+cd /Users/yamanekazuki/dev/bbq/bbq-shop
 firebase functions:secrets:set STRIPE_SECRET_KEY
 # プロンプトで sk_test_... を貼り付け
 
@@ -154,7 +154,7 @@ firebase deploy --only functions
 ### 3.6-2. 拡張機能をインストール
 
 ```bash
-cd /Users/yamanekazuki/Documents/bbq-shop
+cd /Users/yamanekazuki/dev/bbq/bbq-shop
 firebase ext:install firebase/firestore-send-email
 ```
 
