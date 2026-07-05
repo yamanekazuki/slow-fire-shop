@@ -35,4 +35,4 @@ User-agent: *
 Disallow: /admin.html
 Disallow: /functions/
 
-Sitemap: https://yamanekazuki.github.io/slow-fire-shop/sitemap.xml
+Sitemap: https://an-bbq.jp/sitemap.xml

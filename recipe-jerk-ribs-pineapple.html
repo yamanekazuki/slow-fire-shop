@@ -7,7 +7,7 @@
   <title id="pageTitle">ジャークリブ＆グリルパイナップル (Jerk Ribs with Grilled Pineapple) — 料理ガイド | SLOW FIRE SHOP</title>
   <meta id="pageDesc" name="description" content="カリブの魂をリブに刻み、パイナップルで甘さの逃げ道を作る。ジャマイカの路上で焼かれているのと同じ料理を、自宅のグリルで再現する。辛さと甘さの対比は、BBQが扱える最も劇的な味の構造。">
   <meta name="robots" content="index,follow">
-  <link id="canonicalLink" rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/recipe-jerk-ribs-pineapple.html">
+  <link id="canonicalLink" rel="canonical" href="https://an-bbq.jp/recipe-jerk-ribs-pineapple.html">
   <meta property="og:type" content="article">
   <meta name="theme-color" content="#B45309">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
@@ -509,7 +509,7 @@
       // SEO
       document.getElementById('pageTitle').textContent = `${r.name} (${r.nameEn}) — 料理ガイド | SLOW FIRE SHOP`;
       document.getElementById('pageDesc').setAttribute('content', r.essence);
-      document.getElementById('canonicalLink').setAttribute('href', `https://yamanekazuki.github.io/slow-fire-shop/recipe-${r.id}.html`);
+      document.getElementById('canonicalLink').setAttribute('href', `https://an-bbq.jp/recipe-${r.id}.html`);
 
       document.getElementById('crumbName').textContent = r.name;
 
@@ -586,11 +586,11 @@
 
     /* Schema.org Recipe JSON-LD */
     if (recipe) {
-      const imgUrl = `https://yamanekazuki.github.io/slow-fire-shop/images/recipes/${recipe.id}.jpg`;
+      const imgUrl = `https://an-bbq.jp/images/recipes/${recipe.id}.jpg`;
       const ingredients = (recipe.ingredients || []).map(i =>
         typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
       );
-      const pageUrl = `https://yamanekazuki.github.io/slow-fire-shop/recipe-${recipe.id}.html`;
+      const pageUrl = `https://an-bbq.jp/recipe-${recipe.id}.html`;
       const instructions = (recipe.points || []).map((p, idx) => {
         const step = typeof p === 'string' ? p : (p.step || '');
         const note = typeof p === 'object' ? (p.note || '') : '';

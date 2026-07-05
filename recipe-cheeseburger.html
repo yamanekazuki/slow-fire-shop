@@ -7,7 +7,7 @@
   <title id="pageTitle">クラシックチーズバーガー (Classic Cheeseburger) — 料理ガイド | SLOW FIRE SHOP</title>
   <meta id="pageDesc" name="description" content="バーガーは、BBQのアイコンであり、BBQの宣言だ。「これがアメリカン」と一目で伝わる、最も雄弁な一品。">
   <meta name="robots" content="index,follow">
-  <link id="canonicalLink" rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/recipe-cheeseburger.html">
+  <link id="canonicalLink" rel="canonical" href="https://an-bbq.jp/recipe-cheeseburger.html">
   <meta property="og:type" content="article">
   <meta name="theme-color" content="#B45309">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
@@ -509,7 +509,7 @@
       // SEO
       document.getElementById('pageTitle').textContent = `${r.name} (${r.nameEn}) — 料理ガイド | SLOW FIRE SHOP`;
       document.getElementById('pageDesc').setAttribute('content', r.essence);
-      document.getElementById('canonicalLink').setAttribute('href', `https://yamanekazuki.github.io/slow-fire-shop/recipe-${r.id}.html`);
+      document.getElementById('canonicalLink').setAttribute('href', `https://an-bbq.jp/recipe-${r.id}.html`);
 
       document.getElementById('crumbName').textContent = r.name;
 
@@ -586,11 +586,11 @@
 
     /* Schema.org Recipe JSON-LD */
     if (recipe) {
-      const imgUrl = `https://yamanekazuki.github.io/slow-fire-shop/images/recipes/${recipe.id}.jpg`;
+      const imgUrl = `https://an-bbq.jp/images/recipes/${recipe.id}.jpg`;
       const ingredients = (recipe.ingredients || []).map(i =>
         typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
       );
-      const pageUrl = `https://yamanekazuki.github.io/slow-fire-shop/recipe-${recipe.id}.html`;
+      const pageUrl = `https://an-bbq.jp/recipe-${recipe.id}.html`;
       const instructions = (recipe.points || []).map((p, idx) => {
         const step = typeof p === 'string' ? p : (p.step || '');
         const note = typeof p === 'object' ? (p.note || '') : '';
