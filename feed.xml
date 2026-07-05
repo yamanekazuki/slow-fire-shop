@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 03 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 06 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>熱燻・温燻・冷燻の温度帯を使い分ける — 食材別スモーク早見ガイド</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoking-temperature-zones.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoking-temperature-zones.html</guid>
+    <pubDate>Mon, 06 Jul 2026 07:00:00 +0900</pubDate>
+    <description>熱燻(80〜140℃)・温燻(30〜60℃)・冷燻(15〜30℃)の3つの温度帯を、仕組みと食材別の中心温度・時間つきで完全整理。どれを選ぶべきか迷わなくなる実務ガイドです。</description>
+  </item>
   <item>
     <title>ソーセージが破裂する・生焼けになる原因と、失敗しない焼き方</title>
     <link>https://an-bbq.jp/journal/articles/grilling-sausages-hotdog.html</link>
