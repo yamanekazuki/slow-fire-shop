@@ -7,7 +7,7 @@
   <title id="pageTitle">Garlic Goals (ガーリックゴールズ) — Low n Slow Basics | SLOW FIRE SHOP</title>
   <meta id="pageDesc" name="description" content="ガーリックとパルメザンチーズの万能ラブ。肉・野菜・ローストポテトまで何でも合う最もフレキシブルなブレンド。 ガーリック・パルメザン・ハーブ / マイルドで万能">
   <meta name="robots" content="index,follow">
-  <link id="canonicalLink" rel="canonical" href="https://an-bbq.jp/product-garlic-goals.html">
+  <link id="canonicalLink" rel="canonical" href="https://yamanekazuki.github.io/slow-fire-shop/product-garlic-goals.html">
   <meta property="og:type" content="product">
   <meta name="theme-color" content="#B45309">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
@@ -463,7 +463,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wmtxoerxqx");
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Garlic Goals","alternateName":"ガーリックゴールズ","image":"https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg","description":"ガーリックとパルメザンチーズの万能ラブ。肉・野菜・ローストポテトまで何でも合う最もフレキシブルなブレンド。","brand":{"@type":"Brand","name":"Low n Slow Basics"},"offers":{"@type":"Offer","url":"https://an-bbq.jp/product-garlic-goals.html","priceCurrency":"JPY","price":3800,"availability":"https://schema.org/InStock"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Garlic Goals","alternateName":"ガーリックゴールズ","image":"https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg","description":"ガーリックとパルメザンチーズの万能ラブ。肉・野菜・ローストポテトまで何でも合う最もフレキシブルなブレンド。","brand":{"@type":"Brand","name":"Low n Slow Basics"},"offers":{"@type":"Offer","url":"https://yamanekazuki.github.io/slow-fire-shop/product-garlic-goals.html","priceCurrency":"JPY","price":3800,"availability":"https://schema.org/InStock"}}</script>
 </head>
 
 <body class="pd-page">
@@ -532,6 +532,7 @@
         <h1 class="pd-name" id="pdName">Garlic Goals</h1>
         <p class="pd-nameja" id="pdNameja">ガーリックゴールズ</p>
         <p class="pd-subtitle" id="pdSubtitle">All Purpose Rub</p>
+        <p class="pd-oneliner" id="pdOneLiner" style="font-size:14px;font-weight:600;color:var(--black);line-height:1.7;padding:12px 14px;background:var(--off-white);border-radius:10px;margin-bottom:20px;"></p>
 
         <div class="pd-buy" id="pdBuyTop" style="margin-bottom:20px;">
           <span class="pd-price" id="pdPriceTop"></span>
@@ -583,6 +584,26 @@
         <svg id="pdRadar" class="pd-radar" viewBox="0 0 280 280" aria-hidden="true"></svg>
         <div class="pd-affinity-list" id="pdAffinityList"></div>
       </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pd-section" aria-labelledby="pdFaqHeading">
+      <p class="pd-section-eyebrow">FAQ</p>
+      <h2 id="pdFaqHeading">ご購入前によくある質問</h2>
+      <dl style="display:grid;gap:16px;max-width:720px;">
+        <div style="padding:18px 20px;background:var(--off-white);border-radius:12px;">
+          <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">送料はいくらですか？</dt>
+          <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">全国一律 ¥550 です。¥7,000以上のご購入で送料無料になります。</dd>
+        </div>
+        <div style="padding:18px 20px;background:var(--off-white);border-radius:12px;">
+          <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">どのくらいで届きますか？</dt>
+          <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">ご注文から1〜3営業日以内に発送します。お届けまでの日数は地域により異なります。</dd>
+        </div>
+        <div style="padding:18px 20px;background:var(--off-white);border-radius:12px;">
+          <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">支払い方法は何がありますか？</dt>
+          <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">クレジットカードをはじめ、各種決済に対応しています。</dd>
+        </div>
+      </dl>
     </section>
 
     <!-- RELATED RECIPES -->
@@ -688,6 +709,16 @@
       document.getElementById('pdName').textContent = p.name;
       document.getElementById('pdNameja').textContent = p.nameja;
       document.getElementById('pdSubtitle').textContent = p.subtitle;
+      const oneLinerEl = document.getElementById('pdOneLiner');
+      if (oneLinerEl) {
+        const useMap = { beef: '牛', pork: '豚', chicken: '鶏', fish: '魚介', veggie: '野菜' };
+        let useTxt = '';
+        if (p.bestFor) {
+          const tops = Object.keys(useMap).filter(k => (p.bestFor[k] || 0) >= 4).map(k => useMap[k]);
+          if (tops.length) useTxt = tops.join('・') + '向け／';
+        }
+        oneLinerEl.textContent = useTxt + (p.subtitle || p.flavorNotes || '') + '｜税込¥' + p.price.toLocaleString() + '・全国一律送料¥550（¥7,000以上で無料）';
+      }
       document.getElementById('pdFlavor').textContent = p.flavorNotes;
       document.getElementById('pdDesc').textContent = p.desc;
       document.getElementById('pdPrice').textContent = '¥' + p.price.toLocaleString();
@@ -725,6 +756,14 @@
       const buyBtnTop = document.getElementById('pdBuyBtnTop');
       if (buyBtnTop) {
         buyBtnTop.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
+        var buyTopNote = document.getElementById('pdBuyTopNote');
+        if (!buyTopNote) {
+          buyTopNote = document.createElement('p');
+          buyTopNote.id = 'pdBuyTopNote';
+          buyTopNote.style.cssText = 'width:100%;font-size:12px;color:var(--gray-600);margin:8px 0 0;';
+          buyTopNote.textContent = 'まずは1本から試せます。全国一律送料¥550・¥7,000以上で送料無料';
+          buyBtnTop.parentNode.appendChild(buyTopNote);
+        }
         buyBtnTop.addEventListener('click', () => {
           if (typeof window.cart !== 'undefined' && window.cart.add) {
             window.cart.add(p.id);
