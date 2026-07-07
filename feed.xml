@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 06 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 08 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>スモークウッドとチップの違いと使い分け — 燃やし方で香りが決まる</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoke-wood-vs-chips.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoke-wood-vs-chips.html</guid>
+    <pubDate>Wed, 08 Jul 2026 07:00:00 +0900</pubDate>
+    <description>スモークウッドとスモークチップ、結局どっちを使えばいいのか。着火方式・煙が出る時間・向いている調理を数値で整理し、食材別の使い分けと失敗回避まで一気に解決します。</description>
+  </item>
   <item>
     <title>熱燻・温燻・冷燻の温度帯を使い分ける — 食材別スモーク早見ガイド</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoking-temperature-zones.html</link>
