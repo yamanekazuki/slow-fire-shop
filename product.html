@@ -577,8 +577,9 @@
         <p class="pd-affinity-tags" id="pdAffinityTags" style="font-size:12.5px;color:var(--gray-600);margin-bottom:20px;"></p>
         <div class="pd-buy">
           <span class="pd-price" id="pdPrice"></span>
-          <button id="pdBuyBtn" class="pd-buy-btn">＋ カートに追加</button>
+          <button id="pdBuyBtn" class="pd-buy-btn">カートに入れる</button>
         </div>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.85;margin:12px 0 0;">初めての方へ：小さじ1杯で肉200gが目安。使い切りやすい少量から試せます。ご不明な点は<a href="contact/" style="color:var(--brand);font-weight:700;text-decoration:none;">お問い合わせ</a>ください（返品・交換のご相談も承ります）。</p>
       </div>
     </section>
 
@@ -793,7 +794,7 @@
         });
       }
       const buyBtn = document.getElementById('pdBuyBtn');
-      buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）｜全国一律送料¥550・¥7,000以上で送料無料';
+      buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
       buyBtn.addEventListener('click', () => {
         // Try to use existing cart if available; otherwise redirect
         if (typeof window.cart !== 'undefined' && window.cart.add) {
