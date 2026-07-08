@@ -2031,9 +2031,9 @@ html[data-fx-off] .hero-tiles { display: none; }
 @keyframes rotWord {
   0%    { opacity: 0; transform: translateY(.4em); }
   4%    { opacity: 1; transform: translateY(0); }
-  22%   { opacity: 1; transform: translateY(0); }
-  27%   { opacity: 0; transform: translateY(-.4em); }
-  100%  { opacity: 0; }
+  20%   { opacity: 1; transform: translateY(0); }
+  24%   { opacity: 0; transform: translateY(-.4em); }
+  100%  { opacity: 0; transform: translateY(-.4em); }
 }
 
 .hero-stats {
