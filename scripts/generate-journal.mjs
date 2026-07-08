@@ -21,6 +21,7 @@
 
 import { readFile, writeFile, readdir, mkdir } from "node:fs/promises";
 import { existsSync, appendFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -614,7 +615,9 @@ async function main() {
   if (existingSlugs.has(slug)) slug = `${slug}-${iso}`;
   const category = CATEGORIES.includes(a.category) ? a.category : "recipe";
   const file = `${slug}.html`;
-  const hero = pickHero(category, files.length);
+  // EPISODE表紙型サムネ（決定的生成・tools/gen-journal-thumb）を記事のhero/カード画像として使う。
+  // 生成前は仮でstockのpickHeroを使い、記事HTML書き出し後にgen.mjsで実サムネへ差し替える。
+  const hero = `${SITE}/journal/thumbs/${slug}.jpg`;
 
   const p = {
     title: a.title, file, slug, category,
@@ -645,6 +648,16 @@ async function main() {
   await mkdir(ART_DIR, { recursive: true });
   await writeFile(join(ART_DIR, file), renderArticle(p), "utf8");
   console.log(`記事生成: journal/articles/${file}`);
+
+  // 1.5) EPISODE表紙型サムネを決定的生成（tools/gen-journal-thumb/gen.mjs）。
+  // 記事HTMLのh1/jr-category/meta descriptionから毎回同じ結果を生成するため、
+  // 上で書き出したファイルを読んでそのまま使う。失敗しても本文公開は止めない。
+  try {
+    execFileSync("node", [join(ROOT, "tools", "gen-journal-thumb", "gen.mjs"), slug], { stdio: "inherit" });
+    console.log(`サムネ生成: journal/thumbs/${slug}.jpg`);
+  } catch (e) {
+    console.warn(`⚠️ サムネ生成に失敗（公開は継続）: ${e.message}`);
+  }
 
   // 2) journal/index.html （#all グリッド先頭）
   await updateFile(join(ROOT, "journal", "index.html"), (html) => {
