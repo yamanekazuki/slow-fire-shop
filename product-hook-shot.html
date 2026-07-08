@@ -537,9 +537,16 @@
         <div class="pd-buy" id="pdBuyTop" style="margin-bottom:20px;">
           <span class="pd-price" id="pdPriceTop"></span>
           <button id="pdBuyBtnTop" class="pd-buy-btn">カートに入れる</button>
+          <p style="width:100%;font-size:12px;color:var(--gray-600);margin:8px 0 0;">全国一律送料¥550・¥7,000以上で送料無料／クレジットカード等の各種決済に対応</p>
         </div>
+        <ul class="pd-quick-points" style="list-style:none;margin:0 0 16px;padding:0;font-size:13.5px;line-height:1.7;">
+          <li style="display:flex;gap:8px;"><span style="color:var(--brand);font-weight:700;">✓</span><span>ステーキ・牛塊肉（ビーフ）に焼く前すり込むだけ</span></li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--brand);font-weight:700;">✓</span><span>ポーク・チキンの下味にも幅広く使える</span></li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--brand);font-weight:700;">✓</span><span><a href="#affinitySection" style="color:var(--brand);font-weight:700;text-decoration:none;">詳しい食材の相性を見る →</a></span></li>
+        </ul>
         <div class="pd-facts-top" id="pdFactsTop" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;padding:14px 16px;background:var(--off-white);border-radius:10px;margin-bottom:16px;font-size:13px;line-height:1.6;">
-          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">内容量</span><span style="font-weight:700;color:var(--black);">商品ページ参照</span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">価格（税込）</span><span id="pdFactPriceTop" style="font-weight:700;color:var(--black);"></span></div>
+          <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">内容量</span><span style="font-weight:700;color:var(--black);">150g前後（商品により異なります）</span></div>
           <div><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">在庫</span><span style="font-weight:700;color:#16A34A;">在庫あり</span></div>
           <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">何にかける？</span><span style="color:var(--gray-600);">ステーキ・牛塊肉に。焼く前に全面へすり込むだけ</span></div>
           <div style="grid-column:1 / -1;"><span style="display:block;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:var(--gray-400);text-transform:uppercase;">送料・発送目安</span><span style="color:var(--gray-600);">全国一律 ¥550・¥7,000以上で送料無料／ご注文から1〜3営業日で発送</span></div>
@@ -571,8 +578,9 @@
         <p class="pd-affinity-tags" id="pdAffinityTags" style="font-size:12.5px;color:var(--gray-600);margin-bottom:20px;"></p>
         <div class="pd-buy">
           <span class="pd-price" id="pdPrice">¥4,200</span>
-          <button id="pdBuyBtn" class="pd-buy-btn">＋ カートに追加</button>
+          <button id="pdBuyBtn" class="pd-buy-btn">カートに入れる</button>
         </div>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.85;margin:12px 0 0;">初めての方へ：小さじ1杯で肉200gが目安。使い切りやすい少量から試せます。ご不明な点は<a href="contact/" style="color:var(--brand);font-weight:700;text-decoration:none;">お問い合わせ</a>ください（返品・交換のご相談も承ります）。</p>
       </div>
     </section>
 
@@ -603,7 +611,16 @@
           <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">支払い方法は何がありますか？</dt>
           <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">クレジットカードをはじめ、各種決済に対応しています。</dd>
         </div>
+        <div style="padding:18px 20px;background:var(--off-white);border-radius:12px;">
+          <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">賞味期限はどのくらいですか？</dt>
+          <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">未開封で製造から一定期間の賞味期限があります。詳しくは各商品パッケージの表示をご確認ください。開封後はお早めにお使いください。</dd>
+        </div>
+        <div style="padding:18px 20px;background:var(--off-white);border-radius:12px;">
+          <dt style="font-size:14px;font-weight:900;color:var(--black);margin-bottom:6px;">返品・交換はできますか？</dt>
+          <dd style="margin:0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">食品の性質上、お客様都合による返品はお受けできません。破損・不良品の場合は到着後すみやかにお問い合わせください。</dd>
+        </div>
       </dl>
+      <p style="margin:20px 0 0;font-size:13.5px;color:var(--gray-600);line-height:1.85;">初めての方は、少量ずつ試せる<a href="essentials.html" style="color:var(--brand);font-weight:700;text-decoration:none;">essentialsセット</a>から始めるのがおすすめです。</p>
     </section>
 
     <!-- RELATED RECIPES -->
@@ -726,6 +743,8 @@
       if (priceTopEl) priceTopEl.textContent = '¥' + p.price.toLocaleString() + '（税込）';
       const factPriceEl = document.getElementById('pdFactPrice');
       if (factPriceEl) factPriceEl.textContent = '¥' + p.price.toLocaleString();
+      const factPriceTopEl = document.getElementById('pdFactPriceTop');
+      if (factPriceTopEl) factPriceTopEl.textContent = '¥' + p.price.toLocaleString() + '（税込）';
       const affTagsEl = document.getElementById('pdAffinityTags');
       if (affTagsEl && p.bestFor) {
         const tagMeta = [
@@ -776,7 +795,7 @@
         });
       }
       const buyBtn = document.getElementById('pdBuyBtn');
-      buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）｜全国一律送料¥550・¥7,000以上で送料無料';
+      buyBtn.textContent = 'カートに入れる｜¥' + p.price.toLocaleString() + '（税込）';
       buyBtn.addEventListener('click', () => {
         // Try to use existing cart if available; otherwise redirect
         if (typeof window.cart !== 'undefined' && window.cart.add) {
