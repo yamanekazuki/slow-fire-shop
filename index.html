@@ -46,6 +46,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <script>
+    try {
+      if (new URLSearchParams(location.search).get('static') === '1') {
+        document.documentElement.setAttribute('data-fx-off', '1');
+      }
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="style.css?v=20260506e">
   <link rel="stylesheet" href="assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="assets/sf-features.css?v=20260517">
@@ -210,6 +217,15 @@
   </script>
 </head>
 <body>
+
+  <!-- ===== LIVING BACKGROUND (fixed・全ページ裏) ===== -->
+  <div class="living-bg" aria-hidden="true">
+    <div class="living-blob b1"></div>
+    <div class="living-blob b2"></div>
+    <div class="living-blob b3"></div>
+    <div class="living-blob b4"></div>
+    <div class="living-smoke"></div>
+  </div>
 
   <!-- ===== AUTH MODAL ===== -->
   <div id="authOverlay" class="auth-overlay">
@@ -396,31 +412,41 @@
   </header>
 
   <!-- ===== HOME HERO ===== -->
-  <section class="home-hero">
+  <section class="home-hero" id="homeHero">
+    <div class="hero-tiles" aria-hidden="true">
+      <div class="hero-tile hero-tile--l1"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="" loading="lazy"></div>
+      <div class="hero-tile hero-tile--l2"><img src="https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?v=1747206655&width=800" alt="" loading="lazy"></div>
+      <div class="hero-tile hero-tile--r1"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="" loading="lazy"></div>
+      <div class="hero-tile hero-tile--r2"><img src="https://www.staggandco.com.au/cdn/shop/files/Stefthemaoriruboneout-front.png?v=1739318375&width=800" alt="" loading="lazy"></div>
+    </div>
     <div class="home-hero-inner">
       <p class="home-hero-eyebrow">OVERSEAS BBQ RUBS · 3 BRANDS · 28 PRODUCTS</p>
       <h1 class="home-hero-h">
-        オーストラリア直輸入の本格BBQドライラブ。<br>小さじ1杯で、いつもの肉が“お店の味”に。<span style="display:block;margin-top:10px;font-size:1rem;font-weight:600;">全28商品・¥2,980（税込）〜／送料全国一律¥990（¥15,000以上で無料）</span>
+        小さじ1杯で、いつもの肉が<br><span class="rot-word"><span class="rot-word-item">お店の味</span><span class="rot-word-item">ご馳走</span><span class="rot-word-item">スモーキー</span><span class="rot-word-item">週末の主役</span></span>に。
       </h1>
       <p class="home-hero-sub">
-        コンペティション級の3ブランド・全28商品を日本正規取扱。<br>
+        コンペティション級の3ブランド、全28商品を日本正規取扱。<br>
         送料は全国一律¥990（¥15,000以上で無料）・3〜7営業日でお届け。<br>
-        <a href="essentials.html" class="home-hero-firstlink">初めての方は「BBQの神髄」ガイドからどうぞ →</a>
+        <a href="essentials.html" class="home-hero-firstlink">初めての方は「初めての一冊」からどうぞ →</a>
       </p>
       <p class="home-hero-firstpick" style="margin-top:14px;font-size:.95rem;">
         用途で選ぶなら：牛・豚・鶏の万能に <strong>Basecamp</strong>、豚・鶏の甘辛に <strong>Honey Soy Slammer</strong>。<a href="#products" style="text-decoration:underline;">ラブ一覧を見る →</a><br>
         味に迷ったら <a href="rub-guide.html" style="text-decoration:underline;">ラブの選び方ガイド</a> でぴったりの1本が見つかります。
       </p>
-      <ul class="home-hero-lineup" style="list-style:none;padding:0;margin:14px 0 4px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.95rem;">
-        <li><a href="#product-butchers-basecamp" style="text-decoration:underline;">Basecamp（万能）</a>／1本 税込¥2,980</li>
-        <li><a href="#product-honey-soy-slammer" style="text-decoration:underline;">Honey Soy Slammer（豚・鶏）</a>／1本 税込¥3,800</li>
-        <li><a href="#product-all-star-combo" style="text-decoration:underline;">All-Star Combo（7種セット）</a>／税込¥24,000</li>
-      </ul>
       <div class="home-hero-cta">
-        <a href="#products" class="btn-dark btn-hero">ラブ一覧を見る →</a>
+        <a href="#products" class="btn-dark btn-hero btn-aurora" data-magnet>ラブ一覧を見る →</a>
         <a href="#paths" class="btn-hero btn-ghost">選び方から見る</a>
       </div>
-      <p class="home-hero-quicklinks" style="margin-top:16px;font-size:.92rem;">人気の3本をすぐ見る：<a href="#product-butchers-basecamp" style="text-decoration:underline;">Basecamp（万能）</a> ／ <a href="#product-honey-soy-slammer" style="text-decoration:underline;">Honey Soy Slammer（豚・鶏）</a> ／ <a href="#product-all-star-combo" style="text-decoration:underline;">All-Star Combo（7種セット）</a></p>
+      <p class="check-pills">
+        <span class="check-pill">全国送料¥990</span>
+        <span class="check-pill">オーストラリア・NZ直輸入</span>
+        <span class="check-pill">少量サイズから</span>
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num" data-count="3"><span class="v">0</span></div><div class="label">直輸入ブランド</div></div>
+        <div class="hero-stat"><div class="num" data-count="28"><span class="v">0</span></div><div class="label">取扱商品</div></div>
+        <div class="hero-stat"><div class="num" data-count="23"><span class="v">0</span><span class="unit">種</span></div><div class="label">ラブ・ソース</div></div>
+      </div>
     </div>
   </section>
 
@@ -436,15 +462,15 @@
   </div>
 
   <!-- ===== 3-WAY PATHS ===== -->
-  <section id="paths" class="home-paths">
+  <section id="paths" class="home-paths" data-sec="ember">
     <div class="home-paths-inner">
-      <div class="home-paths-head">
-        <p class="home-paths-eyebrow">FIND YOUR RUB</p>
+      <div class="home-paths-head" data-ghost="PATHS" data-reveal>
+        <p class="home-paths-eyebrow sec-chip" data-num="01">FIND YOUR RUB</p>
         <h2>あなたに合うラブを、<br>3つの入口から見つける。</h2>
         <p>「BBQラブ」と一言で言っても、選び方は人それぞれ。<br>あなたの状況に合った入口から進んでください。</p>
       </div>
 
-      <div class="paths-grid">
+      <div class="paths-grid" data-reveal-group>
 
         <a href="pairing-guide.html" class="path-card">
           <div class="path-card-num">01</div>
@@ -476,10 +502,10 @@
   </section>
 
   <!-- ===== TOP PICKS — 迷ったらこの3本 ===== -->
-  <section class="home-picks" id="picks-top">
+  <section class="home-picks" id="picks-top" data-sec="amber">
     <div class="home-picks-inner">
-      <div class="home-picks-head">
-        <p class="home-picks-eyebrow">TOP PICKS</p>
+      <div class="home-picks-head" data-ghost="PICKS" data-reveal>
+        <p class="home-picks-eyebrow sec-chip" data-num="02">TOP PICKS</p>
         <h2>何を買えばいいか迷ったら</h2>
         <p style="margin-top:8px;font-size:.92rem;">主力ラインナップは<a href="#products" style="text-decoration:underline;">全商品一覧</a>から。用途別の代表ラブは下のカードでどうぞ。</p>
         <p>SLOW FIREが選ぶ、最初に手に取るべき定番。牛・豚・鶏の万能に <strong>Basecamp</strong>、豚・鶏の甘辛に <strong>Honey Soy Slammer</strong>、全種試すなら <strong>All-Star Combo</strong>。用途で選んでください。</p>
@@ -540,9 +566,10 @@
   </section>
 
   <!-- ===== PRODUCTS ===== -->
-  <section id="products" class="products-sec" aria-labelledby="productsHead">
+  <section id="products" class="products-sec" aria-labelledby="productsHead" data-sec="smoke">
     <div class="sec-wrap">
-      <div class="sec-head">
+      <div class="sec-head" data-ghost="RUBS" data-reveal>
+        <p class="sec-chip" data-num="03">FULL LINEUP</p>
         <h2 id="productsHead">全商品一覧</h2>
         <p>3ブランド28商品 — フィルターで絞り込めます</p>
       </div>
@@ -558,10 +585,10 @@
   </section>
 
   <!-- ===== COOKBOOK PEEK — 料理から選ぶ ===== -->
-  <section class="home-cookbook">
+  <section class="home-cookbook" data-sec="herb">
     <div class="home-cookbook-inner">
-      <div class="home-cookbook-head">
-        <p class="home-cookbook-eyebrow">FROM THE COOKBOOK</p>
+      <div class="home-cookbook-head" data-ghost="COOKBOOK" data-reveal>
+        <p class="home-cookbook-eyebrow sec-chip" data-num="04">FROM THE COOKBOOK</p>
         <h2>料理から、ラブを決める。</h2>
         <p>「今日は何作る？」から逆算して、必要なラブが見つかります。<br>SLOW FIRE料理ガイド全24品から、人気の6品を抜粋。</p>
       </div>
@@ -618,10 +645,10 @@
   </section>
 
   <!-- ===== 3 BRANDS ===== -->
-  <section class="home-brands">
+  <section class="home-brands" data-sec="ember">
     <div class="home-brands-inner">
-      <div class="home-brands-head">
-        <p class="home-brands-eyebrow">3 BRANDS</p>
+      <div class="home-brands-head" data-ghost="STORIES" data-reveal>
+        <p class="home-brands-eyebrow sec-chip" data-num="05">3 BRANDS</p>
         <h2>3つのブランド、<br>3つの世界観。</h2>
         <p>SLOW FIREは、性格の違う3ブランドを揃えています。<br>「どの世界観で焼くか」で選んでも、楽しい。</p>
       </div>
@@ -655,13 +682,13 @@
   </section>
 
   <!-- ===== DEEPER DIVE — Essentials / Journal / Team ===== -->
-  <section class="home-ess-cta">
-    <div class="home-ess-cta-inner">
-      <p class="home-ess-cta-eyebrow">DEEPER DIVE</p>
+  <section class="home-ess-cta" data-sec="ink">
+    <div class="home-ess-cta-inner" data-ghost="MORE" data-reveal>
+      <p class="home-ess-cta-eyebrow sec-chip" data-num="06">DEEPER DIVE</p>
       <h2>BBQを、もっと深く知る。</h2>
       <p>BBQはラブだけではない。火・温度・時間・文化。<br>SLOW FIREの読み物・思想・実用ガイドへ。</p>
 
-      <div class="deeper-grid">
+      <div class="deeper-grid" data-reveal-group>
         <a href="essentials.html" class="deeper-card">
           <span class="deeper-eyebrow">BBQ ESSENTIALS</span>
           <h3 class="deeper-h">BBQの神髄</h3>
@@ -687,9 +714,12 @@
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section id="faq" class="faq-sec" aria-labelledby="faqHead">
+  <section id="faq" class="faq-sec" aria-labelledby="faqHead" data-sec="amber">
     <div class="sec-wrap sec-narrow">
-      <div class="sec-head"><h2 id="faqHead">BBQラブに関するよくある質問</h2></div>
+      <div class="sec-head" data-ghost="FAQ" data-reveal>
+        <p class="sec-chip" data-num="07">QUESTIONS</p>
+        <h2 id="faqHead">BBQラブに関するよくある質問</h2>
+      </div>
       <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <button class="faq-q" itemprop="name">BBQラブ（バーベキューラブ）とは何ですか？</button>
@@ -775,6 +805,13 @@
   </script>
 
   <footer class="footer" role="contentinfo">
+    <div class="footer-marquee" aria-hidden="true">
+      <div class="footer-marquee-track">
+        <span>LOW &amp; SLOW</span><span class="acc">SLOW FIRE</span><span>BARK</span><span class="acc">ロー&amp;スロー</span><span>PIT MASTER</span><span class="acc">SLOW FIRE</span><span>BRISKET</span><span class="acc">Low n Slow Basics</span><span>SMOKE RING</span>
+        <span>LOW &amp; SLOW</span><span class="acc">SLOW FIRE</span><span>BARK</span><span class="acc">ロー&amp;スロー</span><span>PIT MASTER</span><span class="acc">SLOW FIRE</span><span>BRISKET</span><span class="acc">Low n Slow Basics</span><span>SMOKE RING</span>
+      </div>
+    </div>
+    <p class="footer-giant" aria-hidden="true">SLOW FIRE</p>
     <div class="footer-wrap">
       <div class="footer-top">
         <div>
@@ -807,5 +844,6 @@
   <script src="script.js"></script>
 <script src="assets/global-search.js?v=20260516" defer></script>
 <script src="assets/sf-features.js?v=20260517" defer></script>
+<script src="assets/sf-fable.js?v=20260708" defer></script>
 </body>
 </html>
