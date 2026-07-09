@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 08 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 10 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>冬・雨の日のBBQ温度管理術 — 外気温が低い日に火が上がらない原因と対策</title>
+    <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/cold-weather-bbq-temperature.html</link>
+    <guid>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/cold-weather-bbq-temperature.html</guid>
+    <pubDate>Fri, 10 Jul 2026 07:00:00 +0900</pubDate>
+    <description>外気温5℃の冬や雨の日にグリルの温度が上がらない・安定しない原因を解説。炭の増量、風防、二層断熱、蓋開閉のロス、着火時間まで、寒い日でもロー&amp;スローを完走する具体的な数値と手順をまとめました。</description>
+  </item>
   <item>
     <title>スモークウッドとチップの違いと使い分け — 燃やし方で香りが決まる</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/smoke-wood-vs-chips.html</link>
