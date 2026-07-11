@@ -1115,3 +1115,27 @@ ordersBackdrop?.addEventListener('click', closeOrders);
     history.replaceState({}, '', location.pathname);
   }
 })();
+
+// =============================================
+// HERO CINEMATIC FIRE LOOP — AI-generated video bg (trial 2026-07-12)
+// Wide screens only; skipped on ?static=1 / reduced motion. On any
+// failure the hero silently stays the plain light version.
+// =============================================
+(function () {
+  var media = document.querySelector('.home-hero .home-hero-media');
+  if (!media) return;
+  var params = new URLSearchParams(location.search);
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (params.get('static') === '1' || reduced || window.innerWidth < 700) return;
+  var hero = media.closest('.home-hero');
+  var v = document.createElement('video');
+  v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+  v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+  v.preload = 'metadata';
+  v.poster = 'videos/an-hero-fire.poster.jpg';
+  v.src = 'videos/an-hero-fire.mp4';
+  v.addEventListener('canplay', function () { hero.classList.add('video-on'); });
+  v.addEventListener('error', function () { v.remove(); });
+  media.appendChild(v);
+  var p = v.play(); if (p && p.catch) p.catch(function () {});
+})();
