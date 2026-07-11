@@ -25,7 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://yamanekazuki.github.io/slow-fire-shop';
+const BASE = 'https://an-bbq.jp';
 
 /* ---------- data files を window シムで読み込む ---------- */
 function loadData() {

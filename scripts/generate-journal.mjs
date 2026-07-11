@@ -28,7 +28,7 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");                 // bbq-shop/
 const ART_DIR = join(ROOT, "journal", "articles");
-const SITE = "https://yamanekazuki.github.io/slow-fire-shop";
+const SITE = "https://an-bbq.jp";
 const MODEL = process.env.BLOG_MODEL || "claude-opus-4-8";
 
 // ---- 既存記事の作りに合わせた固定パーツ（back-ribs.html 由来）-----------------
