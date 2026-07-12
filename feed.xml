@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 10 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 13 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>飽きさせないあんBBQの組み立て方 — 肉2〜3種＋副菜＋シーフードの段取り設計</title>
+    <link>https://an-bbq.jp/journal/articles/anbbq-multi-course-plan.html</link>
+    <guid>https://an-bbq.jp/journal/articles/anbbq-multi-course-plan.html</guid>
+    <pubDate>Mon, 13 Jul 2026 07:00:00 +0900</pubDate>
+    <description>肉2〜3種に副菜とシーフードを組み合わせ、5〜6時間で熱々を出し続けるあんBBQの組み立て方を、火入れ温度・投入順・タイムラインまで数値で解説します。</description>
+  </item>
   <item>
     <title>冬・雨の日のBBQ温度管理術 — 外気温が低い日に火が上がらない原因と対策</title>
     <link>https://yamanekazuki.github.io/slow-fire-shop/journal/articles/cold-weather-bbq-temperature.html</link>

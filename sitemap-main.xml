@@ -98,6 +98,7 @@
 
   <!-- SLOW FIRE JOURNAL -->
   <url><loc>https://an-bbq.jp/journal/</loc><lastmod>2026-05-06</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://an-bbq.jp/journal/articles/anbbq-multi-course-plan.html</loc><lastmod>2026-07-13</lastmod><priority>0.9</priority></url>
   <url><loc>https://an-bbq.jp/journal/articles/grilling-sausages-hotdog.html</loc><lastmod>2026-07-03</lastmod><priority>0.9</priority></url>
   <url><loc>https://an-bbq.jp/journal/articles/two-zone-fire-setup.html</loc><lastmod>2026-07-01</lastmod><priority>0.9</priority></url>
   <url><loc>https://an-bbq.jp/journal/articles/balcony-bbq-smoke-control.html</loc><lastmod>2026-06-29</lastmod><priority>0.9</priority></url>
