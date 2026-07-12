@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>肉×BBQラブ ペアリングガイド｜部位別の最適な海外ラブ - SLOW FIRE SHOP</title>
-  <meta name="description" content="牛・豚・鶏・ラム別のおすすめBBQラブ完全ガイド。同じ肉を違うラブで焼いた時のフレーバー比較、ラブの重ねがけ組み合わせを徹底解説。ブリスケット・プルドポーク・チキンウィングなど部位別に最適な海外スパイスブレンドが一目で分かります。">
-  <meta name="keywords" content="BBQラブ,ペアリング,牛肉 ラブ,豚肉 ラブ,鶏肉 ラブ,ラム ラブ,ブリスケット,プルドポーク,Steak Shooter,Honey Soy Slammer">
+  <title>食材から選ぶBBQラブ｜牛・豚・鶏・ラム・海鮮・野菜のペアリング - SLOW FIRE SHOP</title>
+  <meta name="description" content="牛・豚・鶏・ラム・シーフード・野菜——食材を選ぶだけで、合うBBQラブと料理レシピが即座に見つかるインタラクティブ・ペアリングガイド。フレーバーの相性を視覚化。ブリスケット・プルドポーク・サーモンまで、部位別に最適な海外スパイスブレンドが一目で分かります。">
+  <meta name="keywords" content="BBQラブ,ペアリング,食材から選ぶ,牛肉 ラブ,豚肉 ラブ,鶏肉 ラブ,ラム ラブ,シーフード ラブ,野菜 ラブ,ブリスケット,プルドポーク,Steak Shooter,Honey Soy Slammer">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://an-bbq.jp/pairing-guide.html">
   <link rel="manifest" href="manifest.json">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="肉×BBQラブ ペアリングガイド｜部位別の最適な海外ラブ">
-  <meta property="og:description" content="牛・豚・鶏・ラム別のおすすめBBQラブ。ブリスケット・プルドポーク・チキンウィングなど部位別に最適な海外スパイスブレンドを完全解説。">
+  <meta property="og:title" content="食材から選ぶBBQラブ｜牛・豚・鶏・ラム・海鮮・野菜のペアリング">
+  <meta property="og:description" content="食材を選ぶだけで、合うBBQラブと料理レシピが即座に見つかる。フレーバーの相性を視覚化したインタラクティブ・ペアリングガイド。">
   <meta property="og:url" content="https://an-bbq.jp/pairing-guide.html">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260708g">
   <link rel="stylesheet" href="assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="assets/sf-features.css?v=20260708g">
@@ -25,497 +25,448 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "肉×BBQラブ ペアリングガイド｜部位別の最適な海外ラブ",
-    "description": "牛・豚・鶏・ラム別のおすすめBBQラブ完全ガイド。Low n Slow Basics全7種について、ブリスケット・プルドポーク・チキンウィング・ラムショルダーなど部位別の最適なペアリングを解説。",
+    "headline": "食材から選ぶBBQラブ｜牛・豚・鶏・ラム・海鮮・野菜のペアリング",
+    "description": "食材を選ぶだけで、合うBBQラブと料理レシピが即座に見つかるインタラクティブ・ペアリングガイド。牛・豚・鶏・ラム・シーフード・野菜それぞれに最適なスパイスブレンドを解説。",
     "url": "https://an-bbq.jp/pairing-guide.html",
     "inLanguage": "ja-JP",
     "author": {"@type": "Organization", "name": "SLOW FIRE"},
     "publisher": {"@type": "Organization", "name": "SLOW FIRE"},
     "about": [
       {"@type": "Thing", "name": "BBQラブのペアリング"},
-      {"@type": "Thing", "name": "肉部位別の調理"},
+      {"@type": "Thing", "name": "食材別の調理"},
       {"@type": "Thing", "name": "Low and Slow"}
     ],
     "mainEntityOfPage": "https://an-bbq.jp/pairing-guide.html"
   }
   </script>
   <style>
-    /* ---- pairing-guide specific ---- */
-    .page-hero {
-      margin-top: var(--nav-h);
-      background: var(--black);
-      color: var(--white);
-      padding: 80px 24px 64px;
-      text-align: center;
-      position: relative;
+    /* =========================================================
+       PAIRING GUIDE — 食材から選ぶ / interactive redesign
+       ページ専用（他ページを壊さない）
+       ========================================================= */
+
+    /* --- living background (fixed, drifting embers) --- */
+    .pg-living-bg {
+      position: fixed; inset: 0; z-index: -2;
+      background: #faf7f2;
       overflow: hidden;
     }
-    .page-hero::before {
-      content: '';
+    .pg-living-bg .blob {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 80% at 50% 100%, rgba(180,83,9,.3) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .55;
+      will-change: transform;
     }
-    .page-hero > * { position: relative; }
-    .page-hero .label-sm { color: var(--brand); margin-bottom: 16px; }
-    .page-hero h1 {
+    .pg-living-bg .b1 { width: 46vw; height: 46vw; left: -8vw; top: -6vw;
+      background: radial-gradient(circle at 40% 40%, rgba(194,65,12,.42), transparent 70%);
+      animation: pgDrift1 26s ease-in-out infinite; }
+    .pg-living-bg .b2 { width: 40vw; height: 40vw; right: -10vw; top: 18vh;
+      background: radial-gradient(circle at 50% 50%, rgba(217,119,6,.40), transparent 70%);
+      animation: pgDrift2 32s ease-in-out infinite; }
+    .pg-living-bg .b3 { width: 38vw; height: 38vw; left: 20vw; bottom: -12vh;
+      background: radial-gradient(circle at 50% 50%, rgba(234,88,12,.30), transparent 70%);
+      animation: pgDrift3 30s ease-in-out infinite; }
+    .pg-living-bg .b4 { width: 30vw; height: 30vw; right: 14vw; bottom: 6vh;
+      background: radial-gradient(circle at 50% 50%, rgba(124,45,18,.28), transparent 70%);
+      animation: pgDrift1 38s ease-in-out infinite reverse; }
+    .pg-living-bg .grid {
+      position: absolute; inset: -20%;
+      background-image:
+        linear-gradient(rgba(28,25,23,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28,25,23,.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      animation: pgGrid 60s linear infinite;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 85%);
+    }
+    @keyframes pgDrift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(6vw,4vh) scale(1.08)} }
+    @keyframes pgDrift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5vw,5vh) scale(1.1)} }
+    @keyframes pgDrift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(4vw,-4vh) scale(1.06)} }
+    @keyframes pgGrid { from{transform:translate(0,0)} to{transform:translate(64px,64px)} }
+
+    body { background: transparent; }
+
+    /* --- HERO --- */
+    .pg-hero {
+      margin-top: var(--nav-h);
+      position: relative;
+      padding: clamp(64px,10vw,120px) 24px clamp(52px,7vw,84px);
+      text-align: center;
+      overflow: hidden;
+    }
+    .pg-hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800; font-size: 12px; letter-spacing: .22em;
+      color: var(--brand);
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .pg-hero h1 {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: clamp(30px, 5vw, 58px);
-      font-weight: 700;
-      line-height: 1.18;
-      margin-bottom: 20px;
-      color: var(--white);
-    }
-    .page-hero p {
-      font-size: 16px;
-      color: rgba(255,255,255,.65);
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    /* toc */
-    .toc-section { background: var(--off-white); }
-    .toc-wrap {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 48px 24px;
-    }
-    .toc-wrap h2 {
-      font-size: 14px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--gray-400);
-      margin-bottom: 20px;
-    }
-    .toc-list { display: flex; flex-direction: column; gap: 0; counter-reset: toc; }
-    .toc-item {
-      counter-increment: toc;
-      display: flex; align-items: center; gap: 14px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--gray-200);
-      font-size: 14px; font-weight: 500;
-      color: var(--black); cursor: pointer; transition: color .15s;
-    }
-    .toc-item::before {
-      content: counter(toc, decimal-leading-zero);
-      font-size: 11px; font-weight: 700; color: var(--brand);
-      flex-shrink: 0; width: 24px;
-    }
-    .toc-item:hover { color: var(--brand); }
-
-    /* guide sections */
-    .guide-section { background: var(--white); }
-    .guide-section.alt { background: var(--off-white); }
-    .guide-wrap {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 72px 24px;
-    }
-    .guide-wrap .label-sm { margin-bottom: 14px; }
-    .guide-wrap h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: clamp(24px, 3vw, 36px);
-      font-weight: 700;
-      margin-bottom: 24px;
-      line-height: 1.25;
-    }
-    .guide-wrap p {
-      font-size: 15px; color: var(--gray-600);
-      line-height: 1.9; margin-bottom: 18px;
-    }
-    .guide-wrap p strong { color: var(--black); }
-    .guide-wrap h3 {
-      font-size: 17px; font-weight: 700;
-      margin-top: 36px; margin-bottom: 12px;
-    }
-
-    /* cut cards grid */
-    .cut-categories { display: flex; flex-direction: column; gap: 48px; margin-top: 40px; }
-    .cut-category-label {
-      font-size: 11px; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--brand);
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--brand);
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .cuts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .cut-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 22px 20px;
-      background: var(--white);
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .cut-card:hover { border-color: var(--brand); box-shadow: var(--shadow); }
-    .cut-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .cut-name-en { font-size: 11px; color: var(--gray-400); margin-bottom: 12px; }
-    .cut-best-rub {
-      display: flex; flex-direction: column; gap: 6px;
-      margin-bottom: 12px;
-    }
-    .cut-rub-row { display: flex; align-items: center; gap: 8px; }
-    .cut-rub-row img {
-      width: 28px; height: 28px;
-      border-radius: 5px; object-fit: cover; flex-shrink: 0;
-    }
-    .cut-rub-name { font-size: 12px; font-weight: 600; color: var(--black); }
-    .cut-rub-why { font-size: 11px; color: var(--gray-400); }
-    .cut-timing {
-      font-size: 11px; color: var(--gray-600);
-      background: var(--off-white);
-      padding: 6px 10px;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-    .badge-best {
-      font-size: 9px; font-weight: 700;
-      padding: 1px 6px;
-      background: var(--brand); color: var(--white);
-      border-radius: 999px; flex-shrink: 0;
-    }
-
-    /* flavor compare section */
-    .scenario-box {
-      background: var(--black);
-      color: var(--white);
-      border-radius: 14px;
-      padding: 28px 32px;
-      margin-bottom: 36px;
-    }
-    .scenario-box h3 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 20px; font-weight: 700; color: var(--white);
+      font-weight: 900;
+      font-size: clamp(32px, 6vw, 68px);
+      line-height: 1.14;
+      color: #1c1917;
+      letter-spacing: -.01em;
       margin-bottom: 8px;
     }
-    .scenario-box p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.7; margin: 0; }
-    .scenario-box strong { color: rgba(255,255,255,.9); }
-
-    .flavor-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .flavor-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: 14px;
-      background: var(--white);
-      overflow: hidden;
-    }
-    .flavor-card-img { width: 100%; height: 90px; object-fit: cover; }
-    .flavor-card-body { padding: 16px; }
-    .flavor-card-num {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 28px; font-weight: 700;
-      color: var(--black); opacity: .08;
-      line-height: 1; margin-bottom: 4px;
-    }
-    .flavor-card-name { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-    .flavor-card-taste {
-      font-size: 13px; color: var(--gray-600); line-height: 1.65; margin-bottom: 10px;
-    }
-    .flavor-card-keyword {
+    .pg-rotator {
       display: inline-block;
-      font-size: 10px; font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: var(--off-white);
-      color: var(--gray-600);
+      position: relative;
+      background: linear-gradient(100deg,#7c2d12,#c2410c 55%,#ea580c);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      min-width: 4.5em;
     }
-    .flavor-card-keyword.spicy { background: #FEE2E2; color: #991B1B; }
-    .flavor-card-keyword.sweet { background: #FEF3C7; color: #92400E; }
-    .flavor-card-keyword.savory { background: #F0FDF4; color: #166534; }
-    .flavor-card-keyword.bold { background: #EDE9FE; color: #5B21B6; }
-    .flavor-card-keyword.fresh { background: #E0F2FE; color: #075985; }
-    .flavor-card-keyword.finish { background: var(--black); color: var(--white); }
+    .pg-rotator .word { display: inline-block; }
+    .pg-rotate-anim { animation: pgWordIn .5s cubic-bezier(.2,1.3,.4,1); }
+    @keyframes pgWordIn {
+      0%{transform:translateY(.5em) rotate(-6deg);opacity:0}
+      60%{transform:translateY(-.06em) rotate(1.5deg);opacity:1}
+      100%{transform:translateY(0) rotate(0);opacity:1}
+    }
+    .pg-hero-lead {
+      max-width: 620px; margin: 26px auto 0;
+      font-size: 16px; line-height: 1.95; color: #57534e;
+    }
+    .pg-hero-lead strong { color: #1c1917; font-weight: 700; }
 
-    /* layering section */
-    .layer-grid {
+    /* counters */
+    .pg-stats {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: clamp(20px,6vw,64px); margin-top: 44px;
+    }
+    .pg-stat { text-align: center; }
+    .pg-stat-num {
+      font-family: 'Inter', sans-serif; font-weight: 900;
+      font-size: clamp(34px, 5vw, 52px); line-height: 1;
+      color: #1c1917; letter-spacing: -.02em;
+    }
+    .pg-stat-num sup { color: var(--brand); font-size: .5em; top: -.7em; }
+    .pg-stat-label {
+      margin-top: 10px; font-size: 11.5px; font-weight: 700;
+      letter-spacing: .12em; color: #a8a29e; text-transform: uppercase;
+    }
+
+    /* --- SELECTOR (chips) --- */
+    .pg-selector-wrap {
+      max-width: 1080px; margin: 0 auto;
+      padding: 8px 20px 0;
+    }
+    .pg-sel-kicker {
+      text-align: center; font-size: 13px; font-weight: 700;
+      color: #78716c; letter-spacing: .04em; margin-bottom: 22px;
+    }
+    .pg-sel-kicker b { color: var(--brand); }
+    .pg-chips {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 36px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
     }
-    .layer-card {
-      border: 1.5px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 24px;
-      background: var(--white);
-    }
-    .layer-num {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 36px; font-weight: 700;
-      color: var(--black); opacity: .08;
-      line-height: 1; margin-bottom: 10px;
-    }
-    .layer-combo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .layer-rub {
-      display: flex; align-items: center; gap: 6px;
-      background: var(--off-white);
-      padding: 5px 10px 5px 6px;
-      border-radius: 999px;
-      font-size: 12px; font-weight: 600;
-    }
-    .layer-rub img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
-    .layer-rub.base { background: var(--gray-100); }
-    .layer-rub.top { background: #FEF3C7; }
-    .layer-rub.finish { background: var(--black); color: var(--white); }
-    .layer-plus { font-size: 18px; color: var(--gray-400); font-weight: 300; }
-    .layer-label { font-size: 10px; color: var(--gray-400); margin-bottom: 2px; }
-    .layer-result { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .layer-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
-    .layer-meat { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
-    .layer-meat span {
-      font-size: 10px; font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: var(--off-white); color: var(--gray-600);
-    }
-
-    /* quick ref table */
-    .quick-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin-top: 24px;
-    }
-    .quick-table th,
-    .quick-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--gray-200);
-      text-align: left;
-    }
-    .quick-table th {
-      background: var(--off-white);
-      font-size: 11px; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase; color: var(--gray-600);
-    }
-    .quick-table tbody tr:hover { background: var(--off-white); }
-    .qt-rub { display: flex; align-items: center; gap: 8px; }
-    .qt-rub img { width: 28px; height: 28px; border-radius: 5px; object-fit: cover; }
-    .qt-cuts { color: var(--gray-600); font-size: 12px; }
-    .qt-best { font-weight: 700; color: var(--black); }
-    .qt-tag {
-      display: inline-block;
-      font-size: 10px; font-weight: 600;
-      padding: 2px 8px; margin-left: 4px;
-      border-radius: 999px;
-      background: var(--brand); color: var(--white);
-    }
-
-    /* cta */
-    .cta-section { background: var(--black); padding: 72px 24px; text-align: center; }
-    .cta-section h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: clamp(24px, 3vw, 38px); font-weight: 700;
-      color: var(--white); margin-bottom: 16px;
-    }
-    .cta-section p { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 32px; }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-white {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 6px; padding: 13px 32px;
-      background: var(--white); color: var(--black);
-      font-size: 14px; font-weight: 700;
-      border-radius: var(--r); transition: background .18s;
-    }
-    .btn-white:hover { background: var(--off-white); }
-    .btn-outline {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 6px; padding: 13px 32px;
-      border: 1.5px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
-      font-size: 14px; font-weight: 600;
-      border-radius: var(--r); transition: border-color .18s, color .18s;
-    }
-    .btn-outline:hover { border-color: var(--white); color: var(--white); }
-
-    .callout {
-      background: var(--brand);
-      color: var(--white);
-      border-radius: 12px;
-      padding: 22px 28px;
-      margin: 32px 0;
-    }
-    .callout p { color: rgba(255,255,255,.9); margin: 0; font-size: 14px; line-height: 1.8; }
-
-    @media (max-width: 768px) {
-      .cuts-grid         { grid-template-columns: 1fr; }
-      .flavor-grid       { grid-template-columns: 1fr; }
-      .layer-grid        { grid-template-columns: 1fr; }
-      .nav-links         { display: none; }
-      .hamburger         { display: flex; }
-    }
-    @media (max-width: 900px) and (min-width: 769px) {
-      .cuts-grid         { grid-template-columns: repeat(2, 1fr); }
-      .flavor-grid       { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ============================================
-       Pairing v3 — BIG package photo, max 2 rubs
-       ============================================ */
-    .pairing-wrap > p { margin-bottom: 28px; }
-    .pg-group { margin-bottom: 64px; }
-    .pg-group:last-child { margin-bottom: 0; }
-    .pg-group-head {
-      display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 28px; padding-bottom: 14px;
-      border-bottom: 2px solid var(--gray-200);
-    }
-    .pg-group-icon { font-size: 28px; line-height: 1; }
-    .pg-group-title {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: clamp(20px, 2.4vw, 26px);
-      font-weight: 700;
-      color: var(--black);
-    }
-    .pg-group-sub {
-      font-size: 12px;
-      color: var(--gray-400);
-      margin-left: auto;
-      letter-spacing: 0.04em;
-    }
-
-    /* card grid: 1 col mobile, 2 cols desktop (was 2/3 — wider cards now to host bigger photos) */
-    .pg-cuts {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    @media (min-width: 880px) {
-      .pg-cuts { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .pg-cut {
-      background: var(--white);
-      border: 1.5px solid var(--gray-200);
+    .pg-chip {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 20px 8px 16px;
+      border: 1.5px solid rgba(28,25,23,.10);
       border-radius: 18px;
-      padding: 24px 24px 20px;
-      transition: border-color 0.18s, box-shadow 0.18s;
-      display: flex;
-      flex-direction: column;
-    }
-    .pg-cut:hover { border-color: var(--gray-400); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
-
-    .pg-cut-head { margin-bottom: 20px; }
-    .pg-cut-head h4 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 22px; font-weight: 700;
-      color: var(--black);
-      margin-bottom: 4px;
-    }
-    .pg-cut-head p {
-      font-size: 12px;
-      color: var(--gray-400);
-      letter-spacing: 0.04em;
-      line-height: 1.5;
-    }
-
-    /* RUBS — always 2 columns (or 1 centered if single) */
-    .pg-rubs {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-    .pg-rubs.single-rub {
-      grid-template-columns: 1fr;
-      max-width: 56%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .pg-rub {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: transform .22s cubic-bezier(.2,1,.3,1), border-color .2s, box-shadow .22s, background .2s;
       overflow: hidden;
-      transition: transform 0.18s, box-shadow 0.18s;
-      position: relative;
     }
-    .pg-rub:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    .pg-chip::before {
+      content:''; position:absolute; inset:0; opacity:0;
+      background: linear-gradient(160deg, rgba(234,88,12,.14), rgba(124,45,18,.06));
+      transition: opacity .25s;
+    }
+    .pg-chip:hover { transform: translateY(-4px); border-color: rgba(194,65,12,.4); box-shadow: 0 12px 30px rgba(124,45,18,.14); }
+    .pg-chip.is-active {
+      border-color: transparent;
+      background: #1c1917;
+      box-shadow: 0 14px 34px rgba(28,25,23,.28);
+      transform: translateY(-4px);
+    }
+    .pg-chip.is-active::before { opacity:1; background: linear-gradient(160deg,#7c2d12,#c2410c 60%,#ea580c); }
+    .pg-chip > * { position: relative; z-index: 1; }
+    .pg-chip-emoji { font-size: 34px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,.12)); transition: transform .25s; }
+    .pg-chip:hover .pg-chip-emoji { transform: scale(1.12) rotate(-4deg); }
+    .pg-chip-name { font-size: 14px; font-weight: 800; color: #1c1917; transition: color .2s; }
+    .pg-chip-en { font-family:'Inter',sans-serif; font-size: 10px; font-weight:700; letter-spacing:.1em; color:#a8a29e; text-transform: uppercase; }
+    .pg-chip.is-active .pg-chip-name { color: #fff; }
+    .pg-chip.is-active .pg-chip-en { color: rgba(255,255,255,.65); }
+
+    /* --- RESULTS panel --- */
+    .pg-results { max-width: 1080px; margin: 0 auto; padding: 40px 20px 8px; }
+    .pg-result-hero {
+      display: flex; align-items: center; gap: 18px;
+      padding: 22px 26px; margin-bottom: 28px;
+      border-radius: 20px;
+      background: linear-gradient(120deg, rgba(28,25,23,.94), rgba(124,45,18,.92));
+      color: #fff;
+      box-shadow: 0 16px 40px rgba(28,25,23,.22);
+    }
+    .pg-rh-emoji { font-size: 44px; line-height: 1; flex-shrink: 0; }
+    .pg-rh-txt h2 {
+      font-family:'Noto Sans JP',sans-serif; font-weight: 900;
+      font-size: clamp(22px,3.4vw,30px); color:#fff; line-height:1.2; margin:0 0 4px;
+    }
+    .pg-rh-txt p { margin:0; font-size: 13.5px; color: rgba(255,255,255,.8); line-height:1.6; }
+    .pg-rh-txt b { color:#fdba74; }
+
+    .pg-block-head {
+      display: flex; align-items: baseline; gap: 12px;
+      margin: 40px 0 20px;
+    }
+    .pg-block-head .n {
+      font-family:'Inter',sans-serif; font-weight:900; font-size:13px;
+      color:var(--brand); letter-spacing:.1em;
+    }
+    .pg-block-head h3 {
+      font-family:'Noto Sans JP',sans-serif; font-weight:900;
+      font-size: clamp(19px,2.6vw,24px); color:#1c1917; margin:0;
+    }
+    .pg-block-head .count {
+      margin-left:auto; font-size:12px; font-weight:700; color:#a8a29e;
     }
 
-    /* THE PHOTO — now BIG. aspect 3:4, no border, full bleed */
-    .pg-rub-img-wrap {
-      aspect-ratio: 3 / 4;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
-      overflow: hidden;
-      position: relative;
-      border-radius: 12px;
+    /* rub cards (with flavor axis viz) */
+    .pg-rub-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 16px;
     }
-    .pg-rub[data-brand="bax"] .pg-rub-img-wrap {
-      background: linear-gradient(135deg, #1f1f1f 0%, #3a2818 100%);
+    .pg-rc {
+      display: grid; grid-template-columns: 92px 1fr; gap: 16px;
+      padding: 16px; border-radius: 18px;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(28,25,23,.08);
+      text-decoration: none; color: inherit;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
-    .pg-rub[data-brand="stm"] .pg-rub-img-wrap {
-      background: linear-gradient(135deg, #052e1d 0%, #15803d 100%);
+    .pg-rc:hover { transform: translateY(-3px); border-color: rgba(194,65,12,.4); box-shadow: 0 14px 34px rgba(124,45,18,.14); }
+    .pg-rc-imgwrap {
+      aspect-ratio: 3/4; border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg,#FEF3C7,#FED7AA);
     }
-    .pg-rub-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .pg-rub:hover .pg-rub-img-wrap img { transform: scale(1.05); }
+    .pg-rc[data-brand="butchersaxe"] .pg-rc-imgwrap { background: linear-gradient(135deg,#1f1f1f,#3a2818); }
+    .pg-rc[data-brand="stefthemaori"] .pg-rc-imgwrap { background: linear-gradient(135deg,#052e1d,#15803d); }
+    .pg-rc-imgwrap img { width:100%; height:100%; object-fit: cover; transition: transform .4s; }
+    .pg-rc:hover .pg-rc-imgwrap img { transform: scale(1.06); }
+    .pg-rc-body { min-width: 0; display:flex; flex-direction:column; }
+    .pg-rc-brand { font-family:'Inter',sans-serif; font-size:9.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#a8a29e; }
+    .pg-rc-name { font-size:16px; font-weight:800; color:#1c1917; line-height:1.25; margin:1px 0 6px; }
+    .pg-rc-notes { font-size:11.5px; color:#78716c; line-height:1.55; margin-bottom:10px; }
 
-    /* tag overlay top-right of photo (so the photo has nothing else competing) */
-    .pg-rub-tag {
-      position: absolute;
-      top: 8px; right: 8px;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      background: rgba(180,83,9,0.95);
-      padding: 4px 9px;
-      border-radius: 100px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-      z-index: 2;
-    }
-    .pg-rub[data-brand="bax"] .pg-rub-tag { background: rgba(0,0,0,0.85); }
-    .pg-rub[data-brand="stm"] .pg-rub-tag { background: rgba(21,128,61,0.92); }
+    .pg-axis { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .pg-axis-label { font-size:10px; font-weight:700; color:#78716c; width:44px; flex-shrink:0; }
+    .pg-axis-track { flex:1; height:7px; border-radius:99px; background: rgba(28,25,23,.08); overflow:hidden; }
+    .pg-axis-fill { height:100%; border-radius:99px; background: linear-gradient(90deg,#d97706,#c2410c); width:0; transition: width .7s cubic-bezier(.2,1,.3,1); }
+    .pg-axis-fill.spice { background: linear-gradient(90deg,#f97316,#dc2626); }
+    .pg-axis-val { font-family:'Inter',sans-serif; font-size:10px; font-weight:800; color:#c2410c; width:26px; text-align:right; flex-shrink:0; }
 
-    /* meta: small, sits below photo. font sizes stay as user requested */
-    .pg-rub-meta {
-      padding: 10px 4px 0;
-    }
-    .pg-rub-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--black);
-      line-height: 1.3;
-      margin-bottom: 2px;
-    }
-    .pg-rub-brand {
-      font-size: 10.5px;
-      color: var(--gray-400);
-      letter-spacing: 0.03em;
-    }
+    /* mini radar (5 food bars) */
+    .pg-radar { display:flex; align-items:flex-end; gap:5px; margin-top:auto; padding-top:10px; }
+    .pg-radar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .pg-radar-bar { width:100%; max-width:16px; height:34px; border-radius:5px; background: rgba(28,25,23,.06); position:relative; overflow:hidden; }
+    .pg-radar-bar i { position:absolute; left:0; right:0; bottom:0; background:#d6d3d1; border-radius:5px; transition:height .6s ease; }
+    .pg-radar-col.hot .pg-radar-bar i { background: linear-gradient(180deg,#ea580c,#7c2d12); }
+    .pg-radar-cap { font-size:9px; color:#a8a29e; font-weight:700; }
+    .pg-radar-col.hot .pg-radar-cap { color:#c2410c; }
 
-    .pg-tip {
-      font-size: 12.5px;
-      color: var(--gray-600);
-      background: var(--off-white);
-      padding: 12px 16px;
-      border-radius: 10px;
-      border-left: 3px solid var(--brand);
-      line-height: 1.65;
-      margin-top: auto;
+    /* recipe cards */
+    .pg-recipe-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+    .pg-recipe {
+      display:block; text-decoration:none; color:inherit;
+      border-radius:16px; overflow:hidden;
+      background: rgba(255,255,255,.82); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(28,25,23,.08);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
+    .pg-recipe:hover { transform: translateY(-4px); border-color: rgba(194,65,12,.4); box-shadow: 0 16px 36px rgba(124,45,18,.14); }
+    .pg-recipe-img { width:100%; aspect-ratio: 4/3; object-fit: cover; background:#f5f5f4; display:block; }
+    .pg-recipe-body { padding: 13px 15px 15px; }
+    .pg-recipe-top { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .pg-recipe-icon { font-size:18px; }
+    .pg-recipe-level { margin-left:auto; font-size:10px; font-weight:800; letter-spacing:.06em; color:#c2410c; background:#fff7ed; padding:2px 8px; border-radius:99px; }
+    .pg-recipe-name { font-size:14px; font-weight:800; color:#1c1917; line-height:1.35; }
+    .pg-recipe-rubs { margin-top:9px; font-size:10.5px; color:#78716c; display:flex; flex-wrap:wrap; gap:5px; }
+    .pg-recipe-rubs span { background:rgba(28,25,23,.05); padding:2px 8px; border-radius:99px; }
+    .pg-empty { padding: 24px; text-align:center; font-size:13.5px; color:#78716c; background:rgba(255,255,255,.6); border-radius:14px; line-height:1.8; }
+    .pg-empty a { color:var(--brand); font-weight:700; }
 
-    @media (max-width: 480px) {
-      .pg-rubs.single-rub { max-width: 70%; }
-      .pg-cut { padding: 20px 18px 16px; }
-      .pg-cut-head h4 { font-size: 20px; }
-      .pg-rub-name { font-size: 13px; }
+    /* editor pick */
+    .pg-editor {
+      max-width: 1080px; margin: 12px auto 0; padding: 0 20px;
+    }
+    .pg-editor-card {
+      position: relative; overflow: hidden;
+      border-radius: 24px; padding: clamp(30px,5vw,52px);
+      background: linear-gradient(120deg,#1c1917 0%, #431407 60%, #7c2d12 100%);
+      color:#fff;
+      box-shadow: 0 22px 50px rgba(28,25,23,.3);
+    }
+    .pg-editor-card::after {
+      content:''; position:absolute; right:-6%; top:-30%;
+      width:340px; height:340px; border-radius:50%;
+      background: radial-gradient(circle, rgba(234,88,12,.5), transparent 70%);
+      filter: blur(20px);
+    }
+    .pg-editor-card > * { position: relative; z-index:1; }
+    .pg-editor-kick { font-family:'Inter',sans-serif; font-weight:800; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:#fdba74; margin-bottom:14px; }
+    .pg-editor-card h2 { font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size: clamp(24px,3.6vw,34px); color:#fff; line-height:1.28; margin:0 0 14px; }
+    .pg-editor-card p { font-size:14.5px; line-height:1.9; color:rgba(255,255,255,.82); max-width:620px; margin:0 0 26px; }
+    .pg-editor-picks { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
+    .pg-pick {
+      display:flex; align-items:center; gap:11px; text-decoration:none;
+      background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+      border-radius:14px; padding:10px 16px 10px 10px;
+      transition: background .2s, transform .2s;
+    }
+    .pg-pick:hover { background: rgba(255,255,255,.16); transform: translateY(-2px); }
+    .pg-pick img { width:38px; height:50px; object-fit:cover; border-radius:8px; background:#FED7AA; }
+    .pg-pick-t { line-height:1.3; }
+    .pg-pick-t b { display:block; font-size:14px; font-weight:800; color:#fff; }
+    .pg-pick-t small { font-size:10.5px; color:#fdba74; font-weight:700; }
+    .pg-editor-links { display:flex; flex-wrap:wrap; gap:12px; }
+    .pg-btn-amber {
+      display:inline-flex; align-items:center; gap:7px;
+      background:#fff; color:#7c2d12; font-weight:800; font-size:14px;
+      padding:13px 26px; border-radius:99px; text-decoration:none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .pg-btn-amber:hover { transform: translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.25); }
+    .pg-btn-ghost {
+      display:inline-flex; align-items:center; gap:7px;
+      border:1.5px solid rgba(255,255,255,.4); color:#fff; font-weight:700; font-size:14px;
+      padding:12px 24px; border-radius:99px; text-decoration:none; transition: border-color .2s;
+    }
+    .pg-btn-ghost:hover { border-color:#fff; }
+
+    /* generic section shell over living bg */
+    .pg-section { position: relative; }
+    .pg-section-inner { max-width: 980px; margin: 0 auto; padding: clamp(56px,8vw,88px) 24px; }
+    .pg-sec-eyebrow { font-family:'Inter',sans-serif; font-weight:800; font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--brand); margin-bottom:14px; }
+    .pg-sec-h2 { font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size: clamp(24px,3.6vw,38px); line-height:1.24; color:#1c1917; margin-bottom:18px; }
+    .pg-sec-lead { font-size:15px; line-height:1.9; color:#57534e; max-width:640px; margin-bottom:8px; }
+    .pg-sec-lead strong { color:#1c1917; }
+
+    /* solid card surface used by kept sections */
+    .pg-surface { background:#ffffff; border-radius:26px; box-shadow: 0 20px 50px rgba(28,25,23,.08); }
+
+    /* flavor compare */
+    .pg-scenario {
+      background:#1c1917; color:#fff; border-radius:18px; padding:26px 30px; margin: 26px 0 30px;
+    }
+    .pg-scenario h4 { font-family:'Noto Sans JP',sans-serif; font-weight:800; font-size:18px; color:#fff; margin:0 0 8px; }
+    .pg-scenario p { font-size:13.5px; color:rgba(255,255,255,.68); line-height:1.7; margin:0; }
+    .pg-scenario b { color:#fdba74; }
+    .pg-flavor-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .pg-flavor { border-radius:16px; overflow:hidden; background:#fff; border:1.5px solid var(--gray-200); }
+    .pg-flavor img { width:100%; height:96px; object-fit:cover; }
+    .pg-flavor-b { padding:15px; }
+    .pg-flavor-num { font-family:'Inter',sans-serif; font-weight:900; font-size:26px; color:#1c1917; opacity:.1; line-height:1; }
+    .pg-flavor-name { font-size:13px; font-weight:800; margin:2px 0 7px; }
+    .pg-flavor-taste { font-size:12.5px; color:#57534e; line-height:1.6; margin-bottom:9px; }
+    .pg-tag { display:inline-block; font-size:10px; font-weight:700; padding:3px 10px; border-radius:99px; background:#f5f5f4; color:#57534e; }
+    .pg-tag.spicy{background:#FEE2E2;color:#991B1B}.pg-tag.sweet{background:#FEF3C7;color:#92400E}
+    .pg-tag.savory{background:#F0FDF4;color:#166534}.pg-tag.fresh{background:#E0F2FE;color:#075985}.pg-tag.finish{background:#1c1917;color:#fff}
+    .pg-callout { background:var(--brand); color:#fff; border-radius:14px; padding:20px 26px; margin-top:26px; }
+    .pg-callout p { margin:0; font-size:14px; line-height:1.8; color:rgba(255,255,255,.94); }
+
+    /* layering */
+    .pg-layer-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:8px; }
+    .pg-layer { border:1.5px solid var(--gray-200); border-radius:16px; padding:22px; background:#fff; }
+    .pg-layer-num { font-family:'Inter',sans-serif; font-weight:900; font-size:32px; color:#1c1917; opacity:.1; line-height:1; margin-bottom:8px; }
+    .pg-layer-combo { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    .pg-lr { display:inline-flex; align-items:center; gap:7px; background:#f5f5f4; padding:5px 12px 5px 6px; border-radius:99px; font-size:12px; font-weight:700; text-decoration:none; color:#1c1917; transition:background .2s; }
+    .pg-lr:hover { background:#FEF3C7; }
+    .pg-lr img { width:22px; height:22px; border-radius:50%; object-fit:cover; }
+    .pg-lr.finish { background:#1c1917; color:#fff; }
+    .pg-lr.finish img { border-radius:50%; }
+    .pg-plus { color:#a8a29e; font-weight:300; font-size:17px; }
+    .pg-layer-result { font-size:16px; font-weight:800; margin-bottom:7px; }
+    .pg-layer-desc { font-size:13px; color:#57534e; line-height:1.7; }
+    .pg-layer-meat { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+    .pg-layer-meat span { font-size:10px; font-weight:700; padding:2px 9px; border-radius:99px; background:#f5f5f4; color:#57534e; }
+
+    /* brand grids */
+    .pg-brand-grid { display:grid; grid-template-columns:1fr; gap:16px; margin-top:24px; }
+    .pg-bcut { background:#fff; border:1.5px solid var(--gray-200); border-radius:16px; padding:20px 18px; }
+    .pg-bcut h4 { font-size:14.5px; font-weight:800; color:#1c1917; margin:0 0 14px; }
+    .pg-brubs { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .pg-brubs.single { grid-template-columns:1fr; max-width:60%; margin:0 auto; }
+    .pg-brub { position:relative; display:flex; flex-direction:column; text-decoration:none; color:inherit; border:1px solid var(--gray-200); border-radius:12px; overflow:hidden; background:#fff; transition:border-color .2s, transform .2s, box-shadow .2s; }
+    .pg-brub:hover { border-color:var(--brand); transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.08); }
+    .pg-brank { position:absolute; top:8px; left:8px; z-index:2; font-size:9px; font-weight:800; padding:3px 8px; border-radius:99px; backdrop-filter:blur(6px); }
+    .pg-brank.first { background:rgba(0,0,0,.85); color:#fff; }
+    .pg-brank.second { background:rgba(255,255,255,.92); color:#57534e; border:1px solid var(--gray-200); }
+    .pg-bimg { aspect-ratio:3/4; overflow:hidden; background:linear-gradient(135deg,#FEF3C7,#FED7AA); }
+    .pg-brub[data-brand="butchersaxe"] .pg-bimg { background:linear-gradient(135deg,#1f1f1f,#3a2818); }
+    .pg-brub[data-brand="stefthemaori"] .pg-bimg { background:linear-gradient(135deg,#052e1d,#15803d); }
+    .pg-bimg img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .pg-brub:hover .pg-bimg img { transform:scale(1.05); }
+    .pg-bname { padding:10px 12px 12px; font-size:12.5px; font-weight:800; color:#1c1917; line-height:1.35; }
+    .pg-note { max-width:720px; margin:28px auto 0; padding:20px 24px; border-radius:14px; font-size:13.5px; line-height:1.85; color:#57534e; background:linear-gradient(135deg,#FEF3C7,#FFEDD5); border:1px solid #FCD34D; }
+    .pg-note strong { display:block; color:#1c1917; font-size:14px; margin-bottom:6px; }
+    .pg-note em { font-style:italic; color:var(--brand); font-weight:700; }
+    .pg-note.stm { background:linear-gradient(135deg,#ECFDF5,#D1FAE5); border-color:#6ee7b766; }
+    .pg-note.stm em { color:#15803d; }
+
+    /* quick ref */
+    .pg-qtable { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; background:#fff; border-radius:14px; overflow:hidden; }
+    .pg-qtable th, .pg-qtable td { padding:11px 13px; border-bottom:1px solid var(--gray-200); text-align:left; }
+    .pg-qtable th { background:#faf7f2; font-size:11px; font-weight:800; letter-spacing:.05em; color:#57534e; text-transform:uppercase; }
+    .pg-qtable tbody tr:hover { background:#faf7f2; }
+    .pg-qt-rub { display:flex; align-items:center; gap:9px; text-decoration:none; color:inherit; }
+    .pg-qt-rub img { width:30px; height:30px; border-radius:6px; object-fit:cover; }
+    .pg-qt-best { font-weight:800; color:#1c1917; }
+    .pg-qt-sub { color:#78716c; font-size:12px; }
+
+    /* CTA */
+    .pg-cta { position:relative; text-align:center; padding: clamp(60px,9vw,100px) 24px; }
+    .pg-cta h2 { font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:clamp(26px,4vw,42px); color:#1c1917; margin:0 0 16px; line-height:1.24; }
+    .pg-cta p { font-size:15px; color:#57534e; margin:0 auto 30px; max-width:520px; line-height:1.85; }
+    .pg-cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .pg-cta-btns .pg-btn-amber { background:#1c1917; color:#fff; }
+    .pg-cta-btns .pg-btn-ghost { border-color:rgba(28,25,23,.25); color:#1c1917; }
+    .pg-cta-btns .pg-btn-ghost:hover { border-color:#1c1917; }
+
+    /* scroll reveal */
+    .reveal { opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,1,.3,1); }
+    .reveal.in { opacity:1; transform:none; }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .pg-chips { grid-template-columns: repeat(3, 1fr); }
+      .pg-rub-grid { grid-template-columns: 1fr; }
+      .pg-recipe-grid { grid-template-columns: repeat(2,1fr); }
+      .pg-flavor-grid { grid-template-columns: repeat(2,1fr); }
+      .pg-layer-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 720px) { .pg-brand-grid { grid-template-columns:1fr 1fr; } }
+    @media (min-width: 1080px) { .pg-brand-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 560px) {
+      .pg-chips { grid-template-columns: repeat(3, 1fr); gap:9px; }
+      .pg-chip { padding:15px 6px 12px; border-radius:15px; }
+      .pg-chip-emoji { font-size:28px; }
+      .pg-chip-name { font-size:12.5px; }
+      .pg-recipe-grid { grid-template-columns: 1fr; }
+      .pg-flavor-grid { grid-template-columns: 1fr; }
+      .pg-result-hero { flex-direction: row; padding:18px 18px; }
+      .pg-rh-emoji { font-size:34px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pg-living-bg .blob, .pg-living-bg .grid { animation: none !important; }
+      .pg-rotate-anim { animation: none !important; }
+      .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+      .pg-chip, .pg-rc, .pg-recipe, .pg-chip-emoji { transition:none !important; }
+      * { scroll-behavior: auto !important; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
     }
   </style>
   <!-- Google Analytics (GA4) -->
@@ -536,6 +487,15 @@
   </script>
 </head>
 <body>
+
+  <!-- LIVING BACKGROUND -->
+  <div class="pg-living-bg" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
 
   <!-- NAV -->
   <header id="nav" class="nav">
@@ -581,650 +541,222 @@
   </header>
 
   <!-- HERO -->
-  <section class="page-hero">
-    <p class="label-sm">PAIRING GUIDE</p>
-    <h1>どのラブを<br>使えばいい？</h1>
-    <p>部位別のおすすめ、同じ肉を違うラブで焼いたらどう変わるか、組み合わせのコツ——選ぶ楽しさをまるごと解説します。</p>
-  </section>
-
-  <!-- STICKY TABS -->
-  <nav class="pg-tabs" aria-label="セクションナビ">
-    <div class="pg-tabs-inner">
-      <a href="#by-cut" class="pg-tab is-active" data-target="by-cut">部位別おすすめ</a>
-      <a href="#flavor-compare" class="pg-tab" data-target="flavor-compare">フレーバー比較</a>
-      <a href="#layering" class="pg-tab" data-target="layering">重ねがけ</a>
-      <a href="#quick-ref" class="pg-tab" data-target="quick-ref">クイックリファレンス</a>
-      <a href="#butchers-axe-pairing" class="pg-tab" data-target="butchers-axe-pairing">Butcher's Axe</a>
-      <a href="#stef-pairing" class="pg-tab" data-target="stef-pairing">Stef the Maori</a>
-    </div>
-  </nav>
-
-  <style>
-    .pg-tabs {
-      position: sticky;
-      top: var(--nav-h);
-      z-index: 80;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
-    }
-    .pg-tabs-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .pg-tabs-inner::-webkit-scrollbar { display: none; }
-    .pg-tab {
-      flex-shrink: 0;
-      padding: 16px 18px;
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--gray-400);
-      text-decoration: none;
-      white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: color 0.18s, border-color 0.18s;
-    }
-    .pg-tab:hover { color: var(--black); }
-    .pg-tab.is-active {
-      color: var(--black);
-      border-bottom-color: var(--black);
-      font-weight: 700;
-    }
-    @media (max-width: 600px) {
-      .pg-tabs-inner { padding: 0 1rem; }
-      .pg-tab { padding: 14px 14px; font-size: 13px; }
-    }
-  </style>
-
-  <!-- 01. BY CUT -->
-  <!-- 01. BY CUT (NEW: image-first card grid, data-driven) -->
-  <section id="by-cut" class="guide-section">
-    <div class="guide-wrap pairing-wrap">
-      <p class="label-sm">01 / BY CUT</p>
-      <h2>部位別<br>おすすめラブ。</h2>
-      <p>「どの肉にどのラブ？」——これが一番よく聞かれる質問です。<br>3ブランド全23ラブを、部位別に最適な組み合わせで配置しました。<strong>ラブをタップすると商品ページの該当箇所に飛びます。</strong></p>
-      <div id="pairingGroups"></div>
+  <section class="pg-hero">
+    <p class="pg-hero-eyebrow">Pairing Guide · 食材から選ぶ</p>
+    <h1><span class="pg-rotator" id="pgRotator">サーモン</span>に、<br>この一振り。</h1>
+    <p class="pg-hero-lead">
+      牛・豚・鶏・ラム・シーフード・野菜——<strong>まず食材を選んでください。</strong>
+      合うラブ（スパイス）と、そのまま作れる料理レシピが、その場でぱっと並びます。相性の理由も、味の軸で見えるように。
+    </p>
+    <div class="pg-stats" id="pgStats">
+      <div class="pg-stat"><div class="pg-stat-num" data-count="22">0</div><div class="pg-stat-label">Rubs / ラブ</div></div>
+      <div class="pg-stat"><div class="pg-stat-num" data-count="35">0</div><div class="pg-stat-label">Recipes / レシピ</div></div>
+      <div class="pg-stat"><div class="pg-stat-num" data-count="40">0</div><div class="pg-stat-label">Pairings / 組み合わせ</div></div>
     </div>
   </section>
 
-  <!-- 02. FLAVOR COMPARE -->
-  <section id="flavor-compare" class="guide-section alt">
-    <div class="guide-wrap">
-      <p class="label-sm">02 / FLAVOR COMPARISON</p>
-      <h2>同じ肉を違うラブで<br>焼くと、どう変わる？</h2>
-      <p>たとえばスペアリブを5本焼くとき——それぞれ違うラブを使うと、全部「別の料理」になります。これがラブの持つ本当の力です。</p>
+  <!-- SELECTOR -->
+  <div class="pg-selector-wrap reveal">
+    <p class="pg-sel-kicker">🔥 <b>食材のタイルをタップ</b>すると、合うラブとレシピに切り替わります</p>
+    <div class="pg-chips" id="pgChips" role="tablist" aria-label="食材を選ぶ"></div>
+  </div>
 
-      <div class="scenario-box">
-        <h3>シナリオ：スペアリブ5本を同時に焼く</h3>
-        <p>同じスペアリブ、同じ火加減、同じ時間。ラブだけが違う。<strong>食卓に5種類の「別の料理」が並びます。</strong></p>
+  <!-- RESULTS -->
+  <div class="pg-results" id="pgResults"></div>
+
+  <!-- EDITOR'S PICK -->
+  <div class="pg-editor reveal">
+    <div class="pg-editor-card">
+      <p class="pg-editor-kick">Editor's Pick · 迷ったらこれ</p>
+      <h2>最初の一本なら、<br>「何にでも合う」万能系から。</h2>
+      <p>
+        牛か豚か……と迷う前に。まず1本だけ選ぶなら、食材を選ばない<strong style="color:#fff">バランス型のラブ</strong>が失敗しません。
+        肉にも魚にも野菜にも、仕上げのひと振りにも効く3本です。もっと深く知りたくなったら、ラブの選び方をまとめた<strong style="color:#fff">ラブガイド</strong>へ。
+      </p>
+      <div class="pg-editor-picks" id="pgEditorPicks"></div>
+      <div class="pg-editor-links">
+        <a href="rub-guide.html" class="pg-btn-amber">ラブの選び方を深掘りする →</a>
+        <a href="index.html#products" class="pg-btn-ghost">商品一覧を見る</a>
       </div>
+    </div>
+  </div>
 
-      <div class="flavor-grid">
+  <!-- FLAVOR COMPARE -->
+  <section class="pg-section">
+    <div class="pg-section-inner reveal">
+      <div class="pg-surface" style="padding:clamp(28px,5vw,52px)">
+        <p class="pg-sec-eyebrow">Flavor Comparison</p>
+        <h2 class="pg-sec-h2">同じ肉を違うラブで焼くと、<br>どう変わる？</h2>
+        <p class="pg-sec-lead">たとえばスペアリブを5本焼くとき——それぞれ違うラブを使うと、全部「別の料理」になります。これがラブの持つ本当の力です。</p>
 
-        <div class="flavor-card">
-          <img class="flavor-card-img" src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="Honey Soy Slammer">
-          <div class="flavor-card-body">
-            <div class="flavor-card-num">01</div>
-            <div class="flavor-card-name">Honey Soy Slammer</div>
-            <div class="flavor-card-taste">甘みと醤油の香ばしさが絡み合う、日本人が一番「またこれ食べたい」と言う味。グレーズ感が出て、見た目も艶やかに仕上がる。</div>
-            <span class="flavor-card-keyword sweet">甘み × 醤油</span>
+        <div class="pg-scenario">
+          <h4>シナリオ：スペアリブ5本を同時に焼く</h4>
+          <p>同じスペアリブ、同じ火加減、同じ時間。ラブだけが違う。<b>食卓に5種類の「別の料理」が並びます。</b></p>
+        </div>
+
+        <div class="pg-flavor-grid">
+          <div class="pg-flavor">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="Honey Soy Slammer" loading="lazy">
+            <div class="pg-flavor-b"><div class="pg-flavor-num">01</div>
+              <a class="pg-flavor-name rub-link" data-rub="honey-soy-slammer">Honey Soy Slammer</a>
+              <div class="pg-flavor-taste">甘みと醤油の香ばしさが絡み合う、日本人が一番「またこれ食べたい」と言う味。グレーズ感が出て、見た目も艶やかに仕上がる。</div>
+              <span class="pg-tag sweet">甘み × 醤油</span></div>
+          </div>
+          <div class="pg-flavor">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="Steak Shooter" loading="lazy">
+            <div class="pg-flavor-b"><div class="pg-flavor-num">02</div>
+              <a class="pg-flavor-name rub-link" data-rub="steak-shooter">Steak Shooter</a>
+              <div class="pg-flavor-taste">シンプルな塩とスパイスで、豚の脂の甘みと赤身の旨みをそのまま前に出す。余計なものがない分、肉の良さがダイレクトに伝わる。</div>
+              <span class="pg-tag savory">旨み × シンプル</span></div>
+          </div>
+          <div class="pg-flavor">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="Steak Shooter SPICY" loading="lazy">
+            <div class="pg-flavor-b"><div class="pg-flavor-num">03</div>
+              <a class="pg-flavor-name rub-link" data-rub="steak-shooter-spicy">Steak Shooter SPICY</a>
+              <div class="pg-flavor-taste">じわっと続く辛みが食欲を刺激し、止まらなくなる。外皮が赤褐色に仕上がり、見た目も豪快。辛さが苦手でなければ一番インパクトがある。</div>
+              <span class="pg-tag spicy">辛み × インパクト</span></div>
+          </div>
+          <div class="pg-flavor">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="Chilli Citrus Charge" loading="lazy">
+            <div class="pg-flavor-b"><div class="pg-flavor-num">04</div>
+              <a class="pg-flavor-name rub-link" data-rub="chilli-citrus-charge">Chilli Citrus Charge</a>
+              <div class="pg-flavor-taste">シトラスの酸みがリブの脂をすっきりリセットする。食べ進めるほど軽くなる感覚。夏のBBQや、豚が重く感じるときに選びたい一本。</div>
+              <span class="pg-tag fresh">さっぱり × 夏向き</span></div>
+          </div>
+          <div class="pg-flavor">
+            <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="Hook Shot" loading="lazy">
+            <div class="pg-flavor-b"><div class="pg-flavor-num">05</div>
+              <a class="pg-flavor-name rub-link" data-rub="hook-shot">Hook Shot（仕上げがけ）</a>
+              <div class="pg-flavor-taste">どのラブと組み合わせても使える最終兵器。スロークック後に薄く塗って高温グリル。キャラメライズした艶とスモーキーな甘みが加わり、コンペティション級の仕上がりに。</div>
+              <span class="pg-tag finish">仕上げ専用</span></div>
           </div>
         </div>
 
-        <div class="flavor-card">
-          <img class="flavor-card-img" src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="Steak Shooter">
-          <div class="flavor-card-body">
-            <div class="flavor-card-num">02</div>
-            <div class="flavor-card-name">Steak Shooter</div>
-            <div class="flavor-card-taste">シンプルな塩とスパイスで、豚の脂の甘みと赤身の旨みをそのまま前に出す。余計なものがない分、肉の良さがダイレクトに伝わる。</div>
-            <span class="flavor-card-keyword savory">旨み × シンプル</span>
-          </div>
-        </div>
-
-        <div class="flavor-card">
-          <img class="flavor-card-img" src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="Steak Shooter SPICY">
-          <div class="flavor-card-body">
-            <div class="flavor-card-num">03</div>
-            <div class="flavor-card-name">Steak Shooter SPICY</div>
-            <div class="flavor-card-taste">じわっと続く辛みが食欲を刺激し、止まらなくなる。外皮が赤褐色に仕上がり、見た目も豪快。辛さが苦手でなければ一番インパクトがある。</div>
-            <span class="flavor-card-keyword spicy">辛み × インパクト</span>
-          </div>
-        </div>
-
-        <div class="flavor-card">
-          <img class="flavor-card-img" src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="Chilli Citrus Charge">
-          <div class="flavor-card-body">
-            <div class="flavor-card-num">04</div>
-            <div class="flavor-card-name">Chilli Citrus Charge</div>
-            <div class="flavor-card-taste">シトラスの酸みがリブの脂をすっきりリセットする。食べ進めるほど軽くなる感覚。夏のBBQや、豚が重く感じるときに選びたい一本。</div>
-            <span class="flavor-card-keyword fresh">さっぱり × 夏向き</span>
-          </div>
-        </div>
-
-        <div class="flavor-card">
-          <img class="flavor-card-img" src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="Hook Shot">
-          <div class="flavor-card-body">
-            <div class="flavor-card-num">05</div>
-            <div class="flavor-card-name">Hook Shot（仕上げがけ）</div>
-            <div class="flavor-card-taste">どのラブと組み合わせても使える最終兵器。スロークック後に薄く塗って高温グリル。キャラメライズした艶とスモーキーな甘みが加わり、コンペティション級の仕上がりに。</div>
-            <span class="flavor-card-keyword finish">仕上げ専用</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="callout">
-        <p>5本全部違うラブにすれば、食卓に5種類の「あれ、これどのラブ使ったの？」が生まれます。BBQが会話のきっかけになる瞬間です。</p>
+        <div class="pg-callout"><p>5本全部違うラブにすれば、食卓に5種類の「あれ、これどのラブ使ったの？」が生まれます。BBQが会話のきっかけになる瞬間です。</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 03. LAYERING -->
-  <section id="layering" class="guide-section">
-    <div class="guide-wrap">
-      <p class="label-sm">03 / LAYERING</p>
-      <h2>ラブを重ねると、<br>味は指数関数的に変わる。</h2>
-      <p>プロのBBQで頻繁に使われる「レイヤリング（重ねがけ）」。2種のラブを重ねることで、1種では出せない複雑な風味が生まれます。基本のルール：<strong>ベースラブを薄く → トップラブをたっぷり → 必要なら仕上げにソース</strong>。</p>
+  <!-- LAYERING -->
+  <section class="pg-section">
+    <div class="pg-section-inner reveal">
+      <p class="pg-sec-eyebrow">Layering · 重ねがけ</p>
+      <h2 class="pg-sec-h2">ラブを重ねると、<br>味は指数関数的に変わる。</h2>
+      <p class="pg-sec-lead">プロのBBQで頻繁に使われる「レイヤリング（重ねがけ）」。2種のラブを重ねることで、1種では出せない複雑な風味が生まれます。基本のルール：<strong>ベースラブを薄く → トップラブをたっぷり → 必要なら仕上げにソース</strong>。</p>
+      <div class="pg-layer-grid">
 
-      <div class="layer-grid">
-
-        <div class="layer-card">
-          <div class="layer-num">01</div>
-          <div class="layer-combo">
-            <div class="layer-rub base">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">
-              Steak Shooter
-            </div>
-            <div class="layer-plus">+</div>
-            <div class="layer-rub top">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">
-              Beef Bounce
-            </div>
+        <div class="pg-layer"><div class="pg-layer-num">01</div>
+          <div class="pg-layer-combo">
+            <a class="pg-lr" href="product-steak-shooter.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">Steak Shooter</a>
+            <span class="pg-plus">+</span>
+            <a class="pg-lr" href="product-beef-bounce.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">Beef Bounce</a>
           </div>
-          <div class="layer-result">ブリスケット黄金コンビ</div>
-          <div class="layer-desc">Steak Shooterで旨みの土台を作り、Beef Bounceのコーヒー×ペッパーを重ねる。これがプロのブリスケットの「黒褐色バーク」を作る定番手法。</div>
-          <div class="layer-meat"><span>ブリスケット ◎</span><span>牛リブ ◎</span><span>ステーキ ○</span></div>
+          <div class="pg-layer-result">ブリスケット黄金コンビ</div>
+          <div class="pg-layer-desc">Steak Shooterで旨みの土台を作り、Beef Bounceのコーヒー×ペッパーを重ねる。これがプロのブリスケットの「黒褐色バーク」を作る定番手法。</div>
+          <div class="pg-layer-meat"><span>ブリスケット ◎</span><span>牛リブ ◎</span><span>ステーキ ○</span></div>
         </div>
 
-        <div class="layer-card">
-          <div class="layer-num">02</div>
-          <div class="layer-combo">
-            <div class="layer-rub base">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-              Garlic Goals
-            </div>
-            <div class="layer-plus">+</div>
-            <div class="layer-rub top">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg" alt="">
-              Lamb Layup
-            </div>
+        <div class="pg-layer"><div class="pg-layer-num">02</div>
+          <div class="pg-layer-combo">
+            <a class="pg-lr" href="product-garlic-goals.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">Garlic Goals</a>
+            <span class="pg-plus">+</span>
+            <a class="pg-lr" href="product-lamb-layup.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg" alt="">Lamb Layup</a>
           </div>
-          <div class="layer-result">ラム定番コンビ</div>
-          <div class="layer-desc">Garlic Goalsのチーズ×ガーリックで旨みの土台を作り、Lamb Layupの中東スパイスを重ねる。ラムの香りを「昇華」させるプロの組み合わせ。</div>
-          <div class="layer-meat"><span>ラムチョップ ◎</span><span>ラムレッグ ◎</span><span>カンガルー ○</span></div>
+          <div class="pg-layer-result">ラム定番コンビ</div>
+          <div class="pg-layer-desc">Garlic Goalsのチーズ×ガーリックで旨みの土台を作り、Lamb Layupの中東スパイスを重ねる。ラムの香りを「昇華」させるプロの組み合わせ。</div>
+          <div class="pg-layer-meat"><span>ラムチョップ ◎</span><span>ラムレッグ ◎</span><span>カンガルー ○</span></div>
         </div>
 
-        <div class="layer-card">
-          <div class="layer-num">03</div>
-          <div class="layer-combo">
-            <div class="layer-rub base">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-              Garlic Goals
-            </div>
-            <div class="layer-plus">+</div>
-            <div class="layer-rub top">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-              Honey Soy Slammer
-            </div>
+        <div class="pg-layer"><div class="pg-layer-num">03</div>
+          <div class="pg-layer-combo">
+            <a class="pg-lr" href="product-garlic-goals.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">Garlic Goals</a>
+            <span class="pg-plus">+</span>
+            <a class="pg-lr" href="product-honey-soy-slammer.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">Honey Soy Slammer</a>
           </div>
-          <div class="layer-result">チキン万能コンビ</div>
-          <div class="layer-desc">Garlic Goalsでチーズ旨みのベースを作り、Honey Soy Slammerで甘み×醤油を乗せる。チキンのどんな部位にも合う、失敗のない組み合わせ。</div>
-          <div class="layer-meat"><span>もも肉 ◎</span><span>手羽先 ◎</span><span>丸鶏 ◎</span></div>
+          <div class="pg-layer-result">チキン万能コンビ</div>
+          <div class="pg-layer-desc">Garlic Goalsでチーズ旨みのベースを作り、Honey Soy Slammerで甘み×醤油を乗せる。チキンのどんな部位にも合う、失敗のない組み合わせ。</div>
+          <div class="pg-layer-meat"><span>もも肉 ◎</span><span>手羽先 ◎</span><span>丸鶏 ◎</span></div>
         </div>
 
-        <div class="layer-card">
-          <div class="layer-num">04</div>
-          <div class="layer-combo">
-            <div class="layer-rub base">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-              Honey Soy Slammer
-            </div>
-            <div class="layer-plus">+</div>
-            <div class="layer-rub finish" style="background:var(--black);color:var(--white);">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="" style="border-radius:50%;">
-              Hook Shot
-            </div>
+        <div class="pg-layer"><div class="pg-layer-num">04</div>
+          <div class="pg-layer-combo">
+            <a class="pg-lr" href="product-honey-soy-slammer.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">Honey Soy Slammer</a>
+            <span class="pg-plus">+</span>
+            <a class="pg-lr finish" href="product-hook-shot.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="">Hook Shot</a>
           </div>
-          <div class="layer-result">リブ仕上げ最強コンビ</div>
-          <div class="layer-desc">Honey Soy Slammerで仕込んだリブのスロークック後、Hook Shotを薄く塗って高温グリル。甘み×キャラメライズで競技大会レベルの艶と香りが出る。</div>
-          <div class="layer-meat"><span>スペアリブ ◎</span><span>プルドポーク ◎</span><span>チキン ○</span></div>
+          <div class="pg-layer-result">リブ仕上げ最強コンビ</div>
+          <div class="pg-layer-desc">Honey Soy Slammerで仕込んだリブのスロークック後、Hook Shotを薄く塗って高温グリル。甘み×キャラメライズで競技大会レベルの艶と香りが出る。</div>
+          <div class="pg-layer-meat"><span>スペアリブ ◎</span><span>プルドポーク ◎</span><span>チキン ○</span></div>
         </div>
 
-        <div class="layer-card">
-          <div class="layer-num">05</div>
-          <div class="layer-combo">
-            <div class="layer-rub base">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">
-              Steak Shooter
-            </div>
-            <div class="layer-plus">+</div>
-            <div class="layer-rub top">
-              <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="">
-              Steak Shooter SPICY
-            </div>
+        <div class="pg-layer"><div class="pg-layer-num">05</div>
+          <div class="pg-layer-combo">
+            <a class="pg-lr" href="product-steak-shooter.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">Steak Shooter</a>
+            <span class="pg-plus">+</span>
+            <a class="pg-lr" href="product-steak-shooter-spicy.html"><img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="">Steak Shooter SPICY</a>
           </div>
-          <div class="layer-result">スパイシーダブルラブ</div>
-          <div class="layer-desc">同シリーズのオリジナルとSPICYを重ねるシンプルな技。辛みの層が増し、バークの複雑さが格段に上がる。辛さ好きにはたまらない一手。</div>
-          <div class="layer-meat"><span>ステーキ ◎</span><span>チキンウィング ◎</span><span>牛リブ ○</span></div>
+          <div class="pg-layer-result">スパイシーダブルラブ</div>
+          <div class="pg-layer-desc">同シリーズのオリジナルとSPICYを重ねるシンプルな技。辛みの層が増し、バークの複雑さが格段に上がる。辛さ好きにはたまらない一手。</div>
+          <div class="pg-layer-meat"><span>ステーキ ◎</span><span>チキンウィング ◎</span><span>牛リブ ○</span></div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- 04. QUICK REF -->
-  <section id="quick-ref" class="guide-section alt">
-    <div class="guide-wrap">
-      <p class="label-sm">04 / QUICK REFERENCE</p>
-      <h2>クイックリファレンス。</h2>
-      <p>迷ったときにすぐ使える早見表。各ラブの「最もよく合う部位」と「フレーバーの方向性」をまとめました。</p>
-
-      <div style="overflow-x:auto;margin-top:20px">
-        <table class="quick-table">
-          <thead>
-            <tr>
-              <th>ラブ</th>
-              <th>特に合う部位</th>
-              <th>フレーバーの方向性</th>
-              <th>難易度</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Steak Shooter</div>
-                    <div class="qt-cuts">ステーキ・牛リブ</div>
-                  </div>
-                </div>
-              </td>
-              <td>ステーキ / ブリスケットのベース / 野菜</td>
-              <td>シンプルな旨み。発色と外皮の仕上がりが秀逸</td>
-              <td>初級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Steak Shooter SPICY</div>
-                    <div class="qt-cuts">牛肉・チキンウィング</div>
-                  </div>
-                </div>
-              </td>
-              <td>チキンウィング / ステーキ / 重ねがけ用</td>
-              <td>じわっとくる辛み。外皮が赤褐色で見た目もインパクト大</td>
-              <td>初〜中級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Beef Bounce</div>
-                    <div class="qt-cuts">ブリスケット専用に近い</div>
-                  </div>
-                </div>
-              </td>
-              <td>ブリスケット / 牛リブ</td>
-              <td>コーヒー×ペッパーの深み。黒褐色の本格バーク</td>
-              <td>上級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Honey Soy Slammer</div>
-                    <div class="qt-cuts">No.1ベストセラー</div>
-                  </div>
-                </div>
-              </td>
-              <td>スペアリブ / チキン / プルドポーク</td>
-              <td>甘み×醤油のグレーズ感。日本人が一番馴染みやすい</td>
-              <td>初級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Lamb Layup</div>
-                    <div class="qt-cuts">ラム・ジビエ専門</div>
-                  </div>
-                </div>
-              </td>
-              <td>ラムチョップ / ラムレッグ / カンガルー</td>
-              <td>中東スパイスで獣臭を昇華。香りの奥行きが増す</td>
-              <td>中級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg" alt="">
-                  <div>
-                    <div class="qt-best">Garlic Goals</div>
-                    <div class="qt-cuts">最高の汎用ラブ</div>
-                  </div>
-                </div>
-              </td>
-              <td>チキン全般 / ポテト / ベースラブとして</td>
-              <td>ガーリック×チーズの旨み。何にでも合う万能選手</td>
-              <td>初級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png" alt="">
-                  <div>
-                    <div class="qt-best">Chilli Citrus Charge</div>
-                    <div class="qt-cuts">NEW — 夏向き</div>
-                  </div>
-                </div>
-              </td>
-              <td>丸鶏 / 豚ソーセージ / チキンウィング</td>
-              <td>シトラス酸み×チリ辛みのさっぱりコンビ</td>
-              <td>初〜中級</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="qt-rub">
-                  <img src="https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png" alt="">
-                  <div>
-                    <div class="qt-best">Hook Shot</div>
-                    <div class="qt-cuts">仕上げ専用ソース</div>
-                  </div>
-                </div>
-              </td>
-              <td>仕上げとしてどの肉にも / ディップにも</td>
-              <td>スモーキー×甘酸っぱいキャラメライズ。どのラブとも合う</td>
-              <td>初級</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- QUICK REF -->
+  <section class="pg-section">
+    <div class="pg-section-inner reveal">
+      <div class="pg-surface" style="padding:clamp(28px,5vw,52px)">
+        <p class="pg-sec-eyebrow">Quick Reference</p>
+        <h2 class="pg-sec-h2">クイックリファレンス。</h2>
+        <p class="pg-sec-lead">迷ったときにすぐ使える早見表。Low n Slow Basics 8種の「最もよく合う部位」と「フレーバーの方向性」をまとめました。</p>
+        <div style="overflow-x:auto">
+          <table class="pg-qtable">
+            <thead><tr><th>ラブ</th><th>特に合う部位</th><th>フレーバーの方向性</th><th>難易度</th></tr></thead>
+            <tbody id="pgQuickBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- BUTCHER'S AXE BBQ -->
-  <section id="butchers-axe-pairing" class="guide-section alt">
-    <div class="guide-wrap">
-      <div class="section-head">
-        <p class="eyebrow-sm">Butcher's Axe BBQ · Stagg & Co Australia</p>
-        <h2>もう一つの<br><em>選択肢。</em></h2>
-        <p class="section-lead">同じ食材に、別の世界観を当てる。<strong>各ラブをタップで商品ページへ。</strong></p>
-      </div>
-      <div id="baxPairGrid" class="brand-pair-grid"></div>
-      <div class="ba-note">
+  <!-- BUTCHER'S AXE -->
+  <section class="pg-section">
+    <div class="pg-section-inner reveal">
+      <p class="pg-sec-eyebrow">Butcher's Axe BBQ · Stagg &amp; Co Australia</p>
+      <h2 class="pg-sec-h2">もう一つの<em style="font-style:italic;color:var(--brand)">選択肢。</em></h2>
+      <p class="pg-sec-lead">同じ食材に、別の世界観を当てる。<strong>各ラブをタップで商品ページへ。</strong></p>
+      <div id="baxPairGrid" class="pg-brand-grid"></div>
+      <div class="pg-note">
         <strong>Butcher's Axe vs Low n Slow Basics</strong>
-        どちらもオーストラリアのコンペBBQで磨かれたブランド。<br>
-        Low n Slow Basicsは<em>洗練された深み</em>、Butcher's Axeは<em>骨太な直球</em>が特徴。<br>
-        両方を持つと、料理に応じて「世界観」を選べるようになります。
+        どちらもオーストラリアのコンペBBQで磨かれたブランド。Low n Slow Basicsは<em>洗練された深み</em>、Butcher's Axeは<em>骨太な直球</em>が特徴。両方を持つと、料理に応じて「世界観」を選べるようになります。
       </div>
     </div>
   </section>
 
   <!-- STEF THE MAORI -->
-  <section id="stef-pairing" class="guide-section">
-    <div class="guide-wrap">
-      <div class="section-head">
-        <p class="eyebrow-sm">Stef the Maori · New Zealand × Stagg & Co</p>
-        <h2>第三のブランド、<br><em>マオリの森から。</em></h2>
-        <p class="section-lead">アオテアロア（ニュージーランド）北部のキッチンから。遊び心と本格派が同居する4本のラブ。</p>
-      </div>
-      <div id="stmPairGrid" class="brand-pair-grid"></div>
-      <div class="ba-note stm-note">
+  <section class="pg-section">
+    <div class="pg-section-inner reveal">
+      <p class="pg-sec-eyebrow">Stef the Maori · New Zealand × Stagg &amp; Co</p>
+      <h2 class="pg-sec-h2">第三のブランド、<em style="font-style:italic;color:#15803d">マオリの森から。</em></h2>
+      <p class="pg-sec-lead">アオテアロア（ニュージーランド）北部のキッチンから。遊び心と本格派が同居する4本のラブ。</p>
+      <div id="stmPairGrid" class="pg-brand-grid"></div>
+      <div class="pg-note stm">
         <strong>3ブランドの違いを一言で</strong>
-        <strong style="color:var(--brand)">Low n Slow Basics</strong> = 洗練された深み（コンペBBQの王道）<br>
-        <strong style="color:#1f1f1f">Butcher's Axe</strong> = 骨太な直球（オーストラリア・コンペ）<br>
-        <strong style="color:#15803d">Stef the Maori</strong> = 遊び心と異国情緒（NZマオリ × 万能性）<br>
-        — 1本だけ選ぶなら <em>Rub One Out（万能）</em> または <em>Pork Hunt（豚鶏）</em> が入口に最適。
+        <em>Low n Slow Basics</em> = 洗練された深み（コンペBBQの王道）／<em>Butcher's Axe</em> = 骨太な直球（オーストラリア・コンペ）／<em>Stef the Maori</em> = 遊び心と異国情緒（NZマオリ × 万能性）。1本だけ選ぶなら <em>Rub One Out（万能）</em> または <em>Pork Hunt（豚鶏）</em> が入口に最適。
       </div>
     </div>
   </section>
 
-  <style>
-    /* Brand-pair grid: 画像主役カード */
-    .brand-pair-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin: 28px auto;
-      max-width: 920px;
-    }
-    @media (min-width: 720px) { .brand-pair-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 1100px) { .brand-pair-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .bp-cut {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 20px 18px 18px;
-    }
-    .bp-cut-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--black);
-      margin-bottom: 14px;
-      letter-spacing: -0.005em;
-    }
-    .bp-rubs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .bp-rubs.single { grid-template-columns: 1fr; max-width: 60%; margin: 0 auto; }
-
-    .bp-rub {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--gray-200);
-      background: var(--white);
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      position: relative;
-    }
-    .bp-rub:hover {
-      border-color: var(--brand);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-    }
-    .bp-rank {
-      position: absolute;
-      top: 8px; left: 8px;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 3px 8px;
-      border-radius: 100px;
-      z-index: 2;
-      backdrop-filter: blur(6px);
-    }
-    .bp-rank.first { background: rgba(0,0,0,0.85); color: var(--white); }
-    .bp-rank.second { background: rgba(255,255,255,0.92); color: var(--gray-600); border: 1px solid var(--gray-200); }
-    .bp-img {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
-    }
-    .bp-rub[data-brand="bax"] .bp-img { background: linear-gradient(135deg, #1f1f1f, #3a2818); }
-    .bp-rub[data-brand="stm"] .bp-img { background: linear-gradient(135deg, #052e1d, #15803d); }
-    .bp-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .4s ease;
-    }
-    .bp-rub:hover .bp-img img { transform: scale(1.04); }
-    .bp-name {
-      padding: 10px 12px 12px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--black);
-      line-height: 1.35;
-    }
-    .bp-rub-empty {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11.5px;
-      color: var(--gray-400);
-      font-style: italic;
-      background: var(--gray-50);
-      border: 1px dashed var(--gray-200);
-      border-radius: 10px;
-      min-height: 100%;
-    }
-
-    .ba-note.stm-note {
-      background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
-      border: 1px solid #6ee7b766;
-    }
-    .ba-note.stm-note em { color: #15803d; }
-  </style>
-
-  <style>
-    .ba-table {
-      max-width: 880px;
-      margin: 0 auto;
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--white);
-    }
-    .ba-row {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 14px;
-      padding: 14px 22px;
-      border-bottom: 1px solid var(--gray-100);
-      align-items: center;
-    }
-    .ba-row:last-child { border-bottom: none; }
-    .ba-row:nth-child(even) { background: var(--off-white); }
-    .ba-row-head {
-      background: #1f1f1f !important;
-      color: rgba(255,255,255,0.85);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 12px 22px;
-    }
-    .ba-cut { font-size: 14px; font-weight: 600; color: var(--black); }
-    .ba-rub {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 7px 14px;
-      background: var(--white);
-      border: 1.5px solid var(--gray-200);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--black);
-      text-decoration: none;
-      transition: all 0.18s;
-      width: max-content;
-      max-width: 100%;
-    }
-    .ba-rub:hover {
-      border-color: var(--brand);
-      background: var(--brand);
-      color: var(--white);
-      transform: translateX(2px);
-    }
-    .ba-rub::after {
-      content: ' →';
-      font-size: 11px;
-      opacity: 0.6;
-    }
-    .ba-rub-mute {
-      font-size: 12px;
-      color: var(--gray-400);
-      font-style: italic;
-    }
-    .ba-note {
-      max-width: 720px;
-      margin: 30px auto 0;
-      padding: 20px 24px;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FFEDD5 100%);
-      border-radius: 12px;
-      border: 1px solid #FCD34D;
-      font-size: 13.5px;
-      line-height: 1.85;
-      color: var(--gray-600);
-    }
-    .ba-note strong {
-      display: block;
-      color: var(--black);
-      font-size: 14px;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-    .ba-note em {
-      font-style: italic;
-      color: var(--brand);
-      font-weight: 600;
-    }
-    @media (max-width: 720px) {
-      .ba-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 14px 18px;
-      }
-      .ba-row-head { display: none; }
-      .ba-rub { width: 100%; justify-content: center; }
-    }
-
-    /* Existing rub-link auto-injected style */
-    .rub-link-inject {
-      cursor: pointer;
-      color: var(--brand) !important;
-      text-decoration: underline;
-      text-decoration-color: rgba(180,83,9,0.35);
-      text-underline-offset: 3px;
-      transition: color 0.18s, text-decoration-color 0.18s;
-    }
-    .rub-link-inject:hover {
-      color: var(--brand-dk) !important;
-      text-decoration-color: var(--brand);
-    }
-    .rub-link-inject::after {
-      content: ' ↗';
-      font-size: 0.7em;
-      opacity: 0.6;
-      letter-spacing: -0.04em;
-    }
-  </style>
-
   <!-- CTA -->
-  <section class="cta-section">
+  <section class="pg-cta reveal">
     <h2>さあ、組み合わせを<br>試してみよう。</h2>
-    <p>どれを選べばいいか迷ったら、All-Star Comboセット（7種入り）か Basecamp（万能）が最短距離です。</p>
-    <div class="cta-btns">
-      <a href="index.html#products" class="btn-white">商品一覧へ</a>
-      </div>
+    <p>どれを選べばいいか迷ったら、万能系の Basecamp か Rub One Out が最短距離。まずは食材から選んでみてください。</p>
+    <div class="pg-cta-btns">
+      <a href="index.html#products" class="pg-btn-amber">商品一覧へ →</a>
+      <a href="cookbook.html" class="pg-btn-ghost">料理から選ぶ</a>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -1252,467 +784,334 @@
     </div>
   </footer>
 
+  <!-- DATA -->
+  <script src="product-data.js?v=20260506f"></script>
+  <script src="recipe-data.js?v=20260506f"></script>
+
   <script>
+  (function () {
+    const P = window.PRODUCT_DETAILS || {};
+    const RECIPES = window.RECIPES || [];
+    const getRecipeImage = window.getRecipeImage || (id => `images/recipes/${id}.jpg`);
+
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
-    /* ============================================
-       Auto-linkify rub names → index.html#product-xxx
-       ============================================ */
-    (function injectRubLinks() {
-      const RUB_MAP = {
-        // Low n Slow Basics
-        'Steak Shooter SPICY': 'steak-shooter-spicy',
-        'Steak Shooter':       'steak-shooter',
-        'Beef Bounce':         'beef-bounce',
-        'Honey Soy Slammer':   'honey-soy-slammer',
-        'Lamb Layup':          'lamb-layup',
-        'Garlic Goals':        'garlic-goals',
-        'Chilli Citrus Charge':'chilli-citrus-charge',
-        'Hook Shot':           'hook-shot',
-        // Butcher's Axe
-        'Bullseye':  'butchers-bullseye',
-        'Hunter':    'butchers-hunter',
-        'Ranger':    'butchers-ranger',
-        'Big Bark':  'butchers-big-bark',
-        'Stampede':  'butchers-stampede',
-        'El Hacha':  'butchers-el-hacha',
-        'Gyro':      'butchers-gyro',
-        'Woodlands': 'butchers-woodlands',
-        'Scout':     'butchers-scout',
-        'Basecamp':  'butchers-basecamp',
-        // Stef the Maori
-        'Rub One Out':  'stef-rub-one-out',
-        'Pork Hunt':    'stef-pork-hunt',
-        'Deep Bush':    'stef-deep-bush',
-        'Aquadesiac':   'stef-aquadesiac'
-      };
+    /* ---------- material config ---------- */
+    // rub sets are drawn from the site's existing curated cut→rub pairings
+    const MATERIALS = [
+      { key:'beef',    name:'牛肉',      en:'Beef',       emoji:'🥩', axis:'beef',    hero:'牛肩ロース',
+        rubs:['beef-bounce','steak-shooter','butchers-stampede','butchers-bullseye','butchers-big-bark','steak-shooter-spicy','butchers-el-hacha','chilli-citrus-charge'],
+        blurb:'発色と旨みの深いバークが命。塩・ペッパー・コーヒー系が王道。' },
+      { key:'pork',    name:'豚肉',      en:'Pork',       emoji:'🐷', axis:'pork',    hero:'スペアリブ',
+        rubs:['honey-soy-slammer','butchers-big-bark','stef-pork-hunt','butchers-ranger','hook-shot','garlic-goals','beef-bounce'],
+        blurb:'脂の甘みを活かす甘旨系と、バークを作る濃厚系がハマる。' },
+      { key:'chicken', name:'鶏肉',      en:'Chicken',    emoji:'🍗', axis:'chicken', hero:'鶏もも',
+        rubs:['honey-soy-slammer','butchers-gyro','chilli-citrus-charge','stef-pork-hunt','butchers-scout','garlic-goals','butchers-basecamp','stef-rub-one-out','butchers-ranger','steak-shooter-spicy','stef-deep-bush'],
+        blurb:'淡白な白身肉。甘グレーズ・柑橘・ハーブが幅広く合う。' },
+      { key:'lamb',    name:'ラム・ジビエ', en:'Lamb & Game', emoji:'🐑', axis:null,    hero:'ラムチョップ',
+        rubs:['lamb-layup','butchers-hunter','stef-deep-bush','garlic-goals'],
+        blurb:'香りの強い肉。中東スパイスやハーブ系で「昇華」させる。' },
+      { key:'seafood', name:'シーフード', en:'Seafood',    emoji:'🐟', axis:'fish',    hero:'サーモン',
+        rubs:['stef-aquadesiac','butchers-scout','garlic-goals','lamb-layup','honey-soy-slammer'],
+        blurb:'繊細な素材。レモン・海鮮系・ハーブで軽やかに。' },
+      { key:'veggie',  name:'野菜・サイド', en:'Vegetables', emoji:'🥬', axis:'veggie',  hero:'焼き野菜',
+        rubs:['garlic-goals','butchers-basecamp','butchers-woodlands','stef-rub-one-out','butchers-scout'],
+        blurb:'水分を抜くほど甘くなる。ガーリック・万能系が鉄板。' }
+    ];
 
-      // Match the longest names first (Steak Shooter SPICY before Steak Shooter)
-      const orderedNames = Object.keys(RUB_MAP).sort((a, b) => b.length - a.length);
-
-      // Selectors that hold rub names — extend as needed
-      const selectors = [
-        '.cut-rub-name',
-        '.flavor-card-name',
-        '.qt-best',
-        '.layer-rub-name',
-        '.layer-rub'
-      ];
-
-      selectors.forEach(sel => {
-        document.querySelectorAll(sel).forEach(el => {
-          // skip if already linked or already inside an <a>
-          if (el.closest('a') || el.querySelector('a.rub-link-inject')) return;
-          const original = el.textContent.trim();
-          let matched = null;
-          for (const name of orderedNames) {
-            if (original.includes(name)) { matched = name; break; }
-          }
-          if (!matched) return;
-          const id = RUB_MAP[matched];
-          // Replace the matched substring with a clickable span
-          // Preserve any trailing modifier like "（重ねがけ）" or "（ベース）"
-          const escapedName = matched.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          const html = el.innerHTML.replace(
-            new RegExp(escapedName),
-            `<a class="rub-link-inject" href="product.html?id=${id}">${matched}</a>`
-          );
-          el.innerHTML = html;
-        });
-      });
-    })();
-
-    /* ============================================
-       Pairing v2 — image-first card grid (data-driven)
-       ============================================ */
-    const RUB_INFO = {
-      // Low n Slow Basics
-      'steak-shooter':         { name: 'Steak Shooter',         brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-1.jpg' },
-      'steak-shooter-spicy':   { name: 'Steak Shooter SPICY',   brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/STEAK-SHOOTER-SPICY.jpg' },
-      'beef-bounce':           { name: 'Beef Bounce',           brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/BEEF-BOUNCE.jpg' },
-      'honey-soy-slammer':     { name: 'Honey Soy Slammer',     brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HONEY-SOY.jpg' },
-      'lamb-layup':            { name: 'Lamb Layup',            brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/LAMB-LAYUP.jpg' },
-      'garlic-goals':          { name: 'Garlic Goals',          brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/GARLIC-GOALS-1.jpg' },
-      'chilli-citrus-charge':  { name: 'Chilli Citrus Charge',  brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2024/11/Chilli-Charge-Colour-600x600.png' },
-      'hook-shot':             { name: 'Hook Shot',             brand: 'lns', image: 'https://www.lownslowbasics.com.au/wp-content/uploads/2023/09/HOOK-SHOT.png' },
-      // Butcher's Axe
-      'butchers-bullseye':  { name: 'Bullseye',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bullseye-front.png?v=1739404920&width=400' },
-      'butchers-hunter':    { name: 'Hunter',    brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-hunter-front.png?v=1739405308&width=400' },
-      'butchers-ranger':    { name: 'Ranger',    brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-ranger-front.png?v=1739402780&width=400' },
-      'butchers-big-bark':  { name: 'Big Bark',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-bigbark-front.png?v=1739404322&width=400' },
-      'butchers-stampede':  { name: 'Stampede',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-stampede-front.png?v=1739406111&width=400' },
-      'butchers-el-hacha':  { name: 'El Hacha',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-elhacha-front.png?v=1739403261&width=400' },
-      'butchers-gyro':      { name: 'Gyro',      brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-gyro-front.png?v=1739405696&width=400' },
-      'butchers-woodlands': { name: 'Woodlands', brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-woodlands-front.png?v=1745364106&width=400' },
-      'butchers-scout':     { name: 'Scout',     brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/ButchersAxe-scout-front.png?v=1745364053&width=400' },
-      'butchers-basecamp':  { name: 'Basecamp',  brand: 'bax', image: 'https://www.staggandco.com.au/cdn/shop/files/WEB-Basecamp-Front.png?v=1747206655&width=400' },
-      // Stef the Maori
-      'stef-rub-one-out':   { name: 'Rub One Out',  brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/Stefthemaoriruboneout-front.png?v=1739318375&width=400' },
-      'stef-pork-hunt':     { name: 'Pork Hunt',    brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriPorkhunt-front.png?v=1745364300&width=400' },
-      'stef-deep-bush':     { name: 'Deep Bush',    brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/StefthemaoriDeepbush-front.png?v=1739317303&width=400' },
-      'stef-aquadesiac':    { name: 'Aquadesiac',   brand: 'stm', image: 'https://www.staggandco.com.au/cdn/shop/files/WEB_-Aquadesiac_-_new.png?v=1750822318&width=400' }
+    // recipe → material classification (by main ingredient of each dish)
+    const RECIPE_MATERIAL = {
+      beef:    ['tomahawk','carne-asada','cheeseburger','pepper-sesame-beef'],
+      pork:    ['spare-ribs','pulled-pork','back-ribs','pork-steak','bratwurst','jerk-ribs-pineapple'],
+      chicken: ['beer-can-chicken','chicken-thigh','lemon-chicken','jerk-chicken'],
+      lamb:    [],
+      seafood: ['cedar-salmon','salmon-pro','cedar-whitefish','cedar-shrimp-herb','shrimp-grill','saikyo-fish','sanma','cedar-camembert'],
+      veggie:  ['veg-grill','veg-skewer','mushroom-grill','asparagus-grill','grilled-corn','gratin','pizza','tomato-cheese-skillet','pumpkin-camembert','shiitake']
     };
 
-    const BRAND_LABEL = { lns: 'Low n Slow', bax: "Butcher's Axe", stm: 'Stef the Maori' };
+    const AXIS_KEYS = ['beef','pork','chicken','fish','veggie'];
+    const AXIS_CAP  = { beef:'牛', pork:'豚', chicken:'鶏', fish:'魚', veggie:'菜' };
+    const recipeById = Object.fromEntries(RECIPES.map(r => [r.id, r]));
 
-    const PAIRING_GROUPS = [
-      {
-        title: '牛肉',
-        icon: '🥩',
-        sub: 'Beef',
-        cuts: [
-          { cut: 'ステーキ',           cutEn: 'Steak — サーロイン・リブアイ',                 tip: '焼く30分〜1時間前に塗って室温に戻す',                rubs: [
-            { id: 'steak-shooter',       tag: '王道' },
-            { id: 'butchers-bullseye',   tag: 'コンペ' },
-            { id: 'butchers-stampede',   tag: 'ステーキ専用' },
-            { id: 'beef-bounce',         tag: '重ねがけ' }
-          ] },
-          { cut: 'ブリスケット',       cutEn: 'Brisket — 胸部位・長時間ロー&スロー',          tip: '前日夜に塗って冷蔵。110℃で12〜16時間',             rubs: [
-            { id: 'beef-bounce',         tag: '王道' },
-            { id: 'butchers-big-bark',   tag: '黒バーク' },
-            { id: 'butchers-bullseye',   tag: 'コンペ' },
-            { id: 'steak-shooter',       tag: 'ベース' }
-          ] },
-          { cut: '牛リブ',             cutEn: 'Beef Back Ribs / Short Ribs',                  tip: '前日仕込み。120℃で6〜8時間',                       rubs: [
-            { id: 'beef-bounce',         tag: '濃厚' },
-            { id: 'butchers-big-bark',   tag: '深バーク' },
-            { id: 'butchers-stampede',   tag: 'ステーキ寄り' }
-          ] },
-          { cut: 'トマホーク',         cutEn: 'Tomahawk — 骨付き厚切りリブアイ',              tip: 'リバースシア法。120℃→280℃で焼き目',              rubs: [
-            { id: 'butchers-stampede',   tag: 'メイン' },
-            { id: 'beef-bounce',         tag: '深み' },
-            { id: 'steak-shooter',       tag: '基本' }
-          ] },
-          { cut: 'カルネ・アサーダ',   cutEn: 'Carne Asada — メキシカン薄切り',               tip: 'マリネ2時間以上、280℃で短時間',                    rubs: [
-            { id: 'butchers-el-hacha',   tag: '本場' },
-            { id: 'steak-shooter-spicy', tag: 'スパイス' },
-            { id: 'chilli-citrus-charge',tag: '柑橘' }
-          ] }
-        ]
-      },
-      {
-        title: '豚肉',
-        icon: '🐷',
-        sub: 'Pork',
-        cuts: [
-          { cut: 'ポークリブ',         cutEn: 'Pork Spare Ribs',                              tip: 'メンブレン剥がす。180℃で約100分',                  rubs: [
-            { id: 'honey-soy-slammer',   tag: '王道' },
-            { id: 'stef-pork-hunt',      tag: '骨太' },
-            { id: 'butchers-ranger',     tag: '濃厚' },
-            { id: 'hook-shot',           tag: '仕上げ' }
-          ] },
-          { cut: 'バックリブ',         cutEn: 'Pork Back Ribs — ロー&スロー',                 tip: '110℃で4時間、92℃で完成',                          rubs: [
-            { id: 'butchers-big-bark',   tag: '黒バーク' },
-            { id: 'beef-bounce',         tag: '深み' },
-            { id: 'honey-soy-slammer',   tag: '甘旨' }
-          ] },
-          { cut: 'プルドポーク',       cutEn: 'Pulled Pork — 豚肩ロース',                     tip: '110℃で10時間、97℃で手でほぐれる',                  rubs: [
-            { id: 'honey-soy-slammer',   tag: '王道' },
-            { id: 'butchers-big-bark',   tag: 'バーク作り' },
-            { id: 'butchers-ranger',     tag: '濃厚' }
-          ] },
-          { cut: 'ポークステーキ',     cutEn: 'Pork Steak / Loin Chop',                       tip: '直火250℃、中心63℃で完成',                         rubs: [
-            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'stef-pork-hunt',      tag: '専用設計' }
-          ] }
-        ]
-      },
-      {
-        title: '鶏肉',
-        icon: '🍗',
-        sub: 'Chicken',
-        cuts: [
-          { cut: 'ビア缶チキン',       cutEn: 'Beer Can Chicken — 丸鶏',                      tip: '1日漬け込み、200℃で約60分',                        rubs: [
-            { id: 'butchers-gyro',       tag: 'ロティサリー' },
-            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
-            { id: 'butchers-ranger',     tag: '濃厚' },
-            { id: 'stef-rub-one-out',    tag: 'マオリ' }
-          ] },
-          { cut: 'チキンモモ・骨付き', cutEn: 'Chicken Thigh — Bone-in',                     tip: 'マリネ一晩、皮目から5分→裏返し5分',                rubs: [
-            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
-            { id: 'chilli-citrus-charge',tag: '柑橘' },
-            { id: 'stef-pork-hunt',      tag: '白身肉' }
-          ] },
-          { cut: 'チキンウィング',     cutEn: 'Chicken Wings',                                tip: '皮目から焼く、73℃で完成',                          rubs: [
-            { id: 'chilli-citrus-charge',tag: '辛+爽' },
-            { id: 'steak-shooter-spicy', tag: 'スパイシー' },
-            { id: 'stef-pork-hunt',      tag: '骨太' },
-            { id: 'butchers-ranger',     tag: '赤系' }
-          ] },
-          { cut: 'チキン胸',           cutEn: 'Chicken Breast — マリネ系',                    tip: 'マリネで保湿、73℃で完成',                          rubs: [
-            { id: 'butchers-scout',      tag: 'レモン' },
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-basecamp',   tag: '万能' }
-          ] },
-          { cut: 'ジャークチキン',     cutEn: 'Jamaican Jerk Chicken',                        tip: 'マリネ一晩、皮目から焼く',                          rubs: [
-            { id: 'chilli-citrus-charge',tag: 'スパイス' },
-            { id: 'butchers-ranger',     tag: '赤系' },
-            { id: 'stef-deep-bush',      tag: 'ハーブ' }
-          ] }
-        ]
-      },
-      {
-        title: 'ラム・ジビエ',
-        icon: '🐑',
-        sub: 'Lamb & Game',
-        cuts: [
-          { cut: 'ラムチョップ',       cutEn: 'Lamb Chops',                                   tip: 'ハーブ系で短時間直火',                              rubs: [
-            { id: 'lamb-layup',          tag: '専用' },
-            { id: 'butchers-hunter',     tag: '骨太' },
-            { id: 'stef-deep-bush',      tag: 'ホロピト' }
-          ] },
-          { cut: 'ラムショルダー',     cutEn: 'Lamb Shoulder — ロー&スロー',                  tip: '120℃で6〜8時間',                                   rubs: [
-            { id: 'lamb-layup',          tag: 'メイン' },
-            { id: 'butchers-hunter',     tag: '専用' },
-            { id: 'garlic-goals',        tag: 'ベース' }
-          ] },
-          { cut: 'ジビエ（鹿・カンガルー）', cutEn: 'Venison / Kangaroo',                     tip: 'クセを抑えるハーブ系で',                            rubs: [
-            { id: 'butchers-hunter',     tag: '専用' },
-            { id: 'lamb-layup',          tag: 'ハーブ' },
-            { id: 'stef-deep-bush',      tag: 'ホロピト' }
-          ] }
-        ]
-      },
-      {
-        title: '魚介',
-        icon: '🐟',
-        sub: 'Seafood',
-        cuts: [
-          { cut: 'シダープランクサーモン', cutEn: 'Cedar Plank Salmon',                       tip: '杉板30分浸し、230℃で8〜12分',                      rubs: [
-            { id: 'lamb-layup',          tag: 'ハーブ' },
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'stef-aquadesiac',     tag: '海鮮' },
-            { id: 'butchers-scout',      tag: 'レモン' }
-          ] },
-          { cut: '上級サーモン',       cutEn: 'Honey Mustard Salmon',                         tip: 'ドリップ完全に拭き取る、高温→低温',                 rubs: [
-            { id: 'honey-soy-slammer',   tag: 'グレーズ' },
-            { id: 'stef-aquadesiac',     tag: '海鮮' },
-            { id: 'butchers-scout',      tag: 'レモン' }
-          ] },
-          { cut: 'エビ・シーフード',   cutEn: 'Shrimp & Seafood',                             tip: '殻ごと焼く、ピンク色で取り出す',                    rubs: [
-            { id: 'stef-aquadesiac',     tag: '海鮮専用' },
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-scout',      tag: 'レモン' },
-            { id: 'lamb-layup',          tag: 'ハーブ' }
-          ] },
-          { cut: '白身魚',             cutEn: 'White Fish — タラ・スズキ',                    tip: '杉板または直火で繊細に',                            rubs: [
-            { id: 'butchers-scout',      tag: 'レモン' },
-            { id: 'stef-aquadesiac',     tag: '海鮮' },
-            { id: 'garlic-goals',        tag: '万能' }
-          ] },
-          { cut: 'さわらの西京焼き',   cutEn: 'Saikyo Miso Saba',                             tip: '味噌床1日漬け、200℃で12分',                        rubs: [
-            { id: 'honey-soy-slammer',   tag: '甘旨' },
-            { id: 'stef-aquadesiac',     tag: '和魚介' }
-          ] }
-        ]
-      },
-      {
-        title: '野菜・サイド',
-        icon: '🥬',
-        sub: 'Vegetables & Sides',
-        cuts: [
-          { cut: '季節の野菜グリル',   cutEn: 'Seasonal Grilled Vegetables',                  tip: '大きく切る、3分×3回',                              rubs: [
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-woodlands',  tag: 'ガーリック' },
-            { id: 'butchers-basecamp',   tag: '万能' },
-            { id: 'stef-rub-one-out',    tag: 'マオリ万能' }
-          ] },
-          { cut: 'スキュアーベジタブル', cutEn: 'Vegetable Skewers',                           tip: '竹串30分浸し、200℃で6分',                          rubs: [
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-basecamp',   tag: '万能' },
-            { id: 'butchers-woodlands',  tag: 'ガーリック' }
-          ] },
-          { cut: 'アスパラガス',       cutEn: 'Grilled Asparagus',                            tip: '太め選ぶ、3〜4分直火',                              rubs: [
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-scout',      tag: 'レモン' },
-            { id: 'butchers-basecamp',   tag: 'シンプル' }
-          ] },
-          { cut: 'ポートベローマッシュルーム', cutEn: 'Portobello Mushroom',                  tip: '軸を取り、傘を上にして焼く',                       rubs: [
-            { id: 'butchers-woodlands',  tag: 'ガーリック' },
-            { id: 'garlic-goals',        tag: '万能' }
-          ] },
-          { cut: 'BBQポテトグラタン',  cutEn: 'BBQ Potato Gratin',                            tip: 'インダイレクトで30分',                              rubs: [
-            { id: 'garlic-goals',        tag: '万能' },
-            { id: 'butchers-woodlands',  tag: 'ガーリック' }
-          ] },
-          { cut: 'ピザ・パン系',       cutEn: 'Pizza & Bread',                                tip: 'ピザストーン8分予熱',                                rubs: [
-            { id: 'butchers-woodlands',  tag: 'ガーリック' },
-            { id: 'garlic-goals',        tag: '万能' }
-          ] }
-        ]
-      },
-      {
-        title: '迷ったら（万能）',
-        icon: '⛺',
-        sub: 'When in doubt',
-        cuts: [
-          { cut: '初めての一本',       cutEn: 'Best for Beginners',                           tip: 'まず1本だけ買うならこれ',                           rubs: [
-            { id: 'butchers-basecamp',   tag: '万能' },
-            { id: 'stef-rub-one-out',    tag: 'マオリ万能' },
-            { id: 'garlic-goals',        tag: 'ガーリック万能' }
-          ] },
-          { cut: 'チャーハン・卵料理', cutEn: 'Fried Rice & Eggs',                            tip: '仕上げに振るだけ',                                  rubs: [
-            { id: 'butchers-basecamp',   tag: '万能' },
-            { id: 'stef-aquadesiac',     tag: 'アジアン' },
-            { id: 'stef-rub-one-out',    tag: 'シンプル' }
-          ] }
-        ]
-      }
-    ];
+    function rubImg(id){ return (P[id] && P[id].image) || ''; }
+    function rubName(id){ return (P[id] && P[id].name) || id; }
+    function brandSlug(id){
+      const b = P[id] && P[id].brand;
+      return b === 'butchers-axe' ? 'butchersaxe' : (b === 'stef-the-maori' ? 'stefthemaori' : 'lownslow');
+    }
 
-    function renderPairings() {
-      const container = document.getElementById('pairingGroups');
-      if (!container) return;
-      container.innerHTML = PAIRING_GROUPS.map(group => `
-        <div class="pg-group">
-          <div class="pg-group-head">
-            <span class="pg-group-icon">${group.icon}</span>
-            <h3 class="pg-group-title">${group.title}</h3>
-            <span class="pg-group-sub">${group.sub}</span>
+    /* ---------- render chips ---------- */
+    const chipWrap = document.getElementById('pgChips');
+    chipWrap.innerHTML = MATERIALS.map(m => `
+      <button class="pg-chip" role="tab" data-key="${m.key}" aria-selected="false">
+        <span class="pg-chip-emoji">${m.emoji}</span>
+        <span class="pg-chip-name">${m.name}</span>
+        <span class="pg-chip-en">${m.en}</span>
+      </button>`).join('');
+
+    /* ---------- render results ---------- */
+    const resultsWrap = document.getElementById('pgResults');
+
+    function rubCard(id, mat){
+      const p = P[id]; if (!p) return '';
+      const brand = brandSlug(id);
+      const axisScore = mat.axis ? (p.bestFor?.[mat.axis] ?? 0) : null;
+      const spice = p.spiceLevel ?? 0;
+      const matchRow = mat.axis ? `
+        <div class="pg-axis">
+          <span class="pg-axis-label">${mat.name.slice(0,2)}相性</span>
+          <span class="pg-axis-track"><span class="pg-axis-fill" style="width:${(axisScore/5)*100}%"></span></span>
+          <span class="pg-axis-val">${axisScore}/5</span>
+        </div>` : `
+        <div class="pg-axis">
+          <span class="pg-axis-label">相性</span>
+          <span class="pg-axis-track"><span class="pg-axis-fill" style="width:88%"></span></span>
+          <span class="pg-axis-val">◎</span>
+        </div>`;
+      const spiceRow = `
+        <div class="pg-axis">
+          <span class="pg-axis-label">辛さ</span>
+          <span class="pg-axis-track"><span class="pg-axis-fill spice" style="width:${(spice/3)*100}%"></span></span>
+          <span class="pg-axis-val">${spice}/3</span>
+        </div>`;
+      const radar = `<div class="pg-radar">${AXIS_KEYS.map(k => {
+        const v = p.bestFor?.[k] ?? 0;
+        const hot = (mat.axis === k);
+        return `<div class="pg-radar-col ${hot?'hot':''}">
+          <div class="pg-radar-bar"><i style="height:${(v/5)*100}%"></i></div>
+          <span class="pg-radar-cap">${AXIS_CAP[k]}</span></div>`;
+      }).join('')}</div>`;
+      return `
+        <a class="pg-rc" href="product-${id}.html" data-brand="${brand}" aria-label="${p.name}">
+          <div class="pg-rc-imgwrap"><img src="${rubImg(id)}" alt="${p.name}" loading="lazy"></div>
+          <div class="pg-rc-body">
+            <span class="pg-rc-brand">${p.brandLabel || ''}</span>
+            <span class="pg-rc-name">${p.name}</span>
+            <span class="pg-rc-notes">${p.flavorNotes || ''}</span>
+            ${matchRow}${spiceRow}${radar}
           </div>
-          <div class="pg-cuts">
-            ${group.cuts.map(c => {
-              // Limit to 2 rubs max — focus on the package photo
-              const limited = c.rubs.slice(0, 2);
-              const isSingle = limited.length === 1 ? ' single-rub' : '';
-              return `
-                <article class="pg-cut">
-                  <header class="pg-cut-head">
-                    <h4>${c.cut}</h4>
-                    <p>${c.cutEn}</p>
-                  </header>
-                  <div class="pg-rubs${isSingle}">
-                    ${limited.map(r => {
-                      const info = RUB_INFO[r.id];
-                      if (!info) return '';
-                      return `
-                        <a class="pg-rub" href="product.html?id=${r.id}" data-brand="${info.brand}" aria-label="${info.name}">
-                          <div class="pg-rub-img-wrap">
-                            <span class="pg-rub-tag">${r.tag}</span>
-                            <img src="${info.image}" alt="${info.name}" loading="lazy">
-                          </div>
-                          <div class="pg-rub-meta">
-                            <div class="pg-rub-name">${info.name}</div>
-                            <div class="pg-rub-brand">${BRAND_LABEL[info.brand]}</div>
-                          </div>
-                        </a>
-                      `;
-                    }).join('')}
-                  </div>
-                  <div class="pg-tip">💡 ${c.tip}</div>
-                </article>
-              `;
-            }).join('')}
+        </a>`;
+    }
+
+    function recipeCard(id){
+      const r = recipeById[id]; if (!r) return '';
+      const rubs = (r.pairedRubs || []).map(rid => rubName(rid)).filter(Boolean);
+      return `
+        <a class="pg-recipe" href="recipe-${id}.html" aria-label="${r.name}">
+          <img class="pg-recipe-img" src="${getRecipeImage(id)}" alt="${r.name}" loading="lazy"
+               onerror="this.style.display='none'">
+          <div class="pg-recipe-body">
+            <div class="pg-recipe-top">
+              <span class="pg-recipe-icon">${r.icon || '🍽️'}</span>
+              <span class="pg-recipe-level">${r.levelLabel || ''}</span>
+            </div>
+            <div class="pg-recipe-name">${r.name}</div>
+            ${rubs.length ? `<div class="pg-recipe-rubs">${rubs.slice(0,3).map(n=>`<span>${n}</span>`).join('')}</div>` : ''}
+          </div>
+        </a>`;
+    }
+
+    function render(key){
+      const mat = MATERIALS.find(m => m.key === key) || MATERIALS[0];
+      // update chips
+      chipWrap.querySelectorAll('.pg-chip').forEach(c => {
+        const on = c.dataset.key === mat.key;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+
+      // order rubs: by material axis score desc when axis exists
+      let rubs = mat.rubs.slice();
+      if (mat.axis) rubs.sort((a,b) => (P[b]?.bestFor?.[mat.axis]??0) - (P[a]?.bestFor?.[mat.axis]??0));
+      const recipes = RECIPE_MATERIAL[mat.key] || [];
+
+      const recipeBlock = recipes.length
+        ? `<div class="pg-recipe-grid">${recipes.map(recipeCard).join('')}</div>`
+        : `<div class="pg-empty">${mat.name}の専用レシピは準備中です。<br>まずは上のラブを選んで、公式レシピの応用で焼いてみてください。<a href="cookbook.html">料理から選ぶ →</a></div>`;
+
+      resultsWrap.innerHTML = `
+        <div class="pg-result-hero">
+          <span class="pg-rh-emoji">${mat.emoji}</span>
+          <div class="pg-rh-txt">
+            <h2>${mat.name}に合わせるなら</h2>
+            <p>${mat.blurb} <b>合うラブ${rubs.length}種・レシピ${recipes.length}品</b></p>
           </div>
         </div>
-      `).join('');
-    }
-    renderPairings();
 
-    /* ============================================
-       Brand pairing grids — Butcher's Axe & Stef
-       (画像主役、テキストではなくパッケージで認識)
-       ============================================ */
-    const BAX_PAIRINGS = [
-      { cut: '🥩 ステーキ全般',                primary: 'butchers-stampede', secondary: 'butchers-bullseye' },
-      { cut: '🥩 ブリスケット（ロー&スロー）',  primary: 'butchers-big-bark', secondary: 'butchers-bullseye' },
-      { cut: '🥩 トマホーク・厚切り牛',         primary: 'butchers-stampede', secondary: 'butchers-big-bark' },
-      { cut: '🐷 プルドポーク（豚肩）',         primary: 'butchers-big-bark', secondary: 'butchers-ranger' },
-      { cut: '🍖 豚リブ・スペアリブ',           primary: 'butchers-ranger',   secondary: 'butchers-big-bark' },
-      { cut: '🐑 ラム・カンガルー・ジビエ',      primary: 'butchers-hunter',   secondary: null },
-      { cut: '🍗 鶏丸焼き・ビア缶チキン',       primary: 'butchers-gyro',     secondary: 'butchers-ranger' },
-      { cut: '🍗 鶏胸・チキン全般',             primary: 'butchers-scout',    secondary: 'butchers-gyro' },
-      { cut: '🐟 白身魚・サーモン',             primary: 'butchers-scout',    secondary: 'butchers-basecamp' },
-      { cut: '🦐 エビ・シーフード',             primary: 'butchers-scout',    secondary: 'butchers-basecamp' },
-      { cut: '🌮 メキシカン・カルネアサーダ',    primary: 'butchers-el-hacha', secondary: 'butchers-ranger' },
-      { cut: '🥬 野菜グリル・野菜串',           primary: 'butchers-woodlands',secondary: 'butchers-basecamp' },
-      { cut: '🍕 ピザ・パン系',                 primary: 'butchers-woodlands',secondary: 'butchers-basecamp' },
-      { cut: '⛺ 迷ったら（万能）',             primary: 'butchers-basecamp', secondary: 'butchers-woodlands' }
-    ];
+        <div class="pg-block-head">
+          <span class="n">RUBS</span>
+          <h3>この食材に合うラブ</h3>
+          <span class="count">${rubs.length}種</span>
+        </div>
+        <div class="pg-rub-grid">${rubs.map(id => rubCard(id, mat)).join('')}</div>
 
-    const STM_PAIRINGS = [
-      { cut: '⛺ 迷ったら（万能）',           primary: 'stef-rub-one-out', secondary: 'stef-aquadesiac' },
-      { cut: '🐷 ポークリブ・スペアリブ',     primary: 'stef-pork-hunt',   secondary: 'stef-deep-bush' },
-      { cut: '🍗 チキンウィング・鶏全般',     primary: 'stef-pork-hunt',   secondary: 'stef-rub-one-out' },
-      { cut: '🥩 牛肉全般・ステーキ',         primary: 'stef-deep-bush',   secondary: 'stef-rub-one-out' },
-      { cut: '🐑 ラム・ジビエ',               primary: 'stef-deep-bush',   secondary: null },
-      { cut: '🦐 エビ・ホタテ・海鮮',         primary: 'stef-aquadesiac',  secondary: 'stef-rub-one-out' },
-      { cut: '🐟 白身魚・サーモン',           primary: 'stef-aquadesiac',  secondary: 'stef-rub-one-out' },
-      { cut: '🥬 野菜グリル・グリルコーン',    primary: 'stef-aquadesiac',  secondary: 'stef-rub-one-out' },
-      { cut: '🍳 卵料理・チャーハン',         primary: 'stef-aquadesiac',  secondary: 'stef-rub-one-out' }
-    ];
+        <div class="pg-block-head">
+          <span class="n">RECIPES</span>
+          <h3>そのまま作れるレシピ</h3>
+          <span class="count">${recipes.length}品</span>
+        </div>
+        ${recipeBlock}
+      `;
 
-    function renderBrandPairings(containerId, data) {
-      const grid = document.getElementById(containerId);
-      if (!grid) return;
-      grid.innerHTML = data.map(p => {
-        const r1 = RUB_INFO[p.primary];
-        const r2 = p.secondary ? RUB_INFO[p.secondary] : null;
-        const isSingle = !r2;
-        return `
-          <article class="bp-cut">
-            <h4 class="bp-cut-title">${p.cut}</h4>
-            <div class="bp-rubs${isSingle ? ' single' : ''}">
-              <a class="bp-rub" href="product.html?id=${p.primary}" data-brand="${r1.brand}" aria-label="${r1.name}">
-                <span class="bp-rank first">第一候補</span>
-                <div class="bp-img"><img src="${r1.image}" alt="${r1.name}" loading="lazy"></div>
-                <div class="bp-name">${r1.name}</div>
-              </a>
-              ${r2 ? `
-                <a class="bp-rub" href="product.html?id=${p.secondary}" data-brand="${r2.brand}" aria-label="${r2.name}">
-                  <span class="bp-rank second">第二候補</span>
-                  <div class="bp-img"><img src="${r2.image}" alt="${r2.name}" loading="lazy"></div>
-                  <div class="bp-name">${r2.name}</div>
-                </a>
-              ` : ''}
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    renderBrandPairings('baxPairGrid', BAX_PAIRINGS);
-    renderBrandPairings('stmPairGrid', STM_PAIRINGS);
-
-    /* ============================================
-       Sticky tab — active highlight on scroll
-       ============================================ */
-    (function() {
-      const tabs = document.querySelectorAll('.pg-tab');
-      const sections = ['by-cut', 'flavor-compare', 'layering', 'quick-ref', 'butchers-axe-pairing', 'stef-pairing']
-        .map(id => document.getElementById(id))
-        .filter(Boolean);
-      if (!tabs.length || !sections.length) return;
-
-      const setActive = (id) => {
-        tabs.forEach(t => t.classList.toggle('is-active', t.dataset.target === id));
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => a.target.offsetTop - b.target.offsetTop);
-        if (visible.length) setActive(visible[0].target.id);
-      }, {
-        rootMargin: '-25% 0px -55% 0px',
-        threshold: 0
-      });
-      sections.forEach(s => observer.observe(s));
-
-      // smooth scroll with offset for tabs
-      tabs.forEach(t => {
-        t.addEventListener('click', e => {
-          const id = t.dataset.target;
-          const el = document.getElementById(id);
-          if (!el) return;
-          e.preventDefault();
-          const top = el.getBoundingClientRect().top + window.scrollY - 110;
-          window.scrollTo({ top, behavior: 'smooth' });
+      // animate axis bars in
+      requestAnimationFrame(() => {
+        resultsWrap.querySelectorAll('.pg-axis-fill').forEach(el => {
+          const w = el.style.width; el.style.width = '0'; requestAnimationFrame(()=> el.style.width = w);
         });
       });
+
+      // persist
+      try { localStorage.setItem('pg-material', mat.key); } catch(e){}
+      if (history.replaceState) history.replaceState(null, '', '#' + mat.key);
+    }
+
+    chipWrap.addEventListener('click', e => {
+      const chip = e.target.closest('.pg-chip'); if (!chip) return;
+      render(chip.dataset.key);
+      const top = resultsWrap.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+
+    // initial material: hash > localStorage > default
+    const validKeys = MATERIALS.map(m => m.key);
+    let initial = (location.hash || '').replace('#','');
+    if (!validKeys.includes(initial)) { try { initial = localStorage.getItem('pg-material'); } catch(e){} }
+    if (!validKeys.includes(initial)) initial = 'beef';
+    render(initial);
+
+    /* ---------- editor's pick ---------- */
+    const PICKS = ['butchers-basecamp','stef-rub-one-out','garlic-goals'];
+    document.getElementById('pgEditorPicks').innerHTML = PICKS.map(id => `
+      <a class="pg-pick" href="product-${id}.html">
+        <img src="${rubImg(id)}" alt="${rubName(id)}" loading="lazy">
+        <span class="pg-pick-t"><b>${rubName(id)}</b><small>${(P[id]&&P[id].brandLabel)||''}</small></span>
+      </a>`).join('');
+
+    /* ---------- flavor-compare rub links ---------- */
+    document.querySelectorAll('.rub-link[data-rub]').forEach(el => {
+      const id = el.dataset.rub;
+      el.setAttribute('href', `product-${id}.html`);
+      el.style.color = 'var(--brand)';
+      el.style.textDecoration = 'none';
+      el.style.cursor = 'pointer';
+    });
+
+    /* ---------- quick reference ---------- */
+    const QUICK = [
+      ['steak-shooter','ステーキ・牛リブ','ステーキ / ブリスケットのベース / 野菜','シンプルな旨み。発色と外皮の仕上がりが秀逸','初級'],
+      ['steak-shooter-spicy','牛肉・チキンウィング','チキンウィング / ステーキ / 重ねがけ用','じわっとくる辛み。外皮が赤褐色で見た目もインパクト大','初〜中級'],
+      ['beef-bounce','ブリスケット専用に近い','ブリスケット / 牛リブ','コーヒー×ペッパーの深み。黒褐色の本格バーク','上級'],
+      ['honey-soy-slammer','No.1ベストセラー','スペアリブ / チキン / プルドポーク','甘み×醤油のグレーズ感。日本人が一番馴染みやすい','初級'],
+      ['lamb-layup','ラム・ジビエ専門','ラムチョップ / ラムレッグ / カンガルー','中東スパイスで獣臭を昇華。香りの奥行きが増す','中級'],
+      ['garlic-goals','最高の汎用ラブ','チキン全般 / ポテト / ベースラブとして','ガーリック×チーズの旨み。何にでも合う万能選手','初級'],
+      ['chilli-citrus-charge','NEW — 夏向き','丸鶏 / 豚ソーセージ / チキンウィング','シトラス酸み×チリ辛みのさっぱりコンビ','初〜中級'],
+      ['hook-shot','仕上げ専用ソース','仕上げとしてどの肉にも / ディップにも','スモーキー×甘酸っぱいキャラメライズ。どのラブとも合う','初級']
+    ];
+    document.getElementById('pgQuickBody').innerHTML = QUICK.map(row => `
+      <tr>
+        <td><a class="pg-qt-rub" href="product-${row[0]}.html">
+          <img src="${rubImg(row[0])}" alt="">
+          <span><span class="pg-qt-best">${rubName(row[0])}</span><br><span class="pg-qt-sub">${row[1]}</span></span>
+        </a></td>
+        <td>${row[2]}</td><td>${row[3]}</td><td>${row[4]}</td>
+      </tr>`).join('');
+
+    /* ---------- brand grids ---------- */
+    const BAX = [
+      { cut:'🥩 ステーキ全般', a:'butchers-stampede', b:'butchers-bullseye' },
+      { cut:'🥩 ブリスケット（ロー&スロー）', a:'butchers-big-bark', b:'butchers-bullseye' },
+      { cut:'🥩 トマホーク・厚切り牛', a:'butchers-stampede', b:'butchers-big-bark' },
+      { cut:'🐷 プルドポーク（豚肩）', a:'butchers-big-bark', b:'butchers-ranger' },
+      { cut:'🍖 豚リブ・スペアリブ', a:'butchers-ranger', b:'butchers-big-bark' },
+      { cut:'🐑 ラム・カンガルー・ジビエ', a:'butchers-hunter', b:null },
+      { cut:'🍗 鶏丸焼き・ビア缶チキン', a:'butchers-gyro', b:'butchers-ranger' },
+      { cut:'🍗 鶏胸・チキン全般', a:'butchers-scout', b:'butchers-gyro' },
+      { cut:'🐟 白身魚・サーモン', a:'butchers-scout', b:'butchers-basecamp' },
+      { cut:'🦐 エビ・シーフード', a:'butchers-scout', b:'butchers-basecamp' },
+      { cut:'🌮 メキシカン・カルネアサーダ', a:'butchers-el-hacha', b:'butchers-ranger' },
+      { cut:'🥬 野菜グリル・野菜串', a:'butchers-woodlands', b:'butchers-basecamp' },
+      { cut:'🍕 ピザ・パン系', a:'butchers-woodlands', b:'butchers-basecamp' },
+      { cut:'⛺ 迷ったら（万能）', a:'butchers-basecamp', b:'butchers-woodlands' }
+    ];
+    const STM = [
+      { cut:'⛺ 迷ったら（万能）', a:'stef-rub-one-out', b:'stef-aquadesiac' },
+      { cut:'🐷 ポークリブ・スペアリブ', a:'stef-pork-hunt', b:'stef-deep-bush' },
+      { cut:'🍗 チキンウィング・鶏全般', a:'stef-pork-hunt', b:'stef-rub-one-out' },
+      { cut:'🥩 牛肉全般・ステーキ', a:'stef-deep-bush', b:'stef-rub-one-out' },
+      { cut:'🐑 ラム・ジビエ', a:'stef-deep-bush', b:null },
+      { cut:'🦐 エビ・ホタテ・海鮮', a:'stef-aquadesiac', b:'stef-rub-one-out' },
+      { cut:'🐟 白身魚・サーモン', a:'stef-aquadesiac', b:'stef-rub-one-out' },
+      { cut:'🥬 野菜グリル・グリルコーン', a:'stef-aquadesiac', b:'stef-rub-one-out' },
+      { cut:'🍳 卵料理・チャーハン', a:'stef-aquadesiac', b:'stef-rub-one-out' }
+    ];
+    function brandGrid(elId, data){
+      const grid = document.getElementById(elId); if (!grid) return;
+      grid.innerHTML = data.map(p => {
+        const single = !p.b;
+        const cell = (id, rank) => `
+          <a class="pg-brub" href="product-${id}.html" data-brand="${brandSlug(id)}" aria-label="${rubName(id)}">
+            <span class="pg-brank ${rank==='第一候補'?'first':'second'}">${rank}</span>
+            <div class="pg-bimg"><img src="${rubImg(id)}" alt="${rubName(id)}" loading="lazy"></div>
+            <div class="pg-bname">${rubName(id)}</div>
+          </a>`;
+        return `<article class="pg-bcut"><h4>${p.cut}</h4>
+          <div class="pg-brubs${single?' single':''}">
+            ${cell(p.a,'第一候補')}${p.b?cell(p.b,'第二候補'):''}
+          </div></article>`;
+      }).join('');
+    }
+    brandGrid('baxPairGrid', BAX);
+    brandGrid('stmPairGrid', STM);
+
+    /* ---------- hero word rotator ---------- */
+    (function(){
+      const el = document.getElementById('pgRotator');
+      if (!el) return;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const words = ['牛肩ロース','スペアリブ','鶏もも','サーモン','ラムチョップ','焼き野菜'];
+      let i = 0;
+      if (reduce) { el.textContent = words[0]; return; }
+      setInterval(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('pg-rotate-anim'); void el.offsetWidth; el.classList.add('pg-rotate-anim');
+      }, 2200);
     })();
+
+    /* ---------- counters ---------- */
+    (function(){
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.pg-stat-num');
+      const run = (el) => {
+        const target = +el.dataset.count;
+        if (reduce) { el.textContent = target; return; }
+        const dur = 1100, t0 = performance.now();
+        const tick = (t) => {
+          const p = Math.min((t - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+      }, { threshold: .5 });
+      nums.forEach(n => io.observe(n));
+    })();
+
+    /* ---------- scroll reveal ---------- */
+    (function(){
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = document.querySelectorAll('.reveal');
+      if (reduce) { els.forEach(el => el.classList.add('in')); return; }
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(el => io.observe(el));
+    })();
+
+  })();
   </script>
   <script src="mobile-nav.js?v=20260506e"></script>
 <script src="assets/global-search.js?v=20260516" defer></script>
