@@ -118,13 +118,15 @@ function splitTitle(h1) {
     line1 = t.slice(0, idx) + (brk === "。" ? "。" : "、");
     rest = t.slice(idx + brk.length);
   } else {
+    // 漢字の熟語（例：失敗）や英数字の連なり（例：BBQ）の途中で割らない
     const isKanji = (ch) => ch && /[一-鿿]/.test(ch);
+    const isLatin = (ch) => ch && /[A-Za-z0-9]/.test(ch);
+    const badBreak = (p) => (isKanji(t[p - 1]) && isKanji(t[p])) || (isLatin(t[p - 1]) && isLatin(t[p]));
     let mid = Math.min(bucket.line, Math.ceil(t.length / 2));
-    // 漢字の熟語（例：失敗）の途中で割らないよう、近傍で非漢字境界を探す
-    for (let w = 0; w <= 3; w++) {
+    for (let w = 0; w <= 6; w++) {
       const cands = [mid - w, mid + w].filter((p) => p >= 1 && p <= Math.min(bucket.line, t.length - 1));
-      const ok = cands.find((p) => !(isKanji(t[p - 1]) && isKanji(t[p])));
-      if (ok) { mid = ok; break; }
+      const ok = cands.find((p) => !badBreak(p));
+      if (ok !== undefined) { mid = ok; break; }
     }
     line1 = t.slice(0, mid);
     rest = t.slice(mid);
