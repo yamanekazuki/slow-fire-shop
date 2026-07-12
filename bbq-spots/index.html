@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBQ場検索 — 日本最詳のバーベキュー場データベース | SLOW FIRE SHOP</title>
-  <meta name="description" content="蓋付きグリル持ち込み可否・電源対応・アメリカンBBQ可能か・人数別など、9種類のフィルターで絞り込める日本最詳のBBQ場検索。武蔵野公園・城南島・若洲・HERO FIELD新木場ほか全15スポット収録。">
+  <meta name="description" content="蓋付きグリル持ち込み可否・電源対応・アメリカンBBQ可能か・人数別など、複数のフィルターで絞り込める日本最詳のBBQ場検索。武蔵野公園・城南島・若洲・HERO FIELD新木場ほか首都圏全24スポット収録。">
   <meta name="keywords" content="BBQ場,バーベキュー場,検索,持ち込み可,電源,アメリカンBBQ,蓋付きグリル,Weber,Pulse,東京 BBQ,東京 バーベキュー">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://an-bbq.jp/bbq-spots/">
@@ -20,7 +20,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,700&family=Inter:wght@600;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=20260516">
   <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
@@ -29,9 +29,9 @@
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "東京都内のBBQ場 検索データベース",
+    "name": "首都圏のBBQ場 検索データベース",
     "description": "アメリカンBBQ可否・持ち込み可否・電源対応で絞り込める、SLOW FIRE運営の日本最詳BBQ場検索",
-    "numberOfItems": 15,
+    "numberOfItems": 24,
     "itemListOrder": "https://schema.org/ItemListOrderAscending"
   }
   </script>
@@ -53,137 +53,200 @@
   <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wmtxoerxqx");</script>
 
   <style>
-    /* ===== BBQ Spots search page ===== */
-    .bs-wrap { max-width: 1240px; margin: 0 auto; padding: calc(var(--nav-h) + 40px) 24px 64px; }
-    .bs-hero { text-align: center; margin-bottom: 36px; }
-    .bs-mark { font-size: var(--text-xs); letter-spacing: 0.34em; color: var(--brand-500); font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 14px; }
-    .bs-hero h1 { font-size: clamp(28px, 4.5vw, 44px); font-weight: var(--weight-bold); color: var(--gray-900); line-height: var(--leading-tight); margin-bottom: 14px; }
-    .bs-hero h1 em { font-style: normal; color: var(--brand-500); }
-    .bs-tagline { font-size: var(--text-base); color: var(--gray-600); max-width: 720px; margin: 0 auto; line-height: var(--leading-relaxed); }
+    /* ============================================================
+       BBQ場検索 — SLOW FIRE 大刷新 (living bg / rotate / tilt cards)
+       ============================================================ */
+    :root{
+      --sf-cream:#faf7f2; --sf-ink:#1c1917; --sf-ember:#c2410c; --sf-amber:#d97706;
+      --sf-forest:#166534; --sf-charcoal:#1c1917;
+      --sf-grad:linear-gradient(100deg,#7c2d12,#c2410c 55%,#ea580c);
+    }
+    body{ background:var(--sf-cream); }
 
-    /* SLOW FIRE classification banner */
-    .bs-types {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
-      margin: 32px 0;
-    }
-    .bs-type-card {
-      padding: 16px 18px; background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--r-lg); border-top: 4px solid var(--brand-500);
-    }
-    .bs-type-card[data-type="A"] { border-top-color: var(--gray-400); }
-    .bs-type-card[data-type="B"] { border-top-color: var(--warning); }
-    .bs-type-card[data-type="C"] { border-top-color: var(--success); }
-    .bs-type-card[data-type="D"] { border-top-color: var(--brand-500); }
-    .bs-type-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--gray-500); letter-spacing: 0.1em; margin-bottom: 6px; }
-    .bs-type-title { font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; }
-    .bs-type-desc { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-snug); }
+    /* ---- living background ---- */
+    .sf-bg{ position:fixed; inset:0; z-index:-2; background:var(--sf-cream); overflow:hidden; pointer-events:none; }
+    .sf-blob{ position:absolute; border-radius:50%; filter:blur(70px); opacity:.5; mix-blend-mode:multiply; }
+    .sf-blob.b1{ width:44vw; height:44vw; left:-8vw; top:-6vw; background:radial-gradient(circle at 30% 30%,#f59e0b,#c2410c 70%); animation:sfDrift1 26s ease-in-out infinite; }
+    .sf-blob.b2{ width:38vw; height:38vw; right:-6vw; top:12vh; background:radial-gradient(circle at 60% 40%,#ea580c,#7c2d12 72%); opacity:.4; animation:sfDrift2 32s ease-in-out infinite; }
+    .sf-blob.b3{ width:34vw; height:34vw; left:24vw; bottom:-12vh; background:radial-gradient(circle at 50% 50%,#fbbf24,#d97706 70%); opacity:.34; animation:sfDrift3 30s ease-in-out infinite; }
+    .sf-grid{ position:absolute; inset:0; opacity:.05;
+      background-image:linear-gradient(#1c1917 1px,transparent 1px),linear-gradient(90deg,#1c1917 1px,transparent 1px);
+      background-size:60px 60px; animation:sfGridPan 40s linear infinite; }
+    @keyframes sfDrift1{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(6vw,4vh) scale(1.12)} }
+    @keyframes sfDrift2{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5vw,6vh) scale(1.1)} }
+    @keyframes sfDrift3{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(4vw,-5vh) scale(1.15)} }
+    @keyframes sfGridPan{ from{background-position:0 0,0 0} to{background-position:60px 60px,60px 60px} }
 
-    /* search & filters */
-    .bs-search { margin: 32px 0 24px; }
-    .bs-search-input-wrap {
-      position: relative; background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 14px;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    .bs-search-input-wrap:focus-within { border-color: var(--brand-500); box-shadow: 0 0 0 4px rgba(180,83,9,.08); }
-    .bs-search-input { width: 100%; padding: 16px 20px 16px 50px; font-size: var(--text-base); border: none; outline: none; background: transparent; border-radius: 14px; }
-    .bs-search-input::placeholder { color: var(--gray-400); }
-    .bs-search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+    .bs-wrap{ max-width:1240px; margin:0 auto; padding:calc(var(--nav-h) + 48px) 24px 72px; position:relative; }
 
-    .bs-filters {
-      margin: 24px 0; padding: 22px; background: var(--gray-50);
-      border-radius: var(--r-lg); border: 1px solid var(--gray-200);
-    }
-    .bs-filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-    .bs-filter-row:last-child { margin-bottom: 0; }
-    .bs-filter-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--gray-700); letter-spacing: 0.06em; text-transform: uppercase; min-width: 100px; }
-    .bs-chip {
-      display: inline-flex; align-items: center; gap: 4px; padding: 8px 14px;
-      background: var(--white); border: 1px solid var(--gray-300); border-radius: 100px;
-      font-size: var(--text-sm); color: var(--gray-700); cursor: pointer;
-      transition: all 0.15s;
-    }
-    .bs-chip:hover { border-color: var(--brand-500); color: var(--brand-500); }
-    .bs-chip.active { background: var(--brand-500); border-color: var(--brand-500); color: var(--white); }
-    .bs-reset {
-      margin-left: auto; font-size: var(--text-xs); color: var(--gray-500); cursor: pointer;
-      padding: 6px 12px; background: none; border: none;
-    }
-    .bs-reset:hover { color: var(--brand-500); text-decoration: underline; }
+    /* ---- hero ---- */
+    .bs-hero{ text-align:center; margin-bottom:40px; }
+    .bs-mark{ font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.34em; color:var(--sf-ember); font-weight:900; text-transform:uppercase; margin-bottom:16px; opacity:0; animation:sfUp .7s .05s forwards; }
+    .bs-hero h1{ font-size:clamp(30px,5.2vw,54px); font-weight:900; color:var(--sf-ink); line-height:1.24; letter-spacing:-.01em; margin-bottom:18px; }
+    .bs-rotate{ position:relative; display:inline-flex; align-items:center; justify-content:center; min-width:5.4em; height:1.25em; vertical-align:bottom; overflow:hidden; }
+    .bs-rotate .word{ position:absolute; left:50%; transform:translate(-50%,120%); white-space:nowrap;
+      background:var(--sf-grad); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:900; }
+    .bs-rotate .word.in{ animation:sfWordIn .6s cubic-bezier(.2,1.3,.35,1) forwards; }
+    .bs-rotate .word.out{ animation:sfWordOut .5s cubic-bezier(.5,0,.7,0) forwards; }
+    @keyframes sfWordIn{ from{transform:translate(-50%,120%);opacity:0} to{transform:translate(-50%,0);opacity:1} }
+    @keyframes sfWordOut{ from{transform:translate(-50%,0);opacity:1} to{transform:translate(-50%,-120%);opacity:0} }
+    .bs-tagline{ font-size:16px; color:var(--gray-600); max-width:680px; margin:0 auto; line-height:1.85; opacity:0; animation:sfUp .7s .18s forwards; }
 
-    /* result info */
-    .bs-result-info {
-      display: flex; justify-content: space-between; align-items: center;
-      margin: 20px 0 16px; font-size: var(--text-sm); color: var(--gray-600);
-    }
-    .bs-result-info strong { color: var(--brand-500); font-weight: var(--weight-bold); }
-    .bs-sort { padding: 6px 10px; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--white); font-size: var(--text-sm); }
+    /* ---- hero stats ---- */
+    .bs-stats{ display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin:30px auto 0; opacity:0; animation:sfUp .7s .3s forwards; }
+    .bs-stat{ display:flex; flex-direction:column; align-items:center; padding:14px 26px; background:rgba(255,255,255,.72); backdrop-filter:blur(8px); border:1px solid rgba(28,25,23,.08); border-radius:16px; box-shadow:0 4px 20px rgba(124,45,18,.06); }
+    .bs-stat b{ font-family:'Inter',sans-serif; font-weight:900; font-size:34px; line-height:1; background:var(--sf-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .bs-stat span{ font-size:11px; color:var(--gray-600); letter-spacing:.12em; margin-top:7px; font-weight:700; }
+    @keyframes sfUp{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 
-    /* spot cards grid */
-    .bs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    /* ---- reveal ---- */
+    .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.3,1); }
+    .reveal.show{ opacity:1; transform:none; }
 
-    .bs-card {
-      background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg);
-      overflow: hidden; transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
-      display: flex; flex-direction: column;
-      color: inherit; text-decoration: none;
-    }
-    .bs-card:hover {
-      border-color: var(--brand-500); transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-    }
-    .bs-card-img {
-      aspect-ratio: 16/10; background: var(--gray-100); position: relative; overflow: hidden;
-    }
-    .bs-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .bs-card-type-badge {
-      position: absolute; top: 12px; left: 12px;
-      padding: 4px 10px; background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
-      border-radius: 100px; font-size: 10px; font-weight: var(--weight-bold);
-      color: var(--gray-700); letter-spacing: 0.06em;
-    }
-    .bs-card-type-badge[data-type="A"] { color: var(--gray-700); }
-    .bs-card-type-badge[data-type="B"] { color: var(--warning); }
-    .bs-card-type-badge[data-type="C"] { color: var(--success); }
-    .bs-card-type-badge[data-type="D"] { color: var(--brand-500); }
+    /* ---- section chrome ---- */
+    .bs-section-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 18px; }
+    .bs-kicker{ font-family:'Inter',sans-serif; font-size:11px; font-weight:900; letter-spacing:.24em; text-transform:uppercase; color:var(--sf-ember); }
+    .bs-h2{ font-size:clamp(21px,3vw,28px); font-weight:900; color:var(--sf-ink); letter-spacing:-.01em; }
 
-    .bs-card-rating-badge {
-      position: absolute; top: 12px; right: 12px;
-      padding: 4px 10px; background: var(--brand-500); color: var(--white);
-      border-radius: 100px; font-size: 11px; font-weight: var(--weight-bold);
-    }
-    .bs-card-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; }
-    .bs-card-name { font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 4px; line-height: var(--leading-snug); }
-    .bs-card-area { font-size: var(--text-xs); color: var(--gray-500); margin-bottom: 12px; letter-spacing: 0.04em; }
-    .bs-card-summary { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-snug); margin-bottom: 14px; flex: 1; }
-    .bs-card-features { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-    .bs-card-feature {
-      display: inline-flex; align-items: center; gap: 3px;
-      padding: 3px 8px; font-size: 10px; font-weight: var(--weight-semi);
-      background: var(--gray-50); color: var(--gray-700); border-radius: 4px;
-    }
-    .bs-card-feature.ok { color: var(--success); background: rgba(22,163,74,0.08); }
-    .bs-card-feature.ng { color: var(--danger); background: rgba(220,38,38,0.08); }
+    /* ---- search + filters (sticky) ---- */
+    .bs-tools{ position:sticky; top:calc(var(--nav-h) - 2px); z-index:30; margin:36px 0 26px; padding:16px; border-radius:20px;
+      background:rgba(255,255,255,.82); backdrop-filter:blur(14px); border:1px solid rgba(28,25,23,.09);
+      box-shadow:0 10px 40px rgba(124,45,18,.08); transition:box-shadow .25s, background .25s; }
+    .bs-tools.stuck{ box-shadow:0 14px 46px rgba(124,45,18,.16); background:rgba(255,255,255,.94); }
+    .bs-search-input-wrap{ position:relative; }
+    .bs-search-input{ width:100%; padding:15px 18px 15px 50px; font-size:16px; border:1.5px solid var(--gray-200); outline:none; background:#fff; border-radius:14px; transition:border-color .18s, box-shadow .18s; font-family:inherit; }
+    .bs-search-input:focus{ border-color:var(--sf-ember); box-shadow:0 0 0 4px rgba(194,65,12,.1); }
+    .bs-search-input::placeholder{ color:var(--gray-400); }
+    .bs-search-icon{ position:absolute; left:17px; top:50%; transform:translateY(-50%); color:var(--sf-amber); }
 
-    .bs-empty {
-      grid-column: 1 / -1; text-align: center; padding: 60px 24px;
-      color: var(--gray-500); font-size: var(--text-sm);
-    }
+    /* area tabs */
+    .bs-tabs{ display:flex; gap:6px; margin-top:14px; overflow-x:auto; padding-bottom:4px; -ms-overflow-style:none; scrollbar-width:none; }
+    .bs-tabs::-webkit-scrollbar{ display:none; }
+    .bs-tab{ flex:0 0 auto; padding:8px 16px; border-radius:100px; border:1.5px solid transparent; background:transparent; color:var(--gray-700); font-size:14px; font-weight:700; cursor:pointer; transition:all .16s; white-space:nowrap; font-family:inherit; }
+    .bs-tab:hover{ background:rgba(194,65,12,.07); color:var(--sf-ember); }
+    .bs-tab.active{ background:var(--sf-ink); color:#fff; }
+    .bs-tab .n{ font-family:'Inter',sans-serif; font-size:11px; opacity:.65; margin-left:5px; font-weight:600; }
 
-    .bs-faq {
-      margin-top: 64px; padding: 32px; background: var(--gray-50);
-      border-radius: var(--r-lg);
-    }
-    .bs-faq h2 { font-size: var(--text-xl); font-weight: var(--weight-bold); margin-bottom: 20px; color: var(--gray-900); }
-    .bs-faq details { margin-bottom: 10px; padding: 14px 18px; background: var(--white); border-radius: 10px; border: 1px solid var(--gray-200); }
-    .bs-faq summary { font-size: var(--text-base); font-weight: var(--weight-semi); color: var(--gray-900); cursor: pointer; }
-    .bs-faq details[open] summary { margin-bottom: 8px; }
-    .bs-faq p { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-relaxed); }
+    /* feature chips */
+    .bs-chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .bs-chip{ display:inline-flex; align-items:center; gap:6px; padding:8px 14px; background:#fff; border:1.5px solid var(--gray-200); border-radius:100px; font-size:13.5px; color:var(--gray-700); cursor:pointer; transition:all .15s; font-family:inherit; }
+    .bs-chip:hover{ border-color:var(--sf-amber); color:var(--sf-ember); transform:translateY(-1px); }
+    .bs-chip .dot{ width:7px; height:7px; border-radius:50%; background:var(--gray-300); transition:background .15s; }
+    .bs-chip.active{ background:var(--sf-grad); border-color:transparent; color:#fff; box-shadow:0 4px 14px rgba(194,65,12,.28); }
+    .bs-chip.active .dot{ background:#fff; }
 
-    /* mobile */
-    @media (max-width: 640px) {
-      .bs-filter-label { min-width: 80px; font-size: 10px; }
-      .bs-chip { font-size: var(--text-xs); padding: 6px 10px; }
-      .bs-filters { padding: 16px; }
+    /* type mini-filter */
+    .bs-type-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; align-items:center; }
+    .bs-type-row .lbl{ font-size:11px; font-weight:900; letter-spacing:.1em; color:var(--gray-500); margin-right:2px; }
+    .bs-tchip{ padding:6px 13px; border-radius:8px; border:1.5px solid var(--gray-200); background:#fff; font-size:13px; font-weight:700; cursor:pointer; color:var(--gray-700); transition:all .15s; font-family:inherit; }
+    .bs-tchip[data-t="A"].active{ background:var(--gray-700); color:#fff; border-color:var(--gray-700); }
+    .bs-tchip[data-t="B"].active{ background:var(--sf-amber); color:#fff; border-color:var(--sf-amber); }
+    .bs-tchip[data-t="C"].active{ background:var(--sf-forest); color:#fff; border-color:var(--sf-forest); }
+    .bs-tchip[data-t="D"].active{ background:var(--sf-ember); color:#fff; border-color:var(--sf-ember); }
+
+    /* result bar */
+    .bs-result-info{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:22px 2px 18px; }
+    .bs-count-line{ font-size:14px; color:var(--gray-600); }
+    .bs-count-line b{ font-family:'Inter',sans-serif; font-size:24px; font-weight:900; color:var(--sf-ember); vertical-align:-2px; margin-right:2px; }
+    .bs-active-note{ font-size:12px; color:var(--gray-500); margin-left:8px; }
+    .bs-right-tools{ display:flex; align-items:center; gap:10px; }
+    .bs-reset{ font-size:12px; color:var(--gray-500); cursor:pointer; padding:7px 12px; background:none; border:1px solid var(--gray-200); border-radius:8px; font-family:inherit; transition:all .15s; }
+    .bs-reset:hover{ color:var(--sf-ember); border-color:var(--sf-amber); }
+    .bs-sort{ padding:8px 12px; border:1px solid var(--gray-200); border-radius:8px; background:#fff; font-size:13px; font-family:inherit; }
+
+    /* ---- spot grid ---- */
+    .bs-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; perspective:1200px; }
+    .bs-card{ position:relative; background:#fff; border:1px solid rgba(28,25,23,.08); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; color:inherit; text-decoration:none; box-shadow:0 4px 18px rgba(28,25,23,.05); transition:transform .18s cubic-bezier(.2,.8,.3,1), box-shadow .25s; transform-style:preserve-3d; will-change:transform; }
+    .bs-card:hover{ box-shadow:0 22px 50px rgba(124,45,18,.18); }
+    .bs-card::after{ content:""; position:absolute; inset:0; border-radius:18px; pointer-events:none; box-shadow:inset 0 0 0 1.5px transparent; transition:box-shadow .2s; }
+    .bs-card:hover::after{ box-shadow:inset 0 0 0 1.5px rgba(194,65,12,.45); }
+    .bs-card-img{ aspect-ratio:16/10; background:var(--gray-100); position:relative; overflow:hidden; }
+    .bs-card-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+    .bs-card:hover .bs-card-img img{ transform:scale(1.06); }
+    .bs-card-img::before{ content:""; position:absolute; inset:0; background:linear-gradient(to top,rgba(28,25,23,.55),transparent 46%); z-index:1; }
+
+    /* type rank ribbon (visual hierarchy A→D) */
+    .bs-rank{ position:absolute; top:0; left:0; z-index:2; display:flex; align-items:center; gap:7px; padding:9px 13px 9px 12px; color:#fff; font-family:'Inter',sans-serif; font-weight:900; font-size:12px; letter-spacing:.04em; border-bottom-right-radius:14px; }
+    .bs-rank .bars{ display:flex; gap:2px; align-items:flex-end; height:14px; }
+    .bs-rank .bars i{ width:3px; background:rgba(255,255,255,.9); border-radius:1px; }
+    .bs-rank[data-t="A"]{ background:var(--gray-700); }
+    .bs-rank[data-t="B"]{ background:var(--sf-amber); }
+    .bs-rank[data-t="C"]{ background:var(--sf-forest); }
+    .bs-rank[data-t="D"]{ background:var(--sf-ember); }
+    .bs-abadge{ position:absolute; top:11px; right:11px; z-index:2; display:flex; align-items:center; gap:3px; padding:4px 10px; background:rgba(28,25,23,.7); backdrop-filter:blur(6px); color:#ffd9b0; border-radius:100px; font-size:11px; font-weight:800; }
+    .bs-card-station{ position:absolute; left:12px; bottom:10px; z-index:2; color:#fff; font-size:12px; font-weight:700; text-shadow:0 1px 6px rgba(0,0,0,.5); display:flex; align-items:center; gap:5px; }
+
+    .bs-card-body{ padding:15px 17px 17px; flex:1; display:flex; flex-direction:column; }
+    .bs-card-name{ font-size:17px; font-weight:900; color:var(--sf-ink); margin-bottom:5px; line-height:1.4; }
+    .bs-card-area{ font-size:11.5px; color:var(--gray-500); margin-bottom:11px; letter-spacing:.04em; font-weight:600; }
+    .bs-card-summary{ font-size:13px; color:var(--gray-600); line-height:1.6; margin-bottom:13px; flex:1; }
+    .bs-card-features{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+    .bs-feat{ display:inline-flex; align-items:center; gap:3px; padding:3px 9px; font-size:10.5px; font-weight:700; background:var(--gray-50); color:var(--gray-700); border-radius:6px; }
+    .bs-feat.ok{ color:#15803d; background:rgba(22,101,52,.09); }
+    .bs-feat.ng{ color:var(--danger); background:rgba(220,38,38,.09); }
+
+    /* ---- empty state ---- */
+    .bs-empty{ grid-column:1/-1; text-align:center; padding:64px 24px; }
+    .bs-empty .em-fire{ font-size:46px; filter:grayscale(.4); opacity:.8; }
+    .bs-empty h3{ font-size:19px; font-weight:900; color:var(--sf-ink); margin:14px 0 8px; }
+    .bs-empty p{ font-size:14px; color:var(--gray-600); line-height:1.7; margin-bottom:18px; }
+    .bs-empty button{ padding:10px 20px; border:none; border-radius:100px; background:var(--sf-grad); color:#fff; font-weight:800; font-size:14px; cursor:pointer; font-family:inherit; box-shadow:0 6px 18px rgba(194,65,12,.3); }
+
+    /* ---- classification (対置) ---- */
+    .bs-class{ margin:72px 0 0; }
+    .bs-class-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-radius:20px; overflow:hidden; border:1px solid rgba(28,25,23,.1); background:#fff; }
+    .bs-cl{ position:relative; padding:24px 20px 26px; border-right:1px solid rgba(28,25,23,.08); }
+    .bs-cl:last-child{ border-right:none; }
+    .bs-cl-top{ height:5px; position:absolute; top:0; left:0; right:0; }
+    .bs-cl[data-t="A"] .bs-cl-top{ background:var(--gray-700); }
+    .bs-cl[data-t="B"] .bs-cl-top{ background:var(--sf-amber); }
+    .bs-cl[data-t="C"] .bs-cl-top{ background:var(--sf-forest); }
+    .bs-cl[data-t="D"] .bs-cl-top{ background:var(--sf-ember); }
+    .bs-cl-badge{ font-family:'Inter',sans-serif; font-weight:900; font-size:13px; letter-spacing:.06em; color:var(--gray-400); }
+    .bs-cl-bars{ display:flex; gap:3px; align-items:flex-end; height:20px; margin:12px 0 14px; }
+    .bs-cl-bars i{ width:6px; border-radius:2px; background:var(--gray-200); }
+    .bs-cl[data-t="A"] .bs-cl-bars i.on{ background:var(--gray-700); }
+    .bs-cl[data-t="B"] .bs-cl-bars i.on{ background:var(--sf-amber); }
+    .bs-cl[data-t="C"] .bs-cl-bars i.on{ background:var(--sf-forest); }
+    .bs-cl[data-t="D"] .bs-cl-bars i.on{ background:var(--sf-ember); }
+    .bs-cl h3{ font-size:16px; font-weight:900; color:var(--sf-ink); margin-bottom:8px; line-height:1.4; }
+    .bs-cl p{ font-size:12.5px; color:var(--gray-600); line-height:1.65; }
+    .bs-cl .cnt{ margin-top:12px; font-size:11px; color:var(--gray-500); font-weight:700; }
+    .bs-cl .cnt b{ font-family:'Inter',sans-serif; color:var(--sf-ember); font-size:15px; }
+
+    /* ---- map CTA ---- */
+    .bs-map-cta{ margin:44px 0 0; position:relative; overflow:hidden; border-radius:22px; padding:38px 34px; color:#fff;
+      background:linear-gradient(115deg,#1c1917,#7c2d12 70%,#c2410c); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .bs-map-cta::before{ content:""; position:absolute; inset:0; opacity:.18; background:radial-gradient(circle at 82% 30%,#fbbf24,transparent 45%); }
+    .bs-map-cta .txt{ position:relative; z-index:1; max-width:560px; }
+    .bs-map-cta h2{ font-size:clamp(20px,2.6vw,26px); font-weight:900; margin-bottom:8px; }
+    .bs-map-cta p{ font-size:14px; color:rgba(255,255,255,.82); line-height:1.7; }
+    .bs-map-btn{ position:relative; z-index:1; flex:0 0 auto; display:inline-flex; align-items:center; gap:9px; padding:14px 26px; border-radius:100px; background:#fff; color:var(--sf-ember); font-weight:900; font-size:15px; text-decoration:none; box-shadow:0 8px 26px rgba(0,0,0,.28); transition:transform .18s; }
+    .bs-map-btn:hover{ transform:translateY(-2px) scale(1.02); }
+
+    /* ---- FAQ ---- */
+    .bs-faq{ margin-top:56px; padding:34px; background:rgba(255,255,255,.66); backdrop-filter:blur(8px); border:1px solid rgba(28,25,23,.08); border-radius:20px; }
+    .bs-faq details{ margin-bottom:10px; padding:15px 18px; background:#fff; border-radius:12px; border:1px solid var(--gray-200); }
+    .bs-faq summary{ font-size:15px; font-weight:700; color:var(--sf-ink); cursor:pointer; }
+    .bs-faq details[open] summary{ margin-bottom:8px; color:var(--sf-ember); }
+    .bs-faq p{ font-size:13.5px; color:var(--gray-600); line-height:1.8; }
+
+    .bs-seo-list{ margin-top:40px; font-size:12px; color:var(--gray-500); }
+    .bs-seo-list a{ color:var(--gray-500); }
+
+    /* ---- mobile ---- */
+    @media (max-width:820px){ .bs-class-grid{ grid-template-columns:repeat(2,1fr); } .bs-cl:nth-child(2){ border-right:none; } .bs-cl:nth-child(-n+2){ border-bottom:1px solid rgba(28,25,23,.08); } }
+    @media (max-width:560px){
+      .bs-wrap{ padding:calc(var(--nav-h) + 32px) 16px 56px; }
+      .bs-class-grid{ grid-template-columns:1fr; } .bs-cl{ border-right:none; border-bottom:1px solid rgba(28,25,23,.08); } .bs-cl:last-child{ border-bottom:none; }
+      .bs-tools{ top:calc(var(--nav-h) - 4px); border-radius:16px; }
+      .bs-stat{ padding:11px 18px; } .bs-stat b{ font-size:27px; }
+      .bs-map-cta{ padding:28px 22px; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{ animation:none !important; transition:none !important; }
+      .reveal{ opacity:1 !important; transform:none !important; }
+      .bs-rotate .word{ position:static; transform:none; opacity:1; }
     }
   </style>
   <script type="application/ld+json">
@@ -191,6 +254,11 @@
   </script>
 </head>
 <body>
+
+  <div class="sf-bg" aria-hidden="true">
+    <div class="sf-blob b1"></div><div class="sf-blob b2"></div><div class="sf-blob b3"></div>
+    <div class="sf-grid"></div>
+  </div>
 
   <header id="nav" class="nav">
     <div class="nav-wrap">
@@ -222,129 +290,133 @@
   <main class="bs-wrap">
 
     <section class="bs-hero">
-      <p class="bs-mark">BBQ場検索 · 24 SPOTS</p>
-      <h1>あなたのBBQに合う場所を、<em>機能で探す</em>。</h1>
+      <p class="bs-mark">BBQ SPOT FINDER · SLOW FIRE</p>
+      <h1><span class="bs-rotate" id="rotate"><span class="word in">駅近</span></span>で選ぶ、<br>首都圏のBBQ場。</h1>
       <p class="bs-tagline">
-        蓋付きグリル持込・電源・アメリカンBBQ可否で絞り込める、SLOW FIRE運営の日本最詳のBBQ場検索。<br>
-        「Pulseを持って行ける？」「プルドポーク焼けるところはどこ？」が、ここでわかります。
+        蓋付きグリル持込・電源・アメリカンBBQ可否で絞り込める、SLOW FIRE運営の日本最詳のBBQ場データベース。<br>
+        「Pulseを持って行ける？」「プルドポークを焼けるのはどこ？」が、ここでわかります。
       </p>
-    </section>
-
-    <!-- SLOW FIRE classification -->
-    <section class="bs-types">
-      <div class="bs-type-card" data-type="A">
-        <div class="bs-type-label">TYPE A</div>
-        <div class="bs-type-title">常設・焼肉スタイル</div>
-        <div class="bs-type-desc">常設グリルあり・蓋なし。アメリカンBBQ不可。短時間の焼肉向け。</div>
-      </div>
-      <div class="bs-type-card" data-type="B">
-        <div class="bs-type-label">TYPE B</div>
-        <div class="bs-type-title">常設・手ぶら型</div>
-        <div class="bs-type-desc">蓋付きグリルあるが持込制限あり。手ぶら派には◎、ロー&スローは×</div>
-      </div>
-      <div class="bs-type-card" data-type="C">
-        <div class="bs-type-label">TYPE C</div>
-        <div class="bs-type-title">常設+持込OK（理想型）</div>
-        <div class="bs-type-desc">蓋付き常設グリルあり、自分のグリル・食材持込もOK。最強。</div>
-      </div>
-      <div class="bs-type-card" data-type="D">
-        <div class="bs-type-label">TYPE D</div>
-        <div class="bs-type-title">場所のみ（公園型）</div>
-        <div class="bs-type-desc">グリル常設なし、持込前提。Weberなど自前で運べる人向け。</div>
+      <div class="bs-stats" id="stats">
+        <div class="bs-stat"><b data-count="24">0</b><span>収録スポット</span></div>
+        <div class="bs-stat"><b data-count="4">0</b><span>都県</span></div>
+        <div class="bs-stat"><b data-count="10">0</b><span>絞り込み軸</span></div>
+        <div class="bs-stat"><b data-count="4">0</b><span>SLOW FIRE分類</span></div>
       </div>
     </section>
 
-    <!-- search box -->
-    <section class="bs-search">
+    <!-- search + filters -->
+    <section class="bs-tools" id="tools">
       <div class="bs-search-input-wrap">
         <svg class="bs-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         <input type="text" class="bs-search-input" id="searchInput" placeholder="施設名・最寄駅・地名で検索  例：武蔵野公園 / 新木場 / 多摩" autocomplete="off">
       </div>
-    </section>
-
-    <!-- filters -->
-    <section class="bs-filters">
-      <div class="bs-filter-row">
-        <span class="bs-filter-label">タイプ</span>
-        <button class="bs-chip" data-filter="type" data-value="A">A 焼肉スタイル</button>
-        <button class="bs-chip" data-filter="type" data-value="B">B 手ぶら型</button>
-        <button class="bs-chip" data-filter="type" data-value="C">C 持込OK</button>
-        <button class="bs-chip" data-filter="type" data-value="D">D 場所のみ</button>
-      </div>
-      <div class="bs-filter-row">
-        <span class="bs-filter-label">エリア</span>
-        <button class="bs-chip" data-filter="area" data-value="23ku">23区</button>
-        <button class="bs-chip" data-filter="area" data-value="tama">多摩</button>
-        <button class="bs-chip" data-filter="area" data-value="kanagawa">神奈川</button>
-        <button class="bs-chip" data-filter="area" data-value="chiba">千葉</button>
-        <button class="bs-chip" data-filter="area" data-value="saitama">埼玉</button>
-      </div>
-      <div class="bs-filter-row">
-        <span class="bs-filter-label">持込</span>
-        <button class="bs-chip" data-filter="bringGrill" data-value="ok">グリル持込◎</button>
-        <button class="bs-chip" data-filter="bringFood" data-value="ok">食材持込◎</button>
-        <button class="bs-chip" data-filter="bringElectric" data-value="ok">電気グリル可（Pulse対応）</button>
-      </div>
-      <div class="bs-filter-row">
-        <span class="bs-filter-label">設備</span>
-        <button class="bs-chip" data-filter="parking" data-value="true">駐車場あり</button>
-        <button class="bs-chip" data-filter="powerOutlet" data-value="ok">電源あり</button>
-        <button class="bs-chip" data-filter="roof" data-value="ok">屋根あり（雨天可）</button>
-        <button class="bs-chip" data-filter="shower" data-value="ok">シャワーあり</button>
-      </div>
-      <div class="bs-filter-row">
-        <span class="bs-filter-label">SLOW FIRE</span>
-        <button class="bs-chip" data-filter="lowAndSlow" data-value="4">ロー&スロー可（★4以上）</button>
-        <button class="bs-chip" data-filter="americanBbq" data-value="4">アメリカンBBQ可（★4以上）</button>
-        <button class="bs-reset" id="resetBtn">条件をすべてリセット</button>
+      <div class="bs-tabs" id="areaTabs"><!-- JS --></div>
+      <div class="bs-chip-row" id="chipRow"><!-- JS --></div>
+      <div class="bs-type-row" id="typeRow">
+        <span class="lbl">SLOW FIRE分類</span>
+        <button class="bs-tchip" data-t="A">A 焼肉</button>
+        <button class="bs-tchip" data-t="B">B 手ぶら</button>
+        <button class="bs-tchip" data-t="C">C 持込◎</button>
+        <button class="bs-tchip" data-t="D">D 場所のみ</button>
       </div>
     </section>
 
-    <!-- result info -->
     <div class="bs-result-info">
-      <div><strong id="resultCount">15</strong> 件のBBQ場が見つかりました</div>
-      <select class="bs-sort" id="sortSelect">
-        <option value="american">アメリカンBBQ度順</option>
-        <option value="lowAndSlow">ロー&スロー度順</option>
-        <option value="ease">手軽さ順</option>
-        <option value="scenery">景観順</option>
-        <option value="name">名前順</option>
-      </select>
+      <div class="bs-count-line"><b id="resultCount">24</b>件のBBQ場<span class="bs-active-note" id="activeNote"></span></div>
+      <div class="bs-right-tools">
+        <button class="bs-reset" id="resetBtn">条件をリセット</button>
+        <select class="bs-sort" id="sortSelect">
+          <option value="american">アメリカンBBQ度順</option>
+          <option value="lowAndSlow">ロー&スロー度順</option>
+          <option value="ease">手軽さ順</option>
+          <option value="scenery">景観順</option>
+          <option value="name">名前順</option>
+        </select>
+      </div>
     </div>
 
-    <!-- spots grid -->
-    <div class="bs-grid" id="spotsGrid">
-      <!-- JS で生成 -->
-    </div>
+    <div class="bs-grid" id="spotsGrid"><!-- JS --></div>
+
+    <!-- SLOW FIRE classification (対置) -->
+    <section class="bs-class reveal">
+      <div class="bs-section-head">
+        <span class="bs-kicker">Classification</span>
+        <h2 class="bs-h2">SLOW FIRE分類 A〜D</h2>
+      </div>
+      <p style="font-size:14px;color:var(--gray-600);line-height:1.7;margin-bottom:18px;max-width:720px;">アメリカンBBQ（ロー&スロー）の実現しやすさで、全スポットを4段階に格付けしています。右へ行くほど「自分のグリルで、自分の食材を、時間をかけて焼ける」自由度が上がります。</p>
+      <div class="bs-class-grid" id="classGrid"><!-- JS fills counts --></div>
+    </section>
+
+    <!-- map CTA -->
+    <section class="bs-map-cta reveal">
+      <div class="txt">
+        <h2>地図から探す</h2>
+        <p>「今日はこの辺で」という日は、地図表示が便利です。24スポットを一望して、エリアと海・公園・都心の位置関係から選べます。</p>
+      </div>
+      <a href="map.html" class="bs-map-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg>
+        マップで見る
+      </a>
+    </section>
 
     <!-- FAQ -->
-    <section class="bs-faq">
-      <h2>BBQ場の選び方 Q&A</h2>
+    <section class="bs-faq reveal">
+      <div class="bs-section-head"><span class="bs-kicker">Q &amp; A</span><h2 class="bs-h2">BBQ場の選び方</h2></div>
       <details>
-        <summary>Q. アメリカンBBQ（ロー&スロー）ができる場所はどこ？</summary>
+        <summary>アメリカンBBQ（ロー&スロー）ができる場所はどこ？</summary>
         <p>「タイプC（常設+持込OK）」または「タイプD（場所のみ）」のスポットで、<strong>蓋付きグリル（Weber Kettle等）の持込が可能</strong>な場所が必要です。リストではタイプCのスポットが最も理想的です。</p>
       </details>
       <details>
-        <summary>Q. Weber Pulseのような電気グリルが使えるBBQ場は？</summary>
+        <summary>Weber Pulseのような電気グリルが使えるBBQ場は？</summary>
         <p>電源がある施設が必要です。公園型（タイプD）の多くは発電機が禁止されており、ポータブル電源も推奨されていません。HERO FIELD 新木場や城南島海浜公園のように電源レンタル可の施設を選ぶか、Weber Kettle等の炭グリルに切り替える必要があります。</p>
       </details>
       <details>
-        <summary>Q. 焼肉スタイルのBBQができれば十分です。違いは？</summary>
+        <summary>焼肉スタイルのBBQができれば十分です。違いは？</summary>
         <p>焼肉スタイルは「蓋なし炭グリル」でOKなので、ほぼ全タイプで楽しめます。常設グリルがあるタイプAやレンタル可のタイプBが手軽です。</p>
       </details>
       <details>
-        <summary>Q. 駒場野公園のように「グリル持込不可」のBBQ場ってあるの？</summary>
-        <p>はい、特に区立の小さい公園BBQ場ではコンクリート製の常設炉のみ使用可、というケースがあります。リストではタイプAに分類されます。アメリカンBBQ目的の方は避けたほうがいいです。</p>
+        <summary>「グリル持込不可」のBBQ場ってあるの？</summary>
+        <p>はい、特に区立の小さい公園BBQ場ではコンクリート製の常設炉のみ使用可、というケースがあります（駒場野公園など）。リストではタイプAに分類されます。アメリカンBBQ目的の方は避けたほうがいいです。</p>
       </details>
       <details>
-        <summary>Q. ブリスケットを12時間焼きたいんですが、どこが向いていますか？</summary>
+        <summary>ブリスケットを12時間焼きたいんですが、どこが向いていますか？</summary>
         <p>夜通し焼く場合は<strong>若洲海浜公園キャンプ場</strong>のように宿泊できるスポットが現実的です。日帰りでも長時間焼くなら、開園時間が長く広い「タイプC」（HERO FIELD 新木場・城南島）か、団体利用で時間を確保できる「タイプD」（武蔵野公園・野川公園）が向いています。</p>
       </details>
     </section>
 
+    <!-- SEO / no-JS fallback: full spot list -->
+    <noscript>
+      <nav class="bs-seo-list" aria-label="収録スポット一覧">
+        <p>収録スポット（全24件）:</p>
+        <a href="musashino-koen-bbq.html">武蔵野公園バーベキュー広場</a> ·
+        <a href="nogawa-koen-bbq.html">野川公園バーベキュー広場</a> ·
+        <a href="komaba-no-koen-bbq.html">駒場野公園バーベキュー広場</a> ·
+        <a href="jonanjima-kaihin-koen-bbq.html">城南島海浜公園バーベキュー場</a> ·
+        <a href="wakasu-kaihin-koen-camp.html">若洲海浜公園キャンプ場</a> ·
+        <a href="hikarigaoka-koen-bbq.html">光が丘公園バーベキュー広場</a> ·
+        <a href="showa-kinen-koen-bbq.html">国営昭和記念公園バーベキューガーデン</a> ·
+        <a href="local-bbq-harumi.html">LOCAL BBQ 晴海</a> ·
+        <a href="hero-field-shinkiba.html">HERO FIELD 新木場</a> ·
+        <a href="kasai-rinkai-koen-bbq.html">葛西臨海公園バーベキュー広場</a> ·
+        <a href="kinuta-koen-bbq.html">砧公園バーベキュー広場</a> ·
+        <a href="akiruno-akiru-koen.html">秋留台公園バーベキューエリア</a> ·
+        <a href="wild-magic-toyosu.html">WILD MAGIC 豊洲</a> ·
+        <a href="ogawamachi-bbq.html">小金井公園バーベキュー広場</a> ·
+        <a href="ojima-komatsugawa-koen-bbq.html">大島小松川公園バーベキュー広場</a> ·
+        <a href="yokohama-zou-no-hana.html">象の鼻パーク (横浜)</a> ·
+        <a href="umizuri-koen-yokohama.html">本牧海づり施設 BBQエリア (横浜)</a> ·
+        <a href="shounan-enoshima-bbq.html">湘南海岸・江ノ島 BBQエリア</a> ·
+        <a href="inagekaihin-koen-chiba.html">稲毛海浜公園バーベキュー場 (千葉)</a> ·
+        <a href="shinrin-koen-funabashi.html">ふなばし三番瀬海浜公園 BBQ場</a> ·
+        <a href="showanomori-noda.html">清水公園BBQ場 (千葉・野田)</a> ·
+        <a href="akigase-saitama.html">秋ヶ瀬公園BBQ場 (埼玉)</a> ·
+        <a href="saiko-toda-saitama.html">彩湖・道満グリーンパーク BBQ場</a> ·
+        <a href="kawagoe-saitama-bbq.html">川越水上公園BBQ場 (埼玉)</a>
+      </nav>
+    </noscript>
+
   </main>
 
-  
   <!-- Newsletter signup -->
   <link rel="stylesheet" href="../assets/newsletter.css?v=20260517">
   <section class="nl-box" id="newsletter">
@@ -394,153 +466,229 @@
   <script src="../mobile-nav.js?v=20260506e"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
   <script>
-    /* nav scroll */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
-    /* ========== BBQ Spots Search ========== */
+    const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ===== hero rotating word ===== */
+    (function(){
+      const el = document.getElementById('rotate');
+      if (!el) return;
+      const words = ['駅近','手ぶら','蓋付きグリル','電源つき','大人数','海辺','夜通し','桜の下'];
+      if (RM){ el.querySelector('.word').textContent = words[0]; return; }
+      let i = 0;
+      setInterval(() => {
+        const cur = el.querySelector('.word');
+        cur.classList.remove('in'); cur.classList.add('out');
+        i = (i + 1) % words.length;
+        const next = document.createElement('span');
+        next.className = 'word in'; next.textContent = words[i];
+        el.appendChild(next);
+        setTimeout(() => cur.remove(), 550);
+      }, 2100);
+    })();
+
+    /* ===== count-up ===== */
+    (function(){
+      const nums = document.querySelectorAll('#stats b[data-count]');
+      const run = (b) => {
+        const target = +b.dataset.count; if (RM){ b.textContent = target; return; }
+        const t0 = performance.now(), dur = 1100;
+        const step = (t) => { const p = Math.min(1,(t-t0)/dur); b.textContent = Math.round(target*(1-Math.pow(1-p,3))); if (p<1) requestAnimationFrame(step); };
+        requestAnimationFrame(step);
+      };
+      const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); }}),{threshold:.4});
+      nums.forEach(n=>io.observe(n));
+    })();
+
+    /* ===== reveal ===== */
+    (function(){
+      const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);}}),{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    })();
+
+    /* ===== sticky shadow ===== */
+    (function(){
+      const tools = document.getElementById('tools');
+      const io = new IntersectionObserver(([e])=>tools.classList.toggle('stuck', e.intersectionRatio < 1), { threshold:[1] });
+      // sentinel via scroll fallback
+      window.addEventListener('scroll', ()=>{ const r = tools.getBoundingClientRect(); tools.classList.toggle('stuck', r.top <= (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))||64)); }, {passive:true});
+    })();
+
+    /* ========== Spot search ========== */
     (async () => {
       const grid = document.getElementById('spotsGrid');
       const input = document.getElementById('searchInput');
       const countEl = document.getElementById('resultCount');
+      const activeNote = document.getElementById('activeNote');
       const sortSelect = document.getElementById('sortSelect');
       const resetBtn = document.getElementById('resetBtn');
-      const chips = document.querySelectorAll('.bs-chip[data-filter]');
+      const areaTabs = document.getElementById('areaTabs');
+      const chipRow = document.getElementById('chipRow');
+      const typeChips = document.querySelectorAll('.bs-tchip');
+      const classGrid = document.getElementById('classGrid');
 
       let data = [];
-      try {
-        data = await (await fetch('data.json')).json();
-      } catch(e) { console.error('data.json load fail', e); return; }
+      try { data = await (await fetch('data.json')).json(); }
+      catch(e){ console.error('data.json load fail', e); grid.innerHTML = '<div class="bs-empty"><p>データの読み込みに失敗しました。時間をおいて再度お試しください。</p></div>'; return; }
+
+      const esc = s => (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+      const ekichika = s => s.nearestStations.some(st => st.method==='徒歩' && st.minutes<=10);
+
+      /* こだわり feature axes (data-derived predicates) */
+      const featureDefs = [
+        {id:'lid',    label:'蓋付きグリル可', test:s=> (s.grillInstalled && s.grillInstalled.withLid===true) || s.bringIn.grill==='ok'},
+        {id:'power',  label:'電源あり',       test:s=> s.facilities.powerOutlet==='ok'},
+        {id:'temae',  label:'手ぶらOK',       test:s=> s.slowFireType==='A' || s.slowFireType==='B'},
+        {id:'rain',   label:'雨天OK（屋根）',  test:s=> s.facilities.roof==='ok'},
+        {id:'parking',label:'駐車場あり',      test:s=> s.parking.available===true},
+        {id:'ekichika',label:'駅徒歩10分内',   test:ekichika},
+        {id:'grill',  label:'グリル持込◎',     test:s=> s.bringIn.grill==='ok'},
+        {id:'pulse',  label:'Pulse対応（電気）',test:s=> s.bringIn.electric==='ok'},
+        {id:'lowslow',label:'ロー&スロー可',    test:s=> s.ratings.lowAndSlow>=4},
+        {id:'american',label:'アメリカンBBQ可', test:s=> s.ratings.americanBbq>=4},
+      ];
+
+      const state = { query:'', area:'all', features:new Set(), type:null, sort:'american' };
+
+      /* build area tabs from data */
+      const areaOrder = [];
+      const areaCount = {};
+      data.forEach(s=>{ if(!(s.areaType in areaCount)){ areaOrder.push({type:s.areaType,label:s.areaLabel}); areaCount[s.areaType]=0;} areaCount[s.areaType]++; });
+      areaTabs.innerHTML = `<button class="bs-tab active" data-area="all">すべて<span class="n">${data.length}</span></button>` +
+        areaOrder.map(a=>`<button class="bs-tab" data-area="${a.type}">${esc(a.label)}<span class="n">${areaCount[a.type]}</span></button>`).join('');
+
+      /* build feature chips */
+      chipRow.innerHTML = featureDefs.map(f=>`<button class="bs-chip" data-feat="${f.id}"><span class="dot"></span>${esc(f.label)}</button>`).join('');
+
+      /* classification counts */
+      const typeMeta = {
+        A:{title:'常設・焼肉スタイル', desc:'常設グリルあり・蓋なし。アメリカンBBQ不可。短時間の焼肉向け。', on:1},
+        B:{title:'常設・手ぶら型',     desc:'蓋付きグリルはあるが持込制限あり。手ぶら派には◎、ロー&スローは×。', on:2},
+        C:{title:'常設＋持込OK（理想型）',desc:'蓋付き常設グリルがあり、自分のグリル・食材の持込もOK。最強クラス。', on:3},
+        D:{title:'場所のみ（公園型）', desc:'グリル常設なし・持込前提。Weber等を運べる人向け、自由度は最大。', on:4},
+      };
+      const typeCount = {A:0,B:0,C:0,D:0};
+      data.forEach(s=>typeCount[s.slowFireType]!=null && typeCount[s.slowFireType]++);
+      classGrid.innerHTML = ['A','B','C','D'].map(t=>{
+        const m=typeMeta[t];
+        const bars=[1,2,3,4].map(n=>`<i class="${n<=m.on?'on':''}" style="height:${6+n*4}px"></i>`).join('');
+        return `<div class="bs-cl" data-t="${t}"><div class="bs-cl-top"></div>
+          <div class="bs-cl-badge">TYPE ${t}</div>
+          <div class="bs-cl-bars">${bars}</div>
+          <h3>${m.title}</h3><p>${m.desc}</p>
+          <div class="cnt"><b>${typeCount[t]}</b> スポット</div></div>`;
+      }).join('');
 
       const fuse = new Fuse(data, {
-        keys: [
-          { name: 'name', weight: 3 },
-          { name: 'nameKana', weight: 2 },
-          { name: 'city', weight: 2 },
-          { name: 'address', weight: 1.5 },
-          { name: 'nearestStations.name', weight: 2 },
-          { name: 'tags', weight: 2 },
-          { name: 'uniqueness', weight: 1 },
-        ],
-        threshold: 0.4,
-        ignoreLocation: true,
-        minMatchCharLength: 2,
+        keys:[{name:'name',weight:3},{name:'nameKana',weight:2},{name:'city',weight:2},{name:'address',weight:1.5},{name:'nearestStations.name',weight:2},{name:'tags',weight:2},{name:'uniqueness',weight:1}],
+        threshold:0.4, ignoreLocation:true, minMatchCharLength:2,
       });
 
-      const state = {
-        query: '',
-        filters: {}, // { filterName: value }
-        sort: 'american',
-      };
-
-      function escapeHtml(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
-
-      function typeColor(type) {
-        return { A: 'gray-700', B: 'warning', C: 'success', D: 'brand-500' }[type] || 'gray-700';
+      function renderCard(s){
+        const feats=[];
+        if(s.bringIn.grill==='ok') feats.push({l:'グリル持込',c:'ok'});
+        if(s.bringIn.electric==='ok') feats.push({l:'Pulse対応',c:'ok'});
+        if(s.facilities.powerOutlet==='ok') feats.push({l:'電源',c:'ok'});
+        if(s.parking.available) feats.push({l:'駐車場',c:'ok'});
+        if(s.facilities.roof==='ok') feats.push({l:'雨天OK',c:'ok'});
+        if(s.bringIn.grill==='ng') feats.push({l:'持込不可',c:'ng'});
+        const st=s.nearestStations[0]||{};
+        const rankBars=[1,2,3,4].map(n=>`<i style="height:${5+n*3}px;opacity:${ n<=({A:1,B:2,C:3,D:4}[s.slowFireType]) ?1:.32}"></i>`).join('');
+        return `<a href="${s.slug}.html" class="bs-card" data-tilt>
+          <div class="bs-card-img">
+            <div class="bs-rank" data-t="${s.slowFireType}"><span class="bars">${rankBars}</span>TYPE ${s.slowFireType}</div>
+            <div class="bs-abadge">🔥 アメリカンBBQ ${s.americanBbqRating}/5</div>
+            <img src="${s.image}" alt="${esc(s.name)}" loading="lazy">
+            <div class="bs-card-station">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              ${esc(st.name||'')} ${st.minutes?`${st.method||''}${st.minutes}分`:''}
+            </div>
+          </div>
+          <div class="bs-card-body">
+            <h3 class="bs-card-name">${esc(s.name)}</h3>
+            <p class="bs-card-area">${esc(s.areaLabel)} · ${esc(s.city)}</p>
+            <p class="bs-card-summary">${esc(s.uniqueness)}</p>
+            <div class="bs-card-features">${feats.slice(0,4).map(f=>`<span class="bs-feat ${f.c}">${f.l}</span>`).join('')}</div>
+          </div></a>`;
       }
 
-      function renderCard(spot) {
-        const features = [];
-        if (spot.bringIn.grill === 'ok') features.push({label: 'グリル持込', cls: 'ok'});
-        if (spot.bringIn.electric === 'ok') features.push({label: '電気グリル可', cls: 'ok'});
-        if (spot.facilities.powerOutlet === 'ok') features.push({label: '電源あり', cls: 'ok'});
-        if (spot.parking.available) features.push({label: '駐車場', cls: 'ok'});
-        if (spot.facilities.roof === 'ok') features.push({label: '屋根', cls: 'ok'});
-        if (spot.bringIn.grill === 'ng') features.push({label: '持込不可', cls: 'ng'});
-
-        return `
-          <a href="${spot.slug}.html" class="bs-card">
-            <div class="bs-card-img">
-              <img src="${spot.image}" alt="${escapeHtml(spot.name)}" loading="lazy">
-              <span class="bs-card-type-badge" data-type="${spot.slowFireType}">TYPE ${spot.slowFireType}</span>
-              <span class="bs-card-rating-badge">★${spot.americanBbqRating}/5</span>
-            </div>
-            <div class="bs-card-body">
-              <h3 class="bs-card-name">${escapeHtml(spot.name)}</h3>
-              <p class="bs-card-area">${escapeHtml(spot.areaLabel)} · ${escapeHtml(spot.city)} · ${escapeHtml(spot.nearestStations[0]?.name || '')}</p>
-              <p class="bs-card-summary">${escapeHtml(spot.uniqueness)}</p>
-              <div class="bs-card-features">
-                ${features.slice(0, 4).map(f => `<span class="bs-card-feature ${f.cls}">${f.label}</span>`).join('')}
-              </div>
-            </div>
-          </a>
-        `;
-      }
-
-      function applyFilters(items) {
-        return items.filter(spot => {
-          for (const [k, v] of Object.entries(state.filters)) {
-            if (k === 'type') { if (spot.slowFireType !== v) return false; }
-            else if (k === 'area') { if (spot.areaType !== v) return false; }
-            else if (k === 'bringGrill') { if (spot.bringIn.grill !== v) return false; }
-            else if (k === 'bringFood') { if (spot.bringIn.food !== v) return false; }
-            else if (k === 'bringElectric') { if (spot.bringIn.electric !== v) return false; }
-            else if (k === 'parking') { if (String(spot.parking.available) !== v) return false; }
-            else if (k === 'powerOutlet') { if (spot.facilities.powerOutlet !== v) return false; }
-            else if (k === 'roof') { if (spot.facilities.roof !== v) return false; }
-            else if (k === 'shower') { if (spot.facilities.shower !== v) return false; }
-            else if (k === 'lowAndSlow') { if (spot.ratings.lowAndSlow < parseInt(v)) return false; }
-            else if (k === 'americanBbq') { if (spot.ratings.americanBbq < parseInt(v)) return false; }
-          }
+      function apply(items){
+        return items.filter(s=>{
+          if(state.area!=='all' && s.areaType!==state.area) return false;
+          if(state.type && s.slowFireType!==state.type) return false;
+          for(const fid of state.features){ const def=featureDefs.find(d=>d.id===fid); if(def && !def.test(s)) return false; }
           return true;
         });
       }
-
-      function sortItems(items) {
-        const cmp = {
-          american: (a, b) => b.ratings.americanBbq - a.ratings.americanBbq,
-          lowAndSlow: (a, b) => b.ratings.lowAndSlow - a.ratings.lowAndSlow,
-          ease: (a, b) => b.ratings.ease - a.ratings.ease,
-          scenery: (a, b) => b.ratings.scenery - a.ratings.scenery,
-          name: (a, b) => a.nameKana.localeCompare(b.nameKana, 'ja'),
-        }[state.sort];
+      function sortItems(items){
+        const cmp={ american:(a,b)=>b.ratings.americanBbq-a.ratings.americanBbq, lowAndSlow:(a,b)=>b.ratings.lowAndSlow-a.ratings.lowAndSlow, ease:(a,b)=>b.ratings.ease-a.ratings.ease, scenery:(a,b)=>b.ratings.scenery-a.ratings.scenery, name:(a,b)=>a.nameKana.localeCompare(b.nameKana,'ja') }[state.sort];
         return items.slice().sort(cmp);
       }
 
-      function render() {
-        let items = state.query ? fuse.search(state.query).map(r => r.item) : data;
-        items = applyFilters(items);
-        if (state.sort !== 'relevance') items = sortItems(items);
+      function activeFilterCount(){ return (state.area!=='all'?1:0)+(state.type?1:0)+state.features.size+(state.query?1:0); }
+
+      function render(){
+        let items = state.query ? fuse.search(state.query).map(r=>r.item) : data;
+        items = apply(items);
+        items = sortItems(items);
         countEl.textContent = items.length;
-        grid.innerHTML = items.length ? items.map(renderCard).join('') : '<div class="bs-empty">条件に合うBBQ場が見つかりませんでした。フィルターを緩めてお試しください。</div>';
+        const n = activeFilterCount();
+        activeNote.textContent = n ? `／ ${n}件の条件で絞り込み中` : '／ すべて表示中';
+        if(items.length){
+          grid.innerHTML = items.map(renderCard).join('');
+          attachTilt();
+        } else {
+          grid.innerHTML = `<div class="bs-empty">
+            <div class="em-fire">🫙</div>
+            <h3>条件に合うBBQ場が見つかりませんでした</h3>
+            <p>条件が厳しすぎるかもしれません。<br>「Pulse対応」と「駅徒歩10分内」など、両立が難しい条件が重なっていないか見直してみてください。</p>
+            <button id="emReset">条件をすべてリセット</button></div>`;
+          document.getElementById('emReset')?.addEventListener('click', reset);
+        }
       }
 
-      // 検索
-      let timer;
-      input.addEventListener('input', e => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { state.query = e.target.value.trim(); render(); }, 150);
-      });
-
-      // フィルター
-      chips.forEach(c => {
-        c.addEventListener('click', () => {
-          const f = c.dataset.filter, v = c.dataset.value;
-          if (state.filters[f] === v) { delete state.filters[f]; c.classList.remove('active'); }
-          else {
-            state.filters[f] = v;
-            // 同じフィルター内の他チップをoff
-            document.querySelectorAll(`.bs-chip[data-filter="${f}"]`).forEach(x => x.classList.remove('active'));
-            c.classList.add('active');
-          }
-          render();
+      /* 3D tilt (mouse-follow) */
+      function attachTilt(){
+        if(RM || matchMedia('(hover:none)').matches) return;
+        grid.querySelectorAll('[data-tilt]').forEach(card=>{
+          card.addEventListener('mousemove', e=>{
+            const r=card.getBoundingClientRect();
+            const px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
+            card.style.transform=`translateY(-4px) rotateX(${(-py*6).toFixed(2)}deg) rotateY(${(px*7).toFixed(2)}deg)`;
+          });
+          card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
         });
-      });
+      }
 
-      // ソート
-      sortSelect.addEventListener('change', e => { state.sort = e.target.value; render(); });
+      /* events */
+      let timer;
+      input.addEventListener('input', e=>{ clearTimeout(timer); timer=setTimeout(()=>{ state.query=e.target.value.trim(); render(); },140); });
 
-      // リセット
-      resetBtn.addEventListener('click', () => {
-        state.filters = {}; state.query = ''; input.value = '';
-        document.querySelectorAll('.bs-chip.active').forEach(c => c.classList.remove('active'));
-        render();
-      });
+      areaTabs.addEventListener('click', e=>{ const b=e.target.closest('.bs-tab'); if(!b) return;
+        areaTabs.querySelectorAll('.bs-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); state.area=b.dataset.area; render(); });
+
+      chipRow.addEventListener('click', e=>{ const b=e.target.closest('.bs-chip'); if(!b) return;
+        const id=b.dataset.feat; if(state.features.has(id)){ state.features.delete(id); b.classList.remove('active'); } else { state.features.add(id); b.classList.add('active'); } render(); });
+
+      typeChips.forEach(c=>c.addEventListener('click', ()=>{ const t=c.dataset.t;
+        if(state.type===t){ state.type=null; c.classList.remove('active'); }
+        else { state.type=t; typeChips.forEach(x=>x.classList.remove('active')); c.classList.add('active'); } render(); }));
+
+      sortSelect.addEventListener('change', e=>{ state.sort=e.target.value; render(); });
+
+      function reset(){ state.query=''; state.area='all'; state.type=null; state.features.clear(); input.value='';
+        areaTabs.querySelectorAll('.bs-tab').forEach((x,i)=>x.classList.toggle('active',i===0));
+        chipRow.querySelectorAll('.bs-chip').forEach(x=>x.classList.remove('active'));
+        typeChips.forEach(x=>x.classList.remove('active'));
+        render(); }
+      resetBtn.addEventListener('click', reset);
 
       render();
     })();
   </script>
-<script src="../assets/global-search.js?v=20260516" defer></script>
-<script src="../assets/sf-features.js?v=20260517" defer></script>
+  <script src="../assets/global-search.js?v=20260516" defer></script>
+  <script src="../assets/sf-features.js?v=20260517" defer></script>
 </body>
 </html>
