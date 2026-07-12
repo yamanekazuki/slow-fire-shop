@@ -45,6 +45,21 @@ jobs:
           DRAFT: ${{ github.event.inputs.draft }}
         run: node scripts/generate-journal.mjs
 
+      # サムネ自己修復：過去分も含め、サムネが無い記事のサムネをこの場で必ず生成する。
+      # （gen.mjs はMac/Linux両対応化済み。JP豆腐文字防止に Noto CJK フォントを入れる。
+      #   ここが失敗したら記事公開ごと止める＝サムネ欠落ページを二度と世に出さない安全弁）
+      - name: サムネ欠落チェック＆生成
+        if: steps.gen.outputs.status == 'published'
+        run: |
+          sudo apt-get install -y -qq fonts-noto-cjk > /dev/null
+          node tools/gen-journal-thumb/gen.mjs --missing
+          missing=0
+          for f in journal/articles/*.html; do
+            b=$(basename "$f" .html)
+            [ -f "journal/thumbs/$b.jpg" ] || { echo "::error::サムネ欠落: $b"; missing=1; }
+          done
+          exit $missing
+
       # ===== 合格して公開する場合だけ commit / 公開待ち / 3名へメール =====
       - name: 変更をコミット & プッシュ
         if: steps.gen.outputs.status == 'published'

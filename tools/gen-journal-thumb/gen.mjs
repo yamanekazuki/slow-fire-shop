@@ -5,10 +5,15 @@
  * 同じ入力からは毎回同じPNGを出力する。単色グラデ＋大タイポのプレースホルダは禁止。
  *
  * 使い方: node tools/gen-journal-thumb/gen.mjs [slug ...]
+ *         node tools/gen-journal-thumb/gen.mjs --missing   … サムネ未生成の記事だけ生成（CIの自己修復用）
  * 出力: journal/thumbs/<slug>.jpg (1200x675, <170KB)
+ *
+ * Mac/Linux両対応（GitHub Actions ubuntu で動かないと新規記事のサムネが欠落する）:
+ *   Chrome: CHROME_BIN → Mac標準パス → google-chrome/chromium の順で探す
+ *   JPEG変換: sips(Mac) が無ければ ImageMagick convert(Linux) にフォールバック
  */
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, statSync, rmSync, readdirSync, readFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, statSync, rmSync, readdirSync, readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -16,7 +21,24 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
 const ART_DIR = path.join(ROOT, "journal", "articles");
 const OUT = path.join(ROOT, "journal", "thumbs");
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+function findChrome() {
+  const cands = [
+    process.env.CHROME_BIN,
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium-browser",
+    "/usr/bin/chromium",
+  ].filter(Boolean);
+  for (const c of cands) if (existsSync(c)) return c;
+  throw new Error("Chrome/Chromium が見つかりません（環境変数 CHROME_BIN で指定可）");
+}
+const CHROME = findChrome();
+const HAS_SIPS = existsSync("/usr/bin/sips");
+function pngToJpeg(png, jpg, q) {
+  if (HAS_SIPS) execFileSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", String(q), png, "--out", jpg], { stdio: "pipe" });
+  else execFileSync("convert", [png, "-quality", String(q), jpg], { stdio: "pipe" });
+}
 
 const ACCENTS = {
   ember: {
@@ -188,7 +210,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:#faf7f2;position:relative;
 }
 
 // ---- メイン処理 --------------------------------------------------------------
-const only = process.argv.slice(2);
+const args = process.argv.slice(2);
+const missingOnly = args.includes("--missing");
+const only = args.filter((a) => a !== "--missing");
 const files = readdirSync(ART_DIR).filter((f) => f.endsWith(".html"));
 mkdirSync(OUT, { recursive: true });
 
@@ -196,6 +220,7 @@ let n = 0;
 for (const f of files) {
   const meta = extract(path.join(ART_DIR, f));
   if (only.length && !only.includes(meta.slug)) continue;
+  if (missingOnly && existsSync(path.join(OUT, `${meta.slug}.jpg`))) continue;
   const a = { ...meta, accent: accentOf(meta.cat) };
   const tmp = path.join(HERE, `.tmp-${a.slug}.html`);
   const png = path.join(HERE, `.tmp-${a.slug}.png`);
@@ -209,7 +234,7 @@ for (const f of files) {
   const jpg = path.join(OUT, `${a.slug}.jpg`);
   let q = 84;
   do {
-    execFileSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", String(q), png, "--out", jpg], { stdio: "pipe" });
+    pngToJpeg(png, jpg, q);
     q -= 8;
   } while (statSync(jpg).size > 170 * 1024 && q > 40);
   rmSync(tmp); rmSync(png);
