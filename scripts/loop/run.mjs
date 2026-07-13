@@ -32,6 +32,8 @@ const API_KEY = process.env.ANTHROPIC_API_KEY;
 const SECRET = process.env.APPROVAL_SECRET || "";
 const FN_BASE = process.env.APPROVAL_FN_BASE || "";
 const MODEL = process.env.BLOG_MODEL || "claude-opus-4-8";
+// モデル階層化（2026-07-14）: 実装=Sonnet 5（採点ゲートが品質担保）、最終試行のみMODELで救済
+const IMPL_MODEL = process.env.LOOP_IMPL_MODEL || "claude-sonnet-5";
 const REPO = "yamanekazuki/slow-fire-shop";
 const LIVE_BASE = "https://yamanekazuki.github.io/slow-fire-shop/";
 const PASS = 80;
@@ -77,13 +79,13 @@ function changeLink(kind, payload) {
 }
 
 // ---- Claude（structured output / 依存ゼロ）-----------------------------------
-async function callClaude(system, userMsg, schema, { maxTokens = 8000, effort = "high" } = {}) {
+async function callClaude(system, userMsg, schema, { maxTokens = 8000, effort = "high", model = MODEL } = {}) {
   if (!API_KEY) throw new Error("ANTHROPIC_API_KEY 未設定");
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "content-type": "application/json", "x-api-key": API_KEY, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
-      model: MODEL,
+      model,
       max_tokens: maxTokens,
       system,
       output_config: { effort, format: { type: "json_schema", schema } },
@@ -294,7 +296,7 @@ const EDIT_SCHEMA = {
   required: ["edits", "note"],
 };
 
-async function aiImplement(html, proposal, feedback = "", downscope = "") {
+async function aiImplement(html, proposal, feedback = "", downscope = "", model = IMPL_MODEL) {
   const system = IS_SHOP
     ? `あなたはSLOW FIRE SHOP（アメリカンBBQのEC）のWeb編集者／CRO（コンバージョン改善）担当です。
 与えられたページHTMLに対し、改善提案を反映する最小限の find/replace 編集を作ります。完璧を狙って何も出せないより、確実で安全な一歩を必ず出します。
@@ -326,7 +328,7 @@ async function aiImplement(html, proposal, feedback = "", downscope = "") {
 ${feedback ? `\n# 前回の実装が審査で落ちた理由と、通すための直し方（必ず解消すること）\n${feedback}\n→ 上の指摘を踏まえ、不自然な日本語・キーワード詰め込み・事実の劣化を避け、自然で読みやすい編集に直すこと。\n` : ""}${downscope}
 # ${UNIT}HTML
 ${html}`;
-  return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 20000, effort: "xhigh" });
+  return callClaude(system, userMsg, EDIT_SCHEMA, { maxTokens: 20000, effort: "xhigh", model });
 }
 
 // 提案が安全に実装しづらく採点で落ち続けるとき、効果の核を残したまま「確実・安全に実装できる」狭い提案へ作り直す。
@@ -487,7 +489,7 @@ async function implementOne(proposal) {
       : "";
     let impl;
     try {
-      impl = await aiImplement(before, workingProposal, feedback, downscope);
+      impl = await aiImplement(before, workingProposal, feedback, downscope, attempt === MAX_ATTEMPTS ? MODEL : IMPL_MODEL);
     } catch (e) {
       if (attempt === MAX_ATTEMPTS && !best) return { status: "failed", proposal, file, reason: `実装AIエラー: ${e.message}` };
       feedback = `実装AIエラー: ${e.message}`; continue;
