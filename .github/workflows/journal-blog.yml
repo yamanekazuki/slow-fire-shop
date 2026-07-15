@@ -51,7 +51,7 @@ jobs:
       - name: サムネ欠落チェック＆生成
         if: steps.gen.outputs.status == 'published'
         run: |
-          sudo apt-get install -y -qq fonts-noto-cjk > /dev/null
+          sudo apt-get install -y -qq fonts-noto-cjk imagemagick > /dev/null
           node tools/gen-journal-thumb/gen.mjs --missing
           missing=0
           for f in journal/articles/*.html; do
