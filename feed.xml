@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 13 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 17 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQ場の5時間枠を使い切るタイムライン設計 — 仕込みから撤収まで</title>
+    <link>https://an-bbq.jp/journal/articles/five-hour-bbq-timeline.html</link>
+    <guid>https://an-bbq.jp/journal/articles/five-hour-bbq-timeline.html</guid>
+    <pubDate>Fri, 17 Jul 2026 07:00:00 +0900</pubDate>
+    <description>レンタルBBQ場の5時間枠で慌てないためのタイムライン設計。到着から着火、火入れ、多品種の焼き回し、撤収までを分単位で逆算。5〜6時間で完結するYORON BBQの実務がわかります。</description>
+  </item>
   <item>
     <title>飽きさせないYORON BBQの組み立て方 — 肉2〜3種＋副菜＋シーフードの段取り設計</title>
     <link>https://an-bbq.jp/journal/articles/anbbq-multi-course-plan.html</link>
