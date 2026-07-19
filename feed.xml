@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 17 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 20 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>直火で焦がすBBQからの卒業。「面倒なわりに美味しくない」の正体と抜け方</title>
+    <link>https://an-bbq.jp/journal/articles/quit-direct-fire-bbq.html</link>
+    <guid>https://an-bbq.jp/journal/articles/quit-direct-fire-bbq.html</guid>
+    <pubDate>Mon, 20 Jul 2026 07:00:00 +0900</pubDate>
+    <description>日本式の直火BBQが「外は真っ黒・中はカスカス」になる理由を熱の科学から解説。蓋付きグリルの間接熱で、焦がさず水分を守って美味しく焼く具体的な温度と時間、5〜6時間で完結する組み立て方まで。</description>
+  </item>
   <item>
     <title>BBQ場の5時間枠を使い切るタイムライン設計 — 仕込みから撤収まで</title>
     <link>https://an-bbq.jp/journal/articles/five-hour-bbq-timeline.html</link>
