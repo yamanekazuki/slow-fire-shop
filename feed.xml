@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 20 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 22 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>蓋付きグリルは片付けがラクになる — 後処理を軽くする理屈と実務</title>
+    <link>https://an-bbq.jp/journal/articles/lidded-grill-cleanup-logic.html</link>
+    <guid>https://an-bbq.jp/journal/articles/lidded-grill-cleanup-logic.html</guid>
+    <pubDate>Wed, 22 Jul 2026 07:00:00 +0900</pubDate>
+    <description>直火の網焼きより蓋付きグリルの方が片付けが圧倒的にラクな理由を、燃焼と油脂の科学から解説。焦げ・煤・脂の量が減る仕組みと、消火から洗浄まで再現できる後処理手順を数値つきで紹介します。</description>
+  </item>
   <item>
     <title>直火で焦がすBBQからの卒業。「面倒なわりに美味しくない」の正体と抜け方</title>
     <link>https://an-bbq.jp/journal/articles/quit-direct-fire-bbq.html</link>
