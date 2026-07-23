@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 22 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 24 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQを「男のホビー」で終わらせない — 家族の日常食にする5つの条件</title>
+    <link>https://an-bbq.jp/journal/articles/bbq-family-everyday-conditions.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bbq-family-everyday-conditions.html</guid>
+    <pubDate>Fri, 24 Jul 2026 07:00:00 +0900</pubDate>
+    <description>BBQが週末の特別イベントや父親の趣味で止まってしまう理由を分解し、家族の日常食に変える5つの条件を、温度・時間・段取りの具体数値で解説します。</description>
+  </item>
   <item>
     <title>蓋付きグリルは片付けがラクになる — 後処理を軽くする理屈と実務</title>
     <link>https://an-bbq.jp/journal/articles/lidded-grill-cleanup-logic.html</link>
