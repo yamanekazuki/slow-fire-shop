@@ -82,7 +82,8 @@ jobs:
             if [ "$code" = "200" ]; then echo "公開を確認"; exit 0; fi
             sleep 10
           done
-          echo "::warning::Pages反映の確認がタイムアウト。メールは送信します。"
+          echo "::error::Pages反映が5分で確認できず。公開メールは送信しない（2026-07-28テスト設計標準）。"
+          exit 1
 
       - name: 記事公開メール通知（3名）
         if: steps.gen.outputs.status == 'published'
@@ -169,3 +170,17 @@ jobs:
                 ${{ steps.gen.outputs.body }}
               </div>
             </div>
+
+      - name: 異常メール（反映未確認・実行失敗時）
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: yamane@potentialight.com
+          subject: 【SLOW FIRE】⚠ ブログ便失敗（本番反映が確認できず）
+          html_body: journal-blogワークフローが失敗しました。記事のPages反映が確認できなかったか、生成処理自体が失敗しています。Actionsログを確認してください。公開メールは送っていません。
