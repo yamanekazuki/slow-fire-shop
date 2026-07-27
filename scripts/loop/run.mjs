@@ -583,6 +583,8 @@ function emitBatchSummary(results) {
     to: TO,
     subject: `【${BRAND}】改善を自動実装：${pub.length}件を本番公開（全${results.length}件処理）`,
     html: batchSummaryHtml(results, pub, rej, oth),
+    // 公開があった場合のみ: workflowの「Pages反映を待機」ステップがこのcommitの反映を実測確認してからメールを送る
+    verify_sha: pub.length ? (pub[pub.length - 1].mainCommit || "") : "",
   });
 }
 
@@ -624,6 +626,7 @@ async function doPublish() {
     to: TO,
     subject: `【${BRAND}】本番に公開しました${changed ? `：${changed}` : ""}`,
     html: publishedHtml({ branch, mainCommit, changed }),
+    verify_sha: mainCommit,
   });
 }
 

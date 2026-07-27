@@ -43,6 +43,24 @@ jobs:
           BLOG_MODEL: claude-opus-4-8
         run: node scripts/loop/run.mjs
 
+      # 2026-07-28: 本番反映を実測確認してからメールを送る（メール先行→404レースの根絶・テスト設計標準）
+      # 公開commit(verify_sha)がPagesの最新buildとして built になるまで待つ。タイムアウト=失敗（下の異常メールが飛ぶ）。
+      - name: Pages反映を待機（公開があった場合のみ）
+        if: steps.loop.outputs.ready == 'true' && steps.loop.outputs.verify_sha != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ steps.loop.outputs.verify_sha }}
+        run: |
+          echo "反映待ち: $SHA"
+          for i in $(seq 1 30); do
+            build=$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" --jq '.commit + " " + .status' 2>/dev/null || echo "")
+            echo "  試行 $i: $build"
+            case "$build" in "$SHA built") echo "本番反映を確認"; exit 0;; esac
+            sleep 10
+          done
+          echo "::error::Pages反映が5分で確認できず。完了メールは送信しない。"
+          exit 1
+
       - name: 結果をメール（山根さん）
         if: steps.loop.outputs.ready == 'true'
         uses: dawidd6/action-send-mail@v3
@@ -56,3 +74,17 @@ jobs:
           to: ${{ steps.loop.outputs.to }}
           subject: ${{ steps.loop.outputs.subject }}
           html_body: ${{ steps.loop.outputs.html }}
+
+      - name: 異常メール（反映未確認・実行失敗時）
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
+          to: yamane@potentialight.com
+          subject: 【SLOW FIRE】⚠ 改善ループ失敗（本番反映が確認できず）
+          html_body: 改善ループが失敗しました。公開commitのPages反映が確認できなかったか、実装処理自体が失敗しています。Actionsログを確認してください。通常の完了メールは送っていません。
