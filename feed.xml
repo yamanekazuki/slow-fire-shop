@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 27 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 29 Jul 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQラブを自分で調合する——市販スパイスの「同じ味」から抜け出す配合設計</title>
+    <link>https://an-bbq.jp/journal/articles/blend-your-own-bbq-rub.html</link>
+    <guid>https://an-bbq.jp/journal/articles/blend-your-own-bbq-rub.html</guid>
+    <pubDate>Wed, 29 Jul 2026 07:00:00 +0900</pubDate>
+    <description>市販の万能スパイスだと誰が焼いても同じ味になる——その理由と抜け方を、塩・砂糖・香辛料の黄金比や食材別の配合例、たっぷり振ってインダイレクトで焼く手順まで数値で解説します。</description>
+  </item>
   <item>
     <title>BBQ献立は「大皿一発」より「小皿を波状で」— 熱々を切らさない設計術</title>
     <link>https://an-bbq.jp/journal/articles/small-plate-bbq-menu.html</link>
