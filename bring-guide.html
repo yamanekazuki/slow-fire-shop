@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>持ち物と会場ガイド｜どこでやるかで、持ち物は全部変わる - SLOW FIRE SHOP</title>
+  <meta name="description" content="グランピングから無料公園まで、BBQ会場を5レベルに分類。レベル別の持ち物マトリクス、会場タイプ比較表、野川公園（雨天）の運営者実録、レベルを選ぶと自動生成されるインタラクティブ持ち物チェックリスト付き。">
+  <meta name="keywords" content="BBQ 持ち物,BBQ 持ち物リスト,BBQ 会場,無料 BBQ 公園,野川公園 BBQ,夢の島 BBQ,葛西臨海公園 BBQ,手ぶらBBQ,グランピング,BBQ チェックリスト">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://an-bbq.jp/bring-guide.html">
+  <link rel="manifest" href="manifest.json">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="持ち物と会場ガイド｜どこでやるかで、持ち物は全部変わる">
+  <meta property="og:description" content="会場を5レベルに分類。持ち物ゼロのグランピングから、30点持参の無料公園まで。レベル別チェックリストと運営者の実録つき。">
+  <meta property="og:url" content="https://an-bbq.jp/bring-guide.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=70">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260708g">
+  <link rel="stylesheet" href="assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="assets/sf-features.css?v=20260708g">
+
+  <style>
+    /* ===== Bring Guide — 会場レベル別・持ち物特集 ===== */
+    :root {
+      --bg-cream: #faf7f2;
+      --bg-ink: #1c1917;
+      --bg-ember: #c2410c;
+      --bg-amber: #d97706;
+      --bg-forest: #166534;
+      --bg-grad: linear-gradient(100deg,#7c2d12,#c2410c 55%,#ea580c);
+    }
+
+    body.bg-page {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-cream);
+      color: var(--bg-ink);
+      overflow-x: hidden;
+    }
+
+    /* Living background */
+    .bg-bg { position: fixed; inset: 0; z-index: -2; background: var(--bg-cream); overflow: hidden; pointer-events: none; }
+    .bg-blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; will-change: transform; }
+    .bg-blob.b1 { width: 46vw; height: 46vw; left: -10vw; top: -8vw;
+      background: radial-gradient(circle at 40% 40%, rgba(234,88,12,.5), rgba(234,88,12,0) 70%);
+      animation: bgdrift1 26s ease-in-out infinite alternate; }
+    .bg-blob.b2 { width: 40vw; height: 40vw; right: -8vw; top: 24vh;
+      background: radial-gradient(circle at 50% 50%, rgba(22,101,52,.32), rgba(22,101,52,0) 70%);
+      animation: bgdrift2 32s ease-in-out infinite alternate; }
+    .bg-blob.b3 { width: 38vw; height: 38vw; left: 18vw; bottom: -12vw;
+      background: radial-gradient(circle at 50% 50%, rgba(124,45,18,.4), rgba(124,45,18,0) 70%);
+      animation: bgdrift3 30s ease-in-out infinite alternate; }
+    @keyframes bgdrift1 { from{transform:translate(0,0)} to{transform:translate(6vw,5vh)} }
+    @keyframes bgdrift2 { from{transform:translate(0,0)} to{transform:translate(-5vw,4vh)} }
+    @keyframes bgdrift3 { from{transform:translate(0,0)} to{transform:translate(4vw,-4vh)} }
+
+    .bg-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 1200; background: var(--bg-grad); transition: width .08s linear; }
+
+    /* Chapter rail */
+    .bg-rail { position: fixed; left: 26px; top: 50%; transform: translateY(-50%); z-index: 900; display: none; flex-direction: column; gap: 4px; }
+    @media (min-width: 1180px) { .bg-rail { display: flex; } }
+    .bg-rail a { display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 5px 0; color: rgba(28,25,23,.4); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+    .bg-rail-dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid rgba(28,25,23,.3); flex-shrink: 0; transition: all .25s; }
+    .bg-rail-txt { opacity: 0; transform: translateX(-6px); transition: all .25s; white-space: nowrap; max-width: 0; overflow: hidden; }
+    .bg-rail a:hover .bg-rail-txt, .bg-rail a.is-active .bg-rail-txt { opacity: 1; transform: none; max-width: 220px; }
+    .bg-rail a.is-active { color: var(--bg-ember); }
+    .bg-rail a.is-active .bg-rail-dot { background: var(--bg-ember); border-color: var(--bg-ember); transform: scale(1.25); }
+
+    /* HERO */
+    .bg-hero { position: relative; min-height: 86vh; display: flex; flex-direction: column; justify-content: center;
+      padding: calc(var(--nav-h) + 40px) 1.5rem 60px; max-width: 1000px; width: 100%; margin: 0 auto; overflow: hidden; }
+    .bg-hero > * { max-width: 100%; }
+    .bg-hero-photo { position: absolute; inset: 0; z-index: -1;
+      background: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=70') center/cover;
+      opacity: .15;
+      mask-image: linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg,#000 0%,#000 55%,transparent 100%); }
+    .bg-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .22em; color: var(--bg-ember); text-transform: uppercase; margin-bottom: 26px; }
+    .bg-eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--bg-ember); }
+    .bg-hero h1 { font-weight: 900; font-size: clamp(32px, 6.2vw, 68px); line-height: 1.18; letter-spacing: -.01em; margin-bottom: 26px; }
+    .bg-hero h1 em { font-style: normal; background: var(--bg-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .bg-lead { font-size: clamp(15px, 1.9vw, 18px); line-height: 2.05; color: #57534e; max-width: 640px; margin-bottom: 34px; }
+    .bg-lead strong { color: var(--bg-ink); font-weight: 700; }
+    .bg-hero-stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin-bottom: 32px; max-width: 620px; }
+    @media (max-width: 640px) { .bg-hero-stats { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 420px; } }
+    .bg-hstat { background: rgba(255,255,255,.62); backdrop-filter: blur(6px); border: 1px solid rgba(28,25,23,.09); border-radius: 14px; padding: 16px 18px; min-width: 0; }
+    .bg-hstat b { display: block; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 32px; line-height: 1; color: var(--bg-ember); letter-spacing: -.02em; }
+    .bg-hstat span { display: block; margin-top: 7px; font-size: 11.5px; font-weight: 600; color: #78716c; letter-spacing: .03em; }
+    .bg-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .bg-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--bg-grad); color: #fff; font-weight: 700; font-size: 14.5px; padding: 15px 28px; border-radius: 100px; text-decoration: none; box-shadow: 0 10px 30px rgba(194,65,12,.26); transition: transform .2s, box-shadow .2s; }
+    .bg-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(194,65,12,.34); }
+    .bg-btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--bg-ink); font-weight: 600; font-size: 14px; text-decoration: none; padding: 15px 4px; border-bottom: 1px solid rgba(28,25,23,.25); }
+    .bg-btn-ghost:hover { color: var(--bg-ember); border-color: var(--bg-ember); }
+
+    /* Section shell */
+    .bg-chapter { max-width: 1000px; margin: 0 auto; padding: 72px 1.5rem; scroll-margin-top: 90px; }
+    .bg-chapnum { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .2em; color: var(--bg-ember); margin-bottom: 12px; }
+    .bg-chapter h2 { font-weight: 900; font-size: clamp(25px, 4vw, 40px); line-height: 1.32; margin-bottom: 18px; letter-spacing: -.01em; }
+    .bg-chapter > p { font-size: 15.5px; line-height: 2.02; color: #57534e; max-width: 720px; }
+    .bg-chapter h3 { font-weight: 800; font-size: 18px; margin: 34px 0 14px; }
+
+    /* Level cards */
+    .bg-levels { display: grid; gap: 18px; margin-top: 34px; }
+    .bg-level { background: rgba(255,255,255,.72); border: 1px solid rgba(28,25,23,.09); border-left: 5px solid var(--lv, #c2410c); border-radius: 16px; padding: 24px 24px 22px; }
+    .bg-level-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+    .bg-level-badge { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .1em; color: #fff; background: var(--lv, #c2410c); border-radius: 100px; padding: 5px 12px; }
+    .bg-level-head h3 { margin: 0; font-size: 20px; font-weight: 900; }
+    .bg-level-cost { margin-left: auto; font-size: 12.5px; font-weight: 700; color: #78716c; }
+    .bg-level-scene { font-size: 14px; color: #57534e; line-height: 1.9; margin-bottom: 16px; }
+    .bg-level-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .bg-level-box { background: rgba(250,247,242,.85); border: 1px solid rgba(28,25,23,.07); border-radius: 12px; padding: 14px 16px; }
+    .bg-level-box b { display: block; font-size: 11.5px; letter-spacing: .08em; color: #78716c; margin-bottom: 7px; }
+    .bg-level-box p { font-size: 13.5px; line-height: 1.85; color: #44403c; margin: 0; }
+    .bg-level-foot { margin-top: 15px; display: flex; gap: 10px 16px; flex-wrap: wrap; align-items: center; font-size: 13px; }
+    .bg-level-foot .bg-charcoal { font-weight: 700; }
+    .bg-level-foot a { color: var(--bg-ember); font-weight: 700; text-decoration: none; border-bottom: 1px solid rgba(194,65,12,.3); }
+    .bg-level-foot a:hover { border-color: var(--bg-ember); }
+
+    /* Flow arrow strip */
+    .bg-flow { display: flex; align-items: stretch; gap: 8px; margin-top: 30px; overflow-x: auto; padding-bottom: 8px; }
+    .bg-flow-step { flex: 1 0 130px; text-align: center; border-radius: 12px; padding: 14px 10px; color: #fff; font-size: 12.5px; font-weight: 700; line-height: 1.6; }
+    .bg-flow-step small { display: block; font-weight: 500; opacity: .85; font-size: 11px; margin-top: 4px; }
+
+    /* Comparison table */
+    .bg-tablewrap { margin-top: 28px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid rgba(28,25,23,.1); border-radius: 14px; background: rgba(255,255,255,.75); }
+    .bg-table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 13.5px; }
+    .bg-table th, .bg-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid rgba(28,25,23,.07); vertical-align: top; line-height: 1.7; }
+    .bg-table thead th { background: rgba(28,25,23,.045); font-size: 12.5px; font-weight: 800; white-space: nowrap; position: sticky; top: 0; }
+    .bg-table tbody th { font-weight: 700; white-space: nowrap; background: rgba(250,247,242,.9); }
+    .bg-table td.y { color: var(--bg-forest); font-weight: 700; }
+    .bg-table td.n { color: #b91c1c; font-weight: 700; }
+    .bg-table td.m { color: var(--bg-amber); font-weight: 700; }
+    .bg-scrollhint { font-size: 12px; color: #a8a29e; margin-top: 8px; }
+    @media (min-width: 860px) { .bg-scrollhint { display: none; } }
+
+    /* Field report */
+    .bg-report { background: #1c1917; color: #f5f5f4; border-radius: 20px; padding: 34px 28px; margin-top: 30px; }
+    .bg-report h3 { color: #fff; margin-top: 0; font-size: 19px; }
+    .bg-report ol { margin: 18px 0 0; padding-left: 20px; }
+    .bg-report ol li { font-size: 14.5px; line-height: 1.95; margin-bottom: 12px; color: #d6d3d1; }
+    .bg-report ol li b { color: #fdba74; }
+    .bg-insights { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 26px; }
+    .bg-insight { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 18px 18px 16px; }
+    .bg-insight b { display: block; color: #fdba74; font-size: 13px; margin-bottom: 8px; }
+    .bg-insight p { font-size: 13.5px; line-height: 1.9; color: #d6d3d1; margin: 0; }
+
+    /* Checklist tool */
+    .bg-tool { background: rgba(255,255,255,.8); border: 1px solid rgba(28,25,23,.1); border-radius: 20px; padding: 26px 24px; margin-top: 28px; }
+    .bg-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .bg-tab { border: 1.5px solid rgba(28,25,23,.14); background: #fff; border-radius: 100px; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; color: #57534e; font-family: inherit; transition: all .18s; }
+    .bg-tab:hover { border-color: var(--bg-ember); color: var(--bg-ember); }
+    .bg-tab.is-on { background: var(--bg-grad); border-color: transparent; color: #fff; }
+    .bg-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+    .bg-count { font-size: 13px; font-weight: 700; color: #57534e; margin-right: auto; }
+    .bg-count b { color: var(--bg-ember); font-size: 17px; font-family: 'Inter', sans-serif; }
+    .bg-minibtn { border: 1.5px solid rgba(28,25,23,.14); background: #fff; border-radius: 100px; padding: 9px 15px; font-size: 12.5px; font-weight: 700; cursor: pointer; color: #44403c; font-family: inherit; }
+    .bg-minibtn:hover { border-color: var(--bg-ember); color: var(--bg-ember); }
+    .bg-cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+    .bg-cat { border: 1px solid rgba(28,25,23,.08); border-radius: 14px; padding: 16px 16px 12px; background: rgba(250,247,242,.7); }
+    .bg-cat h4 { font-size: 13.5px; font-weight: 800; margin: 0 0 12px; color: var(--bg-ember); letter-spacing: .04em; }
+    .bg-cat ul { list-style: none; margin: 0; padding: 0; }
+    .bg-cat li { margin-bottom: 9px; }
+    .bg-cat label { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.7; cursor: pointer; color: #292524; }
+    .bg-cat input { margin-top: 3px; width: 16px; height: 16px; accent-color: #c2410c; flex-shrink: 0; }
+    .bg-cat label.done span { text-decoration: line-through; color: #a8a29e; }
+    .bg-cat li small { display: block; margin-left: 26px; font-size: 11.5px; color: #78716c; line-height: 1.6; }
+    .bg-empty { font-size: 13.5px; color: #78716c; line-height: 1.9; }
+
+    /* FAQ */
+    .bg-faq { margin-top: 28px; display: grid; gap: 12px; }
+    .bg-faq details { background: rgba(255,255,255,.75); border: 1px solid rgba(28,25,23,.09); border-radius: 14px; padding: 4px 20px; }
+    .bg-faq summary { cursor: pointer; font-weight: 700; font-size: 15px; padding: 16px 0; list-style: none; }
+    .bg-faq summary::-webkit-details-marker { display: none; }
+    .bg-faq summary::before { content: 'Q'; font-family: 'Inter', sans-serif; font-weight: 900; color: var(--bg-ember); margin-right: 10px; }
+    .bg-faq details[open] summary { border-bottom: 1px solid rgba(28,25,23,.07); }
+    .bg-faq .a { font-size: 14px; line-height: 2; color: #57534e; padding: 14px 0 18px; }
+    .bg-faq .a a { color: var(--bg-ember); font-weight: 600; }
+
+    .bg-source { font-size: 12px; color: #a8a29e; line-height: 1.9; margin-top: 14px; }
+    .bg-source a { color: #a8a29e; }
+    .bg-callout { background: rgba(217,119,6,.09); border: 1px solid rgba(217,119,6,.25); border-radius: 14px; padding: 16px 18px; font-size: 13.5px; line-height: 1.95; color: #78350f; margin-top: 22px; }
+
+    /* Final CTA */
+    .bg-final { max-width: 1000px; margin: 0 auto; padding: 20px 1.5rem 90px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .bg-final a { display: block; background: rgba(255,255,255,.8); border: 1px solid rgba(28,25,23,.1); border-radius: 18px; padding: 26px 24px; text-decoration: none; color: var(--bg-ink); transition: transform .2s, box-shadow .2s; }
+    .bg-final a:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(28,25,23,.09); }
+    .bg-final b { display: block; font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+    .bg-final p { font-size: 13.5px; line-height: 1.85; color: #57534e; margin: 0 0 14px; }
+    .bg-final .go { font-size: 13px; font-weight: 700; color: var(--bg-ember); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media print {
+      .nav, .footer, .bg-rail, .bg-progress, .bg-bg, .bg-hero, .bg-final, .bg-tabs, .bg-toolbar, .bg-levels, .bg-tablewrap, .bg-report, .bg-faq, .bg-flow { display: none !important; }
+      body.bg-page { background: #fff; }
+      .bg-chapter { padding: 0; }
+      #checklist { display: block !important; }
+      .bg-cats { display: block; }
+      .bg-cat { break-inside: avoid; border: none; padding: 0 0 14px; background: none; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, .bg-blob { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "持ち物と会場ガイド｜どこでやるかで、持ち物は全部変わる",
+    "description": "BBQ会場を5レベルに分類し、レベル別の持ち物・費用・炭グリル可否を比較。野川公園（雨天）の運営者実録とインタラクティブ持ち物チェックリスト付き。",
+    "url": "https://an-bbq.jp/bring-guide.html",
+    "inLanguage": "ja-JP",
+    "datePublished": "2026-07-30",
+    "dateModified": "2026-07-30",
+    "author": {"@type": "Organization", "name": "SLOW FIRE"},
+    "publisher": {"@type": "Organization", "name": "SLOW FIRE"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "野川公園に洗剤やスポンジはありますか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "ありません。水道と洗い場はありますが洗剤・スポンジ・金たわしの備え付けはなく、洗い場には「グリルを洗わないで」という掲示があります。公式ルールでも水道での洗い物は不可とされているため、油汚れは激落ちくんとキッチンペーパーで拭き取り、器具は自宅で洗う前提で行くのが正解です。"}},
+      {"@type": "Question", "name": "新木場エリアでWeberなどのグリルは借りられますか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "夢の島公園バーベキュー広場はレンタル・販売が一切なく、30cm以上の足つきコンロ持参が必須です（卓上七輪・カセットコンロ不可）。同じ新木場エリアではHERO FIELD運営のBBQ場がグリル・テーブル・椅子などのレンタルを揃えています。若洲海浜公園キャンプ場はリニューアル工事のため2025年4月〜2027年3月（予定）で利用休止中です。"}},
+      {"@type": "Question", "name": "葛西臨海公園に食材を持ち込めますか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "持ち込めません。運営（zetton）のルールで衛生上、食材の持込は不可です（お菓子・飲料は持込可）。手ぶらプランは3,900円〜、キッズ1,200円。機材の持込は5日前までの申請制です。2026年7月時点の公式サイト記載。"}},
+      {"@type": "Question", "name": "無料の公園BBQは何点くらい持っていけばいいですか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "火まわり・食まわり・場まわり・後片付けを合わせて約30点です。無料公園にあるのは広場と水道とトイレだけで、グリル・机・椅子・タープ・皿・氷・飲み物・ゴミ袋・洗い道具まですべて自前になります。テーブルはグリル台で1台消えるため、食事用と別に2台以上見ておくと安全です。"}},
+      {"@type": "Question", "name": "机と椅子は何台必要ですか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "テーブルは最低2台、椅子は人数分です。グリルを載せる台で1台が埋まるため、食事用のテーブルは別に必要になります。人数が増えると机・椅子は線形に増えるので、車の積載量が実質的な人数の上限になります。"}},
+      {"@type": "Question", "name": "電気グリル（Weber Pulseなど）はどこで使えますか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "電源のあるレンタルスペース（レベル4）が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。"}},
+      {"@type": "Question", "name": "結局どのレベルを選べばいいですか？",
+       "acceptedAnswer": {"@type": "Answer", "text": "準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル1〜2、初参加の人が多い・幹事の負荷を下げたいならレベル3以上です。値段の差はそのまま「自分でやる量」の差なので、支払っているのは場所代ではなく段取りの代金だと考えると選びやすくなります。"}}
+    ]
+  }
+  </script>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B6PRVFPKF');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wmtxoerxqx");
+  </script>
+</head>
+
+<body class="bg-page">
+
+  <!-- LIVING BACKGROUND -->
+  <div class="bg-bg" aria-hidden="true">
+    <div class="bg-blob b1"></div>
+    <div class="bg-blob b2"></div>
+    <div class="bg-blob b3"></div>
+  </div>
+
+  <div class="bg-progress" id="bgProgress"></div>
+
+  <!-- NAV -->
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="essentials.html" role="menuitem">
+              <strong>BBQの神髄</strong>
+              <span>初めての方向け・グリルの選び方</span>
+            </a>
+            <a href="bring-guide.html" role="menuitem">
+              <strong>持ち物と会場ガイド</strong>
+              <span>会場レベル別・持ち物チェックリスト</span>
+            </a>
+            <a href="pairing-guide.html" role="menuitem">
+              <strong>食材から選ぶ</strong>
+              <span>部位別おすすめラブ・ペアリング</span>
+            </a>
+            <a href="cookbook.html" role="menuitem">
+              <strong>料理から選ぶ</strong>
+              <span>24品の料理ガイド</span>
+            </a>
+            <a href="rub-guide.html" role="menuitem">
+              <strong>ラブガイド</strong>
+              <span>ラブの種類と使い方</span>
+            </a>
+          </div>
+        </div>
+        <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="bbq-spots/index.html">BBQ場検索</a>
+        <a href="planner/index.html">プランナー</a>
+        <a href="team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='index.html'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CHAPTER RAIL -->
+  <nav class="bg-rail" id="bgRail" aria-label="章ナビ">
+    <a href="#levels" class="is-active"><span class="bg-rail-dot"></span><span class="bg-rail-txt">01 5つのレベル</span></a>
+    <a href="#compare"><span class="bg-rail-dot"></span><span class="bg-rail-txt">02 会場タイプ比較表</span></a>
+    <a href="#field"><span class="bg-rail-dot"></span><span class="bg-rail-txt">03 野川公園・雨の日の実録</span></a>
+    <a href="#checklist"><span class="bg-rail-dot"></span><span class="bg-rail-txt">04 持ち物チェックリスト</span></a>
+    <a href="#faq"><span class="bg-rail-dot"></span><span class="bg-rail-txt">05 よくある質問</span></a>
+    <a href="#next"><span class="bg-rail-dot"></span><span class="bg-rail-txt">06 次にやること</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="bg-hero">
+    <div class="bg-hero-photo" aria-hidden="true"></div>
+    <p class="bg-eyebrow reveal in">Bring Guide — 持ち物と会場</p>
+    <h1 class="reveal in">どこでやるかで、<br><em>持ち物は全部変わる。</em></h1>
+    <p class="bg-lead reveal in">
+      同じ「BBQをやろう」でも、会場のレベルが違えば持っていくものは<strong>ゼロから30点まで</strong>変わります。
+      グランピングなら着替えだけで着いた瞬間に火が入る。無料の公園なら、グリルも机も椅子も氷もゴミ袋も洗い道具も、全部こちらが積んでいく。
+      値段の差は、そのまま<strong>「自分でやる量」の差</strong>です。<br>
+      このページでは会場を5つのレベルに分けて、レベルごとの持ち物・費用・炭が使えるかどうかを並べます。
+      最後に、選んだレベルに合わせて<strong>持ち物チェックリストが自動で出る</strong>ようにしてあります。
+    </p>
+    <div class="bg-hero-stats reveal in">
+      <div class="bg-hstat"><b>5</b><span>会場レベル</span></div>
+      <div class="bg-hstat"><b>約30</b><span>無料公園での持参点数</span></div>
+      <div class="bg-hstat"><b>24</b><span>収録BBQ場</span></div>
+      <div class="bg-hstat"><b>3〜4h</b><span>作って食べて楽しんでトータル</span></div>
+    </div>
+    <div class="bg-cta-row reveal in">
+      <a href="#checklist" class="bg-btn">持ち物チェックリストへ →</a>
+      <a href="#levels" class="bg-btn-ghost">まず5レベルを見る</a>
+    </div>
+  </section>
+
+  <!-- 01 LEVELS -->
+  <section class="bg-chapter" id="levels">
+    <p class="bg-chapnum reveal">CHAPTER 01</p>
+    <h2 class="reveal">会場は5つのレベルに分かれる</h2>
+    <p class="reveal">
+      BBQ場の情報は「無料か有料か」で語られがちですが、実際に効いてくるのは<strong>どこまで施設が用意してくれるか</strong>です。
+      同じ「有料」でも、機材と食材までついてくる手ぶらプランと、場所と洗い場しかない広場では準備がまるで違います。
+      レベル5から1へ下がるほど費用は下がり、持ち物と段取りは増えます。
+    </p>
+
+    <div class="bg-flow reveal">
+      <div class="bg-flow-step" style="background:#166534;">Lv5 グランピング<small>持ち物ほぼゼロ</small></div>
+      <div class="bg-flow-step" style="background:#15803d;">Lv4 レンタルスペース<small>グリルと食材</small></div>
+      <div class="bg-flow-step" style="background:#d97706;">Lv3 手ぶら有料BBQ場<small>ほぼ手ぶら</small></div>
+      <div class="bg-flow-step" style="background:#c2410c;">Lv2 有料BBQ場<small>食材＋足りない機材</small></div>
+      <div class="bg-flow-step" style="background:#7c2d12;">Lv1 無料公園<small>全部持参・約30点</small></div>
+    </div>
+
+    <div class="bg-levels">
+
+      <article class="bg-level reveal" style="--lv:#166534;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 5</span>
+          <h3>グランピング</h3>
+          <span class="bg-level-cost">費用感：高（1人1.5万円〜）</span>
+        </div>
+        <p class="bg-level-scene">記念日、遠方からの来客、子連れで失敗したくない日。準備と片付けを丸ごと外注して、食べて話す時間だけを取りに行く選択です。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>大型ガスグリル／トング・耐熱グローブ／皿・箸・フォーク／冷蔵庫／温度計／洗剤。施設によっては塩・胡椒・醤油・油まで無料備付。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>着替え程度。食材込みのプランが多く、こだわりのラブやソースを持ち込むくらい。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#b91c1c;">炭グリル：✕（ガスのみが大半・火器持込禁止の施設が多い）</span>
+        </div>
+        <p class="bg-source">例：グランファーム富士河口湖（大型ガスグリル・食器・調味料の無料備付、火器持込禁止／<a href="https://www.fuji-farm-glamping.com/meal/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。冷蔵庫の有無・ゴミの扱い・料金詳細は施設差が大きいため、公式で要確認。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#15803d;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 4</span>
+          <h3>レンタルスペース（屋内・屋上）</h3>
+          <span class="bg-level-cost">費用感：中（時間貸し）</span>
+        </div>
+        <p class="bg-level-scene">雨で流したくない日、夜まで長くやりたい日、電気グリルでじっくり焼きたい日。屋根と電源があることが最大の価値です。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>皿・調理器具・油・洗剤・シンク・ゴミ処理（物件による）。BBQコンロ設置済みの物件や、Weber一式＋炭をレンタルできる物件もあります。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>グリル（炭 or 電源グリル）・食材・調味料。何が付いていて何が付いていないかは物件ごとに全然違うので、予約前に備品リストを確認します。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#d97706;">炭グリル：物件による（屋内は電気グリルが現実解）</span>
+        </div>
+        <p class="bg-source">物件差が非常に大きいカテゴリです（<a href="https://www.spacemarket.com/features/bbq/" target="_blank" rel="noopener nofollow">スペースマーケット BBQ特集</a>・2026年7月時点）。個別確認が前提。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#d97706;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 3</span>
+          <h3>手ぶら有料BBQ場</h3>
+          <span class="bg-level-cost">費用感：中〜高（1人4,000円前後〜）</span>
+        </div>
+        <p class="bg-level-scene">初参加の人が多いとき、幹事がひとりで抱えたくないとき。買い出しも積み込みもなく、集合すれば始まります。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>機材一式＋食材プラン＋ゴミ処理。洗浄用具の無料貸出がある施設も。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>ほぼなし。ただし食材の持込を禁じている施設があるので、こだわり食材を持ち込む前提なら要確認。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#d97706;">炭グリル：施設の機材のみ（自前グリルの持込は要確認）</span>
+          <a href="bbq-spots/kasai-rinkai-koen-bbq.html">葛西臨海公園を見る →</a>
+        </div>
+        <p class="bg-source">葛西臨海公園（zetton運営）は手ぶら3,900円〜・キッズ1,200円、<strong>食材持込は衛生上不可</strong>（菓子・飲料は可）、機材持込は5日前申請制（<a href="https://kasai-bbq.zetton.co.jp/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#c2410c;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 2</span>
+          <h3>有料BBQ場（機材レンタルあり）</h3>
+          <span class="bg-level-cost">費用感：中（場所代＋レンタル代）</span>
+        </div>
+        <p class="bg-level-scene">道具は少しずつ揃えている段階の人向け。足りないものだけ借りて、焼き方は自分でコントロールできます。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>レンタルグリル（台数は多くない）・洗い場・ゴミ処理・売店。施設によってテーブルや椅子も単品レンタル。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>食材・飲料・皿・調味料、そしてレンタルでカバーされない機材。レンタル台数が少ないので、グリルは自前で持っていくほうが確実です。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ ただし足つき必須のルールあり</span>
+          <a href="bbq-spots/hero-field-shinkiba.html">HERO FIELD新木場を見る →</a>
+        </div>
+        <p class="bg-callout">
+          <strong>新木場エリアの足つきルール</strong>：夢の島公園バーベキュー広場はレンタル・販売が一切なく、<strong>30cm以上の足つきコンロ持参が必須</strong>（卓上七輪・カセットコンロ不可、ゴミは全持ち帰り、手洗い場のみ）。
+          机の上に30cmのグリルを置いてもNGとされた例があり、監視は厳しめです。木場公園（HERO FIELD運営）も30cm以上の脚付き必須・直火／七輪禁止で、レンタルはグリル4,950円・テーブル1,320円・椅子330円など。
+          若洲海浜公園キャンプ場はリニューアル工事のため<strong>2025年4月〜2027年3月（予定）で利用休止中</strong>です。
+        </p>
+        <p class="bg-source">出典：<a href="https://www.yumenoshima.jp/barbecue" target="_blank" rel="noopener nofollow">夢の島公園</a>／<a href="https://www.herofield.com/bbq/kiba/how.html" target="_blank" rel="noopener nofollow">HERO FIELD木場公園</a>／<a href="https://www.tptc.co.jp/park/news/detail/1958" target="_blank" rel="noopener nofollow">東京港埠頭（若洲）</a>・いずれも2026年7月時点。料金・レンタル在庫は変わるため予約時に公式で要確認。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#7c2d12;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 1</span>
+          <h3>無料公園（フルセルフ）</h3>
+          <span class="bg-level-cost">費用感：無料（そのぶん全部自前）</span>
+        </div>
+        <p class="bg-level-scene">道具が揃っていて、焼き方も片付けも自分たちで回せるチーム向け。自由度は最大で、監視もゆるく、蓋を閉めてじっくり焼く余地があります。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>広場と水道とトイレだけ。びっくりするほど何もない、というのが実感です。売店がある公園でも扱いは炭くらい。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>火まわり・食まわり・場まわり・後片付けの<strong>約30点すべて</strong>。氷も飲み物も洗剤も含みます。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ 自由度最大</span>
+          <a href="bbq-spots/nogawa-koen-bbq.html">野川公園を見る →</a>
+          <a href="bbq-spots/musashino-koen-bbq.html">武蔵野公園を見る →</a>
+        </div>
+        <p class="bg-source">野川公園・武蔵野公園はいずれも事前予約制（ネットは2ヶ月前〜前日、当日はサービスセンター）、火気は10:00〜16:00、直火・カセットコンロ・プロパン不可、ゴミは持ち帰り。野川公園は水道があっても洗い物での使用は不可（公式ルール）、売店は炭のみ販売。武蔵野公園は売店・貸出なしで全持参。料金額は公式に記載がないため未検証、予約時に要確認。出典：<a href="https://musashinoparks.com/bbq/nogawa/" target="_blank" rel="noopener nofollow">野川公園</a>／<a href="https://musashinoparks.com/bbq/musasino/" target="_blank" rel="noopener nofollow">武蔵野公園</a>・2026年7月時点。</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 02 COMPARE -->
+  <section class="bg-chapter" id="compare">
+    <p class="bg-chapnum reveal">CHAPTER 02</p>
+    <h2 class="reveal">会場タイプ比較表</h2>
+    <p class="reveal">
+      「あり」と書いてあるものは持っていかなくていいもの、「持参」と書いてあるものは車に積むものです。
+      レベルが1つ下がるごとに、荷物とタスクがどこで増えるのかが見えます。
+    </p>
+    <div class="bg-tablewrap reveal">
+      <table class="bg-table">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>Lv5 グランピング</th>
+            <th>Lv4 レンタルスペース</th>
+            <th>Lv3 手ぶら有料</th>
+            <th>Lv2 有料＋レンタル</th>
+            <th>Lv1 無料公園</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">グリル</th>
+            <td class="y">あり（ガス）</td>
+            <td class="m">物件による</td>
+            <td class="y">あり</td>
+            <td class="m">レンタル僅少・持参推奨</td>
+            <td class="n">持参</td>
+          </tr>
+          <tr>
+            <th scope="row">机・椅子</th>
+            <td class="y">あり</td>
+            <td class="y">あり</td>
+            <td class="y">あり</td>
+            <td class="m">施設・レンタルによる</td>
+            <td class="n">持参（机2台以上＋椅子人数分）</td>
+          </tr>
+          <tr>
+            <th scope="row">皿・調理器具</th>
+            <td class="y">あり</td>
+            <td class="y">あり（物件による）</td>
+            <td class="y">あり</td>
+            <td class="n">持参</td>
+            <td class="n">持参</td>
+          </tr>
+          <tr>
+            <th scope="row">洗剤・洗い場</th>
+            <td class="y">あり</td>
+            <td class="y">シンク・洗剤あり</td>
+            <td class="m">洗浄用具の貸出あり（施設による）</td>
+            <td class="m">洗い場あり・洗剤は持参</td>
+            <td class="n">水道はあるが洗い物不可・洗剤なし</td>
+          </tr>
+          <tr>
+            <th scope="row">ゴミ処理</th>
+            <td class="y">施設で処理</td>
+            <td class="m">物件による</td>
+            <td class="y">プランに含む（持込品は有料の場合あり）</td>
+            <td class="m">有料回収 or 全持ち帰り</td>
+            <td class="n">全持ち帰り</td>
+          </tr>
+          <tr>
+            <th scope="row">飲み物・氷</th>
+            <td class="m">プランによる</td>
+            <td class="n">持参</td>
+            <td class="m">プランによる</td>
+            <td class="m">売店あり・氷は持参が安全</td>
+            <td class="n">持参（自販機は遠い前提）</td>
+          </tr>
+          <tr>
+            <th scope="row">監視・ルールの厳しさ</th>
+            <td class="m">火器持込禁止が多い</td>
+            <td class="m">物件ルール次第</td>
+            <td class="m">食材持込制限あり</td>
+            <td class="n">厳しめ（足つき必須・卓上NG）</td>
+            <td class="y">ゆるめ（係員ほぼ不在）</td>
+          </tr>
+          <tr>
+            <th scope="row">費用</th>
+            <td>1人1.5万円〜</td>
+            <td>時間貸し</td>
+            <td>1人4,000円前後〜</td>
+            <td>場所代＋レンタル代</td>
+            <td>無料（詳細は公式で要確認）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bg-scrollhint">← 横にスクロールできます</p>
+    <p class="bg-callout">
+      価格・レンタル内容はいずれも<strong>2026年7月時点の各公式サイト記載</strong>です。シーズンや改定で変わるので、予約前に必ず公式で確認してください。
+      「未確認」と書いていない項目でも、施設ごとの例外はあります。
+    </p>
+  </section>
+
+  <!-- 03 FIELD REPORT -->
+  <section class="bg-chapter" id="field">
+    <p class="bg-chapnum reveal">CHAPTER 03</p>
+    <h2 class="reveal">運営者の実録：雨の日の野川公園</h2>
+    <p class="reveal">
+      2026年7月下旬、大人4人＋子ども1人で野川公園へ。あいにくの雨でした。
+      レベル1の無料公園がどういう場所なのか、実際に行って初めてわかったことを、そのまま並べます。
+    </p>
+
+    <div class="bg-report reveal">
+      <h3>行ってわかった11のこと</h3>
+      <ol>
+        <li><b>コンビニは車なら行ける距離。</b>忘れ物が出ても致命傷にはならない、が歩きだと厳しい。</li>
+        <li><b>車がないとアクセスは弱い。</b>荷物量を考えると、最寄り駅からタクシーで相乗りするのが現実的な正解でした。</li>
+        <li><b>びっくりするほど何もない。</b>あるのは広場だけ。これが無料の所以です。</li>
+        <li><b>机と椅子は人数分持参。</b>しかも机は1台では足りません。スモーキージョーとAnywhereを載せた時点で1台がグリル台として消え、食事用のテーブルが別に必要でした。</li>
+        <li><b>飲み物と氷も持参。</b>自販機を当てにして買い足しに行く時間がもったいない。</li>
+        <li><b>ゴミ袋は必須。</b>1枚ではなく複数枚。どこか1箇所に常設しておくと、その後のオペレーションが一気に楽になります。</li>
+        <li><b>洗剤・スポンジ・金たわしはない。</b>洗い場には「グリルを洗わないで」の掲示、係員はほぼ不在。激落ちくんを持っていったのが正解でした。</li>
+        <li><b>周囲は焼肉スタイルばかり。</b>蓋つきグリルを持ち込んでいる人はゼロ。</li>
+        <li><b>監視がゆるい。</b>新木場の「足つき必須・机の上に30cmのグリルを置いてもNG」とは対照的でした。</li>
+        <li><b>後片付けが本当に大変。</b>グランピングが流行る理由を身をもって理解しました。</li>
+        <li><b>値段の差は、ランクの差そのもの。</b>払っているのは場所代ではなく段取りの代金です。</li>
+      </ol>
+
+      <div class="bg-insights">
+        <div class="bg-insight">
+          <b>「無料」の所以</b>
+          <p>無料公園が無料なのは、施設が提供しているのが土地だけだからです。グリル・机・椅子・皿・氷・ゴミ処理・洗い道具という、有料施設が肩代わりしてくれる部分を全部こちらが負担している。無料というより「全部自分でやる契約」だと思ったほうが準備が正確になります。</p>
+        </div>
+        <div class="bg-insight">
+          <b>新木場との対比</b>
+          <p>新木場エリアは足つきコンロ必須で、机の上に置くこともNG。自由度は低いぶん、レンタルとゴミ処理と洗い場が揃っています。野川はその逆で、自由だけど全部自前。どちらが良いではなく、<strong>自由度と手間はトレードオフ</strong>だと理解して選ぶのが正解です。</p>
+        </div>
+        <div class="bg-insight">
+          <b>グランピングが流行る理由</b>
+          <p>楽しい時間より、その前後の積み込みと後片付けのほうが長い。作って食べて楽しんでトータル3〜4時間で完結させたいなら、レベルを上げてしまうのが最短です。逆に、道具を揃えて段取りを覚えるほど、レベル1が一番自由で一番安いという逆転が起きます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 CHECKLIST -->
+  <section class="bg-chapter" id="checklist">
+    <p class="bg-chapnum reveal">CHAPTER 04</p>
+    <h2 class="reveal">レベル別・持ち物チェックリスト</h2>
+    <p class="reveal">
+      行く会場のレベルを選ぶと、必要な持ち物だけが表示されます。チェックした状態はこの端末に保存されるので、
+      買い出し中に閉じても消えません。リストをコピーしてグループチャットに貼るのが、いちばん揉めない配り方です。
+    </p>
+
+    <div class="bg-tool reveal">
+      <div class="bg-tabs" id="bgTabs" role="tablist" aria-label="会場レベル">
+        <button class="bg-tab" data-lv="5" role="tab">Lv5 グランピング</button>
+        <button class="bg-tab" data-lv="4" role="tab">Lv4 レンタルスペース</button>
+        <button class="bg-tab" data-lv="3" role="tab">Lv3 手ぶら有料</button>
+        <button class="bg-tab" data-lv="2" role="tab">Lv2 有料＋レンタル</button>
+        <button class="bg-tab is-on" data-lv="1" role="tab">Lv1 無料公園</button>
+      </div>
+
+      <div class="bg-toolbar">
+        <span class="bg-count" id="bgCount">0 / 0 チェック済み</span>
+        <button class="bg-minibtn" id="bgCopy" type="button">リストをコピー</button>
+        <button class="bg-minibtn" id="bgPrint" type="button">印刷する</button>
+        <button class="bg-minibtn" id="bgReset" type="button">チェックをリセット</button>
+      </div>
+
+      <div class="bg-cats" id="bgCats"></div>
+    </div>
+    <p class="bg-source">△＝施設・物件によるため、予約時に公式で要確認の項目です。人数が増えるほど机・椅子は線形に増えます。</p>
+  </section>
+
+  <!-- 05 FAQ -->
+  <section class="bg-chapter" id="faq">
+    <p class="bg-chapnum reveal">CHAPTER 05</p>
+    <h2 class="reveal">よくある質問</h2>
+
+    <div class="bg-faq reveal">
+      <details>
+        <summary>野川公園に洗剤はある？</summary>
+        <div class="a">ありません。水道と洗い場はありますが、洗剤・スポンジ・金たわしの備え付けはなく、洗い場には「グリルを洗わないで」という掲示があります。公式ルールでも水道での洗い物は不可とされています（<a href="https://musashinoparks.com/bbq/nogawa/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。油汚れは激落ちくんとキッチンペーパーで拭き取り、器具は自宅で洗う前提で行くのが正解です。</div>
+      </details>
+      <details>
+        <summary>新木場エリアでWeberは借りられる？</summary>
+        <div class="a">
+          施設によって大きく違います。<br>
+          ・<strong>夢の島公園バーベキュー広場</strong>：レンタル・販売は一切なし。<strong>30cm以上の足つきコンロ持参が必須</strong>で、卓上七輪・カセットコンロは不可。ゴミは全持ち帰り、手洗い場のみ。予約制（2ヶ月前〜）で場所は無料、卓30台（<a href="https://www.yumenoshima.jp/barbecue" target="_blank" rel="noopener nofollow">公式</a>）。<br>
+          ・<strong>HERO FIELD新木場</strong>：レンタルが豊富に揃うタイプの施設です。<a href="bbq-spots/hero-field-shinkiba.html">施設ページ</a>と公式で最新の在庫・料金を確認してください。<br>
+          ・<strong>若洲海浜公園キャンプ場</strong>：リニューアル工事で<strong>2025年4月〜2027年3月（予定）は利用休止中</strong>（<a href="https://www.tptc.co.jp/park/news/detail/1958" target="_blank" rel="noopener nofollow">東京港埠頭</a>）。<br>
+          同じ運営のHERO FIELD木場公園は、器材レンタルのみ1,980円、手ぶら食材付4,580円、グリル4,950円・テーブル1,320円・椅子330円などの単品レンタルあり（<a href="https://www.herofield.com/bbq/kiba/how.html" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。特定機種の指定貸出については各施設の公式で要確認です。
+        </div>
+      </details>
+      <details>
+        <summary>葛西臨海公園に食材は持ち込める？</summary>
+        <div class="a">持ち込めません。運営（zetton）のルールで<strong>衛生上、食材の持込は不可</strong>です（お菓子・飲料は持込可）。手ぶらプランは3,900円〜、キッズ1,200円。<strong>機材の持込は5日前までの申請制</strong>、かまどはなく移動式コンロを使用します。食材プランのゴミは無料回収、持込品のゴミは1袋220円。プラン利用者には洗浄用具の無料貸出あり。予約は60日前から（<a href="https://kasai-bbq.zetton.co.jp/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。→ <a href="bbq-spots/kasai-rinkai-koen-bbq.html">施設ページ</a></div>
+      </details>
+      <details>
+        <summary>無料の公園BBQは何点くらい持っていけばいい？</summary>
+        <div class="a">火まわり・食まわり・場まわり・後片付けを合わせて<strong>約30点</strong>です。無料公園にあるのは広場と水道とトイレだけなので、グリル・炭・着火剤・トング・グローブ・机・椅子・タープ・皿・まな板・氷・飲み物・ゴミ袋・洗い道具まですべて自前になります。<a href="#checklist">上のチェックリスト</a>でLv1を選ぶと全項目が出ます。</div>
+      </details>
+      <details>
+        <summary>机と椅子は何台必要？</summary>
+        <div class="a">テーブルは最低2台、椅子は人数分です。グリルを載せる台で1台が埋まるため、食事用のテーブルは別に必要になります（野川公園の実録より）。人数が増えると机・椅子は線形に増えるので、実質的には<strong>車の積載量が人数の上限</strong>になります。</div>
+      </details>
+      <details>
+        <summary>電気グリル（Weber Pulseなど）はどこで使える？</summary>
+        <div class="a">電源のある<strong>レンタルスペース（レベル4）</strong>が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。各会場の電源・発電機の可否は<a href="bbq-spots/index.html">BBQ場検索</a>で確認できます。</div>
+      </details>
+      <details>
+        <summary>結局どのレベルを選べばいい？</summary>
+        <div class="a">準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル1〜2、初参加の人が多い・幹事の負荷を下げたいならレベル3以上。<strong>作って食べて楽しんでトータル3〜4時間で完結</strong>させたいなら、迷わずレベルを上げてしまうほうが満足度は高くなります。値段の差はそのまま「自分でやる量」の差です。</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 06 NEXT -->
+  <section class="bg-chapter" id="next" style="padding-bottom:24px;">
+    <p class="bg-chapnum reveal">CHAPTER 06</p>
+    <h2 class="reveal">次にやること</h2>
+    <p class="reveal">会場のレベルが決まったら、あとは場所を決めて段取りを組むだけです。</p>
+  </section>
+  <div class="bg-final">
+    <a href="bbq-spots/index.html" class="reveal">
+      <b>BBQ場を探す</b>
+      <p>首都圏24会場のデータベース。炭・電気・持込・洗い場・ゴミ処理の可否まで条件で絞り込めます。</p>
+      <span class="go">BBQ場検索へ →</span>
+    </a>
+    <a href="planner/index.html" class="reveal">
+      <b>当日の段取りを組む</b>
+      <p>人数と時間を入れると、火入れから配膳までのタイムラインを作ります。作って食べて楽しんでトータル3〜4時間で完結。</p>
+      <span class="go">プランナーへ →</span>
+    </a>
+    <a href="https://yoron-bbq.com/bring-guide.html" target="_blank" rel="noopener">
+      <b>YORON BBQ の持ち物ページ</b>
+      <p>コミュニティ側の持ち物ガイド。次回の集まりに参加する人はこちらもどうぞ。</p>
+      <span class="go">yoron-bbq.com へ →</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html#products">商品一覧</a>
+          <a href="essentials.html">BBQの神髄</a>
+          <a href="bring-guide.html">持ち物と会場ガイド</a>
+          <a href="rub-guide.html">ラブガイド</a>
+          <a href="pairing-guide.html">ペアリング</a>
+          <a href="cookbook.html">料理ガイド</a>
+          <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="team.html">私たちについて</a><a href="legal/tokushoho.html">特定商取引法</a><a href="legal/privacy.html">プライバシー</a><a href="legal/terms.html">利用規約</a><a href="about/">About</a><a href="contact/">お問い合わせ</a></nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#' || id.length < 2) return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* reading progress */
+    const progress = document.getElementById('bgProgress');
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* scroll reveal */
+    (function() {
+      const items = document.querySelectorAll('.reveal:not(.in)');
+      if (reduce) { items.forEach(i => i.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+      items.forEach(i => io.observe(i));
+    })();
+
+    /* chapter rail */
+    (function() {
+      const chapters = document.querySelectorAll('.bg-chapter');
+      const links = document.querySelectorAll('.bg-rail a');
+      if (!chapters.length || !links.length) return;
+      const setActive = (id) => links.forEach(l => l.classList.toggle('is-active', l.getAttribute('href').slice(1) === id));
+      const io = new IntersectionObserver((entries) => {
+        const vis = entries.filter(e => e.isIntersecting).sort((a, b) => a.target.offsetTop - b.target.offsetTop);
+        if (vis.length) setActive(vis[0].target.id);
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      chapters.forEach(c => io.observe(c));
+    })();
+
+    /* ===== Interactive bring-list ===== */
+    (function() {
+      // levels: 対象レベル配列。note は補足。
+      const ITEMS = {
+        fire: { label: '火まわり', items: [
+          { t: 'グリル（蓋つき）', lv: [1,2], note: 'Lv2はレンタル台数が少ないので持参が安全。足つき30cm以上のルールがある会場は要確認' },
+          { t: 'グリル（物件備品を確認）', lv: [4], note: '設置済み物件・Weber一式レンタル物件あり。予約前に備品リストを確認' },
+          { t: '炭 or 燃料', lv: [1,2], note: '野川公園は売店で炭のみ販売' },
+          { t: 'チムニースターター', lv: [1,2] },
+          { t: '着火剤・ライター', lv: [1,2] },
+          { t: '耐熱グローブ', lv: [1,2] },
+          { t: 'トング（炭用・調理用の2本）', lv: [1,2], note: '1本で兼用すると必ず困ります' },
+          { t: '温度計', lv: [1,2,4], note: '蓋を閉めて焼くなら必須' },
+          { t: '火消し壺 or 消火用の水', lv: [1,2], note: '炭の後始末は自分たちの責任' }
+        ]},
+        food: { label: '食まわり', items: [
+          { t: '食材', lv: [1,2,4], note: 'Lv3は持込不可の施設あり（葛西臨海公園は衛生上不可・菓子飲料は可）' },
+          { t: 'ラブ・調味料', lv: [1,2,3,4,5], note: 'Lv3〜5でも自分のラブを持っていくと味が変わります' },
+          { t: '油', lv: [1,2] },
+          { t: 'クーラーボックス', lv: [1,2] },
+          { t: '氷（買っていく）', lv: [1,2], note: '現地調達を当てにしない' },
+          { t: '飲み物', lv: [1,2], note: '自販機は遠い前提で' },
+          { t: '皿・カトラリー', lv: [1,2] },
+          { t: 'まな板・包丁', lv: [1,2] },
+          { t: 'アルミホイル・バット', lv: [1,2], note: 'テキサスクラッチにも休ませにも使う' }
+        ]},
+        place: { label: '場まわり', items: [
+          { t: 'テーブル×2台以上', lv: [1], note: 'グリル台で1台消えるので、食事用は別に必要（野川公園の実録）' },
+          { t: 'テーブル（レンタル可否を確認）', lv: [2], note: '木場公園は1台1,320円などの単品レンタルあり' },
+          { t: '椅子×人数分', lv: [1] },
+          { t: '椅子（レンタル可否を確認）', lv: [2], note: '木場公園は1脚330円' },
+          { t: 'タープ・日よけ', lv: [1], note: '屋根なしの会場が大半。雨でも日差しでも効きます' },
+          { t: 'レジャーシート', lv: [1] },
+          { t: '防寒着・雨具', lv: [1,2], note: '海沿いは風が強い日が多い' }
+        ]},
+        clean: { label: '後片付け', items: [
+          { t: 'ゴミ袋（複数枚）', lv: [1,2], note: 'どこかに常設するとオペが一気に楽になります' },
+          { t: '洗剤', lv: [1,2], note: '野川公園は洗い場はあるが洗剤なし・洗い物での水道使用は不可' },
+          { t: 'スポンジ・金たわし・激落ちくん', lv: [1,2], note: '「グリルを洗わないで」の掲示あり。拭き取って持ち帰る前提で' },
+          { t: 'ウェットティッシュ・キッチンペーパー', lv: [1,2,3,4] },
+          { t: '持ち帰り用の防臭袋', lv: [1,2], note: 'ゴミ全持ち帰りの会場では必需品' },
+          { t: 'ゴミ処理の料金を確認', lv: [2,3], note: '木場公園45L=500円・炭処理300円／葛西臨海は持込品1袋220円（2026年7月時点）' }
+        ]}
+      };
+
+      const LEVEL_NOTE = {
+        5: 'グランピングはガスグリル・食器・トング・耐熱グローブ・洗剤まで備え付けなのが一般的です。持ち物は着替え程度で、あとは自分のラブくらい。火器の持込は禁止されている施設が多いので、炭を焚くつもりなら別のレベルを選びます。',
+        4: '物件差が非常に大きいカテゴリです。皿・油・調理器具・洗剤・シンクが揃っている物件もあれば、何もない物件もあります。予約前に備品リストを確認して、足りないぶんだけ積んでください。',
+        3: '手ぶらプランなら基本的に持ち物はありません。食材の持込を禁じている施設があるので、こだわり食材を持っていくつもりなら事前に確認を。自分のラブだけ持っていくのが、いちばん費用対効果の高い一手です。',
+        2: '食材と皿と調味料、そしてレンタルでカバーされない機材を持っていきます。レンタルグリルは台数が多くないので、自前のグリルを積むほうが確実です。足つき必須の会場が多い点に注意。',
+        1: '広場と水道とトイレしかありません。ここに出ている全部が持ち物です。'
+      };
+
+      const tabs = document.getElementById('bgTabs');
+      const cats = document.getElementById('bgCats');
+      const countEl = document.getElementById('bgCount');
+      if (!tabs || !cats) return;
+
+      let level = parseInt(localStorage.getItem('sf-bring-level') || '1', 10);
+      if (![1,2,3,4,5].includes(level)) level = 1;
+
+      const key = (lv, t) => 'sf-bring-' + lv + '-' + t;
+
+      function updateCount() {
+        const boxes = cats.querySelectorAll('input[type=checkbox]');
+        const done = cats.querySelectorAll('input[type=checkbox]:checked').length;
+        countEl.innerHTML = '<b>' + done + '</b> / ' + boxes.length + ' チェック済み';
+      }
+
+      function render() {
+        tabs.querySelectorAll('.bg-tab').forEach(b => b.classList.toggle('is-on', parseInt(b.dataset.lv, 10) === level));
+        cats.innerHTML = '';
+
+        const note = document.createElement('p');
+        note.className = 'bg-empty';
+        note.style.gridColumn = '1 / -1';
+        note.textContent = LEVEL_NOTE[level];
+        cats.appendChild(note);
+
+        let total = 0;
+        Object.keys(ITEMS).forEach(catKey => {
+          const cat = ITEMS[catKey];
+          const list = cat.items.filter(i => i.lv.includes(level));
+          if (!list.length) return;
+          total += list.length;
+          const box = document.createElement('div');
+          box.className = 'bg-cat';
+          const h = document.createElement('h4');
+          h.textContent = cat.label + '（' + list.length + '）';
+          box.appendChild(h);
+          const ul = document.createElement('ul');
+          list.forEach(item => {
+            const li = document.createElement('li');
+            const label = document.createElement('label');
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = localStorage.getItem(key(level, item.t)) === '1';
+            const span = document.createElement('span');
+            span.textContent = item.t;
+            label.appendChild(cb);
+            label.appendChild(span);
+            label.classList.toggle('done', cb.checked);
+            cb.addEventListener('change', () => {
+              localStorage.setItem(key(level, item.t), cb.checked ? '1' : '0');
+              label.classList.toggle('done', cb.checked);
+              updateCount();
+            });
+            li.appendChild(label);
+            if (item.note) {
+              const small = document.createElement('small');
+              small.textContent = item.note;
+              li.appendChild(small);
+            }
+            ul.appendChild(li);
+          });
+          box.appendChild(ul);
+          cats.appendChild(box);
+        });
+
+        if (!total) {
+          const p = document.createElement('p');
+          p.className = 'bg-empty';
+          p.style.gridColumn = '1 / -1';
+          p.textContent = 'このレベルで必ず持っていくものは、実質ありません。身ひとつで大丈夫です。';
+          cats.appendChild(p);
+        }
+        updateCount();
+      }
+
+      tabs.addEventListener('click', e => {
+        const btn = e.target.closest('.bg-tab');
+        if (!btn) return;
+        level = parseInt(btn.dataset.lv, 10);
+        localStorage.setItem('sf-bring-level', String(level));
+        render();
+        if (window.gtag) gtag('event', 'bring_level_select', { level: level });
+      });
+
+      document.getElementById('bgReset').addEventListener('click', () => {
+        cats.querySelectorAll('input[type=checkbox]').forEach(cb => { cb.checked = false; cb.dispatchEvent(new Event('change')); });
+      });
+
+      document.getElementById('bgPrint').addEventListener('click', () => window.print());
+
+      document.getElementById('bgCopy').addEventListener('click', () => {
+        const lines = ['【BBQ持ち物リスト｜レベル' + level + '】'];
+        Object.keys(ITEMS).forEach(catKey => {
+          const cat = ITEMS[catKey];
+          const list = cat.items.filter(i => i.lv.includes(level));
+          if (!list.length) return;
+          lines.push('');
+          lines.push('■ ' + cat.label);
+          list.forEach(i => {
+            const checked = localStorage.getItem(key(level, i.t)) === '1';
+            lines.push((checked ? '[x] ' : '[ ] ') + i.t + (i.note ? '（' + i.note + '）' : ''));
+          });
+        });
+        lines.push('');
+        lines.push('出典: https://an-bbq.jp/bring-guide.html');
+        const text = lines.join('\n');
+        const btn = document.getElementById('bgCopy');
+        const done = () => { btn.textContent = 'コピーしました'; setTimeout(() => btn.textContent = 'リストをコピー', 1800); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(() => window.prompt('コピーしてください', text));
+        } else {
+          window.prompt('コピーしてください', text);
+        }
+        if (window.gtag) gtag('event', 'bring_list_copy', { level: level });
+      });
+
+      render();
+    })();
+  </script>
+  <script src="mobile-nav.js?v=20260506e"></script>
+<script src="assets/global-search.js?v=20260516" defer></script>
+<script src="assets/sf-features.js?v=20260517" defer></script>
+</body>
+</html>
