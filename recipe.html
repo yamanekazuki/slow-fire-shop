@@ -340,6 +340,155 @@
       text-align: center;
       color: var(--gray-400);
     }
+
+    /* ===================================================================
+       YORON BBQ トーン寄せ（正本トーン: bbq-site/community.css）
+       warm cream #f6f1e4 × ember #d95f3b × Zen Maru Gothic × radius 18px × pill
+       ここは色・角丸・フォント・余白のトーンだけを上書きする。
+       レイアウト（grid列数・幅）と本文の内容には触らない。
+       =================================================================== */
+    .rd-page { background: transparent; }
+
+    /* 見出しは Zen Maru Gothic に寄せる */
+    .rd-name,
+    .rd-section h2,
+    .rd-ingredients-section h2 { font-family: var(--font-sans); letter-spacing: .01em; }
+
+    /* eyebrow は ember */
+    .rd-section-eyebrow { color: var(--yb-ember, #d95f3b); letter-spacing: .22em; }
+
+    /* パンくず */
+    .rd-crumb a:hover { color: var(--yb-ember, #d95f3b); }
+
+    /* ヒーロー画像 = warm card */
+    .rd-img-wrap {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(45, 37, 28, .08);
+    }
+
+    /* タグ = pill */
+    .rd-tag {
+      border-radius: 100px;
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      color: var(--gray-600);
+      font-weight: 800;
+    }
+    .rd-tag.lvl-1 { background: rgba(74,124,89,.12);  border-color: rgba(74,124,89,.3);  color: #3d6a4a; }
+    .rd-tag.lvl-2 { background: rgba(232,155,63,.16); border-color: rgba(232,155,63,.4); color: #a8621b; }
+    .rd-tag.lvl-3 { background: rgba(217,95,59,.14);  border-color: rgba(217,95,59,.35); color: #b74a2c; }
+
+    /* エッセンス = ember の縦線が入った warm card */
+    .rd-essence {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-left: 4px solid var(--yb-ember, #d95f3b);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 20px rgba(45, 37, 28, .06);
+    }
+
+    /* スペック（温度表）= warm card ＋ ember ラベル */
+    .rd-specs { gap: 10px; }
+    .rd-spec {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 16px;
+      padding: 14px 10px;
+      box-shadow: 0 3px 14px rgba(45, 37, 28, .05);
+    }
+    .rd-spec-label { color: var(--yb-ember, #d95f3b); letter-spacing: .12em; font-weight: 800; }
+    .rd-spec-value { font-weight: 900; }
+
+    /* セクション区切りは warm な破線に */
+    .rd-section { border-top: 1px dashed var(--yb-line, rgba(45,37,28,.14)); }
+
+    /* 材料 = warm な丸みのある行 */
+    .rd-ingredients-section .rd-ingredients-eyebrow { letter-spacing: .22em; }
+    .rd-ingredient {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 14px;
+      padding: 13px 16px;
+    }
+
+    /* 手順ステップ = warm card ＋ ember の番号バッジ */
+    .rd-points { gap: 12px; }
+    .rd-points li {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 18px;
+      padding: 18px 20px 20px 58px;
+      box-shadow: 0 3px 16px rgba(45, 37, 28, .05);
+      transition: box-shadow .2s, border-color .2s, transform .2s;
+    }
+    .rd-points li:hover {
+      border-color: rgba(217, 95, 59, .45);
+      box-shadow: 0 10px 28px rgba(217, 95, 59, .12);
+      transform: translateY(-1px);
+    }
+    .rd-points li::before {
+      left: 16px; top: 18px;
+      width: 28px; height: 28px;
+      background: var(--yb-ember, #d95f3b);
+      box-shadow: 0 3px 10px rgba(217, 95, 59, .3);
+      font-weight: 800;
+    }
+    .rd-points li strong { color: var(--yb-ember, #d95f3b); }
+
+    /* 哲学 = 一段大きい warm card */
+    .rd-philosophy {
+      background: var(--yb-card, #fffdf6);
+      border: 1px solid var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 22px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 30px rgba(45, 37, 28, .07);
+    }
+    .rd-philosophy strong { color: var(--yb-ember, #d95f3b); }
+
+    /* 合うラブ = radius 18px の warm card */
+    .rd-rub-card {
+      background: var(--yb-card, #fffdf6);
+      border-color: var(--yb-line, rgba(45,37,28,.14));
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(45, 37, 28, .06);
+    }
+    .rd-rub-card:hover {
+      border-color: var(--yb-ember, #d95f3b);
+      box-shadow: 0 12px 30px rgba(217, 95, 59, .14);
+    }
+    .rd-rub-brand { color: var(--yb-ember, #d95f3b); }
+    .rd-rub-name { font-family: var(--font-sans); }
+
+    /* 「合うラブ」セクションの地色（style.css の inline 指定を warm に戻す） */
+    #rdRubsSection { background: rgba(239, 232, 214, .55) !important; }
+
+    /* ===== キャラクター（あんちゃん／やまちゃん／うえたく）の差し込み枠 ===== */
+    .rd-cast {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .rd-cast:empty { display: none; }
+    .rd-cast > [data-anchan] { margin: 1.1rem 0 .2rem; }
+    .rd-cast .anchan-spot.an-flip { justify-content: flex-end; }
+    .rd-cast--hero { margin-top: -14px; margin-bottom: 22px; }
+    .rd-cast--inline { padding: 0; margin-top: 18px; }
+    /* 吹き出しはトーンに合わせて少し柔らかく（anchan.js の既定を上書き） */
+    .rd-cast .an-bubble {
+      border-color: rgba(45, 37, 28, .55);
+      border-radius: 18px;
+      box-shadow: 3px 3px 0 rgba(217, 95, 59, .14);
+    }
+    .rd-cast:not(.an-flip) .an-bubble::before,
+    .rd-cast .anchan-spot:not(.an-flip) .an-bubble::before { border-right-color: rgba(45, 37, 28, .55); }
+    @media (max-width: 640px) {
+      .rd-cast { padding: 0 16px; }
+      .rd-cast--inline { padding: 0; }
+      .rd-points li { padding: 16px 16px 18px 52px; }
+    }
   </style>
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
@@ -425,6 +574,9 @@
       </div>
     </section>
 
+    <!-- キャラクター（ヒーロー直下） -->
+    <div class="rd-cast rd-cast--hero" id="rdCastHero"></div>
+
     <section class="rd-ingredients-section" id="rdIngredientsSection">
       <p class="rd-ingredients-eyebrow">INGREDIENTS</p>
       <h2>用意するもの</h2>
@@ -436,17 +588,20 @@
       <p class="rd-section-eyebrow">KEY POINTS</p>
       <h2>調理のポイント</h2>
       <ol class="rd-points" id="rdPoints"></ol>
+      <div class="rd-cast rd-cast--inline" id="rdCastPoints"></div>
     </section>
 
     <section class="rd-section">
       <p class="rd-section-eyebrow">PHILOSOPHY</p>
       <h2>この料理の哲学</h2>
       <div class="rd-philosophy" id="rdPhilosophy"></div>
+      <div class="rd-cast rd-cast--inline" id="rdCastPhilosophy"></div>
     </section>
 
     <section class="rd-section" id="rdRubsSection" style="background:var(--off-white);">
       <p class="rd-section-eyebrow">PERFECT WITH</p>
       <h2>合うラブ</h2>
+      <div class="rd-cast rd-cast--inline" id="rdCastRubs" style="margin:0 0 22px;"></div>
       <div class="rd-rubs-grid" id="rdRubs"></div>
     </section>
 
@@ -561,6 +716,8 @@
       }).join('');
       document.getElementById('rdPhilosophy').innerHTML = r.philosophy;
 
+      renderCast(r);
+
       const rubsSection = document.getElementById('rdRubsSection');
       const rubsEl = document.getElementById('rdRubs');
       if (r.pairedRubs && r.pairedRubs.length && window.PRODUCT_DETAILS) {
@@ -581,6 +738,41 @@
       } else {
         rubsSection.style.display = 'none';
       }
+    }
+
+    /* ------------------------------------------------------------------
+       キャラクター（あんちゃん／やまちゃん／うえたく）を差し込む。
+       文言は recipe-data.js の window.RECIPE_CAST[id] にレシピ1件ずつ持つ。
+       実際の SVG 描画は anchan.js（yoron-bridge.js が DOMContentLoaded で
+       ロードする）が [data-anchan] を拾って行う。
+       ------------------------------------------------------------------ */
+    function renderCast(r) {
+      const cast = (window.RECIPE_CAST || {})[r.id];
+      if (!cast || !cast.length) return;
+
+      const hasRubs = !!(r.pairedRubs && r.pairedRubs.length && window.PRODUCT_DETAILS);
+      const slots = [];
+      if (cast.length >= 4) {
+        slots.push('rdCastHero', 'rdCastPoints', 'rdCastPhilosophy');
+        slots.push(hasRubs ? 'rdCastRubs' : 'rdCastPhilosophy');
+      } else if (cast.length === 3) {
+        slots.push('rdCastHero', 'rdCastPoints');
+        slots.push(hasRubs ? 'rdCastRubs' : 'rdCastPhilosophy');
+      } else {
+        slots.push('rdCastHero', 'rdCastPhilosophy');
+      }
+
+      cast.forEach((c, i) => {
+        const host = document.getElementById(slots[i] || 'rdCastPhilosophy');
+        if (!host) return;
+        const spot = document.createElement('div');
+        spot.setAttribute('data-anchan', c.pose || 'guide');
+        spot.setAttribute('data-who', c.who || 'an');
+        spot.setAttribute('data-size', 's');
+        spot.setAttribute('data-say', c.say || '');
+        if (i % 2 === 1) spot.setAttribute('data-flip', '');
+        host.appendChild(spot);
+      });
     }
 
     /* Schema.org Recipe JSON-LD */

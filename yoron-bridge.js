@@ -41,6 +41,46 @@
   var EVENT = "https://yoron-bbq.com/event.html";
   var BANNER_KEY = "yoron_banner_closed";
 
+  /* ---------- 次回イベント（ここ1箇所を書き換えれば全導線に反映される） ---------- */
+  var NEXT_EVENT = {
+    date: "8/23(日)",
+    place: "野川公園（調布飛行場そば・無料のLv5会場）",
+    url: "https://yoron-bbq.com/event.html",
+    rest: "以降 10/4・11/22・12/13 も申込可"
+  };
+
+  /* ---------- 計測：UTM 付与 ＋ GA4 クリックイベント ---------- */
+  var UTM_BASE = "utm_source=an-bbq&utm_medium=referral&utm_campaign=yoron-bridge&utm_content=";
+
+  /* UTM はクエリに付け、#join などのアンカーは必ず最後に残す */
+  function withUtm(url, content) {
+    var hash = "";
+    var u = String(url);
+    var h = u.indexOf("#");
+    if (h !== -1) { hash = u.slice(h); u = u.slice(0, h); }
+    u += (u.indexOf("?") === -1 ? "?" : "&") + UTM_BASE + encodeURIComponent(content);
+    return u + hash;
+  }
+
+  /* data-yb-cta を持つリンクにクリック計測を付ける（gtag が無ければ何もしない） */
+  function trackCtas(scope) {
+    var links = (scope || document).querySelectorAll("a[data-yb-cta]");
+    for (var i = 0; i < links.length; i++) {
+      (function (a) {
+        if (a.getAttribute("data-yb-tracked") === "1") return;
+        a.setAttribute("data-yb-tracked", "1");
+        a.addEventListener("click", function () {
+          if (typeof window.gtag !== "function") return;
+          try {
+            window.gtag("event", "yoron_cta_click", {
+              cta_location: a.getAttribute("data-yb-cta")
+            });
+          } catch (e) {}
+        });
+      })(links[i]);
+    }
+  }
+
   /* ---------- 1. <head> 注入 ---------- */
   function link(attrs) {
     var el = document.createElement("link");
@@ -89,7 +129,7 @@
       banner.setAttribute("role", "complementary");
       banner.innerHTML =
         '<span>🔥 YORON BBQ コミュニティ — 月1回、一緒に焼こう。</span>' +
-        '<a href="' + JOIN + '">入会はこちら →</a>' +
+        '<a href="' + withUtm(JOIN, "banner") + '" data-yb-cta="banner">入会はこちら →</a>' +
         '<button type="button" class="yb-banner-close" aria-label="バナーを閉じる">×</button>';
       body.insertBefore(banner, body.firstChild);
       body.classList.add("yb-banner-on");
@@ -121,12 +161,50 @@
               'data-say="スパイスの使い方は、その場で聞くのがいちばん早い。"></div>' +
           '</div>' +
           '<div class="yb-comm-actions">' +
-            '<a class="yb-cta-primary" href="' + COMMUNITY + '">コミュニティサイトへ</a>' +
-            '<a class="yb-cta-outline" href="' + EVENT + '">月1BBQに申し込む</a>' +
+            '<a class="yb-cta-primary" href="' + withUtm(COMMUNITY, "comm-site") +
+              '" data-yb-cta="comm-site">コミュニティサイトへ</a>' +
+            '<a class="yb-cta-outline" href="' + withUtm(EVENT, "comm-event") +
+              '" data-yb-cta="comm-event">月1BBQに申し込む</a>' +
           '</div>' +
           '<p class="yb-comm-note">yoron-bbq.com へ移動します</p>' +
         '</div>';
       footer.parentNode.insertBefore(sec, footer);
+    }
+
+    /* 4b. journal 記事だけ：記事文脈のCTAカード（.yb-comm の直前に置く） */
+    if (path.indexOf("/journal/articles/") !== -1 && !document.querySelector(".yb-article-cta")) {
+      var h1 = document.querySelector("h1");
+      var title = h1 ? (h1.textContent || "").trim() : "";
+      if (title.length > 40) title = title.slice(0, 40) + "…";
+      var lead = title
+        ? "「" + escHtml(title) + "」のテーマ、月1BBQで実際にやってみませんか。次回は" +
+          NEXT_EVENT.date + "、" + NEXT_EVENT.place + "。" + NEXT_EVENT.rest + "です。"
+        : "読んで終わりにせず、月1BBQで実際にやってみませんか。次回は" +
+          NEXT_EVENT.date + "、" + NEXT_EVENT.place + "。" + NEXT_EVENT.rest + "です。";
+
+      var card = document.createElement("section");
+      card.className = "yb-article-cta";
+      card.innerHTML =
+        '<div class="yb-article-cta-inner">' +
+          '<p class="yb-article-cta-eyebrow">NEXT BBQ ' + NEXT_EVENT.date + '</p>' +
+          '<h2>この記事、読むだけで終わらせない</h2>' +
+          '<p class="yb-article-cta-lead">' + lead + '</p>' +
+          '<div class="yb-article-cta-cast">' +
+            '<div data-anchan="tongs" data-who="an" data-size="s" ' +
+              'data-say="次回は' + NEXT_EVENT.date + '、野川公園で焼くよ！"></div>' +
+          '</div>' +
+          '<div class="yb-article-cta-actions">' +
+            '<a class="yb-cta-primary" href="' + withUtm(NEXT_EVENT.url, "article-cta") +
+              '" data-yb-cta="article-cta">月1BBQに申し込む →</a>' +
+          '</div>' +
+          '<p class="yb-article-cta-note">yoron-bbq.com へ移動します</p>' +
+        '</div>';
+
+      var anchor = document.querySelector(".yb-comm") ||
+                   document.querySelector("footer.footer") ||
+                   document.querySelector("footer");
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(card, anchor);
+      else body.appendChild(card);
     }
 
     /* 5. anchan.js（DOM 注入後にロード＝キャラを確実に描画させる） */
@@ -136,6 +214,14 @@
       s.src = asset("anchan.js?v=20260730");
       document.body.appendChild(s);
     }
+
+    /* 6. 注入した誘導リンクにクリック計測を付ける */
+    trackCtas(document);
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   if (document.readyState === "loading") {

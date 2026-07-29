@@ -1,0 +1,145 @@
+/* =====================================================================
+   yoron-hero.css — トップページのヒーローを YORON BBQ コミュニティ
+   （https://yoron-bbq.com）と同じ warm cream トーンに揃える。
+   style.css / yoron-theme.css は編集せず、このファイルで上書きする。
+   ===================================================================== */
+
+.yhero {
+  margin-top: var(--nav-h, 64px);
+  padding: 5.5rem 1.5rem 4rem;
+  position: relative;
+  background: transparent;   /* yoron-theme の cream 地＋bg-blob を活かす */
+  border-bottom: 1px solid var(--yb-line, rgba(45, 37, 28, .14));
+  overflow: hidden;
+}
+
+.yhero-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: 3rem;
+  align-items: center;
+}
+.yhero-grid > * { min-width: 0; }
+
+.yhero-copy { text-align: left; }
+
+.yhero-pill {
+  display: inline-block;
+  border: 1.5px solid var(--yb-ember, #d95f3b);
+  color: var(--yb-ember, #d95f3b);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .24em;
+  padding: .42rem 1.25rem;
+  border-radius: 100px;
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  animation: yheroRise .8s .1s forwards;
+}
+
+.yhero-title {
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  font-weight: 900;
+  line-height: 1.38;
+  letter-spacing: .02em;
+  color: var(--yb-ink, #2d251c);
+  margin: 0 0 1.3rem;
+  opacity: 0;
+  animation: yheroRise .8s .25s forwards;
+}
+.yhero-title .hl { color: var(--yb-ember, #d95f3b); }
+
+.yhero-body {
+  max-width: 26em;
+  color: var(--yb-ink-soft, #5b5044);
+  font-size: 1rem;
+  line-height: 1.95;
+  margin: 0;
+  opacity: 0;
+  animation: yheroRise .8s .4s forwards;
+}
+
+.yhero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.1rem;
+  opacity: 0;
+  animation: yheroRise .8s .55s forwards;
+}
+
+.yhero-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: .95rem;
+  line-height: 1;
+  padding: 1rem 2.1rem;
+  border-radius: 100px;
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+}
+.yhero-btn-primary {
+  background: var(--yb-ember, #d95f3b);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(217, 95, 59, .3);
+}
+.yhero-btn-primary:hover {
+  background: var(--yb-ember-deep, #b74a2c);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(217, 95, 59, .36);
+}
+.yhero-btn-outline {
+  border: 1.6px solid var(--yb-ink, #2d251c);
+  color: var(--yb-ink, #2d251c);
+  background: transparent;
+}
+.yhero-btn-outline:hover {
+  background: var(--yb-ink, #2d251c);
+  color: var(--yb-cream, #f6f1e4);
+  transform: translateY(-2px);
+}
+
+@keyframes yheroRise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- 右カラム：実写＋キャラ ---------- */
+.yhero-figure {
+  opacity: 0;
+  animation: yheroRise .9s .35s forwards;
+}
+.yhero-photo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(45, 37, 28, .16);
+}
+.yhero-chars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: .6rem;
+}
+.yhero-chars > * { flex: 0 1 auto; }
+
+/* ---------- SP：1カラム ---------- */
+@media (max-width: 860px) {
+  .yhero { padding: 4.5rem 1.25rem 3rem; }
+  .yhero-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .yhero-copy { text-align: left; }
+  .yhero-body { max-width: none; font-size: .95rem; }
+  .yhero-actions { margin-top: 1.6rem; }
+  .yhero-btn { padding: .9rem 1.6rem; font-size: .9rem; flex: 1 1 auto; text-align: center; }
+  .yhero-photo { aspect-ratio: 3 / 2; border-radius: 18px; }
+  .yhero-chars { margin-top: .4rem; }
+}

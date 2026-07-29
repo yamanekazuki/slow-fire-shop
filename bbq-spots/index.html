@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBQ場検索 — 日本最詳のバーベキュー場データベース | SLOW FIRE SHOP</title>
-  <meta name="description" content="蓋付きグリル持ち込み可否・電源対応・アメリカンBBQ可能か・人数別など、複数のフィルターで絞り込める日本最詳のBBQ場検索。武蔵野公園・城南島・若洲・HERO FIELD新木場ほか首都圏全24スポット収録。">
+  <title>BBQ場検索 — 首都圏24会場の持ち込み・設備ガイド | SLOW FIRE SHOP</title>
+  <meta name="description" content="蓋付きグリルの持ち込み可否・電源・会場レベル（Lv1〜5）で絞り込めるBBQ場検索。武蔵野公園・城南島・若洲・HERO FIELD新木場ほか、東京・神奈川・千葉・埼玉の24会場を1件ずつ調べてまとめています。">
   <meta name="keywords" content="BBQ場,バーベキュー場,検索,持ち込み可,電源,アメリカンBBQ,蓋付きグリル,Weber,Pulse,東京 BBQ,東京 バーベキュー">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://an-bbq.jp/bbq-spots/">
   <link rel="manifest" href="../manifest.json">
-  <meta name="theme-color" content="#B45309">
+  <meta name="theme-color" content="#d95f3b">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
   <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="BBQ場検索 — 日本最詳のバーベキュー場データベース">
-  <meta property="og:description" content="蓋付きグリル持ち込み・電源・アメリカンBBQ可否で絞り込める、日本最詳のBBQ場検索。">
+  <meta property="og:title" content="BBQ場検索 — 首都圏24会場の持ち込み・設備ガイド">
+  <meta property="og:description" content="蓋付きグリルの持ち込み・電源・会場レベルで絞り込めるBBQ場検索。首都圏24会場。">
   <meta property="og:url" content="https://an-bbq.jp/bbq-spots/">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@1,700&family=Inter:wght@600;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=20260516">
   <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
@@ -30,7 +30,7 @@
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "首都圏のBBQ場 検索データベース",
-    "description": "アメリカンBBQ可否・持ち込み可否・電源対応で絞り込める、SLOW FIRE運営の日本最詳BBQ場検索",
+    "description": "アメリカンBBQ可否・持ち込み可否・電源対応で絞り込める、SLOW FIRE運営のBBQ場検索",
     "numberOfItems": 24,
     "itemListOrder": "https://schema.org/ItemListOrderAscending"
   }
@@ -54,199 +54,292 @@
 
   <style>
     /* ============================================================
-       BBQ場検索 — SLOW FIRE 大刷新 (living bg / rotate / tilt cards)
+       BBQ場検索 — YORON BBQ コミュニティ・トーン
+       正本: ~/dev/bbq/bbq-site/community.css（warm cream / ember / Zen Maru Gothic）
        ============================================================ */
     :root{
-      --sf-cream:#faf7f2; --sf-ink:#1c1917; --sf-ember:#c2410c; --sf-amber:#d97706;
-      --sf-forest:#166534; --sf-charcoal:#1c1917;
-      --sf-grad:linear-gradient(100deg,#7c2d12,#c2410c 55%,#ea580c);
+      --sf-cream:#f6f1e4; --sf-ink:#2d251c; --sf-ink-soft:#5b5044;
+      --sf-ember:#d95f3b; --sf-ember-deep:#b74a2c; --sf-amber:#e89b3f;
+      --sf-forest:#4a7c59; --sf-smoke:#8a8177;
+      --sf-card:#fffdf6; --sf-line:rgba(45,37,28,.14); --sf-radius:18px;
     }
-    body{ background:var(--sf-cream); }
+    body{
+      background:var(--sf-cream); color:var(--sf-ink);
+      font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
+      line-height:1.85;
+    }
 
-    /* ---- living background ---- */
-    .sf-bg{ position:fixed; inset:0; z-index:-2; background:var(--sf-cream); overflow:hidden; pointer-events:none; }
-    .sf-blob{ position:absolute; border-radius:50%; filter:blur(70px); opacity:.5; mix-blend-mode:multiply; }
-    .sf-blob.b1{ width:44vw; height:44vw; left:-8vw; top:-6vw; background:radial-gradient(circle at 30% 30%,#f59e0b,#c2410c 70%); animation:sfDrift1 26s ease-in-out infinite; }
-    .sf-blob.b2{ width:38vw; height:38vw; right:-6vw; top:12vh; background:radial-gradient(circle at 60% 40%,#ea580c,#7c2d12 72%); opacity:.4; animation:sfDrift2 32s ease-in-out infinite; }
-    .sf-blob.b3{ width:34vw; height:34vw; left:24vw; bottom:-12vh; background:radial-gradient(circle at 50% 50%,#fbbf24,#d97706 70%); opacity:.34; animation:sfDrift3 30s ease-in-out infinite; }
-    .sf-grid{ position:absolute; inset:0; opacity:.05;
-      background-image:linear-gradient(#1c1917 1px,transparent 1px),linear-gradient(90deg,#1c1917 1px,transparent 1px);
-      background-size:60px 60px; animation:sfGridPan 40s linear infinite; }
-    @keyframes sfDrift1{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(6vw,4vh) scale(1.12)} }
-    @keyframes sfDrift2{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-5vw,6vh) scale(1.1)} }
-    @keyframes sfDrift3{ 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(4vw,-5vh) scale(1.15)} }
-    @keyframes sfGridPan{ from{background-position:0 0,0 0} to{background-position:60px 60px,60px 60px} }
+    .bs-wrap{ max-width:1140px; margin:0 auto; padding:calc(var(--nav-h) + 56px) 24px 24px; position:relative; z-index:2; }
 
-    .bs-wrap{ max-width:1240px; margin:0 auto; padding:calc(var(--nav-h) + 48px) 24px 72px; position:relative; }
+    @keyframes bsRise{ from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:none} }
 
-    /* ---- hero ---- */
-    .bs-hero{ text-align:center; margin-bottom:40px; }
-    .bs-mark{ font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.34em; color:var(--sf-ember); font-weight:900; text-transform:uppercase; margin-bottom:16px; opacity:0; animation:sfUp .7s .05s forwards; }
-    .bs-hero h1{ font-size:clamp(30px,5.2vw,54px); font-weight:900; color:var(--sf-ink); line-height:1.24; letter-spacing:-.01em; margin-bottom:18px; }
-    .bs-rotate{ position:relative; display:inline-flex; align-items:center; justify-content:center; min-width:5.4em; height:1.25em; vertical-align:bottom; overflow:hidden; }
-    .bs-rotate .word{ position:absolute; left:50%; transform:translate(-50%,120%); white-space:nowrap;
-      background:var(--sf-grad); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:900; }
-    .bs-rotate .word.in{ animation:sfWordIn .6s cubic-bezier(.2,1.3,.35,1) forwards; }
-    .bs-rotate .word.out{ animation:sfWordOut .5s cubic-bezier(.5,0,.7,0) forwards; }
-    @keyframes sfWordIn{ from{transform:translate(-50%,120%);opacity:0} to{transform:translate(-50%,0);opacity:1} }
-    @keyframes sfWordOut{ from{transform:translate(-50%,0);opacity:1} to{transform:translate(-50%,-120%);opacity:0} }
-    .bs-tagline{ font-size:16px; color:var(--gray-600); max-width:680px; margin:0 auto; line-height:1.85; opacity:0; animation:sfUp .7s .18s forwards; }
-
-    /* ---- hero stats ---- */
-    .bs-stats{ display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin:30px auto 0; opacity:0; animation:sfUp .7s .3s forwards; }
-    .bs-stat{ display:flex; flex-direction:column; align-items:center; padding:14px 26px; background:rgba(255,255,255,.72); backdrop-filter:blur(8px); border:1px solid rgba(28,25,23,.08); border-radius:16px; box-shadow:0 4px 20px rgba(124,45,18,.06); }
-    .bs-stat b{ font-family:'Inter',sans-serif; font-weight:900; font-size:34px; line-height:1; background:var(--sf-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .bs-stat span{ font-size:11px; color:var(--gray-600); letter-spacing:.12em; margin-top:7px; font-weight:700; }
-    @keyframes sfUp{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    /* ---- hero（community の hero-pill → 大見出し → 補足1文） ---- */
+    .bs-hero{ max-width:44em; margin-bottom:2.6rem; }
+    .bs-pill{
+      display:inline-block; border:1.5px solid var(--sf-ember); color:var(--sf-ember);
+      font-size:.72rem; font-weight:800; letter-spacing:.28em;
+      padding:.45rem 1.3rem; border-radius:100px; margin-bottom:1.6rem;
+      opacity:0; animation:bsRise .8s .1s forwards;
+    }
+    .bs-hero h1{
+      font-size:clamp(1.9rem, 4.4vw, 3.1rem); font-weight:900; line-height:1.4;
+      letter-spacing:.02em; color:var(--sf-ink); margin:0 0 1.2rem;
+      opacity:0; animation:bsRise .8s .25s forwards;
+    }
+    .bs-hero h1 .hl{ color:var(--sf-ember); }
+    .bs-lead{
+      font-size:1rem; line-height:1.95; color:var(--sf-ink-soft); max-width:34em; margin:0;
+      opacity:0; animation:bsRise .8s .4s forwards;
+    }
+    .bs-note{
+      display:inline-flex; align-items:center; flex-wrap:wrap; gap:.4rem 1.1rem;
+      margin-top:1.6rem; padding:.85rem 1.4rem;
+      background:var(--sf-card); border:1px solid var(--sf-line); border-radius:100px;
+      box-shadow:0 4px 24px rgba(45,37,28,.06);
+      font-size:.82rem; font-weight:700; color:var(--sf-ink-soft);
+      opacity:0; animation:bsRise .8s .55s forwards;
+    }
+    .bs-note b{ color:var(--sf-ember); font-weight:900; }
+    .bs-hero-cast{ margin-top:1.2rem; opacity:0; animation:bsRise .8s .7s forwards; }
 
     /* ---- reveal ---- */
-    .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.3,1); }
+    .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
     .reveal.show{ opacity:1; transform:none; }
 
     /* ---- section chrome ---- */
-    .bs-section-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 18px; }
-    .bs-kicker{ font-family:'Inter',sans-serif; font-size:11px; font-weight:900; letter-spacing:.24em; text-transform:uppercase; color:var(--sf-ember); }
-    .bs-h2{ font-size:clamp(21px,3vw,28px); font-weight:900; color:var(--sf-ink); letter-spacing:-.01em; }
+    .bs-section-head{ margin:0 0 1.1rem; }
+    .bs-kicker{ display:block; color:var(--sf-ember); font-size:.72rem; font-weight:800; letter-spacing:.3em; margin-bottom:.7rem; }
+    .bs-h2{ font-size:clamp(1.4rem, 3vw, 2.1rem); font-weight:900; line-height:1.5; color:var(--sf-ink); }
+    .bs-sec-lead{ font-size:.95rem; line-height:1.95; color:var(--sf-ink-soft); max-width:42em; margin:0 0 1.6rem; }
 
-    /* ---- search + filters (sticky) ---- */
-    .bs-tools{ position:sticky; top:calc(var(--nav-h) - 2px); z-index:30; margin:36px 0 26px; padding:16px; border-radius:20px;
-      background:rgba(255,255,255,.82); backdrop-filter:blur(14px); border:1px solid rgba(28,25,23,.09);
-      box-shadow:0 10px 40px rgba(124,45,18,.08); transition:box-shadow .25s, background .25s; }
-    .bs-tools.stuck{ box-shadow:0 14px 46px rgba(124,45,18,.16); background:rgba(255,255,255,.94); }
+    /* ---- search + filters ---- */
+    .bs-tools{
+      position:sticky; top:calc(var(--nav-h) - 2px); z-index:30; margin:0 0 1.6rem; padding:1.3rem 1.5rem;
+      background:rgba(255,253,246,.9); backdrop-filter:blur(12px);
+      border:1px solid var(--sf-line); border-radius:var(--sf-radius);
+      box-shadow:0 4px 24px rgba(45,37,28,.07); transition:box-shadow .25s, background .25s;
+    }
+    .bs-tools.stuck{ background:rgba(255,253,246,.97); box-shadow:0 10px 34px rgba(45,37,28,.11); }
     .bs-search-input-wrap{ position:relative; }
-    .bs-search-input{ width:100%; padding:15px 18px 15px 50px; font-size:16px; border:1.5px solid var(--gray-200); outline:none; background:#fff; border-radius:14px; transition:border-color .18s, box-shadow .18s; font-family:inherit; }
-    .bs-search-input:focus{ border-color:var(--sf-ember); box-shadow:0 0 0 4px rgba(194,65,12,.1); }
-    .bs-search-input::placeholder{ color:var(--gray-400); }
-    .bs-search-icon{ position:absolute; left:17px; top:50%; transform:translateY(-50%); color:var(--sf-amber); }
+    .bs-search-input{
+      width:100%; padding:.95rem 1.1rem .95rem 3rem; font-size:1rem; font-family:inherit;
+      color:var(--sf-ink); background:#fff; border:1.5px solid var(--sf-line);
+      border-radius:100px; outline:none; transition:border-color .2s, box-shadow .2s;
+    }
+    .bs-search-input:focus{ border-color:var(--sf-ember); box-shadow:0 0 0 4px rgba(217,95,59,.1); }
+    .bs-search-input::placeholder{ color:#c8b99f; opacity:1; }
+    .bs-search-icon{ position:absolute; left:1.1rem; top:50%; transform:translateY(-50%); color:var(--sf-amber); }
 
-    /* area tabs */
-    .bs-tabs{ display:flex; gap:6px; margin-top:14px; overflow-x:auto; padding-bottom:4px; -ms-overflow-style:none; scrollbar-width:none; }
+    /* area tabs = pill */
+    .bs-tabs{ display:flex; gap:.5rem; margin-top:1rem; overflow-x:auto; padding-bottom:.25rem; -ms-overflow-style:none; scrollbar-width:none; }
     .bs-tabs::-webkit-scrollbar{ display:none; }
-    .bs-tab{ flex:0 0 auto; padding:8px 16px; border-radius:100px; border:1.5px solid transparent; background:transparent; color:var(--gray-700); font-size:14px; font-weight:700; cursor:pointer; transition:all .16s; white-space:nowrap; font-family:inherit; }
-    .bs-tab:hover{ background:rgba(194,65,12,.07); color:var(--sf-ember); }
-    .bs-tab.active{ background:var(--sf-ink); color:#fff; }
-    .bs-tab .n{ font-family:'Inter',sans-serif; font-size:11px; opacity:.65; margin-left:5px; font-weight:600; }
+    .bs-tab{
+      flex:0 0 auto; padding:.5rem 1.15rem; border-radius:100px;
+      border:1.5px solid transparent; background:transparent; color:var(--sf-ink-soft);
+      font-size:.86rem; font-weight:700; font-family:inherit; cursor:pointer; white-space:nowrap; transition:all .18s;
+    }
+    .bs-tab:hover{ background:rgba(217,95,59,.08); color:var(--sf-ember); }
+    .bs-tab.active{ background:var(--sf-ember); color:#fff; box-shadow:0 4px 14px rgba(217,95,59,.26); }
+    .bs-tab .n{ font-size:.72rem; opacity:.7; margin-left:.35rem; font-weight:700; }
 
-    /* feature chips */
-    .bs-chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
-    .bs-chip{ display:inline-flex; align-items:center; gap:6px; padding:8px 14px; background:#fff; border:1.5px solid var(--gray-200); border-radius:100px; font-size:13.5px; color:var(--gray-700); cursor:pointer; transition:all .15s; font-family:inherit; }
-    .bs-chip:hover{ border-color:var(--sf-amber); color:var(--sf-ember); transform:translateY(-1px); }
-    .bs-chip .dot{ width:7px; height:7px; border-radius:50%; background:var(--gray-300); transition:background .15s; }
-    .bs-chip.active{ background:var(--sf-grad); border-color:transparent; color:#fff; box-shadow:0 4px 14px rgba(194,65,12,.28); }
+    /* filter rows（こだわり・分類・会場レベル） */
+    .bs-frow-label{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--sf-smoke); margin:1.2rem 0 .55rem; }
+    .bs-chip-row, .bs-type-row, .bs-lv-row{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+    .bs-chip, .bs-tchip, .bs-lchip{
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.5rem 1.05rem; border-radius:100px;
+      background:var(--sf-card); border:1.5px solid var(--sf-line);
+      font-size:.83rem; font-weight:700; font-family:inherit; color:var(--sf-ink-soft);
+      cursor:pointer; transition:all .18s;
+    }
+    .bs-chip:hover, .bs-tchip:hover, .bs-lchip:hover{ border-color:var(--sf-amber); color:var(--sf-ember); transform:translateY(-1px); }
+    .bs-chip .dot{ width:6px; height:6px; border-radius:50%; background:var(--sf-line); transition:background .18s; }
+    .bs-chip.active, .bs-lchip.active{ background:var(--sf-ember); border-color:transparent; color:#fff; box-shadow:0 4px 14px rgba(217,95,59,.26); }
     .bs-chip.active .dot{ background:#fff; }
+    .bs-chip.active:hover, .bs-lchip.active:hover{ color:#fff; background:var(--sf-ember-deep); }
+    .bs-lchip .n{ font-size:.72rem; opacity:.68; margin-left:.3rem; }
+    .bs-tchip[data-t="A"].active{ background:var(--sf-ink); border-color:transparent; color:#fff; }
+    .bs-tchip[data-t="B"].active{ background:var(--sf-amber); border-color:transparent; color:#3b2e1e; }
+    .bs-tchip[data-t="C"].active{ background:var(--sf-forest); border-color:transparent; color:#fff; }
+    .bs-tchip[data-t="D"].active{ background:var(--sf-ember); border-color:transparent; color:#fff; }
+    .bs-type-row .lbl, .bs-lv-row .lbl{ font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--sf-smoke); margin-right:.3rem; }
 
-    /* type mini-filter */
-    .bs-type-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; align-items:center; }
-    .bs-type-row .lbl{ font-size:11px; font-weight:900; letter-spacing:.1em; color:var(--gray-500); margin-right:2px; }
-    .bs-tchip{ padding:6px 13px; border-radius:8px; border:1.5px solid var(--gray-200); background:#fff; font-size:13px; font-weight:700; cursor:pointer; color:var(--gray-700); transition:all .15s; font-family:inherit; }
-    .bs-tchip[data-t="A"].active{ background:var(--gray-700); color:#fff; border-color:var(--gray-700); }
-    .bs-tchip[data-t="B"].active{ background:var(--sf-amber); color:#fff; border-color:var(--sf-amber); }
-    .bs-tchip[data-t="C"].active{ background:var(--sf-forest); color:#fff; border-color:var(--sf-forest); }
-    .bs-tchip[data-t="D"].active{ background:var(--sf-ember); color:#fff; border-color:var(--sf-ember); }
+    /* カード上のLvバッジ */
+    .bs-lv-badge{
+      display:inline-flex; align-items:center; gap:.35rem; margin-bottom:.6rem;
+      padding:.24rem .8rem; border-radius:100px;
+      background:rgba(232,155,63,.14); border:1px solid rgba(217,95,59,.2);
+      color:var(--sf-ember-deep); font-size:.7rem; font-weight:800;
+    }
+    .bs-lv-badge b{ font-size:.74rem; font-weight:900; }
 
     /* result bar */
-    .bs-result-info{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:22px 2px 18px; }
-    .bs-count-line{ font-size:14px; color:var(--gray-600); }
-    .bs-count-line b{ font-family:'Inter',sans-serif; font-size:24px; font-weight:900; color:var(--sf-ember); vertical-align:-2px; margin-right:2px; }
-    .bs-active-note{ font-size:12px; color:var(--gray-500); margin-left:8px; }
-    .bs-right-tools{ display:flex; align-items:center; gap:10px; }
-    .bs-reset{ font-size:12px; color:var(--gray-500); cursor:pointer; padding:7px 12px; background:none; border:1px solid var(--gray-200); border-radius:8px; font-family:inherit; transition:all .15s; }
-    .bs-reset:hover{ color:var(--sf-ember); border-color:var(--sf-amber); }
-    .bs-sort{ padding:8px 12px; border:1px solid var(--gray-200); border-radius:8px; background:#fff; font-size:13px; font-family:inherit; }
+    .bs-result-info{ display:flex; justify-content:space-between; align-items:center; gap:.8rem; flex-wrap:wrap; margin:0 .2rem 1.4rem; }
+    .bs-count-line{ font-size:.9rem; font-weight:700; color:var(--sf-ink-soft); }
+    .bs-count-line b{ font-size:1.5rem; font-weight:900; color:var(--sf-ember); margin-right:.15rem; }
+    .bs-active-note{ font-size:.78rem; font-weight:700; color:var(--sf-smoke); margin-left:.5rem; }
+    .bs-right-tools{ display:flex; align-items:center; gap:.6rem; }
+    .bs-reset, .bs-sort{
+      padding:.5rem 1rem; border-radius:100px; border:1.5px solid var(--sf-line);
+      background:var(--sf-card); font-size:.8rem; font-weight:700; font-family:inherit;
+      color:var(--sf-ink-soft); cursor:pointer; transition:all .18s;
+    }
+    .bs-reset:hover, .bs-sort:hover{ border-color:var(--sf-amber); color:var(--sf-ember); }
 
     /* ---- spot grid ---- */
-    .bs-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; perspective:1200px; }
-    .bs-card{ position:relative; background:#fff; border:1px solid rgba(28,25,23,.08); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; color:inherit; text-decoration:none; box-shadow:0 4px 18px rgba(28,25,23,.05); transition:transform .18s cubic-bezier(.2,.8,.3,1), box-shadow .25s; transform-style:preserve-3d; will-change:transform; }
-    .bs-card:hover{ box-shadow:0 22px 50px rgba(124,45,18,.18); }
-    .bs-card::after{ content:""; position:absolute; inset:0; border-radius:18px; pointer-events:none; box-shadow:inset 0 0 0 1.5px transparent; transition:box-shadow .2s; }
-    .bs-card:hover::after{ box-shadow:inset 0 0 0 1.5px rgba(194,65,12,.45); }
-    .bs-card-img{ aspect-ratio:16/10; background:var(--gray-100); position:relative; overflow:hidden; }
-    .bs-card-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
-    .bs-card:hover .bs-card-img img{ transform:scale(1.06); }
-    .bs-card-img::before{ content:""; position:absolute; inset:0; background:linear-gradient(to top,rgba(28,25,23,.55),transparent 46%); z-index:1; }
+    .bs-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.6rem; }
+    .bs-card{
+      position:relative; display:flex; flex-direction:column; overflow:hidden;
+      background:var(--sf-card); border:1px solid var(--sf-line); border-radius:var(--sf-radius);
+      color:inherit; text-decoration:none;
+      box-shadow:0 4px 24px rgba(45,37,28,.07);
+      transition:transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .bs-card:hover{ transform:translateY(-4px); box-shadow:0 12px 36px rgba(217,95,59,.15); border-color:rgba(217,95,59,.3); }
+    .bs-card-img{ aspect-ratio:16/10; background:var(--sf-bg-soft,#efe8d6); position:relative; overflow:hidden; }
+    .bs-card-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease; }
+    .bs-card:hover .bs-card-img img{ transform:scale(1.05); }
+    .bs-card-img::before{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(to top,rgba(25,20,16,.55),transparent 50%); }
 
-    /* type rank ribbon (visual hierarchy A→D) */
-    .bs-rank{ position:absolute; top:0; left:0; z-index:2; display:flex; align-items:center; gap:7px; padding:9px 13px 9px 12px; color:#fff; font-family:'Inter',sans-serif; font-weight:900; font-size:12px; letter-spacing:.04em; border-bottom-right-radius:14px; }
-    .bs-rank .bars{ display:flex; gap:2px; align-items:flex-end; height:14px; }
-    .bs-rank .bars i{ width:3px; background:rgba(255,255,255,.9); border-radius:1px; }
-    .bs-rank[data-t="A"]{ background:var(--gray-700); }
-    .bs-rank[data-t="B"]{ background:var(--sf-amber); }
+    /* 分類タグ（pill・角ばったリボンを廃止） */
+    .bs-rank{
+      position:absolute; top:.7rem; left:.7rem; z-index:2;
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.26rem .8rem; border-radius:100px;
+      font-size:.7rem; font-weight:800; letter-spacing:.04em; color:#fff;
+      box-shadow:0 2px 10px rgba(45,37,28,.2);
+    }
+    .bs-rank .bars{ display:flex; gap:2px; align-items:flex-end; height:11px; }
+    .bs-rank .bars i{ width:2.5px; background:rgba(255,255,255,.9); border-radius:2px; }
+    .bs-rank[data-t="A"]{ background:var(--sf-ink); }
+    .bs-rank[data-t="B"]{ background:var(--sf-amber); color:#3b2e1e; }
+    .bs-rank[data-t="B"] .bars i{ background:rgba(59,46,30,.75); }
     .bs-rank[data-t="C"]{ background:var(--sf-forest); }
     .bs-rank[data-t="D"]{ background:var(--sf-ember); }
-    .bs-abadge{ position:absolute; top:11px; right:11px; z-index:2; display:flex; align-items:center; gap:3px; padding:4px 10px; background:rgba(28,25,23,.7); backdrop-filter:blur(6px); color:#ffd9b0; border-radius:100px; font-size:11px; font-weight:800; }
-    .bs-card-station{ position:absolute; left:12px; bottom:10px; z-index:2; color:#fff; font-size:12px; font-weight:700; text-shadow:0 1px 6px rgba(0,0,0,.5); display:flex; align-items:center; gap:5px; }
+    .bs-abadge{
+      position:absolute; top:.7rem; right:.7rem; z-index:2;
+      padding:.24rem .75rem; border-radius:100px;
+      background:rgba(25,20,16,.62); backdrop-filter:blur(6px);
+      color:#f3d9c2; font-size:.7rem; font-weight:800;
+    }
+    .bs-card-station{
+      position:absolute; left:.85rem; bottom:.7rem; z-index:2;
+      display:flex; align-items:center; gap:.35rem;
+      color:#fff; font-size:.76rem; font-weight:700; text-shadow:0 1px 6px rgba(0,0,0,.5);
+    }
 
-    .bs-card-body{ padding:15px 17px 17px; flex:1; display:flex; flex-direction:column; }
-    .bs-card-name{ font-size:17px; font-weight:900; color:var(--sf-ink); margin-bottom:5px; line-height:1.4; }
-    .bs-card-area{ font-size:11.5px; color:var(--gray-500); margin-bottom:11px; letter-spacing:.04em; font-weight:600; }
-    .bs-card-summary{ font-size:13px; color:var(--gray-600); line-height:1.6; margin-bottom:13px; flex:1; }
-    .bs-card-features{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
-    .bs-feat{ display:inline-flex; align-items:center; gap:3px; padding:3px 9px; font-size:10.5px; font-weight:700; background:var(--gray-50); color:var(--gray-700); border-radius:6px; }
-    .bs-feat.ok{ color:#15803d; background:rgba(22,101,52,.09); }
-    .bs-feat.ng{ color:var(--danger); background:rgba(220,38,38,.09); }
+    .bs-card-body{ padding:1.2rem 1.4rem 1.4rem; flex:1; display:flex; flex-direction:column; }
+    .bs-card-name{ font-size:1.05rem; font-weight:900; line-height:1.5; color:var(--sf-ink); margin-bottom:.3rem; }
+    .bs-card-area{ font-size:.74rem; font-weight:700; letter-spacing:.06em; color:var(--sf-smoke); margin-bottom:.7rem; }
+    .bs-card-summary{ font-size:.85rem; line-height:1.8; color:var(--sf-ink-soft); margin-bottom:.9rem; flex:1; }
+    .bs-card-features{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:auto; }
+    .bs-feat{
+      display:inline-flex; align-items:center; padding:.2rem .65rem; border-radius:100px;
+      font-size:.7rem; font-weight:700;
+      background:rgba(45,37,28,.05); color:var(--sf-ink-soft);
+    }
+    .bs-feat.ok{ background:rgba(74,124,89,.12); color:#3d6749; }
+    .bs-feat.ng{ background:rgba(183,74,44,.1); color:var(--sf-ember-deep); }
 
     /* ---- empty state ---- */
-    .bs-empty{ grid-column:1/-1; text-align:center; padding:64px 24px; }
-    .bs-empty .em-fire{ font-size:46px; filter:grayscale(.4); opacity:.8; }
-    .bs-empty h3{ font-size:19px; font-weight:900; color:var(--sf-ink); margin:14px 0 8px; }
-    .bs-empty p{ font-size:14px; color:var(--gray-600); line-height:1.7; margin-bottom:18px; }
-    .bs-empty button{ padding:10px 20px; border:none; border-radius:100px; background:var(--sf-grad); color:#fff; font-weight:800; font-size:14px; cursor:pointer; font-family:inherit; box-shadow:0 6px 18px rgba(194,65,12,.3); }
+    .bs-empty{
+      grid-column:1/-1; text-align:center; padding:3.4rem 1.5rem;
+      background:var(--sf-card); border:1px solid var(--sf-line); border-radius:var(--sf-radius);
+      box-shadow:0 4px 24px rgba(45,37,28,.07);
+    }
+    .bs-empty .em-fire{ font-size:2.4rem; opacity:.75; }
+    .bs-empty h3{ font-size:1.1rem; font-weight:900; color:var(--sf-ink); margin:.8rem 0 .5rem; }
+    .bs-empty p{ font-size:.88rem; line-height:1.9; color:var(--sf-ink-soft); margin-bottom:1.2rem; }
+    .bs-empty button{
+      padding:.8rem 1.9rem; border:0; border-radius:100px;
+      background:var(--sf-ember); color:#fff; font-family:inherit; font-size:.88rem; font-weight:800;
+      cursor:pointer; box-shadow:0 6px 20px rgba(217,95,59,.3); transition:background .2s, transform .2s;
+    }
+    .bs-empty button:hover{ background:var(--sf-ember-deep); transform:translateY(-2px); }
 
-    /* ---- classification (対置) ---- */
-    .bs-class{ margin:72px 0 0; }
-    .bs-class-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-radius:20px; overflow:hidden; border:1px solid rgba(28,25,23,.1); background:#fff; }
-    .bs-cl{ position:relative; padding:24px 20px 26px; border-right:1px solid rgba(28,25,23,.08); }
-    .bs-cl:last-child{ border-right:none; }
-    .bs-cl-top{ height:5px; position:absolute; top:0; left:0; right:0; }
-    .bs-cl[data-t="A"] .bs-cl-top{ background:var(--gray-700); }
+    /* ---- classification ---- */
+    .bs-class{ margin:5rem 0 0; }
+    .bs-class-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+    .bs-cl{
+      position:relative; overflow:hidden; padding:1.8rem 1.5rem 1.6rem;
+      background:var(--sf-card); border:1px solid var(--sf-line); border-radius:var(--sf-radius);
+      box-shadow:0 4px 24px rgba(45,37,28,.07); transition:transform .3s, box-shadow .3s;
+    }
+    .bs-cl:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(217,95,59,.13); }
+    .bs-cl-top{ position:absolute; top:0; left:0; right:0; height:4px; }
+    .bs-cl[data-t="A"] .bs-cl-top{ background:var(--sf-ink); }
     .bs-cl[data-t="B"] .bs-cl-top{ background:var(--sf-amber); }
     .bs-cl[data-t="C"] .bs-cl-top{ background:var(--sf-forest); }
     .bs-cl[data-t="D"] .bs-cl-top{ background:var(--sf-ember); }
-    .bs-cl-badge{ font-family:'Inter',sans-serif; font-weight:900; font-size:13px; letter-spacing:.06em; color:var(--gray-400); }
-    .bs-cl-bars{ display:flex; gap:3px; align-items:flex-end; height:20px; margin:12px 0 14px; }
-    .bs-cl-bars i{ width:6px; border-radius:2px; background:var(--gray-200); }
-    .bs-cl[data-t="A"] .bs-cl-bars i.on{ background:var(--gray-700); }
+    .bs-cl-badge{ font-size:.7rem; font-weight:800; letter-spacing:.2em; color:var(--sf-smoke); }
+    .bs-cl-bars{ display:flex; gap:3px; align-items:flex-end; height:18px; margin:.8rem 0 .9rem; }
+    .bs-cl-bars i{ width:5px; border-radius:2px; background:rgba(45,37,28,.12); }
+    .bs-cl[data-t="A"] .bs-cl-bars i.on{ background:var(--sf-ink); }
     .bs-cl[data-t="B"] .bs-cl-bars i.on{ background:var(--sf-amber); }
     .bs-cl[data-t="C"] .bs-cl-bars i.on{ background:var(--sf-forest); }
     .bs-cl[data-t="D"] .bs-cl-bars i.on{ background:var(--sf-ember); }
-    .bs-cl h3{ font-size:16px; font-weight:900; color:var(--sf-ink); margin-bottom:8px; line-height:1.4; }
-    .bs-cl p{ font-size:12.5px; color:var(--gray-600); line-height:1.65; }
-    .bs-cl .cnt{ margin-top:12px; font-size:11px; color:var(--gray-500); font-weight:700; }
-    .bs-cl .cnt b{ font-family:'Inter',sans-serif; color:var(--sf-ember); font-size:15px; }
+    .bs-cl h3{ font-size:.98rem; font-weight:900; line-height:1.55; color:var(--sf-ink); margin-bottom:.5rem; }
+    .bs-cl p{ font-size:.8rem; line-height:1.8; color:var(--sf-ink-soft); }
+    .bs-cl .cnt{ margin-top:.9rem; font-size:.74rem; font-weight:700; color:var(--sf-smoke); }
+    .bs-cl .cnt b{ font-size:1rem; font-weight:900; color:var(--sf-ember); }
 
-    /* ---- map CTA ---- */
-    .bs-map-cta{ margin:44px 0 0; position:relative; overflow:hidden; border-radius:22px; padding:38px 34px; color:#fff;
-      background:linear-gradient(115deg,#1c1917,#7c2d12 70%,#c2410c); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
-    .bs-map-cta::before{ content:""; position:absolute; inset:0; opacity:.18; background:radial-gradient(circle at 82% 30%,#fbbf24,transparent 45%); }
-    .bs-map-cta .txt{ position:relative; z-index:1; max-width:560px; }
-    .bs-map-cta h2{ font-size:clamp(20px,2.6vw,26px); font-weight:900; margin-bottom:8px; }
-    .bs-map-cta p{ font-size:14px; color:rgba(255,255,255,.82); line-height:1.7; }
-    .bs-map-btn{ position:relative; z-index:1; flex:0 0 auto; display:inline-flex; align-items:center; gap:9px; padding:14px 26px; border-radius:100px; background:#fff; color:var(--sf-ember); font-weight:900; font-size:15px; text-decoration:none; box-shadow:0 8px 26px rgba(0,0,0,.28); transition:transform .18s; }
-    .bs-map-btn:hover{ transform:translateY(-2px) scale(1.02); }
+    /* ---- map CTA（charcoal の丸いバンド） ---- */
+    .bs-map-cta{
+      margin:3.4rem 0 0; padding:2.8rem 3rem; border-radius:32px;
+      background:#191410; color:#f3ead9; position:relative; overflow:hidden;
+      display:flex; align-items:center; justify-content:space-between; gap:1.6rem; flex-wrap:wrap;
+    }
+    .bs-map-cta::before{
+      content:""; position:absolute; left:78%; top:-40%; width:420px; height:420px; border-radius:50%;
+      background:radial-gradient(circle, rgba(232,155,63,.32), transparent 65%); filter:blur(20px);
+    }
+    .bs-map-cta .txt{ position:relative; z-index:1; max-width:34em; }
+    .bs-map-cta h2{ font-size:clamp(1.25rem,2.4vw,1.7rem); font-weight:900; line-height:1.55; margin-bottom:.5rem; color:#fff; }
+    .bs-map-cta p{ font-size:.88rem; line-height:1.9; color:rgba(243,234,217,.78); }
+    .bs-map-btn{
+      position:relative; z-index:1; flex:0 0 auto;
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.95rem 2.1rem; border-radius:100px;
+      background:var(--sf-amber); color:#191410; text-decoration:none;
+      font-size:.92rem; font-weight:800; box-shadow:0 6px 20px rgba(232,155,63,.3);
+      transition:background .2s, transform .2s;
+    }
+    .bs-map-btn:hover{ background:#f2ad57; transform:translateY(-2px); }
 
     /* ---- FAQ ---- */
-    .bs-faq{ margin-top:56px; padding:34px; background:rgba(255,255,255,.66); backdrop-filter:blur(8px); border:1px solid rgba(28,25,23,.08); border-radius:20px; }
-    .bs-faq details{ margin-bottom:10px; padding:15px 18px; background:#fff; border-radius:12px; border:1px solid var(--gray-200); }
-    .bs-faq summary{ font-size:15px; font-weight:700; color:var(--sf-ink); cursor:pointer; }
-    .bs-faq details[open] summary{ margin-bottom:8px; color:var(--sf-ember); }
-    .bs-faq p{ font-size:13.5px; color:var(--gray-600); line-height:1.8; }
+    .bs-faq{ margin-top:4rem; }
+    .bs-faq details{
+      margin-bottom:.8rem; padding:1.1rem 1.5rem;
+      background:var(--sf-card); border:1px solid var(--sf-line); border-radius:14px;
+      box-shadow:0 2px 14px rgba(45,37,28,.05);
+    }
+    .bs-faq summary{ font-size:.94rem; font-weight:800; color:var(--sf-ink); cursor:pointer; line-height:1.7; }
+    .bs-faq details[open] summary{ margin-bottom:.6rem; color:var(--sf-ember-deep); }
+    .bs-faq p{ font-size:.86rem; line-height:1.9; color:var(--sf-ink-soft); }
 
-    .bs-seo-list{ margin-top:40px; font-size:12px; color:var(--gray-500); }
-    .bs-seo-list a{ color:var(--gray-500); }
+    .bs-seo-list{ margin-top:2.4rem; font-size:.75rem; color:var(--sf-smoke); }
+    .bs-seo-list a{ color:var(--sf-smoke); }
 
     /* ---- mobile ---- */
-    @media (max-width:820px){ .bs-class-grid{ grid-template-columns:repeat(2,1fr); } .bs-cl:nth-child(2){ border-right:none; } .bs-cl:nth-child(-n+2){ border-bottom:1px solid rgba(28,25,23,.08); } }
-    @media (max-width:560px){
-      .bs-wrap{ padding:calc(var(--nav-h) + 32px) 16px 56px; }
-      .bs-class-grid{ grid-template-columns:1fr; } .bs-cl{ border-right:none; border-bottom:1px solid rgba(28,25,23,.08); } .bs-cl:last-child{ border-bottom:none; }
-      .bs-tools{ top:calc(var(--nav-h) - 4px); border-radius:16px; }
-      .bs-stat{ padding:11px 18px; } .bs-stat b{ font-size:27px; }
-      .bs-map-cta{ padding:28px 22px; }
+    @media (max-width:900px){
+      .bs-class-grid{ grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:600px){
+      .bs-wrap{ padding:calc(var(--nav-h) + 36px) 16px 16px; }
+      .bs-class-grid{ grid-template-columns:1fr; }
+      .bs-tools{ padding:1rem 1.1rem; top:calc(var(--nav-h) - 4px); }
+      .bs-note{ border-radius:18px; padding:.8rem 1.1rem; }
+      .bs-grid{ grid-template-columns:1fr; gap:1.2rem; }
+      .bs-map-cta{ padding:2rem 1.5rem; border-radius:24px; }
+      .bs-map-btn{ width:100%; justify-content:center; }
+      .bs-result-info{ gap:.6rem; }
+      .bs-right-tools{ width:100%; }
+      .bs-sort{ flex:1; }
     }
     @media (prefers-reduced-motion:reduce){
       *{ animation:none !important; transition:none !important; }
       .reveal{ opacity:1 !important; transform:none !important; }
-      .bs-rotate .word{ position:static; transform:none; opacity:1; }
+      .bs-pill,.bs-hero h1,.bs-lead,.bs-note,.bs-hero-cast{ opacity:1 !important; }
     }
   </style>
   <script type="application/ld+json">
@@ -255,10 +348,12 @@
 </head>
 <body>
 
-  <div class="sf-bg" aria-hidden="true">
-    <div class="sf-blob b1"></div><div class="sf-blob b2"></div><div class="sf-blob b3"></div>
-    <div class="sf-grid"></div>
+  <div class="bg-field" aria-hidden="true">
+    <div class="bg-blob b1"></div>
+    <div class="bg-blob b2"></div>
+    <div class="bg-blob b3"></div>
   </div>
+  <div class="bg-grain" aria-hidden="true"></div>
 
   <header id="nav" class="nav">
     <div class="nav-wrap">
@@ -291,17 +386,12 @@
   <main class="bs-wrap">
 
     <section class="bs-hero">
-      <p class="bs-mark">BBQ SPOT FINDER · SLOW FIRE</p>
-      <h1><span class="bs-rotate" id="rotate"><span class="word in">駅近</span></span>で選ぶ、<br>首都圏のBBQ場。</h1>
-      <p class="bs-tagline">
-        蓋付きグリル持込・電源・アメリカンBBQ可否で絞り込める、SLOW FIRE運営の日本最詳のBBQ場データベース。<br>
-        「Pulseを持って行ける？」「プルドポークを焼けるのはどこ？」が、ここでわかります。
-      </p>
-      <div class="bs-stats" id="stats">
-        <div class="bs-stat"><b data-count="24">0</b><span>収録スポット</span></div>
-        <div class="bs-stat"><b data-count="4">0</b><span>都県</span></div>
-        <div class="bs-stat"><b data-count="10">0</b><span>絞り込み軸</span></div>
-        <div class="bs-stat"><b data-count="4">0</b><span>SLOW FIRE分類</span></div>
+      <p class="bs-pill">BBQ SPOT GUIDE</p>
+      <h1>火を囲む場所を、<br><span class="hl">持ち物の重さ</span>から選ぶ。</h1>
+      <p class="bs-lead">グリルを持ち込めるか、電源があるか、手ぶらで行けるか。首都圏の24会場を1件ずつ調べて、同じ項目で並べました。</p>
+      <p class="bs-note"><span><b>24</b> 会場</span><span>東京・神奈川・千葉・埼玉</span><span>会場レベル <b>Lv1〜5</b></span></p>
+      <div class="bs-hero-cast">
+        <div data-anchan="guide" data-who="yama" data-size="s" data-say="会場の「重さ」はLv1〜5で見てね。Lv1は全部持参、Lv5はほぼ手ぶら。"></div>
       </div>
     </section>
 
@@ -312,6 +402,7 @@
         <input type="text" class="bs-search-input" id="searchInput" placeholder="施設名・最寄駅・地名で検索  例：武蔵野公園 / 新木場 / 多摩" autocomplete="off">
       </div>
       <div class="bs-tabs" id="areaTabs"><!-- JS --></div>
+      <span class="bs-frow-label">こだわり条件</span>
       <div class="bs-chip-row" id="chipRow"><!-- JS --></div>
       <div class="bs-type-row" id="typeRow">
         <span class="lbl">SLOW FIRE分類</span>
@@ -319,6 +410,9 @@
         <button class="bs-tchip" data-t="B">B 手ぶら</button>
         <button class="bs-tchip" data-t="C">C 持込◎</button>
         <button class="bs-tchip" data-t="D">D 場所のみ</button>
+      </div>
+      <div class="bs-lv-row" id="lvRow">
+        <span class="lbl">会場レベル</span><!-- JS -->
       </div>
     </section>
 
@@ -341,18 +435,18 @@
     <!-- SLOW FIRE classification (対置) -->
     <section class="bs-class reveal">
       <div class="bs-section-head">
-        <span class="bs-kicker">Classification</span>
-        <h2 class="bs-h2">SLOW FIRE分類 A〜D</h2>
+        <span class="bs-kicker">CLASSIFICATION</span>
+        <h2 class="bs-h2">会場の性格を、A〜Dの4つに分けています。</h2>
       </div>
-      <p style="font-size:14px;color:var(--gray-600);line-height:1.7;margin-bottom:18px;max-width:720px;">アメリカンBBQ（ロー&スロー）の実現しやすさで、全スポットを4段階に格付けしています。右へ行くほど「自分のグリルで、自分の食材を、時間をかけて焼ける」自由度が上がります。</p>
+      <p class="bs-sec-lead">アメリカンBBQ（ロー&スロー）のやりやすさで分けた区分です。Dに近づくほど「自分のグリルで、自分の食材を、時間をかけて焼ける」自由度が上がります。</p>
       <div class="bs-class-grid" id="classGrid"><!-- JS fills counts --></div>
     </section>
 
     <!-- map CTA -->
     <section class="bs-map-cta reveal">
       <div class="txt">
-        <h2>地図から探す</h2>
-        <p>「今日はこの辺で」という日は、地図表示が便利です。24スポットを一望して、エリアと海・公園・都心の位置関係から選べます。</p>
+        <h2>「今日はこの辺で」なら、地図から。</h2>
+        <p>24会場を1枚の地図に並べています。海沿い・公園・都心の位置関係を見ながら、その日の集まりやすさで選べます。</p>
       </div>
       <a href="/bbq-spots/map.html" class="bs-map-btn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg>
@@ -362,10 +456,10 @@
 
     <!-- FAQ -->
     <section class="bs-faq reveal">
-      <div class="bs-section-head"><span class="bs-kicker">Q &amp; A</span><h2 class="bs-h2">BBQ場の選び方</h2></div>
+      <div class="bs-section-head"><span class="bs-kicker">Q &amp; A</span><h2 class="bs-h2">会場選びで、よく聞かれること。</h2></div>
       <details>
         <summary>アメリカンBBQ（ロー&スロー）ができる場所はどこ？</summary>
-        <p>「タイプC（常設+持込OK）」または「タイプD（場所のみ）」のスポットで、<strong>蓋付きグリル（Weber Kettle等）の持込が可能</strong>な場所が必要です。リストではタイプCのスポットが最も理想的です。</p>
+        <p>「タイプC（常設+持込OK）」または「タイプD（場所のみ）」のスポットで、<strong>蓋付きグリル（Weber Kettle等）の持込が可能</strong>な場所が必要です。リストのなかではタイプCがいちばんやりやすい区分です。</p>
       </details>
       <details>
         <summary>Weber Pulseのような電気グリルが使えるBBQ場は？</summary>
@@ -373,11 +467,11 @@
       </details>
       <details>
         <summary>焼肉スタイルのBBQができれば十分です。違いは？</summary>
-        <p>焼肉スタイルは「蓋なし炭グリル」でOKなので、ほぼ全タイプで楽しめます。常設グリルがあるタイプAやレンタル可のタイプBが手軽です。</p>
+        <p>焼肉スタイルは「蓋なし炭グリル」でOKなので、ほぼ全タイプで楽しめます。常設グリルがあるタイプA、レンタルのあるタイプBが手軽です。</p>
       </details>
       <details>
         <summary>「グリル持込不可」のBBQ場ってあるの？</summary>
-        <p>はい、特に区立の小さい公園BBQ場ではコンクリート製の常設炉のみ使用可、というケースがあります（駒場野公園など）。リストではタイプAに分類されます。アメリカンBBQ目的の方は避けたほうがいいです。</p>
+        <p>はい、特に区立の小さい公園BBQ場ではコンクリート製の常設炉のみ使用可、というケースがあります（駒場野公園など）。リストではタイプAに分類されます。蓋付きグリルを使いたい場合は、別の会場を選んだほうが確実です。</p>
       </details>
       <details>
         <summary>ブリスケットを12時間焼きたいんですが、どこが向いていますか？</summary>
@@ -472,37 +566,6 @@
 
     const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ===== hero rotating word ===== */
-    (function(){
-      const el = document.getElementById('rotate');
-      if (!el) return;
-      const words = ['駅近','手ぶら','蓋付きグリル','電源つき','大人数','海辺','夜通し','桜の下'];
-      if (RM){ el.querySelector('.word').textContent = words[0]; return; }
-      let i = 0;
-      setInterval(() => {
-        const cur = el.querySelector('.word');
-        cur.classList.remove('in'); cur.classList.add('out');
-        i = (i + 1) % words.length;
-        const next = document.createElement('span');
-        next.className = 'word in'; next.textContent = words[i];
-        el.appendChild(next);
-        setTimeout(() => cur.remove(), 550);
-      }, 2100);
-    })();
-
-    /* ===== count-up ===== */
-    (function(){
-      const nums = document.querySelectorAll('#stats b[data-count]');
-      const run = (b) => {
-        const target = +b.dataset.count; if (RM){ b.textContent = target; return; }
-        const t0 = performance.now(), dur = 1100;
-        const step = (t) => { const p = Math.min(1,(t-t0)/dur); b.textContent = Math.round(target*(1-Math.pow(1-p,3))); if (p<1) requestAnimationFrame(step); };
-        requestAnimationFrame(step);
-      };
-      const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); }}),{threshold:.4});
-      nums.forEach(n=>io.observe(n));
-    })();
-
     /* ===== reveal ===== */
     (function(){
       const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);}}),{threshold:.12});
@@ -528,6 +591,7 @@
       const areaTabs = document.getElementById('areaTabs');
       const chipRow = document.getElementById('chipRow');
       const typeChips = document.querySelectorAll('.bs-tchip');
+      const lvRow = document.getElementById('lvRow');
       const classGrid = document.getElementById('classGrid');
 
       let data = [];
@@ -551,7 +615,17 @@
         {id:'american',label:'アメリカンBBQ可', test:s=> s.ratings.americanBbq>=4},
       ];
 
-      const state = { query:'', area:'all', features:new Set(), type:null, sort:'american' };
+      /* 会場レベル Lv1〜5（どこまで自分で用意するか＝持ち物の重さ） */
+      const lvMeta = {
+        1:{short:'無料公園=全持参',  long:'無料の公園。道具・炭・食材すべて持参。'},
+        2:{short:'有料＋レンタル',   long:'有料BBQ場。機材レンタルはあるが食材は持参。運用ルールは厳しめ。'},
+        3:{short:'手ぶら有料',      long:'機材と食材が付くプラン制。持込には制限あり。'},
+        4:{short:'レンタルスペース',  long:'貸しスペース型。調理器具はほぼそろっている。'},
+        5:{short:'グランピング',     long:'ほぼ手ぶらで完結。ただし自前の炭グリルは持ち込めない。'},
+      };
+      const lvLabel = s => `Lv${s.sfLevel} ${lvMeta[s.sfLevel] ? lvMeta[s.sfLevel].short : ''}`.trim();
+
+      const state = { query:'', area:'all', features:new Set(), type:null, level:null, sort:'american' };
 
       /* build area tabs from data */
       const areaOrder = [];
@@ -562,6 +636,13 @@
 
       /* build feature chips */
       chipRow.innerHTML = featureDefs.map(f=>`<button class="bs-chip" data-feat="${f.id}"><span class="dot"></span>${esc(f.label)}</button>`).join('');
+
+      /* build level chips（データに存在するレベルだけ・件数つき） */
+      const lvCount = {};
+      data.forEach(s=>{ if(s.sfLevel) lvCount[s.sfLevel]=(lvCount[s.sfLevel]||0)+1; });
+      lvRow.insertAdjacentHTML('beforeend',
+        Object.keys(lvCount).sort().map(l=>`<button class="bs-lchip" data-lv="${l}" title="${esc(lvMeta[l]?lvMeta[l].long:'')}">Lv${l} ${esc(lvMeta[l]?lvMeta[l].short:'')}<span class="n">${lvCount[l]}</span></button>`).join(''));
+      const lvChips = lvRow.querySelectorAll('.bs-lchip');
 
       /* classification counts */
       const typeMeta = {
@@ -597,7 +678,7 @@
         if(s.bringIn.grill==='ng') feats.push({l:'持込不可',c:'ng'});
         const st=s.nearestStations[0]||{};
         const rankBars=[1,2,3,4].map(n=>`<i style="height:${5+n*3}px;opacity:${ n<=({A:1,B:2,C:3,D:4}[s.slowFireType]) ?1:.32}"></i>`).join('');
-        return `<a href="${s.slug}.html" class="bs-card" data-tilt>
+        return `<a href="${s.slug}.html" class="bs-card">
           <div class="bs-card-img">
             <div class="bs-rank" data-t="${s.slowFireType}"><span class="bars">${rankBars}</span>TYPE ${s.slowFireType}</div>
             <div class="bs-abadge">🔥 アメリカンBBQ ${s.americanBbqRating}/5</div>
@@ -608,6 +689,7 @@
             </div>
           </div>
           <div class="bs-card-body">
+            ${s.sfLevel?`<span class="bs-lv-badge" title="${esc(s.sfLevelNote||'')}"><b>Lv${s.sfLevel}</b>${esc(lvMeta[s.sfLevel]?lvMeta[s.sfLevel].short:'')}</span>`:''}
             <h3 class="bs-card-name">${esc(s.name)}</h3>
             <p class="bs-card-area">${esc(s.areaLabel)} · ${esc(s.city)}</p>
             <p class="bs-card-summary">${esc(s.uniqueness)}</p>
@@ -619,6 +701,7 @@
         return items.filter(s=>{
           if(state.area!=='all' && s.areaType!==state.area) return false;
           if(state.type && s.slowFireType!==state.type) return false;
+          if(state.level && String(s.sfLevel)!==String(state.level)) return false;
           for(const fid of state.features){ const def=featureDefs.find(d=>d.id===fid); if(def && !def.test(s)) return false; }
           return true;
         });
@@ -628,7 +711,7 @@
         return items.slice().sort(cmp);
       }
 
-      function activeFilterCount(){ return (state.area!=='all'?1:0)+(state.type?1:0)+state.features.size+(state.query?1:0); }
+      function activeFilterCount(){ return (state.area!=='all'?1:0)+(state.type?1:0)+(state.level?1:0)+state.features.size+(state.query?1:0); }
 
       function render(){
         let items = state.query ? fuse.search(state.query).map(r=>r.item) : data;
@@ -639,7 +722,6 @@
         activeNote.textContent = n ? `／ ${n}件の条件で絞り込み中` : '／ すべて表示中';
         if(items.length){
           grid.innerHTML = items.map(renderCard).join('');
-          attachTilt();
         } else {
           grid.innerHTML = `<div class="bs-empty">
             <div class="em-fire">🫙</div>
@@ -648,19 +730,6 @@
             <button id="emReset">条件をすべてリセット</button></div>`;
           document.getElementById('emReset')?.addEventListener('click', reset);
         }
-      }
-
-      /* 3D tilt (mouse-follow) */
-      function attachTilt(){
-        if(RM || matchMedia('(hover:none)').matches) return;
-        grid.querySelectorAll('[data-tilt]').forEach(card=>{
-          card.addEventListener('mousemove', e=>{
-            const r=card.getBoundingClientRect();
-            const px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
-            card.style.transform=`translateY(-4px) rotateX(${(-py*6).toFixed(2)}deg) rotateY(${(px*7).toFixed(2)}deg)`;
-          });
-          card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
-        });
       }
 
       /* events */
@@ -677,12 +746,17 @@
         if(state.type===t){ state.type=null; c.classList.remove('active'); }
         else { state.type=t; typeChips.forEach(x=>x.classList.remove('active')); c.classList.add('active'); } render(); }));
 
+      lvChips.forEach(c=>c.addEventListener('click', ()=>{ const l=c.dataset.lv;
+        if(state.level===l){ state.level=null; c.classList.remove('active'); }
+        else { state.level=l; lvChips.forEach(x=>x.classList.remove('active')); c.classList.add('active'); } render(); }));
+
       sortSelect.addEventListener('change', e=>{ state.sort=e.target.value; render(); });
 
-      function reset(){ state.query=''; state.area='all'; state.type=null; state.features.clear(); input.value='';
+      function reset(){ state.query=''; state.area='all'; state.type=null; state.level=null; state.features.clear(); input.value='';
         areaTabs.querySelectorAll('.bs-tab').forEach((x,i)=>x.classList.toggle('active',i===0));
         chipRow.querySelectorAll('.bs-chip').forEach(x=>x.classList.remove('active'));
         typeChips.forEach(x=>x.classList.remove('active'));
+        lvChips.forEach(x=>x.classList.remove('active'));
         render(); }
       resetBtn.addEventListener('click', reset);
 

@@ -32,6 +32,8 @@
     "closedDays": "12/29〜1/3",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。常設グリルもレンタルもなく、道具・炭・食材すべて持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "蓋付き炭グリル持込可、指定エリアでロー&スロー実施可能",
     "grillInstalled": {
@@ -133,6 +135,8 @@
     "closedDays": "12/29〜1/3",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。設備は水道とトイレのみで、道具・炭・食材はすべて持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "蓋付き炭グリル持込可。広大な敷地で実施しやすい",
     "grillInstalled": {
@@ -224,6 +228,8 @@
     "closedDays": "公園規定による",
     "slowFireType": "A",
     "slowFireTypeLabel": "常設・焼肉スタイル（持込グリル不可）",
+    "sfLevel": 2,
+    "sfLevelNote": "有料の常設炉タイプ。炉とテーブルは場内設備だが持込制限があり、運用ルールは厳しめ。",
     "americanBbqRating": 1,
     "americanBbqReason": "常設の囲い炉のみ使用可能。蓋付きグリル持込不可。アメリカンBBQ・ロー&スローは不可",
     "grillInstalled": {
@@ -321,6 +327,8 @@
     "closedDays": "なし（年末年始除く）",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・蓋付きグリル・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。食材は持参が基本で、手ぶらはオプション扱い。",
     "americanBbqRating": 5,
     "americanBbqReason": "持込グリル可、機材レンタルもあり。海と飛行機の景観抜群",
     "grillInstalled": {
@@ -415,6 +423,8 @@
     "closedDays": "なし",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・蓋付きグリル・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料のデイキャンプ区画。機材レンタルはあるが食材は持参が基本。",
     "americanBbqRating": 5,
     "americanBbqReason": "宿泊もできるキャンプ場併設。グリル持込自由でロー&スロー余裕",
     "grillInstalled": {
@@ -507,6 +517,8 @@
     "closedDays": "年末年始",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。常設グリルなし・レンタルなしで全持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "持込グリル可、広大な敷地",
     "grillInstalled": {
@@ -601,6 +613,8 @@
     "closedDays": "公園規定",
     "slowFireType": "B",
     "slowFireTypeLabel": "常設・蓋付き・持込制限あり",
+    "sfLevel": 3,
+    "sfLevelNote": "1人あたりのプラン制で機材と食材が付く手ぶら型。持込には制限がある。",
     "americanBbqRating": 2,
     "americanBbqReason": "事業者運営のため、食材・機材はほぼお店のものに準じる",
     "grillInstalled": {
@@ -692,6 +706,8 @@
     "closedDays": "不定休",
     "slowFireType": "B",
     "slowFireTypeLabel": "常設・蓋付き・持込制限あり（手ぶら型）",
+    "sfLevel": 3,
+    "sfLevelNote": "食材込みのプラン制・屋上の手ぶら型。道具はすべて用意されている。",
     "americanBbqRating": 2,
     "americanBbqReason": "手ぶらBBQ業態。食材・グリルは店側提供",
     "grillInstalled": {
@@ -782,6 +798,8 @@
     "closedDays": "不定休",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・蓋付きグリル・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料の持込プラン中心。機材レンタルと電源はあるが、食材は持参前提。",
     "americanBbqRating": 5,
     "americanBbqReason": "持込BBQグリル可、電源使用可。アメリカンBBQに本気で取り組める",
     "grillInstalled": {
@@ -874,6 +892,8 @@
     "closedDays": "公園規定",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の広場。機材の常設・貸出がなく、グリルから食材まで持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "海辺の広場で持込グリル可",
     "grillInstalled": {
@@ -962,6 +982,8 @@
     "closedDays": "公園規定",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。テーブル・椅子も持参前提の全持参スタイル。",
     "americanBbqRating": 4,
     "americanBbqReason": "持込グリル可、世田谷区内の貴重な公園BBQ",
     "grillInstalled": {
@@ -1049,6 +1071,8 @@
     "closedDays": "公園規定",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。常設設備がなく、道具・炭・食材はすべて持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "自然豊か、持込グリル可",
     "grillInstalled": {
@@ -1137,6 +1161,8 @@
     "closedDays": "不定休",
     "slowFireType": "B",
     "slowFireTypeLabel": "常設・蓋付き・持込制限あり（手ぶら型）",
+    "sfLevel": 5,
+    "sfLevelNote": "グランピング型のBBQ施設。ほぼ手ぶらで完結する一方、自前の炭グリルは持ち込めない。",
     "americanBbqRating": 3,
     "americanBbqReason": "手ぶらBBQ業態。グラマラスな空間が魅力",
     "grillInstalled": {
@@ -1226,6 +1252,8 @@
     "closedDays": "12/29〜1/3",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。常設グリルもレンタルもなく全持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "広大な敷地で持込グリル可",
     "grillInstalled": {
@@ -1314,6 +1342,8 @@
     "closedDays": "公園規定",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。駅近だが設備は最小限で、道具も食材も持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "持込グリル可。駅近で利便性◎",
     "grillInstalled": {
@@ -1401,6 +1431,8 @@
     "closedDays": "なし",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "イベント開催時のみ使える屋外広場。常設グリルも貸出設備もなく持参前提。",
     "americanBbqRating": 3,
     "americanBbqReason": "横浜港の眺望は最高だが、火気使用ルールは要確認",
     "grillInstalled": {
@@ -1490,6 +1522,8 @@
     "closedDays": "なし",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画で常設グリル・テーブルあり。食材と細かな道具は持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "海釣り併設、釣った魚をBBQで焼ける独自体験",
     "grillInstalled": {
@@ -1579,6 +1613,8 @@
     "closedDays": "オフシーズン",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の海岸エリア。設備はほぼなく、道具・炭・食材を持ち込む前提。",
     "americanBbqRating": 4,
     "americanBbqReason": "湘南の海辺で本格BBQ。夕日が美しい",
     "grillInstalled": {
@@ -1667,6 +1703,8 @@
     "closedDays": "公園規定",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。食材持参が基本のスタイル。",
     "americanBbqRating": 4,
     "americanBbqReason": "千葉県内最大級のBBQ場。レンタル・持込両対応",
     "grillInstalled": {
@@ -1757,6 +1795,8 @@
     "closedDays": "公園規定",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。屋根付きだが食材は持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "三番瀬の自然と海岸線で本格BBQ",
     "grillInstalled": {
@@ -1846,6 +1886,8 @@
     "closedDays": "公園規定",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。食材は持参が基本。",
     "americanBbqRating": 4,
     "americanBbqReason": "アスレチック併設の総合公園、施設充実",
     "grillInstalled": {
@@ -1936,6 +1978,8 @@
     "closedDays": "公園規定",
     "slowFireType": "D",
     "slowFireTypeLabel": "場所のみ（持込前提）",
+    "sfLevel": 1,
+    "sfLevelNote": "場所利用無料の公園。常設グリルなし・貸出なしで全持参。",
     "americanBbqRating": 4,
     "americanBbqReason": "広大な敷地で持込BBQ可能。荒川沿いの自然",
     "grillInstalled": {
@@ -2024,6 +2068,8 @@
     "closedDays": "公園規定",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。食材持参が基本。",
     "americanBbqRating": 4,
     "americanBbqReason": "彩湖の湖畔で本格BBQ。広い敷地",
     "grillInstalled": {
@@ -2113,6 +2159,8 @@
     "closedDays": "公園規定",
     "slowFireType": "C",
     "slowFireTypeLabel": "常設・持込OK",
+    "sfLevel": 2,
+    "sfLevelNote": "有料区画＋機材レンタルあり。食材は持参が基本。",
     "americanBbqRating": 4,
     "americanBbqReason": "プール併設の総合公園、施設充実",
     "grillInstalled": {

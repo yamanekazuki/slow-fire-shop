@@ -8,7 +8,7 @@
   <meta name="keywords" content="小金井公園バーベキュー広場,BBQ場,バーベキュー,小金井市,多摩,持ち込み,電源,Pulse">
   <link rel="canonical" href="https://an-bbq.jp/bbq-spots/ogawamachi-bbq.html">
   <link rel="manifest" href="../manifest.json">
-  <meta name="theme-color" content="#B45309">
+  <meta name="theme-color" content="#d95f3b">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
   <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
   <meta property="og:type" content="article">
@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css?v=20260516">
 
   <script type="application/ld+json">{
@@ -116,68 +116,183 @@
   <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wmtxoerxqx");</script>
 
   <style>
-    .sp-wrap { max-width: 1080px; margin: 0 auto; padding: calc(var(--nav-h) + 30px) 24px 64px; }
-    .sp-crumb { font-size: var(--text-xs); color: var(--gray-500); margin-bottom: 16px; }
-    .sp-crumb a { color: var(--gray-600); text-decoration: none; }
-    .sp-crumb a:hover { color: var(--brand-500); text-decoration: underline; }
-    .sp-header { margin-bottom: 24px; }
-    .sp-type { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--brand-50); color: var(--brand-700); border-radius: 100px; font-size: var(--text-xs); font-weight: var(--weight-bold); margin-bottom: 14px; letter-spacing: 0.04em; }
-    .sp-type-A { background: var(--gray-100); color: var(--gray-700); }
-    .sp-type-B { background: #FEF3C7; color: #92400E; }
-    .sp-type-C { background: #ECFDF5; color: #047857; }
-    .sp-type-D { background: var(--brand-50); color: var(--brand-700); }
-    .sp-header h1 { font-size: clamp(28px, 4vw, 40px); font-weight: var(--weight-bold); color: var(--gray-900); line-height: var(--leading-tight); margin-bottom: 10px; }
-    .sp-subtitle { font-size: var(--text-base); color: var(--gray-600); line-height: var(--leading-relaxed); margin-bottom: 18px; }
-    .sp-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: var(--text-sm); color: var(--gray-500); }
-    .sp-meta span { display: inline-flex; align-items: center; gap: 4px; }
-    .sp-hero-img { aspect-ratio: 16/9; border-radius: var(--r-lg); overflow: hidden; margin-bottom: 32px; }
-    .sp-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    /* ============================================================
+       会場ページ — YORON BBQ コミュニティ・トーン
+       正本: ~/dev/bbq/bbq-site/community.css
+       ============================================================ */
+    :root{
+      --sp-cream:#f6f1e4; --sp-ink:#2d251c; --sp-ink-soft:#5b5044; --sp-smoke:#8a8177;
+      --sp-ember:#d95f3b; --sp-ember-deep:#b74a2c; --sp-amber:#e89b3f; --sp-forest:#4a7c59;
+      --sp-card:#fffdf6; --sp-line:rgba(45,37,28,.14); --sp-radius:18px;
+    }
+    body{
+      background:var(--sp-cream); color:var(--sp-ink);
+      font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif; line-height:1.85;
+    }
 
-    .sp-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
-    @media (min-width: 880px) { .sp-grid { grid-template-columns: 2fr 1fr; } }
+    .sp-wrap{ max-width:1080px; margin:0 auto; padding:calc(var(--nav-h) + 48px) 24px 40px; position:relative; z-index:2; }
 
-    .sp-section { margin-bottom: 36px; }
-    .sp-section h2 { font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--gray-900); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--brand-500); }
-    .sp-section p { font-size: var(--text-base); color: var(--gray-700); line-height: var(--leading-relaxed); margin-bottom: 12px; }
-    .sp-section ul { font-size: var(--text-sm); color: var(--gray-700); line-height: var(--leading-relaxed); padding-left: 20px; }
-    .sp-section li { margin-bottom: 4px; }
+    .sp-crumb{ font-size:.76rem; font-weight:700; color:var(--sp-smoke); margin-bottom:1.4rem; }
+    .sp-crumb a{ color:var(--sp-smoke); text-decoration:none; }
+    .sp-crumb a:hover{ color:var(--sp-ember); }
 
-    .sp-info-card { padding: 20px 22px; background: var(--gray-50); border-radius: var(--r-lg); border: 1px solid var(--gray-200); margin-bottom: 20px; }
-    .sp-info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-200); font-size: var(--text-sm); }
-    .sp-info-row:last-child { border-bottom: none; }
-    .sp-info-label { color: var(--gray-500); font-weight: var(--weight-semi); }
-    .sp-info-value { color: var(--gray-900); text-align: right; }
+    .sp-header{ margin-bottom:1.8rem; }
+    .sp-type{
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.4rem 1.15rem; border-radius:100px; margin-bottom:1.1rem;
+      background:rgba(217,95,59,.1); color:var(--sp-ember-deep);
+      font-size:.72rem; font-weight:800; letter-spacing:.1em;
+    }
+    .sp-type-A{ background:rgba(45,37,28,.08); color:var(--sp-ink); }
+    .sp-type-B{ background:rgba(232,155,63,.18); color:#8a5a12; }
+    .sp-type-C{ background:rgba(74,124,89,.14); color:#3d6749; }
+    .sp-type-D{ background:rgba(217,95,59,.1); color:var(--sp-ember-deep); }
 
-    .sp-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: 14px 0; background: var(--white); }
-    .sp-table th, .sp-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--gray-200); }
-    .sp-table th { background: var(--gray-50); font-weight: var(--weight-semi); color: var(--gray-700); font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; }
+    .sp-header h1{
+      font-size:clamp(1.7rem,4vw,2.7rem); font-weight:900; line-height:1.42;
+      letter-spacing:.02em; color:var(--sp-ink); margin-bottom:1rem;
+    }
 
-    .sp-callout { padding: 18px 22px; background: linear-gradient(135deg, var(--brand-50), var(--cream)); border-radius: var(--r-lg); border-left: 4px solid var(--brand-500); margin: 20px 0; }
-    .sp-callout-title { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--brand-700); letter-spacing: 0.06em; margin-bottom: 6px; text-transform: uppercase; }
-    .sp-callout p { font-size: var(--text-sm); color: var(--gray-700); line-height: var(--leading-relaxed); margin: 0; }
+    /* 会場レベル Lv1〜5（bring-guide.html の5レベルと同じ軸） */
+    .sp-lv{
+      margin:.4rem 0 1.2rem; padding:1.15rem 1.4rem;
+      background:var(--sp-card); border:1px solid var(--sp-line); border-left:4px solid var(--sp-ember);
+      border-radius:var(--sp-radius); box-shadow:0 4px 24px rgba(45,37,28,.06);
+    }
+    .sp-lv-head{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; }
+    .sp-lv-badge{
+      display:inline-flex; align-items:center; gap:.35rem;
+      padding:.34rem 1rem; border-radius:100px;
+      background:var(--sp-ember); color:#fff; font-size:.76rem; font-weight:800; letter-spacing:.03em;
+    }
+    .sp-lv-note{ margin:.7rem 0 0; font-size:.88rem; line-height:1.9; color:var(--sp-ink-soft); }
+    .sp-lv-link{ display:inline-block; margin-top:.7rem; font-size:.85rem; font-weight:800; color:var(--sp-ember); text-decoration:none; }
+    .sp-lv-link:hover{ text-decoration:underline; }
 
-    .sp-faq details { margin-bottom: 10px; padding: 14px 18px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; }
-    .sp-faq summary { font-weight: var(--weight-semi); color: var(--gray-900); cursor: pointer; }
-    .sp-faq details[open] summary { margin-bottom: 8px; }
-    .sp-faq p { font-size: var(--text-sm); color: var(--gray-600); line-height: var(--leading-relaxed); margin: 0; }
+    /* やまちゃんの一言（anchan.js が描画） */
+    .sp-cast{ margin:0 0 1.4rem; }
 
-    .sp-back { display: inline-block; margin-top: 32px; color: var(--brand-500); font-weight: var(--weight-semi); text-decoration: none; }
-    .sp-back:hover { text-decoration: underline; }
+    .sp-subtitle{ font-size:.98rem; line-height:1.95; color:var(--sp-ink-soft); margin-bottom:1rem; max-width:40em; }
+    .sp-meta{ display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; font-size:.82rem; font-weight:700; color:var(--sp-smoke); }
+    .sp-meta span{ display:inline-flex; align-items:center; gap:.3rem; }
 
-    /* shared with index.html bs-* card styling */
-    .bs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
-    .bs-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
-    .bs-card:hover { border-color: var(--brand-500); transform: translateY(-2px); }
-    .bs-card-img { aspect-ratio: 16/10; overflow: hidden; position: relative; }
-    .bs-card-img img { width: 100%; height: 100%; object-fit: cover; }
-    .bs-card-type-badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; background: rgba(255,255,255,0.9); border-radius: 100px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; }
-    .bs-card-body { padding: 14px 16px; }
-    .bs-card-name { font-size: var(--text-base); font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
-    .bs-card-area { font-size: 11px; color: var(--gray-500); margin-bottom: 8px; }
-    .bs-card-summary { font-size: var(--text-sm); color: var(--gray-600); line-height: 1.5; }
+    .sp-hero-img{
+      aspect-ratio:16/9; border-radius:var(--sp-radius); overflow:hidden; margin-bottom:2.6rem;
+      box-shadow:0 10px 36px rgba(45,37,28,.13);
+    }
+    .sp-hero-img img{ width:100%; height:100%; object-fit:cover; }
+
+    .sp-grid{ display:grid; grid-template-columns:1fr; gap:2.4rem; }
+    @media (min-width:880px){ .sp-grid{ grid-template-columns:2fr 1fr; } }
+
+    .sp-section{ margin-bottom:2.8rem; }
+    .sp-section h2{
+      font-size:clamp(1.1rem,2.2vw,1.35rem); font-weight:900; line-height:1.6;
+      color:var(--sp-ink); margin-bottom:1rem; padding-bottom:.6rem;
+      border-bottom:1px solid var(--sp-line); position:relative;
+    }
+    .sp-section h2::after{
+      content:""; position:absolute; left:0; bottom:-1px; width:3.2rem; height:2px;
+      background:var(--sp-ember); border-radius:2px;
+    }
+    .sp-section p{ font-size:.94rem; line-height:1.95; color:var(--sp-ink-soft); margin-bottom:.8rem; }
+    .sp-section ul{ font-size:.9rem; line-height:1.95; color:var(--sp-ink-soft); padding-left:1.3rem; }
+    .sp-section li{ margin-bottom:.2rem; }
+
+    .sp-info-card{
+      padding:1.4rem 1.6rem; margin-bottom:1.4rem;
+      background:var(--sp-card); border:1px solid var(--sp-line); border-radius:var(--sp-radius);
+      box-shadow:0 4px 24px rgba(45,37,28,.06);
+    }
+    .sp-info-card h3{ font-size:.98rem; font-weight:900; color:var(--sp-ink); margin-bottom:.9rem; }
+    .sp-info-row{ display:flex; justify-content:space-between; gap:.8rem; padding:.55rem 0; border-bottom:1px dashed var(--sp-line); font-size:.85rem; }
+    .sp-info-row:last-child{ border-bottom:none; }
+    .sp-info-label{ color:var(--sp-smoke); font-weight:700; white-space:nowrap; }
+    .sp-info-value{ color:var(--sp-ink); font-weight:700; text-align:right; }
+
+    .sp-table{
+      width:100%; border-collapse:collapse; font-size:.86rem; margin:1rem 0;
+      background:var(--sp-card); border:1px solid var(--sp-line);
+      border-radius:14px; overflow:hidden;
+    }
+    .sp-table th, .sp-table td{ padding:.7rem 1rem; text-align:left; border-bottom:1px dashed var(--sp-line); }
+    .sp-table tr:last-child td{ border-bottom:none; }
+    .sp-table th{
+      background:rgba(232,155,63,.1); color:var(--sp-ink-soft);
+      font-size:.74rem; font-weight:800; letter-spacing:.1em; border-bottom:1px solid var(--sp-line);
+    }
+    .sp-table td{ color:var(--sp-ink-soft); }
+
+    .sp-callout{
+      margin:1.4rem 0; padding:1.3rem 1.6rem;
+      background:rgba(232,155,63,.1); border:1px solid rgba(217,95,59,.16);
+      border-left:4px solid var(--sp-amber); border-radius:var(--sp-radius);
+    }
+    .sp-callout-title{ font-size:.7rem; font-weight:800; letter-spacing:.22em; color:var(--sp-ember-deep); margin-bottom:.5rem; }
+    .sp-callout p{ font-size:.9rem; line-height:1.9; color:var(--sp-ink-soft); margin:0; }
+
+    .sp-faq details{
+      margin-bottom:.7rem; padding:1rem 1.4rem;
+      background:var(--sp-card); border:1px solid var(--sp-line); border-radius:14px;
+      box-shadow:0 2px 14px rgba(45,37,28,.05);
+    }
+    .sp-faq summary{ font-size:.92rem; font-weight:800; color:var(--sp-ink); cursor:pointer; line-height:1.7; }
+    .sp-faq details[open] summary{ margin-bottom:.5rem; color:var(--sp-ember-deep); }
+    .sp-faq p{ font-size:.86rem; line-height:1.9; color:var(--sp-ink-soft); margin:0; }
+
+    .sp-back{
+      display:inline-block; margin-top:2.4rem; padding:.85rem 2rem; border-radius:100px;
+      border:1.6px solid var(--sp-ink); color:var(--sp-ink);
+      font-size:.88rem; font-weight:800; text-decoration:none;
+      transition:background .2s, color .2s, transform .2s;
+    }
+    .sp-back:hover{ background:var(--sp-ink); color:var(--sp-cream); transform:translateY(-2px); }
+
+    /* 近くの会場カード（index.html と同じ warm カード） */
+    .bs-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.2rem; margin-top:1.2rem; }
+    .bs-card{
+      background:var(--sp-card); border:1px solid var(--sp-line); border-radius:var(--sp-radius);
+      overflow:hidden; text-decoration:none; color:inherit;
+      box-shadow:0 4px 24px rgba(45,37,28,.07);
+      transition:transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .bs-card:hover{ transform:translateY(-4px); border-color:rgba(217,95,59,.3); box-shadow:0 12px 34px rgba(217,95,59,.14); }
+    .bs-card-img{ aspect-ratio:16/10; overflow:hidden; position:relative; }
+    .bs-card-img img{ width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+    .bs-card:hover .bs-card-img img{ transform:scale(1.05); }
+    .bs-card-type-badge{
+      position:absolute; top:.6rem; left:.6rem; padding:.2rem .7rem; border-radius:100px;
+      background:rgba(255,253,246,.92); color:var(--sp-ink);
+      font-size:.66rem; font-weight:800; letter-spacing:.06em;
+    }
+    .bs-card-body{ padding:1.1rem 1.3rem 1.2rem; }
+    .bs-card-name{ font-size:.98rem; font-weight:900; color:var(--sp-ink); margin-bottom:.25rem; line-height:1.5; }
+    .bs-card-area{ font-size:.72rem; font-weight:700; letter-spacing:.06em; color:var(--sp-smoke); margin-bottom:.5rem; }
+    .bs-card-summary{ font-size:.83rem; line-height:1.8; color:var(--sp-ink-soft); }
+
+    .sf-map div, .sf-map iframe{ border-radius:var(--sp-radius); }
+
+    @media (max-width:600px){
+      .sp-wrap{ padding:calc(var(--nav-h) + 32px) 16px 32px; }
+      .sp-table{ font-size:.8rem; }
+      .sp-table th, .sp-table td{ padding:.6rem .7rem; }
+      .sp-info-row{ font-size:.8rem; }
+      .sp-back{ display:block; text-align:center; }
+      .bs-grid{ grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{ animation:none !important; transition:none !important; }
+    }
   </style>
 </head>
 <body>
+
+<div class="bg-field" aria-hidden="true">
+  <div class="bg-blob b1"></div>
+  <div class="bg-blob b2"></div>
+  <div class="bg-blob b3"></div>
+</div>
+<div class="bg-grain" aria-hidden="true"></div>
 
 <header id="nav" class="nav">
   <div class="nav-wrap">
@@ -211,11 +326,19 @@
   <header class="sp-header">
     <span class="sp-type sp-type-D">TYPE D · 場所のみ（持込前提）</span>
     <h1>小金井公園バーベキュー広場</h1>
+    <div class="sp-lv">
+      <div class="sp-lv-head"><span class="sp-lv-badge">Lv1 無料公園=全持参</span></div>
+      <p class="sp-lv-note">場所利用無料の公園。常設グリルもレンタルもなく全持参。</p>
+      <a class="sp-lv-link" href="../bring-guide.html#levels">このレベルの持ち物リストを見る →</a>
+    </div>
     <p class="sp-subtitle">都内最大級の公園、桜の名所</p>
     <div class="sp-meta">
       <span>📍 多摩 · 小金井市</span>
       <span>⏰ 10:00〜16:00</span>
       <span>📅 1/4〜12/28</span>
+    </div>
+    <div class="sp-cast">
+      <div data-anchan="guide" data-who="yama" data-size="s" data-say="都内最大級の公園、桜の名所。蓋付きグリルを持ち込めるから、腰を据えて焼ける。道具も炭も食材も全部持参だから、忘れ物リストは前の日に一度見直そう。"></div>
     </div>
   </header>
 
@@ -225,14 +348,14 @@
     <div>
 
       <section class="sp-section">
-        <h2>SLOW FIREによる評価</h2>
+        <h2>この会場の評価</h2>
         <table class="sp-table">
           <tbody>
-            <tr><td>アメリカンBBQ度</td><td style="color:var(--brand-500);font-weight:700;font-size:16px;letter-spacing:2px;">★★★★☆</td><td style="color:var(--gray-500);font-size:12px;">4/5</td></tr><tr><td>ロー&スロー度</td><td style="color:var(--brand-500);font-weight:700;font-size:16px;letter-spacing:2px;">★★★★☆</td><td style="color:var(--gray-500);font-size:12px;">4/5</td></tr><tr><td>手軽さ</td><td style="color:var(--brand-500);font-weight:700;font-size:16px;letter-spacing:2px;">★★★☆☆</td><td style="color:var(--gray-500);font-size:12px;">3/5</td></tr><tr><td>景観</td><td style="color:var(--brand-500);font-weight:700;font-size:16px;letter-spacing:2px;">★★★★★</td><td style="color:var(--gray-500);font-size:12px;">5/5</td></tr><tr><td>アクセスの良さ</td><td style="color:var(--brand-500);font-weight:700;font-size:16px;letter-spacing:2px;">★★★☆☆</td><td style="color:var(--gray-500);font-size:12px;">3/5</td></tr>
+            <tr><td>アメリカンBBQ度</td><td style="color:var(--sp-ember);font-weight:900;font-size:16px;letter-spacing:2px;">★★★★☆</td><td style="color:var(--sp-smoke);font-size:12px;font-weight:700;">4/5</td></tr><tr><td>ロー&スロー度</td><td style="color:var(--sp-ember);font-weight:900;font-size:16px;letter-spacing:2px;">★★★★☆</td><td style="color:var(--sp-smoke);font-size:12px;font-weight:700;">4/5</td></tr><tr><td>手軽さ</td><td style="color:var(--sp-ember);font-weight:900;font-size:16px;letter-spacing:2px;">★★★☆☆</td><td style="color:var(--sp-smoke);font-size:12px;font-weight:700;">3/5</td></tr><tr><td>景観</td><td style="color:var(--sp-ember);font-weight:900;font-size:16px;letter-spacing:2px;">★★★★★</td><td style="color:var(--sp-smoke);font-size:12px;font-weight:700;">5/5</td></tr><tr><td>アクセスの良さ</td><td style="color:var(--sp-ember);font-weight:900;font-size:16px;letter-spacing:2px;">★★★☆☆</td><td style="color:var(--sp-smoke);font-size:12px;font-weight:700;">3/5</td></tr>
           </tbody>
         </table>
         <div class="sp-callout">
-          <p class="sp-callout-title">SLOW FIREからのアドバイス</p>
+          <p class="sp-callout-title">SLOW FIRE の見立て</p>
           <p>武蔵野公園と同事業者運営。長時間調理可能。</p>
         </div>
       </section>
@@ -242,7 +365,7 @@
         <table class="sp-table">
           <thead><tr><th>項目</th><th style="width:80px;text-align:center;">可否</th><th>備考</th></tr></thead>
           <tbody>
-            <tr><td>BBQグリル</td><td style="color:var(--success);font-weight:700;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--gray-600);"></td></tr><tr><td>炭</td><td style="color:var(--success);font-weight:700;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--gray-600);"></td></tr><tr><td>ガス・カートリッジ</td><td style="color:var(--warning);font-weight:700;text-align:center;">△ 要確認</td><td style="font-size:13px;color:var(--gray-600);"></td></tr><tr><td>電気グリル（Pulse等）</td><td style="color:var(--danger);font-weight:700;text-align:center;">✕ 不可</td><td style="font-size:13px;color:var(--gray-600);"></td></tr><tr><td>食材</td><td style="color:var(--success);font-weight:700;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--gray-600);"></td></tr><tr><td>飲料</td><td style="color:var(--success);font-weight:700;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--gray-600);"></td></tr>
+            <tr><td>BBQグリル</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr><tr><td>炭</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr><tr><td>ガス・カートリッジ</td><td style="color:#a8791f;font-weight:800;text-align:center;">△ 要確認</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr><tr><td>電気グリル（Pulse等）</td><td style="color:var(--sp-ember-deep);font-weight:800;text-align:center;">✕ 不可</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr><tr><td>食材</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr><tr><td>飲料</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○ 可</td><td style="font-size:13px;color:var(--sp-ink-soft);"></td></tr>
           </tbody>
         </table>
       </section>
@@ -257,7 +380,7 @@
         <table class="sp-table">
           <thead><tr><th>設備</th><th style="width:60px;text-align:center;">有無</th><th>備考</th></tr></thead>
           <tbody>
-            <tr><td>トイレ</td><td style="color:var(--success);font-weight:700;text-align:center;">○</td><td style="font-size:13px;color:var(--gray-600);">可</td></tr><tr><td>電源</td><td style="color:var(--danger);font-weight:700;text-align:center;">✕</td><td style="font-size:13px;color:var(--gray-600);">不可</td></tr><tr><td>シャワー</td><td style="color:var(--danger);font-weight:700;text-align:center;">✕</td><td style="font-size:13px;color:var(--gray-600);">不可</td></tr><tr><td>屋根</td><td style="color:var(--danger);font-weight:700;text-align:center;">✕</td><td style="font-size:13px;color:var(--gray-600);">不可</td></tr><tr><td>タープ</td><td style="color:var(--warning);font-weight:700;text-align:center;">△</td><td style="font-size:13px;color:var(--gray-600);">要確認</td></tr><tr><td>テーブル</td><td style="color:var(--warning);font-weight:700;text-align:center;">△</td><td style="font-size:13px;color:var(--gray-600);">要確認</td></tr><tr><td>椅子</td><td style="color:var(--warning);font-weight:700;text-align:center;">△</td><td style="font-size:13px;color:var(--gray-600);">要確認</td></tr><tr><td>ゴミ処理</td><td style="color:var(--warning);font-weight:700;text-align:center;">△</td><td style="font-size:13px;color:var(--gray-600);">要確認</td></tr><tr><td>水道</td><td style="color:var(--success);font-weight:700;text-align:center;">○</td><td style="font-size:13px;color:var(--gray-600);">可</td></tr><tr><td>売店</td><td style="color:var(--warning);font-weight:700;text-align:center;">△</td><td style="font-size:13px;color:var(--gray-600);">要確認</td></tr><tr><td>自販機</td><td style="color:var(--gray-400);font-weight:700;text-align:center;">—</td><td style="font-size:13px;color:var(--gray-600);">—</td></tr>
+            <tr><td>トイレ</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○</td><td style="font-size:13px;color:var(--sp-ink-soft);">可</td></tr><tr><td>電源</td><td style="color:var(--sp-ember-deep);font-weight:800;text-align:center;">✕</td><td style="font-size:13px;color:var(--sp-ink-soft);">不可</td></tr><tr><td>シャワー</td><td style="color:var(--sp-ember-deep);font-weight:800;text-align:center;">✕</td><td style="font-size:13px;color:var(--sp-ink-soft);">不可</td></tr><tr><td>屋根</td><td style="color:var(--sp-ember-deep);font-weight:800;text-align:center;">✕</td><td style="font-size:13px;color:var(--sp-ink-soft);">不可</td></tr><tr><td>タープ</td><td style="color:#a8791f;font-weight:800;text-align:center;">△</td><td style="font-size:13px;color:var(--sp-ink-soft);">要確認</td></tr><tr><td>テーブル</td><td style="color:#a8791f;font-weight:800;text-align:center;">△</td><td style="font-size:13px;color:var(--sp-ink-soft);">要確認</td></tr><tr><td>椅子</td><td style="color:#a8791f;font-weight:800;text-align:center;">△</td><td style="font-size:13px;color:var(--sp-ink-soft);">要確認</td></tr><tr><td>ゴミ処理</td><td style="color:#a8791f;font-weight:800;text-align:center;">△</td><td style="font-size:13px;color:var(--sp-ink-soft);">要確認</td></tr><tr><td>水道</td><td style="color:var(--sp-forest);font-weight:800;text-align:center;">○</td><td style="font-size:13px;color:var(--sp-ink-soft);">可</td></tr><tr><td>売店</td><td style="color:#a8791f;font-weight:800;text-align:center;">△</td><td style="font-size:13px;color:var(--sp-ink-soft);">要確認</td></tr><tr><td>自販機</td><td style="color:var(--sp-smoke);font-weight:800;text-align:center;">—</td><td style="font-size:13px;color:var(--sp-ink-soft);">—</td></tr>
           </tbody>
         </table>
       </section>
@@ -278,7 +401,7 @@
 
     <aside>
       <div class="sp-info-card">
-        <h3 style="font-size:var(--text-base);font-weight:var(--weight-bold);margin-bottom:12px;color:var(--gray-900);">基本情報</h3>
+        <h3 >基本情報</h3>
         <div class="sp-info-row"><span class="sp-info-label">所在地</span><span class="sp-info-value">東京都小金井市関野町1丁目13-1</span></div>
         <div class="sp-info-row"><span class="sp-info-label">エリア</span><span class="sp-info-value">多摩</span></div>
         <div class="sp-info-row"><span class="sp-info-label">営業時間</span><span class="sp-info-value">10:00〜16:00</span></div>
@@ -290,27 +413,27 @@
       </div>
 
       <div class="sp-info-card">
-        <h3 style="font-size:var(--text-base);font-weight:var(--weight-bold);margin-bottom:12px;color:var(--gray-900);">最寄駅</h3>
-        <ul style="list-style:none;padding:0;margin:0;font-size:var(--text-sm);">
+        <h3 >最寄駅</h3>
+        <ul style="list-style:none;padding:0;margin:0;font-size:.86rem;line-height:2;color:var(--sp-ink-soft);">
           <li>JR武蔵小金井駅 からバス20分</li>
         </ul>
       </div>
 
-      <div class="sp-info-card" style="background:var(--brand-50);border-color:var(--brand-200);">
-        <h3 style="font-size:var(--text-base);font-weight:var(--weight-bold);margin-bottom:12px;color:var(--brand-700);">🔗 公式サイト</h3>
-        <a href="https://musashinoparks.com/bbq/koganei/" target="_blank" rel="noopener" style="color:var(--brand-700);font-size:var(--text-sm);word-break:break-all;">https://musashinoparks.com/bbq/koganei/</a>
-        <p style="font-size:var(--text-xs);color:var(--gray-500);margin-top:8px;">最新情報・予約は公式サイトでご確認ください</p>
+      <div class="sp-info-card" style="background:rgba(232,155,63,.12);border-color:rgba(217,95,59,.2);">
+        <h3 style="color:var(--sp-ember-deep);">🔗 公式サイト</h3>
+        <a href="https://musashinoparks.com/bbq/koganei/" target="_blank" rel="noopener" style="color:var(--sp-ember-deep);font-size:.85rem;font-weight:700;word-break:break-all;">https://musashinoparks.com/bbq/koganei/</a>
+        <p style="font-size:.76rem;color:var(--sp-smoke);margin-top:8px;">最新情報・予約は公式サイトでご確認ください</p>
       </div>
     </aside>
   </div>
 
   
       <section class="sp-section sf-map-section">
-        <h2>📍 地図</h2>
-        <div class="sf-map" style="border-radius:14px;overflow:hidden;border:1px solid var(--gray-200);">
+        <h2>地図</h2>
+        <div class="sf-map" style="border-radius:18px;overflow:hidden;border:1px solid var(--sp-line);">
           <iframe src="https://www.google.com/maps?q=東京都小金井市関野町1丁目13-1&output=embed" width="100%" height="380" style="border:0;display:block;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <p style="font-size:12px;color:var(--gray-500);margin-top:8px;">住所: 東京都小金井市関野町1丁目13-1</p>
+        <p style="font-size:.76rem;color:var(--sp-smoke);margin-top:8px;">住所: 東京都小金井市関野町1丁目13-1</p>
       </section>
 
     <section class="sp-section">
