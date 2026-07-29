@@ -57,7 +57,7 @@ const NUMRE = /(\d+\s*(?:℃|度|時間|分|kg|g|cm|mm|%|人前|本|枚|回))/;
  * セクション本文から「一言のもと」になる一文を決定的に選ぶ。
  * 途中で切れた不自然な文にならないよう、そのままで収まる長さの一文だけを候補にする。
  */
-function coreSentence(sectionText, h2Text, salt) {
+function coreSentence(sectionText, h2Text, salt, used = new Set()) {
   const clean = (s) => {
     let t = s.replace(/\s+/g, "").replace(/^[『（(・]/, "").replace(/[。！？、]+$/, "").trim();
     // 文頭の鉤カッコを落とすと閉じだけが残るので、対応が崩れたカッコは取り除く
@@ -73,8 +73,10 @@ function coreSentence(sectionText, h2Text, salt) {
     .filter((s) => s.length >= 12 && s.length <= 32 && !/^[Qq]\./.test(s))
     .filter((s) => !/(解説|参照|詳しくは|くわしくは|次の|以下|上記|前述|この記事|ご紹介|くわしく)/.test(s));
   const numbered = sents.filter((s) => NUMRE.test(s));
-  const pool = numbered.length ? numbered : sents;
+  const pool = (numbered.length ? numbered : sents).filter((s) => !used.has(s));
   if (pool.length) return pool[salt % pool.length];
+  const any = (numbered.length ? numbered : sents).filter((s) => !used.has(s));
+  if (any.length) return any[salt % any.length];
   // 収まる一文がなければ見出しをそのまま使う（見出しは記事ごとに固有なので文言は重複しない）
   const h = clean(h2Text).replace(/^\d+[.、]?/, "");
   return h.length > 30 ? h.slice(0, 30) : h;
@@ -118,11 +120,13 @@ export function sprinkle(html, slug) {
   const targets = [...new Set(pick)].filter((i) => Number.isInteger(i) && i > 0 && i < n).sort((a, b) => a - b);
 
   const h = hashCode(slug);
+  const usedCores = new Set(); // 同じ記事の中でセリフの元ネタが被らないようにする
   const inserts = targets.map((ti, k) => {
     const who = WHO[(h + k) % 3];
     const pose = POSES[who][(h + k * 2) % 3];
     const sec = body.slice(h2s[ti].end, ti + 1 < n ? h2s[ti + 1].index : body.length);
-    const core = coreSentence(stripTags(sec), h2s[ti].text, h + k);
+    const core = coreSentence(stripTags(sec), h2s[ti].text, h + k, usedCores);
+    usedCores.add(core);
     const say = FRAMES[who][(h + k * 3) % 3](core);
     return { at: h2s[ti].index, who, pose, say };
   });

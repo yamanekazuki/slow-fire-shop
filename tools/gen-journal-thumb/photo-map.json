@@ -1,0 +1,12 @@
+{
+  "_readme": [
+    "SLOW FIRE JOURNAL 写真台帳（正本）。1記事=1枚・同一写真の重複割当は全体で禁止。",
+    "山根さんFB 2026-07-30:『ビジネスっぽい図版をやめてBBQらしい実写に』『同じ写真が並ぶのが気持ち悪い』。",
+    "写真の新規AI生成は禁止。承認済み実写だけを使う（images/journal/ と images/journal/pool/）。",
+    "pool/ は外部リポジトリ（yoron-bbq/flyer/ph・bbq-site/images）からコピーした与論の実写。",
+    "articles = journal/articles/<slug>.html のサムネ下地、guide = journal/guide/<slug>.html のヒーロー＆一覧カード。",
+    "検証: node tools/gen-journal-thumb/verify-photo-map.mjs（値のユニーク性と実ファイル存在をチェック）"
+  ],
+  "articles": {},
+  "guide": {}
+}

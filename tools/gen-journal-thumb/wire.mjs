@@ -16,7 +16,7 @@ const SITE = "https://an-bbq.jp";
 
 const slugs = readdirSync(ART_DIR).filter((f) => f.endsWith(".html")).map((f) => f.replace(/\.html$/, ""));
 
-let heroCount = 0, ogCount = 0;
+let heroCount = 0, ogCount = 0, relCount = 0;
 for (const slug of slugs) {
   const file = path.join(ART_DIR, `${slug}.html`);
   const thumbFile = path.join(THUMB_DIR, `${slug}.jpg`);
@@ -45,9 +45,19 @@ for (const slug of slugs) {
   }
   if (html !== beforeOg) ogCount++;
 
+  // 3) 記事末尾の関連記事カード → リンク先記事の生成サムネ（同じストック写真が並ぶのを止める）
+  html = html.replace(
+    /(<a href="(?:https:\/\/an-bbq\.jp\/journal\/articles\/)?([a-z0-9-]+)\.html" class="jr-related-card"[^>]*>\s*<div class="jr-related-img"><img src=")[^"]+(")/g,
+    (m, p1, s, p2) => {
+      if (!existsSync(path.join(THUMB_DIR, `${s}.jpg`))) return m;
+      relCount++;
+      return `${p1}../thumbs/${s}.jpg${p2}`;
+    }
+  );
+
   if (html !== before) writeFileSync(file, html);
 }
-console.log(`記事ページ: hero差し替え ${heroCount}件 / og:image差し替え ${ogCount}件`);
+console.log(`記事ページ: hero差し替え ${heroCount}件 / og:image差し替え ${ogCount}件 / 関連カード ${relCount}件`);
 
 // ---- journal/index.html のカードサムネ差し替え -----------------------------
 function wireCards(file, prefix) {
