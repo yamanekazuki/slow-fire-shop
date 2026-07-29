@@ -86,7 +86,7 @@
       opacity:0; animation:bsRise .8s .1s forwards;
     }
     .bs-hero h1{
-      font-size:clamp(1.9rem, 4.4vw, 3.1rem); font-weight:900; line-height:1.4;
+      font-size:clamp(1.75rem, 3.7vw, 2.7rem); font-weight:900; line-height:1.42;
       letter-spacing:.02em; color:var(--sf-ink); margin:0 0 1.2rem;
       opacity:0; animation:bsRise .8s .25s forwards;
     }
@@ -105,6 +105,7 @@
     }
     .bs-note b{ color:var(--sf-ember); font-weight:900; }
     .bs-hero-cast{ min-width:0; display:flex; justify-content:center; opacity:0; animation:bsRise .8s .7s forwards; }
+    .bs-hero-cast > [data-anchan]{ max-width:100%; }
     @media (max-width:860px){
       .bs-hero{ grid-template-columns:minmax(0,1fr); gap:1.4rem; }
       .bs-hero-cast{ justify-content:flex-start; }
@@ -170,11 +171,15 @@
     .bs-tchip[data-t="B"].active{ background:var(--sf-amber); border-color:transparent; color:#3b2e1e; }
     .bs-tchip[data-t="C"].active{ background:var(--sf-forest); border-color:transparent; color:#fff; }
     .bs-tchip[data-t="D"].active{ background:var(--sf-ember); border-color:transparent; color:#fff; }
-    .bs-type-row .lbl, .bs-lv-row .lbl{ font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--sf-smoke); margin-right:.3rem; }
+    .bs-type-row, .bs-lv-row{ margin-top:1.2rem; }
+    .bs-type-row .lbl, .bs-lv-row .lbl{
+      flex:0 0 100%; font-size:.68rem; font-weight:800; letter-spacing:.22em;
+      color:var(--sf-smoke); margin-bottom:.15rem;
+    }
 
     /* カード上のLvバッジ */
     .bs-lv-badge{
-      display:inline-flex; align-items:center; gap:.35rem; margin-bottom:.6rem;
+      display:inline-flex; align-items:center; align-self:flex-start; gap:.35rem; margin-bottom:.6rem;
       padding:.24rem .8rem; border-radius:100px;
       background:rgba(232,155,63,.14); border:1px solid rgba(217,95,59,.2);
       color:var(--sf-ember-deep); font-size:.7rem; font-weight:800;
