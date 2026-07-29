@@ -476,7 +476,8 @@
       "持込OK",
       "夜通しBBQ可",
       "釣り併設"
-    ]
+    ],
+    "note": "リニューアル工事のため2025年4月〜2027年3月（予定）まで利用休止中。出典: 東京港埠頭"
   },
   {
     "slug": "hikarigaoka-koen-bbq",
@@ -885,8 +886,9 @@
       "charcoal": "ok",
       "gas": "warning",
       "electric": "ng",
-      "food": "ok",
-      "drinks": "ok"
+      "food": "ng",
+      "drinks": "ok",
+      "foodNote": "衛生上持込不可（菓子・飲料は可）。機材持込は5日前申請"
     },
     "facilities": {
       "toilet": "ok",
