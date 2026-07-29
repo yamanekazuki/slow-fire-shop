@@ -1,0 +1,262 @@
+/* =====================================================================
+   yoron-theme.css — YORON BBQ トーン統一テーマ（style.css の後に読む）
+   トーンの正本: ~/dev/bbq/bbq-site/community.css
+   役割:
+     1. style.css の :root にある自己参照で壊れたトークンに実値を与える
+     2. warm cream / ember / amber / Zen Maru Gothic のトーンへ寄せる
+     3. pill型ボタン・radius 18px のカード・生きた背景（bg-blob / bg-grain）
+   方針: レイアウト（grid / flex / 幅 / padding）は触らない。
+         色・角丸・フォント・影のトーン統一だけを行う。
+   ===================================================================== */
+
+:root {
+  /* ── Brand scale（ember / amber 系） ── */
+  --brand-50:   #faf0e2;
+  --brand-100:  #f3d9c2;
+  --brand-200:  #eec49f;
+  --brand-300:  #e89b3f;   /* amber */
+  --brand-500:  #d95f3b;   /* ember = main brand */
+  --brand-700:  #b74a2c;   /* ember deep */
+  --brand-900:  #8a3520;
+
+  /* ── Neutral scale（warm 系に寄せる） ── */
+  --white:      #fffdf6;   /* warm paper（カード・ナビ地） */
+  --cream:      #f6f1e4;
+  --paper:      #fffdf6;
+  --off-white:  #efe8d6;
+  --gray-50:    #f6f1e4;
+  --gray-100:   #efe8d6;
+  --gray-200:   #e2d8c3;
+  --gray-300:   #cfc3aa;
+  --gray-400:   #a89c88;
+  --gray-500:   #8a8177;
+  --gray-600:   #5b5044;
+  --gray-700:   #453b30;
+  --gray-900:   #2d251c;   /* ink */
+
+  /* ── Semantic ── */
+  --success:    #4a7c59;
+  --danger:     #b74a2c;
+
+  /* ── Typography ── */
+  --font-sans: 'Zen Maru Gothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont,
+               'Segoe UI', 'Helvetica Neue', sans-serif;
+
+  /* ── Structure（角丸を community.css の 18px 系へ） ── */
+  --r:      12px;
+  --r-lg:   18px;
+  --shadow:    0 1px 4px rgba(45,37,28,.05), 0 4px 24px rgba(45,37,28,.07);
+  --shadow-lg: 0 10px 36px rgba(45,37,28,.13);
+
+  /* ── テーマ内部で使う値 ── */
+  --yb-ember:      #d95f3b;
+  --yb-ember-deep: #b74a2c;
+  --yb-amber:      #e89b3f;
+  --yb-ink:        #2d251c;
+  --yb-ink-soft:   #5b5044;
+  --yb-cream:      #f6f1e4;
+  --yb-card:       #fffdf6;
+  --yb-line:       rgba(45, 37, 28, .14);
+  --yb-radius:     18px;
+}
+
+body {
+  background: var(--yb-cream);
+  color: var(--yb-ink);
+  font-family: var(--font-sans);
+}
+
+/* ---------------------------------------------------------------
+   生きた背景（community.css の bg-field / bg-blob / bg-grain 移植）
+   div は yoron-bridge.js が注入する
+   --------------------------------------------------------------- */
+.bg-field {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden;
+}
+.bg-blob {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45;
+  animation: ybBlobDrift 26s ease-in-out infinite alternate;
+}
+.bg-blob.b1 { width: 46vw; height: 46vw; top: -12vw; right: -10vw; background: radial-gradient(circle, rgba(232,155,63,.30), transparent 70%); }
+.bg-blob.b2 { width: 40vw; height: 40vw; top: 46%; left: -14vw; background: radial-gradient(circle, rgba(217,95,59,.20), transparent 70%); animation-delay: -8s; }
+.bg-blob.b3 { width: 34vw; height: 34vw; bottom: -8vw; right: 8vw; background: radial-gradient(circle, rgba(197,160,89,.24), transparent 70%); animation-delay: -16s; }
+@keyframes ybBlobDrift {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(4vw, 3vw) scale(1.12); }
+}
+.bg-grain {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+/* 背景は z-index 負値で沈めるため、本文側の position/z-index は一切触らない
+   （position 上書きは fixed 配置のカートドロワー等を壊すため禁止） */
+
+/* ---------------------------------------------------------------
+   ボタン・バッジ = pill 型
+   --------------------------------------------------------------- */
+.btn-dark,
+.btn-hero,
+.btn-ghost,
+.atc-btn,
+.filter-btn,
+.account-btn,
+.link-btn,
+.pc-badge,
+.path-badge,
+.badge-official,
+.pick-tag,
+.slide-tag,
+.pc-brand-badge,
+.brand-card-count,
+.cart-badge {
+  border-radius: 100px;
+}
+.btn-dark { background: var(--yb-ink); color: var(--white); }
+.btn-dark:hover { background: var(--yb-ember-deep); }
+.atc-btn { background: var(--yb-ink); }
+.atc-btn:hover { background: var(--yb-ember); }
+.atc-btn.done { background: var(--success); }
+.btn-ghost { background: var(--white); border-color: var(--gray-200); }
+.btn-ghost:hover { border-color: var(--yb-ember); }
+.path-badge { border-radius: 0 0 100px 100px; }
+
+/* 動画ヒーロー上のCTAは「白地×濃文字」「透明×白文字」を明示（白地×白文字の混線防止） */
+.home-hero.video-on a.btn-dark,
+.home-hero.video-on .home-hero-inner a.btn-dark,
+.home-hero.video-on a.btn-dark:hover { background: #fffdf6; color: #2d251c; }
+.home-hero.video-on a.btn-ghost,
+.home-hero.video-on .home-hero-inner a.btn-ghost,
+.home-hero.video-on a.btn-ghost:hover { background: transparent; color: #fff; border-color: rgba(255,255,255,.65); }
+
+/* ---------------------------------------------------------------
+   カード = radius 18px ＋ warm な影
+   --------------------------------------------------------------- */
+.product-card,
+.pick-card,
+.path-card,
+.brand-card,
+.deeper-card,
+.faq-item,
+.cookbook-peek,
+.trust-strip,
+.co-overlay > div,
+.cart-drawer {
+  border-radius: var(--yb-radius);
+}
+.pick-card, .path-card, .product-card, .brand-card, .deeper-card {
+  box-shadow: 0 4px 24px rgba(45,37,28,.07);
+}
+.pick-card:hover, .path-card:hover, .product-card:hover {
+  box-shadow: 0 12px 34px rgba(217,95,59,.14);
+}
+.path-card:hover { border-color: var(--yb-ember); }
+.deeper-card--brand { border-color: var(--yb-ember); }
+
+/* nav / footer のトーン */
+.nav { background: rgba(255,253,246,.94); backdrop-filter: blur(10px); border-bottom-color: var(--yb-line); }
+.nav-links a:hover { color: var(--yb-ember); }
+.mobile-menu { background: rgba(246,241,228,.98); }
+
+/* 見出しの下線・アクセントを ember に寄せる（色だけ） */
+.sec-head span, .home-picks-eyebrow, .home-paths-eyebrow,
+.home-brands-eyebrow, .home-cookbook-eyebrow { color: var(--yb-ember); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob { animation: none; }
+}
+
+/* ---------------------------------------------------------------
+   コミュニティ誘導バナー（yoron-bridge.js が注入）
+   .nav が position:fixed なので、バナーも fixed でその直下に置き、
+   body に padding-top を足して本文を押し下げる（レイアウト崩れ回避）
+   --------------------------------------------------------------- */
+body.yb-banner-on { padding-top: 42px; }
+.yb-banner {
+  position: fixed; top: var(--nav-h, 64px); left: 0; right: 0; z-index: 880;
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  padding: 7px 46px 7px 16px;
+  background: linear-gradient(90deg, rgba(217,95,59,.14), rgba(232,155,63,.16));
+  border-bottom: 1px solid var(--yb-line);
+  font-size: 12.5px; font-weight: 700; line-height: 1.5;
+  color: var(--yb-ink);
+  backdrop-filter: blur(8px);
+}
+.yb-banner a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--yb-ember); color: var(--white);
+  border-radius: 100px; padding: 4px 14px;
+  font-size: 12px; font-weight: 800; white-space: nowrap;
+  transition: background .2s, transform .2s;
+}
+.yb-banner a:hover { background: var(--yb-ember-deep); transform: translateY(-1px); }
+.yb-banner-close {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--yb-ink-soft); font-size: 15px; line-height: 1;
+  transition: background .15s;
+}
+.yb-banner-close:hover { background: rgba(45,37,28,.08); }
+@media (max-width: 640px) {
+  body.yb-banner-on { padding-top: 54px; }
+  .yb-banner { font-size: 11.5px; flex-wrap: wrap; gap: .35rem; padding: 6px 40px 6px 12px; }
+}
+
+/* ---------------------------------------------------------------
+   フッター直前のコミュニティ導線（yoron-bridge.js が注入）
+   --------------------------------------------------------------- */
+.yb-comm {
+  position: relative; z-index: 2;
+  padding: 64px 24px 72px;
+}
+.yb-comm-inner {
+  max-width: 980px; margin: 0 auto;
+  background: var(--yb-card);
+  border: 1px solid var(--yb-line);
+  border-radius: 28px;
+  padding: 44px 44px 40px;
+  box-shadow: 0 10px 40px rgba(45,37,28,.09);
+}
+.yb-comm-eyebrow {
+  color: var(--yb-ember); font-size: 11px; font-weight: 800;
+  letter-spacing: .28em; margin-bottom: 12px;
+}
+.yb-comm h2 {
+  font-size: clamp(22px, 3.4vw, 30px); font-weight: 900;
+  line-height: 1.5; margin-bottom: 14px; color: var(--yb-ink);
+}
+.yb-comm-lead {
+  font-size: 14.5px; line-height: 1.95; color: var(--yb-ink-soft);
+  max-width: 40em; margin-bottom: 8px;
+}
+.yb-comm-cast {
+  display: flex; flex-wrap: wrap; gap: 8px 28px;
+  margin: 18px 0 26px;
+}
+.yb-comm-cast > [data-anchan] { margin: .6rem 0; }
+.yb-comm-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.yb-comm-actions a {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 100px; padding: 14px 32px;
+  font-size: 14px; font-weight: 800; letter-spacing: .02em;
+  transition: background .2s, transform .2s, box-shadow .2s, color .2s;
+}
+.yb-comm-actions .yb-cta-primary {
+  background: var(--yb-ember); color: var(--white);
+  box-shadow: 0 6px 20px rgba(217,95,59,.28);
+}
+.yb-comm-actions .yb-cta-primary:hover {
+  background: var(--yb-ember-deep); transform: translateY(-2px);
+}
+.yb-comm-actions .yb-cta-outline {
+  border: 1.6px solid var(--yb-ink); color: var(--yb-ink);
+}
+.yb-comm-actions .yb-cta-outline:hover {
+  background: var(--yb-ink); color: var(--yb-cream); transform: translateY(-2px);
+}
+.yb-comm-note { margin-top: 18px; font-size: 12.5px; color: var(--gray-500); font-weight: 700; }
+@media (max-width: 640px) {
+  .yb-comm { padding: 44px 16px 52px; }
+  .yb-comm-inner { padding: 28px 20px 26px; border-radius: 22px; }
+  .yb-comm-actions a { width: 100%; }
+}

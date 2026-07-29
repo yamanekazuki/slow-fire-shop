@@ -103,3 +103,25 @@
     init();
   }
 })();
+
+/* =============================================
+   YORON BBQ トーン橋渡し（yoron-bridge.js）を動的ロード。
+   このファイルは全ページで読まれているので、ここ1箇所で一括適用になる。
+   自分の src を基準にパスを解決するのでサブディレクトリからでも動く。
+   ============================================= */
+(function () {
+  var me = document.currentScript;
+  if (!me) {
+    var all = document.querySelectorAll('script[src*="mobile-nav.js"]');
+    me = all.length ? all[all.length - 1] : null;
+  }
+  var base = '/';
+  if (me && me.src) {
+    try { base = new URL('.', me.src).href; } catch (e) { base = '/'; }
+  }
+  if (document.querySelector('script[src*="yoron-bridge.js"]')) return;
+  var s = document.createElement('script');
+  s.src = base + 'yoron-bridge.js?v=20260730';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
