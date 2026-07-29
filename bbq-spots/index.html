@@ -73,8 +73,12 @@
 
     @keyframes bsRise{ from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:none} }
 
-    /* ---- hero（community の hero-pill → 大見出し → 補足1文） ---- */
-    .bs-hero{ max-width:44em; margin-bottom:2.6rem; }
+    /* ---- hero（community の hero-grid: コピー左 / キャラ右） ---- */
+    .bs-hero{
+      display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+      gap:2.6rem; align-items:center; margin-bottom:3rem;
+    }
+    .bs-hero-copy{ min-width:0; }
     .bs-pill{
       display:inline-block; border:1.5px solid var(--sf-ember); color:var(--sf-ember);
       font-size:.72rem; font-weight:800; letter-spacing:.28em;
@@ -100,7 +104,11 @@
       opacity:0; animation:bsRise .8s .55s forwards;
     }
     .bs-note b{ color:var(--sf-ember); font-weight:900; }
-    .bs-hero-cast{ margin-top:1.2rem; opacity:0; animation:bsRise .8s .7s forwards; }
+    .bs-hero-cast{ min-width:0; display:flex; justify-content:center; opacity:0; animation:bsRise .8s .7s forwards; }
+    @media (max-width:860px){
+      .bs-hero{ grid-template-columns:minmax(0,1fr); gap:1.4rem; }
+      .bs-hero-cast{ justify-content:flex-start; }
+    }
 
     /* ---- reveal ---- */
     .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
@@ -386,12 +394,14 @@
   <main class="bs-wrap">
 
     <section class="bs-hero">
-      <p class="bs-pill">BBQ SPOT GUIDE</p>
-      <h1>火を囲む場所を、<br><span class="hl">持ち物の重さ</span>から選ぶ。</h1>
-      <p class="bs-lead">グリルを持ち込めるか、電源があるか、手ぶらで行けるか。首都圏の24会場を1件ずつ調べて、同じ項目で並べました。</p>
-      <p class="bs-note"><span><b>24</b> 会場</span><span>東京・神奈川・千葉・埼玉</span><span>会場レベル <b>Lv1〜5</b></span></p>
+      <div class="bs-hero-copy">
+        <p class="bs-pill">BBQ SPOT GUIDE</p>
+        <h1>火を囲む場所を、<br><span class="hl">持ち物の重さ</span>から選ぶ。</h1>
+        <p class="bs-lead">グリルを持ち込めるか、電源があるか、手ぶらで行けるか。首都圏の24会場を1件ずつ調べて、同じ項目で並べました。</p>
+        <p class="bs-note"><span><b>24</b> 会場</span><span>東京・神奈川・千葉・埼玉</span><span>会場レベル <b>Lv1〜5</b></span></p>
+      </div>
       <div class="bs-hero-cast">
-        <div data-anchan="guide" data-who="yama" data-size="s" data-say="会場の「重さ」はLv1〜5で見てね。Lv1は全部持参、Lv5はほぼ手ぶら。"></div>
+        <div data-anchan="guide" data-who="yama" data-say="会場の「重さ」はLv1〜5で見てね。Lv1は全部持参、Lv5はほぼ手ぶら。"></div>
       </div>
     </section>
 
@@ -648,8 +658,8 @@
       const typeMeta = {
         A:{title:'常設・焼肉スタイル', desc:'常設グリルあり・蓋なし。アメリカンBBQ不可。短時間の焼肉向け。', on:1},
         B:{title:'常設・手ぶら型',     desc:'蓋付きグリルはあるが持込制限あり。手ぶら派には◎、ロー&スローは×。', on:2},
-        C:{title:'常設＋持込OK（理想型）',desc:'蓋付き常設グリルがあり、自分のグリル・食材の持込もOK。最強クラス。', on:3},
-        D:{title:'場所のみ（公園型）', desc:'グリル常設なし・持込前提。Weber等を運べる人向け、自由度は最大。', on:4},
+        C:{title:'常設＋持込OK（理想型）',desc:'蓋付きの常設グリルがあり、自分のグリルや食材も持ち込める区分。いちばん自由度が高い。', on:3},
+        D:{title:'場所のみ（公園型）', desc:'グリル常設なし・持込前提。Weber等を運べる人向け。自由度はいちばん高い。', on:4},
       };
       const typeCount = {A:0,B:0,C:0,D:0};
       data.forEach(s=>typeCount[s.slowFireType]!=null && typeCount[s.slowFireType]++);

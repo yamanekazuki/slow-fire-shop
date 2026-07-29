@@ -107,20 +107,42 @@ const CAT = {
   science: { upper: "SCIENCE", ja: "科学" },
   gear: { upper: "GEAR", ja: "道具" },
 };
-// ヒーロー画像（images/journal/ にある SLOW FIRE の実写真を使う。ストック画像は使わない）
-// カテゴリごとに文脈の合う写真プールを用意し、その中から記事ごとに選ぶ。
-const IMG_BASE = `${SITE}/images/journal`;
-const HERO_BY_CAT = {
-  recipe:     ["bbq-platter.jpg", "pork-plate.jpg", "ribs.jpg", "roast-chicken.jpg", "seafood-board.jpg", "shrimp-skewers.jpg", "brisket-sliced.jpg", "roast-pork-loin.jpg", "vegetables.jpg"],
-  science:    ["meat-on-grill.jpg", "chicken-charcoal.jpg", "charcoal-chimney.jpg", "smoked-pork-shoulder.jpg", "brisket-sliced.jpg", "smoker.jpg"],
-  gear:       ["charcoal-chimney.jpg", "rub-ribs.jpg", "smoker.jpg", "meat-on-grill.jpg", "chicken-charcoal.jpg"],
-  philosophy: ["smoker.jpg", "charcoal-chimney.jpg", "smoked-pork-shoulder.jpg", "ribs.jpg", "meat-on-grill.jpg"],
+// ヒーロー画像 = journal/thumbs/<slug>.jpg（実写フルブリードのサムネ。tools/gen-journal-thumb/gen.mjs が生成）
+// サムネの下地写真は tools/gen-journal-thumb/photo-map.json が正本。1記事=1枚・重複禁止（山根さんFB 2026-07-30）。
+// 写真の新規AI生成はしない。images/journal/ 配下の承認済み実写だけを使う。
+const PHOTO_MAP_FILE = join(ROOT, "tools", "gen-journal-thumb", "photo-map.json");
+const PHOTO_DIRS = [join("images", "journal"), join("images", "journal", "pool")];
+// カテゴリ→写真ファイル名に含まれていたら優先するキーワード（テーマの合う絵を先に取る）
+const PHOTO_HINT = {
+  recipe: ["platter", "plate", "ribs", "chicken", "brisket", "pork", "salmon", "shrimp", "steak", "burger"],
+  science: ["grill", "charcoal", "smoke", "smoker", "fire", "brisket"],
+  gear: ["charcoal", "chimney", "smoker", "grill", "rub", "tool"],
+  philosophy: ["smoker", "fire", "table", "scene", "platter", "grill"],
 };
-const HERO_FALLBACK = ["meat-on-grill.jpg", "charcoal-chimney.jpg", "bbq-platter.jpg", "ribs.jpg"];
-// カテゴリ内のプールから、記事インデックスで1枚選んで絶対URLを返す
-function pickHero(category, idx) {
-  const pool = HERO_BY_CAT[category] || HERO_FALLBACK;
-  return `${IMG_BASE}/${pool[idx % pool.length]}`;
+/**
+ * 新記事に「まだ誰も使っていない写真」を1枚割り当て、photo-map.json に追記する。
+ * 割当できたら相対パスを返す（できなければ null＝サムネは生成されず一覧に警告が出る）。
+ */
+async function assignPhoto(slug, category) {
+  const map = JSON.parse(await readFile(PHOTO_MAP_FILE, "utf8"));
+  map.articles ||= {}; map.guide ||= {};
+  if (map.articles[slug]) return map.articles[slug];
+  const used = new Set([...Object.values(map.articles), ...Object.values(map.guide)]);
+  const all = [];
+  for (const d of PHOTO_DIRS) {
+    const abs = join(ROOT, d);
+    if (!existsSync(abs)) continue;
+    for (const f of (await readdir(abs)).filter((f) => /\.(jpe?g|png)$/i.test(f))) all.push(`${d}/${f}`.split("\\").join("/"));
+  }
+  const free = all.filter((p) => !used.has(p)).sort();
+  if (!free.length) { console.warn("⚠️ 未使用の写真が枯渇。photo-map.json を見直して写真を追加してください。"); return null; }
+  const hints = PHOTO_HINT[category] || [];
+  const hit = free.find((p) => hints.some((h) => p.toLowerCase().includes(h)));
+  const chosen = hit || free[0];
+  map.articles[slug] = chosen;
+  await writeFile(PHOTO_MAP_FILE, JSON.stringify(map, null, 2) + "\n", "utf8");
+  console.log(`写真割当: ${slug} → ${chosen}`);
+  return chosen;
 }
 
 // ---- テーマの種（GROWTH-10K-UU.md＝bbq-site正本の戦略に沿ってクラスター化 2026-07-05）----
@@ -644,8 +666,7 @@ async function main() {
   if (existingSlugs.has(slug)) slug = `${slug}-${iso}`;
   const category = CATEGORIES.includes(a.category) ? a.category : "recipe";
   const file = `${slug}.html`;
-  // EPISODE表紙型サムネ（決定的生成・tools/gen-journal-thumb）を記事のhero/カード画像として使う。
-  // 生成前は仮でstockのpickHeroを使い、記事HTML書き出し後にgen.mjsで実サムネへ差し替える。
+  // 実写フルブリードのサムネ（決定的生成・tools/gen-journal-thumb）を記事のhero/カード画像として使う。
   const hero = `${SITE}/journal/thumbs/${slug}.jpg`;
 
   const p = {
@@ -678,9 +699,30 @@ async function main() {
   await writeFile(join(ART_DIR, file), renderArticle(p), "utf8");
   console.log(`記事生成: journal/articles/${file}`);
 
-  // 1.5) EPISODE表紙型サムネを決定的生成（tools/gen-journal-thumb/gen.mjs）。
-  // 記事HTMLのh1/jr-category/meta descriptionから毎回同じ結果を生成するため、
-  // 上で書き出したファイルを読んでそのまま使う。失敗しても本文公開は止めない。
+  // 1.3) あんちゃん・やまちゃん・うえたくを本文に散りばめる（決定的・API不使用）。
+  // セリフはいま書き出したこの記事の本文から拾うので、新記事は毎回その記事の内容の一言になる。
+  try {
+    const { sprinkle } = await import(join(ROOT, "tools", "gen-journal-thumb", "anchan-sprinkle.mjs"));
+    const artFile = join(ART_DIR, file);
+    const withChars = sprinkle(await readFile(artFile, "utf8"), slug);
+    if (withChars) {
+      await writeFile(artFile, withChars, "utf8");
+      console.log("キャラ挿入: あんちゃん／やまちゃん／うえたく");
+    }
+  } catch (e) {
+    console.warn(`⚠️ キャラ挿入に失敗（公開は継続）: ${e.message}`);
+  }
+
+  // 1.4) この記事だけの写真を1枚割り当てる（重複禁止・photo-map.jsonが正本）
+  try {
+    await assignPhoto(slug, category);
+  } catch (e) {
+    console.warn(`⚠️ 写真割当に失敗（公開は継続）: ${e.message}`);
+  }
+
+  // 1.5) 実写フルブリードのサムネを決定的生成（tools/gen-journal-thumb/gen.mjs）。
+  // 記事HTMLのh1/jr-category/meta description＋photo-map.jsonの割当写真から毎回同じ結果を生成する。
+  // 失敗しても本文公開は止めない。
   try {
     execFileSync("node", [join(ROOT, "tools", "gen-journal-thumb", "gen.mjs"), slug], { stdio: "inherit" });
     console.log(`サムネ生成: journal/thumbs/${slug}.jpg`);
