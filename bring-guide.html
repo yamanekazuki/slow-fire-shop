@@ -110,7 +110,8 @@
 
     /* Level cards */
     .bg-levels { display: grid; gap: 18px; margin-top: 34px; }
-    .bg-level { background: rgba(255,255,255,.72); border: 1px solid rgba(28,25,23,.09); border-left: 5px solid var(--lv, #c2410c); border-radius: 16px; padding: 24px 24px 22px; }
+    .bg-level { position: relative; background: rgba(255,255,255,.72); border: 1px solid rgba(28,25,23,.09); border-radius: 16px; padding: 26px 24px 22px; overflow: hidden; }
+    .bg-level::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--lv, #c2410c); }
     .bg-level-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
     .bg-level-badge { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 12px; letter-spacing: .1em; color: #fff; background: var(--lv, #c2410c); border-radius: 100px; padding: 5px 12px; }
     .bg-level-head h3 { margin: 0; font-size: 20px; font-weight: 900; }
@@ -246,9 +247,9 @@
       {"@type": "Question", "name": "机と椅子は何台必要ですか？",
        "acceptedAnswer": {"@type": "Answer", "text": "テーブルは最低2台、椅子は人数分です。グリルを載せる台で1台が埋まるため、食事用のテーブルは別に必要になります。人数が増えると机・椅子は線形に増えるので、車の積載量が実質的な人数の上限になります。"}},
       {"@type": "Question", "name": "電気グリル（Weber Pulseなど）はどこで使えますか？",
-       "acceptedAnswer": {"@type": "Answer", "text": "電源のあるレンタルスペース（レベル4）が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。"}},
+       "acceptedAnswer": {"@type": "Answer", "text": "電源のあるレンタルスペース（レベル2）が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。"}},
       {"@type": "Question", "name": "結局どのレベルを選べばいいですか？",
-       "acceptedAnswer": {"@type": "Answer", "text": "準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル1〜2、初参加の人が多い・幹事の負荷を下げたいならレベル3以上です。値段の差はそのまま「自分でやる量」の差なので、支払っているのは場所代ではなく段取りの代金だと考えると選びやすくなります。"}}
+       "acceptedAnswer": {"@type": "Answer", "text": "準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル4〜5、初参加の人が多い・幹事の負荷を下げたいならレベル3以下です。値段の差はそのまま「自分でやる量」の差なので、支払っているのは場所代ではなく段取りの代金だと考えると選びやすくなります。"}}
     ]
   }
   </script>
@@ -335,8 +336,8 @@
 
   <!-- CHAPTER RAIL -->
   <nav class="bg-rail" id="bgRail" aria-label="章ナビ">
-    <a href="#levels" class="is-active"><span class="bg-rail-dot"></span><span class="bg-rail-txt">01 5つのレベル</span></a>
-    <a href="#compare"><span class="bg-rail-dot"></span><span class="bg-rail-txt">02 会場タイプ比較表</span></a>
+    <a href="#compare" class="is-active"><span class="bg-rail-dot"></span><span class="bg-rail-txt">01 何があって何がないか</span></a>
+    <a href="#levels"><span class="bg-rail-dot"></span><span class="bg-rail-txt">02 5つのレベル</span></a>
     <a href="#field"><span class="bg-rail-dot"></span><span class="bg-rail-txt">03 野川公園・雨の日の実録</span></a>
     <a href="#checklist"><span class="bg-rail-dot"></span><span class="bg-rail-txt">04 持ち物チェックリスト</span></a>
     <a href="#faq"><span class="bg-rail-dot"></span><span class="bg-rail-txt">05 よくある質問</span></a>
@@ -352,156 +353,42 @@
       同じ「BBQをやろう」でも、会場のレベルが違えば持っていくものは<strong>ゼロから30点まで</strong>変わります。
       グランピングなら着替えだけで着いた瞬間に火が入る。無料の公園なら、グリルも机も椅子も氷もゴミ袋も洗い道具も、全部こちらが積んでいく。
       値段の差は、そのまま<strong>「自分でやる量」の差</strong>です。<br>
-      このページでは会場を5つのレベルに分けて、レベルごとの持ち物・費用・炭が使えるかどうかを並べます。
-      最後に、選んだレベルに合わせて<strong>持ち物チェックリストが自動で出る</strong>ようにしてあります。
+      このページでは会場を5つのレベルに分けます。レベルは<strong>バーベキューを実施するハードルの高さ</strong>です。
+      <strong>Lv1（グランピング）がいちばん簡単で、Lv5（無料公園）がいちばん大変</strong>。レベルが上がるほど持って行くものが増え、そのぶんハードルが上がります。
+      まず「何が備わっていて何がないか」を一覧で見て、それからレベルごとの中身へ。最後に、選んだレベルに合わせて<strong>持ち物チェックリストが自動で出る</strong>ようにしてあります。
     </p>
     <div class="bg-hero-stats reveal in">
-      <div class="bg-hstat"><b>5</b><span>会場レベル</span></div>
-      <div class="bg-hstat"><b>約30</b><span>無料公園での持参点数</span></div>
+      <div class="bg-hstat"><b>5</b><span>会場レベル（Lv1が最も簡単）</span></div>
+      <div class="bg-hstat"><b>約30</b><span>Lv5・無料公園での持参点数</span></div>
       <div class="bg-hstat"><b>24</b><span>収録BBQ場</span></div>
       <div class="bg-hstat"><b>3〜4h</b><span>作って食べて楽しんでトータル</span></div>
     </div>
     <div class="bg-cta-row reveal in">
       <a href="#checklist" class="bg-btn">持ち物チェックリストへ →</a>
-      <a href="#levels" class="bg-btn-ghost">まず5レベルを見る</a>
+      <a href="#compare" class="bg-btn-ghost">まず何があって何がないかを見る</a>
     </div>
   </section>
 
-  <!-- 01 LEVELS -->
-  <section class="bg-chapter" id="levels">
-    <p class="bg-chapnum reveal">CHAPTER 01</p>
-    <h2 class="reveal">会場は5つのレベルに分かれる</h2>
-    <p class="reveal">
-      BBQ場の情報は「無料か有料か」で語られがちですが、実際に効いてくるのは<strong>どこまで施設が用意してくれるか</strong>です。
-      同じ「有料」でも、機材と食材までついてくる手ぶらプランと、場所と洗い場しかない広場では準備がまるで違います。
-      レベル5から1へ下がるほど費用は下がり、持ち物と段取りは増えます。
-    </p>
-
-    <div class="bg-flow reveal">
-      <div class="bg-flow-step" style="background:#166534;">Lv5 グランピング<small>持ち物ほぼゼロ</small></div>
-      <div class="bg-flow-step" style="background:#15803d;">Lv4 レンタルスペース<small>グリルと食材</small></div>
-      <div class="bg-flow-step" style="background:#d97706;">Lv3 手ぶら有料BBQ場<small>ほぼ手ぶら</small></div>
-      <div class="bg-flow-step" style="background:#c2410c;">Lv2 有料BBQ場<small>食材＋足りない機材</small></div>
-      <div class="bg-flow-step" style="background:#7c2d12;">Lv1 無料公園<small>全部持参・約30点</small></div>
-    </div>
-
-    <div class="bg-levels">
-
-      <article class="bg-level reveal" style="--lv:#166534;">
-        <div class="bg-level-head">
-          <span class="bg-level-badge">LV 5</span>
-          <h3>グランピング</h3>
-          <span class="bg-level-cost">費用感：高（1人1.5万円〜）</span>
-        </div>
-        <p class="bg-level-scene">記念日、遠方からの来客、子連れで失敗したくない日。準備と片付けを丸ごと外注して、食べて話す時間だけを取りに行く選択です。</p>
-        <div class="bg-level-grid">
-          <div class="bg-level-box"><b>備わっているもの</b><p>大型ガスグリル／トング・耐熱グローブ／皿・箸・フォーク／冷蔵庫／温度計／洗剤。施設によっては塩・胡椒・醤油・油まで無料備付。</p></div>
-          <div class="bg-level-box"><b>持参するもの</b><p>着替え程度。食材込みのプランが多く、こだわりのラブやソースを持ち込むくらい。</p></div>
-        </div>
-        <div class="bg-level-foot">
-          <span class="bg-charcoal" style="color:#b91c1c;">炭グリル：✕（ガスのみが大半・火器持込禁止の施設が多い）</span>
-        </div>
-        <p class="bg-source">例：グランファーム富士河口湖（大型ガスグリル・食器・調味料の無料備付、火器持込禁止／<a href="https://www.fuji-farm-glamping.com/meal/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。冷蔵庫の有無・ゴミの扱い・料金詳細は施設差が大きいため、公式で要確認。</p>
-      </article>
-
-      <article class="bg-level reveal" style="--lv:#15803d;">
-        <div class="bg-level-head">
-          <span class="bg-level-badge">LV 4</span>
-          <h3>レンタルスペース（屋内・屋上）</h3>
-          <span class="bg-level-cost">費用感：中（時間貸し）</span>
-        </div>
-        <p class="bg-level-scene">雨で流したくない日、夜まで長くやりたい日、電気グリルでじっくり焼きたい日。屋根と電源があることが最大の価値です。</p>
-        <div class="bg-level-grid">
-          <div class="bg-level-box"><b>備わっているもの</b><p>皿・調理器具・油・洗剤・シンク・ゴミ処理（物件による）。BBQコンロ設置済みの物件や、Weber一式＋炭をレンタルできる物件もあります。</p></div>
-          <div class="bg-level-box"><b>持参するもの</b><p>グリル（炭 or 電源グリル）・食材・調味料。何が付いていて何が付いていないかは物件ごとに全然違うので、予約前に備品リストを確認します。</p></div>
-        </div>
-        <div class="bg-level-foot">
-          <span class="bg-charcoal" style="color:#d97706;">炭グリル：物件による（屋内は電気グリルが現実解）</span>
-        </div>
-        <p class="bg-source">物件差が非常に大きいカテゴリです（<a href="https://www.spacemarket.com/features/bbq/" target="_blank" rel="noopener nofollow">スペースマーケット BBQ特集</a>・2026年7月時点）。個別確認が前提。</p>
-      </article>
-
-      <article class="bg-level reveal" style="--lv:#d97706;">
-        <div class="bg-level-head">
-          <span class="bg-level-badge">LV 3</span>
-          <h3>手ぶら有料BBQ場</h3>
-          <span class="bg-level-cost">費用感：中〜高（1人4,000円前後〜）</span>
-        </div>
-        <p class="bg-level-scene">初参加の人が多いとき、幹事がひとりで抱えたくないとき。買い出しも積み込みもなく、集合すれば始まります。</p>
-        <div class="bg-level-grid">
-          <div class="bg-level-box"><b>備わっているもの</b><p>機材一式＋食材プラン＋ゴミ処理。洗浄用具の無料貸出がある施設も。</p></div>
-          <div class="bg-level-box"><b>持参するもの</b><p>ほぼなし。ただし食材の持込を禁じている施設があるので、こだわり食材を持ち込む前提なら要確認。</p></div>
-        </div>
-        <div class="bg-level-foot">
-          <span class="bg-charcoal" style="color:#d97706;">炭グリル：施設の機材のみ（自前グリルの持込は要確認）</span>
-          <a href="bbq-spots/kasai-rinkai-koen-bbq.html">葛西臨海公園を見る →</a>
-        </div>
-        <p class="bg-source">葛西臨海公園（zetton運営）は手ぶら3,900円〜・キッズ1,200円、<strong>食材持込は衛生上不可</strong>（菓子・飲料は可）、機材持込は5日前申請制（<a href="https://kasai-bbq.zetton.co.jp/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。</p>
-      </article>
-
-      <article class="bg-level reveal" style="--lv:#c2410c;">
-        <div class="bg-level-head">
-          <span class="bg-level-badge">LV 2</span>
-          <h3>有料BBQ場（機材レンタルあり）</h3>
-          <span class="bg-level-cost">費用感：中（場所代＋レンタル代）</span>
-        </div>
-        <p class="bg-level-scene">道具は少しずつ揃えている段階の人向け。足りないものだけ借りて、焼き方は自分でコントロールできます。</p>
-        <div class="bg-level-grid">
-          <div class="bg-level-box"><b>備わっているもの</b><p>レンタルグリル（台数は多くない）・洗い場・ゴミ処理・売店。施設によってテーブルや椅子も単品レンタル。</p></div>
-          <div class="bg-level-box"><b>持参するもの</b><p>食材・飲料・皿・調味料、そしてレンタルでカバーされない機材。レンタル台数が少ないので、グリルは自前で持っていくほうが確実です。</p></div>
-        </div>
-        <div class="bg-level-foot">
-          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ ただし足つき必須のルールあり</span>
-          <a href="bbq-spots/hero-field-shinkiba.html">HERO FIELD新木場を見る →</a>
-        </div>
-        <p class="bg-callout">
-          <strong>新木場エリアの足つきルール</strong>：夢の島公園バーベキュー広場はレンタル・販売が一切なく、<strong>30cm以上の足つきコンロ持参が必須</strong>（卓上七輪・カセットコンロ不可、ゴミは全持ち帰り、手洗い場のみ）。
-          机の上に30cmのグリルを置いてもNGとされた例があり、監視は厳しめです。木場公園（HERO FIELD運営）も30cm以上の脚付き必須・直火／七輪禁止で、レンタルはグリル4,950円・テーブル1,320円・椅子330円など。
-          若洲海浜公園キャンプ場はリニューアル工事のため<strong>2025年4月〜2027年3月（予定）で利用休止中</strong>です。
-        </p>
-        <p class="bg-source">出典：<a href="https://www.yumenoshima.jp/barbecue" target="_blank" rel="noopener nofollow">夢の島公園</a>／<a href="https://www.herofield.com/bbq/kiba/how.html" target="_blank" rel="noopener nofollow">HERO FIELD木場公園</a>／<a href="https://www.tptc.co.jp/park/news/detail/1958" target="_blank" rel="noopener nofollow">東京港埠頭（若洲）</a>・いずれも2026年7月時点。料金・レンタル在庫は変わるため予約時に公式で要確認。</p>
-      </article>
-
-      <article class="bg-level reveal" style="--lv:#7c2d12;">
-        <div class="bg-level-head">
-          <span class="bg-level-badge">LV 1</span>
-          <h3>無料公園（フルセルフ）</h3>
-          <span class="bg-level-cost">費用感：無料（そのぶん全部自前）</span>
-        </div>
-        <p class="bg-level-scene">道具が揃っていて、焼き方も片付けも自分たちで回せるチーム向け。自由度は最大で、監視もゆるく、蓋を閉めてじっくり焼く余地があります。</p>
-        <div class="bg-level-grid">
-          <div class="bg-level-box"><b>備わっているもの</b><p>広場と水道とトイレだけ。びっくりするほど何もない、というのが実感です。売店がある公園でも扱いは炭くらい。</p></div>
-          <div class="bg-level-box"><b>持参するもの</b><p>火まわり・食まわり・場まわり・後片付けの<strong>約30点すべて</strong>。氷も飲み物も洗剤も含みます。</p></div>
-        </div>
-        <div class="bg-level-foot">
-          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ 自由度最大</span>
-          <a href="bbq-spots/nogawa-koen-bbq.html">野川公園を見る →</a>
-          <a href="bbq-spots/musashino-koen-bbq.html">武蔵野公園を見る →</a>
-        </div>
-        <p class="bg-source">野川公園・武蔵野公園はいずれも事前予約制（ネットは2ヶ月前〜前日、当日はサービスセンター）、火気は10:00〜16:00、直火・カセットコンロ・プロパン不可、ゴミは持ち帰り。野川公園は水道があっても洗い物での使用は不可（公式ルール）、売店は炭のみ販売。武蔵野公園は売店・貸出なしで全持参。料金額は公式に記載がないため未検証、予約時に要確認。出典：<a href="https://musashinoparks.com/bbq/nogawa/" target="_blank" rel="noopener nofollow">野川公園</a>／<a href="https://musashinoparks.com/bbq/musasino/" target="_blank" rel="noopener nofollow">武蔵野公園</a>・2026年7月時点。</p>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- 02 COMPARE -->
+  <!-- 01 COMPARE -->
   <section class="bg-chapter" id="compare">
-    <p class="bg-chapnum reveal">CHAPTER 02</p>
-    <h2 class="reveal">会場タイプ比較表</h2>
+    <p class="bg-chapnum reveal">CHAPTER 01</p>
+    <h2 class="reveal">まず、何が備わっていて何がないのかを一目で</h2>
     <p class="reveal">
+      会場選びでいちばん効くのは、施設側がどこまで用意してくれるかです。
       「あり」と書いてあるものは持っていかなくていいもの、「持参」と書いてあるものは車に積むものです。
-      レベルが1つ下がるごとに、荷物とタスクがどこで増えるのかが見えます。
+      左のLv1（グランピング）から右のLv5（無料公園）へ進むほど「持参」が増えます。
+      これがそのまま<strong>バーベキューを実施するハードルの高さ</strong>で、荷物とタスクがどこで増えるのかが見えます。
     </p>
     <div class="bg-tablewrap reveal">
       <table class="bg-table">
         <thead>
           <tr>
             <th>項目</th>
-            <th>Lv5 グランピング</th>
-            <th>Lv4 レンタルスペース</th>
+            <th>Lv1 グランピング</th>
+            <th>Lv2 レンタルスペース</th>
             <th>Lv3 手ぶら有料</th>
-            <th>Lv2 有料＋レンタル</th>
-            <th>Lv1 無料公園</th>
+            <th>Lv4 有料＋レンタル</th>
+            <th>Lv5 無料公園</th>
           </tr>
         </thead>
         <tbody>
@@ -579,13 +466,130 @@
     </p>
   </section>
 
+  <!-- 02 LEVELS -->
+  <section class="bg-chapter" id="levels">
+    <p class="bg-chapnum reveal">CHAPTER 02</p>
+    <h2 class="reveal">会場は5つのレベルに分かれる</h2>
+    <p class="reveal">
+      BBQ場の情報は「無料か有料か」で語られがちですが、実際に効いてくるのは<strong>どこまで施設が用意してくれるか</strong>です。
+      同じ「有料」でも、機材と食材までついてくる手ぶらプランと、場所と洗い場しかない広場では準備がまるで違います。
+      そこでこのページでは、実施のハードルの高さでレベルを振っています。<strong>レベルが上がるほど費用は下がり、持ち物と段取りが増える</strong>——つまりハードルが上がります。
+    </p>
+
+    <div class="bg-flow reveal">
+      <div class="bg-flow-step" style="background:#166534;">Lv1 グランピング<small>持ち物ほぼゼロ＝最も簡単</small></div>
+      <div class="bg-flow-step" style="background:#15803d;">Lv2 レンタルスペース<small>グリルと食材</small></div>
+      <div class="bg-flow-step" style="background:#d97706;">Lv3 手ぶら有料BBQ場<small>ほぼ手ぶら</small></div>
+      <div class="bg-flow-step" style="background:#c2410c;">Lv4 有料BBQ場<small>食材＋足りない機材</small></div>
+      <div class="bg-flow-step" style="background:#7c2d12;">Lv5 無料公園<small>全部持参・約30点＝最も大変</small></div>
+    </div>
+
+    <div class="bg-levels">
+
+      <article class="bg-level reveal" style="--lv:#166534;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 1</span>
+          <h3>グランピング</h3>
+          <span class="bg-level-cost">費用感：高（1人1.5万円〜）</span>
+        </div>
+        <p class="bg-level-scene">記念日、遠方からの来客、子連れで失敗したくない日。準備と片付けを丸ごと外注して、食べて話す時間だけを取りに行く選択です。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>大型ガスグリル／トング・耐熱グローブ／皿・箸・フォーク／冷蔵庫／温度計／洗剤。施設によっては塩・胡椒・醤油・油まで無料備付。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>着替え程度。食材込みのプランが多く、こだわりのラブやソースを持ち込むくらい。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#b91c1c;">炭グリル：✕（ガスのみが大半・火器持込禁止の施設が多い）</span>
+        </div>
+        <p class="bg-source">例：グランファーム富士河口湖（大型ガスグリル・食器・調味料の無料備付、火器持込禁止／<a href="https://www.fuji-farm-glamping.com/meal/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。冷蔵庫の有無・ゴミの扱い・料金詳細は施設差が大きいため、公式で要確認。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#15803d;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 2</span>
+          <h3>レンタルスペース（屋内・屋上）</h3>
+          <span class="bg-level-cost">費用感：中（時間貸し）</span>
+        </div>
+        <p class="bg-level-scene">雨で流したくない日、夜まで長くやりたい日、電気グリルでじっくり焼きたい日。屋根と電源があることが最大の価値です。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>皿・調理器具・油・洗剤・シンク・ゴミ処理（物件による）。BBQコンロ設置済みの物件や、Weber一式＋炭をレンタルできる物件もあります。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>グリル（炭 or 電源グリル）・食材・調味料。何が付いていて何が付いていないかは物件ごとに全然違うので、予約前に備品リストを確認します。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#d97706;">炭グリル：物件による（屋内は電気グリルが現実解）</span>
+        </div>
+        <p class="bg-source">物件差が非常に大きいカテゴリです（<a href="https://www.spacemarket.com/features/bbq/" target="_blank" rel="noopener nofollow">スペースマーケット BBQ特集</a>・2026年7月時点）。個別確認が前提。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#d97706;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 3</span>
+          <h3>手ぶら有料BBQ場</h3>
+          <span class="bg-level-cost">費用感：中〜高（1人4,000円前後〜）</span>
+        </div>
+        <p class="bg-level-scene">初参加の人が多いとき、幹事がひとりで抱えたくないとき。買い出しも積み込みもなく、集合すれば始まります。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>機材一式＋食材プラン＋ゴミ処理。洗浄用具の無料貸出がある施設も。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>ほぼなし。ただし食材の持込を禁じている施設があるので、こだわり食材を持ち込む前提なら要確認。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#d97706;">炭グリル：施設の機材のみ（自前グリルの持込は要確認）</span>
+          <a href="bbq-spots/kasai-rinkai-koen-bbq.html">葛西臨海公園を見る →</a>
+        </div>
+        <p class="bg-source">葛西臨海公園（zetton運営）は手ぶら3,900円〜・キッズ1,200円、<strong>食材持込は衛生上不可</strong>（菓子・飲料は可）、機材持込は5日前申請制（<a href="https://kasai-bbq.zetton.co.jp/" target="_blank" rel="noopener nofollow">公式</a>・2026年7月時点）。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#c2410c;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 4</span>
+          <h3>有料BBQ場（機材レンタルあり）</h3>
+          <span class="bg-level-cost">費用感：中（場所代＋レンタル代）</span>
+        </div>
+        <p class="bg-level-scene">道具は少しずつ揃えている段階の人向け。足りないものだけ借りて、焼き方は自分でコントロールできます。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>レンタルグリル（台数は多くない）・洗い場・ゴミ処理・売店。施設によってテーブルや椅子も単品レンタル。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>食材・飲料・皿・調味料、そしてレンタルでカバーされない機材。レンタル台数が少ないので、グリルは自前で持っていくほうが確実です。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ ただし足つき必須のルールあり</span>
+          <a href="bbq-spots/hero-field-shinkiba.html">HERO FIELD新木場を見る →</a>
+        </div>
+        <p class="bg-callout">
+          <strong>新木場エリアの足つきルール</strong>：夢の島公園バーベキュー広場はレンタル・販売が一切なく、<strong>30cm以上の足つきコンロ持参が必須</strong>（卓上七輪・カセットコンロ不可、ゴミは全持ち帰り、手洗い場のみ）。
+          机の上に30cmのグリルを置いてもNGとされた例があり、監視は厳しめです。木場公園（HERO FIELD運営）も30cm以上の脚付き必須・直火／七輪禁止で、レンタルはグリル4,950円・テーブル1,320円・椅子330円など。
+          若洲海浜公園キャンプ場はリニューアル工事のため<strong>2025年4月〜2027年3月（予定）で利用休止中</strong>です。
+        </p>
+        <p class="bg-source">出典：<a href="https://www.yumenoshima.jp/barbecue" target="_blank" rel="noopener nofollow">夢の島公園</a>／<a href="https://www.herofield.com/bbq/kiba/how.html" target="_blank" rel="noopener nofollow">HERO FIELD木場公園</a>／<a href="https://www.tptc.co.jp/park/news/detail/1958" target="_blank" rel="noopener nofollow">東京港埠頭（若洲）</a>・いずれも2026年7月時点。料金・レンタル在庫は変わるため予約時に公式で要確認。</p>
+      </article>
+
+      <article class="bg-level reveal" style="--lv:#7c2d12;">
+        <div class="bg-level-head">
+          <span class="bg-level-badge">LV 5</span>
+          <h3>無料公園（フルセルフ）</h3>
+          <span class="bg-level-cost">費用感：無料（そのぶん全部自前）</span>
+        </div>
+        <p class="bg-level-scene">道具が揃っていて、焼き方も片付けも自分たちで回せるチーム向け。自由度は最大で、監視もゆるく、蓋を閉めてじっくり焼く余地があります。</p>
+        <div class="bg-level-grid">
+          <div class="bg-level-box"><b>備わっているもの</b><p>広場と水道とトイレだけ。びっくりするほど何もない、というのが実感です。売店がある公園でも扱いは炭くらい。</p></div>
+          <div class="bg-level-box"><b>持参するもの</b><p>火まわり・食まわり・場まわり・後片付けの<strong>約30点すべて</strong>。氷も飲み物も洗剤も含みます。</p></div>
+        </div>
+        <div class="bg-level-foot">
+          <span class="bg-charcoal" style="color:#166534;">炭グリル：○ 自由度最大</span>
+          <a href="bbq-spots/nogawa-koen-bbq.html">野川公園を見る →</a>
+          <a href="bbq-spots/musashino-koen-bbq.html">武蔵野公園を見る →</a>
+        </div>
+        <p class="bg-source">野川公園・武蔵野公園はいずれも事前予約制（ネットは2ヶ月前〜前日、当日はサービスセンター）、火気は10:00〜16:00、直火・カセットコンロ・プロパン不可、ゴミは持ち帰り。野川公園は水道があっても洗い物での使用は不可（公式ルール）、売店は炭のみ販売。武蔵野公園は売店・貸出なしで全持参。料金額は公式に記載がないため未検証、予約時に要確認。出典：<a href="https://musashinoparks.com/bbq/nogawa/" target="_blank" rel="noopener nofollow">野川公園</a>／<a href="https://musashinoparks.com/bbq/musasino/" target="_blank" rel="noopener nofollow">武蔵野公園</a>・2026年7月時点。</p>
+      </article>
+
+    </div>
+  </section>
+
   <!-- 03 FIELD REPORT -->
   <section class="bg-chapter" id="field">
     <p class="bg-chapnum reveal">CHAPTER 03</p>
     <h2 class="reveal">運営者の実録：雨の日の野川公園</h2>
     <p class="reveal">
       2026年7月下旬、大人4人＋子ども1人で野川公園へ。あいにくの雨でした。
-      レベル1の無料公園がどういう場所なのか、実際に行って初めてわかったことを、そのまま並べます。
+      レベル5の無料公園がどういう場所なのか、実際に行って初めてわかったことを、そのまま並べます。
     </p>
 
     <div class="bg-report reveal">
@@ -615,7 +619,7 @@
         </div>
         <div class="bg-insight">
           <b>グランピングが流行る理由</b>
-          <p>楽しい時間より、その前後の積み込みと後片付けのほうが長い。作って食べて楽しんでトータル3〜4時間で完結させたいなら、レベルを上げてしまうのが最短です。逆に、道具を揃えて段取りを覚えるほど、レベル1が一番自由で一番安いという逆転が起きます。</p>
+          <p>楽しい時間より、その前後の積み込みと後片付けのほうが長い。作って食べて楽しんでトータル3〜4時間で完結させたいなら、レベルを下げてしまうのが最短です。逆に、道具を揃えて段取りを覚えるほど、レベル5が一番自由で一番安いという逆転が起きます。</p>
         </div>
       </div>
     </div>
@@ -632,11 +636,11 @@
 
     <div class="bg-tool reveal">
       <div class="bg-tabs" id="bgTabs" role="tablist" aria-label="会場レベル">
-        <button class="bg-tab" data-lv="5" role="tab">Lv5 グランピング</button>
-        <button class="bg-tab" data-lv="4" role="tab">Lv4 レンタルスペース</button>
+        <button class="bg-tab" data-lv="1" role="tab">Lv1 グランピング</button>
+        <button class="bg-tab" data-lv="2" role="tab">Lv2 レンタルスペース</button>
         <button class="bg-tab" data-lv="3" role="tab">Lv3 手ぶら有料</button>
-        <button class="bg-tab" data-lv="2" role="tab">Lv2 有料＋レンタル</button>
-        <button class="bg-tab is-on" data-lv="1" role="tab">Lv1 無料公園</button>
+        <button class="bg-tab" data-lv="4" role="tab">Lv4 有料＋レンタル</button>
+        <button class="bg-tab is-on" data-lv="5" role="tab">Lv5 無料公園</button>
       </div>
 
       <div class="bg-toolbar">
@@ -677,7 +681,7 @@
       </details>
       <details>
         <summary>無料の公園BBQは何点くらい持っていけばいい？</summary>
-        <div class="a">火まわり・食まわり・場まわり・後片付けを合わせて<strong>約30点</strong>です。無料公園にあるのは広場と水道とトイレだけなので、グリル・炭・着火剤・トング・グローブ・机・椅子・タープ・皿・まな板・氷・飲み物・ゴミ袋・洗い道具まですべて自前になります。<a href="#checklist">上のチェックリスト</a>でLv1を選ぶと全項目が出ます。</div>
+        <div class="a">火まわり・食まわり・場まわり・後片付けを合わせて<strong>約30点</strong>です。無料公園にあるのは広場と水道とトイレだけなので、グリル・炭・着火剤・トング・グローブ・机・椅子・タープ・皿・まな板・氷・飲み物・ゴミ袋・洗い道具まですべて自前になります。<a href="#checklist">上のチェックリスト</a>でLv5を選ぶと全項目が出ます。</div>
       </details>
       <details>
         <summary>机と椅子は何台必要？</summary>
@@ -685,11 +689,11 @@
       </details>
       <details>
         <summary>電気グリル（Weber Pulseなど）はどこで使える？</summary>
-        <div class="a">電源のある<strong>レンタルスペース（レベル4）</strong>が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。各会場の電源・発電機の可否は<a href="bbq-spots/index.html">BBQ場検索</a>で確認できます。</div>
+        <div class="a">電源のある<strong>レンタルスペース（レベル2）</strong>が現実的な選択肢です。都内の公園BBQ場は発電機の使用を禁止しているところが多く、電源も基本的にありません。炭が使える会場なら炭グリル、屋内・屋上なら電気グリル、という切り分けになります。各会場の電源・発電機の可否は<a href="bbq-spots/index.html">BBQ場検索</a>で確認できます。</div>
       </details>
       <details>
         <summary>結局どのレベルを選べばいい？</summary>
-        <div class="a">準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル1〜2、初参加の人が多い・幹事の負荷を下げたいならレベル3以上。<strong>作って食べて楽しんでトータル3〜4時間で完結</strong>させたいなら、迷わずレベルを上げてしまうほうが満足度は高くなります。値段の差はそのまま「自分でやる量」の差です。</div>
+        <div class="a">準備と後片付けにかけられる時間で選びます。道具が揃っていて自由に焼きたいならレベル4〜5、初参加の人が多い・幹事の負荷を下げたいならレベル3以下。<strong>作って食べて楽しんでトータル3〜4時間で完結</strong>させたいなら、迷わずレベルを下げてしまうほうが満足度は高くなります。値段の差はそのまま「自分でやる量」の差です。</div>
       </details>
     </div>
   </section>
@@ -798,52 +802,52 @@
       // levels: 対象レベル配列。note は補足。
       const ITEMS = {
         fire: { label: '火まわり', items: [
-          { t: 'グリル（蓋つき）', lv: [1,2], note: 'Lv2はレンタル台数が少ないので持参が安全。足つき30cm以上のルールがある会場は要確認' },
-          { t: 'グリル（物件備品を確認）', lv: [4], note: '設置済み物件・Weber一式レンタル物件あり。予約前に備品リストを確認' },
-          { t: '炭 or 燃料', lv: [1,2], note: '野川公園は売店で炭のみ販売' },
-          { t: 'チムニースターター', lv: [1,2] },
-          { t: '着火剤・ライター', lv: [1,2] },
-          { t: '耐熱グローブ', lv: [1,2] },
-          { t: 'トング（炭用・調理用の2本）', lv: [1,2], note: '1本で兼用すると必ず困ります' },
-          { t: '温度計', lv: [1,2,4], note: '蓋を閉めて焼くなら必須' },
-          { t: '火消し壺 or 消火用の水', lv: [1,2], note: '炭の後始末は自分たちの責任' }
+          { t: 'グリル（蓋つき）', lv: [4,5], note: 'Lv4はレンタル台数が少ないので持参が安全。足つき30cm以上のルールがある会場は要確認' },
+          { t: 'グリル（物件備品を確認）', lv: [2], note: '設置済み物件・Weber一式レンタル物件あり。予約前に備品リストを確認' },
+          { t: '炭 or 燃料', lv: [4,5], note: '野川公園は売店で炭のみ販売' },
+          { t: 'チムニースターター', lv: [4,5] },
+          { t: '着火剤・ライター', lv: [4,5] },
+          { t: '耐熱グローブ', lv: [4,5] },
+          { t: 'トング（炭用・調理用の2本）', lv: [4,5], note: '1本で兼用すると必ず困ります' },
+          { t: '温度計', lv: [2,4,5], note: '蓋を閉めて焼くなら必須' },
+          { t: '火消し壺 or 消火用の水', lv: [4,5], note: '炭の後始末は自分たちの責任' }
         ]},
         food: { label: '食まわり', items: [
-          { t: '食材', lv: [1,2,4], note: 'Lv3は持込不可の施設あり（葛西臨海公園は衛生上不可・菓子飲料は可）' },
-          { t: 'ラブ・調味料', lv: [1,2,3,4,5], note: 'Lv3〜5でも自分のラブを持っていくと味が変わります' },
-          { t: '油', lv: [1,2] },
-          { t: 'クーラーボックス', lv: [1,2] },
-          { t: '氷（買っていく）', lv: [1,2], note: '現地調達を当てにしない' },
-          { t: '飲み物', lv: [1,2], note: '自販機は遠い前提で' },
-          { t: '皿・カトラリー', lv: [1,2] },
-          { t: 'まな板・包丁', lv: [1,2] },
-          { t: 'アルミホイル・バット', lv: [1,2], note: 'テキサスクラッチにも休ませにも使う' }
+          { t: '食材', lv: [2,4,5], note: 'Lv3は持込不可の施設あり（葛西臨海公園は衛生上不可・菓子飲料は可）' },
+          { t: 'ラブ・調味料', lv: [1,2,3,4,5], note: 'Lv1〜3でも自分のラブを持っていくと味が変わります' },
+          { t: '油', lv: [4,5] },
+          { t: 'クーラーボックス', lv: [4,5] },
+          { t: '氷（買っていく）', lv: [4,5], note: '現地調達を当てにしない' },
+          { t: '飲み物', lv: [4,5], note: '自販機は遠い前提で' },
+          { t: '皿・カトラリー', lv: [4,5] },
+          { t: 'まな板・包丁', lv: [4,5] },
+          { t: 'アルミホイル・バット', lv: [4,5], note: 'テキサスクラッチにも休ませにも使う' }
         ]},
         place: { label: '場まわり', items: [
-          { t: 'テーブル×2台以上', lv: [1], note: 'グリル台で1台消えるので、食事用は別に必要（野川公園の実録）' },
-          { t: 'テーブル（レンタル可否を確認）', lv: [2], note: '木場公園は1台1,320円などの単品レンタルあり' },
-          { t: '椅子×人数分', lv: [1] },
-          { t: '椅子（レンタル可否を確認）', lv: [2], note: '木場公園は1脚330円' },
-          { t: 'タープ・日よけ', lv: [1], note: '屋根なしの会場が大半。雨でも日差しでも効きます' },
-          { t: 'レジャーシート', lv: [1] },
-          { t: '防寒着・雨具', lv: [1,2], note: '海沿いは風が強い日が多い' }
+          { t: 'テーブル×2台以上', lv: [5], note: 'グリル台で1台消えるので、食事用は別に必要（野川公園の実録）' },
+          { t: 'テーブル（レンタル可否を確認）', lv: [4], note: '木場公園は1台1,320円などの単品レンタルあり' },
+          { t: '椅子×人数分', lv: [5] },
+          { t: '椅子（レンタル可否を確認）', lv: [4], note: '木場公園は1脚330円' },
+          { t: 'タープ・日よけ', lv: [5], note: '屋根なしの会場が大半。雨でも日差しでも効きます' },
+          { t: 'レジャーシート', lv: [5] },
+          { t: '防寒着・雨具', lv: [4,5], note: '海沿いは風が強い日が多い' }
         ]},
         clean: { label: '後片付け', items: [
-          { t: 'ゴミ袋（複数枚）', lv: [1,2], note: 'どこかに常設するとオペが一気に楽になります' },
-          { t: '洗剤', lv: [1,2], note: '野川公園は洗い場はあるが洗剤なし・洗い物での水道使用は不可' },
-          { t: 'スポンジ・金たわし・激落ちくん', lv: [1,2], note: '「グリルを洗わないで」の掲示あり。拭き取って持ち帰る前提で' },
-          { t: 'ウェットティッシュ・キッチンペーパー', lv: [1,2,3,4] },
-          { t: '持ち帰り用の防臭袋', lv: [1,2], note: 'ゴミ全持ち帰りの会場では必需品' },
-          { t: 'ゴミ処理の料金を確認', lv: [2,3], note: '木場公園45L=500円・炭処理300円／葛西臨海は持込品1袋220円（2026年7月時点）' }
+          { t: 'ゴミ袋（複数枚）', lv: [4,5], note: 'どこかに常設するとオペが一気に楽になります' },
+          { t: '洗剤', lv: [4,5], note: '野川公園は洗い場はあるが洗剤なし・洗い物での水道使用は不可' },
+          { t: 'スポンジ・金たわし・激落ちくん', lv: [4,5], note: '「グリルを洗わないで」の掲示あり。拭き取って持ち帰る前提で' },
+          { t: 'ウェットティッシュ・キッチンペーパー', lv: [2,3,4,5] },
+          { t: '持ち帰り用の防臭袋', lv: [4,5], note: 'ゴミ全持ち帰りの会場では必需品' },
+          { t: 'ゴミ処理の料金を確認', lv: [3,4], note: '木場公園45L=500円・炭処理300円／葛西臨海は持込品1袋220円（2026年7月時点）' }
         ]}
       };
 
       const LEVEL_NOTE = {
-        5: 'グランピングはガスグリル・食器・トング・耐熱グローブ・洗剤まで備え付けなのが一般的です。持ち物は着替え程度で、あとは自分のラブくらい。火器の持込は禁止されている施設が多いので、炭を焚くつもりなら別のレベルを選びます。',
-        4: '物件差が非常に大きいカテゴリです。皿・油・調理器具・洗剤・シンクが揃っている物件もあれば、何もない物件もあります。予約前に備品リストを確認して、足りないぶんだけ積んでください。',
+        1: 'グランピングはガスグリル・食器・トング・耐熱グローブ・洗剤まで備え付けなのが一般的です。持ち物は着替え程度で、あとは自分のラブくらい。実施のハードルはいちばん低いレベルです。火器の持込は禁止されている施設が多いので、炭を焚くつもりなら別のレベルを選びます。',
+        2: '物件差が非常に大きいカテゴリです。皿・油・調理器具・洗剤・シンクが揃っている物件もあれば、何もない物件もあります。予約前に備品リストを確認して、足りないぶんだけ積んでください。',
         3: '手ぶらプランなら基本的に持ち物はありません。食材の持込を禁じている施設があるので、こだわり食材を持っていくつもりなら事前に確認を。自分のラブだけ持っていくのが、いちばん費用対効果の高い一手です。',
-        2: '食材と皿と調味料、そしてレンタルでカバーされない機材を持っていきます。レンタルグリルは台数が多くないので、自前のグリルを積むほうが確実です。足つき必須の会場が多い点に注意。',
-        1: '広場と水道とトイレしかありません。ここに出ている全部が持ち物です。'
+        4: '食材と皿と調味料、そしてレンタルでカバーされない機材を持っていきます。レンタルグリルは台数が多くないので、自前のグリルを積むほうが確実です。足つき必須の会場が多い点に注意。',
+        5: '広場と水道とトイレしかありません。ここに出ている全部が持ち物です。実施のハードルはいちばん高いレベルです。'
       };
 
       const tabs = document.getElementById('bgTabs');
@@ -851,10 +855,11 @@
       const countEl = document.getElementById('bgCount');
       if (!tabs || !cats) return;
 
-      let level = parseInt(localStorage.getItem('sf-bring-level') || '1', 10);
-      if (![1,2,3,4,5].includes(level)) level = 1;
+      // v2: レベル番号の意味を反転（Lv1=グランピング〜Lv5=無料公園）したためキーを刷新
+      let level = parseInt(localStorage.getItem('sf-bring-level-v2') || '5', 10);
+      if (![1,2,3,4,5].includes(level)) level = 5;
 
-      const key = (lv, t) => 'sf-bring-' + lv + '-' + t;
+      const key = (lv, t) => 'sf-bring-v2-' + lv + '-' + t;
 
       function updateCount() {
         const boxes = cats.querySelectorAll('input[type=checkbox]');
@@ -926,7 +931,7 @@
         const btn = e.target.closest('.bg-tab');
         if (!btn) return;
         level = parseInt(btn.dataset.lv, 10);
-        localStorage.setItem('sf-bring-level', String(level));
+        localStorage.setItem('sf-bring-level-v2', String(level));
         render();
         if (window.gtag) gtag('event', 'bring_level_select', { level: level });
       });

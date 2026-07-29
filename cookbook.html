@@ -17,13 +17,14 @@
   <meta property="og:url" content="https://an-bbq.jp/cookbook.html">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#B45309">
+  <meta name="theme-color" content="#b74a2c">
   <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
   <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260708g">
   <link rel="stylesheet" href="assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="assets/sf-features.css?v=20260708g">
@@ -31,15 +32,15 @@
   <style>
     /* ===== cookbook page (white base, EC site palette) ===== */
     :root {
-      --lvl-1-color: #047857;
-      --lvl-1-bg: #ECFDF5;
-      --lvl-1-border: #A7F3D0;
+      --lvl-1-color: #3d6b4a;
+      --lvl-1-bg: #eef5ec;
+      --lvl-1-border: #bcd9be;
       --lvl-2-color: var(--brand);
-      --lvl-2-bg: #FEF3C7;
-      --lvl-2-border: #FCD34D;
-      --lvl-3-color: #BE185D;
-      --lvl-3-bg: #FCE7F3;
-      --lvl-3-border: #F9A8D4;
+      --lvl-2-bg: #f7e6c4;
+      --lvl-2-border: #e8c07a;
+      --lvl-3-color: #a3486b;
+      --lvl-3-bg: #f6e3ea;
+      --lvl-3-border: #dcb0c2;
     }
 
     /* hero */
@@ -201,7 +202,7 @@
 
     .ck-card-img {
       aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
+      background: linear-gradient(135deg, #f7e6c4 0%, #f3d9c2 50%, #f0b483 100%);
       position: relative;
       overflow: hidden;
     }
@@ -345,7 +346,7 @@
       position: relative;
       aspect-ratio: 4 / 3;
       max-height: 460px;          /* taller hero so 3:4 photos breathe */
-      background: linear-gradient(135deg, #FEF3C7 0%, #FED7AA 50%, #FBA577 100%);
+      background: linear-gradient(135deg, #f7e6c4 0%, #f3d9c2 50%, #f0b483 100%);
       overflow: hidden;
       border-radius: 16px 16px 0 0;
     }
@@ -500,7 +501,7 @@
     /* paired rubs */
     .ck-paired-rubs {
       padding: 18px 20px;
-      background: linear-gradient(135deg, #FEF3C7 0%, #FFEDD5 100%);
+      background: linear-gradient(135deg, #f7e6c4 0%, #faf0e2 100%);
       border-radius: 10px;
       border: 1px solid var(--lvl-2-border);
     }
@@ -539,10 +540,10 @@
     .ck-rub-img-wrap {
       aspect-ratio: 3/4;
       overflow: hidden;
-      background: linear-gradient(135deg, #FEF3C7, #FED7AA);
+      background: linear-gradient(135deg, #f7e6c4, #f3d9c2);
     }
-    .ck-rub[data-brand="butchers-axe"] .ck-rub-img-wrap { background: linear-gradient(135deg, #1f1f1f, #3a2818); }
-    .ck-rub[data-brand="stef-the-maori"] .ck-rub-img-wrap { background: linear-gradient(135deg, #052e1d, #15803d); }
+    .ck-rub[data-brand="butchers-axe"] .ck-rub-img-wrap { background: linear-gradient(135deg, #2d251c, #3a2f24); }
+    .ck-rub[data-brand="stef-the-maori"] .ck-rub-img-wrap { background: linear-gradient(135deg, #22402c, #4a7c59); }
     .ck-rub-img-wrap img {
       width: 100%; height: 100%;
       object-fit: cover;
@@ -682,7 +683,7 @@
     .ck-cta h2 em {
       font-style: italic;
       color: var(--brand);
-      background: linear-gradient(120deg, var(--brand), #f59e0b);
+      background: linear-gradient(120deg, var(--brand), #e89b3f);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -720,6 +721,42 @@
     @media (max-width: 480px) {
       .ck-modal-specs { grid-template-columns: 1fr; }
     }
+
+    /* =====================================================================
+       YORON BBQ コミュニティトーン統一（2026-07-30）
+       正本: bbq-site/community.css — warm cream #f6f1e4 / ember #d95f3b /
+       Zen Maru Gothic / カード radius 18px / CTA は pill
+       ===================================================================== */
+    body, body h1, body h2, body h3, body h4, body h5, body h6,
+    body p, body span, body div, body a, body li, body b, body strong,
+    body em, body button, body input, body select, body textarea, body summary {
+      font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif !important;
+    }
+    body { line-height: 1.85; }
+    body em { font-style: normal !important; }
+        body { background: #f6f1e4; }
+    .ck-hero { background: transparent; border-bottom: 1px solid rgba(45,37,28,.14); }
+    .ck-hero h1 em { color: #d95f3b; }
+    .ck-filter-bar { background: rgba(255,253,246,.9); border-bottom-color: rgba(45,37,28,.12); }
+    .ck-grid-wrap { background: transparent; }
+    .ck-fund { background: transparent; border-top: 1px solid rgba(45,37,28,.12); }
+    details.ck-fund-d, .ck-temps, .ck-fund-t { border-radius: 18px; }
+    .ck-card { box-shadow: 0 4px 24px rgba(45,37,28,.07); }
+    .ck-card:hover { border-color: #d95f3b; box-shadow: 0 12px 34px rgba(217,95,59,.14); }
+    .ck-chip.is-active { background: #d95f3b; border-color: #d95f3b; color: #fffdf6; }
+    .ck-chip:hover { border-color: #d95f3b; color: #b74a2c; }
+    .ck-cta { background: #191410; border-radius: 40px; margin: 0 1.2rem; }
+    .ck-cta h2 em { background: linear-gradient(120deg,#e89b3f,#d95f3b);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .ck-cta-btn { border-radius: 100px; background: #d95f3b; padding: 15px 32px;
+      box-shadow: 0 6px 20px rgba(217,95,59,.3); }
+    .ck-cta-btn:hover { background: #b74a2c; }
+    .ck-modal, .ck-modal-hero { border-radius: 18px; }
+    .ck-temp-num, .ck-fund-t .letter, .ck-result-meta .count strong { color: #d95f3b; }
+    .ck-hero [data-anchan], .ck-cta [data-anchan] { justify-content: center; }
+    .ck-cta [data-anchan] .an-bubble { text-align: left; }
+    /* キャラクター配置の余白 */
+    [data-anchan] { margin: 1.8rem 0 !important; }
   </style>
 
   <!-- Firebase compat (consistent with EC site) -->
@@ -812,6 +849,7 @@
       <p class="ck-hero-eyebrow">Cookbook · 料理ガイド</p>
       <h1>BBQで、<em>何を作る？</em></h1>
       <p>レベル・食材・時間でサッと絞り込む、SLOW FIREが提案する24品。<br>各料理に合うBBQラブも一緒に。</p>
+      <div data-anchan="wave" data-who="an" data-say="24品ぜんぶ、<b>普通のスーパーの食材で焼けるもの</b>にした。作りたい一皿から選んで、そこからラブを決めればいい。"></div>
     </div>
   </section>
 
@@ -849,6 +887,10 @@
     <button class="ck-reset-btn hidden" id="resetBtn">フィルターをリセット ✕</button>
   </div>
 
+  <div style="max-width:var(--max);margin:0 auto;padding:0 1.5rem;">
+    <div data-anchan="point" data-who="yama" data-say="選ぶコツは<b>初級から2品、上級から1品</b>。上級を火にかけてる間に初級を回すと、待ち時間がなくなって卓が止まらない。"></div>
+  </div>
+
   <!-- GRID -->
   <section class="ck-grid-wrap">
     <div class="ck-grid" id="recipeGrid"></div>
@@ -881,6 +923,7 @@
             <div class="ck-temp-row"><span>プルドポーク</span><span class="ck-temp-num">97℃</span><span>ロー&スロー</span></div>
             <div class="ck-temp-row"><span>ブリスケット</span><span class="ck-temp-num">92〜96℃</span><span>ロー&スロー</span></div>
           </div>
+          <div data-anchan="guide" data-who="ueta" data-say="見た目で迷ったら数字を見る。<b>牛は53℃、鶏は73℃</b>。この二つを覚えておくだけで、生焼けと焼きすぎの両方から逃げられる。"></div>
         </div>
       </details>
     </div>
@@ -891,6 +934,7 @@
     <div class="ck-cta-inner">
       <h2>料理を、<em>ラブで決める。</em></h2>
       <p>SLOW FIREのBBQラブは、Low n Slow Basics（オーストラリア）日本正規取扱。<br>料理ごとに合う1本を、まず試してみてください。</p>
+      <div data-anchan="cheer" data-who="an" data-say="料理が決まればラブも決まる。<b>逆から選んでもちゃんと着地する</b>のが、このガイドのいいところ。"></div>
       <a href="index.html#products" class="ck-cta-btn">商品一覧を見る →</a>
     </div>
   </section>
