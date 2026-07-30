@@ -5,7 +5,8 @@
     "写真の新規AI生成は禁止。承認済み実写だけを使う（images/journal/ と images/journal/pool/）。",
     "pool/ は外部リポジトリ（yoron-bbq/flyer/ph・bbq-site/images）からコピーした与論の実写。",
     "articles = journal/articles/<slug>.html のサムネ下地、guide = journal/guide/<slug>.html のヒーロー＆一覧カード。",
-    "検証: node tools/gen-journal-thumb/verify-photo-map.mjs（値のユニーク性と実ファイル存在をチェック）"
+    "検証: node tools/gen-journal-thumb/verify-photo-map.mjs（値のユニーク性と実ファイル存在をチェック）",
+    "注意: 現在83スロット=83枚でプールを使い切っている。新記事は generate-journal.mjs が未使用写真を探し、尽きたら既出写真を借りて警告を出す。承認済み実写を images/journal/pool/ に足すと自動で解消する。"
   ],
   "articles": {
     "anbbq-multi-course-plan": "images/journal/bbq-platter.jpg",

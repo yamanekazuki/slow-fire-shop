@@ -142,6 +142,26 @@
     .bg-table td.m { color: var(--bg-amber); font-weight: 700; }
     .bg-scrollhint { font-size: 12px; color: #a8a29e; margin-top: 8px; }
     @media (min-width: 860px) { .bg-scrollhint { display: none; } }
+    /* 比較表のレベル切替（モバイル専用の2列表示） */
+    .bg-cmptabs { display: none; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+    .bg-cmptab { border: 1.5px solid rgba(28,25,23,.14); background: #fff; border-radius: 100px; padding: 9px 15px; font-size: 13px; font-weight: 700; cursor: pointer; color: #57534e; font-family: inherit; transition: all .18s; }
+    .bg-cmptab:hover { border-color: var(--bg-ember); color: var(--bg-ember); }
+    .bg-cmptab.is-on { background: var(--bg-grad); border-color: transparent; color: #fff; }
+    .bg-cmplabel { display: none; font-size: 13px; font-weight: 700; color: var(--bg-ember); margin: 8px 0 0; }
+    @media (max-width: 640px) {
+      .bg-cmptabs { display: flex; }
+      .bg-cmplabel { display: block; }
+      .bg-tablewrap { overflow-x: visible; margin-top: 14px; }
+      .bg-table { min-width: 0; width: 100%; }
+      .bg-table th[data-lv], .bg-table td[data-lv] { display: none; }
+      .bg-table[data-cmplv="1"] th[data-lv="1"], .bg-table[data-cmplv="1"] td[data-lv="1"],
+      .bg-table[data-cmplv="2"] th[data-lv="2"], .bg-table[data-cmplv="2"] td[data-lv="2"],
+      .bg-table[data-cmplv="3"] th[data-lv="3"], .bg-table[data-cmplv="3"] td[data-lv="3"],
+      .bg-table[data-cmplv="4"] th[data-lv="4"], .bg-table[data-cmplv="4"] td[data-lv="4"],
+      .bg-table[data-cmplv="5"] th[data-lv="5"], .bg-table[data-cmplv="5"] td[data-lv="5"] { display: table-cell; }
+      .bg-table thead th, .bg-table tbody th { white-space: normal; }
+      .bg-scrollhint { display: none; }
+    }
 
     /* Field report */
     .bg-report { background: #1c1917; color: #f5f5f4; border-radius: 20px; padding: 34px 28px; margin-top: 30px; }
@@ -202,7 +222,7 @@
     .reveal.in { opacity: 1; transform: none; }
 
     @media print {
-      .nav, .footer, .bg-rail, .bg-progress, .bg-bg, .bg-hero, .bg-final, .bg-tabs, .bg-toolbar, .bg-levels, .bg-tablewrap, .bg-report, .bg-faq, .bg-flow { display: none !important; }
+      .nav, .footer, .bg-rail, .bg-progress, .bg-bg, .bg-hero, .bg-final, .bg-tabs, .bg-cmptabs, .bg-cmplabel, .bg-toolbar, .bg-levels, .bg-tablewrap, .bg-report, .bg-faq, .bg-flow { display: none !important; }
       body.bg-page { background: #fff; }
       .bg-chapter { padding: 0; }
       #checklist { display: block !important; }
@@ -307,7 +327,7 @@
             </a>
             <a href="cookbook.html" role="menuitem">
               <strong>料理から選ぶ</strong>
-              <span>24品の料理ガイド</span>
+              <span>36品の料理ガイド</span>
             </a>
             <a href="rub-guide.html" role="menuitem">
               <strong>ラブガイド</strong>
@@ -378,98 +398,106 @@
       左のLv1（グランピング）から右のLv5（無料公園）へ進むほど、空白＝自分で用意するものが増えます。
       これがそのまま<strong>バーベキューを実施するハードルの高さ</strong>で、荷物とタスクがどこで増えるのかが見えます。
     </p>
+    <div class="bg-cmptabs reveal" role="group" aria-label="表示する会場レベルを選ぶ">
+      <button type="button" class="bg-cmptab is-on" data-cmplv="1">Lv1</button>
+      <button type="button" class="bg-cmptab" data-cmplv="2">Lv2</button>
+      <button type="button" class="bg-cmptab" data-cmplv="3">Lv3</button>
+      <button type="button" class="bg-cmptab" data-cmplv="4">Lv4</button>
+      <button type="button" class="bg-cmptab" data-cmplv="5">Lv5</button>
+    </div>
+    <p class="bg-cmplabel" id="bgCmpLabel">Lv1 グランピング</p>
     <div class="bg-tablewrap reveal">
-      <table class="bg-table">
+      <table class="bg-table" data-cmplv="1">
         <thead>
           <tr>
             <th>項目</th>
-            <th>Lv1 グランピング</th>
-            <th>Lv2 レンタルスペース</th>
-            <th>Lv3 手ぶら有料</th>
-            <th>Lv4 有料＋レンタル</th>
-            <th>Lv5 無料公園</th>
+            <th data-lv="1">Lv1 グランピング</th>
+            <th data-lv="2">Lv2 レンタルスペース</th>
+            <th data-lv="3">Lv3 手ぶら有料</th>
+            <th data-lv="4">Lv4 有料＋レンタル</th>
+            <th data-lv="5">Lv5 無料公園</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">炭グリル（蓋付き）</th>
-            <td></td>
-            <td class="m">△ 物件による（Weberトラベラーや一式常備の物件も、持参前提の物件も）</td>
-            <td class="m">△ 機材一式は付くが、実態はほぼ蓋なしの焼肉系。蓋付きを借りられるのは一部の施設のみ</td>
-            <td class="m">○ Weberなどを借りられる会場あり（HERO FIELD新木場ほか）／自前グリルの持込も可</td>
-            <td></td>
+            <td data-lv="1"></td>
+            <td class="m" data-lv="2">△ 物件による（Weberトラベラーや一式常備の物件も、持参前提の物件も）</td>
+            <td class="m" data-lv="3">△ 機材一式は付くが、実態はほぼ蓋なしの焼肉系。蓋付きを借りられるのは一部の施設のみ</td>
+            <td class="m" data-lv="4">○ Weberなどを借りられる会場あり（HERO FIELD新木場ほか）／自前グリルの持込も可</td>
+            <td data-lv="5"></td>
           </tr>
           <tr>
             <th scope="row">ガスグリル</th>
-            <td class="y">◎ ほとんどこれ</td>
-            <td class="m">△ 物件による</td>
-            <td class="m">△ 施設の機材次第</td>
-            <td class="m">△ 会場ルール次第（プロパン不可の公園あり）</td>
-            <td class="n">不可（カセットコンロ・プロパン禁止）</td>
+            <td class="y" data-lv="1">◎ ほとんどこれ</td>
+            <td class="m" data-lv="2">△ 物件による</td>
+            <td class="m" data-lv="3">△ 施設の機材次第</td>
+            <td class="m" data-lv="4">△ 会場ルール次第（プロパン不可の公園あり）</td>
+            <td class="n" data-lv="5">不可（カセットコンロ・プロパン禁止）</td>
           </tr>
           <tr>
             <th scope="row">電気グリル（Weber Pulse等）</th>
-            <td class="m">△ 施設による</td>
-            <td class="y">○ 電源のある物件が現実解</td>
-            <td></td>
-            <td class="n">電源なし・発電機禁止の会場が多い</td>
-            <td class="n">電源なし</td>
+            <td class="m" data-lv="1">△ 施設による</td>
+            <td class="y" data-lv="2">○ 電源のある物件が現実解</td>
+            <td data-lv="3"></td>
+            <td class="n" data-lv="4">電源なし・発電機禁止の会場が多い</td>
+            <td class="n" data-lv="5">電源なし</td>
           </tr>
           <tr>
             <th scope="row">机・椅子</th>
-            <td class="y">あり</td>
-            <td class="y">あり</td>
-            <td class="y">あり</td>
-            <td class="m">施設・レンタルによる</td>
-            <td>机2台以上＋椅子人数分</td>
+            <td class="y" data-lv="1">あり</td>
+            <td class="y" data-lv="2">あり</td>
+            <td class="y" data-lv="3">あり</td>
+            <td class="m" data-lv="4">施設・レンタルによる</td>
+            <td data-lv="5">机2台以上＋椅子人数分</td>
           </tr>
           <tr>
             <th scope="row">皿・調理器具</th>
-            <td class="y">あり</td>
-            <td class="y">あり（物件による）</td>
-            <td class="y">あり</td>
-            <td></td>
-            <td></td>
+            <td class="y" data-lv="1">あり</td>
+            <td class="y" data-lv="2">あり（物件による）</td>
+            <td class="y" data-lv="3">あり</td>
+            <td data-lv="4"></td>
+            <td data-lv="5"></td>
           </tr>
           <tr>
             <th scope="row">洗剤・洗い場</th>
-            <td class="y">あり</td>
-            <td class="y">シンク・洗剤あり</td>
-            <td class="m">洗浄用具の貸出あり（施設による）</td>
-            <td class="m">洗い場あり・洗剤はなし</td>
-            <td class="n">水道はあるが洗い物不可・洗剤なし</td>
+            <td class="y" data-lv="1">あり</td>
+            <td class="y" data-lv="2">シンク・洗剤あり</td>
+            <td class="m" data-lv="3">洗浄用具の貸出あり（施設による）</td>
+            <td class="m" data-lv="4">洗い場あり・洗剤はなし</td>
+            <td class="n" data-lv="5">水道はあるが洗い物不可・洗剤なし</td>
           </tr>
           <tr>
             <th scope="row">ゴミ処理</th>
-            <td class="y">施設で処理</td>
-            <td class="m">物件による</td>
-            <td class="y">プランに含む（持込品は有料の場合あり）</td>
-            <td class="m">有料回収 or 全持ち帰り</td>
-            <td class="n">全持ち帰り</td>
+            <td class="y" data-lv="1">施設で処理</td>
+            <td class="m" data-lv="2">物件による</td>
+            <td class="y" data-lv="3">プランに含む（持込品は有料の場合あり）</td>
+            <td class="m" data-lv="4">有料回収 or 全持ち帰り</td>
+            <td class="n" data-lv="5">全持ち帰り</td>
           </tr>
           <tr>
             <th scope="row">飲み物・氷</th>
-            <td class="m">プランによる</td>
-            <td></td>
-            <td class="m">プランによる</td>
-            <td class="m">売店あり・氷は持参が安全</td>
-            <td>自販機は遠い前提で用意</td>
+            <td class="m" data-lv="1">プランによる</td>
+            <td data-lv="2"></td>
+            <td class="m" data-lv="3">プランによる</td>
+            <td class="m" data-lv="4">売店あり・氷は持参が安全</td>
+            <td data-lv="5">自販機は遠い前提で用意</td>
           </tr>
           <tr>
             <th scope="row">監視・ルールの厳しさ</th>
-            <td class="m">火器持込禁止が多い</td>
-            <td class="m">物件ルール次第</td>
-            <td class="m">食材持込制限あり</td>
-            <td class="n">厳しめ（足つき必須・卓上NG）</td>
-            <td class="y">おおらか（のびのび使える）</td>
+            <td class="m" data-lv="1">火器持込禁止が多い</td>
+            <td class="m" data-lv="2">物件ルール次第</td>
+            <td class="m" data-lv="3">食材持込制限あり</td>
+            <td class="n" data-lv="4">厳しめ（足つき必須・卓上NG）</td>
+            <td class="y" data-lv="5">おおらか（のびのび使える）</td>
           </tr>
           <tr>
             <th scope="row">費用</th>
-            <td>1人1.5万円〜</td>
-            <td>時間貸し</td>
-            <td>1人4,000円前後〜</td>
-            <td>場所代＋レンタル代</td>
-            <td>無料（詳細は公式で要確認）</td>
+            <td data-lv="1">1人1.5万円〜</td>
+            <td data-lv="2">時間貸し</td>
+            <td data-lv="3">1人4,000円前後〜</td>
+            <td data-lv="4">場所代＋レンタル代</td>
+            <td data-lv="5">無料（詳細は公式で要確認）</td>
           </tr>
         </tbody>
       </table>
@@ -946,6 +974,28 @@
       });
 
       render();
+    })();
+
+    /* ===== 比較表のレベル切替（モバイル2列表示・チェックリストとは独立） ===== */
+    (function () {
+      const table = document.querySelector('.bg-table');
+      const tabs = document.querySelector('.bg-cmptabs');
+      if (!table || !tabs) return;
+      const label = document.getElementById('bgCmpLabel');
+      const names = { '1': 'Lv1 グランピング', '2': 'Lv2 レンタルスペース', '3': 'Lv3 手ぶら有料', '4': 'Lv4 有料＋レンタル', '5': 'Lv5 無料公園' };
+      tabs.querySelectorAll('.bg-cmptab').forEach(b => b.setAttribute('aria-pressed', b.classList.contains('is-on') ? 'true' : 'false'));
+      tabs.addEventListener('click', e => {
+        const btn = e.target.closest('.bg-cmptab');
+        if (!btn) return;
+        const lv = btn.dataset.cmplv;
+        table.setAttribute('data-cmplv', lv);
+        tabs.querySelectorAll('.bg-cmptab').forEach(b => {
+          const on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (label) label.textContent = names[lv] || '';
+      });
     })();
   </script>
   <script src="mobile-nav.js?v=20260506e"></script>

@@ -41,6 +41,12 @@ for (const slug of slugs) {
   );
   if (html !== before) heroN++;
 
+  // 1.5) og:image / twitter:image / 構造化データの image も自前の実写に（外部ストック依存をなくす）
+  const abs = `https://an-bbq.jp/${rel}`;
+  html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${abs}$2`);
+  html = html.replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${abs}$2`);
+  html = html.replace(/("image":\s*")https:\/\/images\.unsplash\.com[^"]*(")/g, `$1${abs}$2`);
+
   // 2) 関連記事カード → 記事の生成サムネ
   html = html.replace(
     /(<a href="(?:\.\.\/articles\/|https:\/\/an-bbq\.jp\/journal\/articles\/)([a-z0-9-]+)\.html" class="jr-related-card"[^>]*>\s*<div class="jr-related-img"><img src=")[^"]+(")/g,

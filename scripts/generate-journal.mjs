@@ -59,7 +59,7 @@ const NAV = `  <header id="nav" class="nav">
           <div class="nav-dropdown-menu" role="menu">
             <a href="../../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
             <a href="../../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
-            <a href="../../cookbook.html"><strong>料理から選ぶ</strong><span>24品の料理ガイド</span></a>
+            <a href="../../cookbook.html"><strong>料理から選ぶ</strong><span>36品の料理ガイド</span></a>
             <a href="../../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
           </div>
         </div>
@@ -135,10 +135,21 @@ async function assignPhoto(slug, category) {
     for (const f of (await readdir(abs)).filter((f) => /\.(jpe?g|png)$/i.test(f))) all.push(`${d}/${f}`.split("\\").join("/"));
   }
   const free = all.filter((p) => !used.has(p)).sort();
-  if (!free.length) { console.warn("⚠️ 未使用の写真が枯渇。photo-map.json を見直して写真を追加してください。"); return null; }
   const hints = PHOTO_HINT[category] || [];
-  const hit = free.find((p) => hints.some((h) => p.toLowerCase().includes(h)));
-  const chosen = hit || free[0];
+  let chosen;
+  if (free.length) {
+    chosen = free.find((p) => hints.some((h) => p.toLowerCase().includes(h))) || free[0];
+  } else {
+    // 未使用が尽きたとき: サムネなしで公開するより、既出写真を1枚借りて必ず絵を出す。
+    // ただし「1記事=1枚」の原則が崩れるので、承認済み実写の追加を強く促す警告を出す。
+    if (!all.length) { console.warn("⚠️ images/journal/ に写真が1枚もありません。"); return null; }
+    let h = 0;
+    for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+    const pool = all.filter((p) => hints.some((x) => p.toLowerCase().includes(x)));
+    const from = pool.length ? pool : all;
+    chosen = from.sort()[h % from.length];
+    console.warn(`⚠️ 未使用の写真が枯渇したため既出写真を再利用しました（${chosen}）。images/journal/pool/ に承認済み実写を追加してください。`);
+  }
   map.articles[slug] = chosen;
   await writeFile(PHOTO_MAP_FILE, JSON.stringify(map, null, 2) + "\n", "utf8");
   console.log(`写真割当: ${slug} → ${chosen}`);
