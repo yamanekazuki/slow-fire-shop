@@ -76,13 +76,16 @@ jobs:
         run: |
           url="${{ steps.gen.outputs.url }}"
           echo "公開待ち: $url"
-          for i in $(seq 1 30); do
+          # Pages(CDN)反映は5分を超えることがある（2026-07-31: 記事は公開済みなのに通知だけ落ちた事故）。
+          # 記事はcommit/push済みで確実に出るので、監視窓を15分(60×15s)に延長し、
+          # 反映の遅れだけで通知メールを落とさないようにする。
+          for i in $(seq 1 60); do
             code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo 000)
             echo "  試行 $i: HTTP $code"
             if [ "$code" = "200" ]; then echo "公開を確認"; exit 0; fi
-            sleep 10
+            sleep 15
           done
-          echo "::error::Pages反映が5分で確認できず。公開メールは送信しない（2026-07-28テスト設計標準）。"
+          echo "::error::Pages反映が15分で確認できず。公開メールは送信しない（2026-07-28テスト設計標準）。"
           exit 1
 
       - name: 記事公開メール通知（3名）
