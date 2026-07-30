@@ -17,7 +17,9 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
-const ART_DIR = path.join(ROOT, "journal", "articles");
+const ART_DIR = process.env.SPRINKLE_DIR
+  ? path.resolve(ROOT, process.env.SPRINKLE_DIR)
+  : path.join(ROOT, "journal", "articles");
 
 function hashCode(s) {
   let h = 0;

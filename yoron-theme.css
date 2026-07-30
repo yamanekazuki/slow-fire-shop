@@ -152,6 +152,14 @@ body {
 .path-card:hover { border-color: var(--yb-ember); }
 .deeper-card--brand { border-color: var(--yb-ember); }
 
+/* 引用の左縦アクセント線は禁止 → 面で見せる（style.css .path-target の上書き） */
+.path-target {
+  border-left: 0;
+  background: rgba(217,95,59,.07);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
 /* nav / footer のトーン */
 .nav { background: rgba(255,253,246,.94); backdrop-filter: blur(10px); border-bottom-color: var(--yb-line); }
 .nav-links a:hover { color: var(--yb-ember); }
