@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>会場別・持ち物分岐表｜野川公園／新木場／グランピングで持参が変わる - SLOW FIRE SHOP</title>
+  <meta name="description" content="同じBBQでも会場が変われば持ち物は全部変わる。野川公園(無料公園)は道具も炭も机も椅子も洗剤も全部持参、HERO FIELD 新木場はレンタルと電源あり、グランピングはほぼ手ぶら。3会場を1枚の表で見比べて、当日の忘れ物と持ちすぎをなくす分岐表。">
+  <meta name="keywords" content="BBQ 持ち物,会場別 持ち物,野川公園 BBQ 持ち物,新木場 BBQ,HERO FIELD 新木場,グランピング 手ぶら,BBQ 持参リスト,無料公園 BBQ">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://an-bbq.jp/bring-by-venue.html">
+  <link rel="manifest" href="manifest.json">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="会場別・持ち物分岐表｜野川公園／新木場／グランピングで持参が変わる">
+  <meta property="og:description" content="野川公園は全部持参、新木場はレンタルあり、グランピングはほぼ手ぶら。3会場を1枚の表で見比べて『持参が要るもの』だけをはっきりさせる分岐表。">
+  <meta property="og:url" content="https://an-bbq.jp/bring-by-venue.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=70">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260708g">
+  <link rel="stylesheet" href="assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="assets/sf-features.css?v=20260708g">
+
+  <style>
+    /* ===== 会場別・持ち物分岐表 ===== */
+    :root {
+      --vb-cream: #faf7f2;
+      --vb-ink: #1c1917;
+      --vb-ember: #c2410c;
+      --vb-amber: #d97706;
+      --vb-forest: #166534;
+      --vb-grad: linear-gradient(100deg,#7c2d12,#c2410c 55%,#ea580c);
+    }
+    body.vb-page {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--vb-cream);
+      color: var(--vb-ink);
+      overflow-x: hidden;
+    }
+    .vb-bg { position: fixed; inset: 0; z-index: -2; background: var(--vb-cream); overflow: hidden; pointer-events: none; }
+    .vb-blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .45; }
+    .vb-blob.b1 { width: 44vw; height: 44vw; left: -10vw; top: -8vw;
+      background: radial-gradient(circle at 40% 40%, rgba(234,88,12,.45), rgba(234,88,12,0) 70%); }
+    .vb-blob.b2 { width: 40vw; height: 40vw; right: -8vw; top: 30vh;
+      background: radial-gradient(circle at 50% 50%, rgba(22,101,52,.3), rgba(22,101,52,0) 70%); }
+
+    /* HERO */
+    .vb-hero { max-width: 980px; margin: 0 auto; padding: calc(var(--nav-h) + 46px) 1.5rem 34px; }
+    .vb-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .16em;
+      color: var(--vb-ember); border: 1px solid rgba(194,65,12,.35); border-radius: 999px; padding: 5px 14px; margin-bottom: 20px; }
+    .vb-hero h1 { font-size: clamp(1.9rem, 5.5vw, 3.1rem); line-height: 1.28; font-weight: 900; margin: 0 0 18px; letter-spacing: -.01em; }
+    .vb-hero h1 em { font-style: normal; background: var(--vb-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .vb-lead { font-size: clamp(1rem, 2.4vw, 1.15rem); line-height: 1.95; color: #44403c; max-width: 720px; }
+    .vb-lead b { color: var(--vb-ink); font-weight: 700; box-shadow: inset 0 -.5em 0 rgba(217,119,6,.18); }
+
+    /* Venue summary cards */
+    .vb-cards { max-width: 980px; margin: 0 auto; padding: 8px 1.5rem 6px; display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media (max-width: 720px) { .vb-cards { grid-template-columns: 1fr; } }
+    .vb-card { background: #fff; border: 1px solid rgba(28,25,23,.09); border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 6px 22px rgba(28,25,23,.05); }
+    .vb-card .tag { font-size: 11px; font-weight: 800; letter-spacing: .1em; color: #fff; padding: 3px 10px; border-radius: 999px; }
+    .vb-card.nogawa .tag { background: var(--vb-forest); }
+    .vb-card.shinkiba .tag { background: var(--vb-ember); }
+    .vb-card.glamping .tag { background: var(--vb-amber); }
+    .vb-card h3 { font-size: 1.12rem; font-weight: 800; margin: 12px 0 6px; }
+    .vb-card p { font-size: .9rem; line-height: 1.75; color: #57534e; margin: 0; }
+    .vb-card .load { margin-top: 12px; font-size: .82rem; font-weight: 700; }
+    .vb-card.nogawa .load { color: var(--vb-forest); }
+    .vb-card.shinkiba .load { color: var(--vb-ember); }
+    .vb-card.glamping .load { color: var(--vb-amber); }
+
+    /* Legend */
+    .vb-legend { max-width: 980px; margin: 20px auto 6px; padding: 0 1.5rem; display: flex; flex-wrap: wrap; gap: 16px; font-size: .85rem; color: #57534e; align-items: center; }
+    .vb-legend .k { display: inline-flex; align-items: center; gap: 7px; }
+    .vb-mark { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 7px; font-weight: 900; font-size: .82rem; }
+    .m-must { background: rgba(194,65,12,.12); color: var(--vb-ember); }
+    .m-opt  { background: rgba(217,119,6,.14); color: #b45309; }
+    .m-no   { background: rgba(28,25,23,.06); color: #a8a29e; }
+
+    /* TABLE */
+    .vb-tablewrap { max-width: 980px; margin: 10px auto 0; padding: 0 1.5rem; }
+    .vb-tabs { display: none; gap: 8px; margin-bottom: 12px; }
+    .vb-tabs button { flex: 1; padding: 10px 6px; border: 1px solid rgba(28,25,23,.14); background: #fff; border-radius: 10px; font-weight: 700; font-size: .86rem; color: #57534e; cursor: pointer; }
+    .vb-tabs button.active { color: #fff; border-color: transparent; }
+    .vb-tabs button[data-col="nogawa"].active { background: var(--vb-forest); }
+    .vb-tabs button[data-col="shinkiba"].active { background: var(--vb-ember); }
+    .vb-tabs button[data-col="glamping"].active { background: var(--vb-amber); }
+
+    .vb-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(28,25,23,.06); border: 1px solid rgba(28,25,23,.08); }
+    .vb-table thead th { background: #1c1917; color: #fff; font-size: .84rem; font-weight: 700; padding: 14px 10px; text-align: center; }
+    .vb-table thead th:first-child { text-align: left; padding-left: 16px; }
+    .vb-table .grouprow td { background: #f5f0e8; font-size: .78rem; font-weight: 800; letter-spacing: .08em; color: #7c2d12; padding: 9px 16px; }
+    .vb-table tbody td { padding: 13px 10px; border-top: 1px solid rgba(28,25,23,.07); text-align: center; vertical-align: middle; }
+    .vb-table tbody td:first-child { text-align: left; padding-left: 16px; font-weight: 600; font-size: .9rem; }
+    .vb-table .note { display: block; font-size: .72rem; font-weight: 400; color: #a8a29e; margin-top: 2px; line-height: 1.4; }
+    .vb-cellnote { display: block; font-size: .68rem; color: #a8a29e; margin-top: 3px; line-height: 1.35; }
+
+    @media (max-width: 640px) {
+      .vb-tabs { display: flex; }
+      .vb-table col.c-nogawa, .vb-table col.c-shinkiba, .vb-table col.c-glamping { }
+      .vb-table.show-nogawa .col-shinkiba, .vb-table.show-nogawa .col-glamping,
+      .vb-table.show-shinkiba .col-nogawa, .vb-table.show-shinkiba .col-glamping,
+      .vb-table.show-glamping .col-nogawa, .vb-table.show-glamping .col-shinkiba { display: none; }
+      .vb-table thead th, .vb-table tbody td { font-size: .82rem; }
+    }
+
+    /* takeaway */
+    .vb-takeaway { max-width: 980px; margin: 34px auto 0; padding: 0 1.5rem; }
+    .vb-takeaway h2 { font-size: 1.4rem; font-weight: 900; margin: 0 0 16px; }
+    .vb-take-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    @media (max-width: 720px) { .vb-take-grid { grid-template-columns: 1fr; } }
+    .vb-take { border-radius: 14px; padding: 18px; background: #fff; border: 1px solid rgba(28,25,23,.09); }
+    .vb-take h4 { margin: 0 0 8px; font-size: .98rem; font-weight: 800; }
+    .vb-take ul { margin: 0; padding-left: 1.1em; }
+    .vb-take li { font-size: .86rem; line-height: 1.7; color: #57534e; }
+
+    .vb-cta { max-width: 980px; margin: 40px auto 10px; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .vb-cta { grid-template-columns: 1fr; } }
+    .vb-cta a { display: block; background: #fff; border: 1px solid rgba(28,25,23,.1); border-radius: 16px; padding: 20px; text-decoration: none; color: var(--vb-ink); transition: transform .18s, box-shadow .18s; }
+    .vb-cta a:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(28,25,23,.09); }
+    .vb-cta strong { display: block; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+    .vb-cta p { margin: 0; font-size: .86rem; color: #57534e; line-height: 1.65; }
+    .vb-cta .go { display: inline-block; margin-top: 10px; font-size: .84rem; font-weight: 700; color: var(--vb-ember); }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "会場別・持ち物分岐表｜野川公園／新木場／グランピングで持参が変わる",
+    "description": "3つの代表的なBBQ会場タイプごとに、持参が必要な道具・火まわり・席まわり・衛生・食材を1枚の表で比較する分岐表。",
+    "author": { "@type": "Organization", "name": "SLOW FIRE SHOP" },
+    "mainEntityOfPage": "https://an-bbq.jp/bring-by-venue.html"
+  }
+  </script>
+</head>
+
+<body class="vb-page">
+
+  <div class="vb-bg" aria-hidden="true">
+    <div class="vb-blob b1"></div>
+    <div class="vb-blob b2"></div>
+  </div>
+
+  <!-- NAV -->
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        SLOW<span>FIRE</span> <em>SHOP</em>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="essentials.html" role="menuitem">
+              <strong>BBQの神髄</strong>
+              <span>初めての方向け・グリルの選び方</span>
+            </a>
+            <a href="bring-guide.html" role="menuitem">
+              <strong>持ち物と会場ガイド</strong>
+              <span>会場レベル別・持ち物チェックリスト</span>
+            </a>
+            <a href="bring-by-venue.html" role="menuitem">
+              <strong>会場別・持ち物分岐表</strong>
+              <span>野川／新木場／グランピングで比較</span>
+            </a>
+            <a href="pairing-guide.html" role="menuitem">
+              <strong>食材から選ぶ</strong>
+              <span>部位別おすすめラブ・ペアリング</span>
+            </a>
+            <a href="cookbook.html" role="menuitem">
+              <strong>料理から選ぶ</strong>
+              <span>36品の料理ガイド</span>
+            </a>
+            <a href="rub-guide.html" role="menuitem">
+              <strong>ラブガイド</strong>
+              <span>ラブの種類と使い方</span>
+            </a>
+          </div>
+        </div>
+        <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="bbq-spots/index.html">BBQ場検索</a>
+        <a href="planner/index.html">プランナー</a>
+        <a href="team.html">私たちについて</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='index.html'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <path d="M3 6h18M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="vb-hero">
+    <span class="vb-eyebrow">会場別・持ち物分岐表</span>
+    <h1>どこでやるかで、<br><em>持っていくものは全部変わる。</em></h1>
+    <p class="vb-lead">
+      同じ「BBQをやる」でも、<b>野川公園</b>なら道具も炭も机も椅子も洗剤も金たわしも全部持参。
+      <b>HERO FIELD 新木場</b>はレンタルと電源があるから身軽。<b>グランピング</b>はほぼ手ぶらで着けばいい。
+      この3つを1枚に並べて、<b>「持参が要るものだけ」</b>をはっきりさせました。忘れ物も、持ちすぎもなくすための表です。
+    </p>
+  </section>
+
+  <!-- VENUE CARDS -->
+  <div class="vb-cards">
+    <div class="vb-card nogawa">
+      <span class="tag">A. 無料公園</span>
+      <h3>野川公園</h3>
+      <p>場所利用は無料。設備は水道とトイレだけ。道具・炭・机・椅子・洗い物道具まで、基本すべて自分で持ち込む。</p>
+      <div class="load">積載量：フル装備（いちばん持つ）</div>
+    </div>
+    <div class="vb-card shinkiba">
+      <span class="tag">B. 持込プラン施設</span>
+      <h3>HERO FIELD 新木場</h3>
+      <p>有料の持込プラン。機材レンタルと電源があり、机・椅子・屋根・ゴミ処理も現地完結。食材と味つけだけ持てばいい。</p>
+      <div class="load">積載量：食材＋こだわりの味だけ</div>
+    </div>
+    <div class="vb-card glamping">
+      <span class="tag">C. グランピング</span>
+      <h3>グランピング施設</h3>
+      <p>食材も道具も片付けもプラン込みが基本。ほぼ手ぶらで到着。持つとしても飲み物や着替えなど身の回りだけ。</p>
+      <div class="load">積載量：ほぼ手ぶら</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="vb-legend">
+    <span class="k"><span class="vb-mark m-must">●</span>持参が要る</span>
+    <span class="k"><span class="vb-mark m-opt">△</span>あると安心・任意（現地レンタル/販売あり）</span>
+    <span class="k"><span class="vb-mark m-no">—</span>現地にある・不要</span>
+  </div>
+
+  <!-- TABLE -->
+  <div class="vb-tablewrap">
+    <div class="vb-tabs" role="tablist" aria-label="会場切り替え">
+      <button data-col="nogawa" class="active">野川公園</button>
+      <button data-col="shinkiba">新木場</button>
+      <button data-col="glamping">グランピング</button>
+    </div>
+
+    <table class="vb-table show-nogawa" id="vbTable">
+      <colgroup>
+        <col>
+        <col class="c-nogawa"><col class="c-shinkiba"><col class="c-glamping">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>持ち物</th>
+          <th class="col-nogawa">野川公園</th>
+          <th class="col-shinkiba">新木場</th>
+          <th class="col-glamping">グランピング</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="grouprow"><td colspan="4">火まわり・調理器具</td></tr>
+        <tr>
+          <td>グリル本体<span class="note">蓋付き炭グリルなど</span></td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span><span class="vb-cellnote">常設なし。指定エリアに持込</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">レンタル可・持込も可</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>炭・薪・着火剤</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">現地販売・レンタルあり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>トング・調理器具</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">プランに含む場合あり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>着火用ライター・軍手</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+
+        <tr class="grouprow"><td colspan="4">席まわり・タープ</td></tr>
+        <tr>
+          <td>テーブル</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span><span class="vb-cellnote">常設なし</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-no">—</span><span class="vb-cellnote">現地にあり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>椅子</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-no">—</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>タープ・日除け<span class="note">屋根の有無</span></td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span><span class="vb-cellnote">屋根なし・炎天/雨対策に</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-no">—</span><span class="vb-cellnote">屋根あり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+
+        <tr class="grouprow"><td colspan="4">衛生・片付け</td></tr>
+        <tr>
+          <td>洗剤・スポンジ・金たわし</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span><span class="vb-cellnote">水道はあるが道具はなし</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-no">—</span><span class="vb-cellnote">レンタル機材は返却でOK</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>ゴミ袋<span class="note">ゴミ処理の有無</span></td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span><span class="vb-cellnote">持ち帰り前提</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-no">—</span><span class="vb-cellnote">処理あり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-no">—</span></td>
+        </tr>
+        <tr>
+          <td>キッチンペーパー・ウェットティッシュ</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span></td>
+          <td class="col-glamping"><span class="vb-mark m-opt">△</span></td>
+        </tr>
+
+        <tr class="grouprow"><td colspan="4">食材・味つけ・飲み物</td></tr>
+        <tr>
+          <td>食材（肉・野菜）</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-must">●</span><span class="vb-cellnote">食材は持参前提</span></td>
+          <td class="col-glamping"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">プラン込みが基本</span></td>
+        </tr>
+        <tr>
+          <td>ラブ・調味料・ソース<span class="note">味の主役はいつも自分で</span></td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-must">●</span></td>
+          <td class="col-glamping"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">こだわるなら持参</span></td>
+        </tr>
+        <tr>
+          <td>飲み物・クーラーボックス</td>
+          <td class="col-nogawa"><span class="vb-mark m-must">●</span></td>
+          <td class="col-shinkiba"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">現地販売あり</span></td>
+          <td class="col-glamping"><span class="vb-mark m-opt">△</span><span class="vb-cellnote">持込可否は施設次第</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TAKEAWAY -->
+  <section class="vb-takeaway">
+    <h2>要するに、持参が要るのはこれ</h2>
+    <div class="vb-take-grid">
+      <div class="vb-take">
+        <h4>野川公園 → フル装備</h4>
+        <ul>
+          <li>グリル・炭・着火剤・トング</li>
+          <li>テーブル・椅子・タープ</li>
+          <li>洗剤・金たわし・ゴミ袋</li>
+          <li>食材・味つけ・飲み物ぜんぶ</li>
+        </ul>
+      </div>
+      <div class="vb-take">
+        <h4>新木場 → 食材と味だけ</h4>
+        <ul>
+          <li>食材（肉・野菜）</li>
+          <li>ラブ・調味料・ソース</li>
+          <li>道具・机・椅子・電源は現地</li>
+          <li>飲み物は買い足しでもOK</li>
+        </ul>
+      </div>
+      <div class="vb-take">
+        <h4>グランピング → ほぼ手ぶら</h4>
+        <ul>
+          <li>基本は身ひとつで到着</li>
+          <li>こだわるならラブだけ持参</li>
+          <li>飲み物は持込可否を要確認</li>
+          <li>着替え・防寒など身の回り</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="vb-cta">
+    <a href="bbq-spots/index.html">
+      <strong>行く会場を先に決める</strong>
+      <p>24会場を設備・持込条件で比較。あなたの会場が「持参フル装備」型か「手ぶら」型かがわかります。</p>
+      <span class="go">BBQ場検索へ →</span>
+    </a>
+    <a href="bring-guide.html">
+      <strong>会場レベル別の詳しい持ち物ガイド</strong>
+      <p>会場を5レベルに分類。レベルを選ぶと自動でチェックリストができるインタラクティブ版はこちら。</p>
+      <span class="go">持ち物と会場ガイドへ →</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html#products">商品一覧</a>
+          <a href="essentials.html">BBQの神髄</a>
+          <a href="bring-guide.html">持ち物と会場ガイド</a>
+          <a href="bring-by-venue.html">会場別・持ち物分岐表</a>
+          <a href="rub-guide.html">ラブガイド</a>
+          <a href="pairing-guide.html">ペアリング</a>
+          <a href="cookbook.html">料理ガイド</a>
+          <a href="journal/index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="team.html">私たちについて</a><a href="legal/tokushoho.html">特定商取引法</a><a href="legal/privacy.html">プライバシー</a><a href="legal/terms.html">利用規約</a><a href="about/">About</a><a href="contact/">お問い合わせ</a></nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 SLOW FIRE. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    // モバイル：会場列の切り替えタブ
+    const table = document.getElementById('vbTable');
+    document.querySelectorAll('.vb-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.vb-tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        table.classList.remove('show-nogawa', 'show-shinkiba', 'show-glamping');
+        table.classList.add('show-' + btn.dataset.col);
+      });
+    });
+  </script>
+
+  <script src="mobile-nav.js?v=20260506e"></script>
+  <script src="assets/global-search.js?v=20260516" defer></script>
+</body>
+</html>
