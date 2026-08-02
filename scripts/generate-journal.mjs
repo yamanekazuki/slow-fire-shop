@@ -1,5 +1,5 @@
 // =============================================================================
-// SLOW FIRE SHOP — journal 自動記事生成スクリプト
+// YORON BBQ SHOP — journal 自動記事生成スクリプト
 // -----------------------------------------------------------------------------
 // GitHub Actions（週3回 / 月・水・金 朝7時 JST）から実行。
 // Claude API で実用・SEO寄りのBBQ記事を1本生成し、既存 journal と同じ作りで:
@@ -51,7 +51,7 @@ const GA_CLARITY = `  <!-- Google Analytics (GA4) -->
 
 const NAV = `  <header id="nav" class="nav">
     <div class="nav-wrap">
-      <a href="../../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <a href="../../index.html" class="nav-logo">YORON<span>BBQ</span> <em>SHOP</em></a>
       <nav class="nav-links">
         <a href="../../index.html#products">商品一覧</a>
         <div class="nav-dropdown">
@@ -67,6 +67,7 @@ const NAV = `  <header id="nav" class="nav">
         <a href="../../bbq-spots/index.html">BBQ場検索</a>
         <a href="../../planner/index.html">プランナー</a>
         <a href="../../team.html">私たちについて</a>
+        <a href="https://yoron-bbq.com/" class="nav-community" target="_blank" rel="noopener">COMMUNITY</a>
       </nav>
       <div class="nav-right">
         <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../../index.html#products'">
@@ -81,7 +82,7 @@ const FOOTER = `  <footer class="footer">
     <div class="footer-wrap">
       <div class="footer-top">
         <div>
-          <a href="../../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+          <a href="../../index.html" class="footer-logo">YORON<span>BBQ</span> <em>SHOP</em></a>
           <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
         </div>
         <nav class="footer-nav">
@@ -235,7 +236,7 @@ const SCHEMA = {
 };
 
 const KNOWLEDGE = `
-# SLOW FIRE SHOP（媒体名: SLOW FIRE JOURNAL / FIRESIDE）について
+# YORON BBQ SHOP（媒体名: YORON BBQ JOURNAL / FIRESIDE）について
 - アメリカン/オーストラリアンBBQのラブ(乾燥スパイス)を販売するECサイトのオウンドメディア。
 - 取扱ブランド: Low n Slow Basics・Butcher's Axe・Stef the Maori（豪州の本格ラブ）。
 - 読者は「家庭でBBQをもっと美味しく/失敗なくやりたい」検索ユーザー。実用記事が中心。
@@ -301,7 +302,7 @@ async function generateArticle(seed, avoidTitles) {
       faq: [{ q: "テスト質問?", a: "テスト回答です。" }],
     };
   }
-  const system = `あなたは、BBQ専門ECメディア「SLOW FIRE JOURNAL」のライターです。BBQが大好きで、自分でも何度も失敗しながらやり込んできた人。検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を、やわらかく親しみやすい語り口の日本語で書きます。
+  const system = `あなたは、BBQ専門ECメディア「YORON BBQ JOURNAL」のライターです。BBQが大好きで、自分でも何度も失敗しながらやり込んできた人。検索から来た読者の疑問を「この1本で完全に解決する」決定版記事を、やわらかく親しみやすい語り口の日本語で書きます。
 
 ${KNOWLEDGE}
 
@@ -406,7 +407,7 @@ async function grade(a, avoidTitles) {
   if (process.env.STUB === "1") {
     return { total: 88, items: RUBRIC.map((r) => ({ name: r.name, score: r.max, max: r.max, issue: "なし", fix: "なし" })), verdict: "STUB合格" };
   }
-  const system = `あなたは SLOW FIRE JOURNAL の厳格な編集長です。公開前の記事を以下のルーブリックで100点満点・項目別に採点します。甘くつけず、具体的に指摘します。
+  const system = `あなたは YORON BBQ JOURNAL の厳格な編集長です。公開前の記事を以下のルーブリックで100点満点・項目別に採点します。甘くつけず、具体的に指摘します。
 
 # 採点ルーブリック（合格 ${PASS}点）
 ${RUBRIC.map((r) => `- ${r.name}（${r.max}点）: ${r.desc}`).join("\n")}
@@ -423,7 +424,7 @@ ${KNOWLEDGE}
   return { total, items, verdict: g.verdict || "" };
 }
 async function revise(a, failing) {
-  const system = `あなたは BBQ専門メディア「SLOW FIRE JOURNAL」の編集者です。以下の記事を、指摘された項目を重点的に直して全文書き直します。良い部分は保ち、指摘以外を不必要に変えないこと。具体的な温度・時間・数値・手順を増やし、AIっぽい定型・水増し・薄さは排除する。
+  const system = `あなたは BBQ専門メディア「YORON BBQ JOURNAL」の編集者です。以下の記事を、指摘された項目を重点的に直して全文書き直します。良い部分は保ち、指摘以外を不必要に変えないこと。具体的な温度・時間・数値・手順を増やし、AIっぽい定型・水増し・薄さは排除する。
 
 ${KNOWLEDGE}
 
@@ -481,11 +482,11 @@ function addTOC(html) {
   });
   if (heads.length < 2) return html;
   const items = heads
-    .map((h) => `<li style="margin:.1em 0"><a href="#${h.id}" style="color:#B45309;text-decoration:none">${h.text}</a></li>`)
+    .map((h) => `<li style="margin:.1em 0"><a href="#${h.id}" style="color:#b74a2c;text-decoration:none">${h.text}</a></li>`)
     .join("");
-  const toc = `<nav class="jr-toc" aria-label="目次" style="margin:0 0 2em;padding:20px 24px;background:#fbf8f3;border-left:3px solid #B45309;border-radius:4px">
-        <p style="margin:0 0 12px;font-weight:700;font-size:15px;color:#1b1b1b">この記事でお話しすること</p>
-        <ol style="margin:0;padding-left:1.4em;line-height:2.05;color:#333">${items}</ol>
+  const toc = `<nav class="jr-toc" aria-label="目次" style="margin:0 0 2em;padding:20px 24px;background:#fffdf6;border:1px solid rgba(45,37,28,.14);border-radius:14px">
+        <p style="margin:0 0 12px;font-weight:700;font-size:15px;color:#2d251c">この記事でお話しすること</p>
+        <ol style="margin:0;padding-left:1.4em;line-height:2.05;color:#5b5044">${items}</ol>
       </nav>`;
   return toc + withIds;
 }
@@ -497,7 +498,7 @@ function renderArticle(p) {
     headline: p.title, description: p.description, datePublished: p.iso, dateModified: p.iso,
     inLanguage: "ja-JP", mainEntityOfPage: { "@type": "WebPage", "@id": url },
     image: [p.hero],
-    author: { "@type": "Organization", name: "SLOW FIRE JOURNAL" },
+    author: { "@type": "Organization", name: "YORON BBQ JOURNAL" },
     publisher: { "@type": "Organization", name: "SLOW FIRE", url: SITE + "/" },
     articleSection: cat.ja, keywords: p.keywords,
   };
@@ -521,7 +522,7 @@ function renderArticle(p) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(p.title)} | SLOW FIRE JOURNAL</title>
+  <title>${esc(p.title)} | YORON BBQ JOURNAL</title>
   <meta name="description" content="${esc(p.description)}">
   <meta name="keywords" content="${esc(p.keywords)}">
   <link rel="canonical" href="${url}">
@@ -538,11 +539,12 @@ function renderArticle(p) {
   <meta name="twitter:image" content="${p.hero}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css?v=20260506e">
   <link rel="stylesheet" href="../../assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="../../assets/sf-features.css?v=20260517">
   <link rel="stylesheet" href="../journal.css">
+  <link rel="stylesheet" href="../../yoron-theme.css?v=20260802">
 ${lds}
 ${GA_CLARITY}
 </head>
@@ -582,7 +584,7 @@ ${NAV}
       </div>
     </aside>
 
-    <div class="jr-back"><a href="../index.html">← SLOW FIRE JOURNAL TOPに戻る</a></div>
+    <div class="jr-back"><a href="../index.html">← YORON BBQ JOURNAL TOPに戻る</a></div>
   </article>
 
 ${FOOTER}
