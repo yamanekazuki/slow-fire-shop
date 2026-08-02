@@ -281,7 +281,6 @@ body.yb-banner-on { padding-top: 42px; }
   max-width: 780px; margin: 0 auto;
   background: var(--yb-card);
   border: 1px solid var(--yb-line);
-  border-top: 3px solid var(--yb-ember);
   border-radius: 22px;
   padding: 32px 34px 30px;
   box-shadow: 0 8px 30px rgba(45,37,28,.08);
@@ -320,3 +319,97 @@ body.yb-banner-on { padding-top: 42px; }
   .yb-article-cta-inner { padding: 24px 18px 22px; border-radius: 18px; }
   .yb-article-cta-actions a { width: 100%; }
 }
+
+/* =====================================================================
+   ADD 2026-08-02 — 静的リンク化に伴う統一調整
+   （yoron-theme.css は全HTMLから <link> で直接読み込む。
+     yoron-bridge.js の動的注入は二重防止のため read-only な保険）
+   ===================================================================== */
+
+/* ---------------------------------------------------------------
+   1. 見出し = Zen Maru Gothic の太丸ゴシック（community 側と揃える）
+   --------------------------------------------------------------- */
+:root {
+  --font-display: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+}
+h1, h2, h3, h4, h5,
+.nav-logo, .footer-logo,
+.sec-head h2, .jr-hero h1, .jr-article-title, .jr-sec-title {
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+/* Playfair 直指定を丸ゴシックへ（journal.css:287/842, style.css:165/1786） */
+.jr-hero-eyebrow, .jr-quote, .jr-drop, .hero-serif,
+[style*="Playfair"] {
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif !important;
+}
+em { font-style: normal; }
+
+/* ---------------------------------------------------------------
+   2. ナビの COMMUNITY リンク（HTML 側で末尾に追加）
+   --------------------------------------------------------------- */
+.nav-links a.nav-community {
+  color: var(--yb-ember);
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+.nav-links a.nav-community:hover { color: var(--yb-ember-deep); }
+
+/* ---------------------------------------------------------------
+   3. journal — クリーム地に馴染ませる
+   --------------------------------------------------------------- */
+.jr-body, .jr-wrap, .jr-article, .jr-main { background: transparent; }
+
+/* 濃色ブロックは純黒でなく「焼けた薪」の暖かい濃茶に。文字はクリーム */
+.jr-conclusion,
+.jr-shop-cta-inner,
+.jr-community-inner a,
+.jr-list-card[data-tone="dark"] .jr-list-img {
+  background: linear-gradient(140deg, #2d251c 0%, #3d2a1c 100%);
+  color: var(--yb-cream);
+}
+.jr-conclusion h2,
+.jr-shop-cta-inner h3,
+.jr-conclusion strong { color: #fffdf6; }
+.jr-conclusion p { color: rgba(255, 253, 246, .90); }
+.jr-conclusion-eyebrow { color: var(--brand-300); }
+.jr-shop-cta-inner p { color: rgba(255, 253, 246, .85); opacity: 1; }
+/* 濃色ブロック内の白ボタンは濃文字を明示（クリーム同士の混線防止） */
+.jr-shop-cta-inner a,
+.jr-conclusion a.jr-btn {
+  background: #fffdf6;
+  color: #2d251c;
+}
+.jr-shop-cta-inner a:hover { background: var(--brand-300); color: #2d251c; }
+
+/* 白地前提のカード・パネルを warm paper に */
+.jr-list-card, .jr-feat-card, .jr-card, .jr-cat-card, .jr-toc,
+.jr-related-card, .jr-search-box, .jr-note, .jr-callout, .jr-table-wrap {
+  background: #fffdf6;
+  border-color: var(--yb-line);
+  box-shadow: 0 4px 24px rgba(45, 37, 28, .07);
+}
+.jr-cat-nav a { background: #fffdf6; border-color: var(--yb-line); }
+.jr-cat-nav a:hover, .jr-cat-nav a[aria-current="page"] {
+  background: var(--yb-ember); color: #fffdf6; border-color: var(--yb-ember);
+}
+.jr-crumb a:hover, .jr-back a:hover { color: var(--yb-ember-deep); }
+.jr-article-body a { color: var(--yb-ember-deep); }
+
+/* ---------------------------------------------------------------
+   4. 汎用 — 白地前提の面を warm paper へ（--white 上書きで拾えない直値）
+   --------------------------------------------------------------- */
+.nav, .mobile-menu, .cart-drawer, .modal, .drawer,
+.newsletter-box, .search-panel, .gs-panel {
+  background-color: #fffdf6;
+}
+input, select, textarea { background: #fffdf6; border-color: var(--yb-line); color: var(--yb-ink); }
+
+/* フッターはコミュニティ側と同じチャコール */
+.footer, footer.footer { background: #191410; color: rgba(243, 234, 217, .72); }
+.footer a { color: rgba(243, 234, 217, .8); }
+.footer a:hover, .footer-nav a:hover { color: var(--brand-300); }
+.footer-logo { color: #fffdf6; }
+
+/* 片側アクセント帯（border-left / border-top）は使わない — 面と文字色で強調する */

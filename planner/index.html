@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BBQプランナー — 日付・人数・予算で5分でBBQを設計 | SLOW FIRE</title>
+  <title>BBQプランナー — 日付・人数・予算で5分でBBQを設計 | YORON BBQ</title>
   <meta name="description" content="日付・人数・予算・エリアを入力するだけで、食材リスト・おすすめBBQ場・推奨メニュー・招待状URLが5分で揃うインタラクティブなBBQ計画ウィザード。SLOW FIREが運営する日本初のBBQ設計ツール。">
   <meta name="keywords" content="BBQ 計画,BBQ 計画 ツール,BBQ 設計,BBQ プランナー,BBQ 食材 計算,BBQ 招待状">
   <link rel="canonical" href="https://an-bbq.jp/planner/">
@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="../style.css?v=20260517">
   <link rel="stylesheet" href="../assets/global-search.css?v=20260516">
   <link rel="stylesheet" href="../assets/sf-features.css?v=20260517">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../yoron-theme.css?v=20260802">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"BBQプランナー","applicationCategory":"LifestyleApplication","description":"日付・人数・予算からBBQを5分で計画するインタラクティブツール","url":"https://an-bbq.jp/planner/","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}}
   </script>
@@ -158,14 +160,14 @@
     .pl-restart a { color: var(--gray-500); font-size: var(--text-sm); text-decoration: underline; }
   </style>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"SLOW FIRE SHOP","alternateName":"SLOW FIRE","url":"https://an-bbq.jp/","logo":"https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=512&h=512&q=80","description":"アメリカンBBQの素晴らしさを日本の日常にする運動。Low n Slow Basics・Butcher's Axe・Stef the Maori の日本正規取扱、BBQメディア、検索ツール、プランナーを運営。","email":"yamane@potentialight.com","sameAs":["https://github.com/yamanekazuki/slow-fire-shop"]}
+  {"@context":"https://schema.org","@type":"Organization","name":"YORON BBQ SHOP","alternateName":"SLOW FIRE","url":"https://an-bbq.jp/","logo":"https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=512&h=512&q=80","description":"アメリカンBBQの素晴らしさを日本の日常にする運動。Low n Slow Basics・Butcher's Axe・Stef the Maori の日本正規取扱、BBQメディア、検索ツール、プランナーを運営。","email":"yamane@potentialight.com","sameAs":["https://github.com/yamanekazuki/slow-fire-shop"]}
   </script>
 </head>
 <body>
 
   <header id="nav" class="nav">
     <div class="nav-wrap">
-      <a href="../index.html" class="nav-logo">SLOW<span>FIRE</span> <em>SHOP</em></a>
+      <a href="../index.html" class="nav-logo">YORON<span>BBQ</span> <em>SHOP</em></a>
       <nav class="nav-links">
         <a href="../index.html#products">商品一覧</a>
         <div class="nav-dropdown">
@@ -181,6 +183,7 @@
         <a href="../bbq-spots/index.html">BBQ場検索</a>
         <a href="index.html" style="color: var(--brand-500);">プランナー</a>
         <a href="../team.html">私たちについて</a>
+        <a href="https://yoron-bbq.com/" class="nav-community" target="_blank" rel="noopener">COMMUNITY</a>
       </nav>
       <div class="nav-right">
         <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../index.html#products'"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg></button>
@@ -310,7 +313,7 @@
   <!-- Newsletter signup -->
   <link rel="stylesheet" href="../assets/newsletter.css?v=20260517">
   <section class="nl-box" id="newsletter">
-    <p class="nl-mark">SLOW FIRE NEWSLETTER</p>
+    <p class="nl-mark">YORON BBQ NEWSLETTER</p>
     <h2 class="nl-title">月1回、BBQの「次の一歩」が届きます</h2>
     <p class="nl-desc">季節のBBQ計画、新しいレシピ、BBQ場のオープン情報、ラブの入荷案内。<br>BBQを日常にする小さなヒントを、月1回だけお届けします。</p>
     <form class="nl-form" id="nlForm" action="https://formspree.io/f/your_form_id" method="POST">
@@ -335,10 +338,10 @@
   <footer class="footer">
     <div class="footer-wrap">
       <div class="footer-top">
-        <div><a href="../index.html" class="footer-logo">SLOW<span>FIRE</span> <em>SHOP</em></a><p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p></div>
+        <div><a href="../index.html" class="footer-logo">YORON<span>BBQ</span> <em>SHOP</em></a><p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p></div>
         <nav class="footer-nav"><a href="../index.html#products">商品一覧</a><a href="../essentials.html">BBQの神髄</a><a href="../pairing-guide.html">食材から選ぶ</a><a href="../cookbook.html">料理から選ぶ</a><a href="../rub-guide.html">ラブガイド</a><a href="../journal/index.html">FIRESIDE</a><a href="../bbq-spots/index.html">BBQ場検索</a><a href="index.html">プランナー</a><a href="../team.html">私たちについて</a><a href="../legal/tokushoho.html">特定商取引法</a><a href="../legal/privacy.html">プライバシー</a><a href="../legal/terms.html">利用規約</a><a href="../about/">About</a><a href="../contact/">お問い合わせ</a></nav>
       </div>
-      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+      <div class="footer-bottom"><p>© 2025 YORON BBQ. All rights reserved.</p></div>
     </div>
   </footer>
 
