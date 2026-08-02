@@ -573,6 +573,15 @@ ${NAV}
       ${addTOC(p.body_html + faqBlock(p.faq))}
     </div>
 
+    <aside class="jr-community">
+      <div class="jr-community-inner">
+        <p class="jr-community-label">YORON BBQ COMMUNITY</p>
+        <h3>読んだら、次は火を入れよう</h3>
+        <p>YORONバーベキューのコミュニティでは、月1回、実際に集まって焼いています。<br>読むだけでは分からない火加減と煙の匂いを、体で覚えに来ませんか。初めての方も歓迎です。</p>
+        <a href="https://yoron-bbq.com/">コミュニティを見てみる</a>
+      </div>
+    </aside>
+
     <div class="jr-back"><a href="../index.html">← SLOW FIRE JOURNAL TOPに戻る</a></div>
   </article>
 
