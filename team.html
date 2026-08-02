@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOW FIREチーム｜Weber Grill Academy受講者が運営する海外BBQラブ通販</title>
-  <meta name="description" content="YORON BBQ SHOPを立ち上げたWeber Grill Academy受講チーム。アメリカンBBQ／オーストラリアンBBQの哲学を日本に届けるべく、Low n Slow Basicsの正規取扱を開始。BBQをもっと日常にする3人のチーム紹介。">
-  <meta name="keywords" content="SLOW FIRE,Weber Grill Academy,BBQラブ,アメリカンBBQ,ピットマスター,ロー&スロー,山根一城,日本初上陸">
+  <title>YORON BBQをはじめた3人｜YORON BBQ SHOP</title>
+  <meta name="description" content="YORON BBQ SHOPを運営する3人のチーム紹介。ひとりのグリリスト・石原杏莉（あんちゃん）の火に、山根一城と植田拓也が出会ったところから始まった物語。Weber Grill Academy初級〜上級修了。">
+  <meta name="keywords" content="YORON BBQ,YORONバーベキュー,石原杏莉,山根一城,植田拓也,Weber Grill Academy,BBQラブ,与論島,グリリスト">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://an-bbq.jp/team.html">
   <link rel="manifest" href="manifest.json">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="SLOW FIREチーム｜海外BBQラブ通販を運営するWeber Grill Academy受講者">
-  <meta property="og:description" content="アメリカンBBQの哲学を日本に届けるSLOW FIREチームの紹介。Low n Slow Basics日本正規取扱。">
+  <meta property="og:title" content="YORON BBQをはじめた3人｜YORON BBQ SHOP">
+  <meta property="og:description" content="一度の食卓の感動から始まった、YORONバーベキュー。3人の物語と、僕らが目指す世界。">
   <meta property="og:url" content="https://an-bbq.jp/team.html">
   <meta property="og:image" content="https://an-bbq.jp/team-photo.jpg">
   <meta property="og:locale" content="ja_JP">
@@ -28,21 +28,26 @@
   {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "YORON BBQチーム",
+    "name": "YORON BBQをはじめた3人",
     "url": "https://an-bbq.jp/team.html",
     "inLanguage": "ja-JP",
-    "description": "YORON BBQ SHOPを運営するWeber Grill Academy受講チーム。アメリカンBBQ／オーストラリアンBBQの哲学を日本に届ける3人組。",
+    "description": "YORON BBQ SHOPを運営する3人のチーム。ひとりのグリリスト石原杏莉の火から始まり、日本の暮らしに最適化したバーベキュー「YORON BBQ」を定義するまでの物語。",
     "mainEntity": {
       "@type": "Organization",
       "name": "YORON BBQ",
       "url": "https://an-bbq.jp/",
-      "knowsAbout": ["アメリカンBBQ", "Low and Slow", "Weber Grill Academy", "BBQドライラブ"],
+      "knowsAbout": ["YORONバーベキュー", "アメリカンBBQ", "Low and Slow", "Weber Grill Academy", "BBQドライラブ"],
       "founder": {
         "@type": "Person",
-        "name": "山根 一城",
-        "jobTitle": "創業者",
-        "knowsAbout": "アメリカンBBQ・ロー&スロー調理"
-      }
+        "name": "石原 杏莉",
+        "jobTitle": "Founder / グリリスト",
+        "knowsAbout": "YORONバーベキュー・蓋を閉めた炭グリルでの低温調理"
+      },
+      "member": [
+        {"@type": "Person", "name": "石原 杏莉", "jobTitle": "Founder / グリリスト"},
+        {"@type": "Person", "name": "山根 一城", "jobTitle": "Co-Founder / 場づくり"},
+        {"@type": "Person", "name": "植田 拓也", "jobTitle": "Co-Founder / カルチャー&流通"}
+      ]
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -215,11 +220,10 @@
     }
     .story-content p strong { color: var(--black); }
     .story-quote {
-      border-top:3px solid var(--brand);
-      padding: 16px 20px;
+      padding: 22px 24px;
       margin: 32px 0;
-      background: var(--white);
-      border-radius: 0 8px 8px 0;
+      background: #FEF6EA;
+      border-radius: 12px;
     }
     .story-quote p {
       font-family: 'Noto Sans JP', sans-serif;
@@ -292,6 +296,63 @@
       flex-wrap: wrap;
     }
 
+    /* member photo avatars */
+    .member-photo {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 18px;
+      border: 2px solid var(--gray-200);
+    }
+    .member-card.founder .member-photo { border-color: var(--brand); width: 104px; height: 104px; }
+    .member-quote {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+    }
+    /* story figures */
+    .story-figure { margin: 32px 0; }
+    .story-figure img {
+      width: 100%;
+      border-radius: 16px;
+      display: block;
+      box-shadow: var(--shadow-lg);
+    }
+    .story-figure figcaption {
+      font-size: 12.5px;
+      color: var(--gray-400);
+      text-align: center;
+      margin-top: 10px;
+    }
+    /* principles */
+    .principle {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .principle .p-no {
+      display: inline-block;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+      color: var(--white); background: var(--brand);
+      padding: 3px 10px; border-radius: 999px; margin-bottom: 10px;
+    }
+    .principle h4 {
+      font-size: 17px; font-weight: 900; margin: 0 0 8px;
+      line-height: 1.4;
+    }
+    .principle p { margin: 0; font-size: 14px; }
+    /* comparison table */
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 12px 0 8px; }
+    .cmp-table th, .cmp-table td { padding: 10px 8px; border-bottom: 1px solid var(--gray-200); text-align: left; }
+    .cmp-table th { font-weight: 700; color: var(--gray-600); font-size: 12px; }
+    .cmp-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .cmp-wrap { overflow-x: auto; }
+    .cmp-table tr.jp td { background: #FEF6EA; font-weight: 700; }
+
     @media (max-width: 768px) {
       .members-grid { grid-template-columns: 1fr; gap: 20px; }
       .nav-links { display: none; }
@@ -363,17 +424,17 @@
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <p class="label-sm">OUR TEAM</p>
-    <h1>SLOW FIREを<br>作った3人。</h1>
-    <p>「飲みに行こう」の代わりに「BBQしよう」が当たり前になる世界を目指して。オーストラリアのラブが、日本のBBQ文化を変える。</p>
-    <p style="margin-top:12px;font-size:.95rem;opacity:.85;">その答えとして提唱するのが、与論島発のバーベキュー「<a href="index.html#an-bbq" style="text-decoration:underline;color:inherit;">YORON BBQ</a>」。本場アメリカンBBQを、与論島から。3〜4時間で完結し、熱々を多品種で楽しみ、スパイスで創作を解放する——このサイト全体の背骨です。</p>
+    <p class="label-sm">OUR TEAM &amp; STORY</p>
+    <h1>火を囲む文化を、<br>はじめた3人。</h1>
+    <p>ひとりのグリリストと、その火に人生を変えられたふたり。YORON BBQは、壮大な事業計画からではなく、一度の食卓の感動から始まりました。</p>
+    <p style="margin-top:12px;font-size:.95rem;opacity:.85;">僕らが提唱するのは、与論島発のバーベキュー「<a href="index.html#an-bbq" style="text-decoration:underline;color:inherit;">YORON BBQ</a>」。本場アメリカンBBQを、与論島から。3〜4時間で完結し、熱々を多品種で楽しみ、スパイスで創作を解放する——このサイト全体の背骨です。</p>
   </section>
 
   <!-- TEAM PHOTO -->
   <section class="team-photo-section">
     <div class="team-photo-wrap">
-      <img src="team-photo.jpg" alt="SLOW FIREチーム3名" loading="eager">
-      <p class="team-photo-caption">左から：植田 拓也、石原 杏莉（中央・Founder）、山根 一城 — Weber寄贈式にて</p>
+      <img src="team-photo.jpg" alt="YORON BBQの3人 — 左から山根一城、石原杏莉、植田拓也" loading="eager">
+      <p class="team-photo-caption">左から：山根 一城、石原 杏莉（中央・Founder）、植田 拓也 — Weberグリル寄贈式にて</p>
     </div>
   </section>
 
@@ -382,127 +443,149 @@
     <div class="members-grid">
 
       <div class="member-card">
-        <div class="member-avatar">🥩</div>
-        <p class="member-role">Co-Founder</p>
+        <img class="member-photo" src="images/team/uetaku.jpg" alt="植田 拓也（うえたく）" loading="lazy">
+        <p class="member-role">カルチャー &amp; 流通</p>
         <h3 class="member-name">植田 拓也</h3>
-        <p class="member-name-en">Takuya Ueda</p>
-        <p class="member-bio">BBQをこよなく愛する共同創業者。Weber Grill Academy で技術を磨き、グリルを次々と買い揃えた現役ピットマスター。オーストラリアのラブと日本のBBQ文化の橋渡しを担い、YORON BBQ SHOPの販路開拓と流通ルートを確立する。</p>
-        <span class="member-tag">流通 × BBQ</span>
+        <p class="member-name-en">UEDA TAKUYA ／ うえたく</p>
+        <p class="member-bio">山根と同じく、あんちゃんのバーベキューに魅了されてしまったひとり。Weber Grill Academyを共に修了し、月に一度のBBQではホスト＝グリリストを務めます。いちばん火がついているのはプルドポークとスモーキーマウンテン。担当はカルチャーと流通——BBQ先進国オーストラリアの多様なプレミアム・ラブを、日本の食卓に架ける役回りです。</p>
+        <p class="member-quote">「スパイス1本で、味の次元が変わる。」</p>
+        <span class="member-tag">プルドポーク／57cmチャコールグリル</span>
       </div>
 
       <div class="member-card founder">
-        <img class="founder-avatar" src="ishihara-logo.png" alt="石原杏莉">
-        <p class="member-role">Founder</p>
+        <img class="member-photo" src="images/team/anchan.jpg" alt="石原 杏莉（あんちゃん）— YORON BBQ Founder" loading="lazy">
+        <p class="member-role">火の原点 — グリリスト</p>
         <h3 class="member-name">石原 杏莉</h3>
-        <p class="member-name-en">Anri Ishihara</p>
-        <p class="member-bio">SLOW FIREの創設者。コロナ禍に名古屋でBBQの伝説的職人 トロイ氏 と出会い、BBQ文化を日本に持ち込む決意をする。「GOOD FOOD, GOOD SMILE!」を合言葉に、与論島・全国各地で人々を笑顔に変えてきた、すべての始まり。</p>
-        <span class="member-tag" style="background:var(--brand);color:var(--white);">BBQカルチャー 創設</span>
+        <p class="member-name-en">ISHIHARA ANRI ／ あんちゃん</p>
+        <p class="member-bio">「GOOD FOOD, GOOD SMILE!」を合言葉に、オーストラリアのBBQ文化と日本の食卓をつなぐ、このチームの原点。蓋を閉めた炭のグリルで低温でじっくり火を通すバーベキューを5年以上続けてきたグリリストです。「YORON BBQ」という名前は、彼女の火づくりと与論島の風土から生まれました。</p>
+        <p class="member-quote">「バーベキューを、日常に。」</p>
+        <span class="member-tag" style="background:var(--brand);color:var(--white);">FOUNDER — すべての始まり</span>
       </div>
 
       <div class="member-card">
-        <div class="member-avatar">🔥</div>
-        <p class="member-role">Co-Founder</p>
+        <img class="member-photo" src="images/team/yamane.jpg" alt="山根 一城（やまちゃん）" loading="lazy">
+        <p class="member-role">場づくり — 数字とロジック</p>
         <h3 class="member-name">山根 一城</h3>
-        <p class="member-name-en">Kazuki Yamane</p>
-        <p class="member-bio">ポテンシャライト代表。採用コンサルティング・人材紹介・SaaS・AI事業を手がけながら、2025年7月の与論島で人生最高の食事に出会い、BBQの伝道師となる。「飲み会の代わりにBBQ」を日本の日常にする活動を牽引。</p>
-        <span class="member-tag">BBQ × ビジネス</span>
+        <p class="member-name-en">YAMANE KAZUKI ／ やまちゃん</p>
+        <p class="member-bio">40年、食べることが大好きで生きてきて、あんちゃんのバーベキューで初めて「美味しい」という言葉を超えた何かに出会ってしまった人。中心温度計を片手に初級〜上級コースを修了し、毎回の実践を記録し続けています。火を囲む場そのものをつくる係で、「BBQを日常に」を思いつきで終わらせず仕組みにして残すのが役目。本業は人材領域です。</p>
+        <p class="member-quote">「見た目より、数字を信じる。」</p>
+        <span class="member-tag">中心温度計／その日の記録</span>
       </div>
 
     </div>
+    <p style="text-align:center;font-size:13px;color:var(--gray-400);max-width:var(--max);margin:0 auto;padding:0 24px 64px;">3人とも、Weber Grill Academy 初級・中級・上級コースを修了しています。</p>
   </section>
 
   <!-- OUR STORY -->
   <section class="story-section">
     <div class="story-content">
       <p class="label-sm">OUR STORY</p>
-      <h2>3人がここに<br>たどり着くまで。</h2>
+      <h2>一度の食卓から、<br>ここまで来た。</h2>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">第1章：すべては、コロナ禍の名古屋から始まった</h3>
+      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">第1章：「美味しい」を超えた何かに、出会ってしまった</h3>
 
-      <p>SLOW FIRE のすべての始まりは、ファウンダーである <strong>石原 杏莉（あんちゃん）</strong> の手にあります。</p>
+      <p>山根と植田は、この40年、食べることが大好きで、さまざまな美味しいご飯を堪能してきました。それでも、<strong>あんちゃんのバーベキュー</strong>を口にしたときの感覚は、これまでの中でいちばん——というよりは、「美味しい」という言葉を超えた、幸せ、あるいはそれすら超えた何か、としか言いようのないものでした。</p>
 
-      <p>コロナ禍の只中、生活に張りがなくなり、日々がただ過ぎていく感覚。ただひとつ救いだったのは、たまたま名古屋に住んでいたこと。そして名古屋には、BBQ界で「伝説の人」と呼ばれる <strong>トロイ氏</strong> が暮らしていました。</p>
+      <p>蓋を閉めた炭のグリル。丁寧な下味。低温でゆっくり、じっくり通していく火。<strong>普通の食材が、異常に美味しくなる</strong>——この体験が、すべての始まりです。</p>
 
-      <p>偶然のような奇跡から、あんちゃんはトロイ氏と出会い、BBQ という調理法に出会いました。そこから探求が始まり、学び、自分でも作り、知り合いに振る舞っていきます。<strong>BBQ を食べた人たちが、文字通り「笑顔になっていく」</strong> 瞬間を、何度も目にしてきました。</p>
+      <figure class="story-figure">
+        <img src="images/team/yoron-team-selfie.jpg" alt="YORON BBQの3人 — 石原杏莉・山根一城・植田拓也" loading="lazy">
+        <figcaption>火を囲むところから、この3人は始まりました。</figcaption>
+      </figure>
 
-      <p>これが、SLOW FIRE の真の起源です。</p>
+      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第2章：感動を、再現できる技術に変える（2025.12〜2026.4）</h3>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第2章：3人を出会わせたリーダーシップワークショップ</h3>
+      <p>感動しただけでは、火は広がらない。3人は<strong>Weber Grill Academy</strong>に通い、初級（2025年12月）→中級（2026年1月）→上級（2026年4月）を修了しました。火の配置設計、中心温度の科学、コラーゲンがゼラチン化する80℃の壁、杉板・ラック・シールドの使い分け——毎回の受講と週末の実践を、ぜんぶノートに記録しながら。</p>
 
-      <p>あんちゃん・山根・植田の3人は、<strong>オーセンティックワークス</strong> が運営するリーダーシップワークショップで出会いました。同じ場で同じ言葉を交わし、価値観の輪郭を確かめ合うなかで、3人それぞれが「人を幸せにする仕事」を志している事実を知ります。</p>
+      <p>スペアリブがうまくいった日も、ラブたっぷりの鶏を焦がした日も、ピザストーンで失敗した日もありました。その記録の全部が、いまこのサイトのガイド類のもとになっています。</p>
 
-      <p>ただ、当時はまだ BBQ の話は副次的なものでした。</p>
+      <figure class="story-figure">
+        <img src="images/team/practice.jpg" alt="週末ごとに重ねてきたバーベキューの実践記録" loading="lazy">
+        <figcaption>週末ごとの実践。失敗も含めて、ぜんぶ記録してきました。</figcaption>
+      </figure>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第3章：与論島の夜、人生最高の食事</h3>
+      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第3章：531。はじめて、人を招いた日（2026.5.31）</h3>
 
-      <p>転機は <strong>2025年7月</strong>。沖縄県・与論島で行われた、3人での合流。あんちゃんが BBQ を担当しました。</p>
-
-      <p>そこで山根が体験したのは、<strong>「人生で食べたなかで、最も美味しい食事」</strong> でした。</p>
+      <p>2026年5月31日、新木場。友人招待制のバーベキュー会「<strong>531</strong>」を開きました。朝の光がいい時間に火を入れて、夕方まで。多くを語らず、その場で受け取ってもらう——という趣旨の会です。</p>
 
       <div class="story-quote">
-        <p>食べた瞬間、言葉が出なくなって、目をつむりたくなる。場の空気が一気に変わる。これが、本当の BBQ なのか。</p>
+        <p>「焼かない。蒸す感じ」「普通のバーベキューと真逆」「ずっと食べていられる」</p>
       </div>
 
-      <p>山根はこれまでにも美味しい料理を口にしてきました。けれど、与論島で口にした BBQ は、それを大きく飛び越えていました。<strong>あの瞬間、山根は BBQ の伝道師になることを決めた</strong> のです。</p>
+      <p>参加してくれた方々のこの反応が、3人の確信を深めました。この日をきっかけに、531は数ヶ月に一度の定期開催になり、月に一度のオープンなバーベキュー会も始まりました。</p>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第4章：山根と植田が、Grill Academy に通い詰める</h3>
+      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第4章：アメリカンBBQは、なぜ日本に根づかないのか</h3>
 
-      <p>山根と植田はその後、<strong>Weber Grill Academy</strong> に通い、技術を体系的に学んでいきます。グリルを次々と買い、自宅のベランダや庭で実験を重ね、家族や仲間に振る舞っては反応を確かめる日々。</p>
+      <p>広げようとするほど、ひとつの問いにぶつかりました。アメリカンBBQは10年、20年前から日本に入ってきているのに、なぜ浸透しないのか。答えは「認知が足りない」でも「インフルエンサーがいない」でもなく、<strong>構造とカルチャー</strong>にありました。</p>
 
-      <p>そして気づきます。<strong>「BBQ とは、料理の技術ではない。場を作る思想だ」</strong> と。</p>
+      <div class="cmp-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr><th>国</th><th>BBQ文化</th><th>肉類 kg/人・年</th><th>魚介類 kg/人・年</th><th>肉÷魚介</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>アメリカ</td><td>★★★★★</td><td class="num">120</td><td class="num">22</td><td class="num">約5.5倍</td></tr>
+            <tr><td>オーストラリア</td><td>★★★★★</td><td class="num">120</td><td class="num">25</td><td class="num">約4.8倍</td></tr>
+            <tr><td>アルゼンチン</td><td>★★★★★</td><td class="num">110</td><td class="num">8</td><td class="num">約13.8倍</td></tr>
+            <tr class="jp"><td>日本</td><td>★☆☆☆☆</td><td class="num">47</td><td class="num">46</td><td class="num">約1.0倍</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12.5px;color:var(--gray-400);">国別の年間食材消費量（1人あたり・概算）。BBQが文化になった国は、どこも圧倒的な肉食文化。日本だけが肉と魚介がほぼ1:1です。</p>
 
-      <p>3人の力が合わさって、SLOW FIRE は動き始めました。あんちゃんの「BBQ を日常にしたい」という確信、山根の「飲み会の代わりに BBQ を」というビジョン、植田の「実際に届けられる仕組みを作る」という実行力。これら3つの源流が交わったところに、SLOW FIRE は立っています。</p>
+      <p>日本は少しずつ多品種を熱々で食べたい国。12時間かけて巨大な塊肉1種を育てるスタイルは、日本の暮らしにも、BBQ場の利用時間にも、食文化にも収まりません。<strong>これは気合いの問題ではなく、構造の問題</strong>。——だったら、日本に最適化された新しいBBQを、僕らが定義すればいい。</p>
+
+      <p>焼き方はアメリカンBBQのロジック（蓋・間接熱・温度の科学）を継承しつつ、時間は暮らしに収まる長さに。食材は肉だけでなく、<strong>魚・野菜・日本各地の貴重な食材</strong>へ。むしろ、生魚の調理法をここまで磨いてきた日本だからこそ、世界のどこにもないバーベキューがつくれる——問いは、確信に変わりました。</p>
+
+      <h3 style="font-size:18px;font-weight:900;margin-top:36px;margin-bottom:14px;color:var(--brand);">第5章：YORON BBQ、誕生（2026.7.16）</h3>
+
+      <p>新しい概念には、名前が要る。そう考えた3人は、2026年7月16日の会議で、この日本に最適化されたバーベキューを<strong>「YORON BBQ（YORONバーベキュー）」</strong>と名づけました。</p>
+
+      <p>与論島は、あんちゃんの火のルーツであり、<strong>「飲みに行こう」と同じくらい自然に「バーベキューしよう」と言い合う土地</strong>です。中国料理や台湾ラーメンがそうだったように、「地名×料理」の名前は文化として広がっていきます。</p>
+
+      <div class="story-quote">
+        <p>それは、あなたの知っている『バーベキュー』とは別の食べ物です。<br>——本場アメリカンBBQを、与論島から。</p>
+      </div>
+
     </div>
   </section>
 
-  <!-- PHILOSOPHY -->
+  <!-- PRINCIPLES -->
   <section class="story-section" style="background: var(--off-white);">
     <div class="story-content">
-      <p class="label-sm">OUR PHILOSOPHY</p>
-      <h2>BBQで実現したい<br>世界観について。</h2>
+      <p class="label-sm">FIVE PRINCIPLES</p>
+      <h2>YORON BBQ、<br>5つの原則。</h2>
 
-      <p>SLOW FIRE は、ただ「美味しい BBQ を提供する」プロジェクトではありません。私たちが BBQ を通じて実現したい世界観は、もう少し深いところにあります。3人で繰り返し対話を重ねるなかで見えてきた、思想の輪郭をここに記しておきます。</p>
+      <p>僕らが扱う商品も、ガイドも、イベントも、すべてこの5つから逆算されています。この思想のレーベル名が「SLOW FIRE（急がない火）」です。</p>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">1. バーベキューを、日常にする</h3>
+      <div class="principle">
+        <span class="p-no">PRINCIPLE 1</span>
+        <h4>3〜4時間で完結する。</h4>
+        <p>作って、食べて、楽しんで、全部込みで3〜4時間。日本の暮らしとBBQ場の利用時間に収まる時間設計にします。12時間の低温燻製は憧れとして語ってよいけれど、推奨スタイルはこちらです。</p>
+      </div>
 
-      <p>あんちゃんから出たキーワード。これがすべての出発点です。</p>
+      <div class="principle">
+        <span class="p-no">PRINCIPLE 2</span>
+        <h4>熱々を、出来立てで。</h4>
+        <p>冷めた塊肉にソースをかけるのは、A5和牛を自家製タレで食べるのと同じロジック。日本人の本音は「少しずつ、多種多様なものを、常に熱々で」。出来立てを、食べる速度に合わせて次々と配ります。</p>
+      </div>
 
-      <p>BBQ は特別な日のものではない。週末のちょっとした集まり、家族とのささやかな食卓、平日の終わりに友人と火を囲む時間。<strong>BBQ が「飲み会の代わりに当たり前に提案できる選択肢」になる日本</strong>。それが、SLOW FIRE が向かう先です。</p>
+      <div class="principle">
+        <span class="p-no">PRINCIPLE 3</span>
+        <h4>多品種——肉だけじゃない。</h4>
+        <p>肉2〜3種＋副菜＋シーフード。肉と魚の消費が1:1の日本だからこそ、魚・野菜・各地域の食材が主役になれます。しかも、いつものスーパーの食材でいい。非日常のままでは文化になりません。</p>
+      </div>
 
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">2. BBQは、自己Aに一瞬で入れる装置</h3>
+      <div class="principle">
+        <span class="p-no">PRINCIPLE 4</span>
+        <h4>創作を、解放する。</h4>
+        <p>万能スパイスの「誰が焼いても同じ味」を超える。第一歩がBBQ先進国オーストラリアのプレミアム・ラブの輸入で、その先に日本の伝統調味料を活かしたオリジナルスパイスの開発があります。<a href="index.html#products" style="text-decoration:underline;color:inherit;">このショップ</a>は、この原則の実装です。</p>
+      </div>
 
-      <p>山根が与論島で体験したのは、ただ「美味しい」では説明がつかない感覚でした。<strong>食べた瞬間、言葉が出なくなり、目をつむりたくなる。場の雰囲気が一気に変わる。</strong></p>
-
-      <p>サッカーで一体感を得る瞬間。仕事で苦しみを越えて成功した瞬間。家族と海で遊ぶ時間。それらと近いけれど、また別の質感がある体験。<strong>BBQ は、人を「いまここ」に連れ戻す</strong>。それが他の食事との決定的な違いです。</p>
-
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">3. Concrete / Subtle / MetAware の3層</h3>
-
-      <p>成人発達理論の <strong>STAGES</strong> モデルに、Concrete・Subtle・MetAware という3つの段階があります。</p>
-
-      <ul style="margin-top:8px;margin-bottom:8px;padding-left:24px;">
-        <li><strong>Concrete</strong>（具体）：物質的・五感で確認できるもの — 美味しい、香ばしい、ジューシー</li>
-        <li><strong>Subtle</strong>（意味）：感情・関係性・空気感・美意識 — 場の質、誰と食べているか</li>
-        <li><strong>MetAware</strong>（俯瞰）：意識そのもの・全体性 — 自分を超えた視座、いまここに在ること</li>
-      </ul>
-
-      <p>美味しい食事を出す店なら世の中にたくさんある（Concrete）。<strong>SLOW FIRE が届けたいのは、Subtle と MetAware の層にある体験</strong>です。BBQ は、料理であると同時に、その場全体の意識を変える装置になり得る——それが、3人が共有している確信です。</p>
-
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">4. 食は、世界で唯一の「普遍的なニーズ」</h3>
-
-      <p>趣味や仕事の達成感は、人によって刺さる・刺さらないが分かれます。ゴルフ、サッカー、フットサル、麻雀、カフェ巡り——どれも素敵ですが、すべての人に「やりませんか？」とは言いにくい。</p>
-
-      <p>けれど、<strong>「食」だけは、地球上のすべての人が等しく必要としている普遍ニーズ</strong>です。だから BBQ は、誰に対しても自然に提案できる。SLOW FIRE のお客様は、世界中のすべての人。それくらい大きな射程を持っているプロジェクトだと、3人は本気で考えています。</p>
-
-      <h3 style="font-size:18px;font-weight:900;margin-top:32px;margin-bottom:14px;color:var(--brand);">5. Weber は吉田松陰、私たちは高杉晋作</h3>
-
-      <p>BBQ 文化を日本に持ち込もうとしてきた先人として、<strong>Weber Grill Academy</strong> の存在は欠かせません。グリルの作り、教育プログラム、コミュニティ — その思想は本物です。</p>
-
-      <p>けれど、まだ日本では「飲み会の代わりに BBQ」が当たり前にはなっていない。Weber が <strong>0 から 0.5 まで</strong> を担ってくれた。私たちは <strong>0.5 から 1、そして 1 から 99 へ</strong> を担う側として、この文化を日本に根付かせていきます。</p>
-
-      <p>これは、教育の世界における吉田松陰と高杉晋作の関係に似ているかもしれません。素晴らしい思想を確立してくれた人と、それを世の中に広げていく人。両者の役割は違うけれど、どちらも欠かせない。</p>
-
-      <div class="story-quote" style="margin-top:32px;">
-        <p>SLOW FIRE は、料理を売る会社ではなく、<br>「場の質」を変えるカルチャーを売る会社です。</p>
+      <div class="principle">
+        <span class="p-no">PRINCIPLE 5</span>
+        <h4>火を囲む場が、人をつなぎ直す。</h4>
+        <p>ゴールは焼くテクニックの普及ではありません。テクノロジーで生活が便利になる引き換えに、リアルな人間関係は希薄になっていく。だからこそ、同じ火を囲んで空間を共有する「場」に意味があります。言葉を無理に紡がなくていい、無言の時間すら心地よい場を——それが僕らの目的地です。</p>
       </div>
     </div>
   </section>
@@ -510,15 +593,15 @@
   <!-- MISSION -->
   <section class="mission-section">
     <div class="mission-inner">
-      <p class="label-sm">OUR MISSION</p>
-      <h2>「飲みに行こう」の代わりに<br>「BBQしよう」が言える世界へ。</h2>
-      <p>BBQは特別な日のものではありません。ラブさえあれば、週末のちょっとした集まりが、忘れられない食の体験になります。私たちはそのきっかけを、オーストラリア直輸入のラブで作ります。</p>
-      <p>SLOW FIREは、BBQを通じて人と人がつながる文化を、日本に根付かせていきます。</p>
+      <p class="label-sm">OUR GOAL</p>
+      <h2>「飲みに行こう」の代わりに<br>「バーベキューしよう」と<br>言い合える日本へ。</h2>
+      <p>僕らの目標は、日本全国民の33%がYORON BBQを味わったことがある世の中をつくることです。そのためにやることは、突き詰めればふたつだけ。<strong style="color:#fff;">グリリスト（振る舞える人）を増やすこと。BBQソムリエ（知識で語れる人）を増やすこと。</strong></p>
+      <p>1人のグリリストが5人に火を手渡し、その5人がまた5人に——このループが11巡すれば、約6,000万人に届きます。その最初の一歩が、ラブを1本手に取ってみることでも、僕らはいいと思っています。</p>
       <div class="mission-values">
-        <span class="mv">🔥 本物のフレーバー</span>
-        <span class="mv">🇦🇺 オーストラリア品質</span>
-        <span class="mv">🤝 つながりをつくるBBQ</span>
-        <span class="mv">🌏 日本初上陸</span>
+        <span class="mv">3〜4時間で完結</span>
+        <span class="mv">熱々を、出来立てで</span>
+        <span class="mv">肉だけじゃない多品種</span>
+        <span class="mv">創作を、解放する</span>
       </div>
     </div>
   </section>
