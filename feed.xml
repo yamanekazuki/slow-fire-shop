@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 03 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 05 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>蓋つきグリルの使い方——なぜ蓋を閉めると味が変わるのか</title>
+    <link>https://an-bbq.jp/journal/articles/lid-closed-grill-flavor.html</link>
+    <guid>https://an-bbq.jp/journal/articles/lid-closed-grill-flavor.html</guid>
+    <pubDate>Wed, 05 Aug 2026 07:00:00 +0900</pubDate>
+    <description>蓋を閉めると味が変わる理由を、対流熱と煙成分の付着という科学で解説。閉めるタイミング、通気口の開度、200℃前後の温度管理まで、家で再現できる数値で完全網羅します。</description>
+  </item>
   <item>
     <title>BBQが人間関係のハブになる理由——無言も心地よい火のまわりの設計</title>
     <link>https://an-bbq.jp/journal/articles/bbq-fire-social-hub.html</link>
