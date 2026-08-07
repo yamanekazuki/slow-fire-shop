@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 05 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 07 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>スネークメソッド完全ガイド — 炭を並べて6時間の低温を安定させる配置術</title>
+    <link>https://an-bbq.jp/journal/articles/charcoal-snake-method-guide.html</link>
+    <guid>https://an-bbq.jp/journal/articles/charcoal-snake-method-guide.html</guid>
+    <pubDate>Fri, 07 Aug 2026 07:00:00 +0900</pubDate>
+    <description>スネークメソッドで110〜125℃の低温を6時間キープする配置を、炭の並べ方・本数・水皿・温度管理まで数値で解説。ロー&amp;スローが安定します。</description>
+  </item>
   <item>
     <title>蓋つきグリルの使い方——なぜ蓋を閉めると味が変わるのか</title>
     <link>https://an-bbq.jp/journal/articles/lid-closed-grill-flavor.html</link>
