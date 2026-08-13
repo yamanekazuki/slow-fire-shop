@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 12 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 14 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQ温度計の選び方 — プローブ式・瞬間読み取り・ワイヤレスの使い分け</title>
+    <link>https://an-bbq.jp/journal/articles/bbq-thermometer-guide.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bbq-thermometer-guide.html</guid>
+    <pubDate>Fri, 14 Aug 2026 07:00:00 +0900</pubDate>
+    <description>BBQ用温度計を3タイプで徹底比較。瞬間読み取りは3秒・プローブ式は放置管理・ワイヤレスは無線監視。反応速度・防水・価格帯まで数値で示し、料理別の選び方が分かる決定版です。</description>
+  </item>
   <item>
     <title>肉の内部温度 完全ガイド — 部位別の安全温度と食感が変わる境目の科学</title>
     <link>https://an-bbq.jp/journal/articles/meat-internal-temperature-guide.html</link>
