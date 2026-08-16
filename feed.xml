@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 14 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 17 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>テキサスクラッチの巻くタイミング完全ガイド — 中心71℃と色で見極める</title>
+    <link>https://an-bbq.jp/journal/articles/texas-crutch-timing.html</link>
+    <guid>https://an-bbq.jp/journal/articles/texas-crutch-timing.html</guid>
+    <pubDate>Mon, 17 Aug 2026 07:00:00 +0900</pubDate>
+    <description>テキサスクラッチ（アルミホイル巻き）をいつ・なぜ行うのか。スタリングの科学、中心71℃と表面の色を基準にした判断、包み方の手順、ペーパー巻きとの違いまで数値で解説します。</description>
+  </item>
   <item>
     <title>BBQ温度計の選び方 — プローブ式・瞬間読み取り・ワイヤレスの使い分け</title>
     <link>https://an-bbq.jp/journal/articles/bbq-thermometer-guide.html</link>
