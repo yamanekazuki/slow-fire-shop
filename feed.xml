@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 17 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 19 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>バークとスモークリングの科学 — あの黒い皮とピンクの輪はこう作る</title>
+    <link>https://an-bbq.jp/journal/articles/bark-smoke-ring-science.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bark-smoke-ring-science.html</guid>
+    <pubDate>Wed, 19 Aug 2026 07:00:00 +0900</pubDate>
+    <description>BBQの黒い皮「バーク」とピンクの輪「スモークリング」がなぜできるのかを科学で解説。庫内110〜120℃・表面の乾き・NO₂の反応など、狙って作る条件と失敗回避を数値で徹底ガイドします。</description>
+  </item>
   <item>
     <title>テキサスクラッチの巻くタイミング完全ガイド — 中心71℃と色で見極める</title>
     <link>https://an-bbq.jp/journal/articles/texas-crutch-timing.html</link>
