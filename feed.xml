@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 19 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 21 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>リブの完成をベンドテストで見極める — 竹串より正確な仕上がり判定</title>
+    <link>https://an-bbq.jp/journal/articles/bend-test-doneness-check.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bend-test-doneness-check.html</guid>
+    <pubDate>Fri, 21 Aug 2026 07:00:00 +0900</pubDate>
+    <description>スペアリブやバックリブが「焼けたかどうか」をベンドテストで判定する方法を解説。竹串やねじれチェックとの精度差、中心温度92℃との関係、失敗パターンと回避策まで具体的な数値で網羅します。</description>
+  </item>
   <item>
     <title>バークとスモークリングの科学 — あの黒い皮とピンクの輪はこう作る</title>
     <link>https://an-bbq.jp/journal/articles/bark-smoke-ring-science.html</link>
