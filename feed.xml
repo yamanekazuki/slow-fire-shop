@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 21 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 24 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>リブの3-2-1メソッド完全ガイド — 3時間+2時間+1時間の設計図</title>
+    <link>https://an-bbq.jp/journal/articles/ribs-321-method-guide.html</link>
+    <guid>https://an-bbq.jp/journal/articles/ribs-321-method-guide.html</guid>
+    <pubDate>Mon, 24 Aug 2026 07:00:00 +0900</pubDate>
+    <description>スペアリブの定番3-2-1メソッドを、110〜125℃の温度と各工程の見極めまで数値で解説。巻くタイミング、ソースの入れ方、失敗の直し方まで、この1本で再現できます。</description>
+  </item>
   <item>
     <title>リブの完成をベンドテストで見極める — 竹串より正確な仕上がり判定</title>
     <link>https://an-bbq.jp/journal/articles/bend-test-doneness-check.html</link>
