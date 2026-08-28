@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 26 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 28 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>なぜ110℃で10時間なのか — Low &amp; Slowの物理と温度の理屈</title>
+    <link>https://an-bbq.jp/journal/articles/low-slow-why-110c.html</link>
+    <guid>https://an-bbq.jp/journal/articles/low-slow-why-110c.html</guid>
+    <pubDate>Fri, 28 Aug 2026 07:00:00 +0900</pubDate>
+    <description>Low &amp; Slowで110℃・10時間焼くのはなぜか。コラーゲンの分解、水分蒸発による冷却(スタリング)、脂の溶け出しを温度と時間の数字で解説。高温では硬くなる理由と、家庭で崩れない火加減のコツまでまとめました。</description>
+  </item>
   <item>
     <title>プルドポークを3〜4時間で作る近道 — 分割して焼く時短メソッド</title>
     <link>https://an-bbq.jp/journal/articles/pulled-pork-fast-method.html</link>
