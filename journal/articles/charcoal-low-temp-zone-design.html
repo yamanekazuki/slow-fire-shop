@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法 | YORON BBQ JOURNAL</title>
+  <meta name="description" content="低温調理器がなくても、炭火だけで狙った温度帯をつくれます。炭の量・配置・吸排気で110〜135℃を安定させる設計の考え方と、実測に基づく具体手順を数字でまとめました。">
+  <meta name="keywords" content="炭火,低温調理,温度管理,ツーゾーン,ロー&amp;スロー,炭の量,インダイレクト,吸排気">
+  <link rel="canonical" href="https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html">
+  <link rel="manifest" href="../../manifest.json">
+  <meta name="theme-color" content="#B45309">
+  <link rel="icon" type="image/jpeg" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=64&h=64&q=80">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1621851709622-e19c9a4f0cc5?auto=format&fit=crop&w=180&h=180&q=80">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法">
+  <meta property="og:description" content="炭の量と配置で110〜135℃を狙う。専用器なしの炭火低温調理を数字で設計。">
+  <meta property="og:url" content="https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html">
+  <meta property="og:image" content="https://an-bbq.jp/journal/thumbs/charcoal-low-temp-zone-design.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://an-bbq.jp/journal/thumbs/charcoal-low-temp-zone-design.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=20260506e">
+  <link rel="stylesheet" href="../../assets/global-search.css?v=20260516">
+  <link rel="stylesheet" href="../../assets/sf-features.css?v=20260517">
+  <link rel="stylesheet" href="../journal.css">
+  <link rel="stylesheet" href="../../yoron-theme.css?v=20260802">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法","description":"低温調理器がなくても、炭火だけで狙った温度帯をつくれます。炭の量・配置・吸排気で110〜135℃を安定させる設計の考え方と、実測に基づく具体手順を数字でまとめました。","datePublished":"2026-08-31","dateModified":"2026-08-31","inLanguage":"ja-JP","mainEntityOfPage":{"@type":"WebPage","@id":"https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html"},"image":["https://an-bbq.jp/journal/thumbs/charcoal-low-temp-zone-design.jpg"],"author":{"@type":"Organization","name":"YORON BBQ JOURNAL"},"publisher":{"@type":"Organization","name":"SLOW FIRE","url":"https://an-bbq.jp/"},"articleSection":"科学","keywords":"炭火,低温調理,温度管理,ツーゾーン,ロー&スロー,炭の量,インダイレクト,吸排気"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"低温調理器と炭火の低温調理は、仕上がりが違いますか？","acceptedAnswer":{"@type":"Answer","text":"目的が違います。低温調理器は水温を一定に保って肉全体を均一に狙った温度へ持っていく方法で、しっとり感が特徴です。炭火の低温調理は空気温度でゆっくり火を入れつつ、燻煙の香りとバーク（表面の香ばしい皮）がつくのが最大の違いです。同じ『低温』でも、炭火は香りと食感の変化を楽しむ調理だと考えるとわかりやすいです。"}},{"@type":"Question","name":"温度計がなくても炭火の低温調理はできますか？","acceptedAnswer":{"@type":"Answer","text":"正直おすすめしません。グリル本体の蓋についている温度計は実測とのズレが30℃以上出ることも珍しくなく、低温帯の設計ではその誤差が致命的です。最低でも網の高さのドーム温度を測るプローブ式が1本あると、成功率が大きく変わります。中心温度も測れる2チャンネルのものなら、蓋を開けずに完成判定までできて安心です。"}},{"@type":"Question","name":"炭は途中で足しても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"足せますが、必ず着火済み（表面が白く灰をかぶった状態）の炭を足してください。未着火の黒い炭をそのまま入れると、着火時に出る不完全燃焼の煙で食材にえぐみがつきます。継ぎ足す量は2〜4個ずつ、温度を見ながら少しずつが基本です。最初からスネーク配置で未着火炭を並べておけば、途中の継ぎ足し自体が要らなくなります。"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://an-bbq.jp/"},{"@type":"ListItem","position":2,"name":"FIRESIDE","item":"https://an-bbq.jp/journal/"},{"@type":"ListItem","position":3,"name":"炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法","item":"https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html"}]}</script>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B6PRVFPKF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B6PRVFPKF');
+  </script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wmtxoerxqx");
+  </script>
+</head>
+<body class="journal-page">
+  <header id="nav" class="nav">
+    <div class="nav-wrap">
+      <a href="../../index.html" class="nav-logo">YORON<span>BBQ</span> <em>SHOP</em></a>
+      <nav class="nav-links">
+        <a href="../../index.html#products">商品一覧</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">ガイド <span class="nav-dropdown-arrow">▾</span></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../../essentials.html"><strong>BBQの神髄</strong><span>初めての方向け</span></a>
+            <a href="../../pairing-guide.html"><strong>食材から選ぶ</strong><span>ペアリング</span></a>
+            <a href="../../cookbook.html"><strong>料理から選ぶ</strong><span>36品の料理ガイド</span></a>
+            <a href="../../rub-guide.html"><strong>ラブガイド</strong><span>ラブの種類と使い方</span></a>
+          </div>
+        </div>
+        <a href="../index.html" style="color: var(--brand);">FIRESIDE</a>
+        <a href="../../bbq-spots/index.html">BBQ場検索</a>
+        <a href="../../planner/index.html">プランナー</a>
+        <a href="../../team.html">私たちについて</a>
+        <a href="https://yoron-bbq.com/" class="nav-community" target="_blank" rel="noopener">COMMUNITY</a>
+      </nav>
+      <div class="nav-right">
+        <button id="cartBtn" class="cart-icon-btn" aria-label="カート" onclick="location.href='../../index.html#products'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        </button>
+        <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <nav class="jr-crumb" aria-label="パンくずリスト">
+      <a href="../../index.html">ホーム</a><span class="jr-crumb-sep">/</span>
+      <a href="../index.html">FIRESIDE</a><span class="jr-crumb-sep">/</span>
+      <span>炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法</span>
+    </nav>
+
+    <header class="jr-article-header">
+      <span class="jr-category">SCIENCE</span>
+      <h1>炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法</h1>
+      <p class="jr-lead"><strong>「低温調理って専用の機械がないと無理でしょ？」と思っていませんか。</strong>実は炭火でも、炭の量と配置と空気の通り道を設計すれば、110〜135℃の低温帯はかなり正確に狙えるんです。結論から言うと、鍵は『少なく熾して、絞って燃やす』こと。この記事では、炭の個数や吸排気の開度まで数字で落とし込んで、そのまま真似できる設計図をお渡しします。</p>
+      <div class="jr-meta">
+        <span>2026.08.31</span><span>読了 約11分</span><span>カテゴリー：科学</span>
+      </div>
+    </header>
+
+    <div class="jr-hero-img">
+      <div class="jr-hero-img-inner"><img src="https://an-bbq.jp/journal/thumbs/charcoal-low-temp-zone-design.jpg" width="1600" height="1000" alt="炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法" loading="eager"></div>
+    </div>
+
+    <div class="jr-body">
+      <nav class="jr-toc" aria-label="目次" style="margin:0 0 2em;padding:20px 24px;background:#fffdf6;border:1px solid rgba(45,37,28,.14);border-radius:14px">
+        <p style="margin:0 0 12px;font-weight:700;font-size:15px;color:#2d251c">この記事でお話しすること</p>
+        <ol style="margin:0;padding-left:1.4em;line-height:2.05;color:#5b5044"><li style="margin:.1em 0"><a href="#sec-1" style="color:#b74a2c;text-decoration:none">炭火の低温調理とは — 「熾した炭を少なく、絞って燃やす」こと</a></li><li style="margin:.1em 0"><a href="#sec-2" style="color:#b74a2c;text-decoration:none">なぜ炭の量で温度が決まるのか — 燃焼と空気の科学</a></li><li style="margin:.1em 0"><a href="#sec-3" style="color:#b74a2c;text-decoration:none">温度帯別・炭の量と配置の設計図</a></li><li style="margin:.1em 0"><a href="#sec-4" style="color:#b74a2c;text-decoration:none">中心温度で見る、部位別の完成ライン</a></li><li style="margin:.1em 0"><a href="#sec-5" style="color:#b74a2c;text-decoration:none">よくある失敗と回避策</a></li><li style="margin:.1em 0"><a href="#sec-6" style="color:#b74a2c;text-decoration:none">トラブルシュート早見表</a></li><li style="margin:.1em 0"><a href="#sec-7" style="color:#b74a2c;text-decoration:none">バリエーションと、もう一歩の応用</a></li><li style="margin:.1em 0"><a href="#sec-8" style="color:#b74a2c;text-decoration:none">よくある質問</a></li></ol>
+      </nav><h2 id="sec-1" style="scroll-margin-top:84px">炭火の低温調理とは — 「熾した炭を少なく、絞って燃やす」こと</h2><p>低温調理というと、水温を1℃単位で管理するスティック型の機械を思い浮かべる方が多いと思います。でも炭火でやる低温調理は、まったく別のロジックです。狙うのは水温ではなく<strong>グリル内の空気温度（ドーム温度）</strong>。ここを110〜135℃という帯に収めて、食材の中心温度をゆっくり引き上げていきます。</p><p>結論から言うと、専用器なしで低温帯を作るコツは3つだけです。①炭を少量だけ熾す、②片側に寄せて間接熱にする、③吸気口と排気口を絞って燃焼速度を落とす。この3つで、Weberのような蓋つきグリルなら110℃前後を4〜6時間キープできます。僕も最初は「炭火なんて温度が暴れるに決まってる」と思い込んでいましたが、やってみると意外なほど素直に言うことを聞いてくれるんですよね。</p><h2 id="sec-2" style="scroll-margin-top:84px">なぜ炭の量で温度が決まるのか — 燃焼と空気の科学</h2><p>炭火の温度を決めているのは、突き詰めると<strong>「今この瞬間、何個の炭がどれだけ激しく燃えているか」</strong>です。ガスと違って火力ツマミはありませんが、代わりに次の3つが火力ツマミの役目を果たします。</p><ul><li><strong>燃えている炭の量</strong>＝発熱量そのもの。炭が多ければ温度は上がる。</li><li><strong>吸気口（下）の開度</strong>＝炭に届く酸素の量。開けば激しく燃え、絞れば燃焼が鈍る。</li><li><strong>排気口（上）の開度</strong>＝熱い空気の抜けるスピード。ここで対流の速さが決まる。</li></ul><p>低温を狙うということは、単位時間あたりの発熱を意図的に小さく抑えるということ。だから最初に大量の炭を熾してしまうと、いくら空気を絞っても余熱が高すぎて150℃を切ってくれません。<strong>「最初から少なく熾す」</strong>のが、専用器なし低温調理の最重要ポイントです。ここを外すと、その日はもう低温帯に戻れなくなります。</p><div data-anchan="wave" data-who="an" data-size="s" data-say="100℃を切ったら1cmだけ開ける。ここ、大事なところだよ" data-auto="1"></div>
+      <h2 id="sec-3" style="scroll-margin-top:84px">温度帯別・炭の量と配置の設計図</h2><p>直径57cm前後の一般的な蓋つきチャコールグリル（Weber 57cmクラス想定）での目安です。使う炭は火持ちの良いオガ炭か岩手切炭を基準にしています。備長炭は着火が遅く火力調整が難しいので、低温設計では扱いにくいです。</p><table><thead><tr><th>狙う温度帯</th><th>最初に熾す炭</th><th>配置</th><th>吸気口</th><th>排気口</th><th>用途</th></tr></thead><tbody><tr><td>110℃</td><td>着火済み6〜8個＋未着火12個</td><td>スネーク（半円1列）</td><td>1/4開</td><td>半開</td><td>ブリスケット・プルドポーク</td></tr><tr><td>120〜125℃</td><td>着火済み8〜10個＋未着火8個</td><td>片側集中</td><td>1/3開</td><td>半開</td><td>スペアリブ・豚肩</td></tr><tr><td>135℃</td><td>着火済み10〜12個</td><td>片側集中</td><td>半開</td><td>3/4開</td><td>丸鶏・時短ロー&スロー</td></tr></tbody></table><p>ここで言う「着火済み」は、チャコールスターターで表面が白い灰をまとった状態のこと。未着火の炭を隣に並べておくと、少しずつ火が移って長時間安定します。これが応用版のスネークメソッドの考え方です。</p><h3>具体的な立ち上げ手順（110℃を狙う場合）</h3><ol><li>チャコールスターターに炭を6〜8個だけ入れ、15〜20分で全体が白く灰をかぶるまで熾す。</li><li>グリルの片側に、未着火の炭12個を三日月状に1列で並べる。</li><li>熾した炭を、その列の端にそっと乗せる。ここから火が列づたいに移っていく。</li><li>炭のない側に水を張ったアルミトレー（ウォーターパン）を置く。水が温度の急上昇を吸収してくれます。</li><li>蓋を閉め、吸気口を1/4、排気口を半開に。プローブ温度計を網の高さにセット。</li><li>15分ごとに測り、120℃を超えそうなら吸気口をさらに絞る。100℃を切ったら1cmだけ開ける。</li></ol><p>調整は<strong>吸気口（下）だけ</strong>でやるのが鉄則です。排気口は基本開けっぱなしにしておき、閉めると煙がこもって食材にえぐみが出ます。温度は「下で作って上で抜く」。これだけは覚えておいてください。</p><h2 id="sec-4" style="scroll-margin-top:84px">中心温度で見る、部位別の完成ライン</h2><p>ドーム温度を安定させたら、あとは食材の中心温度を追いかけるだけです。炭火低温調理で狙う代表的な数字をまとめました。</p><table><thead><tr><th>食材</th><th>ドーム温度</th><th>中心温度の目標</th><th>目安時間</th></tr></thead><tbody><tr><td>プルドポーク(豚肩)</td><td>120〜125℃</td><td>97℃</td><td>8〜10時間</td></tr><tr><td>スペアリブ</td><td>120〜125℃</td><td>92℃</td><td>5〜6時間</td></tr><tr><td>ブリスケット</td><td>110℃</td><td>92〜96℃</td><td>10〜14時間</td></tr><tr><td>丸鶏</td><td>135℃</td><td>胸68〜70℃</td><td>2〜3時間</td></tr><tr><td>豚肩ロース厚切り</td><td>120℃</td><td>63℃</td><td>1.5〜2時間</td></tr></tbody></table><p>ブリスケットやプルドポークでは、中心が65〜75℃あたりで温度が数時間止まる「スタリング（停滞）」が起きます。水分の蒸発で肉が冷やされる現象で、故障ではありません。慌てて炭を足すと帯が崩れるので、アルミホイルで巻いて突破する（テキサスクラッチ）のが安全です。</p><div data-anchan="guide" data-who="yama" data-size="s" data-say="最低でも1〜2cmは開けておくこと。数字で見るとはっきりする" data-auto="1"></div>
+      <h2 id="sec-5" style="scroll-margin-top:84px">よくある失敗と回避策</h2><h3>失敗1：最初に炭を熾しすぎて150℃を切らない</h3><p>いちばん多い失敗です。回避は単純で、着火する炭を「少なすぎるかな」と感じるくらいまで減らすこと。足りなければ後から足せますが、多すぎた熱は引き算できません。110℃狙いなら着火は6〜8個で十分です。</p><h3>失敗2：吸気口を全部閉めて火を消してしまう</h3><p>温度を下げたくて吸気口を完全に閉じると、炭が酸欠で消えます。最低でも1〜2cmは開けておくこと。温度は「絞る」もので「止める」ものではないんですよね。</p><h3>失敗3：蓋を頻繁に開けて温度が乱高下する</h3><p>蓋を開けるたびに熱い空気が逃げ、再安定に10〜15分かかります。中を見るのは1時間に1〜2回まで。プローブ温度計を挿しっぱなしにしておけば、開けずに中心温度がわかります。</p><h3>失敗4：風で燃焼が暴れる</h3><p>屋外は風速3m/sでも吸気量が変わり、温度が20℃跳ねることがあります。吸気口を風下に向けるか、風防を立てて直接風が当たらないようにしてください。冬場や強風の日は、狙い値より10℃低めにセットしておくと安全側に振れます。</p><div data-anchan="peek" data-who="ueta" data-size="s" data-say="トラブルシュート早見表。ここで失敗する人が多い" data-auto="1"></div>
+      <h2 id="sec-6" style="scroll-margin-top:84px">トラブルシュート早見表</h2><table><thead><tr><th>症状</th><th>原因</th><th>対処</th></tr></thead><tbody><tr><td>温度が上がらない(90℃以下)</td><td>炭が少ない/酸欠</td><td>吸気口を1cm開ける→改善なければ着火済み炭を2個追加</td></tr><tr><td>温度が下がらない(150℃超)</td><td>炭が多すぎ</td><td>吸気口を最小に→水トレーの水を足す→炭を数個取り出す</td></tr><tr><td>煙が白く多い/えぐい</td><td>排気不足で不完全燃焼</td><td>排気口を全開に。スモークウッドを減らす</td></tr><tr><td>数時間で火が消える</td><td>未着火炭への延焼が途切れた</td><td>炭を隙間なく1列に密着させて並べ直す</td></tr></tbody></table><h2 id="sec-7" style="scroll-margin-top:84px">バリエーションと、もう一歩の応用</h2><p>この「少なく熾して絞る」設計は、そのままリバースシアにも使えます。まず110〜120℃でステーキ塊の中心を目標マイナス10℃まで持っていき、最後に吸気口を全開＋炭を寄せて一気に高温にし、表面を焼き固める。低温帯と高温帯を1台で切り替えられるのが炭火の強みです。</p><p>ラブとの相性も触れておくと、低温インダイレクトなら砂糖を含んだラブが焦げにくいので、Low n Slow BasicsやButcher's Axeのような甘みのある配合をたっぷり使えます。直火だと100℃を超えたあたりから砂糖が焦げて苦くなるので、低温帯こそラブが映えるんですよね。</p><p>ここまで炭火の低温調理を突き詰めてきましたが、正直に言うと、ブリスケットの10〜14時間を炭を守りながらやり切るのは、休日を丸ごと火の番に捧げる覚悟が要ります。憧れの調理として一度は挑む価値がありますが、毎週やるにはしんどい。そこで、僕らが与論島から提案しているYORON BBQでは、同じ低温設計のロジックを使いつつ、豚肩ロース厚切りや丸鶏のように<strong>3〜4時間で熱々のまま食卓に出せる</strong>部位を主役に据えます。長時間の塊肉は憧れとして楽しみつつ、日常は短い低温帯で回す。同じ炭の設計術が、そのまま日々のBBQにも効いてくるんです。</p>
+      <h2 id="sec-8" style="scroll-margin-top:84px">よくある質問</h2>
+        <h3>低温調理器と炭火の低温調理は、仕上がりが違いますか？</h3>
+        <p>目的が違います。低温調理器は水温を一定に保って肉全体を均一に狙った温度へ持っていく方法で、しっとり感が特徴です。炭火の低温調理は空気温度でゆっくり火を入れつつ、燻煙の香りとバーク（表面の香ばしい皮）がつくのが最大の違いです。同じ『低温』でも、炭火は香りと食感の変化を楽しむ調理だと考えるとわかりやすいです。</p>
+        <h3>温度計がなくても炭火の低温調理はできますか？</h3>
+        <p>正直おすすめしません。グリル本体の蓋についている温度計は実測とのズレが30℃以上出ることも珍しくなく、低温帯の設計ではその誤差が致命的です。最低でも網の高さのドーム温度を測るプローブ式が1本あると、成功率が大きく変わります。中心温度も測れる2チャンネルのものなら、蓋を開けずに完成判定までできて安心です。</p>
+        <h3>炭は途中で足しても大丈夫ですか？</h3>
+        <p>足せますが、必ず着火済み（表面が白く灰をかぶった状態）の炭を足してください。未着火の黒い炭をそのまま入れると、着火時に出る不完全燃焼の煙で食材にえぐみがつきます。継ぎ足す量は2〜4個ずつ、温度を見ながら少しずつが基本です。最初からスネーク配置で未着火炭を並べておけば、途中の継ぎ足し自体が要らなくなります。</p>
+    </div>
+
+    <aside class="jr-community">
+      <div class="jr-community-inner">
+        <p class="jr-community-label">YORON BBQ COMMUNITY</p>
+        <h3>読んだら、次は火を入れよう</h3>
+        <p>YORONバーベキューのコミュニティでは、月1回、実際に集まって焼いています。<br>読むだけでは分からない火加減と煙の匂いを、体で覚えに来ませんか。初めての方も歓迎です。</p>
+        <a href="https://yoron-bbq.com/">コミュニティを見てみる</a>
+      </div>
+    </aside>
+
+    <div class="jr-back"><a href="../index.html">← YORON BBQ JOURNAL TOPに戻る</a></div>
+  </article>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+      <div class="footer-top">
+        <div>
+          <a href="../../index.html" class="footer-logo">YORON<span>BBQ</span> <em>SHOP</em></a>
+          <p class="footer-sub">Low n Slow Basics・Butcher's Axe・Stef the Maori 日本正規取扱</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="../../index.html#products">商品一覧</a><a href="../../essentials.html">BBQの神髄</a>
+          <a href="../../pairing-guide.html">食材から選ぶ</a><a href="../../cookbook.html">料理から選ぶ</a>
+          <a href="../../rub-guide.html">ラブガイド</a><a href="../index.html">FIRESIDE</a><a href="../../team.html">私たちについて</a><a href="../../legal/tokushoho.html">特定商取引法</a><a href="../../legal/privacy.html">プライバシー</a><a href="../../legal/terms.html">利用規約</a><a href="../../about/">About</a><a href="../../contact/">お問い合わせ</a></nav>
+      </div>
+      <div class="footer-bottom"><p>© 2025 SLOW FIRE. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../../mobile-nav.js?v=20260506e"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 40), { passive: true });
+  </script>
+<script src="../../assets/global-search.js?v=20260516" defer></script>
+<script src="../../assets/sf-features.js?v=20260517" defer></script>
+  <script src="../../anchan.js?v=20260730" defer></script>
+</body>
+</html>
