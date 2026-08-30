@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 28 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 31 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法</title>
+    <link>https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html</link>
+    <guid>https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html</guid>
+    <pubDate>Mon, 31 Aug 2026 07:00:00 +0900</pubDate>
+    <description>低温調理器がなくても、炭火だけで狙った温度帯をつくれます。炭の量・配置・吸排気で110〜135℃を安定させる設計の考え方と、実測に基づく具体手順を数字でまとめました。</description>
+  </item>
   <item>
     <title>なぜ110℃で10時間なのか — Low &amp; Slowの物理と温度の理屈</title>
     <link>https://an-bbq.jp/journal/articles/low-slow-why-110c.html</link>
