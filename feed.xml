@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 31 Aug 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 02 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>燻製の煙が「まずくなる」境目——温度で香りが変わる仕組みと食材別の狙い方</title>
+    <link>https://an-bbq.jp/journal/articles/smoke-temperature-flavor-zones.html</link>
+    <guid>https://an-bbq.jp/journal/articles/smoke-temperature-flavor-zones.html</guid>
+    <pubDate>Wed, 02 Sep 2026 07:00:00 +0900</pubDate>
+    <description>燻製の香りは温度で決まります。60℃を超えると煙が苦く、110℃前後で甘く香ばしくなる理由と、魚・肉・チーズの狙い方を温度と時間の数値で解説します。</description>
+  </item>
   <item>
     <title>炭火で低温調理を専用器なしでやる — 温度帯を炭の量で設計する方法</title>
     <link>https://an-bbq.jp/journal/articles/charcoal-low-temp-zone-design.html</link>
