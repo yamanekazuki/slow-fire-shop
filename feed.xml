@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 02 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 04 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>スモークウッドとチップの燃焼時間で選ぶ — 何時間の料理に何を使うか</title>
+    <link>https://an-bbq.jp/journal/articles/smoke-wood-vs-chips-timing.html</link>
+    <guid>https://an-bbq.jp/journal/articles/smoke-wood-vs-chips-timing.html</guid>
+    <pubDate>Fri, 04 Sep 2026 07:00:00 +0900</pubDate>
+    <description>スモークウッドとスモークチップは燃焼時間が全く違います。料理の長さから逆算して選ぶ考え方を、着火温度・煙が出る量・投入タイミングまで具体的な数値で解説します。</description>
+  </item>
   <item>
     <title>燻製の煙が「まずくなる」境目——温度で香りが変わる仕組みと食材別の狙い方</title>
     <link>https://an-bbq.jp/journal/articles/smoke-temperature-flavor-zones.html</link>
