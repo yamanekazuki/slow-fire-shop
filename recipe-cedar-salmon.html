@@ -781,7 +781,7 @@
 
     /* Schema.org Recipe JSON-LD */
     if (recipe) {
-      const imgUrl = new URL(window.getRecipeImage(recipe.id), 'https://an-bbq.jp/').href;
+      const imgUrl = `https://an-bbq.jp/images/recipes/${recipe.id}.jpg`;
       const ingredients = (recipe.ingredients || []).map(i =>
         typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
       );
