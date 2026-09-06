@@ -22,9 +22,9 @@ window.RECIPE_LOCAL_IMAGES = new Set([
 
 window.getRecipeImage = function(id) {
   if (window.RECIPE_LOCAL_IMAGES.has(id)) {
-    return `images/recipes/${id}.jpg?v=20260506f`;
+    return `images/recipes/${id}.jpg?v=20260906`;
   }
-  return window.RECIPE_IMAGE_OVERRIDES[id] || `images/recipes/${id}.jpg?v=20260506f`;
+  return window.RECIPE_IMAGE_OVERRIDES[id] || `images/recipes/${id}.jpg?v=20260906`;
 };
 
 window.RECIPES = [
