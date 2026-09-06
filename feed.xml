@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 04 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 07 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>冬・雨の日にグリルの温度が上がらない — 熱を逃さない5つの断熱テク</title>
+    <link>https://an-bbq.jp/journal/articles/cold-weather-bbq-heat-retention.html</link>
+    <guid>https://an-bbq.jp/journal/articles/cold-weather-bbq-heat-retention.html</guid>
+    <pubDate>Mon, 07 Sep 2026 07:00:00 +0900</pubDate>
+    <description>外気5℃や雨の日、グリルの庫内温度が思うように上がらない原因を熱の逃げ道から解説。炭の増量・風防・二重蓋・保温レンガまで、冬でも110〜200℃を安定させる具体策を数値でまとめました。</description>
+  </item>
   <item>
     <title>スモークウッドとチップの燃焼時間で選ぶ — 何時間の料理に何を使うか</title>
     <link>https://an-bbq.jp/journal/articles/smoke-wood-vs-chips-timing.html</link>
