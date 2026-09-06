@@ -5,8 +5,7 @@
    =================================================================== */
 
 window.RECIPE_IMAGE_OVERRIDES = {
-  'gratin': 'images/bbq-20260906/potato-gratin.png',
-  'beer-can-chicken': 'images/bbq-20260906/whole-chicken-grill.png'
+  'gratin':           'https://images.unsplash.com/photo-1626624155295-d0152ab4200c?w=800&q=80&auto=format&fit=crop'
 };
 
 window.RECIPE_LOCAL_IMAGES = new Set([
@@ -22,7 +21,6 @@ window.RECIPE_LOCAL_IMAGES = new Set([
 ]);
 
 window.getRecipeImage = function(id) {
-  if (window.RECIPE_IMAGE_OVERRIDES[id]) return window.RECIPE_IMAGE_OVERRIDES[id];
   if (window.RECIPE_LOCAL_IMAGES.has(id)) {
     return `images/recipes/${id}.jpg?v=20260506f`;
   }

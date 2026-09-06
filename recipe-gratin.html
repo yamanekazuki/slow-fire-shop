@@ -508,7 +508,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wmtxoerxqx");
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"BBQポテトグラタン","image":"images/bbq-20260906/potato-gratin.png","description":"グリルでグラタンが焼けるという事実。それだけで、テーブルの常識が一段ゆるむ。生クリームとパルメザンの濃厚さが、BBQの香ばしさを引き立てる。","recipeCategory":"🧀 サイド","recipeCuisine":"BBQ","cookTime":"PT30M","keywords":"BBQポテトグラタン, BBQ Potato Gratin, BBQ, レシピ"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"BBQポテトグラタン","image":"https://images.unsplash.com/photo-1626624155295-d0152ab4200c?w=800&q=80&auto=format&fit=crop","description":"グリルでグラタンが焼けるという事実。それだけで、テーブルの常識が一段ゆるむ。生クリームとパルメザンの濃厚さが、BBQの香ばしさを引き立てる。","recipeCategory":"🧀 サイド","recipeCuisine":"BBQ","cookTime":"PT30M","keywords":"BBQポテトグラタン, BBQ Potato Gratin, BBQ, レシピ"}</script>
 </head>
 
 <body class="rd-page">
@@ -781,7 +781,7 @@
 
     /* Schema.org Recipe JSON-LD */
     if (recipe) {
-      const imgUrl = new URL(window.getRecipeImage(recipe.id), 'https://an-bbq.jp/').href;
+      const imgUrl = `https://an-bbq.jp/images/recipes/${recipe.id}.jpg`;
       const ingredients = (recipe.ingredients || []).map(i =>
         typeof i === 'string' ? i : `${i.name} ${i.amount || ''}`.trim()
       );
