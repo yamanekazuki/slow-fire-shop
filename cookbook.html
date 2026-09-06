@@ -1133,7 +1133,7 @@
   function openModal(id) {
     const r = RECIPES.find(x => x.id === id);
     if (!r) return;
-    modalImg.src = `images/recipes/${r.id}.jpg?v=20260506`;
+    modalImg.src = window.getRecipeImage(r.id);
     modalImg.alt = r.name;
     modalImg.style.display = '';
     modalFallback.textContent = r.icon;
