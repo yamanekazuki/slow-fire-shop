@@ -997,8 +997,8 @@
   </div>
 
   <script src="firebase-config.js"></script>
-  <script src="recipe-data.js?v=20260506f"></script>
-  <script src="mobile-nav.js?v=20260506e"></script>
+  <script src="recipe-data.js?v=20260906"></script>
+  <script src="mobile-nav.js?v=20260906e"></script>
   <script>
   /* ============================================
      Recipe data — RECIPES is loaded from recipe-data.js (window.RECIPES)
@@ -1049,7 +1049,7 @@
     grid.innerHTML = RECIPES.map(r => `
       <button class="ck-card" data-id="${r.id}" data-level="${r.level}" data-category="${r.category}" data-time="${r.timeBucket}">
         <div class="ck-card-img">
-          <img src="${window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260506`}" alt="${r.name}（${r.nameEn}）"
+          <img src="${window.getRecipeImage ? window.getRecipeImage(r.id) : `images/recipes/${r.id}.jpg?v=20260906`}" alt="${r.name}（${r.nameEn}）"
                loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="ck-card-img-fallback" style="display:none">${r.icon}</div>
           <div class="ck-card-img-overlay">
@@ -1133,7 +1133,7 @@
   function openModal(id) {
     const r = RECIPES.find(x => x.id === id);
     if (!r) return;
-    modalImg.src = `images/recipes/${r.id}.jpg?v=20260506`;
+    modalImg.src = `images/recipes/${r.id}.jpg?v=20260906`;
     modalImg.alt = r.name;
     modalImg.style.display = '';
     modalFallback.textContent = r.icon;
