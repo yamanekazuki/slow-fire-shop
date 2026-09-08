@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 07 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 09 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQラブの黄金比を自作する — 塩・砂糖・スパイスの基本配合と割合設計</title>
+    <link>https://an-bbq.jp/journal/articles/diy-rub-golden-ratio.html</link>
+    <guid>https://an-bbq.jp/journal/articles/diy-rub-golden-ratio.html</guid>
+    <pubDate>Wed, 09 Sep 2026 07:00:00 +0900</pubDate>
+    <description>BBQラブを自作するための黄金比を、塩・砂糖・スパイスのグラム単位で解説。豚・鶏・牛の部位別配合、失敗の原因、保存方法まで、これ1本で自分のラブが作れます。</description>
+  </item>
   <item>
     <title>冬・雨の日にグリルの温度が上がらない — 熱を逃さない5つの断熱テク</title>
     <link>https://an-bbq.jp/journal/articles/cold-weather-bbq-heat-retention.html</link>
