@@ -67,7 +67,7 @@ jobs:
           git config user.name  "slow-fire-bot"
           git config user.email "bot@users.noreply.github.com"
           if [ -z "$(git status --porcelain)" ]; then echo "変更なし"; exit 0; fi
-          git add journal/ search-index.json feed.xml sitemap-main.xml
+          git add journal/ search-index.json feed.xml sitemap-main.xml tools/gen-journal-thumb/photo-map.json
           git commit -m "journal: 自動生成記事を追加 ($(TZ=Asia/Tokyo date +%Y-%m-%d))"
           git push
 

@@ -111,50 +111,25 @@ const CAT = {
 // ヒーロー画像 = journal/thumbs/<slug>.jpg（実写フルブリードのサムネ。tools/gen-journal-thumb/gen.mjs が生成）
 // サムネの下地写真は tools/gen-journal-thumb/photo-map.json が正本。1記事=1枚・重複禁止（山根さんFB 2026-07-30）。
 // 写真の新規AI生成はしない。images/journal/ 配下の承認済み実写だけを使う。
-const PHOTO_MAP_FILE = join(ROOT, "tools", "gen-journal-thumb", "photo-map.json");
-const PHOTO_DIRS = [join("images", "journal"), join("images", "journal", "pool")];
-// カテゴリ→写真ファイル名に含まれていたら優先するキーワード（テーマの合う絵を先に取る）
-const PHOTO_HINT = {
-  recipe: ["platter", "plate", "ribs", "chicken", "brisket", "pork", "salmon", "shrimp", "steak", "burger"],
-  science: ["grill", "charcoal", "smoke", "smoker", "fire", "brisket"],
-  gear: ["charcoal", "chimney", "smoker", "grill", "rub", "tool"],
-  philosophy: ["smoker", "fire", "table", "scene", "platter", "grill"],
-};
+// 【2026-09-14】選定は tools/gen-journal-thumb/assign.mjs に集約。カテゴリ名でなく記事の中身（タイトル/説明/h2）と
+// 写真タグ（photo-map.json catalog）を照合して選ぶ（掃除記事にアスパラが付いた事故の対策）。
+const { assignForSlug, creditFor } = await import(join(ROOT, "tools", "gen-journal-thumb", "assign.mjs"));
 /**
- * 新記事に「まだ誰も使っていない写真」を1枚割り当て、photo-map.json に追記する。
+ * 新記事に内容の合う写真を1枚割り当て、photo-map.json に追記する。記事HTMLを書き出した後に呼ぶ。
  * 割当できたら相対パスを返す（できなければ null＝サムネは生成されず一覧に警告が出る）。
  */
-async function assignPhoto(slug, category) {
-  const map = JSON.parse(await readFile(PHOTO_MAP_FILE, "utf8"));
-  map.articles ||= {}; map.guide ||= {};
-  if (map.articles[slug]) return map.articles[slug];
-  const used = new Set([...Object.values(map.articles), ...Object.values(map.guide)]);
-  const all = [];
-  for (const d of PHOTO_DIRS) {
-    const abs = join(ROOT, d);
-    if (!existsSync(abs)) continue;
-    for (const f of (await readdir(abs)).filter((f) => /\.(jpe?g|png)$/i.test(f))) all.push(`${d}/${f}`.split("\\").join("/"));
-  }
-  const free = all.filter((p) => !used.has(p)).sort();
-  const hints = PHOTO_HINT[category] || [];
-  let chosen;
-  if (free.length) {
-    chosen = free.find((p) => hints.some((h) => p.toLowerCase().includes(h))) || free[0];
-  } else {
-    // 未使用が尽きたとき: サムネなしで公開するより、既出写真を1枚借りて必ず絵を出す。
-    // ただし「1記事=1枚」の原則が崩れるので、承認済み実写の追加を強く促す警告を出す。
-    if (!all.length) { console.warn("⚠️ images/journal/ に写真が1枚もありません。"); return null; }
-    let h = 0;
-    for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-    const pool = all.filter((p) => hints.some((x) => p.toLowerCase().includes(x)));
-    const from = pool.length ? pool : all;
-    chosen = from.sort()[h % from.length];
-    console.warn(`⚠️ 未使用の写真が枯渇したため既出写真を再利用しました（${chosen}）。images/journal/pool/ に承認済み実写を追加してください。`);
-  }
-  map.articles[slug] = chosen;
-  await writeFile(PHOTO_MAP_FILE, JSON.stringify(map, null, 2) + "\n", "utf8");
-  console.log(`写真割当: ${slug} → ${chosen}`);
-  return chosen;
+async function assignPhoto(slug) {
+  const r = assignForSlug(slug);
+  if (r.existing) { console.log(`写真割当（既存）: ${slug} → ${r.photo}`); return r.photo; }
+  console.log(`写真割当: ${slug} → ${r.photo}  [${r.score}点・${r.reason}]`);
+  if (r.borrowed) console.warn(`⚠️ 未使用の写真が枯渇したため既出写真を借用しました（${r.photo}）。images/journal/pool/ に承認済み実写を追加してください。`);
+  return r.photo;
+}
+/** 出典表記が必要な写真（CC実写）のクレジット行。承認済み自前写真は空文字。 */
+function photoCreditHtml(photoRel) {
+  const c = photoRel ? creditFor(photoRel) : null;
+  if (!c) return "";
+  return `<p class="jr-photo-credit" style="margin:.4em 0 0;text-align:right;font-size:11px;color:#9a8f86">Photo: <a href="${esc(c.source)}" rel="nofollow noopener" target="_blank" style="color:inherit">${esc(c.author)}</a> / <a href="${esc(c.licenseUrl)}" rel="license nofollow noopener" target="_blank" style="color:inherit">${esc(c.license)}</a></p>`;
 }
 
 // ---- テーマの種（GROWTH-10K-UU.md＝bbq-site正本の戦略に沿ってクラスター化 2026-07-05）----
@@ -568,7 +543,7 @@ ${NAV}
     </header>
 
     <div class="jr-hero-img">
-      <div class="jr-hero-img-inner"><img src="${p.hero}" width="1600" height="1000" alt="${esc(p.title)}" loading="eager"></div>
+      <div class="jr-hero-img-inner"><img src="${p.hero}" width="1600" height="1000" alt="${esc(p.title)}" loading="eager"></div>${p.photoCredit || ""}
     </div>
 
     <div class="jr-body">
@@ -721,6 +696,16 @@ async function main() {
   await writeFile(join(ART_DIR, file), renderArticle(p), "utf8");
   console.log(`記事生成: journal/articles/${file}`);
 
+  // 1.1) この記事の中身に合う写真を1枚割り当てる（重複禁止・photo-map.jsonが正本・assign.mjs）。
+  //      出典表記が要る写真ならクレジット行を入れて記事を書き直す。
+  try {
+    const photoRel = await assignPhoto(slug);
+    p.photoCredit = photoCreditHtml(photoRel);
+    if (p.photoCredit) await writeFile(join(ART_DIR, file), renderArticle(p), "utf8");
+  } catch (e) {
+    console.warn(`⚠️ 写真割当に失敗（公開は継続）: ${e.message}`);
+  }
+
   // 1.3) あんちゃん・やまちゃん・うえたくを本文に散りばめる（決定的・API不使用）。
   // セリフはいま書き出したこの記事の本文から拾うので、新記事は毎回その記事の内容の一言になる。
   try {
@@ -733,13 +718,6 @@ async function main() {
     }
   } catch (e) {
     console.warn(`⚠️ キャラ挿入に失敗（公開は継続）: ${e.message}`);
-  }
-
-  // 1.4) この記事だけの写真を1枚割り当てる（重複禁止・photo-map.jsonが正本）
-  try {
-    await assignPhoto(slug, category);
-  } catch (e) {
-    console.warn(`⚠️ 写真割当に失敗（公開は継続）: ${e.message}`);
   }
 
   // 1.5) 実写フルブリードのサムネを決定的生成（tools/gen-journal-thumb/gen.mjs）。
