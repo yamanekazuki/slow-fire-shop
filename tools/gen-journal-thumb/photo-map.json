@@ -6,7 +6,10 @@
     "pool/ は外部リポジトリ（yoron-bbq/flyer/ph・bbq-site/images）からコピーした与論の実写。",
     "articles = journal/articles/<slug>.html のサムネ下地、guide = journal/guide/<slug>.html のヒーロー＆一覧カード。",
     "検証: node tools/gen-journal-thumb/verify-photo-map.mjs（値のユニーク性と実ファイル存在をチェック）",
-    "注意: 現在83スロット=83枚でプールを使い切っている。新記事は generate-journal.mjs が未使用写真を探し、尽きたら既出写真を借りて警告を出す。承認済み実写を images/journal/pool/ に足すと自動で解消する。"
+    "注意: 現在83スロット=83枚でプールを使い切っている。新記事は generate-journal.mjs が未使用写真を探し、尽きたら既出写真を借りて警告を出す。承認済み実写を images/journal/pool/ に足すと自動で解消する。",
+    "【2026-09-14】catalog=写真→日本語タグ。assign.mjs が記事のタイトル/説明/h2 とタグを照合して内容の合う写真を選ぶ（カテゴリ名だけの選定でアスパラが掃除記事に付いた事故の対策）。",
+    "【2026-09-14】credits=出典表記が必要なCC実写。AI生成は引き続き禁止。pool/ に写真を足したら catalog にタグも足す（タグ無しは選ばれにくい）。",
+    "【2026-09-14】CIは journal-blog.yml で photo-map.json もコミットする（未コミットで割当が毎回消えていた）。"
   ],
   "articles": {
     "anbbq-multi-course-plan": "images/journal/bbq-platter.jpg",
@@ -66,7 +69,27 @@
     "texas-crutch": "images/journal/pool/yoron-cedar-shrimp-herb.jpg",
     "two-zone-fire-setup": "images/journal/pool/yoron-stuffed-shiitake.jpg",
     "us-beef": "images/recipes/mushroom-grill.jpg",
-    "whole-chicken-temperature": "images/recipes/lemon-chicken.jpg"
+    "whole-chicken-temperature": "images/recipes/lemon-chicken.jpg",
+    "grill-cleaning-maintenance": "images/journal/pool/stock-charcoal-grate-ash.jpg",
+    "australian-premium-rub-choice": "images/journal/rub-ribs.jpg",
+    "bark-smoke-ring-science": "images/journal/smoked-pork-shoulder.jpg",
+    "bbq-beginner-gear-priority": "images/journal/pool/yoron-fire-starting-outdoor.jpg",
+    "bbq-fire-social-hub": "images/journal/pool/yoron-team-selfie.jpg",
+    "bbq-thermometer-guide": "images/journal/smoker.jpg",
+    "bend-test-doneness-check": "images/journal/pool/yoron-shrimp-skewers-grill.jpg",
+    "charcoal-low-temp-zone-design": "images/journal/charcoal-chimney.jpg",
+    "charcoal-snake-method-guide": "images/journal/pool/yoron-pork-shoulder-kettle.jpg",
+    "charcoal-vent-control-basics": "images/journal/pool/yoron-charcoal-meat-closeup.jpg",
+    "cold-weather-bbq-heat-retention": "images/journal/pool/yoron-sunset.jpg",
+    "diy-rub-golden-ratio": "images/journal/rub-ribs.jpg",
+    "lid-closed-grill-flavor": "images/journal/pool/yoron-smoky-grill-closeup.jpg",
+    "low-slow-why-110c": "images/journal/smoker.jpg",
+    "meat-internal-temperature-guide": "images/journal/smoker.jpg",
+    "pulled-pork-fast-method": "images/journal/pool/yoron-pulled-pork-closeup.jpg",
+    "ribs-321-method-guide": "images/journal/ribs.jpg",
+    "smoke-temperature-flavor-zones": "images/journal/pool/yoron-cedar-salmon-smoke.jpg",
+    "smoke-wood-vs-chips-timing": "images/journal/pool/yoron-cedar-salmon-smoke.jpg",
+    "texas-crutch-timing": "images/journal/brisket-sliced.jpg"
   },
   "guide": {
     "bacon-cold-smoke": "images/journal/smoked-pork-shoulder.jpg",
@@ -94,5 +117,556 @@
     "sausage-indirect": "images/recipes/bratwurst.jpg",
     "tuna-reverse-sear": "images/recipes/saikyo-fish.jpg",
     "vegetables-indirect": "images/recipes/veg-grill.jpg"
+  },
+  "catalog": {
+    "images/journal/bbq-platter.jpg": [
+      "盛り合わせ",
+      "コース",
+      "メニュー",
+      "献立",
+      "皿",
+      "おすすめ"
+    ],
+    "images/journal/brisket-sliced.jpg": [
+      "ブリスケット",
+      "スライス",
+      "牛",
+      "テキサス"
+    ],
+    "images/journal/charcoal-chimney.jpg": [
+      "炭",
+      "チムニー",
+      "火起こし",
+      "着火",
+      "炭火",
+      "スネーク",
+      "ベント",
+      "通気"
+    ],
+    "images/journal/chicken-charcoal.jpg": [
+      "鶏",
+      "チキン",
+      "炭火"
+    ],
+    "images/journal/meat-on-grill.jpg": [
+      "焼き網",
+      "網",
+      "直火",
+      "肉",
+      "ステーキ",
+      "焼き目",
+      "メイラード"
+    ],
+    "images/journal/pork-plate.jpg": [
+      "豚",
+      "ポーク",
+      "皿"
+    ],
+    "images/journal/pulled-pork.jpg": [
+      "プルドポーク",
+      "豚",
+      "ほぐし"
+    ],
+    "images/journal/ribs.jpg": [
+      "リブ",
+      "スペアリブ",
+      "3-2-1",
+      "321"
+    ],
+    "images/journal/roast-chicken.jpg": [
+      "丸鶏",
+      "ローストチキン",
+      "鶏",
+      "クリスマス"
+    ],
+    "images/journal/roast-pork-loin.jpg": [
+      "豚ロース",
+      "ロースト",
+      "豚",
+      "プライムリブ"
+    ],
+    "images/journal/rub-ribs.jpg": [
+      "ラブ",
+      "スパイス",
+      "リブ",
+      "黄金比",
+      "配合",
+      "調合"
+    ],
+    "images/journal/seafood-board.jpg": [
+      "海鮮",
+      "シーフード",
+      "魚"
+    ],
+    "images/journal/shrimp-skewers.jpg": [
+      "エビ",
+      "串",
+      "海老"
+    ],
+    "images/journal/smoked-pork-shoulder.jpg": [
+      "燻製",
+      "スモーク",
+      "豚肩",
+      "ロー＆スロー",
+      "低温",
+      "バーク",
+      "スモークリング"
+    ],
+    "images/journal/smoker.jpg": [
+      "スモーカー",
+      "燻製",
+      "スモーク",
+      "温度",
+      "低温",
+      "ロー＆スロー",
+      "110",
+      "温度計",
+      "温度帯",
+      "ゾーン"
+    ],
+    "images/journal/vegetables.jpg": [
+      "野菜",
+      "ベジ"
+    ],
+    "images/journal/pool/yoron-back-ribs-sauce.jpg": [
+      "バックリブ",
+      "リブ",
+      "ソース"
+    ],
+    "images/journal/pool/yoron-beach-parasol.jpg": [
+      "ビーチ",
+      "海",
+      "夏",
+      "パラソル",
+      "与論",
+      "休暇"
+    ],
+    "images/journal/pool/yoron-beer-can-chicken.jpg": [
+      "ビアカン",
+      "丸鶏",
+      "チキン"
+    ],
+    "images/journal/pool/yoron-bratwurst-hotdog-kettle.jpg": [
+      "ソーセージ",
+      "ホットドッグ",
+      "ケトル"
+    ],
+    "images/journal/pool/yoron-cedar-salmon-raw-plank.jpg": [
+      "シダー",
+      "プランク",
+      "サーモン",
+      "板",
+      "下ごしらえ",
+      "仕込み"
+    ],
+    "images/journal/pool/yoron-cedar-salmon-smoke.jpg": [
+      "シダー",
+      "サーモン",
+      "燻製",
+      "スモーク",
+      "煙",
+      "ウッド",
+      "チップ"
+    ],
+    "images/journal/pool/yoron-cedar-scallop-shrimp.jpg": [
+      "ホタテ",
+      "エビ",
+      "シダー",
+      "海鮮"
+    ],
+    "images/journal/pool/yoron-cedar-seafood-platter.jpg": [
+      "海鮮",
+      "シーフード",
+      "シダー"
+    ],
+    "images/journal/pool/yoron-cedar-shrimp-herb.jpg": [
+      "エビ",
+      "ハーブ",
+      "シダー"
+    ],
+    "images/journal/pool/yoron-cedar-shrimp-onion.jpg": [
+      "エビ",
+      "玉ねぎ",
+      "シダー",
+      "小皿"
+    ],
+    "images/journal/pool/yoron-charcoal-meat-closeup.jpg": [
+      "炭火",
+      "炭",
+      "肉",
+      "直火",
+      "焼き目",
+      "焦げ",
+      "メイラード",
+      "高温"
+    ],
+    "images/journal/pool/yoron-fire-starting-outdoor.jpg": [
+      "火起こし",
+      "着火",
+      "火",
+      "ケトル",
+      "準備",
+      "初心者",
+      "道具",
+      "最初に買う",
+      "優先"
+    ],
+    "images/journal/pool/yoron-grilled-asparagus.jpg": [
+      "アスパラ",
+      "野菜"
+    ],
+    "images/journal/pool/yoron-grilled-corn.jpg": [
+      "とうもろこし",
+      "コーン",
+      "野菜"
+    ],
+    "images/journal/pool/yoron-grilled-vegetables.jpg": [
+      "野菜",
+      "ベジ"
+    ],
+    "images/journal/pool/yoron-herb-chicken-thighs.jpg": [
+      "鶏もも",
+      "チキン",
+      "ハーブ",
+      "鶏"
+    ],
+    "images/journal/pool/yoron-hokke-cedar-plank.jpg": [
+      "ホッケ",
+      "魚",
+      "シダー"
+    ],
+    "images/journal/pool/yoron-jerk-ribs-pineapple-plate.jpg": [
+      "ジャーク",
+      "リブ",
+      "パイナップル"
+    ],
+    "images/journal/pool/yoron-kabocha-camembert-plate.jpg": [
+      "かぼちゃ",
+      "カマンベール",
+      "チーズ"
+    ],
+    "images/journal/pool/yoron-kettle-cedar-fish.jpg": [
+      "ケトル",
+      "魚",
+      "蓋",
+      "シダー",
+      "蓋付き",
+      "蓋つき"
+    ],
+    "images/journal/pool/yoron-lamb-rack.jpg": [
+      "ラム",
+      "羊",
+      "ラムチョップ"
+    ],
+    "images/journal/pool/yoron-lemon-rosemary-chicken.jpg": [
+      "レモン",
+      "ローズマリー",
+      "チキン"
+    ],
+    "images/journal/pool/yoron-pizza-margherita-stone.jpg": [
+      "ピザ",
+      "ピッツァ",
+      "自宅"
+    ],
+    "images/journal/pool/yoron-pork-sausage-kettle.jpg": [
+      "ソーセージ",
+      "ケトル",
+      "豚"
+    ],
+    "images/journal/pool/yoron-pork-shoulder-done.jpg": [
+      "豚肩",
+      "プルドポーク",
+      "燻製",
+      "仕上がり",
+      "ベンド",
+      "焼き上がり",
+      "判定"
+    ],
+    "images/journal/pool/yoron-pork-shoulder-kettle.jpg": [
+      "豚肩",
+      "ケトル",
+      "蓋",
+      "低温",
+      "ロー＆スロー",
+      "蓋を閉め",
+      "蓋閉"
+    ],
+    "images/journal/pool/yoron-pulled-pork-closeup.jpg": [
+      "プルドポーク",
+      "豚",
+      "時短",
+      "早く"
+    ],
+    "images/journal/pool/yoron-sea-blue.jpg": [
+      "海",
+      "与論",
+      "夏",
+      "旅行",
+      "休暇"
+    ],
+    "images/journal/pool/yoron-sea-cheers.jpg": [
+      "乾杯",
+      "ビール",
+      "海",
+      "夏",
+      "仲間",
+      "社交",
+      "集まる"
+    ],
+    "images/journal/pool/yoron-shrimp-skewers-grill.jpg": [
+      "エビ",
+      "串",
+      "網"
+    ],
+    "images/journal/pool/yoron-smoky-grill-closeup.jpg": [
+      "煙",
+      "スモーク",
+      "焼き網",
+      "網",
+      "蓋",
+      "香り",
+      "ベランダ",
+      "風味"
+    ],
+    "images/journal/pool/yoron-spatchcock-chicken.jpg": [
+      "丸鶏",
+      "チキン",
+      "開き"
+    ],
+    "images/journal/pool/yoron-stuffed-shiitake.jpg": [
+      "しいたけ",
+      "きのこ",
+      "小皿"
+    ],
+    "images/journal/pool/yoron-sunset.jpg": [
+      "夕日",
+      "夕方",
+      "雨",
+      "天気",
+      "季節",
+      "冬",
+      "寒"
+    ],
+    "images/journal/pool/yoron-team-selfie.jpg": [
+      "仲間",
+      "チーム",
+      "家族",
+      "子ども",
+      "パーティ",
+      "人",
+      "父の日"
+    ],
+    "images/journal/pool/yoron-team-smoker-deck.jpg": [
+      "スモーカー",
+      "仲間",
+      "チーム",
+      "家族",
+      "準備",
+      "日常",
+      "囲む",
+      "たき火",
+      "火を囲"
+    ],
+    "images/journal/pool/yoron-tomahawk-flame.jpg": [
+      "トマホーク",
+      "ステーキ",
+      "炎",
+      "直火",
+      "フレア",
+      "牛",
+      "高温"
+    ],
+    "images/journal/pool/stock-charcoal-grate-ash.jpg": [
+      "掃除",
+      "手入れ",
+      "メンテ",
+      "灰",
+      "炭受け",
+      "焼き網",
+      "片付け",
+      "保管",
+      "サビ",
+      "錆",
+      "洗",
+      "後処理",
+      "オフシーズン"
+    ],
+    "images/recipes/apple-pie.jpg": [
+      "アップルパイ",
+      "デザート",
+      "ギフト",
+      "贈り物"
+    ],
+    "images/recipes/asparagus-grill.jpg": [
+      "アスパラ",
+      "野菜"
+    ],
+    "images/recipes/back-ribs.jpg": [
+      "バックリブ",
+      "リブ"
+    ],
+    "images/recipes/banana.jpg": [
+      "バナナ",
+      "デザート",
+      "用語"
+    ],
+    "images/recipes/beer-can-chicken.jpg": [
+      "ビアカン",
+      "丸鶏"
+    ],
+    "images/recipes/bratwurst.jpg": [
+      "ブラートヴルスト",
+      "ソーセージ"
+    ],
+    "images/recipes/bread-pudding.jpg": [
+      "ブレッドプディング",
+      "デザート",
+      "冬",
+      "寒"
+    ],
+    "images/recipes/carne-asada.jpg": [
+      "カルネアサダ",
+      "牛",
+      "メキシコ"
+    ],
+    "images/recipes/cedar-camembert.jpg": [
+      "カマンベール",
+      "チーズ",
+      "シダー"
+    ],
+    "images/recipes/cedar-salmon.jpg": [
+      "サーモン",
+      "シダー"
+    ],
+    "images/recipes/cedar-shrimp-herb.jpg": [
+      "エビ",
+      "ハーブ",
+      "小皿"
+    ],
+    "images/recipes/cedar-whitefish.jpg": [
+      "白身魚",
+      "魚",
+      "リバースシア"
+    ],
+    "images/recipes/cheeseburger.jpg": [
+      "チーズバーガー",
+      "バーガー",
+      "バーントエンド"
+    ],
+    "images/recipes/chicken-thigh.jpg": [
+      "鶏もも",
+      "チキン"
+    ],
+    "images/recipes/gratin.jpg": [
+      "グラタン",
+      "チーズ",
+      "オーブン"
+    ],
+    "images/recipes/grilled-corn.jpg": [
+      "とうもろこし",
+      "コーン"
+    ],
+    "images/recipes/jerk-chicken.jpg": [
+      "ジャーク",
+      "チキン"
+    ],
+    "images/recipes/jerk-ribs-pineapple.jpg": [
+      "ジャーク",
+      "リブ",
+      "パイナップル",
+      "ラブ"
+    ],
+    "images/recipes/lemon-chicken.jpg": [
+      "レモン",
+      "チキン",
+      "丸鶏"
+    ],
+    "images/recipes/mushroom-grill.jpg": [
+      "きのこ",
+      "マッシュルーム",
+      "USビーフ"
+    ],
+    "images/recipes/pepper-sesame-beef.jpg": [
+      "牛",
+      "ペッパー",
+      "ごま"
+    ],
+    "images/recipes/pizza.jpg": [
+      "ピザ",
+      "レシピ10"
+    ],
+    "images/recipes/pork-steak.jpg": [
+      "豚",
+      "ステーキ",
+      "牛タン"
+    ],
+    "images/recipes/pulled-pork.jpg": [
+      "プルドポーク",
+      "豚"
+    ],
+    "images/recipes/pumpkin-camembert.jpg": [
+      "かぼちゃ",
+      "カマンベール",
+      "クリスマス"
+    ],
+    "images/recipes/saikyo-fish.jpg": [
+      "西京",
+      "魚",
+      "和"
+    ],
+    "images/recipes/salmon-pro.jpg": [
+      "サーモン",
+      "魚"
+    ],
+    "images/recipes/sanma.jpg": [
+      "さんま",
+      "秋刀魚",
+      "魚",
+      "秋"
+    ],
+    "images/recipes/shiitake.jpg": [
+      "しいたけ",
+      "きのこ"
+    ],
+    "images/recipes/shrimp-grill.jpg": [
+      "エビ",
+      "夏"
+    ],
+    "images/recipes/skillet-apple.jpg": [
+      "スキレット",
+      "りんご",
+      "子ども",
+      "家族"
+    ],
+    "images/recipes/spare-ribs.jpg": [
+      "スペアリブ",
+      "リブ"
+    ],
+    "images/recipes/tomahawk.jpg": [
+      "トマホーク",
+      "ステーキ",
+      "牛"
+    ],
+    "images/recipes/tomato-cheese-skillet.jpg": [
+      "トマト",
+      "チーズ",
+      "スキレット"
+    ],
+    "images/recipes/veg-grill.jpg": [
+      "野菜"
+    ],
+    "images/recipes/veg-skewer.jpg": [
+      "野菜",
+      "串"
+    ]
+  },
+  "credits": {
+    "images/journal/pool/stock-charcoal-grate-ash.jpg": {
+      "author": "Shixart1985",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Charcoal_grill_ready_for_barbecue_with_ashes_arranged_neatly_at_summer_gathering_in_backyard.jpg",
+      "note": "実写（撮影2020-04-19）。記事ページに出典表記を出す（generate-journal.mjs photoCreditHtml）"
+    }
   }
 }
