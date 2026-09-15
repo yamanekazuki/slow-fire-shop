@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 14 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 16 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>YORON BBQとは何か——12時間の憧れと、5〜6時間で成立する日常のBBQ</title>
+    <link>https://an-bbq.jp/journal/articles/yoron-bbq-defined.html</link>
+    <guid>https://an-bbq.jp/journal/articles/yoron-bbq-defined.html</guid>
+    <pubDate>Wed, 16 Sep 2026 07:00:00 +0900</pubDate>
+    <description>12時間のブリスケットに憧れつつ、実際は続かない。その理由と、蓋付きグリルのロジックで5〜6時間・熱々・多品種に組み替える「YORON BBQ」の全体像を、温度と段取りの具体数値でまとめました。</description>
+  </item>
   <item>
     <title>BBQ後のグリル掃除、余熱でやると10分で終わる — 部位別お手入れ術</title>
     <link>https://an-bbq.jp/journal/articles/grill-cleaning-maintenance.html</link>
