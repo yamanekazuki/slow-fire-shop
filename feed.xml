@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 16 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 18 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>スーパーの鶏むね・豚こま・玉ねぎが化ける、蓋付きグリルの温度ロジック</title>
+    <link>https://an-bbq.jp/journal/articles/supermarket-lid-grill-logic.html</link>
+    <guid>https://an-bbq.jp/journal/articles/supermarket-lid-grill-logic.html</guid>
+    <pubDate>Fri, 18 Sep 2026 07:00:00 +0900</pubDate>
+    <description>特売の鶏むね肉やありふれた野菜が、蓋付きグリルの間接熱で驚くほど美味しくなる理由と手順を、中心温度・時間・配置まで数値で解説。特別な塊肉なしで今週末から実践できる完全ガイドです。</description>
+  </item>
   <item>
     <title>YORON BBQとは何か——12時間の憧れと、5〜6時間で成立する日常のBBQ</title>
     <link>https://an-bbq.jp/journal/articles/yoron-bbq-defined.html</link>
