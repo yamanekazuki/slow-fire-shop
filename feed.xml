@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 18 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 21 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>冷めたプルドポーク問題——熱々を出来立てで配るBBQの設計</title>
+    <link>https://an-bbq.jp/journal/articles/warm-pulled-pork-service-design.html</link>
+    <guid>https://an-bbq.jp/journal/articles/warm-pulled-pork-service-design.html</guid>
+    <pubDate>Mon, 21 Sep 2026 07:00:00 +0900</pubDate>
+    <description>苦労して作ったプルドポークが配る頃には冷めてパサパサ…。その正体は「配膳の設計」の欠如です。中心温度・保温レンジ・小分けサーブの数値まで、熱々を切らさないBBQの段取りを丸ごと解説します。</description>
+  </item>
   <item>
     <title>スーパーの鶏むね・豚こま・玉ねぎが化ける、蓋付きグリルの温度ロジック</title>
     <link>https://an-bbq.jp/journal/articles/supermarket-lid-grill-logic.html</link>
