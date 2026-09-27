@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 25 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 28 Sep 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>家庭のBBQが「炭の温度差」でジューシーに変わる — 3ゾーン設計の実践</title>
+    <link>https://an-bbq.jp/journal/articles/three-zone-fire-japanese-bbq.html</link>
+    <guid>https://an-bbq.jp/journal/articles/three-zone-fire-japanese-bbq.html</guid>
+    <pubDate>Mon, 28 Sep 2026 07:00:00 +0900</pubDate>
+    <description>直火で焦がして中はカスカス、というBBQの悩みを、炭を3つの温度ゾーンに分けるだけで解決します。250℃強火・180℃間接・保温という具体的な配置と、豚こま・鶏もも・とうもろこしの焼き分けを数値で解説。</description>
+  </item>
   <item>
     <title>BBQ場5時間枠を「30分刻み」で回す — 撤収まで逆算する進行台本</title>
     <link>https://an-bbq.jp/journal/articles/five-hour-bbq-timeline-script.html</link>
