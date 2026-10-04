@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 02 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 05 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>塊肉ドカンだけでは物足りない理由と、少量多品種で熱々を回すBBQ献立術</title>
+    <link>https://an-bbq.jp/journal/articles/small-plates-bbq-menu.html</link>
+    <guid>https://an-bbq.jp/journal/articles/small-plates-bbq-menu.html</guid>
+    <pubDate>Mon, 05 Oct 2026 07:00:00 +0900</pubDate>
+    <description>大きな塊肉一発では途中で冷めて飽きがくるのが日本人の口。120gずつ・4〜5品を20分刻みで出し続ける少量多品種の献立設計を、温度と時間の数値で具体的に解説します。</description>
+  </item>
   <item>
     <title>BBQを男の趣味から家族の定番にする——続く家庭だけがやっている7つの仕組み</title>
     <link>https://an-bbq.jp/journal/articles/bbq-family-routine.html</link>
