@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 05 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 07 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQラブで「味の指紋」を作る——標準化スパイスから創作を取り戻す配合実験</title>
+    <link>https://an-bbq.jp/journal/articles/rub-creative-blending.html</link>
+    <guid>https://an-bbq.jp/journal/articles/rub-creative-blending.html</guid>
+    <pubDate>Wed, 07 Oct 2026 07:00:00 +0900</pubDate>
+    <description>誰が焼いても同じ味になる万能スパイスから抜け出す方法を、具体的な配合比・層の重ね方・食材別の実験レシピで解説。ベースラブ＋1〜2種の掛け算で、自分だけの味の指紋を作る実践ガイドです。</description>
+  </item>
   <item>
     <title>塊肉ドカンだけでは物足りない理由と、少量多品種で熱々を回すBBQ献立術</title>
     <link>https://an-bbq.jp/journal/articles/small-plates-bbq-menu.html</link>
