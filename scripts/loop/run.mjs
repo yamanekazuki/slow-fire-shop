@@ -37,8 +37,8 @@ const IMPL_MODEL = process.env.LOOP_IMPL_MODEL || "claude-sonnet-5";
 const REPO = "yamanekazuki/slow-fire-shop";
 const LIVE_BASE = "https://yamanekazuki.github.io/slow-fire-shop/";
 const PASS = 80;
-// 改善ループの結果メールの宛先（山根さん＋メンバー2名）。env MAIL_TO で上書き可。
-const TO = process.env.MAIL_TO || "yamane@potentialight.com,member@example.invalid,member@example.invalid";
+// 改善ループの結果メールの宛先。メンバーの宛先は公開リポに書かず、GitHub の Secret MAIL_TO から渡す（未設定なら山根さんだけ）。
+const TO = process.env.MAIL_TO || "yamane@potentialight.com";
 
 // domain で「ショップ本体(EC)」と「ブログ記事(journal)」を切り替える。
 //   implement系: proposal.domain ／ 公開・取消・復元系: PAYLOAD.domain ／ 未指定は従来どおり article。

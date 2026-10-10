@@ -100,7 +100,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           from: SLOW FIRE JOURNAL <${{ secrets.MAIL_USERNAME }}>
-          to: yamane@potentialight.com,member@example.invalid,member@example.invalid
+          to: ${{ secrets.MAIL_TO }}
           subject: "【SLOW FIRE JOURNAL】新着記事を公開しました：${{ steps.gen.outputs.title }}"
           html_body: |
             <div style="font-family:sans-serif;line-height:1.8;color:#222;max-width:600px">
