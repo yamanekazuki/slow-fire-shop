@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 12 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 14 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>蓋を閉めると肉が「蒸し焼き」になるのはなぜ? 対流熱の仕組みと開け閉めの判断基準</title>
+    <link>https://an-bbq.jp/journal/articles/grill-lid-convection-timing.html</link>
+    <guid>https://an-bbq.jp/journal/articles/grill-lid-convection-timing.html</guid>
+    <pubDate>Wed, 14 Oct 2026 07:00:00 +0900</pubDate>
+    <description>蓋つきグリルで味が変わるのは対流熱・水分保持・煙の循環の3つが同時に起きるから。閉める/開けるの判断基準を食材と中心温度の具体数値で解説します。</description>
+  </item>
   <item>
     <title>BBQの「会話を強要しない場づくり」設計術——無言でも気まずくならない火の配置と役割分担</title>
     <link>https://an-bbq.jp/journal/articles/bbq-silence-friendly-design.html</link>
