@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 16 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 19 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQの温度が「じわじわ上がりすぎる」原因と、ベントの戻し方</title>
+    <link>https://an-bbq.jp/journal/articles/vent-temperature-overshoot-fix.html</link>
+    <guid>https://an-bbq.jp/journal/articles/vent-temperature-overshoot-fix.html</guid>
+    <pubDate>Mon, 19 Oct 2026 07:00:00 +0900</pubDate>
+    <description>グリルの温度が設定より上がりすぎて止まらない、逆に下がって上がらない——ベント(吸気・排気)調整の実践を数値で解説。オーバーシュートの戻し方、炭種別の開度目安、15分待つ理由まで、温度が暴れる悩みをこの1本で解決します。</description>
+  </item>
   <item>
     <title>スネークメソッドの炭が「燃え移りすぎる」原因と、6時間を安定させる並べ方</title>
     <link>https://an-bbq.jp/journal/articles/snake-method-troubleshooting.html</link>
