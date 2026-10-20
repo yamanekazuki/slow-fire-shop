@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 19 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 21 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>肉の内部温度が「ちょうどいい」を外さない — 部位別の安全温度と食感が変わる境目</title>
+    <link>https://an-bbq.jp/journal/articles/meat-internal-temp-doneness-map.html</link>
+    <guid>https://an-bbq.jp/journal/articles/meat-internal-temp-doneness-map.html</guid>
+    <pubDate>Wed, 21 Oct 2026 07:00:00 +0900</pubDate>
+    <description>肉は数℃で食感が激変します。牛・豚・鶏・ラムの安全温度と、ジューシーさの境目になる温度帯を部位別に一覧化。キャリーオーバーや休ませ方まで、プローブ1本で再現できる完全ガイドです。</description>
+  </item>
   <item>
     <title>BBQの温度が「じわじわ上がりすぎる」原因と、ベントの戻し方</title>
     <link>https://an-bbq.jp/journal/articles/vent-temperature-overshoot-fix.html</link>
