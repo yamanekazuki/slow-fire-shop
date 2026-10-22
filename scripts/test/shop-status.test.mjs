@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { readShopStatus, syncSitemap, applyStyleBlock, CLOSED_CSS } from "../lib/shop-status.mjs";
+import { readShopStatus, syncSitemap, stripProductUrls, applyStyleBlock, CLOSED_CSS } from "../lib/shop-status.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const BASE = "https://an-bbq.jp";
@@ -74,4 +74,23 @@ test("生成スクリプト: 閉じる→再開で商品ページが準備中→
     assert.ok(sitemap.includes(`${BASE}/product-${id}.html`), `sitemap ${id}`);
   }
   assert.ok(!fs.readFileSync(path.join(dir, "style.css"), "utf8").includes("#cartBtn, .cart-icon-btn"));
+});
+
+test("旧形式 product.html?id= の商品URLも外れる（sitemap-main.xml用）", () => {
+  const xml = `  <url><loc>${BASE}/product.html?id=steak-shooter</loc></url>\n  <url><loc>${BASE}/journal/index.html</loc></url>\n`;
+  assert.equal(stripProductUrls(xml, BASE), `  <url><loc>${BASE}/journal/index.html</loc></url>\n`);
+});
+
+test("読みもの側の購入導線（このラブを購入する・ラブを試す枠）も隠す対象に入っている", () => {
+  assert.ok(CLOSED_CSS.includes(".jr-rubs") && CLOSED_CSS.includes("[data-shop-buy]"));
+  for (const f of ["essentials.html", "rub-guide.html"]) {
+    const html = fs.readFileSync(path.join(ROOT, f), "utf8");
+    const left = (html.match(/<a (?![^>]*data-shop-buy)[^>]*>このラブを購入する/g) || []);
+    assert.equal(left.length, 0, `${f} に目印なしの購入ボタン: ${left.join(" / ")}`);
+  }
+});
+
+test("サービスワーカーは style.css をキャッシュ優先にしない（開閉がすぐ届く）", () => {
+  const sw = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
+  assert.match(sw, /!\/\\\/style\\\.css/);
 });

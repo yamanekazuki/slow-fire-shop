@@ -23,9 +23,14 @@ export function readShopStatus(file) {
 const productLine = (base, id, lastmod) =>
   `  <url><loc>${base}/product-${id}.html</loc><lastmod>${lastmod}</lastmod><priority>0.85</priority></url>`;
 
+// 商品URL（product.html / product-<id>.html / 旧 product.html?id=<id>）の行を消す
+export function stripProductUrls(xml, base) {
+  const re = new RegExp(`^.*<loc>${base.replace(/[.]/g, '\\.')}/product(-[a-z0-9-]+)?\\.html(\\?id=[a-z0-9-]+)?</loc>.*\\n`, 'gm');
+  return xml.replace(re, '');
+}
+
 export function syncSitemap(xml, { base, ids, open, today }) {
-  const re = new RegExp(`^.*<loc>${base.replace(/[.]/g, '\\.')}/product(-[a-z0-9-]+)?\\.html</loc>.*\\n`, 'gm');
-  if (!open) return xml.replace(re, '');
+  if (!open) return stripProductUrls(xml, base);
   const missing = ids.filter((id) => !xml.includes(`<loc>${base}/product-${id}.html</loc>`));
   if (!missing.length) return xml;
   const add = missing.map((id) => productLine(base, id, today)).join('\n') + '\n';
@@ -36,10 +41,11 @@ export function syncSitemap(xml, { base, ids, open, today }) {
 export const CSS_BEGIN = '/* SHOP-STATUS:BEGIN（scripts/lib/shop-status.mjs が自動で書く。手で直さない） */';
 export const CSS_END = '/* SHOP-STATUS:END */';
 
-// 閉じている間に隠すもの: カート一式・トップの商品一覧/おすすめ/送料の帯・「ラブを見る」・商品一覧へのリンク
+// 閉じている間に隠すもの: カート一式・トップの商品一覧/おすすめ/送料の帯・「ラブを見る」・商品一覧へのリンク・
+// 読みものの「ラブを試す」購入枠(.jr-rubs)・「このラブを購入する」ボタン([data-shop-buy])
 export const CLOSED_CSS = `#cartBtn, .cart-icon-btn, #cartBackdrop, #cartDrawer, #ordersBackdrop, #ordersDrawer, #checkoutOverlay,
 #products, #picks-top, .trust-strip, .yhero-btn-primary[href^="product"],
-a[href$="#products"] { display: none !important; }`;
+a[href$="#products"], .jr-rubs, [data-shop-buy] { display: none !important; }`;
 
 export function applyStyleBlock(css, { open }) {
   const body = open ? '' : CLOSED_CSS + '\n';

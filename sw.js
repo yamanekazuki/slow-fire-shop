@@ -1,5 +1,5 @@
 /* SLOW FIRE Service Worker — Offline-first cache */
-const CACHE = 'slowfire-v1-20260517';
+const CACHE = 'slowfire-v2-20261022';
 const PRECACHE = [
   '/slow-fire-shop/',
   '/slow-fire-shop/manifest.json',
@@ -25,7 +25,9 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   // Cache strategy: network-first for HTML, cache-first for static assets
-  const isAsset = /\.(css|js|json|woff2?|jpg|jpeg|png|webp|svg|gif)(\?.*)?$/.test(req.url);
+  // style.css は販売の開閉（shop-status.json）で中身が変わるので、常にネット優先で最新を取る
+  const isAsset = /\.(css|js|json|woff2?|jpg|jpeg|png|webp|svg|gif)(\?.*)?$/.test(req.url)
+    && !/\/style\.css(\?.*)?$/.test(req.url);
   if (isAsset) {
     e.respondWith(
       caches.match(req).then(cached => cached || fetch(req).then(r => {

@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readShopStatus, syncSitemap, applyStyleBlock } from './lib/shop-status.mjs';
+import { readShopStatus, syncSitemap, stripProductUrls, applyStyleBlock } from './lib/shop-status.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'https://an-bbq.jp';
@@ -243,6 +243,13 @@ if (fs.existsSync(sitemapPath)) {
   console.log(`✅ sitemap.xml: クリーンURL ${nClean}件 / 残存クエリURL ${nStale}件(0が正) / journal等は保持`);
 } else {
   console.warn('⚠️ sitemap.xml が見つかりません。スキップしました。');
+}
+
+/* sitemap-main.xml に残る旧 product.html?id= の商品URLは、閉じている間は外す
+   （再開時は sitemap.xml のクリーンURLで足りるので戻さない） */
+const sitemapMainPath = path.join(ROOT, 'sitemap-main.xml');
+if (!SHOP.open && fs.existsSync(sitemapMainPath)) {
+  fs.writeFileSync(sitemapMainPath, stripProductUrls(fs.readFileSync(sitemapMainPath, 'utf8'), BASE));
 }
 
 /* ============================================================
