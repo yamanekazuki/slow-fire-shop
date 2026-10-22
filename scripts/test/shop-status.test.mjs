@@ -84,6 +84,7 @@ test("旧形式 product.html?id= の商品URLも外れる（sitemap-main.xml用�
 test("読みもの側の購入導線（このラブを購入する・ラブを試す枠）も隠す対象に入っている", () => {
   assert.ok(CLOSED_CSS.includes(".jr-rubs") && CLOSED_CSS.includes("[data-shop-buy]"));
   assert.match(fs.readFileSync(path.join(ROOT, "essentials.html"), "utf8"), /<div class="es-note reveal" data-shop-buy/, "「最初の1本」の枠ごと隠す");
+  assert.match(fs.readFileSync(path.join(ROOT, "essentials.html"), "utf8"), /<div data-shop-buy>\n      <h3>まず試すなら、この3本/, "「この3本」の節ごと隠す");
   for (const f of ["essentials.html", "rub-guide.html"]) {
     const html = fs.readFileSync(path.join(ROOT, f), "utf8");
     const left = (html.match(/<a (?![^>]*data-shop-buy)[^>]*>このラブを購入する/g) || []);
