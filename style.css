@@ -1895,3 +1895,9 @@ body.menu-open { overflow: hidden; }
   .carousel { margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0)); }
   .mobile-menu { padding-bottom: max(32px, env(safe-area-inset-bottom, 0)); }
 }
+
+/* SHOP-STATUS:BEGIN（scripts/lib/shop-status.mjs が自動で書く。手で直さない） */
+#cartBtn, .cart-icon-btn, #cartBackdrop, #cartDrawer, #ordersBackdrop, #ordersDrawer, #checkoutOverlay,
+#products, #picks-top, .trust-strip, .yhero-btn-primary[href^="product"],
+a[href$="#products"] { display: none !important; }
+/* SHOP-STATUS:END */

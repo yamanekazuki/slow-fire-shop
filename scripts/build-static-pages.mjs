@@ -23,6 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readShopStatus, syncSitemap, applyStyleBlock } from './lib/shop-status.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'https://an-bbq.jp';
@@ -69,7 +70,10 @@ const PRODUCTS = win.PRODUCT_DETAILS || {};
 const RECIPES = win.RECIPES || [];
 const RECIPES_BY_ID = Object.fromEntries(RECIPES.map((r) => [r.id, r]));
 
-const productTpl = fs.readFileSync(path.join(ROOT, 'product.html'), 'utf8');
+// 商品ページの元は templates/product.html（閉じている間は product.html が準備中ページになるため分けて持つ）
+const productTpl = fs.readFileSync(path.join(ROOT, 'templates', 'product.html'), 'utf8');
+const closedTpl = fs.readFileSync(path.join(ROOT, 'templates', 'shop-closed.html'), 'utf8');
+const SHOP = readShopStatus(path.join(ROOT, 'shop-status.json'));
 const recipeTpl = fs.readFileSync(path.join(ROOT, 'recipe.html'), 'utf8');
 
 let generated = [];
@@ -98,6 +102,12 @@ for (const [id, p] of Object.entries(PRODUCTS)) {
       availability: 'https://schema.org/InStock',
     },
   };
+
+  if (!SHOP.open) {
+    fs.writeFileSync(path.join(ROOT, `product-${id}.html`), closedTpl);
+    generated.push({ type: 'product', id, url });
+    continue;
+  }
 
   let html = productTpl;
 
@@ -225,7 +235,8 @@ for (const r of RECIPES) {
 const sitemapPath = path.join(ROOT, 'sitemap.xml');
 if (fs.existsSync(sitemapPath)) {
   const before = fs.readFileSync(sitemapPath, 'utf8');
-  const after = cleanLinks(before); // ?id= を持つ product/recipe URL のみクリーン化
+  const today = new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' });
+  const after = syncSitemap(cleanLinks(before), { base: BASE, ids: Object.keys(PRODUCTS), open: SHOP.open, today }); // ?id= を持つ product/recipe URL のクリーン化＋販売の開閉
   fs.writeFileSync(sitemapPath, after);
   const nClean = (after.match(/\/(product|recipe)-[a-z0-9-]+\.html<\/loc>/g) || []).length;
   const nStale = (after.match(/\.html\?id=/g) || []).length;
@@ -240,10 +251,14 @@ if (fs.existsSync(sitemapPath)) {
    → 旧 ?id= URLがクロールされても canonical で新URLに集約される。
    （params.get('id') はそのまま残すので、旧URL自体も動作し続ける）
    ============================================================ */
-fs.writeFileSync(path.join(ROOT, 'product.html'), cleanLinks(productTpl));
+fs.writeFileSync(path.join(ROOT, 'product.html'), SHOP.open ? cleanLinks(productTpl) : closedTpl);
+
+/* style.css の印の間を販売の開閉に合わせて書き換え（カート・商品一覧の表示切替） */
+const cssPath = path.join(ROOT, 'style.css');
+fs.writeFileSync(cssPath, applyStyleBlock(fs.readFileSync(cssPath, 'utf8'), SHOP));
 fs.writeFileSync(path.join(ROOT, 'recipe.html'), cleanLinks(recipeTpl));
 
 const nProd = generated.filter((g) => g.type === 'product').length;
 const nRec = generated.filter((g) => g.type === 'recipe').length;
-console.log(`✅ 生成完了: product ${nProd}件 / recipe ${nRec}件`);
+console.log(`✅ 生成完了: product ${nProd}件${SHOP.open ? '' : '（販売クローズ中＝準備中ページ）'} / recipe ${nRec}件`);
 console.log(`✅ 旧 product.html / recipe.html の内部リンクをクリーンURLへ変換`);
