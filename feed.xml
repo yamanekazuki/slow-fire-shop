@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 26 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 28 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>バークが「黒いだけで硬い」人へ——バーク形成とスモークリングの温度条件</title>
+    <link>https://an-bbq.jp/journal/articles/bark-smoke-ring-conditions.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bark-smoke-ring-conditions.html</guid>
+    <pubDate>Wed, 28 Oct 2026 07:00:00 +0900</pubDate>
+    <description>ブリスケットやプルドポークの黒い皮(バーク)とピンクの輪(スモークリング)がなぜできるのか、湿度・温度・煙の3条件を数値で解説。黒くなるだけで硬い・ピンクが出ない原因と対策まで一本でわかります。</description>
+  </item>
   <item>
     <title>テキサスクラッチで巻いた後「柔らかくならない」原因と包み直しの判断</title>
     <link>https://an-bbq.jp/journal/articles/texas-crutch-rewrap-fix.html</link>
