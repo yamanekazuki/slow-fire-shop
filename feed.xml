@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 28 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 30 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>ベンドテストが「いまいち自信ない」人へ——リブ以外にも効く仕上がり判定の全技法</title>
+    <link>https://an-bbq.jp/journal/articles/bend-test-doneness-guide.html</link>
+    <guid>https://an-bbq.jp/journal/articles/bend-test-doneness-guide.html</guid>
+    <pubDate>Fri, 30 Oct 2026 07:00:00 +0900</pubDate>
+    <description>リブのベンドテストのやり方と角度の目安、プローブの刺さり方・ねじり・持ち上げまで、竹串に頼らない仕上がり判定を部位ごとに数値で整理。失敗の原因と回避まで完全網羅します。</description>
+  </item>
   <item>
     <title>バークが「黒いだけで硬い」人へ——バーク形成とスモークリングの温度条件</title>
     <link>https://an-bbq.jp/journal/articles/bark-smoke-ring-conditions.html</link>
