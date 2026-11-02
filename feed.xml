@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 30 Oct 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 02 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>3-2-1リブが「柔らかすぎる・味がぼやける」を直す、時間配分の設計図</title>
+    <link>https://an-bbq.jp/journal/articles/rib-321-method-blueprint.html</link>
+    <guid>https://an-bbq.jp/journal/articles/rib-321-method-blueprint.html</guid>
+    <pubDate>Mon, 02 Nov 2026 07:00:00 +0900</pubDate>
+    <description>リブの3-2-1メソッドを、各ステップが肉に何をしているかの理屈から再設計します。120〜125℃の温度、中心92℃の目安、巻く・戻すの判断基準、柔らかすぎ・味ぼやけの直し方まで、数字で再現できる完全ガイドです。</description>
+  </item>
   <item>
     <title>ベンドテストが「いまいち自信ない」人へ——リブ以外にも効く仕上がり判定の全技法</title>
     <link>https://an-bbq.jp/journal/articles/bend-test-doneness-guide.html</link>
