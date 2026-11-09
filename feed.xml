@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 06 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>炭火で低温調理を「水を使わず」安定させる — 温度帯別の炭の数え方</title>
+    <link>https://an-bbq.jp/journal/articles/charcoal-low-temp-by-count.html</link>
+    <guid>https://an-bbq.jp/journal/articles/charcoal-low-temp-by-count.html</guid>
+    <pubDate>Mon, 09 Nov 2026 07:00:00 +0900</pubDate>
+    <description>専用の低温調理器がなくても、炭火だけで110〜160℃の温度帯を狙って作る方法を解説。炭の個数・配置・吸気で温度を設計し、鶏むね63℃や豚肩97℃まで再現できる実践ガイドです。</description>
+  </item>
   <item>
     <title>なぜ110℃×10時間なのか——コラーゲンが溶ける温度と時間の物理</title>
     <link>https://an-bbq.jp/journal/articles/low-slow-physics-110c.html</link>
