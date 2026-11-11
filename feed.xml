@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 09 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>燻製が「酸っぱい・ベタつく」を直す——温度帯別の煙の掛け方と水分管理</title>
+    <link>https://an-bbq.jp/journal/articles/smoke-temperature-moisture-control.html</link>
+    <guid>https://an-bbq.jp/journal/articles/smoke-temperature-moisture-control.html</guid>
+    <pubDate>Wed, 11 Nov 2026 07:00:00 +0900</pubDate>
+    <description>熱燻・温燻・冷燻の違いを温度と水分で整理し、燻製が酸っぱくなる・ベタつく原因を具体的に解決。食材別の温度・時間・煙量の目安まで、この1本で再現できます。</description>
+  </item>
   <item>
     <title>炭火で低温調理を「水を使わず」安定させる — 温度帯別の炭の数え方</title>
     <link>https://an-bbq.jp/journal/articles/charcoal-low-temp-by-count.html</link>
