@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 13 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 16 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>冬のBBQで炭が「すぐ冷める」を防ぐ——外気温5℃でも140℃を守る熱管理</title>
+    <link>https://an-bbq.jp/journal/articles/winter-bbq-heat-retention.html</link>
+    <guid>https://an-bbq.jp/journal/articles/winter-bbq-heat-retention.html</guid>
+    <pubDate>Mon, 16 Nov 2026 07:00:00 +0900</pubDate>
+    <description>外気温が低い日にグリルの温度が上がらない・すぐ冷める原因を熱の逃げ道から解明。炭の増量率、断熱、風対策、ロー&amp;スローを冬でも成立させる具体数値を網羅した実践ガイドです。</description>
+  </item>
   <item>
     <title>スモークウッドとチップはこう使い分ける——煙の量・継ぎ足し頻度で選ぶ実践ガイド</title>
     <link>https://an-bbq.jp/journal/articles/smoke-wood-vs-chip-practical.html</link>
