@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 16 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQラブの黄金比を覚える——食材別に配合を微調整する実践レシピ集</title>
+    <link>https://an-bbq.jp/journal/articles/spice-rub-ratio-recipes.html</link>
+    <guid>https://an-bbq.jp/journal/articles/spice-rub-ratio-recipes.html</guid>
+    <pubDate>Wed, 18 Nov 2026 07:00:00 +0900</pubDate>
+    <description>スパイスラブを自作するための黄金比を、グラム単位の基本配合から解説。塩6:砂糖4を軸に、豚・鶏・牛で塩分と砂糖を微調整する実践レシピと、焦げ・塩辛さの回避策まで一本でまとめます。</description>
+  </item>
   <item>
     <title>冬のBBQで炭が「すぐ冷める」を防ぐ——外気温5℃でも140℃を守る熱管理</title>
     <link>https://an-bbq.jp/journal/articles/winter-bbq-heat-retention.html</link>
