@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Fri, 20 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>BBQグリルの「サビる・くっつく」を防ぐ洗い方とシーズン保管術</title>
+    <link>https://an-bbq.jp/journal/articles/grill-cleaning-rust-prevention.html</link>
+    <guid>https://an-bbq.jp/journal/articles/grill-cleaning-rust-prevention.html</guid>
+    <pubDate>Mon, 23 Nov 2026 07:00:00 +0900</pubDate>
+    <description>焼き網・炭受け・本体の掃除を部位別に数値で解説。余熱250℃での焼き切り、油膜の作り方、サビ落とし、長期保管の手順まで。焦げ付きとサビを根絶して次回を軽くする実務ガイド。</description>
+  </item>
   <item>
     <title>BBQ初心者の道具、最初の1回は7点だけ——買い足し順と予算配分</title>
     <link>https://an-bbq.jp/journal/articles/bbq-starter-tools-seven.html</link>
