@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Mon, 23 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>12時間ブリスケットに憧れた僕が、5〜6時間BBQに落ち着いた理由</title>
+    <link>https://an-bbq.jp/journal/articles/yoron-bbq-12h-vs-6h.html</link>
+    <guid>https://an-bbq.jp/journal/articles/yoron-bbq-12h-vs-6h.html</guid>
+    <pubDate>Wed, 25 Nov 2026 07:00:00 +0900</pubDate>
+    <description>本場アメリカンBBQの12時間ロー&amp;スローに憧れつつ、なぜ5〜6時間で完結するYORON BBQに行き着くのか。両者の温度・時間・段取りを数値で比較し、週末に続けられるBBQの設計図を示します。</description>
+  </item>
   <item>
     <title>BBQグリルの「サビる・くっつく」を防ぐ洗い方とシーズン保管術</title>
     <link>https://an-bbq.jp/journal/articles/grill-cleaning-rust-prevention.html</link>
