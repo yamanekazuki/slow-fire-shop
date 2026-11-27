@@ -6,7 +6,14 @@
   <atom:link href="https://an-bbq.jp/feed.xml" rel="self" type="application/rss+xml"/>
   <description>火入れの科学と、場をつくる哲学。海外BBQのすべてを発信するメディア。</description>
   <language>ja-JP</language>
-  <lastBuildDate>Wed, 25 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 27 Nov 2026 07:00:00 +0900</lastBuildDate>
+  <item>
+    <title>スーパーの豚こま・鶏むね・舞茸が別物になる、蓋付きグリルの温度ロジック</title>
+    <link>https://an-bbq.jp/journal/articles/supermarket-food-lid-grill-logic.html</link>
+    <guid>https://an-bbq.jp/journal/articles/supermarket-food-lid-grill-logic.html</guid>
+    <pubDate>Fri, 27 Nov 2026 07:00:00 +0900</pubDate>
+    <description>特売の豚こま・鶏むね・舞茸が、蓋付きグリルの間接熱でなぜ劇的に化けるのか。対流熱の仕組みから、食材別の庫内温度・中心温度・時間までまるごと解説します。</description>
+  </item>
   <item>
     <title>12時間ブリスケットに憧れた僕が、5〜6時間BBQに落ち着いた理由</title>
     <link>https://an-bbq.jp/journal/articles/yoron-bbq-12h-vs-6h.html</link>
